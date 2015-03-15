@@ -14,7 +14,7 @@ void write_osc(sp_data *data, void *ud) {
     if(udp->counter == 0){
         udp->osc->freq = 500 + rand() % 2000;
     }
-    sp_osc_compute(data, udp->osc, NULL, &data->out);
+    sp_osc_compute(data, udp->osc, NULL, &data->out[0]);
     udp->counter = (udp->counter + 1) % 4410;
 }
 
@@ -24,14 +24,12 @@ int main() {
     ud.counter = 0;
     sp_data *sp;
     sp_create(&sp);
-    sp_ftbl_create(sp, &ud.ft, 4096);
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_osc_create(&ud.osc);
 
     sp_gen_sine(ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft);
     ud.osc->freq = 500;
-    sp_gen_sine(ud.ft);
     sp->len = 44100 * 5;
     sp_rpi_process(sp, &ud, write_osc);
 

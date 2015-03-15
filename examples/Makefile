@@ -17,9 +17,9 @@ default: all
 
 # RPI Module
 #
-#files += extra/ex_rpi 
-#extra/ex_rpi: extra/ex_rpi.c
-#	gcc -g --std=c99 -I ../h $< ../libsoundpipe.a -lsndfile -lasound -o $@ -lm
+files += extra/ex_rpi 
+extra/ex_rpi: extra/ex_rpi.c
+	gcc -g --std=c99 -I ../h $< ../libsoundpipe.a -lsndfile -lasound -o $@ -lm
 #
 #files += extra/ex_rpi_v2
 #extra/ex_rpi_v2: extra/ex_rpi_v2.c
