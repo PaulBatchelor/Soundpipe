@@ -7,7 +7,8 @@ typedef struct sp_data{
     SPFLOAT out;
     SNDFILE *sf;
     int sr;
-    long len;
+    unsigned long len;
+    unsigned long pos;
     char filename[200];
 }sp_data; 
 

@@ -1,7 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <math.h>
-#include <time.h>
 #include "soundpipe.h"
 
 int sp_create(sp_data **spp) {
@@ -11,6 +9,7 @@ int sp_create(sp_data **spp) {
     sp->out = 0;
     sp->sr = 44100;
     sp->len = 5 * sp->sr;
+    sp->pos = 0;
     return 0;
 }
 
@@ -37,6 +36,7 @@ int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *)) {
         for(i = 0; i < numsamps; i++){
             callback(sp, ud);
             sp->buf[i] = sp->out;
+            sp->pos++;
         }
         sf_write_float(sp->sf, sp->buf, numsamps);
         sp->len -= numsamps;
