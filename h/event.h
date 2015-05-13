@@ -17,7 +17,7 @@ typedef struct {
     void (*init_cb)(void *);
     void (*noton_cb)(void *);
     void (*notoff_cb)(void *);
-    void *ud;
+    void **ud;
 }sp_event; 
 
 typedef struct {
