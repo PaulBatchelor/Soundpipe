@@ -1,12 +1,22 @@
 default: libsoundpipe.a
 
+MODULES=event 
+
+MPATHS=$(addprefix m/, $(addsuffix .o, $(MODULES)))
+
+
+m/event.o: m/event.c soundpipe.o 
+	gcc -c -static -Ih $< -o $@
+
 soundpipe.o: soundpipe.c
-	gcc -c $<
-libsoundpipe.a: soundpipe.o
-	ar rcs $@ $<
+	gcc -c -static $<
+
+libsoundpipe.a: soundpipe.o $(MPATHS)
+	ar rcs $@ $^
 
 install: libsoundpipe.a
 	install soundpipe.h /usr/local/include/
 	install libsoundpipe.a /usr/local/lib/
+
 clean: 
-	rm -rf gen_noise libsoundpipe.a soundpipe.o
+	rm -rf gen_noise libsoundpipe.a soundpipe.o $(MPATHS)
