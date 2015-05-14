@@ -15,10 +15,10 @@ int sp_event_update(sp_event *evt, sp_frame pos){
     }else if(pos < evt->start){
         evt->mode = SPEVT_QUEUED;
     }else if(pos >= evt->start && pos < evt->end - 1){
-        evt->mode = SPEVT_NOTON;
-    }else if(pos == evt->end - 1 && evt->mode == SPEVT_NOTON){
-        evt->mode = SPEVT_NOTOFF;
-    }else if(pos == evt->end && evt->mode == SPEVT_NOTOFF){
+        evt->mode = SPEVT_ON;
+    }else if(pos == evt->end - 1 && evt->mode == SPEVT_ON){
+        evt->mode = SPEVT_OFF;
+    }else if(pos == evt->end && evt->mode == SPEVT_OFF){
         evt->mode = SPEVT_FREE;
     }else {
         return SP_NOT_OK;
@@ -28,8 +28,8 @@ int sp_event_update(sp_event *evt, sp_frame pos){
 int sp_event_create(sp_event *evt, 
         sp_frame cpos, sp_frame start, sp_frame dur,
         void(*init_cb)(void *),
-        void(*noton_cb)(void *),
-        void(*notoff_cb)(void *),
+        void(*evton_cb)(void *),
+        void(*evtoff_cb)(void *),
         void *ud){ 
 
     if(evt->mode != SPEVT_FREE) {
@@ -53,8 +53,8 @@ int sp_event_create(sp_event *evt,
     evt->start = start;
     evt->end = start + dur;
     evt->init_cb = init_cb; 
-    evt->noton_cb = noton_cb; 
-    evt->notoff_cb = notoff_cb; 
+    evt->evton_cb = evton_cb; 
+    evt->evtoff_cb = evtoff_cb; 
     evt->ud = ud;
 
     evt->mode = SPEVT_QUEUED;
@@ -66,12 +66,12 @@ int sp_event_exec(sp_event *evt) {
     case SPEVT_FREE:
         return SP_NOT_OK;
         break;
-    case SPEVT_NOTON:
-        evt->noton_cb(evt->ud);
+    case SPEVT_ON:
+        evt->evton_cb(evt->ud);
         return SP_OK;
         break;
-    case SPEVT_NOTOFF:
-        evt->notoff_cb(evt->ud);
+    case SPEVT_OFF:
+        evt->evtoff_cb(evt->ud);
         return SP_OK;
     case SPEVT_QUEUED:
         return SP_OK;
@@ -81,8 +81,8 @@ int sp_event_exec(sp_event *evt) {
 }
 int sp_event_clear(sp_event *evt) {
     /* when a note turns itself off, all the freeing should be done in the 
-     * notoff_cb function*/
-    evt->notoff_cb(evt->ud);
+     * evtoff_cb function*/
+    evt->evtoff_cb(evt->ud);
     evt->mode = SPEVT_FREE;
     return SP_OK;
 }
