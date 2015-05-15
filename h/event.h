@@ -11,6 +11,11 @@ SPEVT_OFF,
 SPEVT_ERROR
 };
 
+enum{
+SPEVSTK_SEARCH = -2,
+SPEVSTK_NOFREE
+};
+
 typedef struct {
     int mode;
     sp_frame start;
@@ -22,12 +27,17 @@ typedef struct {
 }sp_event; 
 
 typedef struct {
-
+    sp_event *evt;
+    int nevents;
+    int nxtfree;
+    int lstfree;
 }sp_evtstack; 
 
-int sp_event_init(sp_event **evt);
+int sp_event_create(sp_event **evt, int nevents);
+int sp_event_inti(sp_event *evt);
 int sp_event_destroy(sp_event **evt);
-int sp_event_create(sp_event *evt, 
+/* poorly named function because create implies memory mgt. change. */
+int sp_event_insert(sp_event *evt, 
         sp_frame cpos, sp_frame start, sp_frame dur,
         void(*init_cb)(void *),
         void(*evton_cb)(void *),
@@ -39,7 +49,7 @@ int sp_event_exec(sp_event *evt);
 
 /* event stack functions */
 
-int sp_evtstack_create(sp_evtstack **es, int nvoices);
+int sp_evtstack_create(sp_evtstack **es, int nevents);
 int sp_evtstack_init(sp_evtstack *es);
 int sp_evtstack_destroy(sp_evtstack **es);
 

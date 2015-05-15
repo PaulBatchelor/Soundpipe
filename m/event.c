@@ -25,12 +25,12 @@ int sp_event_update(sp_event *evt, sp_frame pos){
     }
     return SP_OK;
 }
-int sp_event_create(sp_event *evt, 
-        sp_frame cpos, sp_frame start, sp_frame dur,
-        void(*init_cb)(void *),
-        void(*evton_cb)(void *),
-        void(*evtoff_cb)(void *),
-        void *ud){ 
+int sp_event_insert(sp_event *evt, 
+    sp_frame cpos, sp_frame start, sp_frame dur,
+    void(*init_cb)(void *),
+    void(*evton_cb)(void *),
+    void(*evtoff_cb)(void *),
+    void *ud){ 
 
     if(evt->mode != SPEVT_FREE) {
             fprintf(stderr, "Error: event mode is not set to SPEVT_FREE. Properly "
@@ -43,7 +43,7 @@ int sp_event_create(sp_event *evt,
         return SP_NOT_OK;
     }
  
-   if(cpos > evt->start){
+   if(cpos > start){
         fprintf(stderr, "Error: Start time %d is past the current time %d.\n", 
                 evt->start, cpos);
         evt->mode = SPEVT_ERROR;
@@ -86,12 +86,63 @@ int sp_event_clear(sp_event *evt) {
     evt->mode = SPEVT_FREE;
     return SP_OK;
 }
-int sp_event_init(sp_event **evt){ *evt = malloc(sizeof(sp_event));
-    sp_event *ep = *evt;
-    ep->mode = SPEVT_FREE;
+int sp_event_create(sp_event **evt, int nevents){ 
+    *evt = malloc(sizeof(sp_event));
+    return SP_OK;
+}
+
+int sp_event_init(sp_event *evt){
+    evt->mode = SPEVT_FREE;
     return SP_OK;
 }
 int sp_event_destroy(sp_event **evt){
     free(*evt);
+    return SP_NOT_OK;
+}
+
+int sp_evtstack_create(sp_evtstack **es, int nevents) {
+    int i;
+    *es = malloc(sizeof(sp_evtstack));
+    sp_evtstack *eptr = *es;
+
+    eptr->nevents = nevents;
+    /* figure out how to put this malloc into sp_event_create */
+    eptr->evt = malloc(sizeof(sp_event) * nevents); 
+    for(i = 0; i < nevents; i++){
+        sp_event_init(&eptr->evt[i]);
+    }
+    return SP_OK;
+}
+int sp_evtstack_init(sp_evtstack *es){
+    es->nxtfree = SPEVSTK_SEARCH;
+    es->crtfree = 0;
+    return SP_NOT_OK;
+}
+int sp_evtstack_destroy(sp_evtstack **es){
+    int i;
+    sp_evtstack *eptr = *es;
+    sp_event evt = *eptr->evt;
+    free((*es)->evt);
+    free(*es);
+    return SP_OK;
+}
+
+int sp_evtstack_add(sp_evtstack *es, 
+    sp_frame cpos, sp_frame start, sp_frame dur,
+    void(*init_cb)(void *),
+    void(*evton_cb)(void *),
+    void(*evtoff_cb)(void *),
+    void *ud){
+    return SP_NOT_OK;
+}
+
+int sp_evtstack_nextfree(sp_evtstack *es, int *id){
+    return SP_OK;
+}
+
+int sp_evtstack_update(sp_evtstack *evt, sp_frame pos){
+    return SP_NOT_OK;
+}
+int sp_evtstack_exec(sp_evtstack *evt){
     return SP_NOT_OK;
 }
