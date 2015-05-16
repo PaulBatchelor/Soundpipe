@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "tap.h"
+#include "base.h"
 #include "event.h"
 
 typedef struct {

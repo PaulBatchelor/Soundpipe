@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "soundpipe.h"
+#include "base.h"
 
 int sp_create(sp_data **spp) {
     *spp = (sp_data *) malloc(sizeof(sp_data));

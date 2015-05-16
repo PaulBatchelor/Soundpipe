@@ -1,23 +1,27 @@
 default: libsoundpipe.a
 
-MODULES=event 
+MODULES=base event 
 
 MPATHS=$(addprefix m/, $(addsuffix .o, $(MODULES)))
+HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
 
 include t/Makefile
 
-m/event.o: m/event.c soundpipe.o 
+m/event.o: m/event.c h/event.h m/base.o h/soundpipe.h
 	gcc -g -c -static -Ih $< -o $@ 
 
-soundpipe.o: soundpipe.c
-	gcc -g -c -static $<
+m/base.o: m/base.c 
+	gcc -g -c -static -Ih $< -o $@ 
 
-libsoundpipe.a: soundpipe.o $(MPATHS)
+h/soundpipe.h: $(HPATHS)
+	cat $(HPATHS) > $@
+
+libsoundpipe.a: $(MPATHS)
 	ar rcs $@ $^
 
-install: libsoundpipe.a
+install: libsoundpipe.a h/soundpipe.h
 	install h/soundpipe.h /usr/local/include/
 	install libsoundpipe.a /usr/local/lib/
 
 clean: 
-	rm -rf gen_noise libsoundpipe.a soundpipe.o $(MPATHS)
+	rm -rf gen_noise libsoundpipe.a $(MPATHS)

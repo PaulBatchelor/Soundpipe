@@ -1,8 +1,3 @@
-#ifndef __SOUNDPIPE_H__
-#include "soundpipe.h"
-#define __SOUNDPIPE_H__
-#endif
-
 enum{
 SPEVT_FREE,
 SPEVT_QUEUED,

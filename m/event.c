@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "event.h"
+#include "soundpipe.h"
 
 int sp_create_evt_stack(sp_data *sp, int nvoices){
     return 1;
