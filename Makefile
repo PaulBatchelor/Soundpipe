@@ -7,10 +7,10 @@ MPATHS=$(addprefix m/, $(addsuffix .o, $(MODULES)))
 include t/Makefile
 
 m/event.o: m/event.c soundpipe.o 
-	gcc -c -static -Ih $< -o $@ 
+	gcc -g -c -static -Ih $< -o $@ 
 
 soundpipe.o: soundpipe.c
-	gcc -c -static $<
+	gcc -g -c -static $<
 
 libsoundpipe.a: soundpipe.o $(MPATHS)
 	ar rcs $@ $^

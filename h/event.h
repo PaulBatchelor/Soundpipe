@@ -30,6 +30,7 @@ typedef struct {
     sp_event *evt;
     int nevents;
     int nxtfree;
+    int curfree;
     int lstfree;
 }sp_evtstack; 
 
@@ -62,5 +63,5 @@ int sp_evtstack_add(sp_evtstack *es,
 
 int sp_evtstack_nextfree(sp_evtstack *es, int *id);
 
-int sp_evtstack_update(sp_evtstack *evt, sp_frame pos);
-int sp_evtstack_exec(sp_evtstack *evt);
+int sp_evtstack_update(sp_evtstack *es, sp_frame pos);
+int sp_evtstack_exec(sp_evtstack *es);

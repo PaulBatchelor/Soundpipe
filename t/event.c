@@ -41,7 +41,7 @@ void init_test_vars(Test_Data *tp){
 int main( int argc, char** argv ) {
     plan( 21 );
     sp_event *e; 
-    int status;
+    int status, i;
 
     Test_Data td;
     Test_Data *tp = &td;
@@ -172,24 +172,24 @@ int main( int argc, char** argv ) {
     
     status = sp_evtstack_add(es, 0, 0, 5, NULL, NULL, NULL, NULL); 
     
+    sp_evtstack_destroy(&es);
+
     ok(td.v3 == 2 && status == SP_NOT_OK, "Event overflow handling.");
 
-    sp_evtstack_destroy(&es);
-    
     status = sp_evtstack_create(&es, 3);
-
     sp_evtstack_init(es);    
 
     sp_evtstack_add(es, 0, 0, 10, NULL, NULL, NULL, NULL); 
     sp_evtstack_add(es, 0, 0, 5, NULL, NULL, NULL, NULL); 
     sp_evtstack_add(es, 0, 0, 10, NULL, NULL, NULL, NULL); 
-  
-    sp_evtstack_update(es, 4); 
-    sp_evtstack_add(es, 4, 5, 5, NULL, NULL, NULL, NULL); 
+
+    for(i = 0; i <= 5; i++){
+        sp_evtstack_update(es, i);
+    }
+
+    sp_evtstack_add(es, 5, 7, 5, NULL, NULL, NULL, NULL); 
     td.v1 = es->lstfree; 
 
-    status = sp_evtstack_add(es, 0, 0, 5, NULL, NULL, NULL, NULL); 
-    
     ok(td.v1 == 1 && status == SP_OK, "Voices being freed properly.");
 
     sp_evtstack_destroy(&es);
