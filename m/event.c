@@ -7,11 +7,44 @@ int sp_create_evt_stack(sp_data *sp, int nvoices){
 int sp_destroy_evt_stack(sp_data *sp, int nvoices){
     return 1;
 }
+
+void print_mode(sp_event *evt){
+    switch(evt->mode){
+        case SPEVT_FREE:
+        printf("SPEVT_FREE\n");
+        break;
+        case SPEVT_QUEUED:
+        printf("SPEVT_QUEUED\n");
+        break;
+        case SPEVT_ON:
+        printf("SPEVT_ON\n");
+        break;
+        case SPEVT_OFF:
+        printf("SPEVT_OFF\n");
+        break;
+        case SPEVT_ERROR:
+        printf("SPEVT_ERROR\n");
+        break;
+        case SPEVT_ONESAMP:
+        printf("SPEVT_ONESAMP\n");
+        break;
+    }
+}
+
 int sp_event_update(sp_event *evt, sp_frame pos){
+    /*
+    if((evt->end - evt->start) == 1){
+        fprintf(stderr, "Error: One sample durations don't work right now.\n");
+        return SP_NOT_OK;
+    }
+    */
     if(evt->mode == SPEVT_FREE){
         return SP_OK;
     }else if(evt->mode == SPEVT_ERROR){
         return SP_NOT_OK;
+    }else if(pos == evt->start && (evt->end - evt->start) == 1){
+        /* handle one sample durations */
+        evt->mode = SPEVT_ONESAMP;
     }else if(pos < evt->start){
         evt->mode = SPEVT_QUEUED;
     }else if(pos >= evt->start && pos < evt->end - 1){
@@ -74,6 +107,12 @@ int sp_event_exec(sp_event *evt) {
     case SPEVT_OFF:
         evt->evtoff_cb(evt->ud);
         return SP_OK;
+    case SPEVT_ONESAMP:
+        evt->evton_cb(evt->ud);
+        evt->evtoff_cb(evt->ud);
+        evt->mode = SPEVT_FREE;
+        return SP_OK;
+        break;
     case SPEVT_QUEUED:
         return SP_OK;
     default:

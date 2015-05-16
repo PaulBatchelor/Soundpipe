@@ -39,7 +39,7 @@ void init_test_vars(Test_Data *tp){
 }
 
 int main( int argc, char** argv ) {
-    plan( 21 );
+    plan( 23 );
     sp_event *e; 
     int status, i;
 
@@ -114,6 +114,30 @@ int main( int argc, char** argv ) {
     ok(tp->evtoff_val == -1, "Making sure evtoff_cb isn't called."); 
     
     sp_event_destroy(&e);
+    
+    sp_event_create(&e, 1);
+    sp_event_init(e);
+    sp_event_insert(e, 0, 0, 1, init_cb, evton_cb, evtoff_cb, tp);
+    sp_event_update(e, 0);
+    sp_event_exec(e);
+    ok(e->mode==SPEVT_FREE, "1 sample duration events are freed at the right time");
+    sp_event_destroy(&e);
+    
+    sp_event_create(&e, 1);
+    sp_event_init(e);
+    sp_event_insert(e, 0, 4, 1, init_cb, evton_cb, evtoff_cb, tp);
+    sp_event_update(e, 0);
+    sp_event_exec(e);
+    td.v1 = e->mode;
+
+    for(i = 1; i <= 5; i++){
+        sp_event_update(e, i);
+        sp_event_exec(e);
+    }
+    td.v2 = e->mode;
+    ok(td.v1 == SPEVT_QUEUED && td.v2== SPEVT_FREE, 
+            "1 sample duration events are queued + freed at the right time");
+    sp_event_destroy(&e);
 
     sp_event_create(&e, 1);
     sp_event_init(e);
@@ -157,7 +181,6 @@ int main( int argc, char** argv ) {
     ok(td.v1 == 0 && td.v2 == 1 && td.v3 == 2, "Event stack adds in correct order.");
 
     sp_evtstack_destroy(&es);
-
 
     status = sp_evtstack_create(&es, 3);
 
