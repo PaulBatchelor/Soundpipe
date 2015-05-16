@@ -16,7 +16,7 @@ libsoundpipe.a: soundpipe.o $(MPATHS)
 	ar rcs $@ $^
 
 install: libsoundpipe.a
-	install soundpipe.h /usr/local/include/
+	install h/soundpipe.h /usr/local/include/
 	install libsoundpipe.a /usr/local/lib/
 
 clean: 

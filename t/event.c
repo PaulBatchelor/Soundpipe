@@ -65,7 +65,7 @@ int main( int argc, char** argv ) {
         return 1;    
     };
 
-    printf("\n**Testing normal event functions...**\n\n");
+    printf("\n** Testing normal use of event functions... **\n\n");
     sp_event_update(e, 0);
     ok(e->mode == SPEVT_QUEUED, "QUEUED mode enabled");
     sp_event_exec(e);
@@ -89,7 +89,7 @@ int main( int argc, char** argv ) {
     sp_event_exec(e);
     ok(e->mode == SPEVT_FREE && td.evtoff_val == 3, "Event is freed at the right time");
    
-    printf("\n**Adding event when its time has passed...**\n\n");
+    printf("\n** Adding event when its time has passed... **\n\n");
     sp_event_insert(e, 2, 1, 5, init_cb, evton_cb, evtoff_cb, tp);
 
     /* Error testing! Event should have been updated at 1, not 2. 
@@ -115,12 +115,16 @@ int main( int argc, char** argv ) {
     
     sp_event_destroy(&e);
     
+
+
+    printf("\n** Misc error handling and exceptions... **\n\n");
+    
     sp_event_create(&e, 1);
     sp_event_init(e);
     sp_event_insert(e, 0, 0, 1, init_cb, evton_cb, evtoff_cb, tp);
     sp_event_update(e, 0);
     sp_event_exec(e);
-    ok(e->mode==SPEVT_FREE, "1 sample duration events are freed at the right time");
+    ok(e->mode == SPEVT_FREE, "1 sample duration events are freed at the right time");
     sp_event_destroy(&e);
     
     sp_event_create(&e, 1);
@@ -138,11 +142,9 @@ int main( int argc, char** argv ) {
     ok(td.v1 == SPEVT_QUEUED && td.v2== SPEVT_FREE, 
             "1 sample duration events are queued + freed at the right time");
     sp_event_destroy(&e);
-
+    
     sp_event_create(&e, 1);
     sp_event_init(e);
-
-    printf("\n**Misc error handling...**\n\n");
 
     sp_event_insert(e, 0, 1, 5, init_cb, evton_cb, evtoff_cb, tp);
     status = sp_event_insert(e, 0, 2, 5, init_cb, evton_cb, evtoff_cb, tp);
@@ -157,7 +159,7 @@ int main( int argc, char** argv ) {
 
     /* Event Stack tests go here */
     
-    printf("\n**Event stack tests...**\n\n");
+    printf("\n** Event stack tests... **\n\n");
 
     sp_evtstack *es;
 
