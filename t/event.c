@@ -9,7 +9,15 @@ int init_val;
 int evton_val;
 int evtoff_val;
 int v1, v2, v3;
+int id;
 }Test_Data;
+
+void print_testdata(Test_Data *td, int nvals){
+    int i;
+    for(i = 0; i < nvals; i++){
+        printf("event %d ID is %d\n", i, td[i]);
+    }
+}
 
 void init_cb(void *ud){
     Test_Data *t = (Test_Data *) ud;
@@ -32,7 +40,7 @@ void evtoff_cb(void *ud){
 
 void init_test_vars(Test_Data *tp){
     tp->init_val = -1;
-    tp->evton_val = -1;
+    tp->evton_val = -3;
     tp->evtoff_val = -1;
     tp->v1 = -1;
     tp->v2 = -1;
@@ -233,14 +241,16 @@ int main( int argc, char** argv ) {
     sp_evtstack_destroy(&es);
     sp_evtstack_create(&es, 3);
     sp_evtstack_init(es, init_cb, evton_cb, evtoff_cb, td_es);    
-    for(i = 0; i < 3; i++) init_test_vars(&td_es[i]);
+    for(i = 0; i < 3; i++) { 
+        init_test_vars(&td_es[i]);
+        td_es[i].id = i;
+    }
     sp_evtstack_add(es, 0, 0, 4, &id);
     tp->v1 = id;
     sp_evtstack_add(es, 0, 0, 4, &id);
     tp->v2 = id;
     sp_evtstack_add(es, 0, 0, 4, &id);
     tp->v3 = id;
-
     for(i = 0; i <= 5; i++){
         sp_evtstack_update(es, i);
         sp_evtstack_exec(es);

@@ -189,9 +189,8 @@ int sp_evtstack_add(sp_evtstack *es,
     }
 
     sp_event *evt = &es->evt[id];
-    void *ud = &es->ud[id];
     if(!sp_event_insert(evt, cpos, start, dur, es->init_cb, es->evton_cb, es->evtoff_cb, 
-                ud)){
+                &es->ud[id])){
         return SP_NOT_OK;
     }
     es->nalloc++;
