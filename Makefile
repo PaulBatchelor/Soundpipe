@@ -8,10 +8,10 @@ HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
 include t/Makefile
 
 m/event.o: m/event.c h/event.h m/base.o h/soundpipe.h
-	gcc -g -c -static -Ih $< -o $@ 
+	gcc -lsndfile -g -c -static -Ih $< -o $@ 
 
 m/base.o: m/base.c 
-	gcc -g -c -static -Ih $< -o $@ 
+	gcc -g -c -static -lsndfile -Ih $< -o $@ 
 
 h/soundpipe.h: $(HPATHS)
 	cat $(HPATHS) > $@
