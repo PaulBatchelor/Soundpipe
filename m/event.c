@@ -148,20 +148,25 @@ int sp_evtstack_create(sp_evtstack **es, int nevents) {
     eptr->nevents = nevents;
     /* figure out how to put this malloc into sp_event_create */
     eptr->evt = malloc(sizeof(sp_event) * nevents); 
+    //eptr->ud = malloc(sizeof(void *) * nevents);
     for(i = 0; i < nevents; i++){
         sp_event_init(&eptr->evt[i]);
     }
+
     return SP_OK;
 }
 int sp_evtstack_init(sp_evtstack *es,
     void(*init_cb)(void *),
     void(*evton_cb)(void *),
     void(*evtoff_cb)(void *), 
-    void *ud){
+    void *ud, size_t ud_size){
     es->nalloc = 0;
     es->nxtfree = 0;
     es->lstfree = 0;
-    es->ud = ud;
+    int i;
+    for(i = 0; i < es->nevents; i++){ 
+        es->ud[i] = ud + ud_size * i;
+    }
     es->init_cb = init_cb;
     es->evton_cb = evton_cb;
     es->evtoff_cb = evtoff_cb;
@@ -190,7 +195,7 @@ int sp_evtstack_add(sp_evtstack *es,
 
     sp_event *evt = &es->evt[id];
     if(!sp_event_insert(evt, cpos, start, dur, es->init_cb, es->evton_cb, es->evtoff_cb, 
-                &es->ud[id])){
+                es->ud[id])){
         return SP_NOT_OK;
     }
     es->nalloc++;

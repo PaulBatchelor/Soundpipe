@@ -19,7 +19,7 @@ typedef struct {
     void (*init_cb)(void *);
     void (*evton_cb)(void *);
     void (*evtoff_cb)(void *);
-    void **ud;
+    void *ud;
 }sp_event; 
 
 typedef struct {
@@ -32,11 +32,11 @@ typedef struct {
     void (*init_cb)(void *);
     void (*evton_cb)(void *);
     void (*evtoff_cb)(void *);
-    void **ud;
+    void *ud[3];
 }sp_evtstack; 
 
 int sp_event_create(sp_event **evt, int nevents);
-int sp_event_inti(sp_event *evt);
+int sp_event_init(sp_event *evt);
 int sp_event_destroy(sp_event **evt);
 /* poorly named function because create implies memory mgt. change. */
 int sp_event_insert(sp_event *evt, 
@@ -56,7 +56,7 @@ int sp_evtstack_init(sp_evtstack *es,
         void(*init_cb)(void *),
         void(*evton_cb)(void *),
         void(*evtoff_cb)(void *), 
-        void *ud);
+        void *ud, size_t ud_size);
 int sp_evtstack_destroy(sp_evtstack **es);
 
 int sp_evtstack_add(sp_evtstack *es, 
