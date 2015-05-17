@@ -40,7 +40,7 @@ void evtoff_cb(void *ud){
 
 void init_test_vars(Test_Data *tp){
     tp->init_val = -1;
-    tp->evton_val = -3;
+    tp->evton_val = -1;
     tp->evtoff_val = -1;
     tp->v1 = -1;
     tp->v2 = -1;
