@@ -40,9 +40,9 @@ void init_test_vars(Test_Data *tp){
 }
 
 int main( int argc, char** argv ) {
-    plan( 24 );
+    plan( 25 );
     sp_event *e; 
-    int status, i;
+    int status, i, id;
 
     Test_Data td;
     Test_Data td_es[3];
@@ -118,8 +118,6 @@ int main( int argc, char** argv ) {
     
     sp_event_destroy(&e);
     
-
-
     printf("\n** Misc error handling and exceptions... **\n\n");
     
     sp_event_create(&e, 1);
@@ -176,11 +174,11 @@ int main( int argc, char** argv ) {
    
     sp_evtstack_init(es, init_cb, evton_cb, evtoff_cb, &td_es);    
 
-    sp_evtstack_add(es, 0, 0, 5);
+    sp_evtstack_add(es, 0, 0, 5, &id);
     td.v1 = es->lstfree; 
-    sp_evtstack_add(es, 0, 0, 5);
+    sp_evtstack_add(es, 0, 0, 5, &id);
     td.v2 = es->lstfree; 
-    sp_evtstack_add(es, 0, 0, 5);
+    sp_evtstack_add(es, 0, 0, 5, &id);
     td.v3 = es->lstfree; 
     
     ok(td.v1 == 0 && td.v2 == 1 && td.v3 == 2, "Event stack adds in correct order.");
@@ -191,14 +189,14 @@ int main( int argc, char** argv ) {
 
     sp_evtstack_init(es, init_cb, evton_cb, evtoff_cb, &td_es);    
 
-    sp_evtstack_add(es, 0, 0, 5);
+    sp_evtstack_add(es, 0, 0, 5, &id);
     td.v1 = es->lstfree; 
-    sp_evtstack_add(es, 0, 0, 5);
+    sp_evtstack_add(es, 0, 0, 5, &id);
     td.v2 = es->lstfree; 
-    sp_evtstack_add(es, 0, 0, 5);
+    sp_evtstack_add(es, 0, 0, 5, &id);
     td.v3 = es->lstfree; 
     
-    status = sp_evtstack_add(es, 0, 0, 5);
+    status = sp_evtstack_add(es, 0, 0, 5, &id);
     
     sp_evtstack_destroy(&es);
 
@@ -207,15 +205,15 @@ int main( int argc, char** argv ) {
     status = sp_evtstack_create(&es, 3);
     sp_evtstack_init(es, init_cb, evton_cb, evtoff_cb, &td_es);    
 
-    sp_evtstack_add(es, 0, 0, 10);
-    sp_evtstack_add(es, 0, 0, 5);
-    sp_evtstack_add(es, 0, 0, 10);
+    sp_evtstack_add(es, 0, 0, 10, &id);
+    sp_evtstack_add(es, 0, 0, 5, &id);
+    sp_evtstack_add(es, 0, 0, 10, &id);
 
     for(i = 0; i <= 5; i++){
         sp_evtstack_update(es, i);
     }
 
-    sp_evtstack_add(es, 5, 7, 5);
+    sp_evtstack_add(es, 5, 7, 5, &id);
     td.v1 = es->lstfree; 
 
     ok(td.v1 == 1 && status == SP_OK, "Voices being freed properly.");
@@ -225,13 +223,30 @@ int main( int argc, char** argv ) {
     sp_evtstack_create(&es, 3);
     sp_evtstack_init(es, init_cb, evton_cb, evtoff_cb, &td_es);    
     for(i = 0; i < 3; i++) init_test_vars(&td_es[i]);
-    sp_evtstack_add(es, 0, 0, 4);
+    sp_evtstack_add(es, 0, 0, 4, &id);
 
     for(i = 0; i <= 5; i++){
         sp_evtstack_update(es, i);
         sp_evtstack_exec(es);
     }
-    ok(td_es[es->lstfree].evton_val == 4, "Testing callbacks and user data");
+    ok(td_es[es->lstfree].evton_val == 4, "Test 1 of callbacks and user data");
+    sp_evtstack_destroy(&es);
+    sp_evtstack_create(&es, 3);
+    sp_evtstack_init(es, init_cb, evton_cb, evtoff_cb, td_es);    
+    for(i = 0; i < 3; i++) init_test_vars(&td_es[i]);
+    sp_evtstack_add(es, 0, 0, 4, &id);
+    tp->v1 = id;
+    sp_evtstack_add(es, 0, 0, 4, &id);
+    tp->v2 = id;
+    sp_evtstack_add(es, 0, 0, 4, &id);
+    tp->v3 = id;
+
+    for(i = 0; i <= 5; i++){
+        sp_evtstack_update(es, i);
+        sp_evtstack_exec(es);
+    }
+    ok(td_es[2].evton_val == 4
+            , "Test 2 of callbacks and user data");
     sp_evtstack_destroy(&es);
 
     return 0;

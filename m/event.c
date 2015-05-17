@@ -158,6 +158,7 @@ int sp_evtstack_init(sp_evtstack *es,
     void(*evton_cb)(void *),
     void(*evtoff_cb)(void *), 
     void *ud){
+    es->nalloc = 0;
     es->nxtfree = 0;
     es->lstfree = 0;
     es->ud = ud;
@@ -176,23 +177,24 @@ int sp_evtstack_destroy(sp_evtstack **es){
 }
 
 int sp_evtstack_add(sp_evtstack *es, 
-    sp_frame cpos, sp_frame start, sp_frame dur){
+    sp_frame cpos, sp_frame start, sp_frame dur, int *pos){
 
     int id = SPEVSTK_NOFREE;
     sp_evtstack_nextfree(es, &id);
-    
+    *pos = id; 
+
     if(id == SPEVSTK_NOFREE){
         printf("Error: no more free voices\n");
         return SP_NOT_OK;
     }
 
     sp_event *evt = &es->evt[id];
-
+    void *ud = &es->ud[id];
     if(!sp_event_insert(evt, cpos, start, dur, es->init_cb, es->evton_cb, es->evtoff_cb, 
-                &es->ud[id])){
+                ud)){
         return SP_NOT_OK;
     }
-
+    es->nalloc++;
     return SP_OK;
 }
 
@@ -236,6 +238,7 @@ int sp_evtstack_update(sp_evtstack *es, sp_frame pos){
        sp_event_update(tmp, pos); 
        if(tmp->mode == SPEVT_OFF){
             es->nxtfree = i;
+            es->nalloc--;
        }
     }
     return SP_NOT_OK;
@@ -248,4 +251,11 @@ int sp_evtstack_exec(sp_evtstack *es){
        sp_event_exec(tmp); 
     }
     return SP_OK;
+}
+int sp_evtstack_full(sp_evtstack *es){
+    if(es->nalloc == es->nevents){
+        return SP_OK;
+    }else{
+        return SP_NOT_OK;
+    }
 }

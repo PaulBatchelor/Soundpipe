@@ -28,6 +28,7 @@ typedef struct {
     int nxtfree;
     int curfree;
     int lstfree;
+    int nalloc;
     void (*init_cb)(void *);
     void (*evton_cb)(void *);
     void (*evtoff_cb)(void *);
@@ -59,9 +60,10 @@ int sp_evtstack_init(sp_evtstack *es,
 int sp_evtstack_destroy(sp_evtstack **es);
 
 int sp_evtstack_add(sp_evtstack *es, 
-        sp_frame cpos, sp_frame start, sp_frame dur);
+        sp_frame cpos, sp_frame start, sp_frame dur, int *pos);
 
 int sp_evtstack_nextfree(sp_evtstack *es, int *id);
 
 int sp_evtstack_update(sp_evtstack *es, sp_frame pos);
 int sp_evtstack_exec(sp_evtstack *es);
+int sp_evtstack_full(sp_evtstack *es);
