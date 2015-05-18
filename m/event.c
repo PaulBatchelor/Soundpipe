@@ -9,26 +9,6 @@ int sp_destroy_evt_stack(sp_data *sp, int nvoices){
 }
 
 void print_mode(sp_event *evt){
-    switch(evt->mode){
-        case SPEVT_FREE:
-        printf("SPEVT_FREE\n");
-        break;
-        case SPEVT_QUEUED:
-        printf("SPEVT_QUEUED\n");
-        break;
-        case SPEVT_ON:
-        printf("SPEVT_ON\n");
-        break;
-        case SPEVT_OFF:
-        printf("SPEVT_OFF\n");
-        break;
-        case SPEVT_ERROR:
-        printf("SPEVT_ERROR\n");
-        break;
-        case SPEVT_ONESAMP:
-        printf("SPEVT_ONESAMP\n");
-        break;
-    }
 }
 
 int sp_event_update(sp_event *evt, sp_frame pos){
@@ -51,12 +31,34 @@ int sp_event_update(sp_event *evt, sp_frame pos){
         evt->mode = SPEVT_ON;
     }else if(pos == evt->end - 1 && evt->mode == SPEVT_ON){
         evt->mode = SPEVT_OFF;
-    }else if(pos == evt->end && evt->mode == SPEVT_OFF){
+    }else if(pos >= evt->end && evt->mode == SPEVT_OFF){
         evt->mode = SPEVT_FREE;
     }else {
         return SP_NOT_OK;
     }
     return SP_OK;
+}
+void sp_get_mode_string(int mode){
+    switch(mode){
+        case SPEVT_FREE:
+        printf("SPEVT_FREE\n");
+        break;
+        case SPEVT_QUEUED:
+        printf("SPEVT_QUEUED\n");
+        break;
+        case SPEVT_ON:
+        printf("SPEVT_ON\n");
+        break;
+        case SPEVT_OFF:
+        printf("SPEVT_OFF\n");
+        break;
+        case SPEVT_ERROR:
+        printf("SPEVT_ERROR\n");
+        break;
+        case SPEVT_ONESAMP:
+        printf("SPEVT_ONESAMP\n");
+        break;
+    }
 }
 int sp_event_insert(sp_event *evt, 
     sp_frame cpos, sp_frame start, sp_frame dur,
@@ -66,13 +68,14 @@ int sp_event_insert(sp_event *evt,
     void *ud){ 
 
     if(evt->mode != SPEVT_FREE) {
+            sp_get_mode_string(evt->mode);        
             fprintf(stderr, "Error: event mode is not set to SPEVT_FREE. Properly "
                 "clear current event before proceeding.\n");
         return SP_NOT_OK;
     }
 
     if(dur < 1){
-        fprintf(stderr, "Error: invalid duration %d.", dur);
+        fprintf(stderr, "Error: invalid duration %d.\n", dur);
         return SP_NOT_OK;
     }
  
@@ -196,6 +199,7 @@ int sp_evtstack_add(sp_evtstack *es,
     sp_event *evt = &es->evt[id];
     if(!sp_event_insert(evt, cpos, start, dur, es->init_cb, es->evton_cb, es->evtoff_cb, 
                 es->ud[id])){
+        fprintf(stderr, "There was an error adding to position %d.\n", id);
         return SP_NOT_OK;
     }
     es->nalloc++;
@@ -240,8 +244,13 @@ int sp_evtstack_update(sp_evtstack *es, sp_frame pos){
     for(i = 0; i < es->nevents; i++){
        sp_event *tmp = &es->evt[i];
        sp_event_update(tmp, pos); 
+       /* TODO: THIS SUCKS. we shouldn't have to call the note off. 
+        * Probably need to remove this conditional, or reevaluate how
+        * we are handling SPEVT_OFF and SPEVT_FREE. */
        if(tmp->mode == SPEVT_OFF){
             es->nxtfree = i;
+            sp_event_exec(tmp);
+            tmp->mode = SPEVT_FREE;
             es->nalloc--;
        }
     }
@@ -258,6 +267,8 @@ int sp_evtstack_exec(sp_evtstack *es){
 }
 int sp_evtstack_full(sp_evtstack *es){
     if(es->nalloc == es->nevents){
+        /* since all the voices are allocated, we set the mode to NOFREE*/
+        es->nxtfree = SPEVSTK_NOFREE;
         return SP_OK;
     }else{
         return SP_NOT_OK;

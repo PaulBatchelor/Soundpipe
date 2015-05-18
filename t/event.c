@@ -56,7 +56,7 @@ void init_test_vars(Test_Data *tp){
 }
 
 int main( int argc, char** argv ) {
-    plan( 25 );
+    plan( 26 );
     sp_event *e; 
     int status, i, id;
 
@@ -265,6 +265,26 @@ int main( int argc, char** argv ) {
     }
     ok(td_es[2].evton_val == 2
             , "Test 2 of callbacks and user data");
+    sp_evtstack_destroy(&es);
+
+    sp_evtstack_create(&es, 3);
+    sp_evtstack_init(es, init_cb, evton_cb2, evtoff_cb, td_es, sizeof(Test_Data));
+    for(i = 0; i < 3; i++) { 
+        init_test_vars(&td_es[i]);
+        td_es[i].id = i;
+    }
+    sp_evtstack_add(es, 0, 0, 4, &id);
+    tp->v1 = es->nalloc;
+
+    sp_evtstack_add(es, 0, 4, 4, &id);
+    tp->v2 = es->nalloc;
+
+    sp_evtstack_add(es, 0, 8, 4, &id);
+    tp->v3 = es->nalloc;
+
+    ok(tp->v1 == 1 && tp->v2 == 2 && tp->v3 == 3 && sp_evtstack_full(es) && 
+            es->nxtfree == SPEVSTK_NOFREE
+            , "Testing allocation numbers and correlation to SPEVSTK_NOFREE");
     sp_evtstack_destroy(&es);
 
     return 0;
