@@ -151,7 +151,6 @@ int sp_evtstack_create(sp_evtstack **es, int nevents) {
     eptr->nevents = nevents;
     /* figure out how to put this malloc into sp_event_create */
     eptr->evt = malloc(sizeof(sp_event) * nevents); 
-    //eptr->ud = malloc(sizeof(void *) * nevents);
     for(i = 0; i < nevents; i++){
         sp_event_init(&eptr->evt[i]);
     }
@@ -166,10 +165,8 @@ int sp_evtstack_init(sp_evtstack *es,
     es->nalloc = 0;
     es->nxtfree = 0;
     es->lstfree = 0;
-    int i;
-    for(i = 0; i < es->nevents; i++){ 
-        es->ud[i] = ud + (ud_size * i);
-    }
+    es->ud_size = ud_size;
+    es->ud = ud;
     es->init_cb = init_cb;
     es->evton_cb = evton_cb;
     es->evtoff_cb = evtoff_cb;
@@ -197,7 +194,7 @@ int sp_evtstack_add(sp_evtstack *es,
 
     sp_event *evt = &es->evt[id];
     if(!sp_event_insert(evt, cpos, start, dur, es->init_cb, es->evton_cb, es->evtoff_cb, 
-                es->ud[id])){
+                ((*es).ud + id * es->ud_size))){
         fprintf(stderr, "There was an error adding to position %d.\n", id);
         return SP_NOT_OK;
     }

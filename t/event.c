@@ -8,7 +8,8 @@ typedef struct {
 int init_val;
 int evton_val;
 int evtoff_val;
-int v1, v2, v3;
+int v1, v2, v3; 
+long v4, v5, v6;
 int id;
 }Test_Data;
 
@@ -246,6 +247,7 @@ int main( int argc, char** argv ) {
     }
     ok(td_es[es->lstfree].evton_val == 2, "Test 1 of callbacks and user data");
     sp_evtstack_destroy(&es);
+
     sp_evtstack_create(&es, 3);
     sp_evtstack_init(es, init_cb, evton_cb2, evtoff_cb, td_es, sizeof(Test_Data));
     for(i = 0; i < 3; i++) { 
@@ -286,7 +288,7 @@ int main( int argc, char** argv ) {
             , "Testing allocation numbers and correlation to SPEVSTK_NOFREE");
     sp_evtstack_destroy(&es);
 
-    sp_evtstack_create(&es, 3);
+    sp_evtstack_create(&es, 4);
     sp_evtstack_init(es, init_cb, evton_cb2, evtoff_cb, td_es, sizeof(Test_Data));
     ok(es->evt[0].mode == SPEVT_FREE, "Eventstack init bug check.");
     sp_evtstack_destroy(&es);

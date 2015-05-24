@@ -25,6 +25,7 @@ typedef struct {
 typedef struct {
     sp_event *evt;
     int nevents;
+    size_t ud_size;
     int nxtfree;
     int curfree;
     int lstfree;
@@ -32,7 +33,8 @@ typedef struct {
     void (*init_cb)(void *);
     void (*evton_cb)(void *);
     void (*evtoff_cb)(void *);
-    void *ud[3];
+    void *ud;
+    int *t;
 }sp_evtstack; 
 
 int sp_event_create(sp_event **evt, int nevents);
