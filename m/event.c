@@ -70,17 +70,17 @@ int sp_event_insert(sp_event *evt,
     if(evt->mode != SPEVT_FREE) {
             sp_get_mode_string(evt->mode);        
             fprintf(stderr, "Error: event mode is not set to SPEVT_FREE. Properly "
-                "clear current event before proceeding.\n");
+                "clear current event before proceeding. The current mode is %d.\n", evt->mode);
         return SP_NOT_OK;
     }
 
     if(dur < 1){
-        fprintf(stderr, "Error: invalid duration %d.\n", dur);
+        fprintf(stderr, "Error: invalid duration %ld.\n", dur);
         return SP_NOT_OK;
     }
  
    if(cpos > start){
-        fprintf(stderr, "Error: Start time %d is past the current time %d.\n", 
+        fprintf(stderr, "Error: Start time %ld is past the current time %ld.\n", 
                 evt->start, cpos);
         evt->mode = SPEVT_ERROR;
         return SP_NOT_OK;
@@ -168,7 +168,7 @@ int sp_evtstack_init(sp_evtstack *es,
     es->lstfree = 0;
     int i;
     for(i = 0; i < es->nevents; i++){ 
-        es->ud[i] = ud + ud_size * i;
+        es->ud[i] = ud + (ud_size * i);
     }
     es->init_cb = init_cb;
     es->evton_cb = evton_cb;
@@ -176,7 +176,6 @@ int sp_evtstack_init(sp_evtstack *es,
     return SP_OK;
 }
 int sp_evtstack_destroy(sp_evtstack **es){
-    int i;
     sp_evtstack *eptr = *es;
     sp_event *evt = eptr->evt;
     free(evt);

@@ -56,7 +56,7 @@ void init_test_vars(Test_Data *tp){
 }
 
 int main( int argc, char** argv ) {
-    plan( 26 );
+    plan( 27 );
     sp_event *e; 
     int status, i, id;
 
@@ -111,8 +111,7 @@ int main( int argc, char** argv ) {
     printf("\n** Adding event when its time has passed... **\n\n");
     sp_event_insert(e, 2, 1, 5, init_cb, evton_cb, evtoff_cb, tp);
 
-    /* Error testing! Event should have been updated at 1, not 2. 
-     * Make sure it handles that properly */
+    /* Error testing! */
 
     init_test_vars(tp);
     status = sp_event_update(e, 2);
@@ -285,6 +284,11 @@ int main( int argc, char** argv ) {
     ok(tp->v1 == 1 && tp->v2 == 2 && tp->v3 == 3 && sp_evtstack_full(es) && 
             es->nxtfree == SPEVSTK_NOFREE
             , "Testing allocation numbers and correlation to SPEVSTK_NOFREE");
+    sp_evtstack_destroy(&es);
+
+    sp_evtstack_create(&es, 3);
+    sp_evtstack_init(es, init_cb, evton_cb2, evtoff_cb, td_es, sizeof(Test_Data));
+    ok(es->evt[0].mode == SPEVT_FREE, "Eventstack init bug check.");
     sp_evtstack_destroy(&es);
 
     return 0;

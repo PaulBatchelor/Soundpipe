@@ -42,4 +42,5 @@ int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *)) {
         sp->len -= numsamps;
     }
     sf_close(sp->sf);
+    return 0;
 }
