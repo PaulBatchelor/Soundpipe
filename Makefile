@@ -1,6 +1,6 @@
 default: libsoundpipe.a
 
-MODULES=base event noise
+MODULES=base event noise tone
 
 MPATHS=$(addprefix m/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
