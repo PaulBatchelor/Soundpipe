@@ -3,3 +3,4 @@ gcc -g -I ../h ex_tone.c ../libsoundpipe.a -lsndfile -o ex_tone -lm
 gcc -g -I ../h ex_moogladder.c ../libsoundpipe.a -lsndfile -o ex_moogladder -lm
 gcc -g -I ../h ex_butlp.c ../libsoundpipe.a -lsndfile -o ex_butlp -lm
 gcc -g -I ../h ex_buthp.c ../libsoundpipe.a -lsndfile -o ex_buthp -lm
+gcc -g -I ../h ex_revsc.c ../libsoundpipe.a -lsndfile -o ex_revsc -lm

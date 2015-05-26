@@ -94,7 +94,7 @@ int sp_butlp_compute(sp_data *sp, sp_butlp *p, SPFLOAT *in, SPFLOAT *out) {
 
 /* Filter loop */
 
-static void sp_butter_filter(SPFLOAT *in, SPFLOAT *out, SPFLOAT *a){
+int sp_butter_filter(SPFLOAT *in, SPFLOAT *out, SPFLOAT *a){
     SPFLOAT t, y;
     t = *in - a[4] * a[6] - a[5] * a[7];
     /*TODO: look into this function */
@@ -103,5 +103,5 @@ static void sp_butter_filter(SPFLOAT *in, SPFLOAT *out, SPFLOAT *a){
     a[7] = a[6];
     a[6] = t;
     *out = y;
+    return SP_OK;
 }
-

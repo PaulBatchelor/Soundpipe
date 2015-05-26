@@ -21,4 +21,4 @@ int sp_buthp_create(sp_buthp **p);
 int sp_buthp_destroy(sp_buthp **p);
 int sp_buthp_init(sp_data *sp, sp_buthp *p);
 int sp_buthp_compute(sp_data *sp, sp_buthp *p, SPFLOAT *in, SPFLOAT *out);
-static void sp_butter_filter(SPFLOAT *in, SPFLOAT *out, SPFLOAT *a);
+int sp_butter_filter(SPFLOAT *in, SPFLOAT *out, SPFLOAT *a);
