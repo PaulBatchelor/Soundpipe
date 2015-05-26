@@ -1,6 +1,6 @@
 default: libsoundpipe.a
 
-MODULES=base event noise tone moogladder
+MODULES=base event noise tone moogladder butter
 
 MPATHS=$(addprefix m/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
