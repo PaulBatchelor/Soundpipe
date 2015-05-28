@@ -33,4 +33,3 @@ int sp_revsc_create(sp_data *sp, sp_revsc **p);
 int sp_revsc_destroy(sp_revsc **p, sp_auxdata *aux); 
 int sp_revsc_init(sp_data *sp, sp_revsc *p, sp_auxdata *aux);
 int sp_revsc_compute(sp_data *sp, sp_revsc *p, SPFLOAT *in, SPFLOAT *out);
-
