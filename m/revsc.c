@@ -79,9 +79,7 @@ static int delay_line_bytes_alloc(SPFLOAT sr, SPFLOAT iPitchMod, int n)
 {
     int nBytes = 0;
 
-    //nBytes = (int) sizeof(sp_revsc_dl) - (int) sizeof(SPFLOAT);
     nBytes += (delay_line_max_samples(sr, iPitchMod, n) * (int) sizeof(SPFLOAT));
-    //nBytes = (nBytes + 15) & (~15);
     return nBytes;
 }
 
@@ -134,8 +132,7 @@ static int init_delay_line(sp_revsc *p, sp_revsc_dl *lp, int n)
     next_random_lineseg(p, lp, n);
     /* clear delay line to zero */
     lp->filterState = 0.0;
-    //memset(lp->buf, 0, sizeof(SPFLOAT) * lp->bufferSize);
-    int i; for (i = 0; i < lp->bufferSize; i++)  lp->buf[i] = 0.0;
+    memset(lp->buf, 0, sizeof(SPFLOAT) * lp->bufferSize);
     return SP_OK;
 }
 
@@ -247,8 +244,7 @@ int sp_revsc_compute(sp_data *sp, sp_revsc *p, SPFLOAT *in, SPFLOAT *out){
             next_random_lineseg(p, lp, n);
         }
     }
-    //p->aoutL = (SPFLOAT) (aoutL * outputGain);
-    //p->aoutR = (SPFLOAT) (aoutR * outputGain);
+    /* someday, use aoutR for multimono out */
     *out  = aoutL * outputGain;
     return SP_OK;
 }
