@@ -23,12 +23,14 @@ typedef struct  {
     SPFLOAT       prv_LPFreq;
     int         initDone;
     sp_revsc_dl delayLines[8];
-    //sp_revsc_dl *delayLines[8];
-    auxData aux;
+    sp_auxdata *aux;
 } sp_revsc;
 
+/* TODO: merge alloc and create (assuming this method works... */
+int sp_revsc_alloc(sp_data *sp, sp_auxdata *aux);
 int sp_revsc_create(sp_data *sp, sp_revsc **p);
-int sp_revsc_destroy(sp_revsc **p);
-int sp_revsc_init(sp_data *sp, sp_revsc *p);
+/* destroys user allocated data as well */
+int sp_revsc_destroy(sp_revsc **p, sp_auxdata *aux); 
+int sp_revsc_init(sp_data *sp, sp_revsc *p, sp_auxdata *aux);
 int sp_revsc_compute(sp_data *sp, sp_revsc *p, SPFLOAT *in, SPFLOAT *out);
 

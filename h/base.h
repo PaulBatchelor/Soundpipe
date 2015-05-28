@@ -10,6 +10,11 @@
 
 typedef unsigned long sp_frame;
 
+typedef struct sp_auxdata{
+    size_t size;
+    void *ptr;
+}sp_auxdata;
+
 typedef struct sp_data{ 
     SPFLOAT buf[SP_BUFSIZE];
     SPFLOAT out;
@@ -19,6 +24,9 @@ typedef struct sp_data{
     unsigned long pos;
     char filename[200];
 }sp_data; 
+
+int sp_auxdata_alloc(sp_auxdata *aux, size_t size);
+int sp_auxdata_free(sp_auxdata *aux);
 
 int sp_create(sp_data **spp);
 int sp_destroy(sp_data **spp);

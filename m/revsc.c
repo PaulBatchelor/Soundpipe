@@ -29,58 +29,39 @@ static const SPFLOAT reverbParams[8][4] = {
 };
 
 static int delay_line_max_samples(SPFLOAT sr, SPFLOAT iPitchMod, int n);
-static int init_delay_line(sp_revsc *p, sp_revsc_dl *lp, SPFLOAT **buf, int n);
+static int init_delay_line(sp_revsc *p, sp_revsc_dl *lp, int n);
 static int delay_line_bytes_alloc(SPFLOAT sr, SPFLOAT iPitchMod, int n);
 static const SPFLOAT outputGain  = 0.35;
 static const SPFLOAT jpScale     = 0.25;
 int sp_revsc_create(sp_data *sp, sp_revsc **p){
-    /* calculate the number of bytes to allocate */
-    /* set up delay lines */
-    int i, nBytes = 0;
-    for(i = 0; i < 8; i++){
-        nBytes += delay_line_bytes_alloc(sp->sr, 1, i);
-    }
-    *p = malloc(sizeof(sp_revsc) + sizeof(SPFLOAT) * nBytes + 10);
-    
+    *p = malloc(sizeof(sp_revsc));
     return SP_OK;
 }
 
-int sp_revsc_init(sp_data *sp, sp_revsc *p){
+int sp_revsc_init(sp_data *sp, sp_revsc *p, sp_auxdata *aux){
     p->iSampleRate = sp->sr;
     p->sampleRate = sp->sr;
     p->kFeedBack = 0.97;
     p->kLPFreq = 10000;
     p->iPitchMod = 1;
     p->iSkipInit = 0;
-    //int i;
     p->dampFact = 1.0;
     p->prv_LPFreq = 0.0;
     p->initDone = 1;
-    
+    p->aux = aux; 
     int i, nBytes = 0;
-    for(i = 0; i < 8; i++){
-        nBytes += delay_line_bytes_alloc(sp->sr, 1, i);
-    }
-    p->aux.auxp = malloc(nBytes * sizeof(SPFLOAT));
-    memset(p->aux.auxp, 0, nBytes * sizeof(SPFLOAT));
-    nBytes = 0;
-    //for (i = 0; i < 8; i++) {
-    //  p->delayLines[i] = (sp_revsc_dl *) ((unsigned char *)  (p->aux.auxp) + (int) nBytes);
-    //  init_delay_line(p, p->delayLines[i], i);
-    //  nBytes += delay_line_bytes_alloc(sp->sr, 1, i);
-    //}
-
-    nBytes = delay_line_bytes_alloc(sp->sr, 1, i);
     for (i = 0; i < 8; i++) {
-    //    p->delayLines[i].buf = (p->aux.auxp) + nBytes * i;
-        init_delay_line(p, &p->delayLines[i], &p->delayLines[i].buf, i);
+        p->delayLines[i].buf = (p->aux->ptr) + nBytes;
+        init_delay_line(p, &p->delayLines[i], i);
+        nBytes += delay_line_bytes_alloc(sp->sr, 1, i);
     }
 
     return SP_OK;
 }
 
 
-int sp_revsc_destroy(sp_revsc **p){
+int sp_revsc_destroy(sp_revsc **p, sp_auxdata *aux){
+    sp_auxdata_free(aux);
     free(*p);
     return SP_OK;
 }
@@ -96,11 +77,11 @@ static int delay_line_max_samples(SPFLOAT sr, SPFLOAT iPitchMod, int n)
 
 static int delay_line_bytes_alloc(SPFLOAT sr, SPFLOAT iPitchMod, int n)
 {
-    int nBytes;
+    int nBytes = 0;
 
-    nBytes = (int) sizeof(sp_revsc_dl) - (int) sizeof(SPFLOAT);
+    //nBytes = (int) sizeof(sp_revsc_dl) - (int) sizeof(SPFLOAT);
     nBytes += (delay_line_max_samples(sr, iPitchMod, n) * (int) sizeof(SPFLOAT));
-    nBytes = (nBytes + 15) & (~15);
+    //nBytes = (nBytes + 15) & (~15);
     return nBytes;
 }
 
@@ -131,7 +112,7 @@ static void next_random_lineseg(sp_revsc *p, sp_revsc_dl *lp, int n)
     lp->readPosFrac_inc = (int) (phs_incVal * DELAYPOS_SCALE + 0.5);
 }
 
-static int init_delay_line(sp_revsc *p, sp_revsc_dl *lp, SPFLOAT **buf, int n)
+static int init_delay_line(sp_revsc *p, sp_revsc_dl *lp, int n)
 {
     SPFLOAT  readPos;
     /* int     i; */
@@ -153,9 +134,8 @@ static int init_delay_line(sp_revsc *p, sp_revsc_dl *lp, SPFLOAT **buf, int n)
     next_random_lineseg(p, lp, n);
     /* clear delay line to zero */
     lp->filterState = 0.0;
-    *buf = malloc(sizeof(SPFLOAT) * lp->bufferSize);
-    memset(&buf, 0, sizeof(SPFLOAT) * lp->bufferSize);
-    //int i; for (i = 0; i < lp->bufferSize; i++)  lp->buf[i] = 0.0;
+    //memset(lp->buf, 0, sizeof(SPFLOAT) * lp->bufferSize);
+    int i; for (i = 0; i < lp->bufferSize; i++)  lp->buf[i] = 0.0;
     return SP_OK;
 }
 
@@ -270,5 +250,14 @@ int sp_revsc_compute(sp_data *sp, sp_revsc *p, SPFLOAT *in, SPFLOAT *out){
     //p->aoutL = (SPFLOAT) (aoutL * outputGain);
     //p->aoutR = (SPFLOAT) (aoutR * outputGain);
     *out  = aoutL * outputGain;
+    return SP_OK;
+}
+int sp_revsc_alloc(sp_data *sp, sp_auxdata *aux){
+    int i;
+    int nBytes = 0;
+    for(i = 0; i < 8; i++){
+        nBytes += delay_line_bytes_alloc(sp->sr, 1, i);
+    }
+    sp_auxdata_alloc(aux, nBytes);
     return SP_OK;
 }

@@ -13,12 +13,12 @@ int sp_create(sp_data **spp) {
     return 0;
 }
 
-int sp_destroy(sp_data **spp) {
+int sp_destroy(sp_data **spp){
     free(*spp);
     return 0;
 }
 
-int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *)) {
+int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *)){
     SF_INFO info;
     info.samplerate = sp->sr;
     info.channels = 1;
@@ -27,7 +27,7 @@ int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *)) {
 
     sp->sf = sf_open(sp->filename, SFM_WRITE, &info);
 
-    while(sp->len > 0) {
+    while(sp->len > 0){
         if(sp->len < SP_BUFSIZE) {
             numsamps = sp->len;
         }else{
@@ -44,3 +44,15 @@ int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *)) {
     sf_close(sp->sf);
     return 0;
 }
+
+int sp_auxdata_alloc(sp_auxdata *aux, size_t size){
+    aux->ptr = malloc(size);
+    aux->size = size;
+    return SP_OK;
+}
+
+int sp_auxdata_free(sp_auxdata *aux){
+    free(aux->ptr);
+    return SP_OK;
+}
+
