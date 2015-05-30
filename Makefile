@@ -5,7 +5,7 @@ MODULES=base event noise tone moogladder butter revsc ftbl osc posc3 randi dcblo
 MPATHS=$(addprefix m/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
 
-CFLAGS += -lm -lsndfile -g
+CFLAGS += -lm -lsndfile -g 
 
 include t/Makefile
 

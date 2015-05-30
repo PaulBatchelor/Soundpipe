@@ -38,10 +38,10 @@ void write_osc(sp_data *data, void *ud) {
         sp_osc_compute(data, udp->v[i].osc, NULL, &osc);
         dry += osc * amp; 
     }
-    sp_revsc_compute(data, udp->rev, &dry, &wet);  
+    //sp_revsc_compute(data, udp->rev, &dry, &wet);  
 
-    sp_dcblock_compute(data, udp->dcblk, &wet, &blk);
-    data->out = 0.5 * dry + 0.3 * blk; 
+    //sp_dcblock_compute(data, udp->dcblk, &wet, &blk);
+    data->out = 0.5 * dry + 0.3 * wet; 
 }
 
 int main() {
@@ -56,7 +56,7 @@ int main() {
     sp_dcblock_create(&ud.dcblk);
     sp_revsc_alloc(sp, &ud.rev_aux);
     sp_revsc_create(sp, &ud.rev);
-    sp_ftbl_create(sp, &ud.ft, 1024);
+    sp_ftbl_create(sp, &ud.ft, 2048);
 
     sp_gen_file(ud.ft, "FMSine111.wav");
     for(i = 0; i < NVOICES; i++){ 
