@@ -9,10 +9,11 @@ int main( int argc, char** argv ) {
     plan( 3 );
 
     int status;
-
+    sp_data *sp;
+    sp_create(&sp);
     sp_ftbl *ft; 
 
-    status = sp_ftbl_create(&ft, 1024);
+    status = sp_ftbl_create(sp, &ft, 1024);
 
     ok(status, "Initialize event");
 
@@ -25,5 +26,6 @@ int main( int argc, char** argv ) {
     sp_gen_sine(ft);
 
     sp_ftbl_destroy(&ft);
+    sp_destroy(&sp);
     return 0;
 }

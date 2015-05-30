@@ -1,4 +1,5 @@
 #include <sndfile.h>
+#include <stdint.h>
 #define SP_BUFSIZE 4096
 #define SPFLOAT float
 #define SP_OK 1
