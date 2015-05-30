@@ -1,6 +1,7 @@
 default: libsoundpipe.a
 
-MODULES=base event noise tone moogladder butter revsc ftbl osc posc3 randi dcblock
+MODULES=base event noise tone moogladder butter revsc ftbl osc posc3 randi \
+		dcblock tevent
 
 MPATHS=$(addprefix m/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
