@@ -1,20 +1,19 @@
 default: libsoundpipe.a
 
-MODULES=base event noise tone moogladder butter revsc
+MODULES=base event noise tone moogladder butter revsc ftbl osc
 
 MPATHS=$(addprefix m/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
 
+CFLAGS += -lm -lsndfile -g
+
 include t/Makefile
 
 m/%.o: m/%.c h/%.h m/base.o h/soundpipe.h
-	gcc -Wall -lsndfile -g -c -static -Ih $< -o $@ 
+	gcc -Wall $(CFLAGS) -c -static -Ih $< -o $@ 
 
-#m/event.o: m/event.c h/event.h m/base.o h/soundpipe.h
-#	gcc -Wall -lsndfile -g -c -static -Ih $< -o $@ 
-#
 m/base.o: m/base.c 
-	gcc -Wall -g -c -static -lsndfile -Ih $< -o $@ 
+	gcc -Wall $(CFLAGS) -c -static -lsndfile -Ih $< -o $@ 
 
 h/soundpipe.h: $(HPATHS)
 	cat $(HPATHS) > $@

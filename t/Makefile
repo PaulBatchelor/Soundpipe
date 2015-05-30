@@ -1,4 +1,4 @@
-TESTS=test event
+TESTS=test event ftbl
 TPATHS=$(addprefix t/, $(TESTS))
 
 .PHONY: tests
@@ -9,7 +9,7 @@ t/libtap.o: t/libtap.c
 	gcc -I h/ -c t/libtap.c -o t/libtap.o
 
 t/%: t/%.c t/libtap.o $(MPATHS)
-	gcc -g -I h/ -lsndfile -o $@ $< t/libtap.o $(MPATHS)
+	gcc -g -I h/ $(CFLAGS) -o $@ $< t/libtap.o $(MPATHS)
 
 clean_tests:
 	rm -rf $(TPATHS) t/libtap.o
