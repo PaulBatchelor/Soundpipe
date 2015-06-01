@@ -12,6 +12,10 @@
 #define DELAYPOS_SCALE  0x10000000
 #define DELAYPOS_MASK   0x0FFFFFFF
 
+#ifndef M_PI
+#define M_PI		3.14159265358979323846	/* pi */
+#endif 
+
 /* reverbParams[n][0] = delay time (in seconds)                     */
 /* reverbParams[n][1] = random variation in delay time (in seconds) */
 /* reverbParams[n][2] = random variation frequency (in 1/sec)       */

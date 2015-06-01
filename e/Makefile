@@ -5,7 +5,7 @@ files = ex_buthp ex_butlp ex_moogladder ex_noise ex_revsc ex_tone ex_osc \
 default: $(files)
 
 % :: %.c 
-	gcc -O3 -g -I ../h $< ../libsoundpipe.a -lsndfile -o $@ -lm
+	gcc -g --std=c99 -I ../h $< ../libsoundpipe.a -lsndfile -o $@ -lm
 
 clean:
 	rm  -rf $(files) test.wav

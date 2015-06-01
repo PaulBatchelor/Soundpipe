@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "soundpipe.h"
+
 int sp_osc_create(sp_osc **osc){
     *osc = malloc(sizeof(sp_osc));
     return SP_OK;
