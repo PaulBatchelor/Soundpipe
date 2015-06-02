@@ -1,14 +1,16 @@
 <CsoundSynthesizer>
 <CsOptions>
--d -odac:system:playback_ -+rtaudio="jack" 
+;-d -odac:system:playback_ -+rtaudio="jack" 
+-odac -rtaudio+=alsa
 ;--sample-accurate
+-Z
 -B 4096
 -b 4096
 </CsOptions>
 <CsInstruments>
 
-sr	=	96000
-ksmps	=	1
+sr	=	44100
+ksmps	=	1024
 nchnls	=	1
 0dbfs	=	1
 
