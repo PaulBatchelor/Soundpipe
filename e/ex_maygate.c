@@ -9,6 +9,7 @@ typedef struct {
     sp_tevent *te;
     sp_metro *met;
     sp_tenv *tenv;
+    sp_maygate *mg;
     SPFLOAT freq;
 } udata;
 
@@ -17,11 +18,13 @@ void write_osc(sp_data *data, void *ud) {
     SPFLOAT trig = 0;
     SPFLOAT env = 0;
     SPFLOAT osc = 0;
+    SPFLOAT mgate = 0;
     sp_metro_compute(data, udp->met, NULL, &trig);
+    sp_maygate_compute(data, udp->mg, &trig, &mgate);
     sp_tevent_compute(data, udp->te, &trig, &udp->osc->freq);
     sp_tenv_compute(data, udp->tenv, &trig, &env);
     sp_osc_compute(data, udp->osc, NULL, &osc);
-    data->out = osc * env;
+    data->out = osc * env * mgate;
 }
 
 void freq_reinit(void *ud){
@@ -42,15 +45,17 @@ int main() {
     sp_data *sp;
     sp_create(&sp);
 
+    sp_maygate_create(&ud.mg);
     sp_tenv_create(&ud.tenv);
     sp_metro_create(&ud.met);
     sp_tevent_create(&ud.te);
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_osc_create(&ud.osc);
 
-    sp_tenv_init(sp, ud.tenv, 0.03, 0.01, 0.3);
+    sp_maygate_init(sp, ud.mg, 0.2);
+    sp_tenv_init(sp, ud.tenv, 0.01, 0.01, 0.2);
     sp_metro_init(sp, ud.met);
-    ud.met->cps = 3;
+    ud.met->cps = 12;
     sp_tevent_init(sp, ud.te, freq_reinit, freq_compute, freqp);
     sp_gen_sine(ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft);
@@ -59,6 +64,7 @@ int main() {
     sp->len = 44100 * 5;
     sp_process(sp, &ud, write_osc);
 
+    sp_maygate_destroy(&ud.mg);
     sp_tenv_destroy(&ud.tenv);
     sp_metro_destroy(&ud.met);
     sp_ftbl_destroy(&ud.ft);

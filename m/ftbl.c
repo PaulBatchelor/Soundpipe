@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include "soundpipe.h" 
+
+#ifndef M_PI
+#define M_PI		3.14159265358979323846	/* pi */
+#endif 
+
 int sp_ftbl_create(sp_data *sp, sp_ftbl **ft, size_t size) {
     *ft = malloc(sizeof(sp_ftbl));
     sp_ftbl *ftp = *ft;

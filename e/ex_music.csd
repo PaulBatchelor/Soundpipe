@@ -1,15 +1,13 @@
 <CsoundSynthesizer>
 <CsOptions>
-;-d -odac:system:playback_ -+rtaudio="jack" 
--o csnd.wav
--3
+-d -odac:system:playback_ -+rtaudio="jack" 
 ;--sample-accurate
 -B 4096
 -b 4096
 </CsOptions>
 <CsInstruments>
 
-sr	=	44100
+sr	=	96000
 ksmps	=	1
 nchnls	=	1
 0dbfs	=	1

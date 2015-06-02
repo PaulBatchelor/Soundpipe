@@ -4,6 +4,11 @@
 #include <stdint.h>
 #include <stdlib.h>
 #define ROOT2 (1.4142135623730950488)
+
+#ifndef M_PI
+#define M_PI		3.14159265358979323846	/* pi */
+#endif 
+
 #include "soundpipe.h"
 
 int sp_butlp_create(sp_butlp **t){

@@ -1,12 +1,7 @@
 typedef struct{
-    SPFLOAT freq;
-    SPFLOAT ris;
-    SPFLOAT dec;
-    SPFLOAT istor;
-
+    SPFLOAT freq, ris, dec, istor;
     SPFLOAT tpidsr;
     SPFLOAT sr;
-
     SPFLOAT delay[4];
 }sp_fofilter;
 

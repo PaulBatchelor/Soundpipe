@@ -42,7 +42,7 @@ void write_osc(sp_data *data, void *ud) {
     sp_revsc_compute(data, udp->rev, &dry, &wet);  
 
     sp_dcblock_compute(data, udp->dcblk, &wet, &blk);
-    data->out = 0.5 * dry + 0.3 * wet; 
+    data->out = 0.5 * dry + 0.1 * wet; 
 }
 
 int main() {
@@ -50,7 +50,8 @@ int main() {
     udata ud;
     sp_data *sp;
     sp_create(&sp);
-
+    /* this is the samplerate I typically use for realtime */
+    sp->sr = 96000;
     int notes[] = { 60, 67, 71, 74, 76 };
     int i;
 
@@ -59,7 +60,7 @@ int main() {
     sp_revsc_create(sp, &ud.rev);
     sp_ftbl_create(sp, &ud.ft, 2048);
 
-    sp_gen_file(ud.ft, "FMSine111.wav");
+    sp_gen_file(ud.ft, "../FMSine111.wav");
     for(i = 0; i < NVOICES; i++){ 
         sp_osc_create(&ud.v[i].osc);
         sp_randi_create(&ud.v[i].rnd);
@@ -72,9 +73,10 @@ int main() {
 
     sp_revsc_init(sp, ud.rev, &ud.rev_aux);
     sp_dcblock_init(sp, ud.dcblk);
-    sp->len = 44100 * 40;
+    /* length does not work in realtime */
+    sp->len = 0;
 
-    sp_process(sp, &ud, write_osc);
+    sp_jack_process(sp, &ud, write_osc);
 
     sp_revsc_destroy(&ud.rev, &ud.rev_aux);
     sp_dcblock_destroy(&ud.dcblk);
