@@ -1,12 +1,12 @@
 default: libsoundpipe.a
 
 MODULES=base event noise tone moogladder butter revsc ftbl osc posc3 randi \
-		dcblock tevent metro tenv
+		dcblock tevent metro tenv fofilter
 
 MPATHS=$(addprefix m/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
 
-CFLAGS += -lm -lsndfile -g 
+CFLAGS += -lm -lsndfile -g -I/opt/include
 
 include t/Makefile
 
