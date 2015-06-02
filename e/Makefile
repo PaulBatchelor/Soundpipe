@@ -1,7 +1,7 @@
 .PHONY: default clean
 files = ex_buthp ex_butlp ex_moogladder ex_noise ex_revsc ex_tone ex_osc \
 		ex_wtosc ex_posc3 ex_randi ex_music ex_tevent ex_metro ex_tenv \
-        ex_maygate ex_fofilter
+        ex_maygate ex_fofilt
 
 # Jack Module
 #
