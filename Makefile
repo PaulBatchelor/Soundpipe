@@ -9,8 +9,8 @@ MODULES=base event noise tone moogladder butter revsc ftbl osc posc3 randi \
 #CFLAGS += -ljack
 
 #RPi Module
-#MODULES += pi
-#CFLAGS += lalsa
+MODULES += rpi
+CFLAGS += -lasound
 
 MPATHS=$(addprefix m/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
