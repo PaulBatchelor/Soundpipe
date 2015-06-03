@@ -9,7 +9,7 @@
 </CsOptions>
 <CsInstruments>
 
-sr	=	44100
+sr	=	22050
 ksmps	=	1024
 nchnls	=	1
 0dbfs	=	1
