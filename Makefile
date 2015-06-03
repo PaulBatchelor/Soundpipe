@@ -1,17 +1,6 @@
 default: libsoundpipe.a
 
-MODULES=base event noise tone moogladder butter revsc ftbl osc posc3 randi \
-		dcblock tevent metro tenv maygate fofilt 
-
-#JACK module
-#
-#MODULES += jack
-#CFLAGS += -ljack
-
-#RPi Module
-#
-#MODULES += rpi
-#CFLAGS += -lasound
+include config.mk
 
 MPATHS=$(addprefix m/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
