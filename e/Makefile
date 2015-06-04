@@ -12,14 +12,14 @@ default: all
 #	gcc -g --std=c99 -I ../h $< ../libsoundpipe.a -lsndfile -ljack -laaio -o $@ -lm
 
 # RPI Module
-
-files += extra/ex_rpi 
-extra/ex_rpi: extra/ex_rpi.c
-	gcc -g --std=c99 -I ../h $< ../libsoundpipe.a -lsndfile -lasound -o $@ -lm
-
-files += extra/ex_rpi_v2
-extra/ex_rpi_v2: extra/ex_rpi_v2.c
-	gcc -g --std=c99 -I ../h $< ../libsoundpipe.a -lsndfile -lasound -o $@ -lm
+#
+#files += extra/ex_rpi 
+#extra/ex_rpi: extra/ex_rpi.c
+#	gcc -g --std=c99 -I ../h $< ../libsoundpipe.a -lsndfile -lasound -o $@ -lm
+#
+#files += extra/ex_rpi_v2
+#extra/ex_rpi_v2: extra/ex_rpi_v2.c
+#	gcc -g --std=c99 -I ../h $< ../libsoundpipe.a -lsndfile -lasound -o $@ -lm
 
 all: $(files)
 
@@ -27,4 +27,4 @@ all: $(files)
 	gcc -g --std=c99 -I ../h $< ../libsoundpipe.a -lsndfile -o $@ -lm
 
 clean:
-	rm  -rf $(files) test.wav
+	rm  -rf $(files) test.wav 
