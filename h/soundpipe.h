@@ -334,3 +334,15 @@ int sp_biquad_create(sp_biquad **p);
 int sp_biquad_destroy(sp_biquad **p);
 int sp_biquad_init(sp_data *sp, sp_biquad *p);
 int sp_biquad_compute(sp_data *sp, sp_biquad *p, SPFLOAT *in, SPFLOAT *out);
+typedef struct{
+    SPFLOAT fco, res, dist, asym, iskip, y, y1, y2;
+    int fcocod, rezcod;
+    SPFLOAT sr;
+    SPFLOAT onedsr;
+
+}sp_tbvcf;
+
+int sp_tbvcf_create(sp_tbvcf **p);
+int sp_tbvcf_destroy(sp_tbvcf **p);
+int sp_tbvcf_init(sp_data *sp, sp_tbvcf *p);
+int sp_tbvcf_compute(sp_data *sp, sp_tbvcf *p, SPFLOAT *in, SPFLOAT *out);
