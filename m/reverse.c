@@ -15,19 +15,22 @@ static int sp_auxdata_getbuf(sp_auxdata *aux, uint32_t pos, SPFLOAT *out){
 
 }
 static int sp_auxdata_setbuf(sp_auxdata *aux, uint32_t pos, SPFLOAT *in){
-    if(pos * sizeof(SPFLOAT) > aux->size){
+    if((pos * sizeof(SPFLOAT)) > aux->size){
         fprintf(stderr, "Error: Buffer overflow!\n");
         return SP_NOT_OK;
     }else{
         SPFLOAT *tmp = aux->ptr; 
-        tmp[pos] = *in;
+        SPFLOAT n = *in;
+        tmp[0] = n;
     }
     return SP_OK;
 }
 
 /*TODO: merge alloc and create functions together somehow */
-int sp_reverse_alloc(sp_data *sp, sp_auxdata *aux, SPFLOAT delay){
-    sp_auxdata_alloc(aux, delay * sp->sr * sizeof(SPFLOAT) * 2);
+int sp_reverse_alloc(sp_data *sp, sp_auxdata *aux, SPFLOAT delay, uint32_t *bufsize){
+    size_t size = delay * sp->sr * sizeof(SPFLOAT) * 2;
+    *bufsize = size;
+    sp_auxdata_alloc(aux, size);
     return SP_OK;
 }
 
@@ -42,7 +45,7 @@ int sp_reverse_destroy(sp_reverse **p, sp_auxdata *aux){
     return SP_OK;
 }
 
-int sp_reverse_init(sp_data *sp, sp_reverse *p, sp_auxdata *aux){
+int sp_reverse_init(sp_data *sp, sp_reverse *p, sp_auxdata *aux, uint32_t bufsize){
     p->bufpos = 0;
     p->bufsize = aux->size / sizeof(SPFLOAT);    
     p->buf = aux;

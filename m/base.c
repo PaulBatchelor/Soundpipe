@@ -49,6 +49,7 @@ int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *)){
 int sp_auxdata_alloc(sp_auxdata *aux, size_t size){
     aux->ptr = malloc(size);
     aux->size = size;
+    memset(aux->ptr, 0, size);
     return SP_OK;
 }
 
