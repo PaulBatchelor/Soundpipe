@@ -346,3 +346,12 @@ int sp_tbvcf_create(sp_tbvcf **p);
 int sp_tbvcf_destroy(sp_tbvcf **p);
 int sp_tbvcf_init(sp_data *sp, sp_tbvcf *p);
 int sp_tbvcf_compute(sp_data *sp, sp_tbvcf *p, SPFLOAT *in, SPFLOAT *out);
+typedef struct{
+    SPFLOAT freq, q, reinit, xnm1, ynm1, ynm2, a0, a1, a2, d, lfq, lq;
+    SPFLOAT sr;
+}sp_mode;
+
+int sp_mode_create(sp_mode **p);
+int sp_mode_destroy(sp_mode **p);
+int sp_mode_init(sp_data *sp, sp_mode *p);
+int sp_mode_compute(sp_data *sp, sp_mode *p, SPFLOAT *in, SPFLOAT *out);
