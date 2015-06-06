@@ -21,7 +21,7 @@ static int sp_auxdata_setbuf(sp_auxdata *aux, uint32_t pos, SPFLOAT *in){
     }else{
         SPFLOAT *tmp = aux->ptr; 
         SPFLOAT n = *in;
-        tmp[0] = n;
+        tmp[pos] = n;
     }
     return SP_OK;
 }
@@ -49,13 +49,12 @@ int sp_reverse_init(sp_data *sp, sp_reverse *p, sp_auxdata *aux, uint32_t bufsiz
     p->bufpos = 0;
     p->bufsize = aux->size / sizeof(SPFLOAT);    
     p->buf = aux;
-    //memset(p->buf->ptr, 0, aux->size);
     return SP_OK;
 }
 
 int sp_reverse_compute(sp_data *sp, sp_reverse *p, SPFLOAT *in, SPFLOAT *out){
     sp_auxdata_getbuf(p->buf, p->bufpos, out);
-    sp_auxdata_setbuf(p->buf, p->bufsize - p->bufpos, in);
+    sp_auxdata_setbuf(p->buf, (p->bufsize - 1) - p->bufpos, in);
     p->bufpos = (p->bufpos + 1) % p->bufsize;
     return SP_OK;
 }
