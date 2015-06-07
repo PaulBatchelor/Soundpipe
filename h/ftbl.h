@@ -23,6 +23,8 @@ int sp_ftbl_tseq_create(sp_ftbl_seq **seq, sp_ftbl *ft);
 int sp_ftbl_tseq_compute(sp_ftbl_seq *seq, SPFLOAT *trig, SPFLOAT *val);
 int sp_ftbl_tseq_destroy(sp_ftbl_seq **seq);
 
+int sp_gen_vals(sp_ftbl *ft, char *string);
+
 int sp_gen_sine(sp_ftbl *ft);
 int sp_gen_file(sp_ftbl *ft, const char *filename);
 

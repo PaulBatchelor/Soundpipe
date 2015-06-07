@@ -1,4 +1,5 @@
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "soundpipe.h" 
@@ -6,7 +7,6 @@
 #ifndef M_PI
 #define M_PI		3.14159265358979323846	/* pi */
 #endif 
-
 int sp_ftbl_create(sp_data *sp, sp_ftbl **ft, size_t size) {
     *ft = malloc(sizeof(sp_ftbl));
     sp_ftbl *ftp = *ft;
@@ -47,6 +47,25 @@ int sp_ftbl_tseq_compute(sp_ftbl_seq *seq, SPFLOAT *trig, SPFLOAT *val){
 
 int sp_ftbl_tseq_destroy(sp_ftbl_seq **seq){
     free(*seq);
+    return SP_OK;
+}
+
+int sp_gen_vals(sp_ftbl *ft, char *string){
+    char *str1, *token, *t;
+    char *saveptr1;
+    int j, nvals;
+    char *d;
+    asprintf(&d, " ");
+    asprintf(&t, "%s", string);
+    for (j = 0, str1 = t; j < ft->size; j++, str1 = NULL) {
+        token = strtok_r(str1, d, &saveptr1);
+        if (token == NULL)
+            break;
+        ft->tbl[j] = atof(token);
+    }
+
+    free(t);
+    free(d);
     return SP_OK;
 }
 

@@ -26,7 +26,7 @@ void write_osc(sp_data *data, void *ud) {
     }
     sp_dtrig_compute(data, udp->dt, &trig, &dtrig);
     sp_ftbl_tseq_compute(udp->seq, &dtrig, &note);
-    udp->osc->freq = sp_midi2cps(note + 12);
+    udp->osc->freq = sp_midi2cps(note + 24);
     sp_tenv_compute(data, udp->tenv, &dtrig, &env);
     sp_osc_compute(data, udp->osc, NULL, &osc);
     data->out = osc * env;
@@ -47,16 +47,9 @@ int main() {
     sp_ftbl_create(sp, &ud.nn, 4);
     sp_osc_create(&ud.osc);
 
-    ud.delta->tbl[0] = 1.0; 
-    ud.delta->tbl[1] = 1.0; 
-    ud.delta->tbl[2] = 0.5; 
-    ud.delta->tbl[3] = 0.5; 
-    
-    ud.nn->tbl[0] = 60; 
-    ud.nn->tbl[1] = 62; 
-    ud.nn->tbl[2] = 64; 
-    ud.nn->tbl[3] = 67; 
-    
+    sp_gen_vals(ud.delta, "1.0 1.0 0.5 0.5");
+    sp_gen_vals(ud.nn, "60 62 64 67");
+
     sp_ftbl_tseq_create(&ud.seq, ud.nn); 
     
     sp_dtrig_init(sp, ud.dt, ud.delta);
