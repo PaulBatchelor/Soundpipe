@@ -19,12 +19,37 @@ int sp_ftbl_create(sp_data *sp, sp_ftbl **ft, size_t size) {
     ftp->lodiv = 1.0 / pow(2, ftp->lobits);
     return SP_OK;
 }
+
 int sp_ftbl_destroy(sp_ftbl **ft){
     sp_ftbl *ftp = *ft;
     free(ftp->tbl);
     free(*ft);
     return SP_OK;
 }
+
+int sp_ftbl_tseq_create(sp_ftbl_seq **seq, sp_ftbl *ft){
+    *seq = malloc(sizeof(sp_ftbl_seq));
+    sp_ftbl_seq *seqp = *seq;
+    seqp->ft = ft;
+    seqp->pos = 0;
+    seqp->val = 0;
+    return SP_OK;
+}
+
+int sp_ftbl_tseq_compute(sp_ftbl_seq *seq, SPFLOAT *trig, SPFLOAT *val){
+    if(*trig != 0){
+        seq->val = seq->ft->tbl[seq->pos];
+        seq->pos = (seq->pos + 1) % seq->ft->size;
+    }
+    *val = seq->val;
+    return SP_OK;
+}
+
+int sp_ftbl_tseq_destroy(sp_ftbl_seq **seq){
+    free(*seq);
+    return SP_OK;
+}
+
 int sp_gen_sine(sp_ftbl *ft){
     unsigned long i;
     SPFLOAT step = 2 * M_PI / ft->size;
