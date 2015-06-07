@@ -4,3 +4,4 @@
 *.swp
 *.dSYM
 soundpipe.h
+.DS_Store
