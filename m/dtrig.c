@@ -14,6 +14,7 @@ int sp_dtrig_init(sp_data *sp, sp_dtrig *p, sp_ftbl *ft){
     p->counter = 0;
     p->pos = 0; 
     p->running = 0;
+    p->loop = 0;
     return SP_OK;
 }
 int sp_dtrig_compute(sp_data *sp, sp_dtrig *p, SPFLOAT *in, SPFLOAT *out){
@@ -26,6 +27,9 @@ int sp_dtrig_compute(sp_data *sp, sp_dtrig *p, SPFLOAT *in, SPFLOAT *out){
             p->counter = p->ft->tbl[p->pos] * sp->sr - 1;
             *out = 1.0;
             p->pos++; 
+            if(p->loop){
+                p->pos %= p->ft->size;
+            }
             return SP_OK;
         }else{
             *out = 0;
