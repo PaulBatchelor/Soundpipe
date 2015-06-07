@@ -1,5 +1,6 @@
 #include <sndfile.h>
 #include <stdint.h>
+
 #define SP_BUFSIZE 4096
 #define SPFLOAT float
 #define SP_OK 1
@@ -32,3 +33,5 @@ int sp_auxdata_free(sp_auxdata *aux);
 int sp_create(sp_data **spp);
 int sp_destroy(sp_data **spp);
 int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *));
+
+SPFLOAT sp_midi2cps(int nn);

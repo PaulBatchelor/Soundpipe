@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+#include <math.h>
 #include "base.h"
 
 int sp_create(sp_data **spp) {
@@ -48,6 +50,7 @@ int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *)){
 int sp_auxdata_alloc(sp_auxdata *aux, size_t size){
     aux->ptr = malloc(size);
     aux->size = size;
+    memset(aux->ptr, 0, size);
     return SP_OK;
 }
 
@@ -56,3 +59,6 @@ int sp_auxdata_free(sp_auxdata *aux){
     return SP_OK;
 }
 
+SPFLOAT sp_midi2cps(int nn) {
+    return pow(2, (nn - 69.0) / 12.0) * 440.0;
+}
