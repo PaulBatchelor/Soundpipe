@@ -5,8 +5,7 @@ include config.mk
 MPATHS=$(addprefix m/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
 
-#CFLAGS += -lm -lsndfile -g --std=c99
-CFLAGS += -lm -lsndfile -g 
+CFLAGS += -lm -lsndfile -g --std=c99
 
 include t/Makefile
 

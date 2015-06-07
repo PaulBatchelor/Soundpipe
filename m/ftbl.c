@@ -7,6 +7,7 @@
 #ifndef M_PI
 #define M_PI		3.14159265358979323846	/* pi */
 #endif 
+
 int sp_ftbl_create(sp_data *sp, sp_ftbl **ft, size_t size) {
     *ft = malloc(sizeof(sp_ftbl));
     sp_ftbl *ftp = *ft;
@@ -53,14 +54,21 @@ int sp_ftbl_tseq_destroy(sp_ftbl_seq **seq){
 int sp_gen_vals(sp_ftbl *ft, char *string){
     char *str1, *token, *t;
     char *saveptr1;
-    int j, nvals;
+    int j;
     char *d;
-    asprintf(&d, " ");
-    asprintf(&t, "%s", string);
-    for (j = 0, str1 = t; j < ft->size; j++, str1 = NULL) {
+    d = malloc(sizeof(char) + 1);
+    d[0] = ' ';
+    d[1] = 0;
+    t = malloc(sizeof(char) * (strlen(string) + 1));
+    strcpy(t, string);
+    for (j = 0, str1 = t; ; j++, str1 = NULL) {
         token = strtok_r(str1, d, &saveptr1);
         if (token == NULL)
             break;
+        if(ft->size < j + 1){
+            ft->tbl = realloc(ft->tbl, sizeof(SPFLOAT) * (ft->size + 2));
+            ft->size++;
+        }
         ft->tbl[j] = atof(token);
     }
 

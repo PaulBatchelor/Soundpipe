@@ -44,7 +44,7 @@ int main() {
     sp_tenv_create(&ud.tenv);
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_ftbl_create(sp, &ud.delta, 4);
-    sp_ftbl_create(sp, &ud.nn, 4);
+    sp_ftbl_create(sp, &ud.nn, 1);
     sp_osc_create(&ud.osc);
 
     sp_gen_vals(ud.delta, "1.0 1.0 0.5 0.5");
