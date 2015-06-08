@@ -59,6 +59,30 @@ int sp_auxdata_free(sp_auxdata *aux){
     return SP_OK;
 }
 
+int sp_auxdata_getbuf(sp_auxdata *aux, uint32_t pos, SPFLOAT *out){
+    if(pos * sizeof(SPFLOAT) > aux->size){
+        fprintf(stderr, "Error: Buffer overflow!\n");
+        *out = 0;
+        return SP_NOT_OK;
+    }else{
+        SPFLOAT *tmp = aux->ptr; 
+        *out = tmp[pos];
+    }
+    return SP_OK;
+
+}
+int sp_auxdata_setbuf(sp_auxdata *aux, uint32_t pos, SPFLOAT *in){
+    if((pos * sizeof(SPFLOAT)) > aux->size){
+        fprintf(stderr, "Error: Buffer overflow!\n");
+        return SP_NOT_OK;
+    }else{
+        SPFLOAT *tmp = aux->ptr; 
+        SPFLOAT n = *in;
+        tmp[pos] = n;
+    }
+    return SP_OK;
+}
+
 SPFLOAT sp_midi2cps(int nn) {
     return pow(2, (nn - 69.0) / 12.0) * 440.0;
 }
