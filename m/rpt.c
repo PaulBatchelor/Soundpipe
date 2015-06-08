@@ -14,28 +14,30 @@ int sp_rpt_destroy(sp_rpt **p){
 }
 
 int sp_rpt_init(sp_data *sp, sp_rpt *p, SPFLOAT maxdur){
-    sp_auxdata_alloc(&p->aux, sizeof(SPFLOAT) * (uint32_t)maxdur);
+    sp_auxdata_alloc(&p->aux, sizeof(SPFLOAT) * (uint32_t)maxdur * sp->sr);
     p->playpos = 0;
     p->bufpos = 0;
     p->running = 0;
     p->reps = 4;
     p->count = p->reps;
     p->size = p->aux.size;
-    p->onedsr = 1.0 / sp->sr;
+    p->sr = sp->sr;
     return SP_OK;
 }
 
 int sp_rpt_compute(sp_data *sp, sp_rpt *p, SPFLOAT *trig, 
         SPFLOAT *in, SPFLOAT *out){
-    if(*trig){
+    if(*trig > 0){
         p->running = 1;
         p->playpos = 0;
         p->bufpos = 0;    
-        p->count = p->reps;
+        p->count = p->reps + 1;
     }
     if(p->bufpos * sizeof(SPFLOAT) < p->aux.size){
-       sp_auxdata_setbuf(&p->aux, p->bufpos, in);
-       p->bufpos++;
+        sp_auxdata_setbuf(&p->aux, p->bufpos, in);
+        p->bufpos++;
+    }else{
+        p->running = 0;
     }
     if(p->running && p->count > 0){
         if(p->playpos == 0){
@@ -43,17 +45,19 @@ int sp_rpt_compute(sp_data *sp, sp_rpt *p, SPFLOAT *trig,
         }
         sp_auxdata_getbuf(&p->aux, p->playpos, out);
         p->playpos = (p->playpos + 1) % p->size;
-        p->count--;
     }else{
         *out = *in;
     }
     return SP_OK;
 }
-int sp_rpt_set(sp_rpt *p, int bpm, int beat, int rep){
-    uint32_t size = (beat * (60.0/bpm)) * p->onedsr;
+int sp_rpt_set(sp_rpt *p, SPFLOAT bpm, int div, int rep){
+    uint32_t size = (p->sr * (60.0 / bpm)) / (SPFLOAT) div;
     p->reps = rep;
     if(size * sizeof(SPFLOAT) > p->aux.size){
         fprintf(stderr, "Error: not enough memory allocated for buffer.\n");
+        return SP_NOT_OK;
+    }else if(size <= 0){
+        fprintf(stderr, "Error: Size cannot be zero.\n");
         return SP_NOT_OK;
     }else{
         p->size = size;

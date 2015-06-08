@@ -6,16 +6,19 @@ typedef struct{
     sp_metro *mt;
     sp_tenv *te;
     sp_rpt *rpt;
+    sp_maygate *mg;
 }UserData;
 
 void compute(sp_data *sp, void *user_data){
     UserData *ud = user_data;
-    SPFLOAT met, osc, env, rpt, trig = 0, dry;
+    SPFLOAT met, osc, env, rpt, maygate, trig, dry;
     sp_metro_compute(sp, ud->mt, NULL, &met);
     sp_tenv_compute(sp, ud->te, &met, &env);
     sp_osc_compute(sp, ud->osc, NULL, &osc);
     dry = osc * env;
-    sp_rpt_compute(sp, ud->rpt, &met, &dry, &rpt);
+    sp_maygate_compute(sp, ud->mg, &met, &maygate);
+    trig = met * maygate;
+    sp_rpt_compute(sp, ud->rpt, &trig, &dry, &rpt);
     sp->out = rpt;
 }
 
@@ -25,20 +28,20 @@ int main(){
     sp_create(&sp);
     int tempo = 120;
     sp_rpt_create(&ud.rpt);
+    sp_maygate_create(&ud.mg);
     sp_osc_create(&ud.osc);
     sp_ftbl_create(sp, &ud.ft, 4096);
     sp_metro_create(&ud.mt);
     sp_tenv_create(&ud.te);
 
-    
+   
+    sp_maygate_init(sp, ud.mg, 0.5);
     sp_gen_sine(ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft);
     sp_metro_init(sp, ud.mt);
     ud.mt->cps = tempo / 60.0;
     sp_rpt_init(sp, ud.rpt, 1.0);
-//    sp_rpt_set(ud.rpt, 120, 0.25, 2);
-    ud.rpt->size = 100;
-    ud.rpt->reps = 3;
+    sp_rpt_set(ud.rpt, tempo, 8, 4);
     sp_tenv_init(sp, ud.te, 0.001, 0.1, 0.1); 
     sp_process(sp, &ud, compute);
 
