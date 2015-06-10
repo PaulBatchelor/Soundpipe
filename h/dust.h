@@ -2,6 +2,7 @@ typedef struct sp_dust{
     SPFLOAT amp, density; 
     SPFLOAT density0, thresh, scale;
     SPFLOAT onedsr;
+    int bipolar; /* 1 = bipolar 0 = unipolar */
     uint32_t rand;
 } sp_dust;
 

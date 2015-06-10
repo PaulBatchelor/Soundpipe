@@ -19,6 +19,7 @@ int sp_dust_init(sp_data *sp, sp_dust *p, SPFLOAT amp, SPFLOAT density) {
     p->scale = 0.0;
     p->rand = rand();
     p->onedsr = 1.0 / sp->sr;
+    p->bipolar = 0;
     return SP_OK;
 }
 
@@ -28,7 +29,11 @@ int sp_dust_compute(sp_data *sp, sp_dust *p, SPFLOAT *in, SPFLOAT *out) {
     density = p->density;
     if (density != p->density0) {
         thresh = p->thresh = density * p->onedsr;
-        scale  = p->scale  = (thresh > 0.0 ? 1.0 / thresh : 0.0);
+        if(p->bipolar) {
+            scale  = p->scale  = (thresh > 0.0 ? 2.0 / thresh : 0.0);
+        } else {
+            scale  = p->scale  = (thresh > 0.0 ? 1.0 / thresh : 0.0);
+        }
         p->density0 = density;
     } else {
         thresh = p->thresh;
@@ -38,6 +43,12 @@ int sp_dust_compute(sp_data *sp, sp_dust *p, SPFLOAT *in, SPFLOAT *out) {
     SPFLOAT r;
     p->rand = rand();
     r = (SPFLOAT)p->rand * dv2_31;
-    *out = p->amp * (r < thresh ? r*scale : 0.0);
+
+    if(p->bipolar) {
+        *out = p->amp * (r < thresh ? r*scale - 1.0 : 0.0);
+    } else {
+        *out = p->amp * (r < thresh ? r*scale : 0.0);
+    }
+
     return SP_OK;
 }
