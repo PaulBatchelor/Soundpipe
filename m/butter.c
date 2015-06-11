@@ -1,4 +1,14 @@
-/* GIVE CREDIT HERE WHERE IT IS DUE PAUL, LOVE PAUL */
+/*
+ * Butterworth Filters
+ * 
+ * This code has been extracted from the Csound butterworth filter opcodes 
+ * It has been modified to work as a Soundpipe module.
+ * 
+ * Original Author(s): Paris Smaragdis, John ffitch
+ * Year: 1994
+ * Location: Opcodes/butter.c
+ *
+ */
 
 #include <math.h>
 #include <stdint.h>
