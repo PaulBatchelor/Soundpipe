@@ -1,5 +1,5 @@
 typedef struct{
-    SPFLOAT htime, sig;
+    SPFLOAT htime;
     SPFLOAT c1, c2, yt1, prvhtim;
     SPFLOAT sr, onedsr;
 }sp_port;

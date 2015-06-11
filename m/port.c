@@ -33,9 +33,7 @@ int sp_port_destroy(sp_port **p){
 }
 
 int sp_port_init(sp_data *sp, sp_port *p, SPFLOAT htime){
-    if(p->sig >= 0){
-        p->yt1 = p->sig;
-    }
+    p->yt1 = 0;
     p->prvhtim = -100.0;
     p->htime = htime;
 
