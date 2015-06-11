@@ -1,4 +1,16 @@
-/* Note: randi uses macros from the ftbl module. Make sure it is enabled. */
+/*
+ * Randi
+ * 
+ * This code has been extracted from the Csound opcode "randi".
+ * It has been modified to work as a Soundpipe module.
+ * 
+ * Original Author(s): Barry Vercoe, John ffitch
+ * Year: 1991
+ * Location: OOps/ugens4.c
+ *
+ * Randi needs the ftbl Soundpipe module in order to work. 
+ *
+ */
 
 #include <stdlib.h>
 #include <math.h>

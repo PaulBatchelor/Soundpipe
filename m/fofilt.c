@@ -1,3 +1,15 @@
+/*
+ * Fofilt
+ * 
+ * This code has been extracted from the Csound opcode "fofilter".
+ * It has been modified to work as a Soundpipe module.
+ * 
+ * Original Author(s): Victor Lazzarini 
+ * Year: 2004
+ * Location: Opcodes/newfils.c
+ *
+ */
+
 #include <stdint.h>
 #include <stdlib.h>
 #include <math.h>

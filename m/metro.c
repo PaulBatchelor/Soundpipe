@@ -1,3 +1,15 @@
+/*
+ * Metro
+ * 
+ * This code has been extracted from the Csound opcode "metro".
+ * It has been modified to work as a Soundpipe module.
+ * 
+ * Original Author(s): Gabriel Maldonado
+ * Year: 2000
+ * Location: Opcodes/metro.c
+ *
+ */
+
 #include <stdlib.h>
 #include "soundpipe.h"
 

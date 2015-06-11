@@ -1,5 +1,15 @@
+/*
+ * Planet
+ * 
+ * This code has been extracted from the Csound opcode "Planet".
+ * It has been modified to work as a Soundpipe module.
+ * 
+ * Original Author(s): Hans Mikelson 
+ * Year: 1998
+ * Location: Opcodes/biquad.c
+ *
+ */
 
-/* GIVE CREDIT HERE WHERE IT IS DUE PAUL, LOVE PAUL */
 
 #include <math.h>
 #include <stdint.h>

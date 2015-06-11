@@ -1,3 +1,15 @@
+/*
+ * DCblock
+ * 
+ * This code has been extracted from the Csound opcode "dcblock".
+ * It has been modified to work as a Soundpipe module.
+ * 
+ * Original Author(s): Perry R. Cook 
+ * Year: 1995
+ * Location: Opcodes/biquad.c
+ *
+ */
+
 #include <stdlib.h>
 #include "soundpipe.h"
 

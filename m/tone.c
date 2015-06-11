@@ -1,8 +1,8 @@
 /*
  * Tone
  * 
- * This code has been extracted from the Csound opcode "tone"
- * it has been modified to work as a Soundpipe module.
+ * This code has been extracted from the Csound opcode "tone".
+ * It has been modified to work as a Soundpipe module.
  * 
  * Original Author(s): Barry Vercoe, John FFitch, Gabriel Maldonado
  * Year: 1991

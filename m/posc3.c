@@ -1,3 +1,15 @@
+/*
+ * posc3
+ * 
+ * This code has been extracted from the Csound opcode "poscil3".
+ * It has been modified to work as a Soundpipe module.
+ * 
+ * Original Author(s): Gabriel Maldonado, John ffitch
+ * Year: 1998
+ * Location: Opcodes/uggab.c
+ *
+ */
+
 #include <stdlib.h>
 #include <math.h>
 #include "soundpipe.h"
