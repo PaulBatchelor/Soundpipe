@@ -29,6 +29,8 @@ typedef struct sp_data{
 
 int sp_auxdata_alloc(sp_auxdata *aux, size_t size);
 int sp_auxdata_free(sp_auxdata *aux);
+int sp_auxdata_getbuf(sp_auxdata *aux, uint32_t pos, SPFLOAT *out);
+int sp_auxdata_setbuf(sp_auxdata *aux, uint32_t pos, SPFLOAT *in);
 
 int sp_create(sp_data **spp);
 int sp_destroy(sp_data **spp);
