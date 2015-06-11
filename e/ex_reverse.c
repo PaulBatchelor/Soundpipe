@@ -35,16 +35,13 @@ int main() {
     uint32_t bufsize;
     sp_data *sp;
     sp_create(&sp);
-    sp_auxdata rvaux;
-
-    sp_reverse_alloc(sp, &rvaux, 1.0, &bufsize);
     
     sp_reverse_create(sp, &ud.rv);
     sp_tenv_create(&ud.tenv);
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_osc_create(&ud.osc);
 
-    sp_reverse_init(sp, ud.rv, &rvaux, bufsize);
+    sp_reverse_init(sp, ud.rv, 1.0);
     sp_tenv_init(sp, ud.tenv, 0.03, 0.01, 0.3);
     sp_gen_sine(ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft);
@@ -54,7 +51,7 @@ int main() {
     sp->len = 44100 * 5;
     sp_process(sp, &ud, write_osc);
 
-    sp_reverse_destroy(&ud.rv, &rvaux);
+    sp_reverse_destroy(&ud.rv);
     sp_tenv_destroy(&ud.tenv);
     sp_ftbl_destroy(&ud.ft);
     sp_osc_destroy(&ud.osc);
