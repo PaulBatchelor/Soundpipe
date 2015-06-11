@@ -49,12 +49,12 @@ static int init_delay_line(sp_revsc *p, sp_revsc_dl *lp, int n);
 static int delay_line_bytes_alloc(SPFLOAT sr, SPFLOAT iPitchMod, int n);
 static const SPFLOAT outputGain  = 0.35;
 static const SPFLOAT jpScale     = 0.25;
-int sp_revsc_create(sp_data *sp, sp_revsc **p){
+int sp_revsc_create(sp_revsc **p){
     *p = malloc(sizeof(sp_revsc));
     return SP_OK;
 }
 
-int sp_revsc_init(sp_data *sp, sp_revsc *p, sp_auxdata *aux){
+int sp_revsc_init(sp_data *sp, sp_revsc *p){
     p->iSampleRate = sp->sr;
     p->sampleRate = sp->sr;
     p->kFeedBack = 0.97;
@@ -64,10 +64,14 @@ int sp_revsc_init(sp_data *sp, sp_revsc *p, sp_auxdata *aux){
     p->dampFact = 1.0;
     p->prv_LPFreq = 0.0;
     p->initDone = 1;
-    p->aux = aux; 
     int i, nBytes = 0;
+    for(i = 0; i < 8; i++){
+        nBytes += delay_line_bytes_alloc(sp->sr, 1, i);
+    }
+    sp_auxdata_alloc(&p->aux, nBytes);
+    nBytes = 0;
     for (i = 0; i < 8; i++) {
-        p->delayLines[i].buf = (p->aux->ptr) + nBytes;
+        p->delayLines[i].buf = (p->aux.ptr) + nBytes;
         init_delay_line(p, &p->delayLines[i], i);
         nBytes += delay_line_bytes_alloc(sp->sr, 1, i);
     }
@@ -76,8 +80,9 @@ int sp_revsc_init(sp_data *sp, sp_revsc *p, sp_auxdata *aux){
 }
 
 
-int sp_revsc_destroy(sp_revsc **p, sp_auxdata *aux){
-    sp_auxdata_free(aux);
+int sp_revsc_destroy(sp_revsc **p){
+    sp_revsc *pp = *p;
+    sp_auxdata_free(&pp->aux);
     free(*p);
     return SP_OK;
 }
@@ -264,6 +269,7 @@ int sp_revsc_compute(sp_data *sp, sp_revsc *p, SPFLOAT *in, SPFLOAT *out){
     *out  = aoutL * outputGain;
     return SP_OK;
 }
+/*
 int sp_revsc_alloc(sp_data *sp, sp_auxdata *aux){
     int i;
     int nBytes = 0;
@@ -273,3 +279,4 @@ int sp_revsc_alloc(sp_data *sp, sp_auxdata *aux){
     sp_auxdata_alloc(aux, nBytes);
     return SP_OK;
 }
+*/

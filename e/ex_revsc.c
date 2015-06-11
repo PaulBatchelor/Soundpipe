@@ -9,7 +9,7 @@ typedef struct {
     int counter;
 } udata;
 
-void write_noise(sp_data *data, void *ud) {
+void process(sp_data *data, void *ud) {
     udata *udata = ud;
     SPFLOAT in = 0;
     SPFLOAT out = 0;
@@ -26,21 +26,18 @@ int main() {
     srand(time(NULL));
     udata ud;
     ud.counter = 0;
-    sp_auxdata rev_aux;
     sp_data *sp;
     sp_create(&sp);
     sp_noise_create(&ud.ns);
-    sp_revsc_alloc(sp, &rev_aux);
-    sp_revsc_create(sp, &ud.rev);
+    sp_revsc_create(&ud.rev);
     sp_noise_init(sp, ud.ns);
-    sp_revsc_init(sp, ud.rev, &rev_aux);
+    sp_revsc_init(sp, ud.rev);
 
-    //sp->len = 3;
     sp->len = 44100 * 5;
-    sp_process(sp, &ud, write_noise);
+    sp_process(sp, &ud, process);
 
     sp_noise_destroy(&ud.ns);
-    sp_revsc_destroy(&ud.rev, &rev_aux);
+    sp_revsc_destroy(&ud.rev);
     sp_destroy(&sp);
     return 0;
 }
