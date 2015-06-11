@@ -1,3 +1,15 @@
+/*
+ * Tone
+ * 
+ * This code has been extracted form the Csound opcode "tone"
+ * it has been modified to work as a Soundpipe module.
+ * 
+ * Original Author(s): Barry Vercoe, John FFitch, Gabriel Maldonado
+ * Year: 1991
+ * Location: OOps/ugens5.c
+ *
+ */
+
 #include <stdlib.h>
 #include <math.h>
 #include <stdint.h>
