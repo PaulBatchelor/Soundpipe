@@ -19,7 +19,6 @@ typedef struct {
     sp_ftbl *ft; 
     sp_revsc *rev;
     sp_dcblock *dcblk;
-    sp_auxdata rev_aux;
 } udata;
 
 SPFLOAT midi2cps(int nn){
@@ -55,8 +54,7 @@ int main() {
     int i;
 
     sp_dcblock_create(&ud.dcblk);
-    sp_revsc_alloc(sp, &ud.rev_aux);
-    sp_revsc_create(sp, &ud.rev);
+    sp_revsc_create(&ud.rev);
     sp_ftbl_create(sp, &ud.ft, 2048);
 
     sp_gen_file(ud.ft, "FMSine111.wav");
@@ -70,13 +68,13 @@ int main() {
         ud.v[i].rnd->cps = 0.8;
     }
 
-    sp_revsc_init(sp, ud.rev, &ud.rev_aux);
+    sp_revsc_init(sp, ud.rev);
     sp_dcblock_init(sp, ud.dcblk);
     sp->len = 44100 * 40;
 
     sp_process(sp, &ud, write_osc);
 
-    sp_revsc_destroy(&ud.rev, &ud.rev_aux);
+    sp_revsc_destroy(&ud.rev);
     sp_dcblock_destroy(&ud.dcblk);
     sp_ftbl_destroy(&ud.ft);
     for(i = 0; i < NVOICES; i++){
