@@ -118,7 +118,6 @@ int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, char *argstring) {
             }
         }
     }
-
     sp_ftbl_destroy(&args);
     return SP_OK;
 }
