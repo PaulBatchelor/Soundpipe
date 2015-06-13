@@ -101,23 +101,10 @@ int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, char *argstring) {
     sp_ftbl_create(sp, &args, 1);
     sp_gen_vals(args, argstring);
 
-    int32_t phs, hcnt;
+    int32_t phs;
     SPFLOAT amp;
     int32_t flen = ft->size;
     SPFLOAT tpdlen = 2.0 * M_PI / (SPFLOAT) flen;
-
-    hcnt = args->size;
-    //finp = &ftp->ftbl[flen - 1]; 
-    //do {
-    //  //SPFLOAT valp = (hcnt+4>=PMAX ? &ff->e.c.extra[hcnt+5-PMAX] :
-    //                              //  &ff->e.p[hcnt + 4]);
-    //  SPFLOAT amp = args->tbl[hcnt];
-    //    for (phs = 0, fp = ftp->ftable; fp <= finp; fp++) {
-    //      *fp += (SPFLOAT) sin(phs * tpdlen) * amp; 
-    //      phs += hcnt;                                    
-    //      phs %= flen;
-    //    }
-    //} while (--hcnt);
 
     int i, n;
 
