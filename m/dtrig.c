@@ -15,12 +15,14 @@ int sp_dtrig_init(sp_data *sp, sp_dtrig *p, sp_ftbl *ft){
     p->pos = 0; 
     p->running = 0;
     p->loop = 0;
+    p->delay = 0;
     return SP_OK;
 }
 int sp_dtrig_compute(sp_data *sp, sp_dtrig *p, SPFLOAT *in, SPFLOAT *out){
     if(*in == 1.0){
-        p->pos = 0;
         p->running = 1.0;
+        p->pos = 0;
+        p->counter = p->delay * sp->sr;
     } 
     if((p->pos < p->ft->size) && p->running){
         if(p->counter == 0){

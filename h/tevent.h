@@ -2,6 +2,7 @@ typedef struct{
     void (*reinit)(void *);
     void (*compute)(void *, SPFLOAT *out);
     void *ud;
+    int started;
 }sp_tevent;
 
 int sp_tevent_create(sp_tevent **te);

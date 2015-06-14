@@ -14,12 +14,20 @@ int sp_tevent_init(sp_data *sp, sp_tevent *te,
     te->reinit = reinit;
     te->compute = compute;
     te->ud = ud;
-    return SP_NOT_OK;
+    te->started = 0;
+    return SP_OK;
 }
 int sp_tevent_compute(sp_data *sp, sp_tevent *te, SPFLOAT *in, SPFLOAT *out){
     if(*in){
         te->reinit(te->ud);
+        te->started = 1;
     }
-    te->compute(te->ud, out);
+    if(te->started) {
+        te->compute(te->ud, out);
+    }
+    else {
+        *out = 0;
+    }
+
     return SP_OK;
 }
