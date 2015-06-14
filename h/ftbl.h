@@ -14,6 +14,7 @@ typedef struct sp_ftbl_seq{
     sp_ftbl *ft;
     SPFLOAT val;
     uint32_t pos;
+    int shuf;
 }sp_ftbl_seq;
 
 int sp_ftbl_create(sp_data *sp, sp_ftbl **ft, size_t size);

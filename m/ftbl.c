@@ -34,13 +34,18 @@ int sp_ftbl_tseq_create(sp_ftbl_seq **seq, sp_ftbl *ft){
     seqp->ft = ft;
     seqp->pos = 0;
     seqp->val = 0;
+    seqp->shuf = 0;
     return SP_OK;
 }
 
 int sp_ftbl_tseq_compute(sp_ftbl_seq *seq, SPFLOAT *trig, SPFLOAT *val){
     if(*trig != 0){
         seq->val = seq->ft->tbl[seq->pos];
-        seq->pos = (seq->pos + 1) % seq->ft->size;
+        if(seq->shuf) {
+            seq->pos = rand() % seq->ft->size;
+        } else {
+            seq->pos = (seq->pos + 1) % seq->ft->size;
+        }
     }
     *val = seq->val;
     return SP_OK;

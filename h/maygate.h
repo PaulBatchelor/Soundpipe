@@ -1,6 +1,7 @@
 typedef struct sp_maygate{
     SPFLOAT prob;
     SPFLOAT gate;
+    int mode;
 } sp_maygate;
 
 int sp_maygate_create(sp_maygate **p);

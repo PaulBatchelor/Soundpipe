@@ -16,7 +16,7 @@ typedef struct {
 } sp_revsc_dl;
 
 typedef struct  {
-    SPFLOAT aoutL, aoutR, ainL, ainR, kFeedBack, kLPFreq;
+    SPFLOAT feedback, lpfreq;
     SPFLOAT iSampleRate, iPitchMod, iSkipInit;
     SPFLOAT sampleRate;
     SPFLOAT dampFact;

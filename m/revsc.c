@@ -57,8 +57,8 @@ int sp_revsc_create(sp_revsc **p){
 int sp_revsc_init(sp_data *sp, sp_revsc *p){
     p->iSampleRate = sp->sr;
     p->sampleRate = sp->sr;
-    p->kFeedBack = 0.97;
-    p->kLPFreq = 10000;
+    p->feedback = 0.97;
+    p->lpfreq = 10000;
     p->iPitchMod = 1;
     p->iSkipInit = 0;
     p->dampFact = 1.0;
@@ -171,8 +171,8 @@ int sp_revsc_compute(sp_data *sp, sp_revsc *p, SPFLOAT *in, SPFLOAT *out){
 
     /* calculate tone filter coefficient if frequency changed */
 
-    if (p->kLPFreq != p->prv_LPFreq) {
-        p->prv_LPFreq = p->kLPFreq;
+    if (p->lpfreq != p->prv_LPFreq) {
+        p->prv_LPFreq = p->lpfreq;
         dampFact = 2.0 - cos(p->prv_LPFreq * (2 * M_PI) / p->sampleRate);
         dampFact = p->dampFact = dampFact - sqrt(dampFact * dampFact - 1.0);
     }
@@ -247,7 +247,7 @@ int sp_revsc_compute(sp_data *sp, sp_revsc *p, SPFLOAT *in, SPFLOAT *out){
 
         /* apply feedback gain and lowpass filter */
 
-        v0 *= (SPFLOAT) p->kFeedBack;
+        v0 *= (SPFLOAT) p->feedback;
         v0 = (lp->filterState - v0) * dampFact + v0;
         lp->filterState = v0;
 
@@ -269,14 +269,3 @@ int sp_revsc_compute(sp_data *sp, sp_revsc *p, SPFLOAT *in, SPFLOAT *out){
     *out  = aoutL * outputGain;
     return SP_OK;
 }
-/*
-int sp_revsc_alloc(sp_data *sp, sp_auxdata *aux){
-    int i;
-    int nBytes = 0;
-    for(i = 0; i < 8; i++){
-        nBytes += delay_line_bytes_alloc(sp->sr, 1, i);
-    }
-    sp_auxdata_alloc(aux, nBytes);
-    return SP_OK;
-}
-*/
