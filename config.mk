@@ -15,8 +15,8 @@ MODULES=base event noise tone moogladder butter revsc ftbl osc posc3 randi \
 
 # Padsynth module
 #
-MODULES += fftwrapper 
-MODULES += padsynth
-CFLAGS += -lfftw3
+#MODULES += fftwrapper 
+#MODULES += padsynth
+#CFLAGS += -lfftw3
 
 
