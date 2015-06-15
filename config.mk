@@ -12,3 +12,11 @@ MODULES=base event noise tone moogladder butter revsc ftbl osc posc3 randi \
 #
 #MODULES += rpi
 #CFLAGS += -lasound
+
+# Padsynth module
+#
+MODULES += fftwrapper 
+MODULES += padsynth
+CFLAGS += -lfftw3
+
+

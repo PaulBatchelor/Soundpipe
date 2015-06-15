@@ -23,6 +23,12 @@ default: all
 #extra/ex_rpi_v2: extra/ex_rpi_v2.c
 #	gcc -g --std=c99 -I ../h $< ../libsoundpipe.a -lsndfile -lasound -o $@ -lm
 
+# Padsynth Module
+#
+files += extra/ex_padsynth
+extra/ex_padsynth: extra/ex_padsynth.c
+	gcc -g --std=c99 -I ../h $< ../libsoundpipe.a -lsndfile -lfftw3 -o $@ -lm
+
 all: $(files)
 
 % :: %.c 
