@@ -16,6 +16,7 @@ int sp_streson_destroy(sp_streson **p) {
 int sp_streson_init(sp_data *sp, sp_streson *p) {
     int n;
     p->freq = 440.0;
+    p->fdbgain = 0.8;
     p->size = (int) (sp->sr/20);   /* size of delay line */
     sp_auxdata_alloc(&p->buf, p->size * sizeof(SPFLOAT));
     p->Cdelay = (SPFLOAT*) p->buf.ptr; /* delay line */
