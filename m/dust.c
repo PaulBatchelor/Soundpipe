@@ -1,5 +1,5 @@
 /*
- * DUST
+ * Dust
  * 
  * This code has been extracted from the Csound opcode "dust".
  * It has been modified to work as a Soundpipe module.

@@ -1,5 +1,5 @@
 /*
- * STRESON
+ * Streson
  * 
  * This code has been extracted from the Csound opcode "streson".
  * It has been modified to work as a Soundpipe module.
