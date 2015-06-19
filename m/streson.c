@@ -1,3 +1,16 @@
+/*
+ * STRESON
+ * 
+ * This code has been extracted from the Csound opcode "streson".
+ * It has been modified to work as a Soundpipe module.
+ * 
+ * Original Author(s): John ffitch, Victor Lazzarini
+ * Year: 1996, 1998
+ * Location: Opcodes/repluck.c
+ *
+ */
+
+
 #include <stdlib.h>
 #include "soundpipe.h"
 

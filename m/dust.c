@@ -1,3 +1,16 @@
+/*
+ * DUST
+ * 
+ * This code has been extracted from the Csound opcode "dust".
+ * It has been modified to work as a Soundpipe module.
+ * 
+ * Original Author(s): Tito Latini
+ * Year: 2012
+ * Location: Opcodes/tl/sc_noise.c
+ *
+ */
+
+
 #include <stdlib.h>
 #include "soundpipe.h"
 

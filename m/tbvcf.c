@@ -1,7 +1,7 @@
 /*
  * TBVCF
  * 
- * This code has been extracted from the Csound opcode "tbvc".
+ * This code has been extracted from the Csound opcode "tbvcf".
  * It has been modified to work as a Soundpipe module.
  * 
  * Original Author(s): Hans Mikelson
