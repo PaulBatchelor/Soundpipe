@@ -59,9 +59,7 @@ are set.
 single sample of output. 
 4. Destroy: All memory allocated is freed.
 
-Credits
--------
-
-Soundpipe is created by Paul Batchelor. 
-
-It is maintained by him and Alex Tape.
+Contributors of Soundpipe:
+--------------------------
+Paul Batchelor
+Alex Tape
