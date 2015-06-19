@@ -2,13 +2,8 @@ Soundpipe
 =========
 
 Soundpipe is a lightweight music DSP library written in C. It aims to provide
-a comprehensive set of high-quality DSP modules for composers, sound designers,
+a set of high-quality DSP modules for composers, sound designers,
 and creative coders. 
-
-Soundpipe is primarily intended to generate wav files, however there are 
-optional modules which allow Soundpipe to be run in realtime via JACK or
-from a Raspberry Pi (ALSA). See the *compilation* section for how to enable 
-these.
 
 Features
 ---------
@@ -19,6 +14,11 @@ Features
 - Static library
 - Easily extendable
 - Easily embeddable
+
+Soundpipe is primarily desgined to generate wav files, however there are 
+optional modules which allow Soundpipe to be run in realtime via JACK or
+from a Raspberry Pi (ALSA). See the *compilation* section for how to enable 
+these.
 
 Compilation
 -----------
@@ -36,6 +36,13 @@ To build the examples, go into the (e)xamples folder and run "make". Each
 example will generate a 5 second file called "test.wav". Examples in the "extra"
 folder are for optional modules. Open up the Makefile and uncomment the
 specific files you want to compile.
+
+Future Plans
+------------
+- multi-channel support (only mono right now)
+- dynamic documentation generation (HTML, LaTeX, manpage, etc...)
+- Faust support
+- Commandline utilities
 
 The Soundpipe Model
 -------------------
