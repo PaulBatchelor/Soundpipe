@@ -21,18 +21,20 @@
 
 #include "soundpipe.h"
 
-int sp_mode_create(sp_mode **p){
+int sp_mode_create(sp_mode **p)
+{
     *p = malloc(sizeof(sp_mode));
     return SP_OK;
 }
 
-int sp_mode_destroy(sp_mode **p){
+int sp_mode_destroy(sp_mode **p)
+{
     free(*p);
     return SP_OK;
 }
 
-int sp_mode_init(sp_data *sp, sp_mode *p){
-
+int sp_mode_init(sp_data *sp, sp_mode *p)
+{
     p->freq = 500.0;
     p->q = 0.5;
 
@@ -50,7 +52,8 @@ int sp_mode_init(sp_data *sp, sp_mode *p){
     return SP_OK;
 }
 
-int sp_mode_compute(sp_data *sp, sp_mode *p, SPFLOAT *in, SPFLOAT *out){
+int sp_mode_compute(sp_data *sp, sp_mode *p, SPFLOAT *in, SPFLOAT *out)
+{
     SPFLOAT lfq = p->lfq, lq = p->lq;
 
     SPFLOAT xn, yn, a0=p->a0, a1=p->a1, a2=p->a2,d=p->d;

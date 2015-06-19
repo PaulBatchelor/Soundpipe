@@ -1,21 +1,28 @@
 #include <stdlib.h>
 #include "soundpipe.h"
 
-int sp_maygate_create(sp_maygate **p){
+int sp_maygate_create(sp_maygate **p)
+{
     *p = malloc(sizeof(sp_maygate));
     return SP_OK;
 }
-int sp_maygate_destroy(sp_maygate **p){
+
+int sp_maygate_destroy(sp_maygate **p)
+{
     free(*p);
     return SP_OK;
 }
-int sp_maygate_init(sp_data *sp, sp_maygate *p, SPFLOAT prob){
+
+int sp_maygate_init(sp_data *sp, sp_maygate *p, SPFLOAT prob)
+{
     p->prob = prob;
     p->gate = 0;
     p->mode = 0;
     return SP_OK;
 }
-int sp_maygate_compute(sp_data *sp, sp_maygate *p, SPFLOAT *in, SPFLOAT *out) {
+
+int sp_maygate_compute(sp_data *sp, sp_maygate *p, SPFLOAT *in, SPFLOAT *out) 
+{
     if(*in == 0) {
         if(p->mode) {
             *out = 0;

@@ -22,17 +22,20 @@
 
 #include "soundpipe.h"
 
-int sp_planet_create(sp_planet **p){
+int sp_planet_create(sp_planet **p)
+{
     *p = malloc(sizeof(sp_planet));
     return SP_OK;
 }
 
-int sp_planet_destroy(sp_planet **p){
+int sp_planet_destroy(sp_planet **p)
+{
     free(*p);
     return SP_OK;
 }
 
-int sp_planet_init(sp_data *sp, sp_planet *p){
+int sp_planet_init(sp_data *sp, sp_planet *p)
+{
     p->iskip = 0.0;
 
     if(p->iskip == 0.0){
@@ -45,7 +48,8 @@ int sp_planet_init(sp_data *sp, sp_planet *p){
     return SP_OK;
 }
 
-int sp_planet_compute(sp_data *sp, sp_planet *p, SPFLOAT *in, SPFLOAT *out){
+int sp_planet_compute(sp_data *sp, sp_planet *p, SPFLOAT *in, SPFLOAT *out)
+{
 
     SPFLOAT outx, outy, outz;
     SPFLOAT   sqradius1, sqradius2, radius1, radius2, fric;

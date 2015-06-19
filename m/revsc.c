@@ -54,7 +54,8 @@ int sp_revsc_create(sp_revsc **p){
     return SP_OK;
 }
 
-int sp_revsc_init(sp_data *sp, sp_revsc *p){
+int sp_revsc_init(sp_data *sp, sp_revsc *p)
+{
     p->iSampleRate = sp->sr;
     p->sampleRate = sp->sr;
     p->feedback = 0.97;
@@ -80,7 +81,8 @@ int sp_revsc_init(sp_data *sp, sp_revsc *p){
 }
 
 
-int sp_revsc_destroy(sp_revsc **p){
+int sp_revsc_destroy(sp_revsc **p)
+{
     sp_revsc *pp = *p;
     sp_auxdata_free(&pp->aux);
     free(*p);
@@ -158,7 +160,8 @@ static int init_delay_line(sp_revsc *p, sp_revsc_dl *lp, int n)
 }
 
 
-int sp_revsc_compute(sp_data *sp, sp_revsc *p, SPFLOAT *in, SPFLOAT *out){
+int sp_revsc_compute(sp_data *sp, sp_revsc *p, SPFLOAT *in, SPFLOAT *out)
+{
     SPFLOAT    ainL, ainR, aoutL, aoutR;
     SPFLOAT    vm1, v0, v1, v2, am1, a0, a1, a2, frac;
     sp_revsc_dl *lp;

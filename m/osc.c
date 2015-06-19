@@ -14,15 +14,20 @@
 #include <math.h>
 #include "soundpipe.h"
 
-int sp_osc_create(sp_osc **osc){
+int sp_osc_create(sp_osc **osc)
+{
     *osc = malloc(sizeof(sp_osc));
     return SP_OK;
 }
-int sp_osc_destroy(sp_osc **osc){
+
+int sp_osc_destroy(sp_osc **osc)
+{
     free(*osc);
     return SP_NOT_OK;
 }
-int sp_osc_init(sp_data *sp, sp_osc *osc, sp_ftbl *ft){
+
+int sp_osc_init(sp_data *sp, sp_osc *osc, sp_ftbl *ft)
+{
     osc->freq = 440.0;
     osc->amp = 0.2;
     osc->iphs = 0;
@@ -33,7 +38,9 @@ int sp_osc_init(sp_data *sp, sp_osc *osc, sp_ftbl *ft){
     }
     return SP_OK;
 }
-int sp_osc_compute(sp_data *sp, sp_osc *osc, SPFLOAT *in, SPFLOAT *out){
+
+int sp_osc_compute(sp_data *sp, sp_osc *osc, SPFLOAT *in, SPFLOAT *out)
+{
     sp_ftbl *ftp;
     SPFLOAT amp, cps, fract, v1, *ftab, *ft;
     int32_t phs, lobits;

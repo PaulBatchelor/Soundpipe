@@ -13,17 +13,20 @@
 #include <stdlib.h>
 #include "soundpipe.h"
 
-int sp_dcblock_create(sp_dcblock **p){
+int sp_dcblock_create(sp_dcblock **p)
+{
     *p = malloc(sizeof(sp_dcblock));
     return SP_OK;
 }
 
-int sp_dcblock_destroy(sp_dcblock **p){
+int sp_dcblock_destroy(sp_dcblock **p)
+{
     free(*p);
     return SP_OK;
 }
 
-int sp_dcblock_init(sp_data *sp, sp_dcblock *p) {
+int sp_dcblock_init(sp_data *sp, sp_dcblock *p)
+{
     p->outputs = 0.0;
     p->inputs = 0.0;
     p->gain = 0.99;
@@ -32,7 +35,8 @@ int sp_dcblock_init(sp_data *sp, sp_dcblock *p) {
     return SP_OK;
 }
 
-int sp_dcblock_compute(sp_data *sp, sp_dcblock *p, SPFLOAT *in, SPFLOAT *out) {
+int sp_dcblock_compute(sp_data *sp, sp_dcblock *p, SPFLOAT *in, SPFLOAT *out) 
+{
     SPFLOAT      gain = p->gain;
     SPFLOAT      outputs = p->outputs;
     SPFLOAT      inputs = p->inputs;

@@ -2,14 +2,15 @@
 #include "alsa/asoundlib.h"
 #include "soundpipe.h"
 
-void sp_rpi_shutdown (void *arg){
+void sp_rpi_shutdown (void *arg)
+{
 	exit (1);
 }
 
 #define SP_ALSABUFSIZE 4096
 
-int sp_rpi_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *)){
-
+int sp_rpi_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
+{
     int err;
     unsigned int i;
     SPFLOAT buf[SP_ALSABUFSIZE];

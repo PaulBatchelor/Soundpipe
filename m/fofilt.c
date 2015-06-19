@@ -20,16 +20,20 @@
 #endif 
 
 
-int sp_fofilt_create(sp_fofilt **p){
+int sp_fofilt_create(sp_fofilt **p)
+{
     *p = malloc(sizeof(sp_fofilt));
     return SP_OK;
 }
-int sp_fofilt_destroy(sp_fofilt **p){
+
+int sp_fofilt_destroy(sp_fofilt **p)
+{
     free(*p);
     return SP_OK;
 }
 
-int sp_fofilt_init(sp_data *sp, sp_fofilt *p){
+int sp_fofilt_init(sp_data *sp, sp_fofilt *p)
+{
    p->tpidsr = 2.0*M_PI / sp->sr;
    p->sr = sp->sr;
 
@@ -46,7 +50,8 @@ int sp_fofilt_init(sp_data *sp, sp_fofilt *p){
    return SP_OK;
 }
 
-int sp_fofilt_compute(sp_data *sp, sp_fofilt *p, SPFLOAT *in, SPFLOAT *out){
+int sp_fofilt_compute(sp_data *sp, sp_fofilt *p, SPFLOAT *in, SPFLOAT *out)
+{
 
     SPFLOAT  freq = p->freq;
     SPFLOAT  ris = p->ris;

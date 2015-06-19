@@ -1,15 +1,20 @@
 #include <stdlib.h>
 #include "soundpipe.h"
 
-int sp_dtrig_create(sp_dtrig **p){
+int sp_dtrig_create(sp_dtrig **p)
+{
     *p = malloc(sizeof(sp_dtrig));
     return SP_OK;
 }
-int sp_dtrig_destroy(sp_dtrig **p){
+
+int sp_dtrig_destroy(sp_dtrig **p)
+{
     free(*p);
     return SP_OK;
 }
-int sp_dtrig_init(sp_data *sp, sp_dtrig *p, sp_ftbl *ft){
+
+int sp_dtrig_init(sp_data *sp, sp_dtrig *p, sp_ftbl *ft)
+{
     p->ft = ft;
     p->counter = 0;
     p->pos = 0; 
@@ -18,7 +23,9 @@ int sp_dtrig_init(sp_data *sp, sp_dtrig *p, sp_ftbl *ft){
     p->delay = 0;
     return SP_OK;
 }
-int sp_dtrig_compute(sp_data *sp, sp_dtrig *p, SPFLOAT *in, SPFLOAT *out){
+
+int sp_dtrig_compute(sp_data *sp, sp_dtrig *p, SPFLOAT *in, SPFLOAT *out)
+{
     if(*in == 1.0){
         p->running = 1.0;
         p->pos = 0;

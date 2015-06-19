@@ -14,17 +14,20 @@
 #include <stdlib.h>
 #include "soundpipe.h"
 
-int sp_dust_create(sp_dust **p) {
+int sp_dust_create(sp_dust **p)
+{
     *p = malloc(sizeof(sp_dust));
     return SP_OK;
 }
 
-int sp_dust_destroy(sp_dust **p) {
+int sp_dust_destroy(sp_dust **p) 
+{
     free(*p);
     return SP_OK;
 }
 
-int sp_dust_init(sp_data *sp, sp_dust *p, SPFLOAT amp, SPFLOAT density) {
+int sp_dust_init(sp_data *sp, sp_dust *p, SPFLOAT amp, SPFLOAT density) 
+{
     p->density = density;
     p->amp = amp;
     p->density0 = 0.0;
@@ -36,7 +39,8 @@ int sp_dust_init(sp_data *sp, sp_dust *p, SPFLOAT amp, SPFLOAT density) {
     return SP_OK;
 }
 
-int sp_dust_compute(sp_data *sp, sp_dust *p, SPFLOAT *in, SPFLOAT *out) {
+int sp_dust_compute(sp_data *sp, sp_dust *p, SPFLOAT *in, SPFLOAT *out) 
+{
     SPFLOAT density, thresh, scale;
     const SPFLOAT dv2_31 = 4.656612873077392578125e-10;
     density = p->density;

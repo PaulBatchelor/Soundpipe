@@ -21,25 +21,32 @@
 
 #include "soundpipe.h"
 
-int sp_butlp_create(sp_butlp **t){
+int sp_butlp_create(sp_butlp **t)
+{
     *t = malloc(sizeof(sp_butlp));
     return SP_OK;
 }
-int sp_butlp_destroy(sp_butlp **t){
+
+int sp_butlp_destroy(sp_butlp **t)
+{
     free(*t);
     return SP_OK;
 }
 
-int sp_buthp_create(sp_buthp **t){
+int sp_buthp_create(sp_buthp **t)
+{
     *t = malloc(sizeof(sp_buthp));
     return SP_OK;
 }
-int sp_buthp_destroy(sp_buthp **t){
+
+int sp_buthp_destroy(sp_buthp **t)
+{
     free(*t);
     return SP_OK;
 }
 
-int sp_butlp_init(sp_data *sp, sp_butlp *p){
+int sp_butlp_init(sp_data *sp, sp_butlp *p)
+{
     p->istor = 0.0;
     p->sr = sp->sr;
     p->kfc = 1000;
@@ -51,7 +58,8 @@ int sp_butlp_init(sp_data *sp, sp_butlp *p){
     return SP_OK;
 }
 
-int sp_buthp_init(sp_data *sp, sp_buthp *p){
+int sp_buthp_init(sp_data *sp, sp_buthp *p)
+{
     p->istor = 0.0;
     p->sr = sp->sr;
     p->kfc = 1000;
@@ -63,7 +71,8 @@ int sp_buthp_init(sp_data *sp, sp_buthp *p){
     return SP_OK;
 }
 
-int sp_buthp_compute(sp_data *sp, sp_buthp *p, SPFLOAT *in, SPFLOAT *out){
+int sp_buthp_compute(sp_data *sp, sp_buthp *p, SPFLOAT *in, SPFLOAT *out)
+{
     if (p->kfc <= 0.0)     {
       *out = 0;
       return SP_OK;
@@ -85,7 +94,8 @@ int sp_buthp_compute(sp_data *sp, sp_buthp *p, SPFLOAT *in, SPFLOAT *out){
     return SP_OK;
 }
 
-int sp_butlp_compute(sp_data *sp, sp_butlp *p, SPFLOAT *in, SPFLOAT *out) {
+int sp_butlp_compute(sp_data *sp, sp_butlp *p, SPFLOAT *in, SPFLOAT *out) 
+{
     if (p->kfc <= 0.0){
       *out = 0;
       return SP_OK;
@@ -109,7 +119,8 @@ int sp_butlp_compute(sp_data *sp, sp_butlp *p, SPFLOAT *in, SPFLOAT *out) {
 
 /* Filter loop */
 
-int sp_butter_filter(SPFLOAT *in, SPFLOAT *out, SPFLOAT *a){
+int sp_butter_filter(SPFLOAT *in, SPFLOAT *out, SPFLOAT *a)
+{
     SPFLOAT t, y;
     t = *in - a[4] * a[6] - a[5] * a[7];
     /*TODO: look into this function */

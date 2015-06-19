@@ -7,7 +7,8 @@
 static jack_port_t *output_port;
 static jack_client_t *client;
 
-static int sp_jack_cb(jack_nframes_t nframes, void *arg){
+static int sp_jack_cb(jack_nframes_t nframes, void *arg)
+{
     int i;
 	jack_default_audio_sample_t  *out;
     sp_jack *jd = arg;
@@ -18,12 +19,14 @@ static int sp_jack_cb(jack_nframes_t nframes, void *arg){
     }
     return 0;
 }
+
 void sp_jack_shutdown (void *arg)
 {
 	exit (1);
 }
 
-int sp_jack_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *)){
+int sp_jack_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
+{
     const char **ports;
     const char *client_name = "soundpipe";
     const char *server_name = NULL;

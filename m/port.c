@@ -22,17 +22,20 @@
 
 #include "soundpipe.h"
 
-int sp_port_create(sp_port **p){
+int sp_port_create(sp_port **p)
+{
     *p = malloc(sizeof(sp_port));
     return SP_OK;
 }
 
-int sp_port_destroy(sp_port **p){
+int sp_port_destroy(sp_port **p)
+{
     free(*p);
     return SP_OK;
 }
 
-int sp_port_init(sp_data *sp, sp_port *p, SPFLOAT htime){
+int sp_port_init(sp_data *sp, sp_port *p, SPFLOAT htime)
+{
     p->yt1 = 0;
     p->prvhtim = -100.0;
     p->htime = htime;
@@ -42,7 +45,8 @@ int sp_port_init(sp_data *sp, sp_port *p, SPFLOAT htime){
     return SP_OK;
 }
 
-int sp_port_compute(sp_data *sp, sp_port *p, SPFLOAT *in, SPFLOAT *out){
+int sp_port_compute(sp_data *sp, sp_port *p, SPFLOAT *in, SPFLOAT *out)
+{
     if(p->prvhtim != p->htime){
         p->c2 = pow(0.5, p->onedsr / p->htime);
         p->c1 = 1.0 - p->c2;

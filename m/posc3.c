@@ -13,15 +13,20 @@
 #include <stdlib.h>
 #include <math.h>
 #include "soundpipe.h"
-int sp_posc3_create(sp_posc3 **posc3){
+int sp_posc3_create(sp_posc3 **posc3)
+{
     *posc3 = malloc(sizeof(sp_posc3));
     return SP_OK;
 }
-int sp_posc3_destroy(sp_posc3 **posc3){
+
+int sp_posc3_destroy(sp_posc3 **posc3)
+{
     free(*posc3);
     return SP_NOT_OK;
 }
-int sp_posc3_init(sp_data *sp, sp_posc3 *posc3, sp_ftbl *ft){
+
+int sp_posc3_init(sp_data *sp, sp_posc3 *posc3, sp_ftbl *ft)
+{
 
     posc3->amp = 0.5;
     posc3->freq = 440.0;
@@ -34,7 +39,9 @@ int sp_posc3_init(sp_data *sp, sp_posc3 *posc3, sp_ftbl *ft){
     posc3->phs = posc3->iphs * posc3->tablen;
     return SP_OK;
 }
-int sp_posc3_compute(sp_data *sp, sp_posc3 *posc3, SPFLOAT *in, SPFLOAT *out){
+
+int sp_posc3_compute(sp_data *sp, sp_posc3 *posc3, SPFLOAT *in, SPFLOAT *out)
+{
     SPFLOAT *ftab;
     SPFLOAT fract;
     SPFLOAT phs  = posc3->phs;

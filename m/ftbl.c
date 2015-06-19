@@ -8,7 +8,8 @@
 #define M_PI		3.14159265358979323846	/* pi */
 #endif 
 
-int sp_ftbl_create(sp_data *sp, sp_ftbl **ft, size_t size) {
+int sp_ftbl_create(sp_data *sp, sp_ftbl **ft, size_t size) 
+{
     *ft = malloc(sizeof(sp_ftbl));
     sp_ftbl *ftp = *ft;
     ftp->size = size;
@@ -21,14 +22,16 @@ int sp_ftbl_create(sp_data *sp, sp_ftbl **ft, size_t size) {
     return SP_OK;
 }
 
-int sp_ftbl_destroy(sp_ftbl **ft){
+int sp_ftbl_destroy(sp_ftbl **ft)
+{
     sp_ftbl *ftp = *ft;
     free(ftp->tbl);
     free(*ft);
     return SP_OK;
 }
 
-int sp_ftbl_tseq_create(sp_ftbl_seq **seq, sp_ftbl *ft){
+int sp_ftbl_tseq_create(sp_ftbl_seq **seq, sp_ftbl *ft)
+{
     *seq = malloc(sizeof(sp_ftbl_seq));
     sp_ftbl_seq *seqp = *seq;
     seqp->ft = ft;
@@ -38,7 +41,8 @@ int sp_ftbl_tseq_create(sp_ftbl_seq **seq, sp_ftbl *ft){
     return SP_OK;
 }
 
-int sp_ftbl_tseq_compute(sp_ftbl_seq *seq, SPFLOAT *trig, SPFLOAT *val){
+int sp_ftbl_tseq_compute(sp_ftbl_seq *seq, SPFLOAT *trig, SPFLOAT *val)
+{
     if(*trig != 0){
         seq->val = seq->ft->tbl[seq->pos];
         if(seq->shuf) {
@@ -51,12 +55,14 @@ int sp_ftbl_tseq_compute(sp_ftbl_seq *seq, SPFLOAT *trig, SPFLOAT *val){
     return SP_OK;
 }
 
-int sp_ftbl_tseq_destroy(sp_ftbl_seq **seq){
+int sp_ftbl_tseq_destroy(sp_ftbl_seq **seq)
+{
     free(*seq);
     return SP_OK;
 }
 
-int sp_gen_vals(sp_ftbl *ft, char *string){
+int sp_gen_vals(sp_ftbl *ft, char *string)
+{
     char *str1, *token, *t;
     char *saveptr1;
     int j;
@@ -82,7 +88,8 @@ int sp_gen_vals(sp_ftbl *ft, char *string){
     return SP_OK;
 }
 
-int sp_gen_sine(sp_ftbl *ft){
+int sp_gen_sine(sp_ftbl *ft)
+{
     unsigned long i;
     SPFLOAT step = 2 * M_PI / ft->size;
     for(i = 0; i < ft->size; i++){
@@ -92,7 +99,8 @@ int sp_gen_sine(sp_ftbl *ft){
 }
 
 /*TODO: add error checking, make tests */
-int sp_gen_file(sp_ftbl *ft, const char *filename){
+int sp_gen_file(sp_ftbl *ft, const char *filename)
+{
     SF_INFO info;
     SNDFILE *snd = sf_open(filename, SFM_READ, &info);
     sf_readf_float(snd, ft->tbl, ft->size);
@@ -101,7 +109,8 @@ int sp_gen_file(sp_ftbl *ft, const char *filename){
 }
 
 /* port of GEN10 from Csound */
-int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, char *argstring) {
+int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, char *argstring)
+{
     sp_ftbl *args;
     sp_ftbl_create(sp, &args, 1);
     sp_gen_vals(args, argstring);

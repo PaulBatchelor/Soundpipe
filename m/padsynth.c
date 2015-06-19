@@ -24,7 +24,8 @@
 #endif 
 
 int sp_gen_padsynth(sp_data *sp, sp_ftbl *ps, sp_ftbl *amps, 
-        SPFLOAT f, SPFLOAT bw) {
+        SPFLOAT f, SPFLOAT bw) 
+{
 
     int i, nh;
     int N = ps->size;
@@ -69,7 +70,8 @@ int sp_gen_padsynth(sp_data *sp, sp_ftbl *ps, sp_ftbl *amps,
    The amplitude is divided by the bandwidth to ensure that the harmonic
    keeps the same amplitude regardless of the bandwidth */
 
-SPFLOAT sp_padsynth_profile(SPFLOAT fi, SPFLOAT bwi) {
+SPFLOAT sp_padsynth_profile(SPFLOAT fi, SPFLOAT bwi) 
+{
     SPFLOAT x =fi/bwi;
     x *= x;
 
@@ -83,7 +85,8 @@ SPFLOAT sp_padsynth_profile(SPFLOAT fi, SPFLOAT bwi) {
 }
 
 int sp_padsynth_ifft(int N, SPFLOAT *freq_amp, 
-        SPFLOAT *freq_phase, SPFLOAT *smp) {
+        SPFLOAT *freq_phase, SPFLOAT *smp) 
+{
     int i;
     FFTwrapper *fft;
     FFTwrapper_create(&fft, N);
@@ -104,7 +107,8 @@ int sp_padsynth_ifft(int N, SPFLOAT *freq_amp,
     Simple normalization function. It normalizes the sound to 1/sqrt(2)
 */
 
-int sp_padsynth_normalize(int N, SPFLOAT *smp) {
+int sp_padsynth_normalize(int N, SPFLOAT *smp) 
+{
     int i;
     SPFLOAT max=0.0;
     for (i=0;i<N;i++) if (fabs(smp[i])>max) max=fabs(smp[i]);

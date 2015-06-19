@@ -16,17 +16,20 @@
 #include <math.h>
 #include "soundpipe.h"
 
-int sp_randi_create(sp_randi **p){
+int sp_randi_create(sp_randi **p)
+{
     *p = malloc(sizeof(sp_randi));
     return SP_OK;
 }
 
-int sp_randi_destroy(sp_randi **p){
+int sp_randi_destroy(sp_randi **p)
+{
     free(*p);
     return SP_OK;
 }
 
-int sp_randi_init(sp_data *sp, sp_randi *p, int seed){
+int sp_randi_init(sp_data *sp, sp_randi *p, int seed)
+{
     p->sicvt = 1.0 * SP_FT_MAXLEN / sp->sr;
     p->phs = 0;
     p->min = 0;
@@ -62,7 +65,8 @@ int sp_randi_init(sp_data *sp, sp_randi *p, int seed){
     return SP_OK;
 }
 
-int sp_randi_compute(sp_data *sp, sp_randi *p, SPFLOAT *in, SPFLOAT *out) {
+int sp_randi_compute(sp_data *sp, sp_randi *p, SPFLOAT *in, SPFLOAT *out) 
+{
     int32_t phs = p->phs, inc;
     SPFLOAT       cpsp;
     SPFLOAT       amp, min;

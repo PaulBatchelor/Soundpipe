@@ -22,18 +22,20 @@
 
 #include "soundpipe.h"
 
-int sp_tbvcf_create(sp_tbvcf **p){
+int sp_tbvcf_create(sp_tbvcf **p)
+{
     *p = malloc(sizeof(sp_tbvcf));
     return SP_OK;
 }
 
-int sp_tbvcf_destroy(sp_tbvcf **p){
+int sp_tbvcf_destroy(sp_tbvcf **p)
+{
     free(*p);
     return SP_OK;
 }
 
-int sp_tbvcf_init(sp_data *sp, sp_tbvcf *p){
-
+int sp_tbvcf_init(sp_data *sp, sp_tbvcf *p)
+{
     p->fco = 500.0;
     p->res = 0.8;
     p->dist = 2.0;
@@ -53,10 +55,10 @@ int sp_tbvcf_init(sp_data *sp, sp_tbvcf *p){
     return SP_OK;
 }
 
-int sp_tbvcf_compute(sp_data *sp, sp_tbvcf *p, SPFLOAT *in, SPFLOAT *out){
-
+/* TODO: clean up code here. */
+int sp_tbvcf_compute(sp_data *sp, sp_tbvcf *p, SPFLOAT *in, SPFLOAT *out)
+{
     SPFLOAT x;
-    //SPFLOAT fcoptr, resptr, distptr, asymptr;
     SPFLOAT fco, res, dist, asym;
     SPFLOAT y = p->y, y1 = p->y1, y2 = p->y2;
     /* The initialisations are fake to fool compiler warnings */

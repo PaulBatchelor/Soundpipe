@@ -13,7 +13,8 @@
 #include <math.h>
 #include "soundpipe.h"
 
-void FFTwrapper_create(FFTwrapper **fw, int fftsize) {
+void FFTwrapper_create(FFTwrapper **fw, int fftsize) 
+{
     *fw = malloc(sizeof(FFTwrapper));
     FFTwrapper *fwp = *fw;
     fwp->fftsize = fftsize;
@@ -26,7 +27,9 @@ void FFTwrapper_create(FFTwrapper **fw, int fftsize) {
     fwp->planfftw_inv = fftw_plan_r2r_1d(fftsize, fwp->tmpfftdata2, 
             fwp->tmpfftdata2, FFTW_HC2R, FFTW_ESTIMATE);
 }
-void FFTwrapper_destroy(FFTwrapper **fw) {
+
+void FFTwrapper_destroy(FFTwrapper **fw) 
+{
     FFTwrapper *fwp = *fw;
     fftw_destroy_plan(fwp->planfftw);
     fftw_destroy_plan(fwp->planfftw_inv);
@@ -37,7 +40,8 @@ void FFTwrapper_destroy(FFTwrapper **fw) {
 
 /* do the Fast Fourier Transform */
 
-void smps2freqs(FFTwrapper *ft, SPFLOAT *smps, FFTFREQS freqs) {
+void smps2freqs(FFTwrapper *ft, SPFLOAT *smps, FFTFREQS freqs) 
+{
     int i;
     for (i = 0; i < ft->fftsize; i++) ft->tmpfftdata1[i]=smps[i];
     fftw_execute(ft->planfftw);
@@ -48,12 +52,13 @@ void smps2freqs(FFTwrapper *ft, SPFLOAT *smps, FFTFREQS freqs) {
     }
 
     ft->tmpfftdata2[ft->fftsize/2] = 0.0;
-};
+}
 
 /*
  * do the Inverse Fast Fourier Transform
  */
-void freqs2smps(FFTwrapper *ft, FFTFREQS freqs, SPFLOAT *smps) {
+void freqs2smps(FFTwrapper *ft, FFTFREQS freqs, SPFLOAT *smps) 
+{
     ft->tmpfftdata2[ft->fftsize/2]=0.0;
     int i;
     for (i=0; i<ft->fftsize/2 ;i++) {
@@ -63,9 +68,10 @@ void freqs2smps(FFTwrapper *ft, FFTFREQS freqs, SPFLOAT *smps) {
     fftw_execute(ft->planfftw_inv);
     for (i = 0; i < ft->fftsize; i++) smps[i]=ft->tmpfftdata2[i];
 
-};
+}
 
-void newFFTFREQS(FFTFREQS *f,int size){
+void newFFTFREQS(FFTFREQS *f,int size)
+{
     int i;
     SPFLOAT *c = malloc(size * sizeof(SPFLOAT));
     SPFLOAT *s = malloc(size * sizeof(SPFLOAT));
@@ -75,10 +81,11 @@ void newFFTFREQS(FFTFREQS *f,int size){
         f->c[i]=0.0;
         f->s[i]=0.0;
     };
-};
+}
 
-void deleteFFTFREQS(FFTFREQS *f){
+void deleteFFTFREQS(FFTFREQS *f)
+{
     free(f->c);
     free(f->s);
     f->c= f->s = NULL;
-};
+}

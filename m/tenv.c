@@ -1,19 +1,24 @@
 #include <stdlib.h>
 #include "soundpipe.h"
 
-int sp_tenv_create(sp_tenv **p){
+int sp_tenv_create(sp_tenv **p)
+{
     *p = malloc(sizeof(sp_tenv));
     sp_tenv *pp = *p;
     sp_tevent_create(&pp->te);
     return SP_OK;
 }
-int sp_tenv_destroy(sp_tenv **p){
+
+int sp_tenv_destroy(sp_tenv **p)
+{
     sp_tenv *pp = *p;
     sp_tevent_destroy(&pp->te);
     free(*p);
     return SP_OK;
 }
-int sp_tenv_init(sp_data *sp, sp_tenv *p, SPFLOAT atk, SPFLOAT hold, SPFLOAT rel){
+
+int sp_tenv_init(sp_data *sp, sp_tenv *p, SPFLOAT atk, SPFLOAT hold, SPFLOAT rel)
+{
     p->pos = 0;
     p->last = 0;
     p->atk = atk;
@@ -31,7 +36,8 @@ int sp_tenv_init(sp_data *sp, sp_tenv *p, SPFLOAT atk, SPFLOAT hold, SPFLOAT rel
     return SP_OK;
 }
 
-void sp_tenv_reinit(void *ud){
+void sp_tenv_reinit(void *ud)
+{
     sp_tenv *env = ud;
     env->pos = 0;
     env->last = 0;
@@ -41,7 +47,8 @@ void sp_tenv_reinit(void *ud){
     env->rel_slp = -1.0 / (env->sr * env->rel);
 }
 
-void sp_tenv_comp(void *ud, SPFLOAT *out){
+void sp_tenv_comp(void *ud, SPFLOAT *out)
+{
     sp_tenv *env = ud;
     uint32_t pos = env->pos;
     *out = 0.0;
@@ -58,7 +65,8 @@ void sp_tenv_comp(void *ud, SPFLOAT *out){
     env->last = *out;
 }
 
-int sp_tenv_compute(sp_data *sp, sp_tenv *p, SPFLOAT *in, SPFLOAT *out){
+int sp_tenv_compute(sp_data *sp, sp_tenv *p, SPFLOAT *in, SPFLOAT *out)
+{
     sp_tevent_compute(sp, p->te, in, out);
     return SP_OK;
 }

@@ -14,19 +14,22 @@
 #include <stdlib.h>
 #include "soundpipe.h"
 
-int sp_streson_create(sp_streson **p) {
+int sp_streson_create(sp_streson **p) 
+{
     *p = malloc(sizeof(sp_streson));
     return SP_OK;
 }
 
-int sp_streson_destroy(sp_streson **p) {
+int sp_streson_destroy(sp_streson **p) 
+{
     sp_streson *pp = *p;
     sp_auxdata_free(&pp->buf);
     free(*p);
     return SP_OK;
 }
 
-int sp_streson_init(sp_data *sp, sp_streson *p) {
+int sp_streson_init(sp_data *sp, sp_streson *p) 
+{
     int n;
     p->freq = 440.0;
     p->fdbgain = 0.8;
@@ -41,7 +44,8 @@ int sp_streson_init(sp_data *sp, sp_streson *p) {
     return SP_OK;
 }
 
-int sp_streson_compute(sp_data *sp, sp_streson *p, SPFLOAT *in, SPFLOAT *out) {
+int sp_streson_compute(sp_data *sp, sp_streson *p, SPFLOAT *in, SPFLOAT *out) 
+{
     SPFLOAT g = p->fdbgain;
     SPFLOAT freq;
     SPFLOAT a, s, w, sample, tdelay, fracdelay;

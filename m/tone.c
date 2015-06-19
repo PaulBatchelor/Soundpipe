@@ -21,17 +21,20 @@
 #include "soundpipe.h"
 
 
-int sp_tone_create(sp_tone **t){
+int sp_tone_create(sp_tone **t)
+{
     *t = malloc(sizeof(sp_tone));
     return SP_OK;
 }
 
-int sp_tone_destroy(sp_tone **t){
+int sp_tone_destroy(sp_tone **t)
+{
     free(*t);
     return SP_OK;
 }
 
-int sp_tone_init(sp_data *sp, sp_tone *p) {
+int sp_tone_init(sp_data *sp, sp_tone *p)
+{
     p->khp = 1000;
     p->istor = 0;
     SPFLOAT b;
@@ -46,7 +49,8 @@ int sp_tone_init(sp_data *sp, sp_tone *p) {
     return SP_OK;
 }
 
-int sp_tone_compute(sp_data *sp, sp_tone *p, SPFLOAT *in, SPFLOAT *out) {
+int sp_tone_compute(sp_data *sp, sp_tone *p, SPFLOAT *in, SPFLOAT *out)
+{
     SPFLOAT     c1 = p->c1, c2 = p->c2;
     SPFLOAT     yt1 = p->yt1;
 

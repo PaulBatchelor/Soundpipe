@@ -19,16 +19,20 @@
 #define M_PI		3.14159265358979323846	
 #endif 
 
-int sp_biquad_create(sp_biquad **p){
+int sp_biquad_create(sp_biquad **p)
+{
     *p = malloc(sizeof(sp_biquad));
     return SP_OK;
 }
-int sp_biquad_destroy(sp_biquad **p){
+
+int sp_biquad_destroy(sp_biquad **p)
+{
     free(*p);
     return SP_OK;
 }
 
-int sp_biquad_init(sp_data *sp, sp_biquad *p){
+int sp_biquad_init(sp_data *sp, sp_biquad *p)
+{
     p->tpidsr = 2.0*M_PI / sp->sr;
     p->sr = sp->sr;
 
@@ -58,7 +62,8 @@ int sp_biquad_init(sp_data *sp, sp_biquad *p){
    return SP_OK; 
 }
 
-int sp_biquad_compute(sp_data *sp, sp_biquad *p, SPFLOAT *in, SPFLOAT *out){
+int sp_biquad_compute(sp_data *sp, sp_biquad *p, SPFLOAT *in, SPFLOAT *out)
+{
     SPFLOAT xn, yn;
     SPFLOAT a0 = p->a0, a1 = p->a1, a2 = p->a2;
     SPFLOAT b0 = p->b0, b1 = p->b1, b2 = p->b2;
