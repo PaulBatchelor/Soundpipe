@@ -2,10 +2,12 @@ default: libsoundpipe.a
 
 include config.mk
 
+VERSION=0.1.0
+
 MPATHS=$(addprefix m/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
 
-CFLAGS +=  -g --std=c99
+CFLAGS +=  -g --std=c99 -DSP_VERSION=$(VERSION)
 
 include t/Makefile
 
