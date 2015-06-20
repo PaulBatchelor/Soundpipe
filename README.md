@@ -37,18 +37,6 @@ example will generate a 5 second file called "test.wav". Examples in the "extra"
 folder are for optional modules. Open up the Makefile and uncomment the
 specific files you want to compile.
 
-Folder Structure
-----------------
-
-e = (e)xample files
-
-m = (m)odule source code
-
-h = (h)eader files
-
-t = (t)ests and testing
-
-
 Future Plans
 ------------
 - multi-channel support (only mono right now)
