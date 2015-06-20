@@ -1,12 +1,11 @@
 #!/usr/local/bin/lua
--- to parse: lua sp.lua "foo"
+
+-- Parse a lua table in modules/data and write text
+-- to run: lua sp.lua "foo"
+
 sptbl = {}
-
 module = arg[1]
-
 dofile(string.format("modules/data/%s.lua", module))
-
-
 PG = { name = module }
 
 function PG.printheader(self, str)
@@ -27,6 +26,7 @@ end
 
 function PG.desc(self, sp)
     print(sp[self.name].description)
+    io.write("\n")
 end
 
 function PG.createf(self, sp)
@@ -78,10 +78,10 @@ function PG.funcs(self, sp)
 	self:initf(sp)   
 	self:computef(sp)
 	self:destroyf(sp)   
+	io.write("\n")
 end
 
 function PG.man_params(self,sp)
-    --io.write("Mandatory Parameters:\n")
     self:printheader("Mandatory Parameters")
     local tbl = sp[self.name].params.mandatory
     for _, v in pairs(tbl) do
@@ -108,6 +108,7 @@ function PG.inputs(self, sp)
         io.write(string.format("*%s*: ", v.name))
         io.write(v.description .. "\n\n")
     end
+	io.write("\n")
 end
 	
 function PG.outputs(self, sp)
@@ -117,6 +118,7 @@ function PG.outputs(self, sp)
         io.write(string.format("*%s*: ", v.name))
         io.write(v.description .. "\n\n")
     end
+	io.write("\n")
 end
 
 function PG.other(self, sp)
@@ -136,25 +138,23 @@ function PG.other(self, sp)
             
         end
     end
-
-
+    io.write("\n")
 end
 	
 function PG.params(self, sp)
     PG:man_params(sp)
     PG:opt_params(sp)
+    io.write("\n")
 end
 
-PG:title(sptbl)
-PG:desc(sptbl)
-print()
-PG:funcs(sptbl)
-print()
-PG:params(sptbl)
-print()
-PG:inputs(sptbl)
-print()
-PG:outputs(sptbl)
-print()
-PG:other(sptbl)
-print()
+function PG.makepage(self, sp)
+	PG:title(sptbl)
+	PG:desc(sptbl)
+	PG:funcs(sptbl)
+	PG:params(sptbl)
+	PG:inputs(sptbl)
+	PG:outputs(sptbl)
+	PG:other(sptbl)
+end
+
+PG:makepage(sptbl)
