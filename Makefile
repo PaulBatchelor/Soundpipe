@@ -2,19 +2,19 @@ default: libsoundpipe.a
 
 include config.mk
 
-VERSION=0.1.0
+VERSION=0.1.1
 
-MPATHS=$(addprefix m/, $(addsuffix .o, $(MODULES)))
+MPATHS=$(addprefix modules/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
 
 CFLAGS +=  -g --std=c99 -DSP_VERSION=$(VERSION)
 
-include t/Makefile
+include test/Makefile
 
-m/%.o: m/%.c h/%.h m/base.o h/soundpipe.h
+modules/%.o: modules/%.c h/%.h modules/base.o h/soundpipe.h
 	gcc -Wall $(CFLAGS) -c -static -Ih $< -o $@ 
 
-m/base.o: m/base.c 
+modules/base.o: modules/base.c 
 	gcc -Wall $(CFLAGS) -c -static -Ih $< -o $@ 
 
 h/soundpipe.h: $(HPATHS)
