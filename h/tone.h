@@ -1,5 +1,5 @@
 typedef struct {
-        SPFLOAT khp, istor;
+        SPFLOAT hp;
         SPFLOAT c1, c2, yt1, prvhp;
         SPFLOAT tpidsr;
 } sp_tone;
