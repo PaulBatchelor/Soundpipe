@@ -1,3 +1,5 @@
+.PHONY: docs
+
 default: libsoundpipe.a
 
 include config.mk
@@ -27,5 +29,8 @@ install: libsoundpipe.a h/soundpipe.h
 	install h/soundpipe.h /usr/local/include/
 	install libsoundpipe.a /usr/local/lib/
 
+docs:
+	util/gendocs.sh
+
 clean: 
-	rm -rf gen_noise libsoundpipe.a $(MPATHS) h/soundpipe.h
+	rm -rf gen_noise libsoundpipe.a $(MPATHS) h/soundpipe.h docs

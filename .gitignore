@@ -5,3 +5,5 @@
 *.dSYM
 soundpipe.h
 .DS_Store
+docs
+*.html
