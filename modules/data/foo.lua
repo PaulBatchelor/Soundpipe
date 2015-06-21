@@ -1,9 +1,9 @@
 sptbl["foo"] = {
 
 	files = { 
-	    m = "foo.c",
-	    h = "foo.h",
-	    e = "ex_foo.c",
+	    module = "foo.c",
+	    header = "foo.h",
+	    --example = "ex_tone.c",
 	},
 	
 	func = {
