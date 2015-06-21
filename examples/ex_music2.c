@@ -134,10 +134,8 @@ int main() {
     /* Init */
     sp->len = 44100 * (60.0 / tempo) * 32;
     sp_count_init(sp, ud.cnt, 4);
-    sp_metro_init(sp, ud.clk);
-    ud.clk->cps = tempo / 60.0;
-    sp_metro_init(sp, ud.dblclk);
-    ud.dblclk->cps = tempo * 2 / 60.0;
+    sp_metro_init(sp, ud.clk, tempo / 60.0);
+    sp_metro_init(sp, ud.dblclk, tempo * 2 / 60.0);
     sp_revsc_init(sp, ud.rev);
     ud.rev->feedback = 0.9;
     ud.rev->lpfreq = 10000;

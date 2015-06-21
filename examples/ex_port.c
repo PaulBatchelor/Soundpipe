@@ -39,8 +39,7 @@ int main() {
     sp_ftbl_tseq_create(&ud.seq, ud.nn); 
   
     sp_port_init(sp, ud.prt, 0.02); 
-    sp_metro_init(sp, ud.mt);
-    ud.mt->cps = 4;
+    sp_metro_init(sp, ud.mt, 4.0);
     sp_gen_sine(ud.sine);
     sp_osc_init(sp, ud.osc, ud.sine);
     sp->len = 44100 * 5;

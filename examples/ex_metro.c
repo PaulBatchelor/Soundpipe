@@ -15,7 +15,7 @@ typedef struct {
 void write_osc(sp_data *data, void *ud) {
     udata *udp = ud;
     SPFLOAT trig = 0;
-    sp_randi_compute(data, udp->rand, NULL, &udp->met->cps);
+    sp_randi_compute(data, udp->rand, NULL, &udp->met->freq);
     sp_metro_compute(data, udp->met, NULL, &trig);
     sp_tevent_compute(data, udp->te, &trig, &udp->osc->freq);
     sp_osc_compute(data, udp->osc, NULL, &data->out);
@@ -48,7 +48,7 @@ int main() {
     sp_randi_init(sp, ud.rand, rand());
     ud.rand->min = 2.0;
     ud.rand->max= 10.0;
-    sp_metro_init(sp, ud.met);
+    sp_metro_init(sp, ud.met, 2.0);
     sp_tevent_init(sp, ud.te, freq_reinit, freq_compute, freqp);
     sp_gen_sine(ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft);

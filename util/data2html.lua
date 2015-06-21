@@ -45,13 +45,16 @@ function PG.initf(self, sp)
     io.write(string.format("%s(sp_data *sp, sp_%s *%s", 
     tbl.func.init, self.name, self.name))
     
-    for _, v in pairs(tbl.params.mandatory) do
-        if(string.byte(v.type, string.len(v.type)) == 42) then
-	        arg = string.format(", %s%s", v.type, v.name)
-        else
-	        arg = string.format(", %s %s", v.type, v.name)
+    if(tbl.params.mandatory ~= nil) then
+    
+        for _, v in pairs(tbl.params.mandatory) do
+            if(string.byte(v.type, string.len(v.type)) == 42) then
+    	        arg = string.format(", %s%s", v.type, v.name)
+            else
+    	        arg = string.format(", %s %s", v.type, v.name)
+            end
+            io.write(arg)
         end
-        io.write(arg)
     end
 
     io.write(")\n")
@@ -94,8 +97,9 @@ function PG.funcs(self, sp)
 end
 
 function PG.man_params(self,sp)
-    self:printheader("Mandatory Parameters")
     local tbl = sp[self.name].params.mandatory
+	if (tbl == nil) then return end 
+    self:printheader("Mandatory Parameters")
     for _, v in pairs(tbl) do
         io.write("<div class=\"row\">\n")
         self:printoption(v.name)

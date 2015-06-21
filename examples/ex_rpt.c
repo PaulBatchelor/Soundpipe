@@ -38,8 +38,7 @@ int main(){
     sp_maygate_init(sp, ud.mg, 0.5);
     sp_gen_sine(ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft);
-    sp_metro_init(sp, ud.mt);
-    ud.mt->cps = tempo / 60.0;
+    sp_metro_init(sp, ud.mt, tempo / 60.0);
     sp_rpt_init(sp, ud.rpt, 1.0);
     sp_rpt_set(ud.rpt, tempo, 8, 4);
     sp_tenv_init(sp, ud.te, 0.001, 0.1, 0.1); 

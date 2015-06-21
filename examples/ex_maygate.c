@@ -54,8 +54,7 @@ int main() {
 
     sp_maygate_init(sp, ud.mg, 0.2);
     sp_tenv_init(sp, ud.tenv, 0.01, 0.01, 0.2);
-    sp_metro_init(sp, ud.met);
-    ud.met->cps = 12;
+    sp_metro_init(sp, ud.met, 12);
     sp_tevent_init(sp, ud.te, freq_reinit, freq_compute, freqp);
     sp_gen_sine(ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft);
