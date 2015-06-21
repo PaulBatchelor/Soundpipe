@@ -13,17 +13,20 @@ sptbl["foo"] = {
 	    compute = "sp_foo_compute",
 	    other = { 
 	        sp_foo_set = {
-	             {
-	                name = "var1",
-	                type = "SPFLOAT",
-	                description = "This is the first parameter",
-	                default = 1.5
-	            },
-	            {
-	                name = "var2",
-	                type = "SPFLOAT",
-	                description = "This is the second parameter",
-	                default = 1.5
+	            description = "foo_set description goes here.",
+	            args = {
+    	            {
+    	                name = "var1",
+    	                type = "SPFLOAT",
+    	                description = "This is the first parameter",
+    	                default = 1.5
+    	            },
+    	            {
+    	                name = "var2",
+    	                type = "SPFLOAT",
+    	                description = "This is the second parameter",
+    	                default = 1.5
+    	            }
 	            }
 	        }
 	    }

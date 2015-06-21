@@ -156,21 +156,34 @@ end
 
 function PG.other(self, sp)
     local tbl = sp[self.name].func.other
-	if(tbl == nil) then return end    
+    if(tbl == nil) then return end    
     self:printheader("Other Functions:")
     for func,params in pairs(tbl) do
         io.write("<div class=\"row\">\n")
-        io.write(string.format("%s(sp_%s %s", func, self.name, self.name)) for _,p in pairs(params) do
+        io.write(string.format("%s(sp_%s %s", func, self.name, self.name)) 
+        for _,p in pairs(params.args) do
             io.write(string.format(", %s %s", p.type, p.name))
         end
+        
         io.write(")\n")
         io.write("</div>\n")
-        for _,p in pairs(params) do
+        
         io.write("<div class=\"row\">\n")
+        io.write(params.description)
+        io.write("</div>\n")
+        for _,p in pairs(params.args) do
+            io.write("<div class=\"row\">\n")
+            io.write("<div class=\"one column\"></div>\n")
+            io.write("<div class=\"elevent columns\">\n")
             self:printoption(p.name)
             io.write(p.description.. "\n")
+            io.write("</div></div>\n")
+            
+            io.write("<div class=\"row\">\n")
+            io.write("<div class=\"one column\"></div>\n")
+            io.write("<div class=\"elevent columns\">\n")
             io.write("(Suggested default: " .. p.default .. ")\n\n")
-        io.write("</div>\n")
+            io.write("</div></div>\n")
         end
     end
     io.write("<div class=\"row\"><br></div>\n")
