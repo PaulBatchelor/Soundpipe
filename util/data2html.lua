@@ -65,6 +65,10 @@ function PG.computef(self, sp)
     for _, input in pairs(tbl.inputs) do
         io.write(string.format(", SPFLOAT *%s", input.name))
     end
+    
+    for _, output in pairs(tbl.outputs) do
+        io.write(string.format(", SPFLOAT *%s", output.name))
+    end
 
     io.write(")\n")
 end

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "soundpipe.h"
 
-int sp_reverse_create(sp_data *sp, sp_reverse **p)
+int sp_reverse_create(sp_reverse **p)
 {
     *p = malloc(sizeof(sp_reverse));
     return SP_OK;

@@ -28,8 +28,8 @@ sptbl["tone"] = {
 	
 	description = [[Tone is a first-order recursive lowpass filter.]], 
 	
-	ninputs = 2,
-	noutputs = 2,
+	ninputs = 1,
+	noutputs = 1,
 	
 	inputs = { 
 	    {
