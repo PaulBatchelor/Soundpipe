@@ -128,7 +128,7 @@ int main() {
     sp_gen_vals(ud.reps, "4 8 16 6");
     sp_ftbl_tseq_create(&ud.rpick, ud.reps);
     ud.rpick->shuf = 1.0;
-    sp_reverse_create(sp, &ud.rvs);
+    sp_reverse_create(&ud.rvs);
     sp_maygate_create(&ud.rvs_switch);
 
     /* Init */

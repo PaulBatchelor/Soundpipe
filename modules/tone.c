@@ -35,16 +35,14 @@ int sp_tone_destroy(sp_tone **t)
 
 int sp_tone_init(sp_data *sp, sp_tone *p)
 {
-    p->khp = 1000;
-    p->istor = 0;
+    p->hp = 1000;
     SPFLOAT b;
     p->tpidsr = (2.0 * M_PI) / sp->sr * 1.0;
-    p->prvhp = (SPFLOAT)p->khp;
+    p->prvhp = (SPFLOAT)p->hp;
     b = 2.0 - cos((SPFLOAT)(p->prvhp * p->tpidsr));
     p->c2 = b - sqrt(b * b - 1.0);
     p->c1 = 1.0 - p->c2;
-    if (!(p->istor))
-      p->yt1 = 0.0;
+    p->yt1 = 0.0;
 
     return SP_OK;
 }
@@ -54,9 +52,9 @@ int sp_tone_compute(sp_data *sp, sp_tone *p, SPFLOAT *in, SPFLOAT *out)
     SPFLOAT     c1 = p->c1, c2 = p->c2;
     SPFLOAT     yt1 = p->yt1;
 
-    if (p->khp != p->prvhp) {
+    if (p->hp != p->prvhp) {
       SPFLOAT b;
-      p->prvhp = p->khp;
+      p->prvhp = p->hp;
       b = 2.0 - cos((p->prvhp * p->tpidsr));
       p->c2 = c2 = b - sqrt(b * b - 1.0);
       p->c1 = c1 = 1.0 - c2;

@@ -36,7 +36,7 @@ int main() {
     sp_data *sp;
     sp_create(&sp);
     
-    sp_reverse_create(sp, &ud.rv);
+    sp_reverse_create(&ud.rv);
     sp_tenv_create(&ud.tenv);
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_osc_create(&ud.osc);
