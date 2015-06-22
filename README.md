@@ -41,7 +41,8 @@ specific files you want to compile.
 Installation is slightly different on a Mac, due to the way OSX places files.
 Unless you already have it installed, download libsndfile, and run
 'make'. You'll see an OSX error regarding Carbon. To fix that, open the file the 
-error referecnes, and change "#include <Carbon.h>" to "#include <Carbon/Carbon.h>". 
+error referecnes, and change "#include &lt;Carbon.h&gt;" to 
+"#include &lt;Carbon/Carbon.h&gt;". 
 
 Then, run:
 
