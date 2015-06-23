@@ -156,6 +156,8 @@ int main() {
     samp_destroy(&ud.hh);
     sp_revsc_destroy(&ud.rev);
     sp_maygate_destroy(&ud.rthrow);
+    sp_maygate_destroy(&ud.rgate);
+    sp_maygate_destroy(&ud.rvs_switch);
     sp_count_destroy(&ud.cnt);
     sp_metro_destroy(&ud.clk);
     sp_metro_destroy(&ud.dblclk);
