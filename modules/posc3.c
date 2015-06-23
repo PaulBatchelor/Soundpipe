@@ -28,7 +28,7 @@ int sp_posc3_destroy(sp_posc3 **posc3)
 int sp_posc3_init(sp_data *sp, sp_posc3 *posc3, sp_ftbl *ft)
 {
 
-    posc3->amp = 0.5;
+    posc3->amp = 0.2;
     posc3->freq = 440.0;
     posc3->iphs = 0.0;
     posc3->onedsr = 1.0 / sp->sr;
