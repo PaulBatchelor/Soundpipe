@@ -42,7 +42,7 @@ void write_osc(sp_data *data, void *ud) {
     sp_revsc_compute(data, udp->rev, &dry, &dry, &wet, &foo);  
 
     sp_dcblock_compute(data, udp->dcblk, &wet, &blk);
-    data->out = 0.5 * dry + 0.3 * wet; 
+    data->out[0] = 0.5 * dry + 0.3 * wet; 
 }
 
 int main() {

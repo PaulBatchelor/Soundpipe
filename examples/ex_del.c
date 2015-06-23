@@ -18,7 +18,7 @@ void process(sp_data *sp, void *data) {
     ud->del->del = freq;    
     sp_osc_compute(sp, ud->osc, NULL, &osc);
     sp_del_compute(sp, ud->del, &osc, &del);
-    sp->out = del * 0.5 + osc * 0.5;
+    sp->out[0] = del * 0.5 + osc * 0.5;
 }
 
 int main() {

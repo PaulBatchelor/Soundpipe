@@ -20,7 +20,7 @@ void process(sp_data *sp, void *userdata) {
     sp_port_compute(sp, ud->prt, &freq, &pfreq);
     ud->osc->freq = pfreq;
     sp_osc_compute(sp, ud->osc, NULL, &osc);
-    sp->out = osc;
+    sp->out[0] = osc;
 }
 
 int main() {

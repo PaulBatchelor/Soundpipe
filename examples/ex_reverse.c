@@ -26,7 +26,7 @@ void write_osc(sp_data *data, void *ud) {
     sp_osc_compute(data, udp->osc, NULL, &osc);
     dry = osc * env;
     sp_reverse_compute(data, udp->rv, &dry, &rv);
-    data->out = dry + rv;
+    data->out[0] = dry + rv;
 }
 
 int main() {

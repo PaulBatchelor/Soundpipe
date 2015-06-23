@@ -14,7 +14,7 @@ void write_osc(sp_data *data, void *ud) {
     SPFLOAT freq;
     sp_randi_compute(data, udp->rnd, NULL, &freq);
     udp->osc->freq = freq;
-    sp_osc_compute(data, udp->osc, NULL, &data->out);
+    sp_osc_compute(data, udp->osc, NULL, &data->out[0]);
 }
 
 int main() {

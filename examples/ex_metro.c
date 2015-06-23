@@ -18,7 +18,7 @@ void write_osc(sp_data *data, void *ud) {
     sp_randi_compute(data, udp->rand, NULL, &udp->met->freq);
     sp_metro_compute(data, udp->met, NULL, &trig);
     sp_tevent_compute(data, udp->te, &trig, &udp->osc->freq);
-    sp_osc_compute(data, udp->osc, NULL, &data->out);
+    sp_osc_compute(data, udp->osc, NULL, &data->out[0]);
 }
 
 void freq_reinit(void *ud){

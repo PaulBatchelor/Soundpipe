@@ -17,7 +17,7 @@ void write_noise(sp_data *data, void *ud) {
         udata->butlp->kfc = 500 + rand() % 4000;
     }
     sp_noise_compute(data, udata->ns, NULL, &in);
-    sp_butlp_compute(data, udata->butlp, &in, &data->out); 
+    sp_butlp_compute(data, udata->butlp, &in, &data->out[0]); 
     udata->counter = (udata->counter + 1) % 5000;
 }
 int main() {

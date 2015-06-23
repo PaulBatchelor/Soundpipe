@@ -54,7 +54,7 @@ void process(sp_data *sp, void *udata) {
     sp_reverse_compute(sp, ud->rvs, &rpt, &rvs);
     sp_maygate_compute(sp, ud->rvs_switch, &clk, &rvs_switch);
     
-    sp->out = (rvs_switch) ? rvs : rpt;
+    sp->out[0] = (rvs_switch) ? rvs : rpt;
 }
 
 void samp_reinit(void *ud) {

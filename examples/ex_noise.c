@@ -10,7 +10,7 @@ typedef struct {
 void write_noise(sp_data *data, void *ud) {
     udata *udata = ud;
     SPFLOAT in = 0;
-    sp_noise_compute(data, udata->ns, NULL, &data->out);
+    sp_noise_compute(data, udata->ns, NULL, &data->out[0]);
 }
 int main() {
     srand(time(NULL));

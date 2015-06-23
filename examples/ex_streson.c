@@ -13,7 +13,7 @@ void write_noise(sp_data *data, void *ud) {
     SPFLOAT in = 0;
     SPFLOAT noise = 0;
     sp_noise_compute(data, udata->ns, NULL, &noise);
-    sp_streson_compute(data, udata->stres, &noise, &data->out);
+    sp_streson_compute(data, udata->stres, &noise, &data->out[0]);
 }
 int main() {
     srand(time(NULL));

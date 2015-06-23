@@ -19,7 +19,7 @@ void compute(sp_data *sp, void *user_data){
     sp_maygate_compute(sp, ud->mg, &met, &maygate);
     trig = met * maygate;
     sp_rpt_compute(sp, ud->rpt, &trig, &dry, &rpt);
-    sp->out = rpt;
+    sp->out[0] = rpt;
 }
 
 int main(){

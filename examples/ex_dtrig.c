@@ -25,7 +25,7 @@ void write_osc(sp_data *data, void *ud) {
     sp_dtrig_compute(data, udp->dt, &trig, &dtrig);
     sp_tenv_compute(data, udp->tenv, &dtrig, &env);
     sp_osc_compute(data, udp->osc, NULL, &osc);
-    data->out = osc * env;
+    data->out[0] = osc * env;
 }
 
 int main() {

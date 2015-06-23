@@ -18,7 +18,7 @@ void write_osc(sp_data *data, void *ud) {
         trig = 1.0;
     }
     sp_tevent_compute(data, udp->te, &trig, &udp->osc->freq);
-    sp_osc_compute(data, udp->osc, NULL, &data->out);
+    sp_osc_compute(data, udp->osc, NULL, &data->out[0]);
     udp->counter = (udp->counter + 1) % 4410;
 }
 

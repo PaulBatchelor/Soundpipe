@@ -14,7 +14,7 @@ void write_osc(sp_data *data, void *ud) {
     //if(udp->counter == 0){
     //    udp->osc->freq = 500 + rand() % 2000;
     //}
-    sp_osc_compute(data, udp->osc, NULL, &data->out);
+    sp_osc_compute(data, udp->osc, NULL, &data->out[0]);
     udp->counter = (udp->counter + 1) % 4410;
 }
 

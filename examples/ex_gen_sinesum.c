@@ -10,7 +10,7 @@ typedef struct {
 
 void write_osc(sp_data *data, void *ud) {
     udata *udp = ud;
-    sp_osc_compute(data, udp->osc, NULL, &data->out);
+    sp_osc_compute(data, udp->osc, NULL, &data->out[0]);
 }
 
 int main() {

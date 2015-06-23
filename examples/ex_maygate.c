@@ -24,7 +24,7 @@ void write_osc(sp_data *data, void *ud) {
     sp_tevent_compute(data, udp->te, &trig, &udp->osc->freq);
     sp_tenv_compute(data, udp->tenv, &trig, &env);
     sp_osc_compute(data, udp->osc, NULL, &osc);
-    data->out = osc * env * mgate;
+    data->out[0] = osc * env * mgate;
 }
 
 void freq_reinit(void *ud){

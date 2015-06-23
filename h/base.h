@@ -18,8 +18,7 @@ typedef struct sp_auxdata{
 }sp_auxdata;
 
 typedef struct sp_data{ 
-    SPFLOAT buf[SP_BUFSIZE];
-    SPFLOAT out;
+    SPFLOAT *out;
     SNDFILE *sf;
     int sr;
     unsigned long len;

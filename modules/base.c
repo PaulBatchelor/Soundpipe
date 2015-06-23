@@ -9,7 +9,9 @@ int sp_create(sp_data **spp)
     *spp = (sp_data *) malloc(sizeof(sp_data));
     sp_data *sp = *spp;
     sprintf(sp->filename, "test.wav");
-    sp->out = 0;
+    SPFLOAT *out = malloc(sizeof(SPFLOAT));
+    *out = 0;
+    sp->out = out;
     sp->sr = 44100;
     sp->len = 5 * sp->sr;
     sp->pos = 0;
@@ -18,13 +20,18 @@ int sp_create(sp_data **spp)
 
 int sp_destroy(sp_data **spp)
 {
+    sp_data *sp = *spp;
+    free(sp->out);
     free(*spp);
     return 0;
 }
 
 int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
 {
+
+    /* is buf still needed? */
     SF_INFO info;
+    SPFLOAT buf[SP_BUFSIZE];
     info.samplerate = sp->sr;
     info.channels = 1;
     info.format = SF_FORMAT_WAV | SF_FORMAT_FLOAT;
@@ -40,10 +47,10 @@ int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
         }
         for(i = 0; i < numsamps; i++){
             callback(sp, ud);
-            sp->buf[i] = sp->out;
+            buf[i] = sp->out[0];
             sp->pos++;
         }
-        sf_write_float(sp->sf, sp->buf, numsamps);
+        sf_write_float(sp->sf, buf, numsamps);
         sp->len -= numsamps;
     }
     sf_close(sp->sf);
