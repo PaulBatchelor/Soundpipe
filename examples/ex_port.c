@@ -7,7 +7,7 @@ typedef struct {
     sp_osc *osc;
     sp_metro *mt;
     sp_ftbl *sine, *nn;
-    sp_ftbl_seq *seq;
+    sp_tseq *seq;
     sp_port *prt;
 } udata;
 
@@ -15,7 +15,7 @@ void process(sp_data *sp, void *userdata) {
     udata *ud = userdata;
     SPFLOAT osc, mt, nn, freq, pfreq;
     sp_metro_compute(sp, ud->mt, NULL, &mt);
-    sp_ftbl_tseq_compute(ud->seq, &mt, &nn);
+    sp_tseq_compute(sp, ud->seq, &mt, &nn);
     freq = sp_midi2cps(nn);
     sp_port_compute(sp, ud->prt, &freq, &pfreq);
     ud->osc->freq = pfreq;
@@ -36,7 +36,8 @@ int main() {
     sp_port_create(&ud.prt);
 
     sp_gen_vals(ud.nn, "60 63 65 60 63 67");
-    sp_ftbl_tseq_create(&ud.seq, ud.nn); 
+    sp_tseq_create(&ud.seq); 
+    sp_tseq_init(sp, ud.seq, ud.nn); 
   
     sp_port_init(sp, ud.prt, 0.02); 
     sp_metro_init(sp, ud.mt, 4.0);
@@ -47,7 +48,7 @@ int main() {
     sp_process(sp, &ud, process);
 
     sp_port_destroy(&ud.prt);
-    sp_ftbl_tseq_destroy(&ud.seq); 
+    sp_tseq_destroy(&ud.seq); 
     sp_metro_destroy(&ud.mt); 
     sp_ftbl_destroy(&ud.sine);
     sp_ftbl_destroy(&ud.nn);

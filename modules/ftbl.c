@@ -30,37 +30,6 @@ int sp_ftbl_destroy(sp_ftbl **ft)
     return SP_OK;
 }
 
-int sp_ftbl_tseq_create(sp_ftbl_seq **seq, sp_ftbl *ft)
-{
-    *seq = malloc(sizeof(sp_ftbl_seq));
-    sp_ftbl_seq *seqp = *seq;
-    seqp->ft = ft;
-    seqp->pos = 0;
-    seqp->val = 0;
-    seqp->shuf = 0;
-    return SP_OK;
-}
-
-int sp_ftbl_tseq_compute(sp_ftbl_seq *seq, SPFLOAT *trig, SPFLOAT *val)
-{
-    if(*trig != 0){
-        seq->val = seq->ft->tbl[seq->pos];
-        if(seq->shuf) {
-            seq->pos = rand() % seq->ft->size;
-        } else {
-            seq->pos = (seq->pos + 1) % seq->ft->size;
-        }
-    }
-    *val = seq->val;
-    return SP_OK;
-}
-
-int sp_ftbl_tseq_destroy(sp_ftbl_seq **seq)
-{
-    free(*seq);
-    return SP_OK;
-}
-
 int sp_gen_vals(sp_ftbl *ft, char *string)
 {
     char *str1, *token, *t;

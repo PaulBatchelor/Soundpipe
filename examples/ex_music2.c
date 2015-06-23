@@ -14,7 +14,7 @@ typedef struct {
     SPFLOAT tempo;
     sp_count *cnt;
     sp_ftbl *reps;
-    sp_ftbl_seq *rpick; 
+    sp_tseq *rpick; 
     sp_metro *clk, *dblclk;
     sp_reverse *rvs;
     sp_maygate *rthrow, *rgate, *rvs_switch;
@@ -47,7 +47,7 @@ void process(sp_data *sp, void *udata) {
 
     dry = snare + kick + hh * 0.5 + revout * 0.1; 
     sp_maygate_compute(sp, ud->rgate, &dblclk, &rgate);
-    sp_ftbl_tseq_compute(ud->rpick, &dblclk, &reps);
+    sp_tseq_compute(sp, ud->rpick, &dblclk, &reps);
 
     sp_rpt_set(ud->rpt, ud->tempo, reps, 4);
     sp_rpt_compute(sp, ud->rpt, &rgate, &dry, &rpt);
@@ -126,7 +126,7 @@ int main() {
     sp_rpt_create(&ud.rpt);
     sp_ftbl_create(sp, &ud.reps, 1);
     sp_gen_vals(ud.reps, "4 8 16 6");
-    sp_ftbl_tseq_create(&ud.rpick, ud.reps);
+    sp_tseq_init(sp, ud.rpick, ud.reps);
     ud.rpick->shuf = 1.0;
     sp_reverse_create(&ud.rvs);
     sp_maygate_create(&ud.rvs_switch);
@@ -163,7 +163,7 @@ int main() {
     sp_metro_destroy(&ud.dblclk);
     sp_rpt_destroy(&ud.rpt);
     sp_ftbl_destroy(&ud.reps);
-    sp_ftbl_tseq_destroy(&ud.rpick);
+    sp_tseq_destroy(&ud.rpick);
     sp_reverse_destroy(&ud.rvs);
 
     sp_destroy(&sp);    
