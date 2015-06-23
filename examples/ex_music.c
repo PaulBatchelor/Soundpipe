@@ -33,12 +33,13 @@ void write_osc(sp_data *data, void *ud) {
     SPFLOAT dry = 0;
     SPFLOAT wet = 0;
     SPFLOAT blk = 0;
+    SPFLOAT foo = 0;
     for(i = 0; i < NVOICES; i++){
         sp_randi_compute(data, udp->v[i].rnd, NULL, &amp);
         sp_osc_compute(data, udp->v[i].osc, NULL, &osc);
         dry += osc * amp; 
     }
-    sp_revsc_compute(data, udp->rev, &dry, &wet);  
+    sp_revsc_compute(data, udp->rev, &dry, &dry, &wet, &foo);  
 
     sp_dcblock_compute(data, udp->dcblk, &wet, &blk);
     data->out = 0.5 * dry + 0.3 * wet; 

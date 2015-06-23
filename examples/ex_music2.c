@@ -27,7 +27,7 @@ void process(sp_data *sp, void *udata) {
     user_data *ud = udata;
     SPFLOAT dry;
     SPFLOAT kick, snare, hh, clk, dblclk, bar, dtrig, count;
-    SPFLOAT revin, revout, rthrow, rgate, rpt, rvs, rvs_switch;
+    SPFLOAT revin, revout, rthrow, rgate, rpt, rvs, rvs_switch, foo;
     SPFLOAT reps;
     sp_metro_compute(sp, ud->clk, NULL, &clk);
     sp_metro_compute(sp, ud->dblclk, NULL, &dblclk);
@@ -38,7 +38,7 @@ void process(sp_data *sp, void *udata) {
 
     sp_maygate_compute(sp, ud->rthrow, &dtrig, &rthrow);
     revin = snare * rthrow;
-    sp_revsc_compute(sp, ud->rev, &revin, &revout);
+    sp_revsc_compute(sp, ud->rev, &revin, &revin, &revout, &foo);
 
     sp_dtrig_compute(sp, ud->kick.dt, &bar, &dtrig);
     sp_tevent_compute(sp, ud->kick.te, &dtrig, &kick);
