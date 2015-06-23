@@ -6,8 +6,8 @@
 #define SP_OK 1
 #define SP_NOT_OK 0
 
-#ifndef __SOUNDPIPE_H__
-#define __SOUNDPIPE_H__
+#ifndef SOUNDPIPE_H
+#define SOUNDPIPE_H
 #endif
 
 typedef unsigned long sp_frame;

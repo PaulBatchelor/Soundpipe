@@ -13,6 +13,7 @@ void process(sp_data *data, void *ud) {
     udata *udata = ud;
     SPFLOAT in = 0;
     SPFLOAT out = 0;
+    SPFLOAT foo = 0;
     sp_noise_compute(data, udata->ns, NULL, &in);
     
     if(udata->counter < 2000) {
@@ -20,7 +21,7 @@ void process(sp_data *data, void *ud) {
     }else{
         in = 0;
     }
-    sp_revsc_compute(data, udata->rev, &in, &data->out); 
+    sp_revsc_compute(data, udata->rev, &in, &in, &data->out, &foo); 
 }
 int main() {
     srand(time(NULL));

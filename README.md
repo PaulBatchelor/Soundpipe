@@ -23,7 +23,7 @@ these.
 Compilation
 -----------
 
-By default, Soundpipe only needs libsndfile. To compile:
+By default, Soundpipe only needs libsndfile. To compile on Linux:
 
 make
 
@@ -36,6 +36,22 @@ To build the examples, go into the (e)xamples folder and run "make". Each
 example will generate a 5 second file called "test.wav". Examples in the "extra"
 folder are for optional modules. Open up the Makefile and uncomment the
 specific files you want to compile.
+
+
+Installation is slightly different on a Mac, due to the way OSX places files.
+Unless you already have it installed, download libsndfile, and run
+'make'. You'll see an OSX error regarding Carbon. To fix that, open the file the 
+error referecnes, and change "#include &lt;Carbon.h&gt;" to 
+"#include &lt;Carbon/Carbon.h&gt;". 
+
+Then, run:
+
+make
+
+sudo make install
+
+Soundpipe should now successfully be installed.  
+
 
 Future Plans
 ------------
