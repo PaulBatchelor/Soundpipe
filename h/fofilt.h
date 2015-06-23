@@ -1,5 +1,5 @@
 typedef struct{
-    SPFLOAT freq, ris, dec, istor;
+    SPFLOAT freq, atk, dec, istor;
     SPFLOAT tpidsr;
     SPFLOAT sr;
     SPFLOAT delay[4];

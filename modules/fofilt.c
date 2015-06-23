@@ -38,7 +38,7 @@ int sp_fofilt_init(sp_data *sp, sp_fofilt *p)
    p->sr = sp->sr;
 
    p->freq = 1000;
-   p->ris = 0.007;
+   p->atk = 0.007;
    p->dec = 0.04;
    p->istor = 0.0;
 
@@ -54,7 +54,7 @@ int sp_fofilt_compute(sp_data *sp, sp_fofilt *p, SPFLOAT *in, SPFLOAT *out)
 {
 
     SPFLOAT  freq = p->freq;
-    SPFLOAT  ris = p->ris;
+    SPFLOAT  ris = p->atk;
     SPFLOAT  dec = p->dec;
     SPFLOAT  *delay = p->delay,ang=0,fsc,rrad1=0,rrad2=0;
     SPFLOAT  w1,y1,w2,y2;
