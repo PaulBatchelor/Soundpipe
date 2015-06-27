@@ -126,7 +126,7 @@ int sp_auxdata_setbuf(sp_auxdata *aux, uint32_t pos, SPFLOAT *in)
     return SP_OK;
 }
 
-SPFLOAT sp_midi2cps(int nn) 
+SPFLOAT sp_midi2cps(SPFLOAT nn) 
 {
     return pow(2, (nn - 69.0) / 12.0) * 440.0;
 }

@@ -104,3 +104,42 @@ int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, char *argstring)
     sp_ftbl_destroy(&args);
     return SP_OK;
 }
+
+/* port of GEN07 from Csound */
+int sp_gen_line(sp_data *sp, sp_ftbl *ft, char *argstring) 
+{
+    int i, n = 0, seglen, nsegs, argpos = 1;
+    SPFLOAT valp;
+    SPFLOAT amp1, incr;
+    sp_ftbl *args;   
+    sp_ftbl_create(sp, &args, 1);
+    sp_gen_vals(args, argstring);
+    valp = args->tbl[0];
+    nsegs = args->size >> 1; 
+    
+    if((args->size % 2) == 0 || args->size == 1) {
+        fprintf(stderr, "Error: not enough arguments for gen_line.\n");
+        sp_ftbl_destroy(&args);
+        return SP_NOT_OK;
+    } 
+       
+    for(i = 0; i < nsegs; i ++) {
+        seglen = (int)args->tbl[argpos++];
+        amp1 = args->tbl[argpos++];
+        incr = (valp - amp1) / seglen;
+        while(seglen--) {
+            if(n < ft->size) {
+                ft->tbl[n] = amp1;
+                amp1 += incr;
+                n++;
+            } else {
+                break;
+            }
+        }
+        valp = amp1;
+    }
+    
+    sp_ftbl_destroy(&args);
+    return SP_OK;
+}
+ 

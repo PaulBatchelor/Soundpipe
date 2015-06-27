@@ -17,4 +17,5 @@ int sp_gen_vals(sp_ftbl *ft, char *string);
 
 int sp_gen_sine(sp_ftbl *ft);
 int sp_gen_file(sp_ftbl *ft, const char *filename);
-int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, char *args);
+int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, char *argstring);
+int sp_gen_line(sp_data *sp, sp_ftbl *ft, char *argstring);
