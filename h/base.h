@@ -19,8 +19,8 @@ typedef struct sp_auxdata{
 
 typedef struct sp_data{ 
     SPFLOAT *out;
-    SNDFILE *sf;
     int sr;
+    int nchan;
     unsigned long len;
     unsigned long pos;
     char filename[200];
@@ -32,6 +32,8 @@ int sp_auxdata_getbuf(sp_auxdata *aux, uint32_t pos, SPFLOAT *out);
 int sp_auxdata_setbuf(sp_auxdata *aux, uint32_t pos, SPFLOAT *in);
 
 int sp_create(sp_data **spp);
+int sp_createn(sp_data **spp, int nchan);
+
 int sp_destroy(sp_data **spp);
 int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *));
 

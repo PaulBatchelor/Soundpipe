@@ -9,7 +9,23 @@ int sp_create(sp_data **spp)
     *spp = (sp_data *) malloc(sizeof(sp_data));
     sp_data *sp = *spp;
     sprintf(sp->filename, "test.wav");
-    SPFLOAT *out = malloc(sizeof(SPFLOAT));
+    sp->nchan = 1;
+    SPFLOAT *out = malloc(sizeof(SPFLOAT) * sp->nchan);
+    *out = 0;
+    sp->out = out;
+    sp->sr = 44100;
+    sp->len = 5 * sp->sr;
+    sp->pos = 0;
+    return 0;
+}
+
+int sp_createn(sp_data **spp, int nchan) 
+{
+    *spp = (sp_data *) malloc(sizeof(sp_data));
+    sp_data *sp = *spp;
+    sprintf(sp->filename, "test.wav");
+    sp->nchan = nchan;
+    SPFLOAT *out = malloc(sizeof(SPFLOAT) * sp->nchan);
     *out = 0;
     sp->out = out;
     sp->sr = 44100;
@@ -28,17 +44,23 @@ int sp_destroy(sp_data **spp)
 
 int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
 {
-
-    /* is buf still needed? */
+    SNDFILE *sf[sp->nchan];
+    char tmp[140];
     SF_INFO info;
-    SPFLOAT buf[SP_BUFSIZE];
+    SPFLOAT buf[sp->nchan][SP_BUFSIZE];
     info.samplerate = sp->sr;
     info.channels = 1;
     info.format = SF_FORMAT_WAV | SF_FORMAT_FLOAT;
-    int numsamps, i;
-
-    sp->sf = sf_open(sp->filename, SFM_WRITE, &info);
-
+    int numsamps, i, chan;
+    if(sp->nchan == 1) {
+        sf[0] = sf_open(sp->filename, SFM_WRITE, &info);
+    } else {
+        for(chan = 0; chan < sp->nchan; chan++) {
+            sprintf(tmp, "%d_%s", chan, sp->filename);
+            sf[chan] = sf_open(tmp, SFM_WRITE, &info);
+        }
+    }
+    
     while(sp->len > 0){
         if(sp->len < SP_BUFSIZE) {
             numsamps = sp->len;
@@ -47,13 +69,19 @@ int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
         }
         for(i = 0; i < numsamps; i++){
             callback(sp, ud);
-            buf[i] = sp->out[0];
+            for(chan = 0; chan < sp->nchan; chan++) {
+                buf[chan][i] = sp->out[chan];
+            }
             sp->pos++;
         }
-        sf_write_float(sp->sf, buf, numsamps);
+        for(chan = 0; chan < sp->nchan; chan++) {
+            sf_write_float(sf[chan], buf[chan], numsamps);
+        }
         sp->len -= numsamps;
     }
-    sf_close(sp->sf);
+    for(i = 0; i < sp->nchan; i++) {
+        sf_close(sf[i]);
+    }
     return 0;
 }
 
