@@ -75,6 +75,13 @@ are set.
 single sample of output. 
 4. Destroy: All memory allocated is freed.
 
+Documentation
+-------------
+If you have lua installed on your computer, you can generate the current html 
+documentation for soundpipe by running "make docs". A folder called "docs"
+will be created. The top page for the documentation is docs/index.html.
+
+
 Contributors of Soundpipe:
 --------------------------
 Paul Batchelor
