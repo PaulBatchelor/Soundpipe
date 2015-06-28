@@ -1,5 +1,8 @@
 # Change log
 
+0.2.1
+    - tenv tweaks to prevent clicking
+
 0.2.0
 -----
     - html documentation generator
