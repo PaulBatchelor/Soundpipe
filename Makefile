@@ -4,7 +4,7 @@ default: libsoundpipe.a
 
 include config.mk
 
-VERSION=0.1.3
+VERSION=0.2.0
 
 MPATHS=$(addprefix modules/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
