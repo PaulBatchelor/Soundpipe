@@ -6,7 +6,7 @@
     - metadata for current modules created in modules/data 
     - improved build instructions for OSX
     - example cleanup
-    - module variabe cleanup
+    - module variable cleanup
     - Port of Csound GEN07 (gen_line)
     - Multi-channel and Multi-mono file support
     - Revsc module is now stereo
