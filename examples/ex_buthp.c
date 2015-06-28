@@ -24,7 +24,7 @@ int main() {
     sp_buthp_create(&ud.buthp);
     sp_noise_init(sp, ud.ns);
     sp_buthp_init(sp, ud.buthp);
-    ud.buthp->kfc = 5000;
+    ud.buthp->freq = 5000;
     sp->len = 44100 * 5;
     sp_process(sp, &ud, write_noise);
     sp_noise_destroy(&ud.ns);
