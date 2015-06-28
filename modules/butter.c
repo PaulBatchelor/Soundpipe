@@ -49,7 +49,7 @@ int sp_butlp_init(sp_data *sp, sp_butlp *p)
 {
     p->istor = 0.0;
     p->sr = sp->sr;
-    p->kfc = 1000;
+    p->freq = 1000;
     p->pidsr = M_PI / sp->sr * 1.0;
     if (p->istor==0.0) {
         p->a[6] = p->a[7] = 0.0;
@@ -62,7 +62,7 @@ int sp_buthp_init(sp_data *sp, sp_buthp *p)
 {
     p->istor = 0.0;
     p->sr = sp->sr;
-    p->kfc = 1000;
+    p->freq = 1000;
     p->pidsr = M_PI / sp->sr * 1.0;
     if (p->istor==0.0) {
         p->a[6] = p->a[7] = 0.0;
@@ -73,15 +73,15 @@ int sp_buthp_init(sp_data *sp, sp_buthp *p)
 
 int sp_buthp_compute(sp_data *sp, sp_buthp *p, SPFLOAT *in, SPFLOAT *out)
 {
-    if (p->kfc <= 0.0)     {
+    if (p->freq <= 0.0)     {
       *out = 0;
       return SP_OK;
     }
 
-    if (p->kfc != p->lkf)      {
+    if (p->freq != p->lkf)      {
       SPFLOAT    *a, c;
       a = p->a;
-      p->lkf = p->kfc;
+      p->lkf = p->freq;
       c = tan((SPFLOAT)(p->pidsr * p->lkf));
 
       a[1] = 1.0 / ( 1.0 + ROOT2 * c + c * c);
@@ -96,15 +96,15 @@ int sp_buthp_compute(sp_data *sp, sp_buthp *p, SPFLOAT *in, SPFLOAT *out)
 
 int sp_butlp_compute(sp_data *sp, sp_butlp *p, SPFLOAT *in, SPFLOAT *out) 
 {
-    if (p->kfc <= 0.0){
+    if (p->freq <= 0.0){
       *out = 0;
       return SP_OK;
     }
 
-    if (p->kfc != p->lkf){
+    if (p->freq != p->freq){
         SPFLOAT     *a, c;
         a = p->a;
-        p->lkf = p->kfc;
+        p->lkf = p->freq;
         c = 1.0 / tan((SPFLOAT)(p->pidsr * p->lkf));
         a[1] = 1.0 / ( 1.0 + ROOT2 * c + c * c);
         a[2] = a[1] + a[1];

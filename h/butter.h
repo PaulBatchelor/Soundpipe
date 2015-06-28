@@ -1,12 +1,12 @@
 typedef struct  {
-    SPFLOAT sr, kfc, istor;
+    SPFLOAT sr, freq, istor;
     SPFLOAT lkf;
     SPFLOAT a[8];
     SPFLOAT pidsr;
 } sp_butlp;
 
 typedef struct  {
-    SPFLOAT sr, kfc, istor;
+    SPFLOAT sr, freq, istor;
     SPFLOAT lkf;
     SPFLOAT a[8];
     SPFLOAT pidsr;
