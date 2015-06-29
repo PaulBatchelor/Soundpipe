@@ -130,3 +130,9 @@ SPFLOAT sp_midi2cps(SPFLOAT nn)
 {
     return pow(2, (nn - 69.0) / 12.0) * 440.0;
 }
+
+int sp_set(sp_param *p, SPFLOAT val) {
+    p->state = 1;
+    p->val = val;
+    return SP_OK;
+}

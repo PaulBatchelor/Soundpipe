@@ -12,19 +12,24 @@
 
 typedef unsigned long sp_frame;
 
-typedef struct sp_auxdata{
+typedef struct sp_auxdata {
     size_t size;
     void *ptr;
-}sp_auxdata;
+} sp_auxdata;
 
-typedef struct sp_data{ 
+typedef struct sp_data { 
     SPFLOAT *out;
     int sr;
     int nchan;
     unsigned long len;
     unsigned long pos;
     char filename[200];
-}sp_data; 
+} sp_data; 
+
+typedef struct {
+    char state;
+    SPFLOAT val;
+} sp_param;
 
 int sp_auxdata_alloc(sp_auxdata *aux, size_t size);
 int sp_auxdata_free(sp_auxdata *aux);
@@ -38,3 +43,5 @@ int sp_destroy(sp_data **spp);
 int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *));
 
 SPFLOAT sp_midi2cps(SPFLOAT nn);
+
+int sp_set(sp_param *p, SPFLOAT val);
