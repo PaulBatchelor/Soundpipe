@@ -1,12 +1,12 @@
 /*
- * Metro
+ * Bal
  * 
- * This code has been extracted from the Csound opcode "bal".
+ * This code has been extracted from the Csound opcode "balance".
  * It has been modified to work as a Soundpipe module.
  * 
- * Original Author(s): Gabriel Maldonado
- * Year: 2000
- * Location: Opcodes/bal.c
+ * Original Author(s): Barry Vercoe, john ffitch, Gabriel Maldonado
+ * Year: 1991
+ * Location: OOps/ugens5.c
  *
  */
 
