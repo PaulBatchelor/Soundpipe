@@ -33,12 +33,12 @@ int sp_clip_destroy(sp_clip **p)
     return SP_OK;
 }
 
-int sp_clip_init(sp_data *sp, sp_clip *p, int method, SPFLOAT limit)
+int sp_clip_init(sp_data *sp, sp_clip *p, int meth, SPFLOAT lim)
 {
-    p->meth = method;
+    p->meth = meth;
     p->arg = 0.5;
-    p->lim = limit;
-    switch (method) {
+    p->lim = lim;
+    switch (meth) {
         case 0: /* Bram de Jong method */
             if (p->arg > 1.0 || p->arg < 0.0) p->arg = 0.999;
             p->arg = p->lim * p->arg;

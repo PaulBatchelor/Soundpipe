@@ -21,27 +21,27 @@
 
 #include "soundpipe.h"
 
-int sp_butlp_create(sp_butlp **t)
+int sp_butlp_create(sp_butlp **p)
 {
-    *t = malloc(sizeof(sp_butlp));
+    *p = malloc(sizeof(sp_butlp));
     return SP_OK;
 }
 
-int sp_butlp_destroy(sp_butlp **t)
+int sp_butlp_destroy(sp_butlp **p)
 {
-    free(*t);
+    free(*p);
     return SP_OK;
 }
 
-int sp_buthp_create(sp_buthp **t)
+int sp_buthp_create(sp_buthp **p)
 {
-    *t = malloc(sizeof(sp_buthp));
+    *p = malloc(sizeof(sp_buthp));
     return SP_OK;
 }
 
-int sp_buthp_destroy(sp_buthp **t)
+int sp_buthp_destroy(sp_buthp **p)
 {
-    free(*t);
+    free(*p);
     return SP_OK;
 }
 
@@ -101,7 +101,7 @@ int sp_butlp_compute(sp_data *sp, sp_butlp *p, SPFLOAT *in, SPFLOAT *out)
       return SP_OK;
     }
 
-    if (p->freq != p->freq){
+    if (p->freq != p->lkf){
         SPFLOAT     *a, c;
         a = p->a;
         p->lkf = p->freq;

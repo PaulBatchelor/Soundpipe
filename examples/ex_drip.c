@@ -37,6 +37,7 @@ int main() {
     sp_process(sp, &ud, write_osc);
     sp_drip_destroy(&ud.drip);
     sp_dust_destroy(&ud.trig);
+    sp_revsc_destroy(&ud.rev);
     sp_destroy(&sp);
     return 0;
 }
