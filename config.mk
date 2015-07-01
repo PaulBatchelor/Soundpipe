@@ -5,8 +5,8 @@ MODULES=base event noise tone moogladder butter revsc ftbl osc posc3 randi \
 
 # JACK module
 #
-#MODULES += jack
-#CFLAGS += -ljack
+MODULES += jack
+CFLAGS += -ljack
 
 # RPi Module
 #

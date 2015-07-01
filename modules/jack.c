@@ -15,7 +15,7 @@ static int sp_jack_cb(jack_nframes_t nframes, void *arg)
 	out = jack_port_get_buffer (output_port, nframes);
     for(i = 0; i < nframes; i++){
         jd->callback(jd->sp, jd->ud);
-        out[i] = jd->sp->out;
+        out[i] = jd->sp->out[0];
     }
     return 0;
 }
