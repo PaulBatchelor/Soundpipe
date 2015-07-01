@@ -9,10 +9,10 @@ files = ex_buthp ex_butlp ex_moogladder ex_noise ex_revsc ex_tone ex_osc \
 default: all
 
 # Jack Module
-
-files += extra/ex_jack
-extra/ex_jack: extra/ex_jack.c
-	gcc -g --std=c99 -I ../h $< ../libsoundpipe.a -lsndfile -ljack -laaio -o $@ -lm
+#
+#files += extra/ex_jack
+#extra/ex_jack: extra/ex_jack.c
+#	gcc -g --std=c99 -I ../h $< ../libsoundpipe.a -lsndfile -ljack -laaio -o $@ -lm
 
 # RPI Module
 #
