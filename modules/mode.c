@@ -36,14 +36,10 @@ int sp_mode_destroy(sp_mode **p)
 int sp_mode_init(sp_data *sp, sp_mode *p)
 {
     p->freq = 500.0;
-    p->q = 0.5;
+    p->q = 50;
 
-    p->reinit = 0.0;
-
-    if(p->reinit == 0.0){
-      p->xnm1 = p->ynm1 = p->ynm2 = 0.0;
-      p->a0 = p->a1 = p->a2 = p->d = 0.0;
-    }
+    p->xnm1 = p->ynm1 = p->ynm2 = 0.0;
+    p->a0 = p->a1 = p->a2 = p->d = 0.0;
     p->lfq = -1.0;
     p->lq = -1.0;
 

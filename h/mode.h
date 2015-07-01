@@ -1,5 +1,5 @@
 typedef struct{
-    SPFLOAT freq, q, reinit, xnm1, ynm1, ynm2, a0, a1, a2, d, lfq, lq;
+    SPFLOAT freq, q, xnm1, ynm1, ynm2, a0, a1, a2, d, lfq, lq;
     SPFLOAT sr;
 }sp_mode;
 
