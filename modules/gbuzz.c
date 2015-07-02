@@ -1,12 +1,12 @@
 /*
- * Metro
+ * GBuzz
  * 
  * This code has been extracted from the Csound opcode "gbuzz".
  * It has been modified to work as a Soundpipe module.
  * 
  * Original Author(s): Gabriel Maldonado
- * Year: 2000
- * Location: Opcodes/gbuzz.c
+ * Year: 1991
+ * Location: ugens/ugens4.c
  *
  */
 #include <math.h>
@@ -52,9 +52,6 @@ int sp_gbuzz_init(sp_data *sp, sp_gbuzz *p, sp_ftbl *ft)
         p->lphs = (int32_t)(p->iphs * SP_FT_MAXLEN);
         p->prvr = 0.0;
     }
-    p->ampcod = 1;
-    p->cpscod = 1;
-    p->reported = 0;
     p->last = 1.0;
     return SP_OK;
 }
@@ -66,47 +63,57 @@ int sp_gbuzz_compute(sp_data *sp, sp_gbuzz *p, SPFLOAT *in, SPFLOAT *out)
     int32_t phs, inc, lobits, lenmask, k, km1, kpn, kpnm1;
     SPFLOAT r, absr, num, denom, scal, last = p->last;
     int32_t nn, lphs = p->lphs;
-
+    
     ftp = p->ft;
     ftbl = ftp->tbl;
     lobits = ftp->lobits;
     lenmask = ftp->size - 1;
-    k = (int32_t)p->lharm;                   /* fix k and n  */
+    k = (int32_t)p->lharm;
+    
     if ((nn = (int32_t)p->nharm)<0) nn = -nn;
-    if (nn == 0) {              /* n must be > 0 */
-      nn = 1;
+    
+    if (nn == 0) {
+        nn = 1;
     }
     km1 = k - 1;
     kpn = k + nn;
     kpnm1 = kpn - 1;
+    
     if ((r = p->mul) != p->prvr || nn != p->prvn) {
-      p->twor = r + r;
-      p->rsqp1 = r * r + 1.0;
-      p->rtn = intpow1(r, nn);
-      p->rtnp1 = p->rtn * r;
-      if ((absr = fabs(r)) > 0.999 && absr < 1.001)
-        p->rsumr = 1.0 / nn;
-      else p->rsumr = (1.0 - absr) / (1.0 - fabs(p->rtn));
-      p->prvr = r;
-      p->prvn = (int16_t)nn;
+        p->twor = r + r;
+        p->rsqp1 = r * r + 1.0;
+        p->rtn = intpow1(r, nn);
+        p->rtnp1 = p->rtn * r;
+        
+        if ((absr = fabs(r)) > 0.999 && absr < 1.001) {
+            p->rsumr = 1.0 / nn;
+        } else {
+            p->rsumr = (1.0 - absr) / (1.0 - fabs(p->rtn));
+        }
+        
+        p->prvr = r;
+        p->prvn = (int16_t)nn;
     }
+    
     scal =  p->amp * p->rsumr;
     inc = (int32_t)(p->freq * ftp->sicvt);
-      phs = lphs >>lobits;
-      denom = p->rsqp1 - p->twor * ftbl[phs];
-      num = ftbl[phs * k & lenmask]
+    phs = lphs >>lobits;
+    denom = p->rsqp1 - p->twor * ftbl[phs];
+    num = ftbl[phs * k & lenmask]
         - r * ftbl[phs * km1 & lenmask]
         - p->rtn * ftbl[phs * kpn & lenmask]
         + p->rtnp1 * ftbl[phs * kpnm1 & lenmask];
-      if (denom > 0.0002 || denom < -0.0002) {
+    
+    if (denom > 0.0002 || denom < -0.0002) {
         *out = last = num / denom * scal;
-      }
-      else if (last<0)
+    } else if (last<0) {
         *out = last = - *out;
-      else
+    } else {
         *out = last = *out;
-      lphs += inc;
-      lphs &= SP_FT_PHMASK;
+    }
+    
+    lphs += inc;
+    lphs &= SP_FT_PHMASK;
     p->last = last;
     p->lphs = lphs;
     return SP_OK;
