@@ -2,7 +2,7 @@
 MODULES=base event noise tone moogladder butter revsc ftbl osc posc3 randi \
 	dcblock tevent metro tenv maygate fofilt biquad tbvcf mode reverse \
 	dtrig rpt dust port del count streson tseq bal drip clip fosc dist \
-	gbuzz rms
+	gbuzz rms jitter
 
 # JACK module
 #
