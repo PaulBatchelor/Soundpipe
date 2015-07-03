@@ -84,16 +84,6 @@ int sp_moogladder_compute(sp_data *sp, sp_moogladder *p, SPFLOAT *in, SPFLOAT *o
         /* filter stages  */
         input = *in - res4 /*4.0*res*acr*/ *delay[5];
         delay[0] = stg[0] = delay[0] + tune*(tanh(input*THERMAL) - tanhstg[0]);
-#if 0
-        input = stg[0];
-        stg[1] = delay[1] + tune*((tanhstg[0] = tanh(input*THERMAL)) - tanhstg[1]);
-        input = delay[1] = stg[1];
-        stg[2] = delay[2] + tune*((tanhstg[1] = tanh(input*THERMAL)) - tanhstg[2]);
-        input = delay[2] = stg[2];
-        stg[3] = delay[3] + tune*((tanhstg[2] =
-                                   tanh(input*THERMAL)) - tanh(delay[3]*THERMAL));
-        delay[3] = stg[3];
-#else
         for (k = 1; k < 4; k++) {
           input = stg[k-1];
           stg[k] = delay[k]
@@ -101,7 +91,6 @@ int sp_moogladder_compute(sp_data *sp, sp_moogladder *p, SPFLOAT *in, SPFLOAT *o
                     - (k != 3 ? tanhstg[k] : tanh(delay[k]*THERMAL)));
           delay[k] = stg[k];
         }
-#endif
         /* 1/2-sample delay for phase compensation  */
         delay[5] = (stg[3] + delay[4])*0.5;
         delay[4] = stg[3];
