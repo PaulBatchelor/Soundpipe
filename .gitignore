@@ -4,6 +4,7 @@
 *.swp
 *.dSYM
 soundpipe.h
+soundpipe.c
 .DS_Store
 docs
 *.html
