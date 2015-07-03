@@ -1,12 +1,12 @@
 /*
- * Metro
+ * RMS
  * 
  * This code has been extracted from the Csound opcode "rms".
  * It has been modified to work as a Soundpipe module.
  * 
- * Original Author(s): Gabriel Maldonado
- * Year: 2000
- * Location: Opcodes/rms.c
+ * Original Author(s): Barry Vercoe, John ffitch, Gabriel Maldonado
+ * Year: 1991
+ * Location: Opcodes/ugens5.c
  *
  */
 
