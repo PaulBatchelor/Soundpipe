@@ -10,7 +10,7 @@ PG = { name = module }
 
 function PG.printheader(self, str)
     io.write("<div class=\"row\">\n")
-    io.write("<u>" .. str .. "</u>")
+    io.write("<h2>" .. str .. "</h2>")
     io.write("</div>\n")
 end
 
@@ -117,7 +117,7 @@ function PG.opt_params(self,sp)
     local tbl = sp[self.name].params.optional
     
     if (tbl == nil) then return end
-    self:printheader("Optional Parameters:")
+    self:printheader("Optional Parameters")
    
     for _, v in pairs(tbl) do
         io.write("<div class=\"row\">\n")    
@@ -135,7 +135,7 @@ function PG.opt_params(self,sp)
 end
 
 function PG.inputs(self, sp)
-    self:printheader("Inputs:")
+    self:printheader("Inputs")
     local tbl = sp[self.name].inputs
     for _, v in pairs(tbl) do
         io.write("<div class=\"row\">\n")    
@@ -147,7 +147,7 @@ function PG.inputs(self, sp)
 end
     
 function PG.outputs(self, sp)
-    self:printheader("Outputs:")
+    self:printheader("Outputs")
     local tbl = sp[self.name].outputs
     for _, v in pairs(tbl) do
     io.write("<div class=\"row\">\n")    
