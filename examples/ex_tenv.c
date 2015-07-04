@@ -49,8 +49,8 @@ int main() {
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_osc_create(&ud.osc);
 
-    sp_tenv_init(sp, ud.tenv, 0.03, 0.01, 0.3);
-    sp_metro_init(sp, ud.met, 3.0);
+    sp_tenv_init(sp, ud.tenv, 0.03, 0.01, 0.1);
+    sp_metro_init(sp, ud.met, 3);
     sp_tevent_init(sp, ud.te, freq_reinit, freq_compute, freqp);
     sp_gen_sine(ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft);

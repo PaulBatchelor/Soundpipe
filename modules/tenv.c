@@ -46,6 +46,7 @@ void sp_tenv_reinit(void *ud)
     env->rel_start = env->sr * (env->atk + env->hold);
     env->atk_slp = 1.0 / env->atk_end;
     env->rel_slp = -1.0 / (env->sr * env->rel);
+    env->totaldur = env->sr * (env->atk + env->hold + env->rel);
 }
 
 void sp_tenv_comp(void *ud, SPFLOAT *out)
