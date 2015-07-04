@@ -19,8 +19,9 @@ void write_osc(sp_data *data, void *ud) {
     SPFLOAT osc = 0;
     sp_metro_compute(data, udp->met, NULL, &trig);
     sp_tevent_compute(data, udp->te, &trig, &udp->osc->freq);
-    sp_tenv_compute(data, udp->tenv, &trig, &env);
     sp_osc_compute(data, udp->osc, NULL, &osc);
+    sp_tenv_compute(data, udp->tenv, &trig, &env);
+
     data->out[0] = osc * env;
 }
 

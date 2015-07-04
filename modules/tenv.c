@@ -25,7 +25,9 @@ int sp_tenv_init(sp_data *sp, sp_tenv *p, SPFLOAT atk, SPFLOAT hold, SPFLOAT rel
     p->rel = rel;
     p->hold = hold;
     p->rel = rel;
-
+    p->sigmode = 0;
+    p->in = 0;
+       
     p->sr = sp->sr;
     p->atk_end = p->sr * atk;
     p->rel_start = p->sr * (atk + hold);
@@ -40,7 +42,6 @@ void sp_tenv_reinit(void *ud)
 {
     sp_tenv *env = ud;
     env->pos = 0;
-    //env->last = 0;
     env->atk_end = env->sr * env->atk;
     env->rel_start = env->sr * (env->atk + env->hold);
     env->atk_slp = 1.0 / env->atk_end;
@@ -50,23 +51,31 @@ void sp_tenv_reinit(void *ud)
 void sp_tenv_comp(void *ud, SPFLOAT *out)
 {
     sp_tenv *env = ud;
+    SPFLOAT sig = 0;
     uint32_t pos = env->pos;
     *out = 0.0;
     if(pos < env->atk_end){
-        *out = env->last + env->atk_slp;
+        sig = env->last + env->atk_slp;
     }else if (pos < env->rel_start){
-        *out = 1.0;
+        sig = 1.0;
     }else if (pos < env->totaldur){
-        *out = env->last + env->rel_slp;
+        sig = env->last + env->rel_slp;
     }else{
-        *out = 0.0;
+        sig = 0.0;
+    }
+    sig = (sig > 1.0) ? 1.0 : sig;
+    sig = (sig < 0.0) ? 0.0 : sig;
+   
+    /* Internal input signal mode */
+    if(env->sigmode) {
+        *out = env->in * sig;
+    } else {
+        *out = sig;
     }
     
-    *out = (*out > 1.0) ? 1.0 : *out;
-    *out = (*out < 0.0) ? 0.0 : *out;
     
     env->pos++;
-    env->last = *out;
+    env->last = sig;
 }
 
 int sp_tenv_compute(sp_data *sp, sp_tenv *p, SPFLOAT *in, SPFLOAT *out)
