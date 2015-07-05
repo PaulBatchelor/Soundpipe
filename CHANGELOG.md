@@ -1,8 +1,14 @@
 # Change log
 
-0.2.1
-    - tenv tweaks to prevent clicking
-
+0.2.1: "Mo Modules"
+-------------------
+    - New modules: dist, gbuzz fosc, butbp, drip, clip,
+    balance, rms, jitter, lpf18
+    - Updated: mode, jack, rpi, tenv
+    - 2 new musical examples
+    - updated html docgen to work with Lynx better
+    - amalgamation of soundpipe sources possible
+    - sp_param/sp_set
 0.2.0
 -----
     - html documentation generator
