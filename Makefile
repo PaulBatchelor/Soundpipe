@@ -14,10 +14,7 @@ CFLAGS +=  -g --std=c99 -DSP_VERSION=$(VERSION)
 
 include test/Makefile
 
-modules/%.o: modules/%.c h/%.h modules/base.o h/soundpipe.h
-	gcc -Wall $(CFLAGS) -c -static -Ih $< -o $@ 
-
-modules/base.o: modules/base.c 
+modules/%.o: modules/%.c h/%.h h/soundpipe.h
 	gcc -Wall $(CFLAGS) -c -static -Ih $< -o $@ 
 
 h/soundpipe.h: $(HPATHS)
