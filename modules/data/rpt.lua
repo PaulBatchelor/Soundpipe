@@ -11,31 +11,6 @@ sptbl["rpt"] = {
         destroy = "sp_rpt_destroy",
         init = "sp_rpt_init",
         compute = "sp_rpt_compute",
-        other = { 
-            sp_rpt_set = {
-                description = "Set the repeat amount in tempo-based subdivisions",
-                args = { 
-                    {
-                        name = "bpm",
-                        type = "SPFLOAT",
-                        description = "Desired tempo.",
-                        default = 120
-                    },
-                    {
-                        name = "div",
-                        type = "int",
-                        description = "Divider amount. 2 = eigth, 4 = 16th, 3 = triplet, etc. This must be a whole number integer",
-                        default = 4
-                    },
-                    {
-                        name = "rep",
-                        type = "int",
-                        description = "Number of times to repeat. This must be a whole number integer.",
-                        default = 4
-                    }
-                }
-            }
-        }
     },
     
     params = {
@@ -46,6 +21,26 @@ sptbl["rpt"] = {
                 description = "Maximum delay duration in seconds. This will set the buffer size.",
                 default = "0.7"
             }
+        },
+        optional = {
+            {
+                name = "bpm",
+                type = "SPFLOAT",
+                description = "Beats per minute.",
+                default = 130
+            },
+            {
+                name = "div",
+                type = "int",
+                description = "Division amount of the beat. 1 = quarter, 2 = eight, 4 = sixteenth, 8 = thirty-second, etc. Any whole number integer is acceptable.",
+                default = 8
+            },
+            {
+                name = "rep",
+                type = "int",
+                description = "Number of times to repeat.",
+                default = 4
+            },
         }
     },
     

@@ -25,6 +25,9 @@ int sp_rpt_init(sp_data *sp, sp_rpt *p, SPFLOAT maxdur)
     p->count = p->reps;
     p->size = p->aux.size;
     p->sr = sp->sr;
+    p->bpm = 130;
+    p->div = 4;
+    p->rep = 4;
     return SP_OK;
 }
 
@@ -38,6 +41,7 @@ int sp_rpt_compute(sp_data *sp, sp_rpt *p, SPFLOAT *trig,
         p->count = p->reps + 1;
     }
     if(p->bufpos * sizeof(SPFLOAT) < p->aux.size){
+        sp_rpt_set(p, p->bpm, p->div, p->rep);
         sp_auxdata_setbuf(&p->aux, p->bufpos, in);
         p->bufpos++;
     }else{

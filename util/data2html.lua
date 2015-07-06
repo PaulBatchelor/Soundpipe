@@ -19,7 +19,7 @@ function PG.printoption(self, str)
 end
 
 function PG.title(self, sp)
-    io.write("<h1>" .. self.name .. "</h1>\n")
+    io.write("<i><h1>" .. self.name .. "</h1></i>\n")
 end
 
 function PG.desc(self, sp)
@@ -226,8 +226,8 @@ function PG.makepage(self, sp)
     io.write("<head>\n")
     io.write("<link rel=\"stylesheet\" href=\"css/skeleton.css\">\n")
     io.write("<link rel=\"stylesheet\" href=\"css/normalize.css\">\n")
-    io.write("</head>")
     PG:title(sptbl)
+    io.write("</head>")
     PG:files(sptbl)
     PG:desc(sptbl)
     PG:funcs(sptbl)

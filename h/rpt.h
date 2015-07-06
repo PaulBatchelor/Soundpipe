@@ -5,6 +5,8 @@ typedef struct sp_rpt{
     int count, reps;
     SPFLOAT sr;
     uint32_t size;
+    SPFLOAT bpm;
+    int div, rep;
     sp_auxdata aux;
 } sp_rpt;
 

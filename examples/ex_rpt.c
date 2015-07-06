@@ -40,7 +40,9 @@ int main(){
     sp_osc_init(sp, ud.osc, ud.ft);
     sp_metro_init(sp, ud.mt, tempo / 60.0);
     sp_rpt_init(sp, ud.rpt, 1.0);
-    sp_rpt_set(ud.rpt, tempo, 8, 4);
+    ud.rpt->bpm = tempo;
+    ud.rpt->div = 8;
+    ud.rpt->rep = 4;
     sp_tenv_init(sp, ud.te, 0.001, 0.1, 0.1); 
     sp_process(sp, &ud, compute);
 
