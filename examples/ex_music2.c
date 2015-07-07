@@ -49,7 +49,7 @@ void process(sp_data *sp, void *udata) {
     sp_maygate_compute(sp, ud->rgate, &dblclk, &rgate);
     sp_tseq_compute(sp, ud->rpick, &dblclk, &reps);
 
-    sp_rpt_set(ud->rpt, ud->tempo, reps, 4);
+    //sp_rpt_set(ud->rpt, ud->tempo, reps, 4);
     sp_rpt_compute(sp, ud->rpt, &rgate, &dry, &rpt);
     sp_reverse_compute(sp, ud->rvs, &rpt, &rvs);
     sp_maygate_compute(sp, ud->rvs_switch, &clk, &rvs_switch);
@@ -125,6 +125,7 @@ int main() {
     sp_maygate_create(&ud.rgate);
     sp_rpt_create(&ud.rpt);
     sp_ftbl_create(sp, &ud.reps, 1);
+    sp_tseq_create(&ud.rpick);
     sp_gen_vals(ud.reps, "4 8 16 6");
     sp_tseq_init(sp, ud.rpick, ud.reps);
     ud.rpick->shuf = 1.0;
@@ -141,7 +142,10 @@ int main() {
     ud.rev->lpfreq = 10000;
     sp_maygate_init(sp, ud.rthrow, 0.5);
     sp_rpt_init(sp, ud.rpt, 1.0);
-    sp_rpt_set(ud.rpt, tempo, 8, 4);
+    //sp_rpt_set(ud.rpt, tempo, 8, 4);
+    ud.rpt->bpm = tempo;
+    ud.rpt->div = 8;
+    ud.rpt->reps = 4;
     sp_maygate_init(sp, ud.rgate, 0.18);
     ud.rgate->mode = 1.0;
     sp_reverse_init(sp, ud.rvs, 60.0 / tempo);
