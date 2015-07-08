@@ -19,13 +19,13 @@ sptbl["reson"] = {
                 name = "cutoff",
                 type = "SPFLOAT",
                 description = "Center frequency of the filter, or frequency position of the peak response.",
-                default = "N/A"
+                default = 4000
             },
             {
                 name = "bw",
                 type = "SPFLOAT",
                 description = "Bandwidth of the filter.",
-                default = "N/A"
+                default = 1000
             }
         },
     

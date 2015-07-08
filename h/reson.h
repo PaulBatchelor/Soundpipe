@@ -7,5 +7,5 @@ typedef struct {
 
 int sp_reson_create(sp_reson **p);
 int sp_reson_destroy(sp_reson **p);
-int sp_reson_init(sp_data *sp, sp_reson *p, SPFLOAT cutoff, SPFLOAT bw);
+int sp_reson_init(sp_data *sp, sp_reson *p);
 int sp_reson_compute(sp_data *sp, sp_reson *p, SPFLOAT *in, SPFLOAT *out);

@@ -13,16 +13,6 @@ void write_noise(sp_data *data, void *ud) {
     udata *udata = ud;
     SPFLOAT in = 0;
     SPFLOAT out = 0;
-    if(udata->counter == 0) {
-        if(udata->reson->cutoff >= 5000) {
-            udata->reson->cutoff -= 4000;
-        }
-        if(udata->reson->bw <= 20) {
-            udata->reson->bw += 500;
-        }
-        udata->reson->cutoff += 100; 
-        udata->reson->bw -= 20; 
-    }
     sp_noise_compute(data, udata->ns, NULL, &in);
     sp_reson_compute(data, udata->reson, &in, &out); 
     data->out[0] = out * 0.1;
@@ -37,7 +27,7 @@ int main() {
     sp_noise_create(&ud.ns);
     sp_reson_create(&ud.reson);
     sp_noise_init(sp, ud.ns);
-    sp_reson_init(sp, ud.reson, 4000, 1000);
+    sp_reson_init(sp, ud.reson);
     sp->len = 44100 * 5;
     sp_process(sp, &ud, write_noise);
     sp_noise_destroy(&ud.ns);
