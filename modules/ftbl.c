@@ -142,4 +142,63 @@ int sp_gen_line(sp_data *sp, sp_ftbl *ft, char *argstring)
     sp_ftbl_destroy(&args);
     return SP_OK;
 }
- 
+
+int sp_gen_xline(sp_data *sp, sp_ftbl *ft, char *argstring)
+{
+    uint16_t i, n = 0, seglen, nsegs, argpos = 2;
+    SPFLOAT valp;
+    SPFLOAT mult, amp = 0;
+    SPFLOAT x1, x2, y1, y2;
+    sp_ftbl *args;   
+    sp_ftbl_create(sp, &args, 1);
+    sp_gen_vals(args, argstring);
+    valp = args->tbl[0];
+    nsegs = args->size >> 1; 
+    
+    if((args->size % 2) == 1 || args->size == 1) {
+        fprintf(stderr, "Error: not enough arguments for gen_line.\n");
+        sp_ftbl_destroy(&args);
+        return SP_NOT_OK;
+    } else if(args->size == 2) {
+        for(i = 0; i < ft->size; i++) {
+            ft->tbl[i] = args->tbl[1];
+        }
+        return SP_OK;
+    } 
+    
+    x1 = args->tbl[0];
+    y1 = args->tbl[1];
+    for(i = 2; i < args->size; i += 2) {
+        x2 = args->tbl[i];
+        y2 = args->tbl[i + 1];
+        
+        if(y1 == 0) {
+            y1 = 0.000001;
+        }
+        
+        if(y2 == 0) {
+            y2 = 0.000001;
+        }
+        
+        seglen = (uint32_t)(x2 - x1);
+        mult = (y2 / y1);
+        mult = pow(mult, (SPFLOAT)1.0 / seglen);
+        amp = y1;
+        while(seglen != 0){
+            if(n < ft->size) {
+                ft->tbl[n] = amp;
+                amp *= mult;
+                seglen--;
+                n++;
+            } else {
+                break;
+            }
+        }
+        y1 = y2;
+        x1 = x2;
+    }
+    
+    sp_ftbl_destroy(&args);
+    return SP_OK;
+  
+}

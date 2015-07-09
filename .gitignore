@@ -8,3 +8,4 @@ soundpipe.c
 .DS_Store
 docs
 *.html
+examples/plot.dat
