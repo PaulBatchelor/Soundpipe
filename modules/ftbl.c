@@ -71,6 +71,7 @@ int sp_gen_sine(sp_ftbl *ft)
 int sp_gen_file(sp_ftbl *ft, const char *filename)
 {
     SF_INFO info;
+    info.format = 0;
     SNDFILE *snd = sf_open(filename, SFM_READ, &info);
     sf_readf_float(snd, ft->tbl, ft->size);
     sf_close(snd);
@@ -108,15 +109,12 @@ int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, char *argstring)
 /* port of GEN07 from Csound */
 int sp_gen_line(sp_data *sp, sp_ftbl *ft, char *argstring) 
 {
-    uint16_t i, n = 0, seglen, nsegs, argpos = 2;
-    SPFLOAT valp;
+    uint16_t i, n = 0, seglen;
     SPFLOAT incr, amp = 0;
     SPFLOAT x1, x2, y1, y2;
     sp_ftbl *args;   
     sp_ftbl_create(sp, &args, 1);
     sp_gen_vals(args, argstring);
-    valp = args->tbl[0];
-    nsegs = args->size >> 1; 
     
     if((args->size % 2) == 1 || args->size == 1) {
         fprintf(stderr, "Error: not enough arguments for gen_line.\n");
@@ -164,15 +162,12 @@ int sp_gen_line(sp_data *sp, sp_ftbl *ft, char *argstring)
 
 int sp_gen_xline(sp_data *sp, sp_ftbl *ft, char *argstring)
 {
-    uint16_t i, n = 0, seglen, nsegs, argpos = 2;
-    SPFLOAT valp;
+    uint16_t i, n = 0, seglen;
     SPFLOAT mult, amp = 0;
     SPFLOAT x1, x2, y1, y2;
     sp_ftbl *args;   
     sp_ftbl_create(sp, &args, 1);
     sp_gen_vals(args, argstring);
-    valp = args->tbl[0];
-    nsegs = args->size >> 1; 
     
     if((args->size % 2) == 1 || args->size == 1) {
         fprintf(stderr, "Error: not enough arguments for gen_line.\n");
