@@ -43,7 +43,7 @@ int main() {
     ud.filt->res = 0.8;
     sp_tenv_create(&ud.env);
 
-    sp_gen_line(sp, ud.ft, "1 4096 -1");
+    sp_gen_line(sp, ud.ft, "0 1 4096 -1");
     sp_osc_init(sp, ud.osc[0], ud.ft);
     ud.osc[0]->freq = sp_midi2cps(41 - 0.05);
     sp_osc_init(sp, ud.osc[1], ud.ft);

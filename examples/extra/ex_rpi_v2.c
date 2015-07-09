@@ -64,7 +64,7 @@ int main() {
     sp_revsc_create(&ud.rev);
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_noise_init(sp, ud.ns);
-    sp_gen_line(sp, ud.ft, "1 2048 -1");
+    sp_gen_line(sp, ud.ft, "0 1 2048 -1");
     for(i = 0; i < NVOICES; i++){ 
         sp_osc_create(&ud.v[i].osc);
         sp_randi_create(&ud.v[i].rnd);

@@ -38,7 +38,7 @@ int main() {
     sp_ftbl_create(sp, &ud.sine_ft, 4096);
     sp_gen_sine(ud.sine_ft);
 
-    sp_gen_line(sp, ud.ft, "1 4096 -1");
+    sp_gen_line(sp, ud.ft, "0 1 4096 -1");
     sp_osc_init(sp, ud.osc[0], ud.ft);
     ud.osc[0]->freq = sp_midi2cps(40 - 0.05);
     sp_osc_init(sp, ud.osc[1], ud.ft);

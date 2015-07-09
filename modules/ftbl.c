@@ -108,35 +108,54 @@ int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, char *argstring)
 /* port of GEN07 from Csound */
 int sp_gen_line(sp_data *sp, sp_ftbl *ft, char *argstring) 
 {
-    int i, n = 0, seglen, nsegs, argpos = 1;
+    uint16_t i, n = 0, seglen, nsegs, argpos = 2;
     SPFLOAT valp;
-    SPFLOAT amp1, incr;
+    SPFLOAT incr, amp = 0;
+    SPFLOAT x1, x2, y1, y2;
     sp_ftbl *args;   
     sp_ftbl_create(sp, &args, 1);
     sp_gen_vals(args, argstring);
     valp = args->tbl[0];
     nsegs = args->size >> 1; 
     
-    if((args->size % 2) == 0 || args->size == 1) {
+    if((args->size % 2) == 1 || args->size == 1) {
         fprintf(stderr, "Error: not enough arguments for gen_line.\n");
         sp_ftbl_destroy(&args);
         return SP_NOT_OK;
+    } else if(args->size == 2) {
+        for(i = 0; i < ft->size; i++) {
+            ft->tbl[i] = args->tbl[1];
+        }
+        return SP_OK;
     } 
-       
-    for(i = 0; i < nsegs; i ++) {
-        seglen = (int)args->tbl[argpos++];
-        amp1 = args->tbl[argpos++];
-        incr = (valp - amp1) / seglen;
-        while(seglen--) {
+    
+    x1 = args->tbl[0];
+    y1 = args->tbl[1];
+    for(i = 2; i < args->size; i += 2) {
+        x2 = args->tbl[i];
+        y2 = args->tbl[i + 1];
+        
+        if(x2 < x1) {
+            fprintf(stderr, "Error: x coordiates must be sequential!\n");
+            break;
+        }
+        
+        seglen = (x2 - x1);
+        incr = (SPFLOAT)(y2 - y1) / seglen;
+        amp = y1;
+        
+        while(seglen != 0){
             if(n < ft->size) {
-                ft->tbl[n] = amp1;
-                amp1 += incr;
+                ft->tbl[n] = amp;
+                amp += incr;
+                seglen--;
                 n++;
             } else {
                 break;
             }
         }
-        valp = amp1;
+        y1 = y2;
+        x1 = x2;
     }
     
     sp_ftbl_destroy(&args);
