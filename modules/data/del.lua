@@ -29,7 +29,7 @@ sptbl["del"] = {
                 name = "del",
                 type = "SPFLOAT",
                 description = "Delay time (in seconds) that can be changed during performance. This value must not exceed the maximum delay time.",
-                default = "maxdel"
+                default = "maxdel * 0.5"
             },
         }
     },

@@ -31,7 +31,7 @@ int sp_del_init(sp_data *sp, sp_del *p, SPFLOAT maxdel)
 {
     uint32_t n = (int32_t)(maxdel * sp->sr)+1;
     p->sr = sp->sr;
-    p->del = maxdel;
+    p->del = maxdel * 0.5;
     p->maxdel = maxdel;
     sp_auxdata_alloc(&p->buf, n * sizeof(SPFLOAT));
     p->left = 0;
