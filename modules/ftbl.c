@@ -172,6 +172,11 @@ int sp_gen_xline(sp_data *sp, sp_ftbl *ft, char *argstring)
         x2 = args->tbl[i];
         y2 = args->tbl[i + 1];
         
+        if(x2 < x1) {
+            fprintf(stderr, "Error: x coordiates must be sequential!\n");
+            break;
+        }
+        
         if(y1 == 0) {
             y1 = 0.000001;
         }
@@ -184,6 +189,7 @@ int sp_gen_xline(sp_data *sp, sp_ftbl *ft, char *argstring)
         mult = (y2 / y1);
         mult = pow(mult, (SPFLOAT)1.0 / seglen);
         amp = y1;
+        
         while(seglen != 0){
             if(n < ft->size) {
                 ft->tbl[n] = amp;
