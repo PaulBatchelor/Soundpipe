@@ -21,3 +21,4 @@ int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, char *argstring);
 int sp_gen_cosinesum(sp_data *sp, sp_ftbl *ft, char *argstring);
 int sp_gen_line(sp_data *sp, sp_ftbl *ft, char *argstring);
 int sp_gen_xline(sp_data *sp, sp_ftbl *ft, char *argstring);
+int sp_gen_gauss(sp_data *sp, sp_ftbl *ft, SPFLOAT scale, uint32_t seed);

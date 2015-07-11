@@ -249,3 +249,33 @@ int sp_gen_xline(sp_data *sp, sp_ftbl *ft, char *argstring)
     return SP_OK;
   
 }
+
+
+static SPFLOAT gaussrand(sp_randmt *p, SPFLOAT scale)
+{
+    int64_t r1 = -((int64_t)0xFFFFFFFFU * 6);
+    int n = 12;
+    SPFLOAT x;
+
+    do {
+      r1 += (int64_t)sp_randmt_compute(p);
+    } while (--n);
+    
+    x = (SPFLOAT)r1;
+    return (SPFLOAT)(x * ((SPFLOAT)scale * (1.0 / (3.83 * 4294967295.03125))));
+}
+
+int sp_gen_gauss(sp_data *sp, sp_ftbl *ft, SPFLOAT scale, uint32_t seed)
+{
+    int n;
+    
+    sp_randmt rand;
+    
+    sp_randmt_seed(&rand, NULL, seed);
+    
+    for(n = 0; n < ft->size; n++) {
+        ft->tbl[n] = gaussrand(&rand, scale);
+    }
+    
+    return SP_OK;
+}
