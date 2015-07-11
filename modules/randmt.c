@@ -40,22 +40,35 @@
    email: m-mat @ math.sci.hiroshima-u.ac.jp (remove space)
 */
 
-
+#include "soundpipe.h"
 #define N           (624)
 #define M           (397)
 #define MATRIX_A    0x9908B0DFU     /* constant vector a */
 #define UPPER_MASK  0x80000000U     /* most significant w-r bits */
 #define LOWER_MASK  0x7FFFFFFFU     /* least significant r bits */
 
+static void MT_update_state(uint32_t *mt)
+{
+    /* mag01[x] = x * MATRIX_A  for x=0,1 */
+    const uint32_t  mag01[2] = { (uint32_t) 0, (uint32_t) MATRIX_A };
+    int       i;
+    uint32_t  y;
 
-typedef struct CsoundRandMTState_ {
-        int         mti;
-        uint32_t    mt[624];
-} CsoundRandMTState;
+    for (i = 0; i < (N - M); i++) {
+      y = (mt[i] & UPPER_MASK) | (mt[i + 1] & LOWER_MASK);
+      mt[i] = mt[i + M] ^ (y >> 1) ^ mag01[y & (uint32_t) 1];
+    }
+    for ( ; i < (N - 1); i++) {
+      y = (mt[i] & UPPER_MASK) | (mt[i + 1] & LOWER_MASK);
+      mt[i] = mt[i + (M - N)] ^ (y >> 1) ^ mag01[y & (uint32_t) 1];
+    }
+    y = (mt[N - 1] & UPPER_MASK) | (mt[0] & LOWER_MASK);
+    mt[N - 1] = mt[M - 1] ^ (y >> 1) ^ mag01[y & (uint32_t) 1];
+}
 
 /* generates a random number on [0,0xffffffff]-interval */
 
-PUBLIC uint32_t csoundRandMT(CsoundRandMTState *p)
+uint32_t sp_randmt_compute(sp_randmt *p)
 {
     int       i = p->mti;
     uint32_t  y;
@@ -75,8 +88,8 @@ PUBLIC uint32_t csoundRandMT(CsoundRandMTState *p)
     return y;
 }
 
-PUBLIC void csoundSeedRandMT(CsoundRandMTState *p,
-                             const uint32_t *initKey, uint32_t keyLength)
+void sp_randmt_seed(sp_randmt *p,
+    const uint32_t *initKey, uint32_t keyLength)
 {
     int       i, j, k;
     uint32_t  x;
@@ -120,3 +133,4 @@ PUBLIC void csoundSeedRandMT(CsoundRandMTState *p,
     /* MSB is 1; assuring non-zero initial array */
     p->mt[0] = (uint32_t) 0x80000000U;
 }
+
