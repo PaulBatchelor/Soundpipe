@@ -32,10 +32,10 @@ default: all
 #extra/ex_padsynth: extra/ex_padsynth.c
 #	gcc -g --std=c99 -I ../h $< ../libsoundpipe.a -lsndfile -lfftw3 -o $@ -lm
 
-all: $(files)
+all: $(addsuffix .bin, $(files)) 
 
-% :: %.c 
+%.bin : %.c 
 	gcc -g --std=c99 -I ../h $< ../libsoundpipe.a -lsndfile -o $@ -lm
 
 clean:
-	rm  -rf $(files) test.wav plot.dat plot.png
+	rm  -rf $(addsuffix .bin, $(files)) test.wav plot.dat plot.png

@@ -9,3 +9,4 @@ soundpipe.c
 docs
 *.html
 examples/plot.dat
+examples/*.bin
