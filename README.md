@@ -3,7 +3,7 @@ Soundpipe
 
 Soundpipe is a lightweight music DSP library written in C. It aims to provide
 a set of high-quality DSP modules for composers, sound designers,
-and creative coders. 
+and creative coders.
 
 Features
 ---------
@@ -15,9 +15,9 @@ Features
 - Easily extendable
 - Easily embeddable
 
-Soundpipe is primarily desgined to generate wav files, however there are 
+Soundpipe is primarily desgined to generate wav files, however there are
 optional modules which allow Soundpipe to be run in realtime via JACK or
-from a Raspberry Pi (ALSA). See the *compilation* section for how to enable 
+from a Raspberry Pi (ALSA). See the *compilation* section for how to enable
 these.
 
 Compilation
@@ -29,10 +29,10 @@ make
 
 sudo make install
 
-To build additional plugins with external library dependencies, uncomment lines 
+To build additional plugins with external library dependencies, uncomment lines
 in the file "config.mk".
 
-To build the examples, go into the (e)xamples folder and run "make". Each 
+To build the examples, go into the (e)xamples folder and run "make". Each
 example will generate a 5 second file called "test.wav". Examples in the "extra"
 folder are for optional modules. Open up the Makefile and uncomment the
 specific files you want to compile.
@@ -40,9 +40,9 @@ specific files you want to compile.
 
 Installation is slightly different on a Mac, due to the way OSX places files.
 Unless you already have it installed, download libsndfile, and run
-'make'. You'll see an OSX error regarding Carbon. To fix that, open the file the 
-error referecnes, and change "#include &lt;Carbon.h&gt;" to 
-"#include &lt;Carbon/Carbon.h&gt;". 
+'make'. You'll see an OSX error regarding Carbon. To fix that, open the file the
+error referecnes, and change "#include &lt;Carbon.h&gt;" to
+"#include &lt;Carbon/Carbon.h&gt;".
 
 Then, run:
 
@@ -50,7 +50,7 @@ make
 
 sudo make install
 
-Soundpipe should now successfully be installed.  
+Soundpipe should now successfully be installed.
 
 
 Future Plans
@@ -63,21 +63,21 @@ Future Plans
 The Soundpipe Model
 -------------------
 
-Soundpipe is callback driven. Every time Soundpipe needs a frame, it will 
-call upon a single function specified by the user. Soundpipe modules are 
-designed to process a signal, one sample at a time.  Every module follows the 
+Soundpipe is callback driven. Every time Soundpipe needs a frame, it will
+call upon a single function specified by the user. Soundpipe modules are
+designed to process a signal, one sample at a time.  Every module follows the
 same life cycle:
 
 1. Create: Memory is allocated for the data struct.
 2. Initialize: Buffers are allocated, and initial variables and constants
 are set.
 3. Compute: the module takes in inputs (if applicable), and generates a
-single sample of output. 
+single sample of output.
 4. Destroy: All memory allocated is freed.
 
 Documentation
 -------------
-If you have lua installed on your computer, you can generate the current html 
+If you have lua installed on your computer, you can generate the current html
 documentation for soundpipe by running "make docs". A folder called "docs"
 will be created. The top page for the documentation is docs/index.html.
 
@@ -87,3 +87,5 @@ Contributors of Soundpipe:
 Paul Batchelor
 
 Alex Tape
+
+Daniel Friedman
