@@ -1,4 +1,4 @@
-#!/usr/local/bin/lua
+#!/usr/bin/env lua
 
 -- Parse a lua table in modules/data and write text
 -- to run: lua sp.lua "foo"

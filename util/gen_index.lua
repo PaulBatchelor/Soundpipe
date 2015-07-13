@@ -1,4 +1,4 @@
-#!/usr/local/bin/lua
+#!/usr/bin/env lua
 
 file = io.open(arg[1])
 io.write("<html>\n")
