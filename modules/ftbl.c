@@ -106,34 +106,6 @@ int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, char *argstring)
     return SP_OK;
 }
 
-/* port of GEN10 from Csound */
-int sp_gen_cosinesum(sp_data *sp, sp_ftbl *ft, char *argstring)
-{
-    sp_ftbl *args;
-    sp_ftbl_create(sp, &args, 1);
-    sp_gen_vals(args, argstring);
-
-    int32_t phs;
-    SPFLOAT amp;
-    int32_t flen = ft->size;
-    SPFLOAT tpdlen = 2.0 * M_PI / (SPFLOAT) flen;
-
-    int i, n;
-
-    for(i = args->size; i > 0; i--){
-        amp = args->tbl[args->size - i];
-        if(amp != 0) {
-            for(phs = 0, n = 0; n < ft->size; n++){
-                ft->tbl[n] += cos(phs * tpdlen) * amp;
-                phs += i;
-                phs %= flen;
-            }
-        }
-    }
-    sp_ftbl_destroy(&args);
-    return SP_OK;
-}
-
 int sp_gen_line(sp_data *sp, sp_ftbl *ft, char *argstring) 
 {
     uint16_t i, n = 0, seglen;

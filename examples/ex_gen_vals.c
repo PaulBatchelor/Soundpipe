@@ -5,8 +5,10 @@ int main() {
     sp_data *sp;
     sp_create(&sp);
     sp_ftbl *ft;
-    sp_ftbl_create(sp, &ft, 4096);
-    sp_gen_sinesum(sp, ft, "1 0.5 0.25");
+    sp_ftbl_create(sp, &ft, 1);
+    
+    /* table will automatically resize */
+    sp_gen_vals(ft, "1 1.5 -3 5 ");
     int i;
     FILE *fp= fopen("plot.dat", "w");
     for(i = 0; i < ft->size; i++) {
