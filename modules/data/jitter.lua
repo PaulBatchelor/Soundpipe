@@ -28,7 +28,7 @@ sptbl["jitter"] = {
                 default = 0.5
             },
             {
-                name = "cspMax",
+                name = "cpsMax",
                 type = "SPFLOAT",
                 description ="The maximum frequency of change in Hz.",
                 default = 4
