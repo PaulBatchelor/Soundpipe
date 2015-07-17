@@ -3,7 +3,7 @@ sptbl["vco"] = {
     files = { 
         module = "vco.c",
         header = "vco.h",
-        --example = "ex_vco.c",
+        example = "ex_vco.c",
     },
     
     func = {

@@ -60,6 +60,25 @@ function PG.initf(self, sp)
     io.write(")\n")
 end
 
+function PG.genf(self, sp)
+    local tbl = sp[self.name]
+    
+    io.write(string.format("%s(sp_data *sp, sp_ftbl *ft ", tbl.func.name)) 
+    
+    if(tbl.params ~= nil) then
+        for _, v in pairs(tbl.params) do
+            if(string.byte(v.type, string.len(v.type)) == 42) then
+    	        arg = string.format(", %s%s", v.type, v.name)
+            else
+    	        arg = string.format(", %s %s", v.type, v.name)
+            end
+            io.write(arg)
+        end
+    end
+
+    io.write(")\n")
+end
+
 function PG.computef(self, sp)
     local tbl = sp[self.name]
     io.write(string.format("%s(sp_data *sp, sp_%s *%s", 
@@ -96,6 +115,16 @@ function PG.funcs(self, sp)
     io.write("<div class=\"row\"><br></div>\n")
 end
 
+function PG.genfuncs(self, sp)
+    io.write("<div class=\"row\">\n")
+    self:printheader("Functions")    
+    io.write("</div>\n")
+    io.write("<div class=\"row\">\n")
+    self:genf(sp) 
+    io.write("</div>\n")
+    io.write("<div class=\"row\"><br></div>\n")
+end
+
 function PG.man_params(self,sp)
     local tbl = sp[self.name].params.mandatory
 	if (tbl == nil) then return end 
@@ -111,8 +140,24 @@ function PG.man_params(self,sp)
         io.write("</div>\n")
     end
     io.write("<div class=\"row\"><br></div>\n")
- end
+end
 
+function PG.genparams(self,sp)
+    local tbl = sp[self.name].params
+	if (tbl == nil) then return end 
+    self:printheader("Parameters")
+    for _, v in pairs(tbl) do
+        io.write("<div class=\"row\">\n")
+        self:printoption(v.name)
+        io.write(v.description)
+        io.write("</div>\n")
+        io.write("<div class=\"row\">\n")
+        io.write(string.format("\n(Recommended value: %s)\n", 
+            v.default))
+        io.write("</div>\n")
+    end
+    io.write("<div class=\"row\"><br></div>\n")
+ end
 function PG.opt_params(self,sp)
     local tbl = sp[self.name].params.optional
     
@@ -229,15 +274,25 @@ function PG.makepage(self, sp)
     io.write("</head>\n")
     io.write("<body>\n")
     io.write("<div class=\"container\">\n")
-    PG:title(sptbl)
-    PG:files(sptbl)
-    PG:desc(sptbl)
-    PG:funcs(sptbl)
-    PG:params(sptbl)
-    PG:inputs(sptbl)
-    PG:outputs(sptbl)
-    PG:other(sptbl)
-    PG:example(sptbl)
+    if(string.match(sptbl[self.name].modtype, "^module$")) then
+        PG:title(sptbl)
+        PG:files(sptbl)
+        PG:desc(sptbl)
+        PG:funcs(sptbl)
+        PG:params(sptbl)
+        PG:inputs(sptbl)
+        PG:outputs(sptbl)
+        PG:other(sptbl)
+        PG:example(sptbl)
+    end
+    if(string.match(sptbl[self.name].modtype, "^gen$")) then
+        PG:title(sptbl)
+        PG:files(sptbl)
+        PG:desc(sptbl)
+        PG:genfuncs(sptbl)
+        PG:genparams(sptbl)
+        PG:example(sptbl)
+    end
     io.write("</div>")
     io.write("</body>")
     io.write("</html>\n")
