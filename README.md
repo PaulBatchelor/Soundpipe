@@ -38,13 +38,17 @@ folder are for optional modules. Open up the Makefile and uncomment the
 specific files you want to compile.
 
 
-Installation is slightly different on a Mac, due to the way OSX places files.
-Unless you already have it installed, download libsndfile, and run
-'make'. You'll see an OSX error regarding Carbon. To fix that, open the file the
-error referecnes, and change "#include &lt;Carbon.h&gt;" to
-"#include &lt;Carbon/Carbon.h&gt;".
+On Mac, clone the repository located here: https://github.com/erikd/libsndfile/
 
-Then, run:
+Then, run the following command: 
+
+sh autogen.sh
+
+If you are missing any dependencies, get them using a package manager like brew or port, and run the above command again.
+
+Next, run the following commands:
+
+./configure
 
 make
 
