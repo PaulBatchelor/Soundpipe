@@ -42,7 +42,7 @@ int main()
     for(int i = 0; i < 8; i++) sp_posc3_create(&ud.posc[i]);
     for(int i = 0; i < 8; i++) sp_tenv_create(&ud.tenv[i]);
     sp_revsc_create(&ud.rev);
-    sp_gen_sine(ud.ft);
+    sp_gen_sine(sp, ud.ft);
 
     for(int i = 0; i < 8; i++) sp_tenv_init(sp, ud.tenv[i], 0.01, 0.1, 0.1);
     for(int i = 0; i < 8; i++) sp_posc3_init(sp, ud.posc[i], ud.ft);

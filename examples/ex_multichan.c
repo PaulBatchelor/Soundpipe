@@ -35,12 +35,11 @@ int main() {
     sp_osc_create(&ud.osc1);
     sp_osc_create(&ud.osc2);
 
-    sp_gen_sine(ud.ft);
+    sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc1, ud.ft);
     ud.osc1->freq = 500;
     sp_osc_init(sp, ud.osc2, ud.ft);
     ud.osc2->freq = 500;
-    sp_gen_sine(ud.ft);
     sp->len = 44100 * 5;
     sp_process(sp, &ud, write_osc);
 

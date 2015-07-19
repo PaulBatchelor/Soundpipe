@@ -76,7 +76,7 @@ void samp_create(sp_data *sp, samp_data *sd,
     int i;
     SPFLOAT tscale = 60.0 / tempo;
     sp_ftbl_create(sp, &sd->delta, 1);
-    sp_gen_vals(sd->delta, dtrig);
+    sp_gen_vals(sp, sd->delta, dtrig);
     sp_dtrig_create(&sd->dt);
     for(i = 0; i < sd->delta->size; i++){
         sd->delta->tbl[i] *= tscale;
@@ -86,7 +86,7 @@ void samp_create(sp_data *sp, samp_data *sd,
     sd->dt->delay = delay * tscale;
 
     sp_ftbl_create(sp, &sd->ft, 5574);
-    sp_gen_file(sd->ft, file);
+    sp_gen_file(sp, sd->ft, file);
     
     sp_tevent_create(&sd->te);
     sp_tevent_init(sp, sd->te, samp_reinit, samp_compute, sd);
@@ -126,7 +126,7 @@ int main() {
     sp_rpt_create(&ud.rpt);
     sp_ftbl_create(sp, &ud.reps, 1);
     sp_tseq_create(&ud.rpick);
-    sp_gen_vals(ud.reps, "4 8 16 6");
+    sp_gen_vals(sp, ud.reps, "4 8 16 6");
     sp_tseq_init(sp, ud.rpick, ud.reps);
     ud.rpick->shuf = 1.0;
     sp_reverse_create(&ud.rvs);

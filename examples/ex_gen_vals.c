@@ -8,7 +8,7 @@ int main() {
     sp_ftbl_create(sp, &ft, 1);
     
     /* table will automatically resize */
-    sp_gen_vals(ft, "1 1.5 -3 5 ");
+    sp_gen_vals(sp, ft, "1 1.5 -3 5 ");
     int i;
     FILE *fp= fopen("plot.dat", "w");
     for(i = 0; i < ft->size; i++) {

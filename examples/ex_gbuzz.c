@@ -22,7 +22,7 @@ int main() {
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_gbuzz_create(&ud.buzz);
 
-    sp_gen_sine(ud.ft);
+    sp_gen_sine(sp, ud.ft);
     sp_gbuzz_init(sp, ud.buzz, ud.ft);
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);

@@ -36,7 +36,7 @@ int main() {
     sp_lpf18_create(&ud.lpf);
     sp_osc_create(&ud.lfo);
     sp_ftbl_create(sp, &ud.sine_ft, 4096);
-    sp_gen_sine(ud.sine_ft);
+    sp_gen_sine(sp, ud.sine_ft);
 
     sp_gen_line(sp, ud.ft, "0 1 4096 -1");
     sp_osc_init(sp, ud.osc[0], ud.ft);

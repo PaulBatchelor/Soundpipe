@@ -27,7 +27,7 @@ int main() {
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_fosc_create(&ud.osc);
 
-    sp_gen_sine(ud.ft);
+    sp_gen_sine(sp, ud.ft);
     sp_fosc_init(sp, ud.osc, ud.ft);
     ud.osc->freq = 500;
     sp->len = 44100 * 5;

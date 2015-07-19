@@ -45,10 +45,9 @@ int main() {
     sp_osc_create(&ud.osc);
 
     sp_tevent_init(sp, ud.te, freq_reinit, freq_compute, freqp);
-    sp_gen_sine(ud.ft);
+    sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft);
     ud.osc->freq = *freqp;
-    sp_gen_sine(ud.ft);
     sp->len = 44100 * 5;
     sp_process(sp, &ud, write_osc);
 

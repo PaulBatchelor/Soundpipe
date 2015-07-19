@@ -58,7 +58,7 @@ int main() {
     sp_revsc_create(&ud.rev);
     sp_ftbl_create(sp, &ud.ft, 2048);
 
-    sp_gen_file(ud.ft, "FMSine111.wav");
+    sp_gen_file(sp, ud.ft, "FMSine111.wav");
     for(i = 0; i < NVOICES; i++){ 
         sp_osc_create(&ud.v[i].osc);
         sp_randi_create(&ud.v[i].rnd);

@@ -33,11 +33,11 @@ int main() {
     sp_osc_create(&ud.lfo);
    
     sp_del_init(sp, ud.del, 0.5); 
-    sp_gen_file(ud.ft, "Formant04.wav");
+    sp_gen_file(sp, ud.ft, "Formant04.wav");
     sp_osc_init(sp, ud.osc, ud.ft);
     ud.osc->freq = sp_midi2cps(50);
 
-    sp_gen_sine(ud.sine);
+    sp_gen_sine(sp, ud.sine);
     sp_osc_init(sp, ud.lfo, ud.sine);
     ud.lfo->freq = 0.2;
 

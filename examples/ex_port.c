@@ -35,13 +35,13 @@ int main() {
     sp_osc_create(&ud.osc);
     sp_port_create(&ud.prt);
 
-    sp_gen_vals(ud.nn, "60 63 65 60 63 67");
+    sp_gen_vals(sp, ud.nn, "60 63 65 60 63 67");
     sp_tseq_create(&ud.seq); 
     sp_tseq_init(sp, ud.seq, ud.nn); 
   
     sp_port_init(sp, ud.prt, 0.02); 
     sp_metro_init(sp, ud.mt, 4.0);
-    sp_gen_sine(ud.sine);
+    sp_gen_sine(sp, ud.sine);
     sp_osc_init(sp, ud.osc, ud.sine);
     sp->len = 44100 * 5;
 

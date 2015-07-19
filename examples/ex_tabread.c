@@ -24,7 +24,7 @@ int main() {
     sp_tabread_create(&ud.tr);
 
     sp_ftbl_create(sp, &ud.ft, 395393);
-    sp_gen_file(ud.ft, "oneart.wav");
+    sp_gen_file(sp, ud.ft, "oneart.wav");
 
     sp_tabread_init(sp, ud.tr, ud.ft);
     sp->len = 44100 * 5;

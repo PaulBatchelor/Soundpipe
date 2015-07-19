@@ -52,10 +52,9 @@ int main() {
     sp_tenv_init(sp, ud.tenv, 0.03, 0.01, 0.1);
     sp_metro_init(sp, ud.met, 3);
     sp_tevent_init(sp, ud.te, freq_reinit, freq_compute, freqp);
-    sp_gen_sine(ud.ft);
+    sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft);
     ud.osc->freq = *freqp;
-    sp_gen_sine(ud.ft);
     sp->len = 44100 * 5;
     sp_process(sp, &ud, write_osc);
 

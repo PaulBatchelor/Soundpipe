@@ -42,7 +42,7 @@ int sp_vco_init(sp_data *sp, sp_vco *p)
     uint32_t ndel = (uint32_t)(p->maxd * sp->sr);
 
     sp_ftbl_create(sp, &p->ftp, 4096); 
-    sp_gen_sine(p->ftp);
+    sp_gen_sine(sp, p->ftp);
 
     if (p->iphs >= 0.0)
       p->lphs = (int32_t)(p->iphs * 0.5 * SP_FT_MAXLEN);

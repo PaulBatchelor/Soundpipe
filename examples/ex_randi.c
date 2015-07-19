@@ -26,7 +26,7 @@ int main() {
     sp_osc_create(&ud.osc);
     sp_randi_create(&ud.rnd);
 
-    sp_gen_sine(ud.ft);
+    sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft);
     sp_randi_init(sp, ud.rnd, 12345);
     

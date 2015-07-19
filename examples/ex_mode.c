@@ -123,7 +123,7 @@ int main()
     sp_metro_init(sp, ud.met, 3.0);
 
     sp_ftbl_create(sp, &ud.notes, 1);
-    sp_gen_vals(ud.notes, "60 67 62 69 76");
+    sp_gen_vals(sp, ud.notes, "60 67 62 69 76");
     
     sp_tseq_create(&ud.seq);
     sp_tseq_init(sp, ud.seq, ud.notes);

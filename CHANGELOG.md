@@ -1,5 +1,14 @@
 # Change log
 
+0.2.2: "Tables"
+-------------------
+    - New gen routines: gen_line, gen_xline, gen_gauss
+    - New Modules: vco, reson, allpass, phasor, comb, tabread
+    - Docgen support for gen routines
+    - A standardized layout for gen routines
+    - Bug fixes relating to docgen, maxdel, and libsndfile valgrind errors
+    - Musical example 5 (byte beats!)
+
 0.2.1: "Mo Modules"
 -------------------
     - New modules: dist, gbuzz fosc, butbp, drip, clip,

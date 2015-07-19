@@ -26,7 +26,7 @@ int main() {
     sp_fosc_create(&ud.osc);
     sp_jitter_create(&ud.jit);   
 
-    sp_gen_sine(ud.ft);
+    sp_gen_sine(sp, ud.ft);
     sp_fosc_init(sp, ud.osc, ud.ft);
     sp_jitter_init(sp, ud.jit);
     ud.jit->cpsMin = 0.5;

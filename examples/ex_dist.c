@@ -30,7 +30,7 @@ int main() {
     sp_dist_create(&ud.ds);
     sp_osc_create(&ud.lfo); 
 
-    sp_gen_sine(ud.ft);
+    sp_gen_sine(sp, ud.ft);
     sp_fosc_init(sp, ud.osc, ud.ft);
     ud.osc->freq = 60;
     sp_dist_init(sp, ud.ds);

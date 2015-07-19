@@ -27,7 +27,7 @@ int main() {
     sp_ftbl_create(sp, &ud.ft, 1024);
     sp_posc3_create(&ud.posc3);
 
-    sp_gen_sine(ud.ft);
+    sp_gen_sine(sp, ud.ft);
     sp_posc3_init(sp, ud.posc3, ud.ft);
     ud.posc3->freq = 500;
     sp->len = 44100 * 5;

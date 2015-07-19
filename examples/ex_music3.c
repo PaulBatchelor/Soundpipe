@@ -135,7 +135,7 @@ int chord_cloud_init(sp_data *sp, chord_cloud *cc, char *notes, SPFLOAT amp)
     sp_ftbl_create(sp, &cc->sine, 4096);
     sp_gen_sinesum(sp, cc->sine, "1 0.5 0.3 0.25, 0.1625");
     sp_ftbl_create(sp, &cc->notes, 1);
-    sp_gen_vals(cc->notes, notes);
+    sp_gen_vals(sp, cc->notes, notes);
     cc->ampmax= amp;    
 
     cc->grains= malloc(cc->notes->size * sizeof(chord_grain));
@@ -315,7 +315,7 @@ int main()
     modal_create(&ud.mod);
     modal_init(sp, ud.mod);
     sp_ftbl_create(sp, &ud.notes, 1);
-    sp_gen_vals(ud.notes, "62 64 59 57");
+    sp_gen_vals(sp, ud.notes, "62 64 59 57");
     sp_tseq_create(&ud.seq);
     sp_tseq_init(sp, ud.seq, ud.notes);
     sp_maygate_create(&ud.mg);

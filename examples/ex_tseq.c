@@ -47,19 +47,18 @@ int main() {
     sp_ftbl_create(sp, &ud.nn, 1);
     sp_osc_create(&ud.osc);
 
-    sp_gen_vals(ud.delta, "0.2 0.2 0.2 0.1");
-    sp_gen_vals(ud.nn, "60 62 64 67");
+    sp_gen_vals(sp, ud.delta, "0.2 0.2 0.2 0.1");
+    sp_gen_vals(sp, ud.nn, "60 62 64 67");
     sp_tseq_create(&ud.seq); 
     sp_tseq_init(sp, ud.seq, ud.nn);
     
     sp_dtrig_init(sp, ud.dt, ud.delta);
     ud.dt->loop = 1.0;
     sp_tenv_init(sp, ud.tenv, 0.01, 0.01, 0.05);
-    sp_gen_sine(ud.ft);
+    sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft);
     ud.osc->freq = 1000;
     ud.osc->amp = 0.5;
-    sp_gen_sine(ud.ft);
     sp->len = 44100 * 5;
     sp_process(sp, &ud, write_osc);
 

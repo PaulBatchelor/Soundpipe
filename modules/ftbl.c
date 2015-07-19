@@ -30,7 +30,7 @@ int sp_ftbl_destroy(sp_ftbl **ft)
     return SP_OK;
 }
 
-int sp_gen_vals(sp_ftbl *ft, char *string)
+int sp_gen_vals(sp_data *sp, sp_ftbl *ft, char *string)
 {
     char *str1, *token, *t;
     char *saveptr1;
@@ -57,7 +57,7 @@ int sp_gen_vals(sp_ftbl *ft, char *string)
     return SP_OK;
 }
 
-int sp_gen_sine(sp_ftbl *ft)
+int sp_gen_sine(sp_data *sp, sp_ftbl *ft)
 {
     unsigned long i;
     SPFLOAT step = 2 * M_PI / ft->size;
@@ -68,7 +68,7 @@ int sp_gen_sine(sp_ftbl *ft)
 }
 
 /*TODO: add error checking, make tests */
-int sp_gen_file(sp_ftbl *ft, const char *filename)
+int sp_gen_file(sp_data *sp, sp_ftbl *ft, const char *filename)
 {
     SF_INFO info;
     info.format = 0;
@@ -83,7 +83,7 @@ int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, char *argstring)
 {
     sp_ftbl *args;
     sp_ftbl_create(sp, &args, 1);
-    sp_gen_vals(args, argstring);
+    sp_gen_vals(sp, args, argstring);
 
     int32_t phs;
     SPFLOAT amp;
@@ -113,7 +113,7 @@ int sp_gen_line(sp_data *sp, sp_ftbl *ft, char *argstring)
     SPFLOAT x1, x2, y1, y2;
     sp_ftbl *args;   
     sp_ftbl_create(sp, &args, 1);
-    sp_gen_vals(args, argstring);
+    sp_gen_vals(sp, args, argstring);
     
     if((args->size % 2) == 1 || args->size == 1) {
         fprintf(stderr, "Error: not enough arguments for gen_line.\n");
@@ -166,7 +166,7 @@ int sp_gen_xline(sp_data *sp, sp_ftbl *ft, char *argstring)
     SPFLOAT x1, x2, y1, y2;
     sp_ftbl *args;   
     sp_ftbl_create(sp, &args, 1);
-    sp_gen_vals(args, argstring);
+    sp_gen_vals(sp, args, argstring);
     
     if((args->size % 2) == 1 || args->size == 1) {
         fprintf(stderr, "Error: not enough arguments for gen_line.\n");
