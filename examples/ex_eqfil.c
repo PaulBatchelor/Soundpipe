@@ -31,7 +31,7 @@ int main() {
     sp_noise_create(&ud.ns);
     sp_eqfil_create(&ud.eqfil);
     sp_noise_init(sp, ud.ns);
-    sp_eqfil_init(sp, ud.eqfil, 500, 25, 5);
+    sp_eqfil_init(sp, ud.eqfil);
     sp->len = 44100 * 5;
     sp_process(sp, &ud, write_noise);
     sp_noise_destroy(&ud.ns);

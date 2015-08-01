@@ -10,3 +10,4 @@ docs
 *.html
 examples/plot.dat
 examples/*.bin
+config.mk

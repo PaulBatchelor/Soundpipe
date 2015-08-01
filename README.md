@@ -10,7 +10,7 @@ Features
 
 - A great set of high-quality modules ported directly from the Csound library
 - Sample accurate timing
-- Tiny codebase
+- Small codebase
 - Static library
 - Easily extendable
 - Easily embeddable
@@ -23,7 +23,16 @@ these.
 Compilation
 -----------
 
-By default, Soundpipe only needs libsndfile. To compile on Linux:
+By default, Soundpipe needs libsndfile, and a standard build environment. 
+Other modules that use other external libraries will need to be explicitly compiled
+by modififying config.mk.
+
+If you are using a Mac, clone and build from the libsndfile repository here 
+located here: https://github.com/erikd/libsndfile/
+
+On Linux, the libsndfile-dev package will need to be installed.
+
+To compile:
 
 make
 
@@ -32,37 +41,16 @@ sudo make install
 To build additional plugins with external library dependencies, uncomment lines
 in the file "config.mk".
 
-To build the examples, go into the (e)xamples folder and run "make". Each
-example will generate a 5 second file called "test.wav". Examples in the "extra"
+To build the examples, go into the examples folder and run "make", which will create
+files with a .bin extention. When an example is run, it will generate a 
+5 second file called "test.wav". Examples in the "extra"
 folder are for optional modules. Open up the Makefile and uncomment the
 specific files you want to compile.
 
 
-On Mac, clone the repository located here: https://github.com/erikd/libsndfile/
-
-Then, run the following command: 
-
-sh autogen.sh
-
-If you are missing any dependencies, get them using a package manager like brew or port, and run the above command again.
-
-Next, run the following commands:
-
-./configure
-
-make
-
-sudo make install
-
-Soundpipe should now successfully be installed.
-
-
 Future Plans
 ------------
-- multi-channel support (only mono right now)
-- dynamic documentation generation (HTML, LaTeX, manpage, etc...)
 - Faust support
-- Commandline utilities
 
 The Soundpipe Model
 -------------------
@@ -86,6 +74,7 @@ documentation for soundpipe by running "make docs". A folder called "docs"
 will be created. The top page for the documentation is docs/index.html.
 
 
+
 Contributors of Soundpipe:
 --------------------------
 Paul Batchelor
@@ -93,3 +82,9 @@ Paul Batchelor
 Alex Tape
 
 Daniel Friedman
+
+Nick Arner
+
+If you'd like to contribute to Soundpipe, please read the style guide found at
+util/style\_guide.md
+

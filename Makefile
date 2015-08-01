@@ -20,10 +20,13 @@ modules/%.o: modules/%.c h/%.h h/soundpipe.h
 h/soundpipe.h: $(HPATHS)
 	cat $(HPATHS) > $@
 
-libsoundpipe.a: $(MPATHS)
+libsoundpipe.a: $(MPATHS) config.mk
 	ar rcs $@ $^
 
-soundpipe.c: $(CPATHS) h/soundpipe.h
+config.mk: config.def.mk
+	cp config.def.mk config.mk
+
+soundpipe.c: $(CPATHS) h/soundpipe.h 
 	cat $(CPATHS) | sed "/^#/d" > tmp 
 	cat util/include.h tmp > soundpipe.c
 	rm tmp
