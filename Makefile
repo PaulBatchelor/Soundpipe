@@ -1,6 +1,6 @@
 .PHONY: docs
 
-default: libsoundpipe.a
+default: config.mk libsoundpipe.a
 
 include config.mk
 
@@ -20,7 +20,7 @@ modules/%.o: modules/%.c h/%.h h/soundpipe.h
 h/soundpipe.h: $(HPATHS)
 	cat $(HPATHS) > $@
 
-libsoundpipe.a: $(MPATHS) config.mk
+libsoundpipe.a: $(MPATHS) 
 	ar rcs $@ $^
 
 config.mk: config.def.mk
