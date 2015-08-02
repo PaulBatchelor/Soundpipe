@@ -1,4 +1,4 @@
-.PHONY: docs
+.PHONY: docs bootstrap
 
 default: config.mk libsoundpipe.a
 
@@ -35,8 +35,13 @@ install: libsoundpipe.a h/soundpipe.h
 	install h/soundpipe.h /usr/local/include/
 	install libsoundpipe.a /usr/local/lib/
 
+clean: 
+	rm -rf gen_noise libsoundpipe.a $(MPATHS) h/soundpipe.h docs soundpipe.c
+
 docs:
 	util/gendocs.sh
 
-clean: 
-	rm -rf gen_noise libsoundpipe.a $(MPATHS) h/soundpipe.h docs soundpipe.c
+# example usage: make bootstrap MODULE_NAME=name
+
+bootstrap: 
+	util/module_bootstrap.sh $(MODULE_NAME)
