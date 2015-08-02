@@ -3,7 +3,7 @@ sptbl["foo"] = {
     files = { 
         module = "foo.c",
         header = "foo.h",
-        --example = "ex_tone.c",
+        example = "ex_foo.c",
     },
     
     func = {
