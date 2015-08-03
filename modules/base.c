@@ -85,6 +85,18 @@ int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
     return 0;
 }
 
+int sp_process_raw(sp_data *sp, void *ud, void (*callback)(sp_data *, void *)) 
+{
+    int chan;
+    while(sp->len > 0) {
+        callback(sp, ud);
+        for (chan = 0; chan < sp->nchan; chan++) {
+            fwrite(&sp->out[chan], sizeof(SPFLOAT), 1, stdout);
+        }
+        sp->len--;
+    }    
+    return SP_OK;
+}
 int sp_auxdata_alloc(sp_auxdata *aux, size_t size)
 {
     aux->ptr = malloc(size);
