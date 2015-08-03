@@ -56,7 +56,7 @@ int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
         sf[0] = sf_open(sp->filename, SFM_WRITE, &info);
     } else {
         for(chan = 0; chan < sp->nchan; chan++) {
-            sprintf(tmp, "%d_%s", chan, sp->filename);
+            sprintf(tmp, "%02d_%s", chan, sp->filename);
             sf[chan] = sf_open(tmp, SFM_WRITE, &info);
         }
     }
