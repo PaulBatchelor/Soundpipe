@@ -1,5 +1,5 @@
 typedef struct {
-    /* Noting needed here for now */
+    FILE *fp;
 } sp_in;
 
 int sp_in_create(sp_in **p);
