@@ -209,7 +209,7 @@ function PG.other(self, sp)
     self:printheader("Other Functions:")
     for func,params in pairs(tbl) do
         io.write("<div class=\"row\">\n")
-        io.write(string.format("%s(sp_%s %s", func, self.name, self.name)) 
+        io.write(string.format("%s(sp_data *sp, sp_%s *%s", func, self.name, self.name)) 
         for _,p in pairs(params.args) do
             io.write(string.format(", %s %s", p.type, p.name))
         end

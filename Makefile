@@ -20,8 +20,8 @@ modules/%.o: modules/%.c h/%.h h/soundpipe.h
 h/soundpipe.h: $(HPATHS)
 	cat $(HPATHS) > $@
 
-libsoundpipe.a: $(MPATHS) 
-	ar rcs $@ $^
+libsoundpipe.a: $(MPATHS) $(LPATHS)
+	ar rcs $@ $(MPATHS) $(LPATHS)
 
 config.mk: config.def.mk
 	cp config.def.mk config.mk
@@ -37,6 +37,7 @@ install: libsoundpipe.a h/soundpipe.h
 
 clean: 
 	rm -rf gen_noise libsoundpipe.a $(MPATHS) h/soundpipe.h docs soundpipe.c
+	rm -rf $(LPATHS)
 
 docs:
 	util/gendocs.sh

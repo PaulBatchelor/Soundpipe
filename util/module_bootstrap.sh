@@ -20,7 +20,8 @@ makefile () {
 
 if [ "$#" -ne 1 ]
 then
-    echo "Usage: ./module_bootstrap module_name"
+    echo "Usage: make bootstrap MODULE_NAME=name"
+    exit 1
 fi
 
 MODNAME=$1
