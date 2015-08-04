@@ -1,16 +1,20 @@
-.PHONY: docs bootstrap
+.PHONY: docs bootstrap all
 
-default: config.mk libsoundpipe.a
+#default: config.mk libsoundpipe.a
+
+default: all
 
 include config.mk
 
-VERSION=0.2.2
+VERSION=0.3
 
 MPATHS=$(addprefix modules/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
 CPATHS=$(addprefix modules/, $(addsuffix .c, $(MODULES)))
 
 CFLAGS +=  -g --std=c99 -DSP_VERSION=$(VERSION)
+
+UTIL += util/wav2smp
 
 include test/Makefile
 
@@ -31,6 +35,8 @@ soundpipe.c: $(CPATHS) h/soundpipe.h
 	cat util/include.h tmp > soundpipe.c
 	rm tmp
 
+all: config.mk libsoundpipe.a $(UTIL)
+
 install: libsoundpipe.a h/soundpipe.h
 	install h/soundpipe.h /usr/local/include/
 	install libsoundpipe.a /usr/local/lib/
@@ -38,11 +44,14 @@ install: libsoundpipe.a h/soundpipe.h
 clean: 
 	rm -rf gen_noise libsoundpipe.a $(MPATHS) h/soundpipe.h docs soundpipe.c
 	rm -rf $(LPATHS)
+	rm -rf $(UTIL)
 
 docs:
 	util/gendocs.sh
 
-# example usage: make bootstrap MODULE_NAME=name
-
 bootstrap: 
 	util/module_bootstrap.sh $(MODULE_NAME)
+
+util/wav2smp: util/wav2smp.c
+	gcc $< -lsndfile -o $@
+

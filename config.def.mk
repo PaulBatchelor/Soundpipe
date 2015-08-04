@@ -6,9 +6,8 @@ MODULES=base event noise tone moogladder butter revsc ftbl osc posc3 randi \
 	eqfil foo butbr in diskin nsmp
 
 
-# Special files for nsmp
+# ini parser needed for nsmp module
 include lib/inih/Makefile
-MODULES += nsmp
 
 # JACK module
 #
@@ -25,5 +24,4 @@ MODULES += nsmp
 #MODULES += fftwrapper 
 #MODULES += padsynth
 #CFLAGS += -lfftw3
-
 
