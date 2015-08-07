@@ -12,8 +12,7 @@ MPATHS=$(addprefix modules/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
 CPATHS=$(addprefix modules/, $(addsuffix .c, $(MODULES)))
 
-CFLAGS +=  -g --std=c99 -DSP_VERSION=$(VERSION)
-
+CFLAGS +=  -g --std=c99 -DSP_VERSION=$(VERSION) 
 UTIL += util/wav2smp
 
 include test/Makefile
@@ -35,16 +34,20 @@ soundpipe.c: $(CPATHS) h/soundpipe.h
 	cat util/include.h tmp > soundpipe.c
 	rm tmp
 
-all: config.mk libsoundpipe.a $(UTIL)
+all: config.mk libsoundpipe.a $(UTIL) sp_dict.lua
 
 install: libsoundpipe.a h/soundpipe.h
 	install h/soundpipe.h /usr/local/include/
 	install libsoundpipe.a /usr/local/lib/
 
+sp_dict.lua: 
+	cat modules/data/*.lua > sp_dict.lua
+
 clean: 
 	rm -rf gen_noise libsoundpipe.a $(MPATHS) h/soundpipe.h docs soundpipe.c
 	rm -rf $(LPATHS)
 	rm -rf $(UTIL)
+	rm -rf sp_dict.lua
 
 docs:
 	util/gendocs.sh
