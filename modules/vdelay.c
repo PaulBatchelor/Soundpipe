@@ -13,21 +13,21 @@
 #include <stdlib.h>
 #include "soundpipe.h"
 
-int sp_del_create(sp_del **p) 
+int sp_vdelay_create(sp_vdelay **p) 
 {
-    *p = malloc(sizeof(sp_del));
+    *p = malloc(sizeof(sp_vdelay));
     return SP_OK;
 }
 
-int sp_del_destroy(sp_del **p) 
+int sp_vdelay_destroy(sp_vdelay **p) 
 {
-    sp_del *pp = *p;
+    sp_vdelay *pp = *p;
     sp_auxdata_free(&pp->buf);
     free(*p);
     return SP_OK;
 }
 
-int sp_del_init(sp_data *sp, sp_del *p, SPFLOAT maxdel) 
+int sp_vdelay_init(sp_data *sp, sp_vdelay *p, SPFLOAT maxdel) 
 {
     uint32_t n = (int32_t)(maxdel * sp->sr)+1;
     p->sr = sp->sr;
@@ -38,7 +38,7 @@ int sp_del_init(sp_data *sp, sp_del *p, SPFLOAT maxdel)
     return SP_OK;
 }
 
-int sp_del_compute(sp_data *sp, sp_del *p, SPFLOAT *in, SPFLOAT *out) 
+int sp_vdelay_compute(sp_data *sp, sp_vdelay *p, SPFLOAT *in, SPFLOAT *out) 
 {
     int32_t  maxd, indx;
     *out = p->sr;  

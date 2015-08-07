@@ -1,16 +1,16 @@
-sptbl["del"] = {
+sptbl["vdelay"] = {
 
     files = { 
-        module = "del.c",
-        header = "del.h",
-        example = "ex_del.c",
+        module = "vdelay.c",
+        header = "vdelay.h",
+        example = "ex_vdelay.c",
     },
     
     func = {
-        create = "sp_del_create",
-        destroy = "sp_del_destroy",
-        init = "sp_del_init",
-        compute = "sp_del_compute",
+        create = "sp_vdelay_create",
+        destroy = "sp_vdelay_destroy",
+        init = "sp_vdelay_init",
+        compute = "sp_vdelay_compute",
     },
     
     params = {

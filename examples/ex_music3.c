@@ -211,7 +211,7 @@ typedef struct {
     sp_metro *clk;
     sp_count *meter;
     sp_drip *drip;
-    sp_del *del;
+    sp_vdelay *del;
     SPFLOAT pdel;
     sp_tenv *master;
     modal *mod;
@@ -252,7 +252,7 @@ void process(sp_data *sp, void *udata)
     }
   
     delIn += drip * 0.1 + ud->pdel * 0.6;
-    sp_del_compute(sp, ud->del, &delIn, &delOut);
+    sp_vdelay_compute(sp, ud->del, &delIn, &delOut);
     ud->pdel = delOut;
     revin += delOut * 0.1;
     
@@ -304,9 +304,9 @@ int main()
     sp_count_init(sp, ud.meter, 5);
     sp_drip_create(&ud.drip); 
     sp_drip_init(sp, ud.drip, 0.01); 
-    sp_del_create(&ud.del);
+    sp_vdelay_create(&ud.del);
     /* give some headroom for the delay */
-    sp_del_init(sp, ud.del, 0.4);
+    sp_vdelay_init(sp, ud.del, 0.4);
     ud.del->del = 0.3;
 
     sp_tenv_create(&ud.master);
@@ -333,7 +333,7 @@ int main()
     sp_revsc_destroy(&ud.rev);
     sp_metro_destroy(&ud.clk);
     sp_count_destroy(&ud.meter);
-    sp_del_destroy(&ud.del);
+    sp_vdelay_destroy(&ud.del);
     sp_tenv_destroy(&ud.master);
     modal_destroy(&ud.mod);
     sp_ftbl_destroy(&ud.notes);
