@@ -1,9 +1,9 @@
 /*
  * RevSC
- * 
+ *
  * This code has been extracted from the Csound opcode "reverbsc".
  * It has been modified to work as a Soundpipe module.
- * 
+ *
  * Original Author(s): Sean Costello, Istvan Varga
  * Year: 1999, 2005
  * Location: Opcodes/reverbsc.c
@@ -26,7 +26,7 @@
 
 #ifndef M_PI
 #define M_PI		3.14159265358979323846	/* pi */
-#endif 
+#endif
 
 /* reverbParams[n][0] = delay time (in seconds)                     */
 /* reverbParams[n][1] = random variation in delay time (in seconds) */
@@ -269,6 +269,7 @@ int sp_revsc_compute(sp_data *sp, sp_revsc *p, SPFLOAT *in1, SPFLOAT *in2, SPFLO
         }
     }
     /* someday, use aoutR for multimono out */
+
     *out1  = aoutL * outputGain;
     *out2 = aoutR * outputGain;
     return SP_OK;
