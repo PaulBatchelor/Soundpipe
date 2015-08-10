@@ -29,29 +29,29 @@ typedef struct {
     chord_grain *grains;
 } chord_cloud;
 
-int modal_create(modal **md) 
+int modal_create(modal **md)
 {
     *md = malloc(sizeof(modal));
     return SP_OK;
 }
 
-int modal_init(sp_data *sp, modal *md) 
+int modal_init(sp_data *sp, modal *md)
 {
     int i;
     md->amp = 0.45;
-    
+
     for(i = 0; i < 4; i++) {
         sp_mode_create(&md->mode[i]);
         sp_mode_init(sp, md->mode[i]);
         md->mfreq[i] = &md->mode[i]->freq;
         md->Q[i] = &md->mode[i]->q;
     }
-    
+
     *md->mfreq[0] = 1000;
     *md->mfreq[1] = 3000;
     *md->Q[0] = 12;
     *md->Q[1] = 8;
-    
+
     *md->mfreq[2] = 440;
     *md->mfreq[3] = *md->mfreq[2] * 2.01081;
     *md->Q[2] = 500;
@@ -62,33 +62,33 @@ int modal_init(sp_data *sp, modal *md)
     return SP_OK;
 }
 
-int modal_compute(sp_data *sp, modal *md, SPFLOAT *in, SPFLOAT *out) 
+int modal_compute(sp_data *sp, modal *md, SPFLOAT *in, SPFLOAT *out)
 {
     SPFLOAT exc1, exc2, exc;
     SPFLOAT res1, res2, res;
-    
+
     if(*md->freq != md->lfreq) {
         *md->mfreq[3] = *md->freq * 2.01081;
         md->lfreq = *md->freq;
     }
-    
+
     sp_mode_compute(sp, md->mode[0], in, &exc1);
     sp_mode_compute(sp, md->mode[1], in, &exc2);
     exc = (exc1 + exc2) * 0.5;
-    
+
     if(exc > md->amp) {
         exc = md->amp;
     } else if (exc < 0 ) {
         exc = 0;
     }
-    
+
     sp_mode_compute(sp, md->mode[2], &exc, &res1);
     sp_mode_compute(sp, md->mode[3], &exc, &res2);
     res = (res1 + res2) * 0.5;
-    
-    
+
+
     *out = (exc + res) * md->amp;
-    
+
     return SP_OK;
 }
 
@@ -99,7 +99,7 @@ int modal_destroy(modal **md)
     for(i = 0; i < 4; i++) {
         sp_mode_destroy(&mdp->mode[i]);
     }
-  
+
     free(*md);
     return SP_OK;
 }
@@ -111,8 +111,8 @@ static void cloud_compute(void *ud, SPFLOAT *out) {
 static void cloud_reinit(void *ud) {
     chord_grain *grain = ud;
     int rval = rand();
-/* 
-    Figure out why this clicks    
+/*
+    Figure out why this clicks
     grain->amp = 0.8 + fabs(0.2 * (SPFLOAT) (1.0 * rval / RAND_MAX));
 */
 }
@@ -136,31 +136,31 @@ int chord_cloud_init(sp_data *sp, chord_cloud *cc, char *notes, SPFLOAT amp)
     sp_gen_sinesum(sp, cc->sine, "1 0.5 0.3 0.25, 0.1625");
     sp_ftbl_create(sp, &cc->notes, 1);
     sp_gen_vals(sp, cc->notes, notes);
-    cc->ampmax= amp;    
+    cc->ampmax= amp;
 
     cc->grains= malloc(cc->notes->size * sizeof(chord_grain));
-    
-    for(i = 0; i < cc->notes->size; i++) {    
+
+    for(i = 0; i < cc->notes->size; i++) {
         chord_grain *grain = &cc->grains[i];
         sp_osc_create(&grain->osc);
         sp_tenv_create(&grain->env);
         sp_dust_create(&grain->dust);
         sp_tevent_create(&grain->retrig);
-        
+
         tmposc = grain->osc;
         tmpenv = grain->env;
         tmpdust = grain->dust;
-        tmpretrig = grain->retrig; 
-        
+        tmpretrig = grain->retrig;
+
         sp_dust_init(sp, tmpdust, 1, 8);
         sp_osc_init(sp, tmposc, cc->sine);
         tmposc->freq = sp_midi2cps(cc->notes->tbl[i]);
         tmposc->amp = 1.0;
         grain->amp = 1.0;
         sp_tenv_init(sp, tmpenv, 0.01, 0, 0.03);
-        sp_tevent_init(sp, tmpretrig, cloud_reinit, cloud_compute, grain); 
+        sp_tevent_init(sp, tmpretrig, cloud_reinit, cloud_compute, grain);
     }
-    
+
     return SP_OK;
 }
 
@@ -220,7 +220,7 @@ typedef struct {
     sp_maygate *mg;
 } UserData;
 
-void process(sp_data *sp, void *udata) 
+void process(sp_data *sp, void *udata)
 {
     UserData *ud = udata;
     int i;
@@ -239,7 +239,7 @@ void process(sp_data *sp, void *udata)
     sp_drip_compute(sp, ud->drip, &bar, &drip);
     drip *= 0.5;
     revin += drip * 0.1;
-    
+
     if(sp->pos > 44100 * 3) {
         SPFLOAT mg = 0, nn = 0;
         sp_maygate_compute(sp, ud->mg, &clk, &mg);
@@ -250,13 +250,13 @@ void process(sp_data *sp, void *udata)
         revin += mode * 0.8;
         delIn += mode * 0.5;
     }
-  
+
     delIn += drip * 0.1 + ud->pdel * 0.6;
     sp_vdelay_compute(sp, ud->del, &delIn, &delOut);
     ud->pdel = delOut;
     revin += delOut * 0.1;
-    
-    
+
+
     sp_revsc_compute(sp, ud->rev, &revin, &revin, &rev, &dummy);
     sp->out[0] = tmp * 0.2 + rev * 0.6 + drip * 0.1 + delOut * 0.5 + mode;
 
@@ -273,7 +273,7 @@ SPFLOAT randf(SPFLOAT max) {
     return num;
 }
 
-int main() 
+int main()
 {
     srand(time(NULL));
     int i;
@@ -286,8 +286,8 @@ int main()
         "55 62 69 71",
         "43 50"
     };
-   
-    
+
+
     for(i = 0; i < NUMLINE; i++) {
         sp_randi_create(&ud.line[i].randi);
         chord_cloud_create(&ud.line[i].cc);
@@ -295,15 +295,15 @@ int main()
         sp_randi_init(sp, ud.line[i].randi, rand());
         ud.line[i].randi->cps = 0.1 + randf(1.5);
     }
-    sp_revsc_create(&ud.rev);    
+    sp_revsc_create(&ud.rev);
     sp_revsc_init(sp, ud.rev);
     ud.rev->feedback = 0.95;
     sp_metro_create(&ud.clk);
     sp_metro_init(sp, ud.clk, 86.0 / 60.0);
     sp_count_create(&ud.meter);
     sp_count_init(sp, ud.meter, 5);
-    sp_drip_create(&ud.drip); 
-    sp_drip_init(sp, ud.drip, 0.01); 
+    sp_drip_create(&ud.drip);
+    sp_drip_init(sp, ud.drip, 0.01);
     sp_vdelay_create(&ud.del);
     /* give some headroom for the delay */
     sp_vdelay_init(sp, ud.del, 0.4);
@@ -319,16 +319,17 @@ int main()
     sp_tseq_create(&ud.seq);
     sp_tseq_init(sp, ud.seq, ud.notes);
     sp_maygate_create(&ud.mg);
-    sp_maygate_init(sp, ud.mg, 0.3);
-    ud.mg->mode = 1;    
+    sp_maygate_init(sp, ud.mg);
+    ud.mg->prob = 0.3;
+    ud.mg->mode = 1;
     sp->len = 44100 * 40;
     sp_process(sp, &ud, process);
-    
+
     for(i = 0; i < NUMLINE; i++) {
         sp_randi_destroy(&ud.line[i].randi);
         chord_cloud_destroy(&ud.line[i].cc);
     }
-    
+
     sp_drip_destroy(&ud.drip);
     sp_revsc_destroy(&ud.rev);
     sp_metro_destroy(&ud.clk);
@@ -339,7 +340,7 @@ int main()
     sp_ftbl_destroy(&ud.notes);
     sp_tseq_destroy(&ud.seq);
     sp_maygate_destroy(&ud.mg);
-    
+
     sp_destroy(&sp);
     return 0;
 }

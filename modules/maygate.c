@@ -13,15 +13,15 @@ int sp_maygate_destroy(sp_maygate **p)
     return SP_OK;
 }
 
-int sp_maygate_init(sp_data *sp, sp_maygate *p, SPFLOAT prob)
+int sp_maygate_init(sp_data *sp, sp_maygate *p)
 {
-    p->prob = prob;
+    p->prob = 0.0;
     p->gate = 0;
     p->mode = 0;
     return SP_OK;
 }
 
-int sp_maygate_compute(sp_data *sp, sp_maygate *p, SPFLOAT *in, SPFLOAT *out) 
+int sp_maygate_compute(sp_data *sp, sp_maygate *p, SPFLOAT *in, SPFLOAT *out)
 {
     if(*in == 0) {
         if(p->mode) {

@@ -5,7 +5,7 @@
 
 typedef struct {
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_tevent *te;
     sp_metro *met;
     sp_tenv *tenv;
@@ -52,7 +52,8 @@ int main() {
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_osc_create(&ud.osc);
 
-    sp_maygate_init(sp, ud.mg, 0.2);
+    sp_maygate_init(sp, ud.mg);
+    ud.mg->prob = 0.2;
     sp_tenv_init(sp, ud.tenv, 0.01, 0.01, 0.2);
     sp_metro_init(sp, ud.met, 12);
     sp_tevent_init(sp, ud.te, freq_reinit, freq_compute, freqp);

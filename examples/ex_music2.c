@@ -7,14 +7,14 @@ typedef struct {
     sp_ftbl *ft, *delta;
     sp_dtrig *dt;
     sp_tevent *te;
-    uint32_t pos; 
+    uint32_t pos;
 } samp_data;
 
 typedef struct {
     SPFLOAT tempo;
     sp_count *cnt;
     sp_ftbl *reps;
-    sp_tseq *rpick; 
+    sp_tseq *rpick;
     sp_metro *clk, *dblclk;
     sp_reverse *rvs;
     sp_maygate *rthrow, *rgate, *rvs_switch;
@@ -45,7 +45,7 @@ void process(sp_data *sp, void *udata) {
     sp_dtrig_compute(sp, ud->hh.dt, &bar, &dtrig);
     sp_tevent_compute(sp, ud->hh.te, &dtrig, &hh);
 
-    dry = snare + kick + hh * 0.5 + revout * 0.1; 
+    dry = snare + kick + hh * 0.5 + revout * 0.1;
     sp_maygate_compute(sp, ud->rgate, &dblclk, &rgate);
     sp_tseq_compute(sp, ud->rpick, &dblclk, &reps);
 
@@ -53,7 +53,7 @@ void process(sp_data *sp, void *udata) {
     sp_rpt_compute(sp, ud->rpt, &rgate, &dry, &rpt);
     sp_reverse_compute(sp, ud->rvs, &rpt, &rvs);
     sp_maygate_compute(sp, ud->rvs_switch, &clk, &rvs_switch);
-    
+
     sp->out[0] = (rvs_switch) ? rvs : rpt;
 }
 
@@ -71,7 +71,7 @@ void samp_compute(void *ud, SPFLOAT *out) {
         *out = 0;
     }
 }
-void samp_create(sp_data *sp, samp_data *sd, 
+void samp_create(sp_data *sp, samp_data *sd,
     size_t size, char *file, char *dtrig, SPFLOAT tempo, SPFLOAT delay) {
     int i;
     SPFLOAT tscale = 60.0 / tempo;
@@ -87,7 +87,7 @@ void samp_create(sp_data *sp, samp_data *sd,
 
     sp_ftbl_create(sp, &sd->ft, 5574);
     sp_gen_file(sp, sd->ft, file);
-    
+
     sp_tevent_create(&sd->te);
     sp_tevent_init(sp, sd->te, samp_reinit, samp_compute, sd);
 
@@ -106,8 +106,8 @@ int main() {
     srand(time(NULL));
     sp_data *sp;
     user_data ud;
-    sp_create(&sp);    
-    
+    sp_create(&sp);
+
     SPFLOAT tempo = 144;
     ud.tempo = tempo;
 
@@ -117,8 +117,8 @@ int main() {
     sp_metro_create(&ud.dblclk);
     samp_create(sp, &ud.snare, 5574, "snare.wav", "2 0.75 0.25", tempo, 1);
     samp_create(sp, &ud.kick, 7385, "kick.wav", "0.75 1.25 1 1", tempo, 0);
-    samp_create(sp, &ud.hh, 4507, "hh.wav", 
-            "0.5 0.25 0.5 0.5 0.25 0.5 0.25 0.5 0.5 0.25", 
+    samp_create(sp, &ud.hh, 4507, "hh.wav",
+            "0.5 0.25 0.5 0.5 0.25 0.5 0.25 0.5 0.5 0.25",
             tempo, 0);
     sp_revsc_create(&ud.rev);
     sp_maygate_create(&ud.rthrow);
@@ -140,16 +140,19 @@ int main() {
     sp_revsc_init(sp, ud.rev);
     ud.rev->feedback = 0.9;
     ud.rev->lpfreq = 10000;
-    sp_maygate_init(sp, ud.rthrow, 0.5);
+    sp_maygate_init(sp, ud.rthrow);
+    ud.rthrow->prob = 0.5;
     sp_rpt_init(sp, ud.rpt, 1.0);
     //sp_rpt_set(ud.rpt, tempo, 8, 4);
     ud.rpt->bpm = tempo;
     ud.rpt->div = 8;
     ud.rpt->reps = 4;
-    sp_maygate_init(sp, ud.rgate, 0.18);
+    sp_maygate_init(sp, ud.rgate);
+    ud.rgate->prob = 0.18;
     ud.rgate->mode = 1.0;
     sp_reverse_init(sp, ud.rvs, 60.0 / tempo);
-    sp_maygate_init(sp, ud.rvs_switch, 0.1);
+    sp_maygate_init(sp, ud.rvs_switch);
+    ud.rvs_switch->prob = 0.1;
 
     /* Process */
     sp_process(sp, &ud, process);
@@ -170,6 +173,6 @@ int main() {
     sp_tseq_destroy(&ud.rpick);
     sp_reverse_destroy(&ud.rvs);
 
-    sp_destroy(&sp);    
+    sp_destroy(&sp);
     return 0;
 }

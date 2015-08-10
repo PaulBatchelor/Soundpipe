@@ -34,8 +34,9 @@ int main(){
     sp_metro_create(&ud.mt);
     sp_tenv_create(&ud.te);
 
-   
-    sp_maygate_init(sp, ud.mg, 0.5);
+
+    sp_maygate_init(sp, ud.mg);
+    ud.mg->prob = 0.5;
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft);
     sp_metro_init(sp, ud.mt, tempo / 60.0);
@@ -43,7 +44,7 @@ int main(){
     ud.rpt->bpm = tempo;
     ud.rpt->div = 8;
     ud.rpt->rep = 4;
-    sp_tenv_init(sp, ud.te, 0.001, 0.1, 0.1); 
+    sp_tenv_init(sp, ud.te, 0.001, 0.1, 0.1);
     sp_process(sp, &ud, compute);
 
     sp_tenv_destroy(&ud.te);

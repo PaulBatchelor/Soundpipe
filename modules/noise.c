@@ -18,7 +18,7 @@ int sp_noise_compute(sp_data *sp, sp_noise *ns, SPFLOAT *in, SPFLOAT *out)
 {
     *out = ((rand() % RAND_MAX) / (RAND_MAX * 1.0));
     *out = (*out * 2) - 1;
-    *out *= 0.5;
+    *out *= ns->gain;
     return SP_OK;
 }
 
