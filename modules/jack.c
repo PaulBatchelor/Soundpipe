@@ -1,10 +1,10 @@
 #include <stdlib.h>
 #include <jack/jack.h>
 #include <unistd.h>
-#include <aaio.h>
-#include <sys/socket.h> 
-#include <arpa/inet.h>  
-#include <string.h>     
+//#include <aaio.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
+#include <string.h>
 
 #include "soundpipe.h"
 
@@ -17,8 +17,8 @@ typedef struct sp_jack{
 }sp_jack;
 
 
-/* 
- * Simple UDP server from modified code from 
+/*
+ * Simple UDP server from modified code from
  * http://cs.baylor.edu/~donahoo/practical/CSockets/code/UDPEchoServer.c
  *
  */
@@ -28,13 +28,13 @@ static void DieWithError(char *errorMessage)  {
 }
 
 static void start_udp_server(int port) {
-    int sock;                        
-    struct sockaddr_in echoServAddr; 
-    struct sockaddr_in echoClntAddr; 
-    unsigned int cliAddrLen;         
-    char echoBuffer[255];        
-    unsigned short echoServPort;     
-    int recvMsgSize;                 
+    int sock;
+    struct sockaddr_in echoServAddr;
+    struct sockaddr_in echoClntAddr;
+    unsigned int cliAddrLen;
+    char echoBuffer[255];
+    unsigned short echoServPort;
+    int recvMsgSize;
     int run = 1;
     echoServPort = port;
 
@@ -43,15 +43,15 @@ static void start_udp_server(int port) {
         DieWithError("socket() failed");
 
     /* Construct local address structure */
-    memset(&echoServAddr, 0, sizeof(echoServAddr));   
-    echoServAddr.sin_family = AF_INET;                
-    echoServAddr.sin_addr.s_addr = htonl(INADDR_ANY); 
-    echoServAddr.sin_port = htons(echoServPort);      
+    memset(&echoServAddr, 0, sizeof(echoServAddr));
+    echoServAddr.sin_family = AF_INET;
+    echoServAddr.sin_addr.s_addr = htonl(INADDR_ANY);
+    echoServAddr.sin_port = htons(echoServPort);
 
     /* Bind to the local address */
     if (bind(sock, (struct sockaddr *) &echoServAddr, sizeof(echoServAddr)) < 0)
         DieWithError("bind() failed");
-  
+
     while(run)
     {
         /* Set the size of the in-out parameter */
@@ -65,7 +65,7 @@ static void start_udp_server(int port) {
         if(!strncmp(echoBuffer, "exit", 4)) run = 0;
 
         /* Send received datagram back to the client */
-        if (sendto(sock, echoBuffer, recvMsgSize, 0, 
+        if (sendto(sock, echoBuffer, recvMsgSize, 0,
              (struct sockaddr *) &echoClntAddr, sizeof(echoClntAddr)) != recvMsgSize)
             DieWithError("sendto() sent a different number of bytes than expected");
     }
@@ -144,7 +144,7 @@ for(chan = 0; chan < sp->nchan; chan++) {
         fprintf (stderr, "cannot activate client");
         exit (1);
     }
-} 
+}
     ports = jack_get_ports (jd.client[0], NULL, NULL,
                 JackPortIsPhysical|JackPortIsInput);
     if (ports == NULL) {
