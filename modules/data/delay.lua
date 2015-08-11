@@ -22,11 +22,21 @@ sptbl["delay"] = {
                 default = 1.0
             }
         },
+
+        optional = {
+            {
+                name = "feedback",
+                type = "SPFLOAT",
+                description = "Feedback amount. Should be a value between 0-1.",
+                default = 0.0
+            }
+        }
+
     },
 
     modtype = "module",
 
-    description = [[Add a delay to an incoming signal.]],
+    description = [[Add a delay to an incoming signal with optional feedback.]],
 
     ninputs = 1,
     noutputs = 1,

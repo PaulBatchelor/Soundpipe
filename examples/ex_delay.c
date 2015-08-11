@@ -9,7 +9,6 @@ typedef struct {
     sp_metro *met;
     sp_tenv *tenv;
     sp_ftbl *ft;
-    SPFLOAT last;
 } UserData;
 
 void process(sp_data *sp, void *udata) {
@@ -17,17 +16,18 @@ void process(sp_data *sp, void *udata) {
     SPFLOAT osc = 0, delay = 0, met = 0, tenv = 0;
     sp_metro_compute(sp, ud->met, NULL, &met);
     sp_tenv_compute(sp, ud->tenv, &met, &tenv);
+    if(met) {
+        ud->osc->freq = 100 + rand() % 500;
+    }
     sp_osc_compute(sp, ud->osc, NULL, &osc);
-    osc *= tenv + ud->last * 0.5;
+    osc *= tenv;
     sp_delay_compute(sp, ud->delay, &osc, &delay);
     sp->out[0] = osc + delay;
-    ud->last = delay;
 }
 
 int main() {
     srand(1234567);
     UserData ud;
-    ud.last = 0;
     sp_data *sp;
     sp_create(&sp);
 
@@ -38,6 +38,7 @@ int main() {
     sp_tenv_create(&ud.tenv);
 
     sp_delay_init(sp, ud.delay, 0.75 * 0.5);
+    ud.delay->feedback = 0.5;
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft);
     ud.osc->amp = 0.5;
