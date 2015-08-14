@@ -32,7 +32,7 @@ void process(sp_data *sp, void *udata) {
     sp_metro_compute(sp, ud->clk, NULL, &clk);
     sp_metro_compute(sp, ud->dblclk, NULL, &dblclk);
     sp_count_compute(sp, ud->cnt, &clk, &count);
-    bar = ud->cnt->c->tbl[0];
+    bar = (count == 0 && clk);
     sp_dtrig_compute(sp, ud->snare.dt, &bar, &dtrig);
     sp_tevent_compute(sp, ud->snare.te, &dtrig, &snare);
 
@@ -49,7 +49,6 @@ void process(sp_data *sp, void *udata) {
     sp_maygate_compute(sp, ud->rgate, &dblclk, &rgate);
     sp_tseq_compute(sp, ud->rpick, &dblclk, &reps);
 
-    //sp_rpt_set(ud->rpt, ud->tempo, reps, 4);
     sp_rpt_compute(sp, ud->rpt, &rgate, &dry, &rpt);
     sp_reverse_compute(sp, ud->rvs, &rpt, &rvs);
     sp_maygate_compute(sp, ud->rvs_switch, &clk, &rvs_switch);
@@ -134,7 +133,8 @@ int main() {
 
     /* Init */
     sp->len = 44100 * (60.0 / tempo) * 32;
-    sp_count_init(sp, ud.cnt, 4);
+    sp_count_init(sp, ud.cnt);
+    ud.cnt->count = 4;
     sp_metro_init(sp, ud.clk, tempo / 60.0);
     sp_metro_init(sp, ud.dblclk, tempo * 2 / 60.0);
     sp_revsc_init(sp, ud.rev);

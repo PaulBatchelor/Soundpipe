@@ -225,8 +225,10 @@ void process(sp_data *sp, void *udata)
     UserData *ud = udata;
     int i;
     SPFLOAT line = 0, cloud = 0, tmp = 0, revin = 0, rev = 0, dummy, drip = 0;
+    SPFLOAT count = 0;
     SPFLOAT bar = 0, clk = 0, delIn = 0, delOut = 0;
     SPFLOAT mode = 0;
+
     for(i = 0; i < NUMLINE; i++) {
         sp_randi_compute(sp, ud->line[i].randi, NULL, &line);
         chord_cloud_compute(sp, ud->line[i].cc, NULL, &cloud);
@@ -234,8 +236,8 @@ void process(sp_data *sp, void *udata)
     }
     revin += tmp * 0.5;
     sp_metro_compute(sp, ud->clk, NULL, &clk);
-    sp_count_compute(sp, ud->meter, &clk, &dummy);
-    bar = ud->meter->c->tbl[0];
+    sp_count_compute(sp, ud->meter, &clk, &count);
+    bar = (count == 0 && clk);
     sp_drip_compute(sp, ud->drip, &bar, &drip);
     drip *= 0.5;
     revin += drip * 0.1;
@@ -301,7 +303,8 @@ int main()
     sp_metro_create(&ud.clk);
     sp_metro_init(sp, ud.clk, 86.0 / 60.0);
     sp_count_create(&ud.meter);
-    sp_count_init(sp, ud.meter, 5);
+    sp_count_init(sp, ud.meter);
+    ud.meter->count = 5;
     sp_drip_create(&ud.drip);
     sp_drip_init(sp, ud.drip, 0.01);
     sp_vdelay_create(&ud.del);
