@@ -4,7 +4,7 @@
 #include <math.h>
 #include "soundpipe.h"
 
-int sp_create(sp_data **spp) 
+int sp_create(sp_data **spp)
 {
     *spp = (sp_data *) malloc(sizeof(sp_data));
     sp_data *sp = *spp;
@@ -19,7 +19,7 @@ int sp_create(sp_data **spp)
     return 0;
 }
 
-int sp_createn(sp_data **spp, int nchan) 
+int sp_createn(sp_data **spp, int nchan)
 {
     *spp = (sp_data *) malloc(sizeof(sp_data));
     sp_data *sp = *spp;
@@ -60,7 +60,7 @@ int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
             sf[chan] = sf_open(tmp, SFM_WRITE, &info);
         }
     }
-    
+
     while(sp->len > 0){
         if(sp->len < SP_BUFSIZE) {
             numsamps = sp->len;
@@ -85,16 +85,27 @@ int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
     return 0;
 }
 
-int sp_process_raw(sp_data *sp, void *ud, void (*callback)(sp_data *, void *)) 
+int sp_process_raw(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
 {
     int chan;
-    while(sp->len > 0) {
-        callback(sp, ud);
-        for (chan = 0; chan < sp->nchan; chan++) {
-            fwrite(&sp->out[chan], sizeof(SPFLOAT), 1, stdout);
+    if(sp->len == 0) {
+        while(1) {
+            callback(sp, ud);
+            for (chan = 0; chan < sp->nchan; chan++) {
+                fwrite(&sp->out[chan], sizeof(SPFLOAT), 1, stdout);
+            }
+            sp->len--;
         }
-        sp->len--;
-    }    
+    } else {
+        while(sp->len > 0) {
+            callback(sp, ud);
+            for (chan = 0; chan < sp->nchan; chan++) {
+                fwrite(&sp->out[chan], sizeof(SPFLOAT), 1, stdout);
+            }
+            sp->len--;
+            sp->pos++;
+        }
+    }
     return SP_OK;
 }
 int sp_auxdata_alloc(sp_auxdata *aux, size_t size)
@@ -118,7 +129,7 @@ int sp_auxdata_getbuf(sp_auxdata *aux, uint32_t pos, SPFLOAT *out)
         *out = 0;
         return SP_NOT_OK;
     }else{
-        SPFLOAT *tmp = aux->ptr; 
+        SPFLOAT *tmp = aux->ptr;
         *out = tmp[pos];
     }
     return SP_OK;
@@ -131,14 +142,14 @@ int sp_auxdata_setbuf(sp_auxdata *aux, uint32_t pos, SPFLOAT *in)
         fprintf(stderr, "Error: Buffer overflow!\n");
         return SP_NOT_OK;
     }else{
-        SPFLOAT *tmp = aux->ptr; 
+        SPFLOAT *tmp = aux->ptr;
         SPFLOAT n = *in;
         tmp[pos] = n;
     }
     return SP_OK;
 }
 
-SPFLOAT sp_midi2cps(SPFLOAT nn) 
+SPFLOAT sp_midi2cps(SPFLOAT nn)
 {
     return pow(2, (nn - 69.0) / 12.0) * 440.0;
 }
