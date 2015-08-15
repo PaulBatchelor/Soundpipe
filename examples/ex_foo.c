@@ -38,7 +38,7 @@ int main() {
 
     sp_foo_init(sp, ud.foo);
     sp_gen_sine(sp, ud.ft);
-    sp_osc_init(sp, ud.osc, ud.ft);
+    sp_osc_init(sp, ud.osc, ud.ft, 0);
 
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);

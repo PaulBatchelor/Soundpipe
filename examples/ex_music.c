@@ -16,7 +16,7 @@ typedef struct {
     //sp_osc *osc;
     //sp_randi *rnd;
     oscil v[NVOICES];
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_revsc *rev;
     sp_dcblock *dcblk;
 } udata;
@@ -37,12 +37,12 @@ void write_osc(sp_data *data, void *ud) {
     for(i = 0; i < NVOICES; i++){
         sp_randi_compute(data, udp->v[i].rnd, NULL, &amp);
         sp_osc_compute(data, udp->v[i].osc, NULL, &osc);
-        dry += osc * amp; 
+        dry += osc * amp;
     }
-    sp_revsc_compute(data, udp->rev, &dry, &dry, &wet, &foo);  
+    sp_revsc_compute(data, udp->rev, &dry, &dry, &wet, &foo);
 
     sp_dcblock_compute(data, udp->dcblk, &wet, &blk);
-    data->out[0] = 0.5 * dry + 0.3 * wet; 
+    data->out[0] = 0.5 * dry + 0.3 * wet;
 }
 
 int main() {
@@ -59,10 +59,10 @@ int main() {
     sp_ftbl_create(sp, &ud.ft, 2048);
 
     sp_gen_file(sp, ud.ft, "FMSine111.wav");
-    for(i = 0; i < NVOICES; i++){ 
+    for(i = 0; i < NVOICES; i++){
         sp_osc_create(&ud.v[i].osc);
         sp_randi_create(&ud.v[i].rnd);
-        sp_osc_init(sp, ud.v[i].osc, ud.ft);
+        sp_osc_init(sp, ud.v[i].osc, ud.ft, 0);
         ud.v[i].osc->amp = 0.3;
         ud.v[i].osc->freq = midi2cps(notes[i]);
         sp_randi_init(sp, ud.v[i].rnd, rand());

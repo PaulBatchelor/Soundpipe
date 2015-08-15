@@ -49,7 +49,7 @@ int main() {
     sp_dtrig_init(sp, ud.dt, ud.delta);
     sp_tenv_init(sp, ud.tenv, 0.03, 0.01, 0.3);
     sp_gen_sine(sp, ud.ft);
-    sp_osc_init(sp, ud.osc, ud.ft);
+    sp_osc_init(sp, ud.osc, ud.ft, 0);
     ud.osc->freq = 1000;
     ud.osc->amp = 0.5;
     sp->len = 44100 * 5;

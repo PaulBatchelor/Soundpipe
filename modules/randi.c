@@ -1,14 +1,14 @@
 /*
  * Randi
- * 
+ *
  * This code has been extracted from the Csound opcode "randi".
  * It has been modified to work as a Soundpipe module.
- * 
+ *
  * Original Author(s): Barry Vercoe, John ffitch
  * Year: 1991
  * Location: OOps/ugens4.c
  *
- * Randi needs the ftbl Soundpipe module in order to work. 
+ * Randi needs the ftbl Soundpipe module in order to work.
  *
  */
 
@@ -35,7 +35,7 @@ int sp_randi_init(sp_data *sp, sp_randi *p, int seed)
     p->min = 0;
     p->max = 1;
     p->cps = 3;
-    p->mode = 0;
+    p->mode = 3;
     p->holdrand = (int)(seed & (uint32_t) 0x7FFFFFFF);
     p->fstval = 0;
 
@@ -65,7 +65,7 @@ int sp_randi_init(sp_data *sp, sp_randi *p, int seed)
     return SP_OK;
 }
 
-int sp_randi_compute(sp_data *sp, sp_randi *p, SPFLOAT *in, SPFLOAT *out) 
+int sp_randi_compute(sp_data *sp, sp_randi *p, SPFLOAT *in, SPFLOAT *out)
 {
     int32_t phs = p->phs, inc;
     SPFLOAT       cpsp;

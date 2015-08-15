@@ -28,7 +28,7 @@ int main() {
     sp_osc_create(&ud.osc);
     
     sp_gen_file(sp, ud.ft, "Formant04.wav");
-    sp_osc_init(sp, ud.osc, ud.ft);
+    sp_osc_init(sp, ud.osc, ud.ft, 0);
     ud.osc->freq = 440;
     sp->len = 44100 * 5;
     sp_process(sp, &ud, write_osc);

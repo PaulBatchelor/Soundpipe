@@ -5,7 +5,7 @@
 
 typedef struct {
     sp_fosc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_dist *ds;
     sp_osc *lfo;
 } udata;
@@ -28,16 +28,16 @@ int main() {
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_fosc_create(&ud.osc);
     sp_dist_create(&ud.ds);
-    sp_osc_create(&ud.lfo); 
+    sp_osc_create(&ud.lfo);
 
     sp_gen_sine(sp, ud.ft);
     sp_fosc_init(sp, ud.osc, ud.ft);
     ud.osc->freq = 60;
     sp_dist_init(sp, ud.ds);
     ud.ds->pregain = 10;
-    sp_osc_init(sp, ud.lfo, ud.ft);  
+    sp_osc_init(sp, ud.lfo, ud.ft, 0);
     ud.lfo->freq = 0.5;
-    
+
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);
 

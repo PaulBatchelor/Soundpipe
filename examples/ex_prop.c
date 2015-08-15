@@ -34,7 +34,7 @@ int main() {
     sp_prop_init(sp, ud.prop, "2(++)3(+++)-2(-2(++))+5(+++++)");
     ud.prop->bpm = 80;
     sp_gen_sine(sp, ud.ft);
-    sp_osc_init(sp, ud.osc, ud.ft);
+    sp_osc_init(sp, ud.osc, ud.ft, 0);
     sp_tenv_init(sp, ud.tenv, 0.01, 0.01, 0.2);
     ud.osc->freq = 500;
 

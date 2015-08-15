@@ -40,8 +40,8 @@ int main() {
 
     sp_switch_init(sp, ud.sw);
     sp_gen_sine(sp, ud.ft);
-    sp_osc_init(sp, ud.osc, ud.ft);
-    sp_osc_init(sp, ud.lfo, ud.ft);
+    sp_osc_init(sp, ud.osc, ud.ft, 0);
+    sp_osc_init(sp, ud.lfo, ud.ft, 0);
     ud.lfo->amp = 100;
     ud.lfo->freq = 6;
     sp_fosc_init(sp, ud.fosc, ud.ft);

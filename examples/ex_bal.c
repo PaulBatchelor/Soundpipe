@@ -5,7 +5,7 @@
 
 typedef struct {
     sp_osc *osc[3];
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_moogladder *filt;
     sp_bal *bal;
     sp_tenv *env;
@@ -34,27 +34,27 @@ int main() {
     sp_data *sp;
     sp_create(&sp);
     sp_ftbl_create(sp, &ud.ft, 4096);
-    for(i = 0; i < 3; i++) { 
-        sp_osc_create(&ud.osc[i]); 
+    for(i = 0; i < 3; i++) {
+        sp_osc_create(&ud.osc[i]);
         ud.osc[i]->amp = 0.5;
     }
     sp_bal_create(&ud.bal);
-    sp_moogladder_create(&ud.filt);   
+    sp_moogladder_create(&ud.filt);
     ud.filt->res = 0.8;
     sp_tenv_create(&ud.env);
 
     sp_gen_line(sp, ud.ft, "0 1 4096 -1");
-    sp_osc_init(sp, ud.osc[0], ud.ft);
+    sp_osc_init(sp, ud.osc[0], ud.ft, 0);
     ud.osc[0]->freq = sp_midi2cps(41 - 0.05);
-    sp_osc_init(sp, ud.osc[1], ud.ft);
+    sp_osc_init(sp, ud.osc[1], ud.ft, 0);
     ud.osc[1]->freq = sp_midi2cps(41 - 12);
-    sp_osc_init(sp, ud.osc[2], ud.ft);
+    sp_osc_init(sp, ud.osc[2], ud.ft, 0);
     ud.osc[2]->freq = sp_midi2cps(41 + 0.05);
     sp->len = 44100 * 5;
     sp_bal_init(sp, ud.bal);
     sp_moogladder_init(sp, ud.filt);
     sp_tenv_init(sp, ud.env, 2.25, 0.5, 2.25);
-    
+
     sp_process(sp, &ud, process);
 
     sp_ftbl_destroy(&ud.ft);

@@ -27,7 +27,7 @@ int main() {
     sp_randi_create(&ud.rnd);
 
     sp_gen_sine(sp, ud.ft);
-    sp_osc_init(sp, ud.osc, ud.ft);
+    sp_osc_init(sp, ud.osc, ud.ft, 0);
     sp_randi_init(sp, ud.rnd, 12345);
     
     ud.rnd->min = 300;  

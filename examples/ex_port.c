@@ -28,7 +28,7 @@ int main() {
     udata ud;
     sp_data *sp;
     sp_create(&sp);
-    
+
     sp_metro_create(&ud.mt);
     sp_ftbl_create(sp, &ud.sine, 2048);
     sp_ftbl_create(sp, &ud.nn, 1);
@@ -36,20 +36,20 @@ int main() {
     sp_port_create(&ud.prt);
 
     sp_gen_vals(sp, ud.nn, "60 63 65 60 63 67");
-    sp_tseq_create(&ud.seq); 
-    sp_tseq_init(sp, ud.seq, ud.nn); 
-  
-    sp_port_init(sp, ud.prt, 0.02); 
+    sp_tseq_create(&ud.seq);
+    sp_tseq_init(sp, ud.seq, ud.nn);
+
+    sp_port_init(sp, ud.prt, 0.02);
     sp_metro_init(sp, ud.mt, 4.0);
     sp_gen_sine(sp, ud.sine);
-    sp_osc_init(sp, ud.osc, ud.sine);
+    sp_osc_init(sp, ud.osc, ud.sine, 0);
     sp->len = 44100 * 5;
 
     sp_process(sp, &ud, process);
 
     sp_port_destroy(&ud.prt);
-    sp_tseq_destroy(&ud.seq); 
-    sp_metro_destroy(&ud.mt); 
+    sp_tseq_destroy(&ud.seq);
+    sp_metro_destroy(&ud.mt);
     sp_ftbl_destroy(&ud.sine);
     sp_ftbl_destroy(&ud.nn);
     sp_osc_destroy(&ud.osc);

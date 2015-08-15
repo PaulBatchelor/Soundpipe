@@ -5,7 +5,7 @@
 
 typedef struct {
     sp_osc *osc1, *osc2;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     int counter1, counter2;
 } udata;
 
@@ -30,15 +30,15 @@ int main() {
     ud.counter2 = 0;
     sp_data *sp;
     /* two channels will write 0_test.wav and 1_test.wav */
-    sp_createn(&sp, 2); 
+    sp_createn(&sp, 2);
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_osc_create(&ud.osc1);
     sp_osc_create(&ud.osc2);
 
     sp_gen_sine(sp, ud.ft);
-    sp_osc_init(sp, ud.osc1, ud.ft);
+    sp_osc_init(sp, ud.osc1, ud.ft, 0);
     ud.osc1->freq = 500;
-    sp_osc_init(sp, ud.osc2, ud.ft);
+    sp_osc_init(sp, ud.osc2, ud.ft, 0);
     ud.osc2->freq = 500;
     sp->len = 44100 * 5;
     sp_process(sp, &ud, write_osc);

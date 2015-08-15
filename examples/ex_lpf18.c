@@ -39,14 +39,14 @@ int main() {
     sp_gen_sine(sp, ud.sine_ft);
 
     sp_gen_line(sp, ud.ft, "0 1 4096 -1");
-    sp_osc_init(sp, ud.osc[0], ud.ft);
+    sp_osc_init(sp, ud.osc[0], ud.ft, 0);
     ud.osc[0]->freq = sp_midi2cps(40 - 0.05);
-    sp_osc_init(sp, ud.osc[1], ud.ft);
+    sp_osc_init(sp, ud.osc[1], ud.ft, 0);
     ud.osc[1]->freq = sp_midi2cps(40 - 12);
-    sp_osc_init(sp, ud.osc[2], ud.ft);
+    sp_osc_init(sp, ud.osc[2], ud.ft, 0);
     ud.osc[2]->freq = sp_midi2cps(40 + 0.05);
     sp_lpf18_init(sp, ud.lpf);
-    sp_osc_init(sp, ud.lfo, ud.sine_ft);
+    sp_osc_init(sp, ud.lfo, ud.sine_ft, 0);
     ud.lfo->freq = 0.4;
 
     sp->len = 44100 * 5;

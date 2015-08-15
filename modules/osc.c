@@ -1,9 +1,9 @@
 /*
  * Osc
- * 
+ *
  * This code has been extracted from the Csound opcode "oscili".
  * It has been modified to work as a Soundpipe module.
- * 
+ *
  * Original Author(s): Barry Vercoe, John FFitch, Robin Whittle
  * Year: 1991
  * Location: OOps/ugens2.c
@@ -26,13 +26,12 @@ int sp_osc_destroy(sp_osc **osc)
     return SP_NOT_OK;
 }
 
-int sp_osc_init(sp_data *sp, sp_osc *osc, sp_ftbl *ft)
+int sp_osc_init(sp_data *sp, sp_osc *osc, sp_ftbl *ft, SPFLOAT iphs)
 {
     osc->freq = 440.0;
     osc->amp = 0.2;
-    osc->iphs = 0;
     osc->tbl = ft;
-
+    osc->iphs = abs(iphs);
     if (osc->iphs >= 0){
         osc->lphs = ((int32_t)(osc->iphs * SP_FT_MAXLEN)) & SP_FT_PHMASK;
     }

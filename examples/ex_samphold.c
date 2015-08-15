@@ -36,7 +36,7 @@ int main() {
 
     sp_samphold_init(sp, ud.samphold);
     sp_gen_sine(sp, ud.ft);
-    sp_osc_init(sp, ud.osc, ud.ft);
+    sp_osc_init(sp, ud.osc, ud.ft, 0);
     sp_metro_init(sp, ud.met, 5);
     sp_noise_init(sp, ud.noise);
     ud.noise->gain = 1;

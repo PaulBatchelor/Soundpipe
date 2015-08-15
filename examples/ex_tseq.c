@@ -56,7 +56,7 @@ int main() {
     ud.dt->loop = 1.0;
     sp_tenv_init(sp, ud.tenv, 0.01, 0.01, 0.05);
     sp_gen_sine(sp, ud.ft);
-    sp_osc_init(sp, ud.osc, ud.ft);
+    sp_osc_init(sp, ud.osc, ud.ft, 0);
     ud.osc->freq = 1000;
     ud.osc->amp = 0.5;
     sp->len = 44100 * 5;

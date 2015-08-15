@@ -38,7 +38,7 @@ int main(){
     sp_maygate_init(sp, ud.mg);
     ud.mg->prob = 0.5;
     sp_gen_sine(sp, ud.ft);
-    sp_osc_init(sp, ud.osc, ud.ft);
+    sp_osc_init(sp, ud.osc, ud.ft, 0);
     sp_metro_init(sp, ud.mt, tempo / 60.0);
     sp_rpt_init(sp, ud.rpt, 1.0);
     ud.rpt->bpm = tempo;
