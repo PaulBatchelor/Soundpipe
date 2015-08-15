@@ -2,13 +2,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "soundpipe.h" 
+#include "soundpipe.h"
 
 #ifndef M_PI
 #define M_PI		3.14159265358979323846	/* pi */
-#endif 
+#endif
 
-int sp_ftbl_create(sp_data *sp, sp_ftbl **ft, size_t size) 
+int sp_ftbl_create(sp_data *sp, sp_ftbl **ft, size_t size)
 {
     *ft = malloc(sizeof(sp_ftbl));
     sp_ftbl *ftp = *ft;
@@ -106,15 +106,15 @@ int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, char *argstring)
     return SP_OK;
 }
 
-int sp_gen_line(sp_data *sp, sp_ftbl *ft, char *argstring) 
+int sp_gen_line(sp_data *sp, sp_ftbl *ft, char *argstring)
 {
     uint16_t i, n = 0, seglen;
     SPFLOAT incr, amp = 0;
     SPFLOAT x1, x2, y1, y2;
-    sp_ftbl *args;   
+    sp_ftbl *args;
     sp_ftbl_create(sp, &args, 1);
     sp_gen_vals(sp, args, argstring);
-    
+
     if((args->size % 2) == 1 || args->size == 1) {
         fprintf(stderr, "Error: not enough arguments for gen_line.\n");
         sp_ftbl_destroy(&args);
@@ -124,23 +124,23 @@ int sp_gen_line(sp_data *sp, sp_ftbl *ft, char *argstring)
             ft->tbl[i] = args->tbl[1];
         }
         return SP_OK;
-    } 
-    
+    }
+
     x1 = args->tbl[0];
     y1 = args->tbl[1];
     for(i = 2; i < args->size; i += 2) {
         x2 = args->tbl[i];
         y2 = args->tbl[i + 1];
-        
+
         if(x2 < x1) {
             fprintf(stderr, "Error: x coordiates must be sequential!\n");
             break;
         }
-        
+
         seglen = (x2 - x1);
         incr = (SPFLOAT)(y2 - y1) / seglen;
         amp = y1;
-        
+
         while(seglen != 0){
             if(n < ft->size) {
                 ft->tbl[n] = amp;
@@ -154,7 +154,7 @@ int sp_gen_line(sp_data *sp, sp_ftbl *ft, char *argstring)
         y1 = y2;
         x1 = x2;
     }
-    
+
     sp_ftbl_destroy(&args);
     return SP_OK;
 }
@@ -164,10 +164,10 @@ int sp_gen_xline(sp_data *sp, sp_ftbl *ft, char *argstring)
     uint16_t i, n = 0, seglen;
     SPFLOAT mult, amp = 0;
     SPFLOAT x1, x2, y1, y2;
-    sp_ftbl *args;   
+    sp_ftbl *args;
     sp_ftbl_create(sp, &args, 1);
     sp_gen_vals(sp, args, argstring);
-    
+
     if((args->size % 2) == 1 || args->size == 1) {
         fprintf(stderr, "Error: not enough arguments for gen_line.\n");
         sp_ftbl_destroy(&args);
@@ -177,32 +177,32 @@ int sp_gen_xline(sp_data *sp, sp_ftbl *ft, char *argstring)
             ft->tbl[i] = args->tbl[1];
         }
         return SP_OK;
-    } 
-    
+    }
+
     x1 = args->tbl[0];
     y1 = args->tbl[1];
     for(i = 2; i < args->size; i += 2) {
         x2 = args->tbl[i];
         y2 = args->tbl[i + 1];
-        
+
         if(x2 < x1) {
             fprintf(stderr, "Error: x coordiates must be sequential!\n");
             break;
         }
-        
+
         if(y1 == 0) {
             y1 = 0.000001;
         }
-        
+
         if(y2 == 0) {
             y2 = 0.000001;
         }
-        
+
         seglen = (uint32_t)(x2 - x1);
         mult = (y2 / y1);
         mult = pow(mult, (SPFLOAT)1.0 / seglen);
         amp = y1;
-        
+
         while(seglen != 0){
             if(n < ft->size) {
                 ft->tbl[n] = amp;
@@ -216,10 +216,10 @@ int sp_gen_xline(sp_data *sp, sp_ftbl *ft, char *argstring)
         y1 = y2;
         x1 = x2;
     }
-    
+
     sp_ftbl_destroy(&args);
     return SP_OK;
-  
+
 }
 
 
@@ -232,7 +232,7 @@ static SPFLOAT gaussrand(sp_randmt *p, SPFLOAT scale)
     do {
       r1 += (int64_t)sp_randmt_compute(p);
     } while (--n);
-    
+
     x = (SPFLOAT)r1;
     return (SPFLOAT)(x * ((SPFLOAT)scale * (1.0 / (3.83 * 4294967295.03125))));
 }
@@ -240,14 +240,14 @@ static SPFLOAT gaussrand(sp_randmt *p, SPFLOAT scale)
 int sp_gen_gauss(sp_data *sp, sp_ftbl *ft, SPFLOAT scale, uint32_t seed)
 {
     int n;
-    
+
     sp_randmt rand;
-    
+
     sp_randmt_seed(&rand, NULL, seed);
-    
+
     for(n = 0; n < ft->size; n++) {
         ft->tbl[n] = gaussrand(&rand, scale);
     }
-    
+
     return SP_OK;
 }

@@ -46,6 +46,7 @@ clean:
 	rm -rf $(LPATHS)
 	rm -rf $(UTIL)
 	rm -rf sp_dict.lua
+	rm -rf soundpipe.o
 
 docs:
 	util/gendocs.sh
