@@ -1,5 +1,6 @@
 typedef struct sp_count{
     int32_t count, curcount;
+    int mode;
 } sp_count;
 
 int sp_count_create(sp_count **p);
