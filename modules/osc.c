@@ -31,7 +31,7 @@ int sp_osc_init(sp_data *sp, sp_osc *osc, sp_ftbl *ft, SPFLOAT iphs)
     osc->freq = 440.0;
     osc->amp = 0.2;
     osc->tbl = ft;
-    osc->iphs = abs(iphs);
+    osc->iphs = fabs(iphs);
     if (osc->iphs >= 0){
         osc->lphs = ((int32_t)(osc->iphs * SP_FT_MAXLEN)) & SP_FT_PHMASK;
     }
