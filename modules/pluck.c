@@ -170,19 +170,19 @@ int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *in, SPFLOAT *out)
         /* Decrement pointer and then update */
         yp0 = - state;          
         {
-          MYFLT *ptr = upper_rail->pointer;
+          SPFLOAT *ptr = upper_rail->pointer;
           ptr--;
-          if (UNLIKELY(ptr < upper_rail->data))
+          if (ptr < upper_rail->data)
             ptr = upper_rail->end;
           *ptr = yp0;
           upper_rail->pointer = ptr;
         }
                                 
         {
-          MYFLT *ptr = lower_rail->pointer;
+          SPFLOAT *ptr = lower_rail->pointer;
           *ptr = ymM;
           ptr++;
-          if (UNLIKELY(ptr > lower_rail->end))
+          if (ptr > lower_rail->end)
             ptr = lower_rail->data;
           lower_rail->pointer = ptr;
         }
