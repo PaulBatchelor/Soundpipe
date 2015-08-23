@@ -24,6 +24,26 @@ typedef struct {
     SPFLOAT *end;
 } DelayLine;
 
+static SPFLOAT * locate(DelayLine *dl, int position)
+{
+    SPFLOAT *outloc = dl->pointer + position;
+    while (outloc < dl->data)
+      outloc += dl->length;
+    while (outloc > dl->end)
+      outloc -= dl->length;
+    return outloc;
+}
+
+static SPFLOAT getvalue(DelayLine *dl, int position)
+{
+    SPFLOAT *outloc = dl->pointer + position;
+    while (outloc < dl->data)
+      outloc += dl->length;
+    while (outloc > dl->end)
+      outloc -= dl->length;
+    return *outloc;
+}
+
 int sp_pluck_create(sp_pluck **p)
 {
     *p = malloc(sizeof(sp_pluck));
@@ -32,12 +52,23 @@ int sp_pluck_create(sp_pluck **p)
 
 int sp_pluck_destroy(sp_pluck **p)
 {
+    sp_pluck *pp = *p;
+    sp_auxdata_free(&pp->upper);
+    sp_auxdata_free(&pp->lower);
+    sp_auxdata_free(&pp->up_data);
+    sp_auxdata_free(&pp->down_data);
     free(*p);
     return SP_OK;
 }
 
 int sp_pluck_init(sp_data *sp, sp_pluck *p)
 {
+    p->plk = 0.75;
+    p->amp = 0.8;
+    p->freq = 110;
+    p->reflect = 0.95;
+    p->pickup = 0.75;
+
     int npts;
     int pickpt;
     int rail_len;
@@ -112,7 +143,7 @@ int sp_pluck_init(sp_data *sp, sp_pluck *p)
     return SP_OK;
 }
 
-int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *in, SPFLOAT *out)
+int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *trig, SPFLOAT *in, SPFLOAT *out)
 {
     SPFLOAT yp0,ym0,ypM,ymM;
     DelayLine   *upper_rail;
@@ -123,6 +154,7 @@ int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *in, SPFLOAT *out)
     SPFLOAT state = p->state;
     SPFLOAT reflect = p->reflect;
 
+
     if (reflect <= 0.0 || reflect >= 1.0) {
       reflect = 0.5;
     }
@@ -130,8 +162,34 @@ int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *in, SPFLOAT *out)
     reflect = 1.0 - (1.0 - reflect)/scale; /* For over sapling */
     upper_rail = (DelayLine*)p->upper.ptr;
     lower_rail = (DelayLine*)p->lower.ptr;
+    
+    if(*trig) {
+    if (p->plk != 0.0) {
+      int pickpt = p->rail_len * p->plk;
+      SPFLOAT *initial_shape = (SPFLOAT *) malloc(p->rail_len * sizeof(SPFLOAT));
+      if (pickpt < 1) pickpt = 1;  /* Place for pluck, in range (0,1.0) */
+      SPFLOAT upslope = 1.0 / (SPFLOAT)pickpt;  /* Slightly faster to precalculate */
+      SPFLOAT downslope = 1.0 / (SPFLOAT)(p->rail_len - pickpt - 1);
+      for (i = 0; i < pickpt; i++)
+        initial_shape[i] = upslope * i;
+      for (i = pickpt; i < p->rail_len; i++)
+        initial_shape[i] = downslope * (p->rail_len - 1 - i);
+      for (i=0; i< p->rail_len; i++)
+        upper_rail->data[i] = 0.5 * initial_shape[i];
+      for (i=0; i< p->rail_len; i++)
+        lower_rail->data[i] = 0.5 * initial_shape[i];
+      free(initial_shape);
+    } else {
+      memset(upper_rail->data, 0, p->rail_len * sizeof(SPFLOAT));
+      memset(lower_rail->data, 0, p->rail_len * sizeof(SPFLOAT));
+    }
+    p->state = 0.0;
+    upper_rail->pointer = upper_rail->data;
+    lower_rail->pointer = lower_rail->data;
+    }
+
     /* fractional delays */
-    pickup = (int)((MYFLT)OVERCNT * *(p->pickup) * p->rail_len);
+    pickup = (int)((SPFLOAT)OVERCNT * p->pickup * p->rail_len);
     pickfrac = pickup & OVERMSK;
     pickup = pickup>>OVERSHT;
     if (pickup< 0 || pickup > p->rail_len) {
@@ -146,14 +204,14 @@ int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *in, SPFLOAT *out)
       s1 = getvalue(upper_rail, pickup+1) + getvalue(lower_rail, pickup+1);
     /* Fractional delay */
       *out = s + (s1 - s)*(SPFLOAT)pickfrac/(SPFLOAT)OVERCNT; 
-      if (ain != NULL) {        
+      if (in != NULL) {        
         /* Excite the string from input */
-        MYFLT *loc = locate(lower_rail,1);
-        *loc += (0.5 * *ain)/(*p->xamp);
+        SPFLOAT *loc = locate(lower_rail,1);
+        *loc += (0.5 * *in)/(p->amp);
         loc = locate(upper_rail,1);
         *loc += (0.5 * *in) / (p->amp);
       }
-      *out *= *p->xamp;        
+      *out *= p->amp;        
       /* Loop for precision figure */
       for (i=0; i<scale; i++) { 
 /* Sample traveling into "bridge" */
@@ -165,7 +223,7 @@ int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *in, SPFLOAT *out)
         /* Implement a one-pole lowpass with
            feedback coefficient from input */
         ymM = -ypM;             
-        state = (state * reflect) + ym0 * (FL(1.0) - reflect);
+        state = (state * reflect) + ym0 * (1.0 - reflect);
         /* String state update */
         /* Decrement pointer and then update */
         yp0 = - state;          

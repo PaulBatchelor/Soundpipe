@@ -12,4 +12,4 @@ typedef struct {
 int sp_pluck_create(sp_pluck **p);
 int sp_pluck_destroy(sp_pluck **p);
 int sp_pluck_init(sp_data *sp, sp_pluck *p);
-int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *in, SPFLOAT *out);
+int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *trig, SPFLOAT *in, SPFLOAT *out);
