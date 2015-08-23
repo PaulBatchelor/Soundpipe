@@ -1,7 +1,28 @@
 # Change log
 
+0.3 "Automation"
+----------------
+    - New modules:
+        - eqfil
+        - atone
+        - butbr
+        - foo (dummy module)
+        - pluck
+        - delay (static delay with feedback)
+        - random
+        - diskin
+        - in
+        - nsmp
+        - switch
+        - dmetro
+        - samphold
+    - Module boostrapper with documentation
+    - renamed delay to vdelaya
+    - Documented gen routines
+    - Style guide written
+
 0.2.2: "Tables"
--------------------
+---------------
     - New gen routines: gen_line, gen_xline, gen_gauss
     - New Modules: vco, reson, allpass, phasor, comb, tabread
     - Docgen support for gen routines
