@@ -61,14 +61,8 @@ int sp_pluck_destroy(sp_pluck **p)
     return SP_OK;
 }
 
-int sp_pluck_init(sp_data *sp, sp_pluck *p)
+static int pluck_setup(sp_data *sp, sp_pluck *p) 
 {
-    p->plk = 0.75;
-    p->amp = 0.8;
-    p->freq = 110;
-    p->reflect = 0.95;
-    p->pickup = 0.75;
-
     int npts;
     int pickpt;
     int rail_len;
@@ -97,24 +91,14 @@ int sp_pluck_init(sp_data *sp, sp_pluck *p)
 
     pickpt = (int)(rail_len * plk);
 
-    sp_auxdata_alloc(&p->upper, sizeof(DelayLine));
     upper_rail = (DelayLine*)p->upper.ptr;
     upper_rail->length = rail_len;
-
-    sp_auxdata_alloc(&p->up_data, rail_len * sizeof(SPFLOAT));
     upper_rail->data = (SPFLOAT *)p->up_data.ptr;
-
     upper_rail->pointer = upper_rail->data;
     upper_rail->end = upper_rail->data + rail_len - 1;
-
-    sp_auxdata_alloc(&p->lower, sizeof(DelayLine));
-
     lower_rail = (DelayLine*)p->lower.ptr;
     lower_rail->length = rail_len;
-
-    sp_auxdata_alloc(&p->down_data, rail_len*sizeof(SPFLOAT));
     lower_rail->data = (SPFLOAT *)p->down_data.ptr;
-
     lower_rail->pointer = lower_rail->data;
     lower_rail->end = lower_rail->data + rail_len - 1;
 
@@ -143,6 +127,45 @@ int sp_pluck_init(sp_data *sp, sp_pluck *p)
     return SP_OK;
 }
 
+int sp_pluck_init(sp_data *sp, sp_pluck *p, SPFLOAT ifreq)
+{
+    p->plk = 0.75;
+    p->amp = 0.8;
+    p->freq = ifreq;
+    p->ifreq = ifreq;
+    p->reflect = 0.95;
+    p->pickup = 0.75;
+
+    int npts;
+    int rail_len;
+    int scale = 1;
+    SPFLOAT plk = p->plk;
+                                
+    npts = (int)(sp->sr / p->freq); /* Length of full delay */
+
+    /* Minimum rail length is 256 */
+    while (npts < 512) {        
+      npts += (int)(sp->sr / p->freq);
+      scale++;
+    }
+
+    rail_len = npts / 2;
+
+    if (plk >= 1.0 || plk <= 0.0) {
+      plk = 0.5;
+    }
+
+
+    sp_auxdata_alloc(&p->upper, sizeof(DelayLine));
+    sp_auxdata_alloc(&p->up_data, rail_len * sizeof(SPFLOAT));
+    sp_auxdata_alloc(&p->lower, sizeof(DelayLine));
+    sp_auxdata_alloc(&p->down_data, rail_len*sizeof(SPFLOAT));
+  
+    pluck_setup(sp, p); 
+
+    return SP_OK;
+}
+
 int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *trig, SPFLOAT *in, SPFLOAT *out)
 {
     SPFLOAT yp0,ym0,ypM,ymM;
@@ -164,28 +187,7 @@ int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *trig, SPFLOAT *in, SPFLO
     lower_rail = (DelayLine*)p->lower.ptr;
     
     if(*trig) {
-    if (p->plk != 0.0) {
-      int pickpt = p->rail_len * p->plk;
-      SPFLOAT *initial_shape = (SPFLOAT *) malloc(p->rail_len * sizeof(SPFLOAT));
-      if (pickpt < 1) pickpt = 1;  /* Place for pluck, in range (0,1.0) */
-      SPFLOAT upslope = 1.0 / (SPFLOAT)pickpt;  /* Slightly faster to precalculate */
-      SPFLOAT downslope = 1.0 / (SPFLOAT)(p->rail_len - pickpt - 1);
-      for (i = 0; i < pickpt; i++)
-        initial_shape[i] = upslope * i;
-      for (i = pickpt; i < p->rail_len; i++)
-        initial_shape[i] = downslope * (p->rail_len - 1 - i);
-      for (i=0; i< p->rail_len; i++)
-        upper_rail->data[i] = 0.5 * initial_shape[i];
-      for (i=0; i< p->rail_len; i++)
-        lower_rail->data[i] = 0.5 * initial_shape[i];
-      free(initial_shape);
-    } else {
-      memset(upper_rail->data, 0, p->rail_len * sizeof(SPFLOAT));
-      memset(lower_rail->data, 0, p->rail_len * sizeof(SPFLOAT));
-    }
-    p->state = 0.0;
-    upper_rail->pointer = upper_rail->data;
-    lower_rail->pointer = lower_rail->data;
+        pluck_setup(sp, p);
     }
 
     /* fractional delays */

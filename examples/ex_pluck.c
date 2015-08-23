@@ -15,6 +15,10 @@ void process(sp_data *sp, void *udata) {
     SPFLOAT osc = 0, pluck = 0, met = 0;
     sp_osc_compute(sp, ud->osc, NULL, &osc);
     sp_metro_compute(sp, ud->met, NULL, &met);
+    if(met) {
+        ud->pluck->reflect = 0.5;
+        ud->pluck->freq = ud->pluck->ifreq + rand() % 500;
+    }
     sp_pluck_compute(sp, ud->pluck, &met, &osc, &pluck);
     sp->out[0] = pluck;
 }
@@ -30,7 +34,7 @@ int main() {
     sp_metro_create(&ud.met);
     sp_ftbl_create(sp, &ud.ft, 2048);
 
-    sp_pluck_init(sp, ud.pluck);
+    sp_pluck_init(sp, ud.pluck, 110);
     sp_gen_sine(sp, ud.ft);
     sp_metro_init(sp, ud.met, 2);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
