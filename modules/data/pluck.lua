@@ -11,90 +11,78 @@ sptbl["pluck"] = {
         destroy = "sp_pluck_destroy",
         init = "sp_pluck_init",
         compute = "sp_pluck_compute",
-        other = { 
-            sp_pluck_set = {
-                description = "pluck_set description goes here.",
-                args = {
-                    {
-                        name = "var1",
-                        type = "SPFLOAT",
-                        description = "This is the first parameter",
-                        default = 1.5
-                    },
-                    {
-                        name = "var2",
-                        type = "SPFLOAT",
-                        description = "This is the second parameter",
-                        default = 1.5
-                    }
-                }
-            }
-        }
     },
     
     params = {
         mandatory = {
             {
-                name = "bar",
-                type = "sp_ftbl *",
-                description = "This is a mandatory table value. It does not have a default value, so we set it to 'N/A'. Any that does not or cannot have a default value should set this default value to 'N/A'.",
-                default = "N/A"
-            },
-            {
-                name = "bar2",
+                name = "ifreq",
                 type = "SPFLOAT",
-                description = "This is a mandatory parameter. In soundpipe, users will always need to specify this value, but a default value has been giving in case it is needed to write more complicated engines in the future.",
-                default = 123
+                description = "Sets the initial frequency. This frequency is used to allocate all the buffers needed for the delay. This should be the lowest frequency you plan on using.",
+                default = 110
             }
         },
     
         optional = {
             {
-                name = "blah_1",
+                name = "plk",
                 type = "SPFLOAT",
-                description = "This is an optional parameter. These values are always set to a value by default, and can be set after the init function has been called.",
-                default = 1.5
+                description = [[Point of pluck. Expects value in the rnage of 0-1. 
+A value of 0 is no initial pluck. ]],
+                default = 0.75
             },
             {
-                name = "blah_2",
+                name = "freq",
                 type = "SPFLOAT",
-                description ="This is yet another optional parameter...",
-                default = 456.7
+                description = "Variable frequency. Should be greater than ifreq.",
+                default = "ifreq"
+            },
+            {
+                name = "amp",
+                type = "SPFLOAT",
+                description ="Amplitude",
+                default = 0.8
+            },
+            {
+                name = "pick",
+                type = "SPFLOAT",
+                description =[[Proportion along the string to sample the input. 
+Expects a value in the range of 0-1.]],
+                default = 0.75
+            },
+            {
+                name = "reflect",
+                type = "SPFLOAT",
+                description = [[Coeffecient of reflection, indicating lossiness 
+and rate of decay. Must be between 0 and 1, but not 0 and 1 themselves.]],
+                default = 0.95
             },
         }
     },
     
     modtype = "module",
     
-    description = [[This is a description of the entire module. This is not a real module. This description should be a comprehensive sumary of what this function does. 
-    
-Inside the Lua table, this is expressed as a multiline string, however it does not adhere to the tradtional 80 column rule found in programming. 
-
-Write as much text as needed here...
-]], 
+    description = [[Physical model of a plucked string, based on Karplus-Strong 
+algorithm]], 
     
     ninputs = 2,
-    noutputs = 2,
+    noutputs = 1,
     
     inputs = { 
         {
-            name = "clock",
-            description = "this is the clock source for a made up plugin."
+            name = "trigger",
+            description = "Trigger input. When non-zero, will reinitialize and pluck."
         },
         {
-            name = "input",
-            description = "this is the audio input for a made up plugin."
+            name = "excite",
+            description = "This is signal that will excite the string. A typical signal would be a 1hz sine wave with an amplitude of 1."
         },
     },
     
     outputs = {
         {
-            name = "out_left",
-            description = "Stereo left output for pluck."
-        },
-        {
-            name = "out_right",
-            description = "Stereo right output for pluck."
+            name = "out",
+            description = "Signal output."
         },
     }
 
