@@ -17,7 +17,7 @@ sptbl["tone"] = {
 	    mandatory = {
 	        {
 	            name = "hp",
-	            type = "sp_ftbl *",
+	            type = "SPFLOAT *",
 	            description = "This is the response curve's half power point (aka cutoff).",
 	            default = "1000"
 	        },

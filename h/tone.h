@@ -1,7 +1,7 @@
 typedef struct {
-        SPFLOAT hp;
-        SPFLOAT c1, c2, yt1, prvhp;
-        SPFLOAT tpidsr;
+    SPFLOAT hp;
+    SPFLOAT c1, c2, yt1, prvhp;
+    SPFLOAT tpidsr;
 } sp_tone;
 
 int sp_tone_create(sp_tone **t);
