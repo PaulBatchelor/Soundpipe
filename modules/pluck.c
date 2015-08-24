@@ -12,6 +12,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include "soundpipe.h"
 #define OVERCNT (256)
 #define OVERSHT (8)
@@ -141,7 +142,7 @@ int sp_pluck_init(sp_data *sp, sp_pluck *p, SPFLOAT ifreq)
     p->freq = ifreq;
     p->ifreq = ifreq;
     p->reflect = 0.95;
-    p->pickup = 0.75;
+    p->pick = 0.75;
 
     int npts;
     int rail_len;
@@ -180,7 +181,7 @@ int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *trig, SPFLOAT *in, SPFLO
     SPFLOAT yp0,ym0,ypM,ymM;
     DelayLine   *upper_rail;
     DelayLine   *lower_rail;
-    int pickup, pickfrac;
+    int pick, pickfrac;
     int i;
     int scale;
     SPFLOAT state = p->state;
@@ -198,22 +199,25 @@ int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *trig, SPFLOAT *in, SPFLO
     lower_rail = (DelayLine*)p->lower.ptr;
 
     if(*trig) {
+        while(p->freq < p->ifreq) {
+            p->freq = fabs(p->freq * 2);
+        }
         pluck_setup(sp, p);
     }
 
     /* fractional delays */
-    pickup = (int)((SPFLOAT)OVERCNT * p->pickup * p->rail_len);
-    pickfrac = pickup & OVERMSK;
-    pickup = pickup>>OVERSHT;
-    if (pickup< 0 || pickup > p->rail_len) {
-        pickup = p->rail_len * (OVERCNT/2);
-        pickfrac = pickup & OVERMSK;
-        pickup = pickup>>OVERSHT;
+    pick = (int)((SPFLOAT)OVERCNT * p->pick * p->rail_len);
+    pickfrac = pick & OVERMSK;
+    pick = pick>>OVERSHT;
+    if (pick< 0 || pick > p->rail_len) {
+        pick = p->rail_len * (OVERCNT/2);
+        pickfrac = pick & OVERMSK;
+        pick = pick>>OVERSHT;
     }
 
     SPFLOAT s, s1;
-    s = getvalue(upper_rail, pickup) + getvalue(lower_rail, pickup);
-    s1 = getvalue(upper_rail, pickup+1) + getvalue(lower_rail, pickup+1);
+    s = getvalue(upper_rail, pick) + getvalue(lower_rail, pick);
+    s1 = getvalue(upper_rail, pick+1) + getvalue(lower_rail, pick+1);
 
     /* Fractional delay */
     *out = s + (s1 - s)*(SPFLOAT)pickfrac/(SPFLOAT)OVERCNT; 

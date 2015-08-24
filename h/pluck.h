@@ -1,5 +1,5 @@
 typedef struct {
-    SPFLOAT plk, amp, freq, pickup, reflect;
+    SPFLOAT plk, amp, freq, pick, reflect;
     sp_auxdata upper;
     sp_auxdata lower;
     sp_auxdata up_data;

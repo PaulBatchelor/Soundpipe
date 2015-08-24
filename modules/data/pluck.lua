@@ -34,7 +34,8 @@ A value of 0 is no initial pluck. ]],
             {
                 name = "freq",
                 type = "SPFLOAT",
-                description = "Variable frequency. Should be greater than ifreq.",
+                description = [[Variable frequency. Values less than the initial 
+frequency (ifreq) will be doubled until it is greater than or equal to ifreq.]],
                 default = "ifreq"
             },
             {
