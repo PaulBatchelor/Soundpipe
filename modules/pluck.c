@@ -88,6 +88,11 @@ static int pluck_setup(sp_data *sp, sp_pluck *p)
 
     rail_len = npts / 2;
 
+    /* To avoid buffer overflows */
+    if (rail_len > p->irail_len) {
+        rail_len /= 2;
+    }
+
     if (plk >= 1.0 || plk <= 0.0) {
         plk = 0.5;
     }
@@ -143,33 +148,32 @@ int sp_pluck_init(sp_data *sp, sp_pluck *p, SPFLOAT ifreq)
     p->ifreq = ifreq;
     p->reflect = 0.95;
     p->pick = 0.75;
+    p->plucked = 0;
 
     int npts;
     int rail_len;
-    int scale = 1;
     SPFLOAT plk = p->plk;
                                 
     npts = (int)(sp->sr / p->freq);
 
     /* Minimum rail length is 256 */
-    while (npts < 512) {        
+    while (npts <= 512) {        
         npts += (int)(sp->sr / p->freq);
-        scale++;
     }
 
     rail_len = npts / 2;
+    p->irail_len = rail_len;
 
     if (plk >= 1.0 || plk <= 0.0) {
-        plk = 0.5;
+        p->plk = 0.5;
     }
-
 
     /* Allocate memory for buffers based on ifreq */
 
     sp_auxdata_alloc(&p->upper, sizeof(DelayLine));
     sp_auxdata_alloc(&p->up_data, rail_len * sizeof(SPFLOAT));
     sp_auxdata_alloc(&p->lower, sizeof(DelayLine));
-    sp_auxdata_alloc(&p->down_data, rail_len*sizeof(SPFLOAT));
+    sp_auxdata_alloc(&p->down_data, rail_len * sizeof(SPFLOAT));
   
     pluck_setup(sp, p); 
 
@@ -187,6 +191,18 @@ int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *trig, SPFLOAT *in, SPFLO
     SPFLOAT state = p->state;
     SPFLOAT reflect = p->reflect;
 
+    if(*trig) {
+        p->plucked = 1;
+        while(p->freq < p->ifreq) {
+            p->freq = fabs(p->freq * 2);
+        }
+        pluck_setup(sp, p);
+    }
+
+    if(!p->plucked) {
+        *out = 0;
+        return SP_OK;
+    }
 
     if (reflect <= 0.0 || reflect >= 1.0) {
         reflect = 0.5;
@@ -197,13 +213,6 @@ int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *trig, SPFLOAT *in, SPFLO
     reflect = 1.0 - (1.0 - reflect)/scale; 
     upper_rail = (DelayLine*)p->upper.ptr;
     lower_rail = (DelayLine*)p->lower.ptr;
-
-    if(*trig) {
-        while(p->freq < p->ifreq) {
-            p->freq = fabs(p->freq * 2);
-        }
-        pluck_setup(sp, p);
-    }
 
     /* fractional delays */
     pick = (int)((SPFLOAT)OVERCNT * p->pick * p->rail_len);

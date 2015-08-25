@@ -8,6 +8,8 @@ typedef struct {
     SPFLOAT state;
     int scale;
     int rail_len;
+    int irail_len;
+    int plucked;
 } sp_pluck;
 
 int sp_pluck_create(sp_pluck **p);
