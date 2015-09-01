@@ -6,7 +6,7 @@ default: all
 
 include config.mk
 
-VERSION=0.3
+VERSION=0.3.1
 
 MPATHS=$(addprefix modules/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
