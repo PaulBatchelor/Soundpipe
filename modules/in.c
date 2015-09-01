@@ -9,6 +9,8 @@ int sp_in_create(sp_in **p)
 
 int sp_in_destroy(sp_in **p)
 {
+    sp_in *pp = *p;
+    fclose(pp->fp);
     free(*p);
     return SP_OK;
 }
