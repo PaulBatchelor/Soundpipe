@@ -18,7 +18,7 @@ UTIL += util/wav2smp
 include test/Makefile
 
 modules/%.o: modules/%.c h/%.h h/soundpipe.h
-	gcc -Wall $(CFLAGS) -c -static -Ih $< -o $@
+	$(CC) -Wall $(CFLAGS) -c -static -Ih $< -o $@
 
 h/soundpipe.h: $(HPATHS)
 	cat $(HPATHS) > $@
@@ -55,5 +55,5 @@ bootstrap:
 	util/module_bootstrap.sh $(MODULE_NAME)
 
 util/wav2smp: util/wav2smp.c
-	gcc $< -lsndfile -o $@
+	$(CC) $(CFLAGS) $< -lsndfile -o $@
 
