@@ -47,3 +47,5 @@ SPFLOAT sp_midi2cps(SPFLOAT nn);
 
 int sp_set(sp_param *p, SPFLOAT val);
 
+int sp_out(sp_data *sp, uint32_t chan, SPFLOAT val);
+
