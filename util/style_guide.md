@@ -32,7 +32,8 @@ If you need to explain what your code is doing, there is probably something wron
 If you are doing something necessarily clever, make a comment about it.
 
 If some of your code has bad hacks out of desperation, make a comment about it. It's okay,
-we all have done it before, but note that this will need to be fixed eventually.
+we all have done it before, but note that this will need to be fixed eventually. Feel free to mention
+that you would like some help in your pull-request.
 
 If you are using DSP code or algorithms from someone else, keep it in the header of the .c file. 
 There are several ported Csound opcodes you can use as reference (metro is a good example).
@@ -43,7 +44,7 @@ There are several ported Csound opcodes you can use as reference (metro is a goo
 Choose good names for your variables so your code is clear. In C, a good variable name
 has the right balance of terseness and verboseness for maximum clarity and grokking. 
 
-Variables should be one word, but if must use more than one word, 
+Variables should be one word, but if they must use more than one word, 
 use underscore\_variables and not camelCase.
 
 Soundpipe has a lot of accepted abbreviations for certain variables. These are okay names
