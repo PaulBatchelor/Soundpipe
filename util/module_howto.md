@@ -3,12 +3,12 @@ How to Create a Soundpipe Module
 
 Creating new modules in Soundpipe is a relatively straightforward process.
 
-For this tutorial, we are going to create a gain module. We shall call it "gain". 
+For this tutorial, we are going to create a gain module called "gain". 
 
 ## Bootstrapping
 
 Soundpipe has a script that automatically creates the necessary template files
-needed for a module. 
+needed to create a module. 
 
 This can be invoked with "make" with the following command:
 
@@ -22,11 +22,11 @@ If successful, this script will create 4 boiler plate files:
 - examples/ex_gain.c: an example file utilizing gain
 - modules/data/gain.lua: metadata for gain, used to create a doc page
 
-A fully implemented module file will have these components.
+A fully implemented module file will have these components:
 
 ## The Header File
 
-Typically, the only thing here you'd implement is the data struct 
+Typically, the only thing here you would need to implement is the data struct 
 (empty by default). However, it is okay to tack on variables to the end of the
 init function if you need to do things like create delay lines. 
 
@@ -156,6 +156,7 @@ sptbl["gain"] = {
 ``
 
 ## Adding to Soundpipe
+To add your module to Soundpipe, run the following command:
 
 add to config.mk
 compile
