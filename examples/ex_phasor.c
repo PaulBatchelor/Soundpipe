@@ -18,7 +18,7 @@ int main() {
     sp_create(&sp);
     sp_phasor_create(&ud.phs);
 
-    sp_phasor_init(sp, ud.phs, 0);
+    sp_phasor_init(sp, ud.phs);
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);
 
