@@ -14,7 +14,7 @@ sptbl["tone"] = {
 	},
 	
 	params = {
-	    mandatory = {
+	    optional = {
 	        {
 	            name = "hp",
 	            type = "SPFLOAT *",
