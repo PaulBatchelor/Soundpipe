@@ -14,6 +14,15 @@ sptbl["phasor"] = {
     },
     
     params = {
+        mandatory = {
+            {
+                name = "iphs",
+                type = "SPFLOAT",
+                description = "initial phase",
+                default = 0
+            },
+        },
+
         optional = {
             {
                 name = "freq",
