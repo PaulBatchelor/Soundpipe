@@ -50,7 +50,7 @@ int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
     SPFLOAT buf[sp->nchan][SP_BUFSIZE];
     info.samplerate = sp->sr;
     info.channels = 1;
-    info.format = SF_FORMAT_WAV | SF_FORMAT_FLOAT;
+    info.format = SF_FORMAT_WAV | SF_FORMAT_PCM_24;
     int numsamps, i, chan;
     if(sp->nchan == 1) {
         sf[0] = sf_open(sp->filename, SFM_WRITE, &info);
