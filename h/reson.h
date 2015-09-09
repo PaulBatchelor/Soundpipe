@@ -1,7 +1,7 @@
 typedef struct {
-        SPFLOAT cutoff, bw;
+        SPFLOAT freq, bw;
         int scale;
-        SPFLOAT c1, c2, c3, yt1, yt2, cosf, prvcutoff, prvbw;
+        SPFLOAT c1, c2, c3, yt1, yt2, cosf, prvfreq, prvbw;
         SPFLOAT tpidsr;
 } sp_reson;
 

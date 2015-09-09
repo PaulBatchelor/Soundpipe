@@ -1,3 +1,15 @@
+/* 
+ * reson
+ *
+ * This code has been extracted from the Csound opcode "reson".
+ * It has been modified to work as a Soundpipe module.
+ *
+ * Original Author(s): Barry Vercoe, John FFitch, Gabriel Maldonado
+ * Year: 1991
+ * Location: OOps/afilters.c
+ *
+ */
+
 #include <stdlib.h>
 #include <math.h>
 
@@ -22,9 +34,9 @@ int sp_reson_destroy(sp_reson **p)
 int sp_reson_init(sp_data *sp, sp_reson *p)
 {
     p->scale = 0;
-    p->cutoff = 4000;
+    p->freq = 4000;
     p->bw = 1000;
-    p->prvcutoff = p->prvbw = -100.0;
+    p->prvfreq = p->prvbw = -100.0;
     p->tpidsr = (2.0 * M_PI) / sp->sr * 1.0;
     p->yt1 = p->yt2 = 0.0;
     return SP_OK;
@@ -41,13 +53,13 @@ int sp_reson_compute(sp_data *sp, sp_reson *p, SPFLOAT *in, SPFLOAT *out)
     yt2 = p->yt2;
     
     SPFLOAT yt0;
-    SPFLOAT cf = p->cutoff;
+    SPFLOAT cf = p->freq;
     
     /* bw needs to stay positive so it doesn't blow the filter up */
     SPFLOAT bw = fabs(p->bw);
     
-    if (cf != p->prvcutoff) {
-        p->prvcutoff = cf;
+    if (cf != p->prvfreq ) {
+        p->prvfreq = cf;
         p->cosf = cos(cf * (p->tpidsr));
         flag = 1;
     }

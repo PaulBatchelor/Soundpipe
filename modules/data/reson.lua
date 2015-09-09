@@ -16,7 +16,7 @@ sptbl["reson"] = {
     params = {
         mandatory = {
             {
-                name = "cutoff",
+                name = "freq",
                 type = "SPFLOAT",
                 description = "Center frequency of the filter, or frequency position of the peak response.",
                 default = 4000
