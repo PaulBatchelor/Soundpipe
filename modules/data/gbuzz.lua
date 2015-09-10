@@ -21,6 +21,13 @@ sptbl["gbuzz"] = {
                 description = "Soundpipe function table used internally. This should be a sine wave.",
                 default = "N/A"
             },
+
+            {
+                name = "iphs",
+                type = "SPFLOAT",
+                description ="Phase to start on (in the range 0-1)",
+                default = 0
+            },
         },
     
         optional = {
@@ -53,12 +60,6 @@ sptbl["gbuzz"] = {
                 type = "SPFLOAT",
                 description ="Multiplier. This determines the relative strength of each harmonic.",
                 default = 0.1
-            },
-            {
-                name = "iphs",
-                type = "SPFLOAT",
-                description ="Not yet implemented. Phase to start on (in the range 0-1)",
-                default = 0
             },
         }
     },

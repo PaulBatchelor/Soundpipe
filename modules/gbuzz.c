@@ -38,7 +38,7 @@ int sp_gbuzz_destroy(sp_gbuzz **p)
     return SP_OK;
 }
 
-int sp_gbuzz_init(sp_data *sp, sp_gbuzz *p, sp_ftbl *ft)
+int sp_gbuzz_init(sp_data *sp, sp_gbuzz *p, sp_ftbl *ft, SPFLOAT iphs)
 {
     p->freq = 440;
     p->amp = 0.4;
@@ -46,7 +46,7 @@ int sp_gbuzz_init(sp_data *sp, sp_gbuzz *p, sp_ftbl *ft)
     p->lharm = 1;
     p->mul = 0.1;
     p->ft = ft;
-    p->iphs = 0.0;
+    p->iphs = iphs; 
     
     if (p->iphs >= 0) {
         p->lphs = (int32_t)(p->iphs * SP_FT_MAXLEN);

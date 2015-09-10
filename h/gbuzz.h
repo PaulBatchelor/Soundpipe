@@ -10,5 +10,5 @@ typedef struct {
 
 int sp_gbuzz_create(sp_gbuzz **p);
 int sp_gbuzz_destroy(sp_gbuzz **p);
-int sp_gbuzz_init(sp_data *sp, sp_gbuzz *p, sp_ftbl *ft);
+int sp_gbuzz_init(sp_data *sp, sp_gbuzz *p, sp_ftbl *ft, SPFLOAT iphs);
 int sp_gbuzz_compute(sp_data *sp, sp_gbuzz *p, SPFLOAT *in, SPFLOAT *out);

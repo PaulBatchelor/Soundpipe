@@ -23,7 +23,7 @@ int main() {
     sp_gbuzz_create(&ud.buzz);
 
     sp_gen_sine(sp, ud.ft);
-    sp_gbuzz_init(sp, ud.buzz, ud.ft);
+    sp_gbuzz_init(sp, ud.buzz, ud.ft, 0);
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);
 
