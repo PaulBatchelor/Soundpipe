@@ -30,7 +30,7 @@ int sp_ftbl_destroy(sp_ftbl **ft)
     return SP_OK;
 }
 
-int sp_gen_vals(sp_data *sp, sp_ftbl *ft, char *string)
+int sp_gen_vals(sp_data *sp, sp_ftbl *ft, const char *string)
 {
     char *str1, *token, *t;
     char *saveptr1;
@@ -79,7 +79,7 @@ int sp_gen_file(sp_data *sp, sp_ftbl *ft, const char *filename)
 }
 
 /* port of GEN10 from Csound */
-int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, char *argstring)
+int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, const char *argstring)
 {
     sp_ftbl *args;
     sp_ftbl_create(sp, &args, 1);
@@ -106,7 +106,7 @@ int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, char *argstring)
     return SP_OK;
 }
 
-int sp_gen_line(sp_data *sp, sp_ftbl *ft, char *argstring)
+int sp_gen_line(sp_data *sp, sp_ftbl *ft, const char *argstring)
 {
     uint16_t i, n = 0, seglen;
     SPFLOAT incr, amp = 0;
@@ -159,7 +159,7 @@ int sp_gen_line(sp_data *sp, sp_ftbl *ft, char *argstring)
     return SP_OK;
 }
 
-int sp_gen_xline(sp_data *sp, sp_ftbl *ft, char *argstring)
+int sp_gen_xline(sp_data *sp, sp_ftbl *ft, const char *argstring)
 {
     uint16_t i, n = 0, seglen;
     SPFLOAT mult, amp = 0;
