@@ -11,7 +11,7 @@ makefile () {
     then
         echo "creating $FILEPATH$NAME.$EXT"
         cp $FOO $FILEPATH$NAME.$EXT
-        sed -i -e s/foo/$NAME/g $FILEPATH$NAME.$EXT
+        sed -i '' -e s/foo/$NAME/g $FILEPATH$NAME.$EXT 
     else
         echo "Error: file $FILEPATH$NAME.$EXT already exists."
         exit 1
