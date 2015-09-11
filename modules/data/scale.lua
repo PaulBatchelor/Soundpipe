@@ -44,8 +44,7 @@ sptbl["scale"] = {
 
     modtype = "module",
 
-    description = [[This module scales an incoming signal (in the range of -1, and 1),
-and scales it to an arbitrary range.
+    description = [[This module scales from one range to another defined by a minimum and maximum point in the input and output domain.
 ]],
 
     ninputs = 1,
@@ -54,14 +53,14 @@ and scales it to an arbitrary range.
     inputs = {
         {
             name = "in",
-            description = "Signal to be scaled, expected to be in the range of +/-1."
+            description = "Signal to be scaled."
         },
     },
 
     outputs = {
         {
             name = "out",
-            description = "Signal out"
+            description = "Scaled signal out"
         },
     }
 
