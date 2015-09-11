@@ -30,15 +30,15 @@ Typically, the only thing here you would need to implement is the data struct
 (empty by default). However, it is okay to tack on variables to the end of the
 init function if you need to do things like create delay lines. 
 
-``
+```
 typedef struct {
     SPFLOAT gain;
 } sp_gain;
-``
+```
 
 ## The Module File
 
-``
+```
 int sp\_gain\_init(sp\_data \*sp, sp\_gain \*p)
 {
     p->gain = 0;
@@ -50,11 +50,11 @@ int sp\_gain\_compute(sp\_data \*sp, sp\_gain \*p, SPFLOAT \*in, SPFLOAT \*out)
     *out = *in * p->gain;
     return SP_OK;
 }
-``
+```
 
 ## The example
 
-``
+```
 #include \<stdlib.h\>
 #include \<stdio.h\>
 #include \<time.h\>
@@ -100,11 +100,11 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-``
+```
 
 ## Metadata / Documentation
 
-``
+```
 sptbl["gain"] = {
 
     files = { 
@@ -153,7 +153,7 @@ sptbl["gain"] = {
     }
 
 }
-``
+```
 
 ## Adding to Soundpipe
 To add your module to Soundpipe, run the following command:
