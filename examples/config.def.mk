@@ -7,7 +7,8 @@ files = ex_buthp ex_butlp ex_moogladder ex_noise ex_revsc ex_tone ex_osc \
 	ex_gen_xline ex_gen_gauss ex_allpass ex_comb ex_gen_vals ex_phasor ex_tabread \
 	ex_vco ex_music5 ex_eqfil ex_foo ex_butbr ex_in ex_diskin ex_nsmp ex_prop \
 	ex_samphold ex_delay ex_switch ex_random ex_dmetro ex_pluck ex_atone ex_tin \
-	ex_scale ex_pan2 ex_jcrev ex_tenv2 ex_fold ex_decimator ex_inverse ex_mul
+	ex_scale ex_pan2 ex_jcrev ex_tenv2 ex_fold ex_decimator ex_inverse ex_mul \
+  ex_add
 
 # Jack Module
 #
