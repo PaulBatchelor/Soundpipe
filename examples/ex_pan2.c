@@ -24,7 +24,8 @@ void process(sp_data *sp, void *udata) {
     SPFLOAT osc = 0, outL = 0, outR = 0, lfo = 0;
     sp_osc_compute(sp, ud->osc, NULL, &osc);
     sp_osc_compute(sp, ud->lfo, NULL, &lfo);
-    ud->pan2->pan = 0.5 * (lfo + 1);
+    //ud->pan2->pan = 0.5 * (lfo + 1);
+    ud->pan2->pan = 3;
     sp_pan2_compute(sp, ud->pan2, &osc, &outL, &outR);
     sp_out(sp, 0, outL);
     sp_out(sp, 1, outR);

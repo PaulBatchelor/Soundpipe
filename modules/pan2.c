@@ -53,8 +53,8 @@ int sp_pan2_compute(sp_data *sp, sp_pan2 *p, SPFLOAT *in, SPFLOAT *out1, SPFLOAT
         /* Equal power */
         case 0:
         pan = M_PI * 0.5 * p->pan;
-        *out1 = *in * sin(pan);
-        *out2 = *in * cos(pan);
+        *out1 = *in * cos(pan);
+        *out2 = *in * sin(pan);
         break;
 
         /* Square root */
@@ -65,8 +65,8 @@ int sp_pan2_compute(sp_data *sp, sp_pan2 *p, SPFLOAT *in, SPFLOAT *out1, SPFLOAT
 
         /* simple linear */
         case 2:
-        *out1 = *in * pan;
-        *out2 = *in * (1.0 - pan);
+        *out1 = *in * (1.0 - pan);
+        *out2 = *in * pan;
         break;
 
         /* Equal power (alternative) */
