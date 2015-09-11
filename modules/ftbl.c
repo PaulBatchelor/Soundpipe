@@ -138,7 +138,7 @@ int sp_gen_line(sp_data *sp, sp_ftbl *ft, char *argstring)
         }
 
         seglen = (x2 - x1);
-        incr = (SPFLOAT)(y2 - y1) / seglen;
+        incr = (SPFLOAT)(y2 - y1) / (seglen - 1);
         amp = y1;
 
         while(seglen != 0){

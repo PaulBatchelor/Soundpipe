@@ -6,7 +6,7 @@ int main() {
     sp_create(&sp);
     sp_ftbl *ft;
     sp_ftbl_create(sp, &ft, 4096);
-    sp_gen_line(sp, ft, "0 -1 2048 1 4096 0");
+    sp_gen_line(sp, ft, "0 -1 2048 1 4096 -1");
     int i;
     FILE *fp= fopen("plot.dat", "w");
     for(i = 0; i < ft->size; i++) {
