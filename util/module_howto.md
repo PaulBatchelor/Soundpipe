@@ -39,13 +39,13 @@ typedef struct {
 ## The Module File
 
 ```
-int sp\_gain\_init(sp\_data \*sp, sp\_gain \*p)
+int sp_gain_init(sp_data *sp, sp_gain *p)
 {
     p->gain = 0;
     return SP_OK;
 }
 
-int sp\_gain\_compute(sp\_data \*sp, sp\_gain \*p, SPFLOAT \*in, SPFLOAT \*out)
+int sp_gain_compute(sp_data *sp, sp_gain *p, SPFLOAT *in, SPFLOAT *out)
 {
     *out = *in * p->gain;
     return SP_OK;
@@ -55,9 +55,9 @@ int sp\_gain\_compute(sp\_data \*sp, sp\_gain \*p, SPFLOAT \*in, SPFLOAT \*out)
 ## The example
 
 ```
-#include \<stdlib.h\>
-#include \<stdio.h\>
-#include \<time.h\>
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
 #include "soundpipe.h"
 
 typedef struct {
@@ -66,8 +66,8 @@ typedef struct {
     sp_ftbl *ft; 
 } UserData;
 
-void process(sp\_data \*sp, void \*udata) {
-    UserData \*ud = udata;
+void process(sp_data *sp, void *udata) {
+    UserData *ud = udata;
     SPFLOAT osc = 0, gain = 0;
     sp_osc_compute(sp, ud->osc, NULL, &osc);
     sp_gain_compute(sp, ud->gain, &osc, &gain);
@@ -80,22 +80,22 @@ int main() {
     sp_data *sp;
     sp_create(&sp);
 
-    sp\_gain\_create(&ud.gain);
-    sp\_osc\_create(&ud.osc);
-    sp\_ftbl\_create(sp, &ud.ft, 2048);
+    sp_gain_create(&ud.gain);
+    sp_osc_create(&ud.osc);
+    sp_ftbl_create(sp, &ud.ft, 2048);
 
     ud.gain->gain = 0.3;
 
-    sp\_gain\_init(sp, ud.gain);
-    sp\_gen\_sine(sp, ud.ft);
-    sp\_osc\_init(sp, ud.osc, ud.ft);
+    sp_gain_init(sp, ud.gain);
+    sp_gen_sine(sp, ud.ft);
+    sp_osc_init(sp, ud.osc, ud.ft);
 
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);
 
-    sp\_gain\_destroy(&ud.gain);
-    sp\_ftbl\_destroy(&ud.ft);
-    sp\_osc\_destroy(&ud.osc);
+    sp_gain_destroy(&ud.gain);
+    sp_ftbl_destroy(&ud.ft);
+    sp_osc_destroy(&ud.osc);
 
     sp_destroy(&sp);
     return 0;
