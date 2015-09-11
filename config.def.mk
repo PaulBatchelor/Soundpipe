@@ -29,4 +29,5 @@ CFLAGS += -I lib/faust
 #MODULES += padsynth
 #CFLAGS += -lfftw3
 
-CFLAGS += -I /usr/local/include
+# If you are on OSX, you may need this 
+# CFLAGS += -I /usr/local/include -L /usr/local/include
