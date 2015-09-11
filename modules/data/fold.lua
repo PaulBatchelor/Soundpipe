@@ -26,7 +26,7 @@ sptbl["fold"] = {
     
     modtype = "module",
     
-    description = [[]], 
+    description = [[Adds artificial foldover to an audio signal. Primarily created for use with Decimator.]], 
     
     ninputs = 1,
     noutputs = 1,
