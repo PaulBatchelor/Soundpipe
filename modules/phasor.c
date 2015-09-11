@@ -25,12 +25,11 @@ int sp_phasor_destroy(sp_phasor **p)
     return SP_OK;
 }
 
-int sp_phasor_init(sp_data *sp, sp_phasor *p)
+int sp_phasor_init(sp_data *sp, sp_phasor *p, SPFLOAT iphs)
 {
     p->freq = 440;
-    SPFLOAT phs = 0;
-    p->phs = phs;
-    p->curphs = phs;
+    p->phs = iphs;
+    p->curphs = iphs;
     p->onedsr = 1.0 / sp->sr;
     return SP_OK;
 }
