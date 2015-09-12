@@ -4,7 +4,8 @@ MODULES=base event noise tone moogladder butter revsc ftbl osc posc3 randi \
 	dtrig rpt dust port vdelay count streson tseq bal drip clip fosc dist \
 	gbuzz rms jitter lpf18 reson randmt allpass comb phasor tabread vco \
 	eqfil foo butbr in diskin nsmp prop samphold delay switch dmetro random \
-	pluck atone tin scale pan2 jcrev tenv2 fold decimator inverse mul
+	pluck atone tin scale pan2 jcrev tenv2 fold decimator inverse mul add sub \
+  div abs
 
 
 # ini parser needed for nsmp module
