@@ -1,5 +1,4 @@
 typedef struct {
-    SPFLOAT aleft, aright;
     SPFLOAT pan;
     uint32_t type;
 } sp_pan2;
