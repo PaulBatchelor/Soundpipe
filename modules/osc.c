@@ -41,7 +41,7 @@ int sp_osc_init(sp_data *sp, sp_osc *osc, sp_ftbl *ft, SPFLOAT iphs)
 int sp_osc_compute(sp_data *sp, sp_osc *osc, SPFLOAT *in, SPFLOAT *out)
 {
     sp_ftbl *ftp;
-    SPFLOAT amp, cps, fract, v1, *ftab, *ft;
+    SPFLOAT amp, cps, fract, v1, v2, *ftab, *ft;
     int32_t phs, lobits;
     SPFLOAT sicvt = osc->tbl->sicvt;
 
@@ -58,7 +58,12 @@ int sp_osc_compute(sp_data *sp, sp_osc *osc, SPFLOAT *in, SPFLOAT *out)
     fract = ((phs) & ftp->lomask) * ftp->lodiv;
     ftab = ft + (phs >> lobits);
     v1 = ftab[0];
-    *out = (v1 + (ftab[1] - v1) * fract) * amp;
+    if(ftab[0] == osc->tbl->tbl[osc->tbl->size - 1]) {
+        v2 = osc->tbl->tbl[0];
+    } else {
+        v2 = ftab[1];
+    }
+    *out = (v1 + (v2 - v1) * fract) * amp;
     phs += inc;
     phs &= SP_FT_PHMASK;
 
