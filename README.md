@@ -85,6 +85,8 @@ Daniel Friedman
 
 Nick Arner
 
+Aurelius Prochazka 
+
 If you'd like to contribute to Soundpipe, please read the style guide found at
 util/style\_guide.md
 
