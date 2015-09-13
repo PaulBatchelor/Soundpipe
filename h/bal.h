@@ -6,4 +6,4 @@ typedef struct sp_bal{
 int sp_bal_create(sp_bal **p);
 int sp_bal_destroy(sp_bal **p);
 int sp_bal_init(sp_data *sp, sp_bal *p);
-int sp_bal_compute(sp_data *sp, sp_bal *p, SPFLOAT *comp, SPFLOAT *sig, SPFLOAT *out);
+int sp_bal_compute(sp_data *sp, sp_bal *p, SPFLOAT *sig, SPFLOAT *comp, SPFLOAT *out);

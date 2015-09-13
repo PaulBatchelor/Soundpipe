@@ -1,23 +1,23 @@
 sptbl["decimator"] = {
 
-    files = { 
+    files = {
         module = "decimator.c",
         header = "decimator.h",
         example = "ex_decimator.c",
     },
-    
+
     func = {
         create = "sp_decimator_create",
         destroy = "sp_decimator_destroy",
         init = "sp_decimator_init",
         compute = "sp_decimator_compute",
     },
-    
+
     params = {
         optional = {
             {
                 name = "bit",
-                type = "uint32_t",
+                type = "SPFLOAT",
                 description = "Bitdepth",
                 default = 8
             },
@@ -29,21 +29,21 @@ sptbl["decimator"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[Otherwise known as a "bitcrusher", Decimator will digitially degrade a signal. ]], 
-    
+
+    description = [[Otherwise known as a "bitcrusher", Decimator will digitally degrade a signal. ]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "input",
             description = "Signal input."
         },
     },
-    
+
     outputs = {
         {
             name = "out",
