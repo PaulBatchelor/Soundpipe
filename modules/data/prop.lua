@@ -35,18 +35,18 @@ sptbl["prop"] = {
 
     modtype = "module",
 
-    description = [[Creates a gate using a simple rhythmic notation system called prop. When it reaches the end of the prop string, it will loop back to the beginning.<br>
-<br>
+    description = [[Creates a gate using a simple rhythmic notation system called prop. When it reaches the end of the prop string, it will loop back to the beginning.
+
 Prop has a few basic rules:
-<br>
+
 1. A '+' denotes a on. A '-' denotes an off (rest). They each have an equal duration of a quarter note.
-<br>
+
 2. On and off values can be strung together to create equally spaced gates: +-+--
-<br>
+
 3. When notes are enclosed in parantheses following an positive integer N, their duration is reduced N times: ++2(+-)
-<br>
+
 4. Parenthesis can be nested: +- 3(+2(++)+)
-<br>
+
 ]],
 
     ninputs = 0,

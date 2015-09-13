@@ -49,12 +49,18 @@ sptbl["nsmp"] = {
     modtype = "module",
     
     description = [[Nanosamp: a tiny sampler built for Soundpipe. A nanosamp file is comprised of a mono audio file and an ini file. Nanosamp is geared towards percussive and found sound sample players, and is intended to be combined with soundpipe modules. 
-<br>    
+
 The ini file contains mappings that correspond to the audio file. Such an entry would look like this:
-<br><pre>
+
+
+
 [keyword]
+
 pos = 2.3
+
 size = 3
+
+
 </pre>
 In this instance, an entry called "keyword" has been made, starting at 2.3 seconds in the 
 audio file, with a length of 3 seconds. An example file oneart.ini has been created in the 

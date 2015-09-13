@@ -23,7 +23,8 @@ function PG.title(self, sp)
 end
 
 function PG.desc(self, sp)
-    print(sp[self.name].description)
+    str,_ =  string.gsub(sp[self.name].description, "\n\n","<br>")
+    print(str)
     io.write("<div class=\"row\"><br></div>\n")
 end
 

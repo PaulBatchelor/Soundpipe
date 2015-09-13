@@ -19,12 +19,21 @@ sptbl["in"] = {
     modtype = "module",
     
     description = [[Reads from standard input. Expects type of SPFLOAT, which by default is a float. If the input data is larger than the number of samples, you will get a complaint about a broken pipe (but it will still work). If there is no input data from STDIN, it will hang. 
-<br><br>
+
+    
+
+
 The expected use case of sp_in is to utilize pipes from the commandline, like so:
-<br><br>
+
+
+
+
 cat /dev/urandom | ./my_program 
-<br><br>
-Assuming <i>my_program</i> is using sp_in, this will write /dev/urandom (essentially white noise) to an audio file. 
+
+
+
+
+Assuming my_program is using sp_in, this will write /dev/urandom (essentially white noise) to an audio file. 
 ]], 
     
     ninputs = 0,

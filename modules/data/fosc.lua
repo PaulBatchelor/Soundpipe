@@ -18,7 +18,7 @@ sptbl["fosc"] = {
             {
                 name = "tbl",
                 type = "sp_ftbl *",
-                description = "Wavetable to read from. <B>Note:</B> the size of this table must be a power of 2.",
+                description = "Wavetable to read from. Note: the size of this table must be a power of 2.",
                 default = "N/A"
             },
         },
