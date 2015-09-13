@@ -15,8 +15,6 @@ CPATHS=$(addprefix modules/, $(addsuffix .c, $(MODULES)))
 CFLAGS +=  -g --std=c99 -DSP_VERSION=$(VERSION)
 UTIL += util/wav2smp
 
-include test/Makefile
-
 modules/%.o: modules/%.c h/%.h h/soundpipe.h
 	$(CC) -Wall $(CFLAGS) -c -static -Ih $< -o $@
 
