@@ -1,5 +1,5 @@
 typedef struct {
-    uint32_t bit;
+    SPFLOAT bit;
     SPFLOAT srate;
     sp_fold *fold;
 } sp_decimator;

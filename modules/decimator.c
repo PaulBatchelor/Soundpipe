@@ -27,7 +27,7 @@ int sp_decimator_init(sp_data *sp, sp_decimator *p)
 
 int sp_decimator_compute(sp_data *sp, sp_decimator *p, SPFLOAT *in, SPFLOAT *out)
 {
-    int bits = pow(2, p->bit);
+    SPFLOAT bits = pow(2, p->bit);
     SPFLOAT foldamt = sp->sr / p->srate;
     SPFLOAT sig;
     *out = *in;
