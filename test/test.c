@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
 #include "soundpipe.h"
 #include "md5.h"
@@ -44,7 +45,6 @@ int sp_test_compare(sp_test *t, const char *md5hash)
     md5_finish(&t->state, t->digest);
     int i;
     char in[3], out[3];
-    unsigned char val;
     int fail = 0;
     for(i = 0; i < 16; i++) {
         in[0] = md5hash[2 * i];
