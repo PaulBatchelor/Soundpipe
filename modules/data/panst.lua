@@ -41,15 +41,26 @@ sptbl["panst"] = {
     ninputs = 2,
     noutputs = 2,
 
+    inputs = {
+        {
+            name = "in2",
+            description = "Stero left input signal."
+        },
+        {
+            name = "in2",
+            description = "Stero right input signal."
+        },
+
+    },
 
     outputs = {
         {
             name = "out_left",
-            description = "Stereo left output for panst."
+            description = "Stereo left output."
         },
         {
             name = "out_right",
-            description = "Stereo right output for panst."
+            description = "Stereo right output."
         },
     }
 

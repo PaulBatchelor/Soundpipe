@@ -40,6 +40,13 @@ sptbl["pan2"] = {
 
     ninputs = 1,
     noutputs = 2,
+    
+    inputs = {
+        {
+            name = "in",
+            description = "Mono input signal to be panned."
+        },
+    },
 
     outputs = {
         {
