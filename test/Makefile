@@ -1,15 +1,7 @@
-TESTS=test event ftbl
-TPATHS=$(addprefix test/, $(TESTS))
+.PHONY: clean
 
-.PHONY: tests
+ex_test: ex_test.c test.c md5.c
+	gcc -g -I../h libtap.c md5.c test.c ex_test.c -lsndfile -lm ../libsoundpipe.a -o ex_test
 
-tests: $(TPATHS)
-
-test/libtap.o: test/libtap.c
-	gcc -I h/ -c t/libtap.c -o t/libtap.o
-
-test/%: test/%.c test/libtap.o $(MPATHS)
-	gcc -g -I h/ $(CFLAGS) -o $@ $< test/libtap.o $(MPATHS)
-
-clean_tests:
-	rm -rf $(TPATHS) test/libtap.o
+clean:
+	rm -rf ex_test
