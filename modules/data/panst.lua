@@ -1,16 +1,16 @@
-sptbl["pan2"] = {
+sptbl["panst"] = {
 
     files = {
-        module = "pan2.c",
-        header = "pan2.h",
-        example = "ex_pan2.c",
+        module = "panst.c",
+        header = "panst.h",
+        example = "ex_panst.c",
     },
 
     func = {
-        create = "sp_pan2_create",
-        destroy = "sp_pan2_destroy",
-        init = "sp_pan2_init",
-        compute = "sp_pan2_compute",
+        create = "sp_panst_create",
+        destroy = "sp_panst_destroy",
+        init = "sp_panst_init",
+        compute = "sp_panst_compute",
     },
 
     params = {
@@ -36,19 +36,20 @@ sptbl["pan2"] = {
 
     modtype = "module",
 
-    description = [[Panner]],
+    description = [[Stereo Panner]],
 
-    ninputs = 1,
+    ninputs = 2,
     noutputs = 2,
+
 
     outputs = {
         {
             name = "out_left",
-            description = "Stereo left output for pan2."
+            description = "Stereo left output for panst."
         },
         {
             name = "out_right",
-            description = "Stereo right output for pan2."
+            description = "Stereo right output for panst."
         },
     }
 
