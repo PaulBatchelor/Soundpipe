@@ -18,7 +18,7 @@ int sp_decimator_destroy(sp_decimator **p)
 
 int sp_decimator_init(sp_data *sp, sp_decimator *p)
 {
-    p->bit = 8;
+    p->bitdepth = 8;
     p->srate = 10000;
     sp_fold_create(&p->fold);
     sp_fold_init(sp, p->fold);
@@ -27,16 +27,17 @@ int sp_decimator_init(sp_data *sp, sp_decimator *p)
 
 int sp_decimator_compute(sp_data *sp, sp_decimator *p, SPFLOAT *in, SPFLOAT *out)
 {
-    SPFLOAT bits = pow(2, p->bit);
+    SPFLOAT bits = pow(2, floor(p->bitdepth));
     SPFLOAT foldamt = sp->sr / p->srate;
     SPFLOAT sig;
-    *out = *in;
+    *out = *in * 65556.0;
     *out += 32768;
     *out *= (bits / 65536.0);
-    *out = *out;
+    *out = floor(*out);
     *out = *out * (65536.0 / bits) - 32768;
     sig = *out;
     p->fold->incr = foldamt;
     sp_fold_compute(sp, p->fold, &sig, out);
+    *out /= 65536.0;
     return SP_OK;
 }

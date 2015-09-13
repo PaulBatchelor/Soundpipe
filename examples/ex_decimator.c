@@ -28,6 +28,9 @@ int main() {
 
     sp_diskin_init(sp, ud.file, "oneart.wav");
     sp_decimator_init(sp, ud.decimator);
+    ud.decimator->bitdepth = 8;
+    ud.decimator->srate = 10000;
+
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);
 

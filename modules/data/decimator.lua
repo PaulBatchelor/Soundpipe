@@ -16,9 +16,9 @@ sptbl["decimator"] = {
     params = {
         optional = {
             {
-                name = "bit",
+                name = "bitdepth",
                 type = "SPFLOAT",
-                description = "Bitdepth",
+                description = "Bit depth. Expects an integer in the range of 1-16. Fractional values will be truncated.",
                 default = 8
             },
             {
