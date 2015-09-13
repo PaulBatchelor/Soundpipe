@@ -23,7 +23,7 @@ void process(sp_data *sp, void *ud) {
     sp_tenv_compute(sp, udp->env, &tick, &env);
     udp->filt->freq = 300 + 3000 * env;
     sp_moogladder_compute(sp, udp->filt, &out, &filt);
-    sp_bal_compute(sp, udp->bal, &osc, &filt, &bal);
+    sp_bal_compute(sp, udp->bal, &filt, &osc, &bal);
     sp->out[0] = bal * env;
 }
 
