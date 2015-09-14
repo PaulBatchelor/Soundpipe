@@ -39,7 +39,7 @@ sptbl["drip"] = {
             {
                 name = "damp",
                 type = "SPFLOAT",
-                description ="The dampening factor. Maximum value is 2.0.",
+                description ="The damping factor. Maximum value is 2.0.",
                 default = 0.2
             },
             {
