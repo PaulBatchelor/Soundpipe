@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include "soundpipe.h"
 #include "md5.h"
-#include "test.h"
 #include "tap.h"
+#include "test.h"
 
 typedef struct {
     sp_osc *osc;
