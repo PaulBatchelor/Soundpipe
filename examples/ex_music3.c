@@ -349,6 +349,7 @@ int main()
     sp_ftbl_destroy(&ud.notes);
     sp_tseq_destroy(&ud.seq);
     sp_maygate_destroy(&ud.mg);
+    sp_progress_destroy(&ud.prog);
 
     sp_destroy(&sp);
     return 0;
