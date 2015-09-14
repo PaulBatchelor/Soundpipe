@@ -5,6 +5,7 @@ typedef struct {
     md5_state_t state;
     md5_byte_t digest[16];
     char md5string[33];
+    char *md5;
 } sp_test;
 
 int sp_test_create(sp_test **t, uint32_t bufsize);

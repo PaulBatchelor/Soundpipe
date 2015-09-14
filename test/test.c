@@ -12,13 +12,14 @@ int sp_test_create(sp_test **t, uint32_t bufsize)
     sp_test *tp = *t;
 
     SPFLOAT *buf = malloc(sizeof(SPFLOAT) * bufsize);
-    for(i = 0; i < bufsize; i++) tp->buf = 0; 
+    for(i = 0; i < bufsize; i++) tp->buf = 0;
 
     tp->buf = buf;
     tp->size = bufsize;
     tp->pos = 0;
     md5_init(&tp->state);
     tp->md5string[32] = '\0';
+    tp->md5 = tp->md5string;
     return SP_OK;
 }
 
