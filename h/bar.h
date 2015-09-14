@@ -1,6 +1,6 @@
 typedef struct {
-    SPFLOAT bcL, bcR, iK, ib, scan, iT30;
-    SPFLOAT ipos, ivel, iwid;
+    SPFLOAT bcL, bcR, iK, ib, scan, T30;
+    SPFLOAT pos, vel, wid;
 
     SPFLOAT *w, *w1, *w2;
     int step, first;
@@ -11,5 +11,5 @@ typedef struct {
 
 int sp_bar_create(sp_bar **p);
 int sp_bar_destroy(sp_bar **p);
-int sp_bar_init(sp_data *sp, sp_bar *p);
+int sp_bar_init(sp_data *sp, sp_bar *p, SPFLOAT iK, SPFLOAT ib);
 int sp_bar_compute(sp_data *sp, sp_bar *p, SPFLOAT *in, SPFLOAT *out);
