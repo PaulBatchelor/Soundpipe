@@ -16,7 +16,7 @@ sptbl["dist"] = {
     params = {
         optional = {
             {
-                name = "pregrain",
+                name = "pregain",
                 type = "SPFLOAT",
                 description ="Gain applied before waveshaping.",
                 default = 2.0
