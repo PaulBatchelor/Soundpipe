@@ -218,6 +218,7 @@ typedef struct {
     sp_ftbl *notes;
     sp_tseq *seq;
     sp_maygate *mg;
+    sp_progress *prog;
 } UserData;
 
 void process(sp_data *sp, void *udata)
@@ -267,6 +268,7 @@ void process(sp_data *sp, void *udata)
     SPFLOAT fader = 0;
     sp_tenv_compute(sp, ud->master, &mtick, &fader);
     sp->out[0] *= fader;
+    sp_progress_compute(sp, ud->prog, NULL, NULL);
 
 }
 
@@ -283,6 +285,7 @@ int main()
     ud.pdel = 0;
     sp_data *sp;
     sp_create(&sp);
+    sp->len = 44100 * 40;
     char *notes[] = {
         "62 69 78",
         "55 62 69 71",
@@ -314,6 +317,9 @@ int main()
 
     sp_tenv_create(&ud.master);
     sp_tenv_init(sp, ud.master, 0, 30, 10);
+    
+    sp_progress_create(&ud.prog);
+    sp_progress_init(sp, ud.prog);
 
     modal_create(&ud.mod);
     modal_init(sp, ud.mod);
@@ -325,13 +331,13 @@ int main()
     sp_maygate_init(sp, ud.mg);
     ud.mg->prob = 0.3;
     ud.mg->mode = 1;
-    sp->len = 44100 * 40;
     sp_process(sp, &ud, process);
 
     for(i = 0; i < NUMLINE; i++) {
         sp_randi_destroy(&ud.line[i].randi);
         chord_cloud_destroy(&ud.line[i].cc);
     }
+
 
     sp_drip_destroy(&ud.drip);
     sp_revsc_destroy(&ud.rev);
