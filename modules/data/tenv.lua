@@ -1,18 +1,18 @@
 sptbl["tenv"] = {
 
-    files = { 
+    files = {
         module = "tenv.c",
         header = "tenv.h",
         example = "ex_tenv.c",
     },
-    
+
     func = {
         create = "sp_tenv_create",
         destroy = "sp_tenv_destroy",
         init = "sp_tenv_init",
         compute = "sp_tenv_compute",
     },
-    
+
     params = {
         mandatory = {
             {
@@ -42,28 +42,28 @@ sptbl["tenv"] = {
                 default = 0
             },
             {
-                name = "in",
+                name = "input",
                 type = "SPFLOAT",
                 description = "Internal input signal. If sigmode variable is set, it will multiply the envelope by this variable. Most of the time, this should be updated at audiorate.",
                 default = 0
             }
-        }    
+        }
     },
-    
+
     modtype = "module",
-    
-    description = [[TEnv is a trigger based linear AHD envelope generator.]], 
-    
+
+    description = [[TEnv is a trigger based linear AHD envelope generator.]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "trig",
             description = "Trigger input. When non-zero, the envelope will (re)trigger."
         },
     },
-    
+
     outputs = {
         {
             name = "out",

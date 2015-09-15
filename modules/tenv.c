@@ -26,8 +26,8 @@ int sp_tenv_init(sp_data *sp, sp_tenv *p, SPFLOAT atk, SPFLOAT hold, SPFLOAT rel
     p->hold = hold;
     p->rel = rel;
     p->sigmode = 0;
-    p->in = 0;
-       
+    p->input = 0;
+
     p->sr = sp->sr;
     p->atk_end = p->sr * atk;
     p->rel_start = p->sr * (atk + hold);
@@ -66,15 +66,15 @@ void sp_tenv_comp(void *ud, SPFLOAT *out)
     }
     sig = (sig > 1.0) ? 1.0 : sig;
     sig = (sig < 0.0) ? 0.0 : sig;
-   
+
     /* Internal input signal mode */
     if(env->sigmode) {
-        *out = env->in * sig;
+        *out = env->input * sig;
     } else {
         *out = sig;
     }
-    
-    
+
+
     env->pos++;
     env->last = sig;
 }
