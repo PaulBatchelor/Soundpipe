@@ -1,18 +1,18 @@
 sptbl["drip"] = {
 
-    files = { 
+    files = {
         module = "drip.c",
         header = "drip.h",
         example = "ex_drip.c",
     },
-    
+
     func = {
         create = "sp_drip_create",
         destroy = "sp_drip_destroy",
         init = "sp_drip_init",
         compute = "sp_drip_compute",
     },
-    
+
     params = {
         mandatory = {
             {
@@ -22,7 +22,7 @@ sptbl["drip"] = {
                 default = 0.09
             },
         },
-    
+
         optional = {
             {
                 name = "num_tubes",
@@ -68,21 +68,23 @@ sptbl["drip"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[This is a physical model of the sound of dripping water. When triggered, it will produce a droplet of water.]], 
-    
+
+    description = [[Water drop physical model
+
+    This is a physical model of the sound of dripping water. When triggered, it will produce a droplet of water.]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "trig",
             description = "Trigger value. When non-zero, it will reinit the drip and create a drip sound."
         },
     },
-    
+
     outputs = {
         {
             name = "out",

@@ -1,18 +1,18 @@
 sptbl["butbp"] = {
 
-    files = { 
+    files = {
         module = "butbp.c",
         header = "butbp.h",
         example = "ex_butbp.c",
     },
-    
+
     func = {
         create = "sp_butbp_create",
         destroy = "sp_butbp_destroy",
         init = "sp_butbp_init",
         compute = "sp_butbp_compute",
     },
-    
+
     params = {
         optional = {
             {
@@ -29,21 +29,21 @@ sptbl["butbp"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[bandpass butterworth filter.]], 
-    
+
+    description = [[Bandpass Butterworth filter]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "input",
             description = "Signal input."
         },
     },
-    
+
     outputs = {
         {
             name = "output",

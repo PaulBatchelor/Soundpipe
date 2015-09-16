@@ -1,18 +1,18 @@
 sptbl["bar"] = {
 
-    files = { 
+    files = {
         module = "bar.c",
         header = "bar.h",
         example = "ex_bar.c",
     },
-    
+
     func = {
         create = "sp_bar_create",
         destroy = "sp_bar_destroy",
         init = "sp_bar_init",
         compute = "sp_bar_compute",
     },
-    
+
     params = {
         mandatory = {
             {
@@ -28,7 +28,7 @@ sptbl["bar"] = {
                 default = 0.001
             }
         },
-    
+
         optional = {
             {
                 name = "bcL",
@@ -74,21 +74,21 @@ sptbl["bar"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[Physical model approximating the sound of a struck metal bar.]], 
-    
+
+    description = [[Physical model approximating the sound of a struck metal bar]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "trig",
             description = "Non-zero values will strike the bar."
         },
     },
-    
+
     outputs = {
         {
             name = "out",

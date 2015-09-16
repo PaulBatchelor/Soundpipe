@@ -1,18 +1,18 @@
 sptbl["allpass"] = {
 
-    files = { 
+    files = {
         module = "allpass.c",
         header = "allpass.h",
         example = "ex_allpass.c",
     },
-    
+
     func = {
         create = "sp_allpass_create",
         destroy = "sp_allpass_destroy",
         init = "sp_allpass_init",
         compute = "sp_allpass_compute",
     },
-    
+
     params = {
         mandatory = {
             {
@@ -22,7 +22,7 @@ sptbl["allpass"] = {
                 default = 0.1
             }
         },
-    
+
         optional = {
             {
                 name = "revtime",
@@ -32,21 +32,23 @@ sptbl["allpass"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[Allpass filter, often used for the creation of reverb modules.]], 
-    
+
+    description = [[Allpass filter
+
+    Often used for the creation of reverb modules.]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "input",
             description = "Signal input."
         },
     },
-    
+
     outputs = {
         {
             name = "out",

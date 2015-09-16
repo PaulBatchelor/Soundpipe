@@ -1,18 +1,18 @@
 sptbl["dust"] = {
 
-    files = { 
+    files = {
         module = "dust.c",
         header = "dust.h",
         example = "ex_dust.c",
     },
-    
+
     func = {
         create = "sp_dust_create",
         destroy = "sp_dust_destroy",
         init = "sp_dust_init",
         compute = "sp_dust_compute",
     },
-    
+
     params = {
         mandatory = {
             {
@@ -28,7 +28,7 @@ sptbl["dust"] = {
                 default = 10
             }
         },
-    
+
         optional = {
             {
                 name = "bipolar",
@@ -38,21 +38,21 @@ sptbl["dust"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[Dust creates a series of random impulses.]], 
-    
+
+    description = [[A series of random impulses]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "dummy",
             description = "This doesn't do anything."
         },
     },
-    
+
     outputs = {
         {
             name = "out",

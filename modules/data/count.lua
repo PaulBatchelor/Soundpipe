@@ -32,7 +32,9 @@ sptbl["count"] = {
 
     modtype = "module",
 
-    description = [[Trigger-based fixed counter. The signal output will count from 0 to [N-1], and then
+    description = [[Trigger-based fixed counter
+
+    The signal output will count from 0 to [N-1], and then
 repeat itself. Count will start when it has been triggered, otherwise it will be -1.]],
 
     ninputs = 1,

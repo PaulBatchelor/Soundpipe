@@ -18,7 +18,9 @@ sptbl["bal"] = {
 
     modtype = "module",
 
-    description = [[Balance the gain of one signal based on another signal. Often this is used to restore gain lost in the output of a filter.
+    description = [[Balance the gain of one signal based on another signal
+
+    Often this is used to restore gain lost in the output of a filter.
 
 In the source code, the value "ihp" is set to a static 10hz. This is the default value in Csound, and you probably won't need to touch this.
 ]],

@@ -32,7 +32,9 @@ sptbl["decimator"] = {
 
     modtype = "module",
 
-    description = [[Otherwise known as a "bitcrusher", Decimator will digitally degrade a signal. ]],
+    description = [[Digital signal degradation
+
+    Otherwise known as a "bitcrusher", Decimator will digitally degrade a signal. ]],
 
     ninputs = 1,
     noutputs = 1,

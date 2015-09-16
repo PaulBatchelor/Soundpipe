@@ -15,7 +15,7 @@ sptbl["add"] = {
 
     modtype = "module",
 
-    description = [[A sum of two input signals.]],
+    description = [[A sum of two input signals]],
 
     ninputs = 2,
     noutputs = 1,

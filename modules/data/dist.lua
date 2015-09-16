@@ -1,18 +1,18 @@
 sptbl["dist"] = {
 
-    files = { 
+    files = {
         module = "dist.c",
         header = "dist.h",
         example = "ex_dist.c",
     },
-    
+
     func = {
         create = "sp_dist_create",
         destroy = "sp_dist_destroy",
         init = "sp_dist_init",
         compute = "sp_dist_compute",
     },
-    
+
     params = {
         optional = {
             {
@@ -39,24 +39,24 @@ sptbl["dist"] = {
                 description ="Like shape1, only for the negative part.",
                 default = 0
             },
-            
+
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[Distortion using a modified hyperbolic tangent function.]], 
-    
+
+    description = [[Distortion using a modified hyperbolic tangent function]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "input",
             description = "Signal input."
         },
     },
-    
+
     outputs = {
         {
             name = "out",

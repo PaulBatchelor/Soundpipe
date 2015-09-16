@@ -1,18 +1,18 @@
 sptbl["fosc"] = {
 
-    files = { 
+    files = {
         module = "fosc.c",
         header = "fosc.h",
         example = "ex_fosc.c",
     },
-    
+
     func = {
         create = "sp_fosc_create",
         destroy = "sp_fosc_destroy",
         init = "sp_fosc_init",
         compute = "sp_fosc_compute",
     },
-    
+
     params = {
         mandatory = {
             {
@@ -55,21 +55,21 @@ sptbl["fosc"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[ FM oscilator pair with linear interpolation. ]], 
-    
+
+    description = [[FM oscilator pair with linear interpolation]],
+
     ninputs = 0,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "dummy",
             description = "This does nothing."
         },
     },
-    
+
     outputs = {
         {
             name = "out",

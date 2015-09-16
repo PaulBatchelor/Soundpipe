@@ -1,18 +1,18 @@
 sptbl["fofilt"] = {
 
-    files = { 
+    files = {
         module = "fofilt.c",
         header = "fofilt.h",
         example = "ex_fofilt.c",
     },
-    
+
     func = {
         create = "sp_fofilt_create",
         destroy = "sp_fofilt_destroy",
         init = "sp_fofilt_init",
         compute = "sp_fofilt_compute",
     },
-    
+
     params = {
         optional = {
             {
@@ -35,21 +35,22 @@ sptbl["fofilt"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[A formant filter. When fed with a pulse train, it will generate a series of overlapping grains. Overlapping will occur when 1/freq < dec, but there is no upper limit on the number of overlaps. (cited from www.csounds.com/manual/html/fofilter.html)]], 
-    
+
+    description = [[Formant filter
+    When fed with a pulse train, it will generate a series of overlapping grains. Overlapping will occur when 1/freq < dec, but there is no upper limit on the number of overlaps. (cited from www.csounds.com/manual/html/fofilter.html)]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "input",
             description = "Signal input."
         },
     },
-    
+
     outputs = {
         {
             name = "out",

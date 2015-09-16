@@ -1,18 +1,18 @@
 sptbl["dtrig"] = {
 
-    files = { 
+    files = {
         module = "dtrig.c",
         header = "dtrig.h",
         example = "ex_dtrig.c",
     },
-    
+
     func = {
         create = "sp_dtrig_create",
         destroy = "sp_dtrig_destroy",
         init = "sp_dtrig_init",
         compute = "sp_dtrig_compute",
     },
-        
+
     params = {
         mandatory = {
             {
@@ -22,7 +22,7 @@ sptbl["dtrig"] = {
                 default = "N/A"
             }
         },
-    
+
         optional = {
             {
                 name = "loop",
@@ -38,21 +38,23 @@ sptbl["dtrig"] = {
             }
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[ "dtrig" is a a delta dtrigger that is able to create spaced out triggers. It is set off by a single trigger.]], 
-    
+
+    description = [[ Delta trigger
+
+    This is able to create spaced out triggers. It is set off by a single trigger.]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "trig",
             description = "trigger input."
         },
     },
-    
+
     outputs = {
         {
             name = "out",

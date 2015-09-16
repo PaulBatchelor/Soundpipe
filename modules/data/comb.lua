@@ -1,18 +1,18 @@
 sptbl["comb"] = {
 
-    files = { 
+    files = {
         module = "comb.c",
         header = "comb.h",
         example = "ex_comb.c",
     },
-    
+
     func = {
         create = "sp_comb_create",
         destroy = "sp_comb_destroy",
         init = "sp_comb_init",
         compute = "sp_comb_compute",
     },
-    
+
     params = {
         mandatory = {
             {
@@ -22,7 +22,7 @@ sptbl["comb"] = {
                 default = 0.1
             }
         },
-    
+
         optional = {
             {
                 name = "revtime",
@@ -32,21 +32,21 @@ sptbl["comb"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[Comb filter.]], 
-    
+
+    description = [[Comb filter]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "input",
             description = "Signal input."
         },
     },
-    
+
     outputs = {
         {
             name = "out",

@@ -15,7 +15,7 @@ sptbl["div"] = {
 
     modtype = "module",
 
-    description = [[A division of two input signals.]],
+    description = [[A division of two input signals]],
 
     ninputs = 2,
     noutputs = 1,
@@ -37,7 +37,7 @@ sptbl["div"] = {
     outputs = {
         {
             name = "out",
-            description = "Output as division of input signals."
+            description = "Output as division of input signals"
         },
     }
 
