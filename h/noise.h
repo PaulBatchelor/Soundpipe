@@ -1,5 +1,5 @@
 typedef struct{
-    SPFLOAT gain;
+    SPFLOAT amp;
 }sp_noise;
 
 int sp_noise_create(sp_noise **ns);
