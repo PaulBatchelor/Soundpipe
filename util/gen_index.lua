@@ -13,13 +13,15 @@ io.write("<h1>Soundpipe Modules</h1>\n")
 for line in file:lines() do
     sptbl = {}
     dofile(string.format("modules/data/%s.lua", line))
-	io.write("<div class=\"row\">\n")
+	io.write("<div class=\"row\"><nobr>\n")
 	io.write(string.format("<a href=\"%s.html\">%s</a>\n", line, line))
-	io.write("</div>\n")
-    -- Prints description
-	-- io.write("<div class=\"row\">\n")
-	-- io.write(string.format("%s\n", sptbl[line].description))
-	-- io.write("</div>\n")
+  firstline = string.gsub(sptbl[line].description, "\n+", "")
+  -- newstring = string.gsub(string,"Tutorial","Language")
+	io.write(string.format("%s\n", string.sub(firstline, 0, 40)))
+  if string.len(firstline) > 40 then
+    io.write("...")
+  end
+	io.write("</nobr></div>\n")
 end
 
 io.write("</div></body></html>\n")
