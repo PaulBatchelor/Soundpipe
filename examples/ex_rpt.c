@@ -45,7 +45,11 @@ int main(){
     ud.rpt->bpm = tempo;
     ud.rpt->div = 8;
     ud.rpt->rep = 4;
-    sp_tenv_init(sp, ud.te, 0.001, 0.1, 0.1);
+    sp_tenv_init(sp, ud.te);
+    ud.te->atk = 0.001;
+    ud.te->hold = 0.1;
+    ud.te->rel =  0.1;
+
     sp_process(sp, &ud, compute);
 
     sp_tenv_destroy(&ud.te);

@@ -49,7 +49,10 @@ int main() {
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_osc_create(&ud.osc);
 
-    sp_tenv_init(sp, ud.tenv, 0.03, 0.01, 0.1);
+    sp_tenv_init(sp, ud.tenv);
+    ud.tenv->atk = 0.03;
+    ud.tenv->hold = 0.01;
+    ud.tenv->rel = 0.1;
     sp_metro_init(sp, ud.met);
     ud.met->freq = 3;
     sp_tevent_init(sp, ud.te, freq_reinit, freq_compute, freqp);

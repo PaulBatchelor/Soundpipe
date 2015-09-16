@@ -157,7 +157,11 @@ int chord_cloud_init(sp_data *sp, chord_cloud *cc, char *notes, SPFLOAT amp)
         tmposc->freq = sp_midi2cps(cc->notes->tbl[i]);
         tmposc->amp = 1.0;
         grain->amp = 1.0;
-        sp_tenv_init(sp, tmpenv, 0.01, 0, 0.03);
+        sp_tenv_init(sp, tmpenv);
+        tmpenv->atk = 0.01;
+        tmpenv->hold = 0;
+        tmpenv->rel =  0.03;
+
         sp_tevent_init(sp, tmpretrig, cloud_reinit, cloud_compute, grain);
     }
 
@@ -317,7 +321,11 @@ int main()
     ud.del->del = 0.3;
 
     sp_tenv_create(&ud.master);
-    sp_tenv_init(sp, ud.master, 0, 30, 10);
+    sp_tenv_init(sp, ud.master);
+    ud.master->atk = 0;
+    ud.master->hold = 30;
+    ud.master->rel =  10;
+
 
     sp_progress_create(&ud.prog);
     sp_progress_init(sp, ud.prog);

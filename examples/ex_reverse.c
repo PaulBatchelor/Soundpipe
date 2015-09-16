@@ -5,7 +5,7 @@
 
 typedef struct {
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_tenv *tenv;
     sp_reverse *rv;
 } udata;
@@ -35,14 +35,18 @@ int main() {
     uint32_t bufsize;
     sp_data *sp;
     sp_create(&sp);
-    
+
     sp_reverse_create(&ud.rv);
     sp_tenv_create(&ud.tenv);
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_osc_create(&ud.osc);
 
     sp_reverse_init(sp, ud.rv, 1.0);
-    sp_tenv_init(sp, ud.tenv, 0.03, 0.01, 0.3);
+    sp_tenv_init(sp, ud.tenv);
+    ud.tenv->atk = 0.03;
+    ud.tenv->hold = 0.01;
+    ud.tenv->rel =  0.3;
+
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
     ud.osc->freq = 1000;

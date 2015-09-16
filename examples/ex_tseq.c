@@ -5,7 +5,7 @@
 
 typedef struct {
     sp_osc *osc;
-    sp_ftbl *ft, *delta, *nn; 
+    sp_ftbl *ft, *delta, *nn;
     sp_tenv *tenv;
     sp_dtrig *dt;
     sp_tseq *seq;
@@ -49,12 +49,16 @@ int main() {
 
     sp_gen_vals(sp, ud.delta, "0.2 0.2 0.2 0.1");
     sp_gen_vals(sp, ud.nn, "60 62 64 67");
-    sp_tseq_create(&ud.seq); 
+    sp_tseq_create(&ud.seq);
     sp_tseq_init(sp, ud.seq, ud.nn);
-    
+
     sp_dtrig_init(sp, ud.dt, ud.delta);
     ud.dt->loop = 1.0;
-    sp_tenv_init(sp, ud.tenv, 0.01, 0.01, 0.05);
+    sp_tenv_init(sp, ud.tenv);
+    ud.tenv->atk = 0.01;
+    ud.tenv->hold = 0.01;
+    ud.tenv->rel =  0.05;
+
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
     ud.osc->freq = 1000;
@@ -63,7 +67,7 @@ int main() {
     sp_process(sp, &ud, write_osc);
 
     sp_dtrig_destroy(&ud.dt);
-    sp_tseq_destroy(&ud.seq); 
+    sp_tseq_destroy(&ud.seq);
     sp_tenv_destroy(&ud.tenv);
     sp_ftbl_destroy(&ud.ft);
     sp_ftbl_destroy(&ud.nn);

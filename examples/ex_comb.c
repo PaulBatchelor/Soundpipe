@@ -25,13 +25,17 @@ int main()
     UserData ud;
     sp_data *sp;
     sp_create(&sp);
-   
+
     sp_comb_create(&ud.comb);
     sp_tenv_create(&ud.env);
     sp_noise_create(&ud.nz);
 
     sp_comb_init(sp, ud.comb, 0.01);
-    sp_tenv_init(sp, ud.env, 0.001, 0.00, 0.1);
+    sp_tenv_init(sp, ud.env);
+    ud.env->atk = 0.001;
+    ud.env->hold = 0.00;
+    ud.env->rel =  0.1;
+
     sp_noise_init(sp, ud.nz);
 
     sp->len = 44100 * 5;

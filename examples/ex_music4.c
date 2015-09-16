@@ -17,7 +17,7 @@ void make_note(sp_data *sp, sp_tenv *tenv, sp_posc3 *posc3, unsigned long counte
     SPFLOAT tick = (count == 0) ? 1 : 0;
     sp_tenv_compute(sp, tenv, &tick, &env);
     sp_posc3_compute(sp, posc3, NULL, &osc);
-    *output = osc * env; 
+    *output = osc * env;
 }
 void write_music(sp_data *sp, void *ud)
 {
@@ -27,7 +27,7 @@ void write_music(sp_data *sp, void *ud)
     for(int i = 0; i < 8; i++) {
         make_note(sp, udp->tenv[i], udp->posc[i], sp->pos, ((i * NOTEDUR) + NOTEDUR), &out[i]);
     }
-    mix = (out[0] * 0.2) + (out[1] * 0.2) + (out[2] * 0.2) + (out[3] * 0.2) + (out[4] * 0.2) + (out[5] * 0.2) 
+    mix = (out[0] * 0.2) + (out[1] * 0.2) + (out[2] * 0.2) + (out[3] * 0.2) + (out[4] * 0.2) + (out[5] * 0.2)
        + (out[6] * 0.2) +  (out[7] * 0.2);
     sp_revsc_compute(sp, udp->rev, &mix, &mix, &verb, &foo);
     sp->out[0] = mix + (verb * 0.2);
@@ -44,7 +44,12 @@ int main()
     sp_revsc_create(&ud.rev);
     sp_gen_sine(sp, ud.ft);
 
-    for(int i = 0; i < 8; i++) sp_tenv_init(sp, ud.tenv[i], 0.01, 0.1, 0.1);
+    for(int i = 0; i < 8; i++) {
+        sp_tenv_init(sp, ud.tenv[i]);
+        ud.tenv[i]->atk = 0.01;
+        ud.tenv[i]->hold = 0.1;
+        ud.tenv[i]->rel =  0.1;
+    }
     for(int i = 0; i < 8; i++) sp_posc3_init(sp, ud.posc[i], ud.ft);
     ud.posc[0]->freq = sp_midi2cps(48);
     ud.posc[1]->freq = sp_midi2cps(52);
@@ -56,7 +61,7 @@ int main()
     ud.posc[7]->freq = sp_midi2cps(66);
 
     sp_revsc_init(sp, ud.rev);
-    
+
     sp->len = 44100 * 20;
     sp_process(sp, &ud, write_music);
 

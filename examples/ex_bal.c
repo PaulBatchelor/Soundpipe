@@ -53,7 +53,11 @@ int main() {
     sp->len = 44100 * 5;
     sp_bal_init(sp, ud.bal);
     sp_moogladder_init(sp, ud.filt);
-    sp_tenv_init(sp, ud.env, 2.25, 0.5, 2.25);
+    sp_tenv_init(sp, ud.env);
+    ud.env->atk = 2.25;
+    ud.env->hold = 0.5;
+    ud.env->rel =  2.25;
+
 
     sp_process(sp, &ud, process);
 
