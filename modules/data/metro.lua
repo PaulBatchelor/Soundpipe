@@ -1,20 +1,20 @@
 sptbl["metro"] = {
 
-    files = { 
+    files = {
         module = "metro.c",
         header = "metro.h",
         --example = "ex_tone.c",
     },
-    
+
     func = {
         create = "sp_metro_create",
         destroy = "sp_metro_destroy",
         init = "sp_metro_init",
         compute = "sp_metro_compute",
     },
-    
+
     params = {
-        mandatory = {
+        optional = {
              {
                 name = "freq",
                 type = "SPFLOAT",
@@ -23,21 +23,23 @@ sptbl["metro"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[Metro produces a series of 1-sample ticks at a regular rate. Typically, this is used alongside trigger-driven modules.]], 
-    
+
+    description = [[Metronome
+
+    Metro produces a series of 1-sample ticks at a regular rate. Typically, this is used alongside trigger-driven modules.]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "dummy",
             description = "This input doesn't do anything"
         },
     },
-    
+
     outputs = {
         {
             name = "out",

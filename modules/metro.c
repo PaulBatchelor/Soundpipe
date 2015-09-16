@@ -1,9 +1,9 @@
 /*
  * Metro
- * 
+ *
  * This code has been extracted from the Csound opcode "metro".
  * It has been modified to work as a Soundpipe module.
- * 
+ *
  * Original Author(s): Gabriel Maldonado
  * Year: 2000
  * Location: Opcodes/metro.c
@@ -25,10 +25,10 @@ int sp_metro_destroy(sp_metro **p)
     return SP_OK;
 }
 
-int sp_metro_init(sp_data *sp, sp_metro *p, SPFLOAT freq)
+int sp_metro_init(sp_data *sp, sp_metro *p)
 {
     p->iphs = 0;
-    p->freq= freq;
+    p->freq= 2.0;
     SPFLOAT phs = p->iphs;
     int32_t  longphs = phs;
     if (phs >= 0.0){
