@@ -40,7 +40,8 @@ int main() {
     sp_tseq_init(sp, ud.seq, ud.nn);
 
     sp_port_init(sp, ud.prt, 0.02);
-    sp_metro_init(sp, ud.mt, 4.0);
+    sp_metro_init(sp, ud.mt);
+    ud.mt->freq = 4.0;
     sp_gen_sine(sp, ud.sine);
     sp_osc_init(sp, ud.osc, ud.sine, 0);
     sp->len = 44100 * 5;

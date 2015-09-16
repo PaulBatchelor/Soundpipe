@@ -28,9 +28,10 @@ int main() {
     sp_nsmp_create(&ud.nsmp);
     sp_metro_create(&ud.met);
 
-    sp_metro_init(sp, ud.met, 2);
+    sp_metro_init(sp, ud.met);
+    ud.met->freq = 2;
     sp_nsmp_init(sp, ud.nsmp, "oneart.wav", "oneart.ini");
-    
+
     sp_nsmp_print_index(sp, ud.nsmp);
 
     sp->len = 44100 * 5;

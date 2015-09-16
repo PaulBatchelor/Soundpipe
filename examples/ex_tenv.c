@@ -5,7 +5,7 @@
 
 typedef struct {
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_tevent *te;
     sp_metro *met;
     sp_tenv *tenv;
@@ -50,7 +50,8 @@ int main() {
     sp_osc_create(&ud.osc);
 
     sp_tenv_init(sp, ud.tenv, 0.03, 0.01, 0.1);
-    sp_metro_init(sp, ud.met, 3);
+    sp_metro_init(sp, ud.met);
+    ud.met->freq = 3;
     sp_tevent_init(sp, ud.te, freq_reinit, freq_compute, freqp);
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
