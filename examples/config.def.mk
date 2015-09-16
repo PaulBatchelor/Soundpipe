@@ -5,7 +5,7 @@ files = ex_buthp ex_butlp ex_moogladder ex_noise ex_revsc ex_tone ex_osc \
 	ex_streson ex_multichan ex_gen_line ex_bal ex_drip ex_clip ex_butbp \
 	ex_music3 ex_fosc ex_dist ex_gbuzz ex_jitter ex_lpf18 ex_music4 \
 	ex_gen_xline ex_gen_gauss ex_allpass ex_comb ex_gen_vals ex_phasor ex_tabread \
-	ex_vco ex_music5 ex_eqfil ex_foo ex_butbr ex_in ex_diskin ex_nsmp ex_prop \
+	ex_music5 ex_eqfil ex_foo ex_butbr ex_in ex_diskin ex_nsmp ex_prop \
 	ex_samphold ex_delay ex_switch ex_random ex_dmetro ex_pluck ex_atone ex_tin \
 	ex_scale ex_pan2 ex_jcrev ex_tenv2 ex_fold ex_decimator ex_inverse ex_mul \
 	ex_add ex_sub ex_div ex_abs ex_panst ex_bar ex_progress
