@@ -1,9 +1,9 @@
 /*
  * This module is similar to "in", execpt that it will only read from STDIN
- * when triggered. 
- * 
+ * when triggered.
+ *
  * This program expects to read SPFLOATs from STDIN, which control
- * the oscillator frequency in Hz. Here is one usage case, using Sporth 
+ * the oscillator frequency in Hz. Here is one usage case, using Sporth
  * (paulbatchelor.github.io/proj/sporth):
  *
  * echo "0.5 noise 0.5 + 100 * 1000 +" | sporth -o raw -d 10 | ./ex_tin.bin
@@ -44,7 +44,8 @@ int main() {
     sp_metro_create(&ud.met);
 
     sp_tin_init(sp, ud.in);
-    sp_metro_init(sp, ud.met, 2);
+    sp_metro_init(sp, ud.met);
+    ud.met->freq = 2;
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
 

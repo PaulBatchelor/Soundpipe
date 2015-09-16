@@ -304,7 +304,8 @@ int main()
     sp_revsc_init(sp, ud.rev);
     ud.rev->feedback = 0.95;
     sp_metro_create(&ud.clk);
-    sp_metro_init(sp, ud.clk, 86.0 / 60.0);
+    sp_metro_init(sp, ud.clk);
+    ud.clk->freq = 86.0 / 60.0;
     sp_count_create(&ud.meter);
     sp_count_init(sp, ud.meter);
     ud.meter->count = 5;
@@ -317,7 +318,7 @@ int main()
 
     sp_tenv_create(&ud.master);
     sp_tenv_init(sp, ud.master, 0, 30, 10);
-    
+
     sp_progress_create(&ud.prog);
     sp_progress_init(sp, ud.prog);
 

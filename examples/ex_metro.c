@@ -5,7 +5,7 @@
 
 typedef struct {
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_tevent *te;
     sp_metro *met;
     sp_randi *rand;
@@ -48,7 +48,7 @@ int main() {
     sp_randi_init(sp, ud.rand, rand());
     ud.rand->min = 2.0;
     ud.rand->max= 10.0;
-    sp_metro_init(sp, ud.met, 2.0);
+    sp_metro_init(sp, ud.met);
     sp_tevent_init(sp, ud.te, freq_reinit, freq_compute, freqp);
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);

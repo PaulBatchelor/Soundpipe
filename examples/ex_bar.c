@@ -28,7 +28,8 @@ int main() {
     sp_bar_init(sp, ud.bar, 3, 0.0001);
     ud.bar->T30 = 1;
 
-    sp_metro_init(sp, ud.met, 1);
+    sp_metro_init(sp, ud.met);
+    ud.met->freq = 1;
 
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);
