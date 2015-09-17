@@ -21,6 +21,6 @@ sptbl["gen_xline"] = {
 
     modtype = "gen",
 
-    description = [[Generate an exponential line segment.]],
+    description = [[A series of exponential segments]],
 
 }

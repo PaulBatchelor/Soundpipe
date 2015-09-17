@@ -1,18 +1,18 @@
 sptbl["revsc"] = {
 
-    files = { 
+    files = {
         module = "revsc.c",
         header = "revsc.h",
         example = "ex_revsc.c",
     },
-    
+
     func = {
         create = "sp_revsc_create",
         destroy = "sp_revsc_destroy",
         init = "sp_revsc_init",
         compute = "sp_revsc_compute",
     },
-    
+
     params = {
         optional = {
             {
@@ -29,15 +29,15 @@ sptbl["revsc"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[ 8 FDN stereo reverb.]], 
-    
+
+    description = [[ 8 FDN stereo reverb]],
+
     ninputs = 2,
     noutputs = 2,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "input_1",
             description = "First input."
@@ -47,7 +47,7 @@ sptbl["revsc"] = {
             description = "Second input."
         },
     },
-    
+
     outputs = {
         {
             name = "out_1",

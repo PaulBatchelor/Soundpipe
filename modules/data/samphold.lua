@@ -18,7 +18,7 @@ sptbl["samphold"] = {
 
     modtype = "module",
 
-    description = [[Classic sample and hold.]],
+    description = [[Classic sample and hold]],
 
     ninputs = 2,
     noutputs = 1,

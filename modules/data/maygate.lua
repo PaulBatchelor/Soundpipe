@@ -33,7 +33,9 @@ sptbl["maygate"] = {
 
     modtype = "module",
 
-    description = [[Maygate is a "maybe gate". It takes in a trigger, and then it will randomly decide to turn the gate on or not. One particular application for maygate is to arbitrarily turn on/off sends to effects. One specific example of this could be a randomized reverb throw on a snare.]],
+    description = [[A randomly open or closed "maybe gate"
+
+    It takes in a trigger, and then it will randomly decide to turn the gate on or not. One particular application for maygate is to arbitrarily turn on/off sends to effects. One specific example of this could be a randomized reverb throw on a snare.]],
 
     ninputs = 1,
     noutputs = 1,

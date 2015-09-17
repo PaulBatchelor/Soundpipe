@@ -1,18 +1,18 @@
 sptbl["streson"] = {
 
-    files = { 
+    files = {
         module = "streson.c",
         header = "streson.h",
         example = "ex_streson.c",
     },
-    
+
     func = {
         create = "sp_streson_create",
         destroy = "sp_streson_destroy",
         init = "sp_streson_init",
         compute = "sp_streson_compute",
     },
-    
+
     params = {
         optional = {
             {
@@ -29,21 +29,21 @@ sptbl["streson"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[String resonator filter.]], 
-    
+
+    description = [[String resonator filter]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "input",
             description = "Signal input."
         },
     },
-    
+
     outputs = {
         {
             name = "output",

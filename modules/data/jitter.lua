@@ -1,18 +1,18 @@
 sptbl["jitter"] = {
 
-    files = { 
+    files = {
         module = "jitter.c",
         header = "jitter.h",
         example = "ex_jitter.c",
     },
-    
+
     func = {
         create = "sp_jitter_create",
         destroy = "sp_jitter_destroy",
         init = "sp_jitter_init",
         compute = "sp_jitter_compute",
     },
-    
+
     params = {
         optional = {
             {
@@ -35,21 +35,23 @@ sptbl["jitter"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[Produce a signal with random fluctuations (aka... jitter). This is useful for emulating jitter found in analogue equipment. ]], 
-    
+
+    description = [[A signal with random fluctuations
+
+     This is useful for emulating jitter found in analogue equipment. ]],
+
     ninputs = 0,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "dummy",
             description = "This doesn't do anything."
         },
     },
-    
+
     outputs = {
         {
             name = "out",

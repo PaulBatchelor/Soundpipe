@@ -1,18 +1,18 @@
 sptbl["moogladder"] = {
 
-    files = { 
+    files = {
         module = "moogladder.c",
         header = "moogladder.h",
         example = "ex_moogladder.c",
     },
-    
+
     func = {
         create = "sp_moogladder_create",
         destroy = "sp_moogladder_destroy",
         init = "sp_moogladder_init",
         compute = "sp_moogladder_compute",
     },
-    
+
     params = {
         optional = {
             {
@@ -29,20 +29,20 @@ sptbl["moogladder"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[Low pass resonant filter based on the moog ladder filter.]], 
-    
+
+    description = [[Low pass resonant filter based on the moog ladder filter]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         { name = "input",
             description = "this is the clock source for a made up plugin."
         },
     },
-    
+
     outputs = {
         {
             name = "out",

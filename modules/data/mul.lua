@@ -37,7 +37,7 @@ sptbl["mul"] = {
     outputs = {
         {
             name = "out",
-            description = "Output as multiplication of input signals."
+            description = "Multiplication of input signals"
         },
     }
 

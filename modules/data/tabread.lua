@@ -1,17 +1,17 @@
 sptbl["tabread"] = {
-    files = { 
+    files = {
         module = "tabread.c",
         header = "tabread.h",
         example = "ex_tabread.c",
     },
-    
+
     func = {
         create = "sp_tabread_create",
         destroy = "sp_tabread_destroy",
         init = "sp_tabread_init",
         compute = "sp_tabread_compute",
     },
-    
+
     params = {
         mandatory = {
             {
@@ -21,7 +21,7 @@ sptbl["tabread"] = {
                 default = "N/A"
             },
         },
-    
+
         optional = {
             {
                 name = "speed",
@@ -31,21 +31,23 @@ sptbl["tabread"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[Read through a table at audio-rate with varispeed. No interpolation is implemented yet, so this works very quickly.]], 
-    
+
+    description = [[Table reader
+
+    Read through a table at audio-rate with varispeed. No interpolation is implemented yet, so this works very quickly.]],
+
     ninputs = 0,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "dummy",
             description = "This doesn't do anything. Can be set to NULL."
         },
     },
-    
+
     outputs = {
         {
             name = "out",

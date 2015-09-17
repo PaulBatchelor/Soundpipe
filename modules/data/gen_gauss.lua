@@ -27,6 +27,6 @@ sptbl["gen_gauss"] = {
 
     modtype = "gen",
 
-    description = [[Generate a gaussian distribution.]],
+    description = [[Gaussian distribution]],
 
 }

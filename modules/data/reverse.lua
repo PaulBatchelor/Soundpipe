@@ -26,7 +26,9 @@ sptbl["reverse"] = {
 
 	modtype = "module",
 
-	description = [[Reverse will store a signal inside a buffer and play it back reversed.]],
+	description = [[Signal reverser
+
+	Reverse will store a signal inside a buffer and play it back reversed.]],
 
 	ninputs = 1,
 	noutputs = 1,

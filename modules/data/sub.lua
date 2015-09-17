@@ -15,7 +15,7 @@ sptbl["sub"] = {
 
     modtype = "module",
 
-    description = [[A difference of two input signals.]],
+    description = [[A difference of two input signals]],
 
     ninputs = 2,
     noutputs = 1,

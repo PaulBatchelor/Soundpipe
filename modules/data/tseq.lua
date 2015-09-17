@@ -1,18 +1,18 @@
 sptbl["tseq"] = {
 
-    files = { 
+    files = {
         module = "tseq.c",
         header = "tseq.h",
         example = "ex_tseq.c",
     },
-    
+
     func = {
         create = "sp_tseq_create",
         destroy = "sp_tseq_destroy",
         init = "sp_tseq_init",
         compute = "sp_tseq_compute",
     },
-    
+
     params = {
         mandatory = {
             {
@@ -22,7 +22,7 @@ sptbl["tseq"] = {
                 default = "N/A"
             },
         },
-    
+
         optional = {
             {
                 name = "shuf",
@@ -32,21 +32,23 @@ sptbl["tseq"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[TSeq runs through values in an ftable. It will change values when the trigger input is a non-zero value, and wrap around when it reaches the end.]], 
-    
+
+    description = [[Function table looper
+
+    TSeq runs through values in an ftable. It will change values when the trigger input is a non-zero value, and wrap around when it reaches the end.]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "trig",
             description = "Trigger."
         },
     },
-    
+
     outputs = {
         {
             name = "val",

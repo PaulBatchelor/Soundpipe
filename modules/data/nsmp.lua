@@ -1,17 +1,17 @@
 sptbl["nsmp"] = {
 
-    files = { 
+    files = {
         module = "nsmp.c",
         header = "nsmp.h",
         example = "ex_nsmp.c",
     },
-    
+
     func = {
         create = "sp_nsmp_create",
         destroy = "sp_nsmp_destroy",
         init = "sp_nsmp_init",
         compute = "sp_nsmp_compute",
-        other = { 
+        other = {
             sp_nsmp_print_index = {
                 description = "Prints the index and their corresponding keyword",
                 args = {
@@ -19,7 +19,7 @@ sptbl["nsmp"] = {
             }
         }
     },
-    
+
     params = {
         mandatory = {
             {
@@ -35,7 +35,7 @@ sptbl["nsmp"] = {
                 default = "N/A"
             }
         },
-    
+
         optional = {
             {
                 name = "index",
@@ -45,10 +45,12 @@ sptbl["nsmp"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[Nanosamp: a tiny sampler built for Soundpipe. A nanosamp file is comprised of a mono audio file and an ini file. Nanosamp is geared towards percussive and found sound sample players, and is intended to be combined with soundpipe modules. 
+
+    description = [[Nanosamp: a tiny sampler built for Soundpipe
+
+    A nanosamp file is comprised of a mono audio file and an ini file. Nanosamp is geared towards percussive and found sound sample players, and is intended to be combined with soundpipe modules.
 
 The ini file contains mappings that correspond to the audio file. Such an entry would look like this:
 
@@ -62,26 +64,26 @@ size = 3
 
 
 </pre>
-In this instance, an entry called "keyword" has been made, starting at 2.3 seconds in the 
-audio file, with a length of 3 seconds. An example file oneart.ini has been created in the 
+In this instance, an entry called "keyword" has been made, starting at 2.3 seconds in the
+audio file, with a length of 3 seconds. An example file oneart.ini has been created in the
 examples folder.
 
 The SoundPipe implementation of nanosamp will automatically index the entries
 in the order they appear in the INI file and must be selected this way by changing the index
 parameter. Soundpipe will only select the new entry when the trigger input is a non-zero value.
 
-]], 
-    
+]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "trigger",
             description = "Trigger input."
         },
     },
-    
+
     outputs = {
         {
             name = "signal out",

@@ -1,17 +1,17 @@
 sptbl["foo"] = {
 
-    files = { 
+    files = {
         module = "foo.c",
         header = "foo.h",
         example = "ex_foo.c",
     },
-    
+
     func = {
         create = "sp_foo_create",
         destroy = "sp_foo_destroy",
         init = "sp_foo_init",
         compute = "sp_foo_compute",
-        other = { 
+        other = {
             sp_foo_set = {
                 description = "foo_set description goes here.",
                 args = {
@@ -31,7 +31,7 @@ sptbl["foo"] = {
             }
         }
     },
-    
+
     params = {
         mandatory = {
             {
@@ -47,7 +47,7 @@ sptbl["foo"] = {
                 default = 123
             }
         },
-    
+
         optional = {
             {
                 name = "blah_1",
@@ -63,20 +63,22 @@ sptbl["foo"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[This is a description of the entire module. This is not a real module. This description should be a comprehensive sumary of what this function does. 
-    
-Inside the Lua table, this is expressed as a multiline string, however it does not adhere to the tradtional 80 column rule found in programming. 
+
+    description = [[A short title describing the module
+
+    This is a description of the entire module.  This is not a real module. This description should be a comprehensive sumary of what this function does.
+
+Inside the Lua table, this is expressed as a multiline string, however it does not adhere to the tradtional 80 column rule found in programming.
 
 Write as much text as needed here...
-]], 
-    
+]],
+
     ninputs = 2,
     noutputs = 2,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "clock",
             description = "this is the clock source for a made up plugin."
@@ -86,7 +88,7 @@ Write as much text as needed here...
             description = "this is the audio input for a made up plugin."
         },
     },
-    
+
     outputs = {
         {
             name = "out_left",

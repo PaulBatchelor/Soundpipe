@@ -1,18 +1,18 @@
 sptbl["tone"] = {
 
-	files = { 
+	files = {
 	    module = "tone.c",
 	    header = "tone.h",
 	    example = "ex_tone.c",
 	},
-	
+
 	func = {
 	    create = "sp_tone_create",
 	    destroy = "sp_tone_destroy",
 	    init = "sp_tone_init",
 	    compute = "sp_tone_compute",
 	},
-	
+
 	params = {
 	    optional = {
 	        {
@@ -23,21 +23,21 @@ sptbl["tone"] = {
 	        },
 	    },
 	},
-	
+
 	modtype = "module",
-	
-	description = [[Tone is a first-order recursive lowpass filter.]], 
-	
+
+	description = [[First-order recursive lowpass filter]],
+
 	ninputs = 1,
 	noutputs = 1,
-	
-	inputs = { 
+
+	inputs = {
 	    {
 	        name = "in",
 	        description = "Audio signal in."
 	    },
 	},
-	
+
 	outputs = {
 	    {
 	        name = "out",

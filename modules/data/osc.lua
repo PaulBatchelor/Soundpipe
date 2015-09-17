@@ -46,7 +46,7 @@ sptbl["osc"] = {
 
     modtype = "module",
 
-    description = [[ "Osc" is a table-lookup oscilator with linear interpolation. ]],
+    description = [[ Table-lookup oscilator with linear interpolation]],
 
     ninputs = 0,
     noutputs = 1,

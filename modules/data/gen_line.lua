@@ -21,6 +21,6 @@ sptbl["gen_line"] = {
 
     modtype = "gen",
 
-    description = [[Generate a line segment.]],
+    description = [[A series of line segments]],
 
 }

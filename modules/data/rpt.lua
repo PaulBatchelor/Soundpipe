@@ -46,7 +46,9 @@ sptbl["rpt"] = {
 
     modtype = "module",
 
-    description = [["rpt" is a trigger based beat-repeat stuttering effect. When the input is a non-zero value, rpt will load up the buffer and loop a certain number of times. Speed and repeat amounts can be set with the sp_rpt_set function.]],
+    description = [[Trigger based beat-repeat stuttering effect
+
+    When the input is a non-zero value, rpt will load up the buffer and loop a certain number of times. Speed and repeat amounts can be set with the sp_rpt_set function.]],
 
     ninputs = 2,
     noutputs = 1,

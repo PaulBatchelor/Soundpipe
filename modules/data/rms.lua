@@ -1,17 +1,17 @@
 sptbl["rms"] = {
 
-    files = { 
+    files = {
         module = "rms.c",
         header = "rms.h",
     },
-    
+
     func = {
         create = "sp_rms_create",
         destroy = "sp_rms_destroy",
         init = "sp_rms_init",
         compute = "sp_rms_compute",
     },
-    
+
     params = {
         optional = {
             {
@@ -22,21 +22,23 @@ sptbl["rms"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[Perform "root-mean-square" on a signal to get overall amplitude of a signal. The output signal looks similar to that of a classic VU meter.]], 
-    
+
+    description = [[RMS-averaged signal amplitude
+
+    Perform "root-mean-square" on a signal to get overall amplitude of a signal. The output signal looks similar to that of a classic VU meter.]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "in",
             description = "Input signal."
         },
     },
-    
+
     outputs = {
         {
             name = "out",

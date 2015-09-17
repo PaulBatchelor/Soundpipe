@@ -21,7 +21,8 @@ sptbl["gen_file"] = {
 
     modtype = "gen",
 
-    description = [[Reads from a wav file. This will only load as many samples as the 
-length of the ftable.]],
+    description = [[Reads from a wav file
+
+    This will only load as many samples as the length of the ftable.]],
 
 }

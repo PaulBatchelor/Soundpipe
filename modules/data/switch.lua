@@ -18,7 +18,9 @@ sptbl["switch"] = {
 
     modtype = "module",
 
-    description = [[Switch between two signals. By default the incoming first signal is selected. When triggered, the output signal will switch to the other signal.]],
+    description = [[Switch between two signals
+
+    By default the incoming first signal is selected. When triggered, the output signal will switch to the other signal.]],
 
     ninputs = 3,
     noutputs = 1,

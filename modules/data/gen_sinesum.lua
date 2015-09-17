@@ -1,15 +1,15 @@
 sptbl["gen_sinesum"] = {
 
-    files = { 
+    files = {
         module = "ftbl.c",
         header = "ftbl.h",
         example = "ex_gen_sinesum.c",
     },
-    
+
     func = {
         name = "sp_gen_sinesum",
     },
-    
+
     params = {
         {
             name = "argstring",
@@ -18,9 +18,9 @@ sptbl["gen_sinesum"] = {
             default = "1 0.5 0.25"
         },
     },
-    
+
     modtype = "gen",
-    
-    description = [[Create a wave by summing together harmonically related sines. ]], 
-    
+
+    description = [[Waveform as a sum of harmonically related sines ]],
+
 }

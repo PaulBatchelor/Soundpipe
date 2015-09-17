@@ -52,7 +52,7 @@ sptbl["tenv"] = {
 
     modtype = "module",
 
-    description = [[TEnv is a trigger based linear AHD envelope generator.]],
+    description = [[Trigger based linear AHD envelope generator]],
 
     ninputs = 1,
     noutputs = 1,

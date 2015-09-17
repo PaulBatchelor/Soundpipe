@@ -1,18 +1,18 @@
 sptbl["tbvcf"] = {
 
-    files = { 
+    files = {
         module = "tbvcf.c",
         header = "tbvcf.h",
         example = "ex_tbvcf.c",
     },
-    
+
     func = {
         create = "sp_tbvcf_create",
         destroy = "sp_tbvcf_destroy",
         init = "sp_tbvcf_init",
         compute = "sp_tbvcf_compute",
     },
-    
+
     params = {
         optional = {
             {
@@ -41,21 +41,21 @@ sptbl["tbvcf"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[This is an emulation of the tb303 filter.]], 
-    
+
+    description = [[Emulation of the Roland TB-303 filter]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "input",
             description = "Signal input."
         },
     },
-    
+
     outputs = {
         {
             name = "out",

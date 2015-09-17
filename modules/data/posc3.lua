@@ -1,18 +1,18 @@
 sptbl["posc3"] = {
 
-    files = { 
+    files = {
         module = "posc3.c",
         header = "posc3.h",
         example = "ex_posc3.c",
     },
-    
+
     func = {
         create = "sp_posc3_create",
         destroy = "sp_posc3_destroy",
         init = "sp_posc3_init",
         compute = "sp_posc3_compute",
     },
-    
+
     params = {
         mandatory = {
             {
@@ -37,21 +37,21 @@ sptbl["posc3"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[ "posc3" is a high-precision table-lookup posc3ilator with cubic interpolation. ]], 
-    
+
+    description = [[ High-precision table-lookup posc3ilator with cubic interpolation]],
+
     ninputs = 0,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "dummy",
             description = "This does nothing."
         },
     },
-    
+
     outputs = {
         {
             name = "out",

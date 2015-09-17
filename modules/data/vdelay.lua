@@ -1,18 +1,18 @@
 sptbl["vdelay"] = {
 
-    files = { 
+    files = {
         module = "vdelay.c",
         header = "vdelay.h",
         example = "ex_vdelay.c",
     },
-    
+
     func = {
         create = "sp_vdelay_create",
         destroy = "sp_vdelay_destroy",
         init = "sp_vdelay_init",
         compute = "sp_vdelay_compute",
     },
-    
+
     params = {
         mandatory = {
             {
@@ -23,7 +23,7 @@ sptbl["vdelay"] = {
                 irate = true
             },
         },
-    
+
         optional = {
             {
                 name = "del",
@@ -33,21 +33,21 @@ sptbl["vdelay"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[A delay line with cubic interpolation.]], 
-    
+
+    description = [[Delay line with cubic interpolation]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "in",
             description = "Signal input."
         },
     },
-    
+
     outputs = {
         {
             name = "out",

@@ -1,18 +1,18 @@
 sptbl["gbuzz"] = {
 
-    files = { 
+    files = {
         module = "gbuzz.c",
         header = "gbuzz.h",
         example = "ex_gbuzz.c",
     },
-    
+
     func = {
         create = "sp_gbuzz_create",
         destroy = "sp_gbuzz_destroy",
         init = "sp_gbuzz_init",
         compute = "sp_gbuzz_compute",
     },
-    
+
     params = {
         mandatory = {
             {
@@ -29,7 +29,7 @@ sptbl["gbuzz"] = {
                 default = 0
             },
         },
-    
+
         optional = {
             {
                 name = "freq",
@@ -63,21 +63,23 @@ sptbl["gbuzz"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [["Gbuzz" is used to generate a series of partials from the harmonic series. GBuzz comes from the "buzz" family of Csound opcodes, and is capable of producing a rich spectrum of harmonic content, possibly ideal for subtractive synthesis techniques.]], 
-    
+
+    description = [[Series of partials from the harmonic series
+
+    GBuzz comes from the "buzz" family of Csound opcodes, and is capable of producing a rich spectrum of harmonic content, possibly ideal for subtractive synthesis techniques.]],
+
     ninputs = 0,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "in",
             description = "Signal input"
         },
     },
-    
+
     outputs = {
         {
             name = "out",

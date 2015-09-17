@@ -18,7 +18,7 @@ sptbl["inverse"] = {
 
     modtype = "module",
 
-    description = [[Inverse of the input signal.]],
+    description = [[Inverse of the input signal]],
 
     ninputs = 1,
     noutputs = 1,

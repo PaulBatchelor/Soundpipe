@@ -1,18 +1,18 @@
 sptbl["mode"] = {
 
-    files = { 
+    files = {
         module = "mode.c",
         header = "mode.h",
         example = "ex_mode.c",
     },
-    
+
     func = {
         create = "sp_mode_create",
         destroy = "sp_mode_destroy",
         init = "sp_mode_init",
         compute = "sp_mode_compute",
     },
-    
+
     params = {
         optional = {
             {
@@ -29,21 +29,23 @@ sptbl["mode"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[A modal resonance filter used for modal synthesis. Plucked and bell sounds can be created using  passing an impulse through a combination of modal filters. ]], 
-    
+
+    description = [[A modal resonance filter used for modal synthesis
+
+    Plucked and bell sounds can be created using  passing an impulse through a combination of modal filters. ]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "in",
             description = "Signal input."
         },
     },
-    
+
     outputs = {
         {
             name = "out",

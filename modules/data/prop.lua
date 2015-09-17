@@ -35,7 +35,9 @@ sptbl["prop"] = {
 
     modtype = "module",
 
-    description = [[Creates a gate using a simple rhythmic notation system called prop. When it reaches the end of the prop string, it will loop back to the beginning.
+    description = [[Simple rhythmic notation gate generator
+
+    Creates a gate using a simple rhythmic notation system called prop. When it reaches the end of the prop string, it will loop back to the beginning.
 
 Prop has a few basic rules:
 

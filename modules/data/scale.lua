@@ -44,7 +44,9 @@ sptbl["scale"] = {
 
     modtype = "module",
 
-    description = [[This module scales from one range to another defined by a minimum and maximum point in the input and output domain.
+    description = [[Linear transformation
+
+    This module scales from one range to another defined by a minimum and maximum point in the input and output domain.
 ]],
 
     ninputs = 1,

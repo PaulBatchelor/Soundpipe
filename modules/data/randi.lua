@@ -1,18 +1,18 @@
 sptbl["randi"] = {
 
-    files = { 
+    files = {
         module = "randi.c",
         header = "randi.h",
         example = "ex_randi.c",
     },
-    
+
     func = {
         create = "sp_randi_create",
         destroy = "sp_randi_destroy",
         init = "sp_randi_init",
         compute = "sp_randi_compute",
     },
-    
+
     params = {
         mandatory = {
             {
@@ -22,7 +22,7 @@ sptbl["randi"] = {
                 default = "N/A"
             },
         },
-    
+
         optional = {
             {
                 name = "min",
@@ -51,21 +51,21 @@ sptbl["randi"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[Produces line of interpolated values within a range.]], 
-    
+
+    description = [[Lines segments between random values within a range]],
+
     ninputs = 0,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "dummy",
             description = "This doesn't do anything."
         },
     },
-    
+
     outputs = {
         {
             name = "out",

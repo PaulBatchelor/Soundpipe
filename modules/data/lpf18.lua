@@ -1,18 +1,18 @@
 sptbl["lpf18"] = {
 
-    files = { 
+    files = {
         module = "lpf18.c",
         header = "lpf18.h",
         example = "ex_lpf18.c",
     },
-    
+
     func = {
         create = "sp_lpf18_create",
         destroy = "sp_lpf18_destroy",
         init = "sp_lpf18_init",
         compute = "sp_lpf18_compute",
     },
-    
+
     params = {
         optional = {
             {
@@ -35,21 +35,21 @@ sptbl["lpf18"] = {
             },
         }
     },
-    
+
     modtype = "module",
-    
-    description = [[3-pole (18 db/oct slope) Low-Pass filter with resonance and tanh distortion.]], 
-    
+
+    description = [[3-pole (18 db/oct slope) Low-Pass filter with resonance and tanh distortion]],
+
     ninputs = 1,
     noutputs = 1,
-    
-    inputs = { 
+
+    inputs = {
         {
             name = "in",
             description = "Signal input."
         },
     },
-    
+
     outputs = {
         {
             name = "out",
