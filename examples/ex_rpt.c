@@ -39,12 +39,17 @@ int main(){
     ud.mg->prob = 0.5;
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
-    sp_metro_init(sp, ud.mt, tempo / 60.0);
+    sp_metro_init(sp, ud.mt);
+    ud.mt->freq = tempo / 60.0;
     sp_rpt_init(sp, ud.rpt, 1.0);
     ud.rpt->bpm = tempo;
     ud.rpt->div = 8;
     ud.rpt->rep = 4;
-    sp_tenv_init(sp, ud.te, 0.001, 0.1, 0.1);
+    sp_tenv_init(sp, ud.te);
+    ud.te->atk = 0.001;
+    ud.te->hold = 0.1;
+    ud.te->rel =  0.1;
+
     sp_process(sp, &ud, compute);
 
     sp_tenv_destroy(&ud.te);

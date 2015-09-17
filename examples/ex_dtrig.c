@@ -5,7 +5,7 @@
 
 typedef struct {
     sp_osc *osc;
-    sp_ftbl *ft, *delta; 
+    sp_ftbl *ft, *delta;
     sp_tenv *tenv;
     sp_dtrig *dt;
 } udata;
@@ -42,12 +42,16 @@ int main() {
     sp_ftbl_create(sp, &ud.delta, 4);
     sp_osc_create(&ud.osc);
 
-    ud.delta->tbl[0] = 1.0; 
-    ud.delta->tbl[1] = 1.0; 
-    ud.delta->tbl[2] = 0.5; 
-    ud.delta->tbl[3] = 0.5; 
+    ud.delta->tbl[0] = 1.0;
+    ud.delta->tbl[1] = 1.0;
+    ud.delta->tbl[2] = 0.5;
+    ud.delta->tbl[3] = 0.5;
     sp_dtrig_init(sp, ud.dt, ud.delta);
-    sp_tenv_init(sp, ud.tenv, 0.03, 0.01, 0.3);
+    sp_tenv_init(sp, ud.tenv);
+    ud.tenv->atk = 0.03;
+    ud.tenv->hold = 0.01;
+    ud.tenv->rel =  0.3;
+
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
     ud.osc->freq = 1000;

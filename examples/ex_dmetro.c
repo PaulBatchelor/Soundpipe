@@ -7,7 +7,7 @@ typedef struct {
     sp_dmetro *dmetro;
     sp_osc *osc;
     sp_osc *lfo;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_tenv *tenv;
 } UserData;
 
@@ -42,7 +42,11 @@ int main() {
     sp_osc_init(sp, ud.lfo, ud.ft, 0);
     ud.lfo->freq = 0.3;
     ud.lfo->amp = 0.5;
-    sp_tenv_init(sp, ud.tenv, 0.001, 0.03, 0.001);
+    sp_tenv_init(sp, ud.tenv);
+    ud.tenv->atk = 0.001;
+    ud.tenv->hold = 0.03;
+    ud.tenv->rel =  0.001;
+
 
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);

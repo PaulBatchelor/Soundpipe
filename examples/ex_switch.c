@@ -45,7 +45,8 @@ int main() {
     ud.lfo->amp = 100;
     ud.lfo->freq = 6;
     sp_fosc_init(sp, ud.fosc, ud.ft);
-    sp_metro_init(sp, ud.met, 2.5);
+    sp_metro_init(sp, ud.met);
+    ud.met->freq = 2.5;
 
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);

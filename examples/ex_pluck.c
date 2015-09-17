@@ -6,7 +6,7 @@
 typedef struct {
     sp_pluck *pluck;
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_metro *met;
 } UserData;
 
@@ -36,7 +36,8 @@ int main() {
 
     sp_pluck_init(sp, ud.pluck, 110);
     sp_gen_sine(sp, ud.ft);
-    sp_metro_init(sp, ud.met, 2);
+    sp_metro_init(sp, ud.met);
+    ud.met->freq = 2;
     sp_osc_init(sp, ud.osc, ud.ft, 0);
 
     ud.osc->freq = 1;

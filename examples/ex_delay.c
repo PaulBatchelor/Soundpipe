@@ -42,8 +42,13 @@ int main() {
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
     ud.osc->amp = 0.5;
-    sp_metro_init(sp, ud.met, 1);
-    sp_tenv_init(sp, ud.tenv, 0.005, 0.1, 0.1);
+    sp_metro_init(sp, ud.met);
+    ud.met->freq = 1;
+    sp_tenv_init(sp, ud.tenv);
+    ud.tenv->atk = 0.005;
+    ud.tenv->hold = 0.1;
+    ud.tenv->rel =  0.1;
+
 
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);

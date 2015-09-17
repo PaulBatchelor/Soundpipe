@@ -35,7 +35,11 @@ int main() {
     ud.prop->bpm = 80;
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
-    sp_tenv_init(sp, ud.tenv, 0.01, 0.01, 0.2);
+    sp_tenv_init(sp, ud.tenv);
+    ud.tenv->atk = 0.01;
+    ud.tenv->hold = 0.01;
+    ud.tenv->rel =  0.2;
+
     ud.osc->freq = 500;
 
     sp->len = 44100 * 5;

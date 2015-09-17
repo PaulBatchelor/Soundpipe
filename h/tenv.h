@@ -10,7 +10,7 @@ typedef struct sp_tenv{
 
 int sp_tenv_create(sp_tenv **p);
 int sp_tenv_destroy(sp_tenv **p);
-int sp_tenv_init(sp_data *sp, sp_tenv *p, SPFLOAT atk, SPFLOAT hold, SPFLOAT rel);
+int sp_tenv_init(sp_data *sp, sp_tenv *p);
 void sp_tenv_reinit(void *ud);
 void sp_tenv_comp(void *ud, SPFLOAT *out);
 int sp_tenv_compute(sp_data *sp, sp_tenv *p, SPFLOAT *in, SPFLOAT *out);
