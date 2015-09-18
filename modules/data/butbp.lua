@@ -40,14 +40,14 @@ sptbl["butbp"] = {
     inputs = {
         {
             name = "input",
-            description = "The signal that the filter should be applied to."
+            description = "Input signal that the filter should be applied to."
         },
     },
 
     outputs = {
         {
             name = "output",
-            description = "The output signal (input modified by the filter)."
+            description = "Output signal (input modified by the filter)."
         },
     }
 

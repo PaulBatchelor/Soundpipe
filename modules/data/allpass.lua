@@ -27,7 +27,7 @@ sptbl["allpass"] = {
             {
                 name = "revtime",
                 type = "SPFLOAT",
-                description = "The reverberation time, in seconds (aka RT-60).",
+                description = "The reverberation time, in seconds (RT-60).",
                 default = 3.5
             },
         }

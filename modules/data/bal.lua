@@ -31,11 +31,11 @@ In the source code, the value "ihp" is set to a static 10hz. This is the default
     inputs = {
         {
             name = "sig",
-            description = "The signal whose gain will be changed."
+            description = "Input signal whose gain will be changed."
         },
         {
             name = "comp",
-            description = "The signal to compare the input to."
+            description = "Secondary signal to compare the input signal to."
         },
     },
 

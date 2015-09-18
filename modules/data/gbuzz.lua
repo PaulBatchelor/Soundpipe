@@ -68,7 +68,7 @@ sptbl["gbuzz"] = {
 
     description = [[Series of partials from the harmonic series
 
-    GBuzz comes from the "buzz" family of Csound opcodes, and is capable of producing a rich spectrum of harmonic content, possibly ideal for subtractive synthesis techniques.]],
+    GBuzz comes from the "buzz" family of Csound opcodes, and is capable of producing a rich spectrum of harmonic content, useful for subtractive synthesis implementation.]],
 
     ninputs = 0,
     noutputs = 1,

@@ -36,7 +36,7 @@ sptbl["dist"] = {
             {
                 name = "shape2",
                 type = "SPFLOAT",
-                description ="Like shape1, only for the negative part.",
+                description ="Like shape1, only for the negative part of the signal.",
                 default = 0
             },
 
