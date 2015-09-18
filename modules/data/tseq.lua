@@ -1,4 +1,4 @@
-wsptbl["tseq"] = {
+sptbl["tseq"] = {
 
     files = {
         module = "tseq.c",
