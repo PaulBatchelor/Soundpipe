@@ -87,6 +87,14 @@ Nick Arner
 
 Aurelius Prochazka 
 
-If you'd like to contribute to Soundpipe, please read the style guide found at
-util/style\_guide.md
+
+Contributing
+--------------------------
+We welcome all contributions! If you find a bug, please feel free to make a bug report or
+a pull-request. 
+
+Additionally, if you'd like to contribute bys adding more modules to Soundpipe, please 
+see the Style Guide (util/style\_guide.md) and the Module How-To Guide (uitl/module\_howto.md).
+
+
 
