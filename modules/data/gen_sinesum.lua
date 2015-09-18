@@ -21,6 +21,6 @@ sptbl["gen_sinesum"] = {
 
     modtype = "gen",
 
-    description = [[Waveform as a sum of harmonically related sines ]],
+    description = [[Waveform as a sum of harmonically related sine waves ]],
 
 }

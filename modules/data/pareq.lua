@@ -24,7 +24,7 @@ sptbl["pareq"] = {
             {
                 name = "v",
                 type = "SPFLOAT",
-                description ="Amount of boost or cut. A value of 1 is a flat response.",
+                description ="Amount at which the center frequency value shall be increased or decreased. A value of 1 is a flat response.",
                 default = 1
             },
             {

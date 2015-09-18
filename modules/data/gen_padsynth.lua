@@ -33,7 +33,7 @@ sptbl["gen_padsynth"] = {
 
     modtype = "gen",
 
-    description = [[An implementation of the Padsynth Algorithm by Paul Nasca.
+    description = [[An implementation of the Padsynth Algorithm by Paul Nasca. ///Paul, this needs a source!!!
 
     This gen routine requires libfftw, and is not compiled by default. See config.mk for more info.]],
 

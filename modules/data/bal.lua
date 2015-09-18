@@ -20,9 +20,9 @@ sptbl["bal"] = {
 
     description = [[Balance the gain of one signal based on another signal
 
-    Often this is used to restore gain lost in the output of a filter.
+    This is often used to restore gain lost in the output of a filter.
 
-In the source code, the value "ihp" is set to a static 10hz. This is the default value in Csound, and you probably won't need to touch this.
+In the source code, the value "ihp" is set to a static 10hz. This is the default value in Csound, and should not often need to be changed.
 ]],
 
     ninputs = 2,
@@ -31,11 +31,11 @@ In the source code, the value "ihp" is set to a static 10hz. This is the default
     inputs = {
         {
             name = "sig",
-            description = "The signal whose gain will be changed."
+            description = "Input signal whose gain will be changed."
         },
         {
             name = "comp",
-            description = "The signal to compare it to."
+            description = "Secondary signal to compare the input signal to."
         },
     },
 

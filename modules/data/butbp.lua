@@ -18,7 +18,7 @@ sptbl["butbp"] = {
             {
                 name = "freq",
                 type = "SPFLOAT",
-                description = "center frequency. (in Hertz)",
+                description = "Center Frequency. (in Hertz)",
                 default = 1000
             },
             {
@@ -40,14 +40,14 @@ sptbl["butbp"] = {
     inputs = {
         {
             name = "input",
-            description = "Signal input."
+            description = "Input signal that the filter should be applied to."
         },
     },
 
     outputs = {
         {
             name = "output",
-            description = "Signal output."
+            description = "Output signal (input modified by the filter)."
         },
     }
 

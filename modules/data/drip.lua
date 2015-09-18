@@ -73,7 +73,7 @@ sptbl["drip"] = {
 
     description = [[Water drop physical model
 
-    This is a physical model of the sound of dripping water. When triggered, it will produce a droplet of water.]],
+    Physical model of the sound of dripping water. When triggered, it will produce a droplet of water.]],
 
     ninputs = 1,
     noutputs = 1,
@@ -81,7 +81,7 @@ sptbl["drip"] = {
     inputs = {
         {
             name = "trig",
-            description = "Trigger value. When non-zero, it will reinit the drip and create a drip sound."
+            description = "Trigger value. When non-zero, it will re-init the drip and create a drip sound."
         },
     },
 

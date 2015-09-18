@@ -43,7 +43,7 @@ repeat itself. Count will start when it has been triggered, otherwise it will be
     inputs = {
         {
             name = "trig",
-            description = "When non-zero, will increment."
+            description = "When non-zero, this value will increment."
         },
     },
 

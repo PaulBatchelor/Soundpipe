@@ -34,7 +34,7 @@ sptbl["decimator"] = {
 
     description = [[Digital signal degradation
 
-    Otherwise known as a "bitcrusher", Decimator will digitally degrade a signal. ]],
+    Otherwise known as a "bitcrusher", Decimator will digitally degrade a signal by altering the bitdepth and sampling-rate. ]],
 
     ninputs = 1,
     noutputs = 1,

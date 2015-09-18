@@ -26,18 +26,18 @@ sptbl["add"] = {
     inputs = {
         {
             name = "input1",
-            description = "The first input to be added."
+            description = "First input to be added."
         },
         {
             name = "input2",
-            description = "The second input to be added."
+            description = "Second input to be added."
         },
     },
 
     outputs = {
         {
             name = "out",
-            description = "Output as sum of input signals."
+            description = "Output the sum of the input signals."
         },
     }
 

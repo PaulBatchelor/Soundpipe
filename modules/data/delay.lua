@@ -36,7 +36,7 @@ sptbl["delay"] = {
 
     modtype = "module",
 
-    description = [[Add a delay to an incoming signal with optional feedback.]],
+    description = [[Adds a delay to an incoming signal with optional feedback.]],
 
     ninputs = 1,
     noutputs = 1,
