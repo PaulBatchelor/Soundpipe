@@ -15,6 +15,7 @@ void write_noise(sp_data *data, void *ud) {
     sp_noise_compute(data, udata->ns, NULL, &in);
     sp_biquad_compute(data, udata->tn, &in, &data->out[0]); 
 }
+
 int main() {
     srand(time(NULL));
     udata ud;
