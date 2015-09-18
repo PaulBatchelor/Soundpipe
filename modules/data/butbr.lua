@@ -18,7 +18,7 @@ sptbl["butbr"] = {
             {
                 name = "freq",
                 type = "SPFLOAT",
-                description = "center frequency. (in Hertz)",
+                description = "Center Frequency. (in Hertz)",
                 default = 1000
             },
             {
@@ -32,7 +32,7 @@ sptbl["butbr"] = {
 
     modtype = "module",
 
-    description = [[Band reject butterworth filter]],
+    description = [[Band-reject Butterworth filter]],
 
     ninputs = 1,
     noutputs = 1,

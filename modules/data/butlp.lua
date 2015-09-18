@@ -18,7 +18,7 @@ sptbl["butlp"] = {
             {
                 name = "freq",
                 type = "SPFLOAT",
-                description = "Cutoff frequency.",
+                description = "Cutoff Frequency.",
                 default = 1000
             },
         }
@@ -26,7 +26,7 @@ sptbl["butlp"] = {
 
     modtype = "module",
 
-    description = [[Lowpass butterworth filter]],
+    description = [[Lowpass Butterworth filter]],
 
     ninputs = 1,
     noutputs = 1,

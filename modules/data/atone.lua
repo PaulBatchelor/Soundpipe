@@ -18,7 +18,7 @@ sptbl["atone"] = {
 	        {
 	            name = "hp",
 	            type = "SPFLOAT *",
-	            description = "This is the response curve's half power point (aka cutoff).",
+	            description = "The response curve's half power point (aka cutoff).",
 	            default = "1000"
 	        },
 	    },
@@ -36,7 +36,7 @@ sptbl["atone"] = {
 	inputs = {
 	    {
 	        name = "in",
-	        description = "Audio signal in."
+	        description = "Audio signal input."
 	    },
 	},
 

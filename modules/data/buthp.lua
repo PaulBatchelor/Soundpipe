@@ -18,7 +18,7 @@ sptbl["buthp"] = {
             {
                 name = "freq",
                 type = "SPFLOAT",
-                description = "Cutoff frequency.",
+                description = "Cutoff Frequency.",
                 default = 1000
             },
         }
@@ -26,7 +26,7 @@ sptbl["buthp"] = {
 
     modtype = "module",
 
-    description = [[Highpass butterworth filter]],
+    description = [[Highpass Butterworth filter]],
 
     ninputs = 1,
     noutputs = 1,

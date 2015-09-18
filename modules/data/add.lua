@@ -37,7 +37,7 @@ sptbl["add"] = {
     outputs = {
         {
             name = "out",
-            description = "Output as sum of input signals."
+            description = "Output the sum of the input signals."
         },
     }
 

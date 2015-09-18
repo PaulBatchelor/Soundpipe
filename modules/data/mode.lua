@@ -32,9 +32,9 @@ sptbl["mode"] = {
 
     modtype = "module",
 
-    description = [[A modal resonance filter used for modal synthesis
+    description = [[Resonance filter used for modal synthesis
 
-    Plucked and bell sounds can be created using  passing an impulse through a combination of modal filters. ]],
+    Plucked and bell sounds can be created by passing an impulse through a combination of modal filters. ]],
 
     ninputs = 1,
     noutputs = 1,

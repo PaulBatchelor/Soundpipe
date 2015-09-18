@@ -18,7 +18,7 @@ sptbl["abs"] = {
 
     modtype = "module",
 
-    description = [[Absolute value of the input signal]],
+    description = [[Outputs the absolute value of the input signal]],
 
     ninputs = 1,
     noutputs = 1,
@@ -33,7 +33,7 @@ sptbl["abs"] = {
     outputs = {
         {
             name = "out",
-            description = "All postiive output signal."
+            description = "Absolute value of the input signal as an output."
         },
     }
 

@@ -34,7 +34,7 @@ sptbl["progress"] = {
 
     description = [[A simple progress bar for the commandline
 
-    Mostly ideal for offline renderings and programs with finite length. Escape characters are used to show/hide the cursor, interruption before finishing may cause the cursor to disappear.]],
+    Mostly ideal for offline renderings and programs with finite length. Escape characters are used to show/hide the cursor. Interruption before finishing may cause the cursor to disappear.]],
 
     ninputs = 0,
     noutputs = 0,
