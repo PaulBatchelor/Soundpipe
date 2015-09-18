@@ -20,7 +20,7 @@ sptbl["switch"] = {
 
     description = [[Switch between two signals
 
-    By default the incoming first signal is selected. When triggered, the output signal will switch to the other signal.]],
+    By default, the incoming first signal is selected. When triggered, the output signal will switch to the other signal.]],
 
     ninputs = 3,
     noutputs = 1,

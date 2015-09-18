@@ -30,7 +30,7 @@ sptbl["tbvcf"] = {
             {
                 name = "dist",
                 type = "SPFLOAT",
-                description ="Distortion. Value is typically 2.0, deviation from this can cause stability issues. ",
+                description ="Distortion. Value is typically 2.0; deviation from this can cause stability issues. ",
                 default = 2.0
             },
             {

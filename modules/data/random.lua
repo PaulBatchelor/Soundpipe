@@ -40,7 +40,7 @@ sptbl["random"] = {
     inputs = {
         {
             name = "dummmy",
-            description = "This doesn't do nuthin."
+            description = "This does nothing."
         },
     },
 

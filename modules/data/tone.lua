@@ -18,7 +18,7 @@ sptbl["tone"] = {
 	        {
 	            name = "hp",
 	            type = "SPFLOAT *",
-	            description = "This is the response curve's half power point (aka cutoff).",
+	            description = "This is the response curve's half power point (aka cutoff frequency).",
 	            default = "1000"
 	        },
 	    },

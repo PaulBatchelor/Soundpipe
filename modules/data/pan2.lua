@@ -51,11 +51,11 @@ sptbl["pan2"] = {
     outputs = {
         {
             name = "out_left",
-            description = "Stereo left output for pan2."
+            description = "Stereo left output."
         },
         {
             name = "out_right",
-            description = "Stereo right output for pan2."
+            description = "Stereo right output."
         },
     }
 

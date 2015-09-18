@@ -30,7 +30,7 @@ sptbl["div"] = {
         },
         {
             name = "input2",
-            description = "The second input which will be divide the first input."
+            description = "The second input which will be divided the first input."
         },
     },
 

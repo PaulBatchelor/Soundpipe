@@ -24,7 +24,7 @@ sptbl["bar"] = {
             {
                 name = "ib",
                 type = "SPFLOAT",
-                description = "High frequency loss parameter. Keep this small",
+                description = "High-frequency loss parameter. Keep this small",
                 default = 0.001
             }
         },
@@ -51,7 +51,7 @@ sptbl["bar"] = {
             {
                 name = "scan",
                 type = "SPFLOAT",
-                description ="SPeed of scanning the output location.",
+                description ="Speed of scanning the output location.",
                 default = 0.25
             },
             {

@@ -40,7 +40,7 @@ sptbl["clip"] = {
 
     modtype = "module",
 
-    description = [[Applies clip limiting to a signal]],
+    description = [[Applies clip-limiting to a signal]],
 
     ninputs = 1,
     noutputs = 1,

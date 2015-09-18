@@ -54,7 +54,7 @@ sptbl["randi"] = {
 
     modtype = "module",
 
-    description = [[Lines segments between random values within a range]],
+    description = [[Line segments between random values within a range]],
 
     ninputs = 0,
     noutputs = 1,
