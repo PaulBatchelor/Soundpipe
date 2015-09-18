@@ -66,3 +66,10 @@ int sp_test_compare(sp_test *t, const char *md5hash)
     }
 }
 
+int sp_test_write_raw(sp_test *t, uint32_t index) {
+    char fname[20];
+    sprintf(fname, "%04d.raw", index);
+    FILE *fp = fopen(fname, "wb");
+    fwrite(t->buf, sizeof(SPFLOAT), t->size, fp);
+    fclose(fp);
+}
