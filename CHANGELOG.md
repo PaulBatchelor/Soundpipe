@@ -1,5 +1,15 @@
 # Change log
 
+0.4 
+---
+    - License change: GPL to MIT
+    - sp_progress CLI progress bar
+    - New modules: scale, butbr, pan2, pareq, tenv2, jcrev, barmodel
+    - Modules can now be made with Faust!
+    - Testing utility and framework (libsptest) created. See test folder
+    - Improved docgen
+    - Bug fixes
+
 0.3 "Automation"
 ----------------
     - New modules:
