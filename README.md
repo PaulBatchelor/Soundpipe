@@ -94,7 +94,7 @@ We welcome all contributions! If you find a bug, please feel free to make a bug 
 a pull-request. 
 
 Additionally, if you'd like to contribute bys adding more modules to Soundpipe, please 
-see the Style Guide (util/style\_guide.md) and the Module How-To Guide (uitl/module\_howto.md).
+see the Style Guide (util/style\_guide.md) and the Module How-To Guide (util/module\_howto.md).
 
 
 
