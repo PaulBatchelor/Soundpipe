@@ -1,6 +1,7 @@
 *.o
 *.a
 *.wav
+*.raw
 *.swp
 *.dSYM
 soundpipe.h
