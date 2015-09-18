@@ -28,8 +28,8 @@ sptbl["pan2"] = {
             {
                 name = "pan",
                 type = "SPFLOAT",
-                description ="Panning. A value of zero is hard left, and a value of 1 is hard right.",
-                default = 0.5
+                description ="Panning. A value of -1 is hard left, and a value of 1 is hard right, and 0 is center.",
+                default = 0
             },
         }
     },

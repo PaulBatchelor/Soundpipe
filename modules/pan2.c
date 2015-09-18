@@ -36,7 +36,7 @@ int sp_pan2_destroy(sp_pan2 **p)
 int sp_pan2_init(sp_data *sp, sp_pan2 *p)
 {
     p->type = 0;
-    p->pan = 0.5;
+    p->pan = 0;
     return SP_OK;
 }
 
@@ -44,7 +44,7 @@ int sp_pan2_compute(sp_data *sp, sp_pan2 *p, SPFLOAT *in, SPFLOAT *out1, SPFLOAT
 {
     /* Send the signal's input to the output */
     uint32_t type = p->type;
-    SPFLOAT pan = p->pan;
+    SPFLOAT pan = (1 + p->pan) * 0.5;
     SPFLOAT cc, ss, l, r;
 
     type %= 4;
@@ -52,7 +52,7 @@ int sp_pan2_compute(sp_data *sp, sp_pan2 *p, SPFLOAT *in, SPFLOAT *out1, SPFLOAT
     switch (type) {
         /* Equal power */
         case 0:
-        pan = M_PI * 0.5 * p->pan;
+        pan = M_PI * 0.5 * pan;
         *out1 = *in * cos(pan);
         *out2 = *in * sin(pan);
         break;
