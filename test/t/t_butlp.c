@@ -11,7 +11,6 @@ typedef struct {
 
 int t_butlp(sp_test *tst, sp_data *sp, const char *hash) 
 {
-    srand(123456);
     uint32_t n;
     int fail = 0;
 

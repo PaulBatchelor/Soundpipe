@@ -9,7 +9,6 @@ int t_atone(sp_test *tst, sp_data *sp, const char *hash)
     int fail = 0;
     SPFLOAT noise = 0, atone = 0;
     
-    srand(1234567);
     sp_atone *atone_d;
     sp_noise *noise_d;
 

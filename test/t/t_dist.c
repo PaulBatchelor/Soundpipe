@@ -12,7 +12,6 @@ typedef struct {
 
 int t_dist(sp_test *tst, sp_data *sp, const char *hash) 
 {
-    srand(123456);
     uint32_t n;
     int fail = 0;
     SPFLOAT osc = 0, lfo = 0, out = 0;

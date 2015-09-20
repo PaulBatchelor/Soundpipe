@@ -13,7 +13,6 @@ typedef struct {
 
 int t_delay(sp_test *tst, sp_data *sp, const char *hash) 
 {
-    srand(1234567);
     uint32_t n;
     int fail = 0;
     SPFLOAT osc = 0, delay = 0, met = 0, tenv = 0;

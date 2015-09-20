@@ -15,7 +15,6 @@ int t_buthp(sp_test *tst, sp_data *sp, const char *hash)
     SPFLOAT in = 0;
     SPFLOAT out = 0;
     
-    srand(1234567);
     udata ud;
     sp_noise_create(&ud.ns);
     sp_buthp_create(&ud.buthp);
