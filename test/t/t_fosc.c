@@ -23,14 +23,14 @@ int t_fosc(sp_test *tst, sp_data *sp, const char *hash)
     ud.osc->freq = 500;
 
     for(n = 0; n < tst->size; n++) {
-        sp_test_add_sample(tst, 0);
-
         if(ud.counter == 0){
             ud.osc->freq = 500 + sp_rand(sp) % 2000;
         }
 
         sp_fosc_compute(sp, ud.osc, NULL, &sp->out[0]);
         ud.counter = (ud.counter + 1) % 4410;
+
+        sp_test_add_sample(tst, sp->out[0]);
     }
 
 

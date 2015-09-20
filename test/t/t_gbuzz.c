@@ -20,10 +20,10 @@ int t_gbuzz(sp_test *tst, sp_data *sp, const char *hash)
     sp_gbuzz_create(&ud.buzz);
     sp_gen_sine(sp, ud.ft);
     sp_gbuzz_init(sp, ud.buzz, ud.ft, 0);
-
+ 
     for(n = 0; n < tst->size; n++) {
-        sp_test_add_sample(tst, 0);
         sp_gbuzz_compute(sp, ud.buzz, NULL, &sp->out[0]);
+        sp_test_add_sample(tst, sp->out[0]);
     }
 
     if(sp_test_compare(tst, hash) == SP_NOT_OK) {
