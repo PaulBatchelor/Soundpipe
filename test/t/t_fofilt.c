@@ -5,29 +5,27 @@
 
 typedef struct {
     sp_noise *ns;
-    sp_buthp *buthp;
+    sp_fofilt *ff;
 } udata;
 
-int t_buthp(sp_test *tst, sp_data *sp, const char *hash) 
+int t_fofilt(sp_test *tst, sp_data *sp, const char *hash) 
 {
     uint32_t n;
     int fail = 0;
     SPFLOAT in = 0;
-    SPFLOAT out = 0;
-    
+
     udata ud;
     sp_noise_create(&ud.ns);
-    sp_buthp_create(&ud.buthp);
+    sp_fofilt_create(&ud.ff);
     sp_noise_init(sp, ud.ns);
-    sp_buthp_init(sp, ud.buthp);
-    ud.buthp->freq = 5000;
+    sp_fofilt_init(sp, ud.ff);
+    ud.ff->freq = 500;
 
     for(n = 0; n < tst->size; n++) {
         in = 0;
-        out = 0;
         sp_noise_compute(sp, ud.ns, NULL, &in);
-        sp_buthp_compute(sp, ud.buthp, &in, &out); 
-        sp_test_add_sample(tst, out);
+        sp_fofilt_compute(sp, ud.ff, &in, &sp->out[0]); 
+        sp_test_add_sample(tst, sp->out[0]);
     }
 
     if(sp_test_compare(tst, hash) == SP_NOT_OK) {
@@ -35,10 +33,10 @@ int t_buthp(sp_test *tst, sp_data *sp, const char *hash)
                 tst->md5string, hash);
         fail = 1;
     }
-    
-    sp_noise_destroy(&ud.ns);
-    sp_buthp_destroy(&ud.buthp);
      
+    sp_noise_destroy(&ud.ns);
+    sp_fofilt_destroy(&ud.ff);
+ 
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }

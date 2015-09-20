@@ -15,8 +15,6 @@ int t_butbr(sp_test *tst, sp_data *sp, const char *hash)
     SPFLOAT noise = 0, butbr = 0;
     UserData ud;
 
-    srand(1234567);
-
     sp_butbr_create(&ud.butbr);
     sp_noise_create(&ud.ns);
 

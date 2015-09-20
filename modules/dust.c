@@ -33,7 +33,7 @@ int sp_dust_init(sp_data *sp, sp_dust *p, SPFLOAT amp, SPFLOAT density)
     p->density0 = 0.0;
     p->thresh = 0.0;
     p->scale = 0.0;
-    p->rand = rand();
+    p->rand = sp_rand(sp);
     p->onedsr = 1.0 / sp->sr;
     p->bipolar = 0;
     return SP_OK;
@@ -58,7 +58,7 @@ int sp_dust_compute(sp_data *sp, sp_dust *p, SPFLOAT *in, SPFLOAT *out)
     }
     *out = 0;
     SPFLOAT r;
-    p->rand = rand();
+    p->rand = sp_rand(sp);
     r = (SPFLOAT)p->rand * dv2_31;
 
     if(p->bipolar) {

@@ -12,7 +12,6 @@ typedef struct {
 
 int t_eqfil(sp_test *tst, sp_data *sp, const char *hash) 
 {
-    srand(123456);
     uint32_t n;
     int fail = 0;
     udata ud;
@@ -29,7 +28,7 @@ int t_eqfil(sp_test *tst, sp_data *sp, const char *hash)
         in = 0;
         out = 0;
         if(ud.counter == 0) {
-            ud.eqfil->freq = 500 + rand() % 4000;
+            ud.eqfil->freq = 500 + sp_rand(sp) % 4000;
             ud.eqfil->bw = fabs(ud.eqfil->freq * 0.5);
         }
         sp_noise_compute(sp, ud.ns, NULL, &in);

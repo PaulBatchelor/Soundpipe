@@ -9,7 +9,6 @@ typedef struct {
 
 int t_dust(sp_test *tst, sp_data *sp, const char *hash) 
 {
-    srand(12346);
     uint32_t n;
     int fail = 0;
     SPFLOAT in = 0, out = 0;

@@ -11,7 +11,6 @@ typedef struct {
 
 int t_drip(sp_test *tst, sp_data *sp, const char *hash) 
 {
-    srand(1234567);
     uint32_t n;
     int fail = 0;
     SPFLOAT trig, rev1, rev2, drip;

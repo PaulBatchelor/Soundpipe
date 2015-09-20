@@ -6,6 +6,8 @@
 #define SP_OK 1
 #define SP_NOT_OK 0
 
+#define SP_RANDMAX 2147483648
+
 #ifndef SOUNDPIPE_H
 #define SOUNDPIPE_H
 #endif
@@ -25,6 +27,7 @@ typedef struct sp_data {
     unsigned long pos;
     char filename[200];
     int k;
+    uint32_t rand;
 } sp_data; 
 
 typedef struct {
@@ -50,3 +53,5 @@ int sp_set(sp_param *p, SPFLOAT val);
 
 int sp_out(sp_data *sp, uint32_t chan, SPFLOAT val);
 
+uint32_t sp_rand(sp_data *sp);
+void sp_rseed(sp_data *sp, uint32_t val);
