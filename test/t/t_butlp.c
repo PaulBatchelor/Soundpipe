@@ -29,7 +29,7 @@ int t_butlp(sp_test *tst, sp_data *sp, const char *hash)
         in = 0;
         out = 0;
         if(ud.counter == 0) {
-            ud.butlp->freq= 500 + rand() % 4000;
+            ud.butlp->freq= 500 + sp_rand(sp) % 4000;
         }
         sp_noise_compute(sp, ud.ns, NULL, &in);
         sp_butlp_compute(sp, ud.butlp, &in, &out); 

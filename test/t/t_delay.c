@@ -44,7 +44,7 @@ int t_delay(sp_test *tst, sp_data *sp, const char *hash)
         sp_metro_compute(sp, ud.met, NULL, &met);
         sp_tenv_compute(sp, ud.tenv, &met, &tenv);
         if(met) {
-            ud.osc->freq = 100 + rand() % 500;
+            ud.osc->freq = 100 + sp_rand(sp) % 500;
         }
         sp_osc_compute(sp, ud.osc, NULL, &osc);
         osc *= tenv;

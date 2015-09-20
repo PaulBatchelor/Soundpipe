@@ -16,7 +16,6 @@ int t_butbp(sp_test *tst, sp_data *sp, const char *hash)
     SPFLOAT in = 0;
     SPFLOAT out = 0;
     
-    srand(1234567);
     udata ud;
     ud.counter = 0;
     sp_noise_create(&ud.ns);
@@ -28,7 +27,7 @@ int t_butbp(sp_test *tst, sp_data *sp, const char *hash)
         in = 0;
         out = 0;
         if(ud.counter == 0) {
-            ud.butbp->freq= 500 + rand() % 4000;
+            ud.butbp->freq= 500 + sp_rand(sp) % 4000;
         }
         sp_noise_compute(sp, ud.ns, NULL, &in);
         sp_butbp_compute(sp, ud.butbp, &in, &out); 
