@@ -16,6 +16,7 @@ int sp_create(sp_data **spp)
     sp->sr = 44100;
     sp->len = 5 * sp->sr;
     sp->pos = 0;
+    sp->k = 1;
     return 0;
 }
 

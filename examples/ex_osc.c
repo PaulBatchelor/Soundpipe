@@ -12,6 +12,7 @@ typedef struct {
 void write_osc(sp_data *data, void *ud) {
     udata *udp = ud;
     SPFLOAT osc = 0;
+    data->k = !(data->pos % 4);
     if(udp->counter == 0){
         udp->osc->freq = 500 + rand() % 2000;
     }

@@ -2,6 +2,7 @@ typedef struct {
     SPFLOAT freq, amp, iphs;
     int32_t   lphs;
     sp_ftbl *tbl;
+    int inc;
 } sp_osc;
 
 int sp_osc_create(sp_osc **osc);

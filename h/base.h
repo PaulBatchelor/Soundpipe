@@ -24,6 +24,7 @@ typedef struct sp_data {
     unsigned long len;
     unsigned long pos;
     char filename[200];
+    int k;
 } sp_data; 
 
 typedef struct {

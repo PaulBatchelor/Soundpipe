@@ -32,6 +32,7 @@ int sp_osc_init(sp_data *sp, sp_osc *osc, sp_ftbl *ft, SPFLOAT iphs)
     osc->amp = 0.2;
     osc->tbl = ft;
     osc->iphs = fabs(iphs);
+    osc->inc = 0;
     if (osc->iphs >= 0){
         osc->lphs = ((int32_t)(osc->iphs * SP_FT_MAXLEN)) & SP_FT_PHMASK;
     }
@@ -51,9 +52,8 @@ int sp_osc_compute(sp_data *sp, sp_osc *osc, SPFLOAT *in, SPFLOAT *out)
     cps = osc->freq;
     phs = osc->lphs;
     ft = osc->tbl->tbl;
-
-    int32_t inc;
-    inc = lrintf(cps * sicvt);
+    
+    if(sp->k) osc->inc = lrintf(cps * sicvt);
 
     fract = ((phs) & ftp->lomask) * ftp->lodiv;
     ftab = ft + (phs >> lobits);
@@ -64,7 +64,7 @@ int sp_osc_compute(sp_data *sp, sp_osc *osc, SPFLOAT *in, SPFLOAT *out)
         v2 = ftab[1];
     }
     *out = (v1 + (v2 - v1) * fract) * amp;
-    phs += inc;
+    phs += osc->inc;
     phs &= SP_FT_PHMASK;
 
     osc->lphs = phs;

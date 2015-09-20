@@ -12,7 +12,7 @@ MPATHS=$(addprefix modules/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
 CPATHS=$(addprefix modules/, $(addsuffix .c, $(MODULES)))
 
-CFLAGS +=  -g --std=c99 -DSP_VERSION=$(VERSION)
+CFLAGS +=  -g --std=c99 -DSP_VERSION=$(VERSION) -O3
 UTIL += util/wav2smp
 
 modules/%.o: modules/%.c h/%.h h/soundpipe.h
