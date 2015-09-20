@@ -21,9 +21,12 @@ int t_moogladder(sp_test *tst, sp_data *sp, const char *hash)
     sp_noise_init(sp, ud.ns);
     sp_moogladder_init(sp, ud.moog);
 
+    SPFLOAT in;
+    SPFLOAT out;
+
     for(n = 0; n < tst->size; n++) {
-        SPFLOAT in = 0;
-        SPFLOAT out = 0;
+        in = 0;
+        out = 0;
 
         if(ud.counter == 0) {
             ud.moog->res = 0.8;
