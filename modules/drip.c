@@ -32,13 +32,13 @@
 
 static inline int my_random(sp_data *sp, int max)
 {                      
-    return (rand() % (max + 1));
+    return (sp_rand(sp) % (max + 1));
 }
 
 static SPFLOAT noise_tick(sp_data *sp)                                        
 {                       
     SPFLOAT temp;                                                                
-    temp = 1.0 * rand() - 1073741823.5;
+    temp = 1.0 * sp_rand(sp) - 1073741823.5;
     return temp * (1.0 / 1073741823.0);
 }                                                                              
 
