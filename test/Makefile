@@ -9,7 +9,7 @@ tests = t_foo t_osc t_allpass t_atone t_bal t_biquad t_butbp t_butbr t_buthp \
 OBJ = $(addprefix t/, $(addsuffix .o, $(tests)))
 
 LDFLAGS += -L/usr/local/lib -lsndfile -lm 
-CFLAGS += -g -I../h -I /usr/local/include -I. -O3
+CFLAGS += -g -I../h -I /usr/local/include -I. -O3 -Wall
 
 ifdef WRITE_RAW
 CFLAGS += -DWRITE_RAW

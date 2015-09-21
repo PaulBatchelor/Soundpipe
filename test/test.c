@@ -72,4 +72,5 @@ int sp_test_write_raw(sp_test *t, uint32_t index) {
     FILE *fp = fopen(fname, "wb");
     fwrite(t->buf, sizeof(SPFLOAT), t->size, fp);
     fclose(fp);
+    return SP_OK;
 }
