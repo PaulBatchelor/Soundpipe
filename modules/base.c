@@ -180,7 +180,7 @@ uint32_t sp_rand(sp_data *sp)
     return val;
 }
 
-void sp_rseed(sp_data *sp, uint32_t val)
+void sp_srand(sp_data *sp, uint32_t val)
 {
     sp->rand = val;
 }
