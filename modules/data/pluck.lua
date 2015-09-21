@@ -76,7 +76,7 @@ algorithm]],
         },
         {
             name = "excite",
-            description = "This is signal that will excite the string. A typical signal would be a 1hz sine wave with an amplitude of 1."
+            description = "Signal that will excite the string. A typical signal would be a 1hz sine wave with an amplitude of 1."
         },
     },
     

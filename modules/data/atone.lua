@@ -43,7 +43,7 @@ sptbl["atone"] = {
 	outputs = {
 	    {
 	        name = "out",
-	        description = "Audio signal out."
+	        description = "Audio signal output."
 	    },
 	}
 

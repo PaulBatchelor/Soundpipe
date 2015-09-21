@@ -87,7 +87,7 @@ parameter. Soundpipe will only select the new entry when the trigger input is a 
     outputs = {
         {
             name = "signal out",
-            description = "Signal out."
+            description = "Signal output."
         },
     }
 
