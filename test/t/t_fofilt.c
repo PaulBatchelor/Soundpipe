@@ -10,6 +10,7 @@ typedef struct {
 
 int t_fofilt(sp_test *tst, sp_data *sp, const char *hash) 
 {
+    sp_srand(sp, 0); 
     uint32_t n;
     int fail = 0;
     SPFLOAT in = 0;

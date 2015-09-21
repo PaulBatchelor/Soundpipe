@@ -10,6 +10,7 @@ typedef struct {
 
 int t_decimator(sp_test *tst, sp_data *sp, const char *hash) 
 {
+    sp_srand(sp, 0); 
     uint32_t n;
     int fail = 0;
     SPFLOAT noise = 0, decimator = 0;

@@ -11,11 +11,11 @@ typedef struct {
 
 int t_butbp(sp_test *tst, sp_data *sp, const char *hash) 
 {
+    sp_srand(sp, 0); 
     uint32_t n;
     int fail = 0;
     SPFLOAT in = 0;
     SPFLOAT out = 0;
-    
     udata ud;
     ud.counter = 0;
     sp_noise_create(&ud.ns);
