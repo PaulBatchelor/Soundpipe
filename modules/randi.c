@@ -35,7 +35,7 @@ int sp_randi_destroy(sp_randi **p)
     return SP_OK;
 }
 
-int sp_randi_init(sp_data *sp, sp_randi *p, int seed)
+int sp_randi_init(sp_data *sp, sp_randi *p)
 {
     p->sicvt = 1.0 * SP_FT_MAXLEN / sp->sr;
     p->phs = 0;
@@ -43,7 +43,7 @@ int sp_randi_init(sp_data *sp, sp_randi *p, int seed)
     p->max = 1;
     p->cps = 3;
     p->mode = 3;
-    p->holdrand = (int)(seed & (uint32_t) 0x7FFFFFFF);
+    p->holdrand = sp_rand(sp);
     p->fstval = 0;
 
     int mode = (int)(p->mode);

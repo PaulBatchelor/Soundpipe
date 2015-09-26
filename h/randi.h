@@ -9,5 +9,5 @@ typedef struct {
 
 int sp_randi_create(sp_randi **p);
 int sp_randi_destroy(sp_randi **p);
-int sp_randi_init(sp_data *sp, sp_randi *p, int seed);
+int sp_randi_init(sp_data *sp, sp_randi *p);
 int sp_randi_compute(sp_data *sp, sp_randi *p, SPFLOAT *in, SPFLOAT *out);
