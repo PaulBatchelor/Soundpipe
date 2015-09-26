@@ -41,7 +41,7 @@ sptbl["noise"] = {
     outputs = {
         {
             name = "out",
-            description = "Signal out."
+            description = "Signal output."
         },
     }
 
