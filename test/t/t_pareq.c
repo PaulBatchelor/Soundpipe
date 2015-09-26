@@ -25,8 +25,6 @@ int t_pareq(sp_test *tst, sp_data *sp, const char *hash)
     sp_noise_init(sp, ud.noise);
     ud.noise->amp = 0.4;
 
-    SPFLOAT out;
-
     for(n = 0; n < tst->size; n++) {
         SPFLOAT noise = 0, pareq = 0;
         sp_noise_compute(sp, ud.noise, NULL, &noise);
