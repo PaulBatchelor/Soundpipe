@@ -1,9 +1,9 @@
 /*
  * Fosc
- * 
+ *
  * This code has been extracted from the Csound opcode "foscili".
  * It has been modified to work as a Soundpipe module.
- * 
+ *
  * Original Author(s): Barry Vercoe, John ffitch
  * Year: 1991
  * Location: OOps/ugens3.c
@@ -29,15 +29,15 @@ int sp_fosc_init(sp_data *sp, sp_fosc *p, sp_ftbl *ft)
 {
     p->freq = 440;
     p->amp = 0.4;
-    p->iphs = 0.0;   
+    p->iphs = 0.0;
     p->ft = ft;
-    
+
     p->mod = 1.0;
     p->car = 1.0;
     p->indx = 1.0;
 
     p->cphs = p->mphs = (int32_t)(p->iphs * SP_FT_MAXLEN);
-   
+
     return SP_OK;
 }
 
@@ -45,6 +45,7 @@ int sp_fosc_compute(sp_data *sp, sp_fosc *p, SPFLOAT *in, SPFLOAT *out)
 {
 
     sp_ftbl *ftp;
+
     SPFLOAT  amp, cps, fract, v1, v2, car, fmod, cfreq, mod;
     SPFLOAT  xcar, xmod, ndx, *ftab;
     int32_t  mphs, cphs, minc, cinc, lobits;
@@ -60,7 +61,7 @@ int sp_fosc_compute(sp_data *sp, sp_fosc *p, SPFLOAT *in, SPFLOAT *out)
     amp  = p->amp;
     xcar = p->car;
     xmod = p->mod;
-    
+
     car = cps * xcar;
     mod = cps * xmod;
     ndx = p->indx * mod;

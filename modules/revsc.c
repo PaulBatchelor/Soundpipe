@@ -91,7 +91,7 @@ int sp_revsc_destroy(sp_revsc **p)
 
 static int delay_line_max_samples(SPFLOAT sr, SPFLOAT iPitchMod, int n)
 {
-    SPFLOAT  maxDel;
+    SPFLOAT maxDel;
 
     maxDel = reverbParams[n][0];
     maxDel += (reverbParams[n][1] * (SPFLOAT) iPitchMod * 1.125);
@@ -108,7 +108,7 @@ static int delay_line_bytes_alloc(SPFLOAT sr, SPFLOAT iPitchMod, int n)
 
 static void next_random_lineseg(sp_revsc *p, sp_revsc_dl *lp, int n)
 {
-    SPFLOAT  prvDel, nxtDel, phs_incVal;
+    SPFLOAT prvDel, nxtDel, phs_incVal;
 
     /* update random seed */
     if (lp->seedVal < 0)
@@ -135,7 +135,7 @@ static void next_random_lineseg(sp_revsc *p, sp_revsc_dl *lp, int n)
 
 static int init_delay_line(sp_revsc *p, sp_revsc_dl *lp, int n)
 {
-    SPFLOAT  readPos;
+    SPFLOAT readPos;
     /* int     i; */
 
     /* calculate length of delay line */
@@ -162,13 +162,13 @@ static int init_delay_line(sp_revsc *p, sp_revsc_dl *lp, int n)
 
 int sp_revsc_compute(sp_data *sp, sp_revsc *p, SPFLOAT *in1, SPFLOAT *in2, SPFLOAT *out1, SPFLOAT *out2)
 {
-    SPFLOAT    ainL, ainR, aoutL, aoutR;
-    SPFLOAT    vm1, v0, v1, v2, am1, a0, a1, a2, frac;
+    SPFLOAT ainL, ainR, aoutL, aoutR;
+    SPFLOAT vm1, v0, v1, v2, am1, a0, a1, a2, frac;
     sp_revsc_dl *lp;
-    int       readPos;
+    int readPos;
     uint32_t n;
-    int       bufferSize; /* Local copy */
-    SPFLOAT    dampFact = p->dampFact;
+    int bufferSize; /* Local copy */
+    SPFLOAT dampFact = p->dampFact;
 
     if (p->initDone <= 0) return SP_NOT_OK;
 

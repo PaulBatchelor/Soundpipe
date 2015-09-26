@@ -1,9 +1,9 @@
 /*
  * Bar
- * 
+ *
  * This code has been extracted from the Csound opcode "bilbar".
  * It has been modified to work as a Soundpipe module.
- * 
+ *
  * Original Author(s): Stefan Bilbao, John Ffitch
  * Year: 2006
  * Location: Opcodes/bilbar.c
@@ -16,7 +16,7 @@
 
 #ifndef M_PI
 #define M_PI		3.14159265358979323846
-#endif 
+#endif
 
 
 int sp_bar_create(sp_bar **p)
@@ -76,7 +76,7 @@ int sp_bar_init(sp_data *sp, sp_bar *p, SPFLOAT iK, SPFLOAT ib)
 
 int sp_bar_compute(sp_data *sp, sp_bar *p, SPFLOAT *in, SPFLOAT *out)
 {
-    SPFLOAT xofreq = 2 * M_PI * (p->scan)/sp->sr; 
+    SPFLOAT xofreq = 2 * M_PI * (p->scan)/sp->sr;
     SPFLOAT xo, xofrac;
     int xoint;
     int step = p->step;
@@ -113,7 +113,7 @@ int sp_bar_compute(sp_data *sp, sp_bar *p, SPFLOAT *in, SPFLOAT *out)
     }
 
     if ((bcL|bcR)&(~3) && (bcL|bcR)!=0) {
-        fprintf(stderr, 
+        fprintf(stderr,
                 "sp_bar: Ends must be clamped(1), pivoting(2), or free(3)\n");
         return SP_NOT_OK;
     }
@@ -143,7 +143,7 @@ int sp_bar_compute(sp_data *sp, sp_bar *p, SPFLOAT *in, SPFLOAT *out)
     }
 
     /* Iterate model */
-    for (rr = 0; rr < N+1; rr++) { 
+    for (rr = 0; rr < N+1; rr++) {
         w[rr+2] = s0*w1[rr+2] + s1*(w1[rr+3]+w1[rr+1]) + s2*(w1[rr+4]+w1[rr]) +
                   t0*w2[rr+2] + t1*(w2[rr+3]+w2[rr+1]);
     }
@@ -160,8 +160,8 @@ int sp_bar_compute(sp_data *sp, sp_bar *p, SPFLOAT *in, SPFLOAT *out)
         }
     }
     {
-        SPFLOAT  xx = SINNW*COS1W + COSNW*SIN1W;
-        SPFLOAT  yy = COSNW*COS1W - SINNW*SIN1W;
+        SPFLOAT xx = SINNW*COS1W + COSNW*SIN1W;
+        SPFLOAT yy = COSNW*COS1W - SINNW*SIN1W;
 
         SINNW = xx;
         COSNW = yy;

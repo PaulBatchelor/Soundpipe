@@ -1,9 +1,9 @@
 /*
  * Moogladder
- * 
+ *
  * This code has been extracted from the Csound opcode "moogladder".
  * It has been modified to work as a Soundpipe module.
- * 
+ *
  * Original Author(s): Victor Lazzarini
  * Year: 2001
  * Location: Opcodes/newfils.c
@@ -17,7 +17,7 @@
 
 #ifndef M_PI
 #define M_PI		3.14159265358979323846	/* pi */
-#endif 
+#endif
 
 int sp_moogladder_create(sp_moogladder **t){
     *t = malloc(sizeof(sp_moogladder));
@@ -45,20 +45,20 @@ int sp_moogladder_init(sp_data *sp, sp_moogladder *p){
 }
 
 int sp_moogladder_compute(sp_data *sp, sp_moogladder *p, SPFLOAT *in, SPFLOAT *out){
-    SPFLOAT   freq = p->freq;
-    SPFLOAT   res = p->res;
-    SPFLOAT  res4;
-    SPFLOAT  *delay = p->delay;
-    SPFLOAT  *tanhstg = p->tanhstg;
-    SPFLOAT  stg[4], input;
-    SPFLOAT  acr, tune;
+    SPFLOAT freq = p->freq;
+    SPFLOAT res = p->res;
+    SPFLOAT res4;
+    SPFLOAT *delay = p->delay;
+    SPFLOAT *tanhstg = p->tanhstg;
+    SPFLOAT stg[4], input;
+    SPFLOAT acr, tune;
 #define THERMAL (0.000025) /* (1.0 / 40000.0) transistor thermal voltage  */
     int     j, k;
 
     if (res < 0) res = 0;
 
     if (p->oldfreq != freq || p->oldres != res) {
-        SPFLOAT  f, fc, fc2, fc3, fcr;
+        SPFLOAT f, fc, fc2, fc3, fcr;
         p->oldfreq = freq;
         /* sr is half the actual filter sampling rate  */
         fc =  (SPFLOAT)(freq/sp->sr);
