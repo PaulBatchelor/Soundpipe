@@ -20,7 +20,6 @@ int t_tone(sp_test *tst, sp_data *sp, const char *hash)
     sp_tone_init(sp, ud.tn);
 
     SPFLOAT in;
-    SPFLOAT out;
 
     for(n = 0; n < tst->size; n++) {
         sp_noise_compute(sp, ud.ns, NULL, &in);
