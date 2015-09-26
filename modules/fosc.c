@@ -45,7 +45,7 @@ int sp_fosc_compute(sp_data *sp, sp_fosc *p, SPFLOAT *in, SPFLOAT *out)
 {
 
     sp_ftbl *ftp;
-    SPFLOAT  amp, cps, fract, v1, car, fmod, cfreq, mod;
+    SPFLOAT  amp, cps, fract, v1, v2, car, fmod, cfreq, mod;
     SPFLOAT  xcar, xmod, ndx, *ftab;
     int32_t  mphs, cphs, minc, cinc, lobits;
     SPFLOAT  sicvt = p->ft->sicvt;
@@ -69,7 +69,14 @@ int sp_fosc_compute(sp_data *sp, sp_fosc *p, SPFLOAT *in, SPFLOAT *out)
     fract = ((mphs) & ftp->lomask) * ftp->lodiv;
     ftab = ft + (mphs >> lobits);
     v1 = ftab[0];
-    fmod = (v1 + (ftab[1] - v1) * fract) * ndx;
+
+    if(ftab[0] == p->ft->tbl[p->ft->size - 1]) {
+        v2 = p->ft->tbl[0];
+    } else {
+        v2 = ftab[1];
+    }
+
+    fmod = (v1 + (v2 - v1) * fract) * ndx;
     mphs += minc;
     cfreq = car + fmod;
     cinc = (int32_t)(cfreq * sicvt);
@@ -77,8 +84,14 @@ int sp_fosc_compute(sp_data *sp, sp_fosc *p, SPFLOAT *in, SPFLOAT *out)
     fract = ((cphs) & ftp->lomask) * ftp->lodiv;
     ftab = ft + (cphs >>lobits);
     v1 = ftab[0];
-    
-    *out = (v1 + (ftab[1] - v1) * fract) * amp;
+
+    if(ftab[0] == p->ft->tbl[p->ft->size - 1]) {
+        v2 = p->ft->tbl[0];
+    } else {
+        v2 = ftab[1];
+    }
+
+    *out = (v1 + (v2 - v1) * fract) * amp;
     cphs += cinc;
     p->mphs = mphs;
     p->cphs = cphs;
