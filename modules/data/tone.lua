@@ -41,7 +41,7 @@ sptbl["tone"] = {
 	outputs = {
 	    {
 	        name = "out",
-	        description = "Singal Output."
+	        description = "Signal Output."
 	    },
 	}
 
