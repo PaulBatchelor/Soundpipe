@@ -11,11 +11,11 @@ typedef struct {
 
 int t_pareq(sp_test *tst, sp_data *sp, const char *hash) 
 {
+    sp_srand(sp, 0); 
     uint32_t n;
     int fail = 0;
 
     udata ud;
-    sp_create(&sp);
 
     sp_pareq_create(&ud.pareq);
     sp_noise_create(&ud.noise);
