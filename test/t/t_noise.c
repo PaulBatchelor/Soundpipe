@@ -9,11 +9,11 @@ typedef struct {
 
 int t_noise(sp_test *tst, sp_data *sp, const char *hash) 
 {
+    sp_srand(sp, 0); 
     uint32_t n;
     int fail = 0;
 
     udata ud;
-    sp_create(&sp);
     sp_noise_create(&ud.ns);
     sp_noise_init(sp, ud.ns);
 
