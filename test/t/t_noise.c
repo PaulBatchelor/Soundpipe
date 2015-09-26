@@ -22,7 +22,7 @@ int t_noise(sp_test *tst, sp_data *sp, const char *hash)
 
     for(n = 0; n < tst->size; n++) {
         sp_noise_compute(sp, ud.ns, &in, &sp->out[0]); 
-        sp_test_add_sample(tst, 0);
+        sp_test_add_sample(tst, sp->out[0]);
     }
 
     if(sp_test_compare(tst, hash) == SP_NOT_OK) {
