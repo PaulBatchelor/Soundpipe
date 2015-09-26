@@ -22,8 +22,6 @@ int t_dtrig(sp_test *tst, sp_data *sp, const char *hash)
     SPFLOAT trig;
     SPFLOAT dtrig = 0;
 
-    sp_auxdata rvaux;
-
     sp_dtrig_create(&ud.dt);
     sp_tenv_create(&ud.tenv);
     sp_ftbl_create(sp, &ud.ft, 2048);

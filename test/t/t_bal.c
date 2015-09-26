@@ -42,7 +42,7 @@ int t_bal(sp_test *tst, sp_data *sp, const char *hash)
 
 
     for(n = 0; n < tst->size; n++) {
-        out = 0, osc = 0, filt = 0, bal = 0, env = 0, tick;
+        out = 0, osc = 0, filt = 0, bal = 0, env = 0;
         for(i = 0; i < 3; i++) {
            sp_osc_compute(sp, osc_d[i], NULL, &osc);
            out += osc * 0.5;
