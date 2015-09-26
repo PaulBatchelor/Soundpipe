@@ -18,7 +18,6 @@ int t_noise(sp_test *tst, sp_data *sp, const char *hash)
     sp_noise_init(sp, ud.ns);
 
     SPFLOAT in;
-    SPFLOAT out;
 
     for(n = 0; n < tst->size; n++) {
         sp_noise_compute(sp, ud.ns, &in, &sp->out[0]); 
