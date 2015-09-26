@@ -1,9 +1,9 @@
 /*
  * Butterworth Filters
- * 
- * This code has been extracted from the Csound butterworth filter opcodes 
+ *
+ * This code has been extracted from the Csound butterworth filter opcodes
  * It has been modified to work as a Soundpipe module.
- * 
+ *
  * Original Author(s): Paris Smaragdis, John ffitch
  * Year: 1994
  * Location: Opcodes/butter.c
@@ -17,7 +17,7 @@
 
 #ifndef M_PI
 #define M_PI		3.14159265358979323846	/* pi */
-#endif 
+#endif
 
 #include "soundpipe.h"
 
@@ -79,7 +79,7 @@ int sp_buthp_compute(sp_data *sp, sp_buthp *p, SPFLOAT *in, SPFLOAT *out)
     }
 
     if (p->freq != p->lkf)      {
-      SPFLOAT    *a, c;
+      SPFLOAT *a, c;
       a = p->a;
       p->lkf = p->freq;
       c = tan((SPFLOAT)(p->pidsr * p->lkf));
@@ -94,7 +94,7 @@ int sp_buthp_compute(sp_data *sp, sp_buthp *p, SPFLOAT *in, SPFLOAT *out)
     return SP_OK;
 }
 
-int sp_butlp_compute(sp_data *sp, sp_butlp *p, SPFLOAT *in, SPFLOAT *out) 
+int sp_butlp_compute(sp_data *sp, sp_butlp *p, SPFLOAT *in, SPFLOAT *out)
 {
     if (p->freq <= 0.0){
       *out = 0;
@@ -102,7 +102,7 @@ int sp_butlp_compute(sp_data *sp, sp_butlp *p, SPFLOAT *in, SPFLOAT *out)
     }
 
     if (p->freq != p->lkf){
-        SPFLOAT     *a, c;
+        SPFLOAT *a, c;
         a = p->a;
         p->lkf = p->freq;
         c = 1.0 / tan((SPFLOAT)(p->pidsr * p->lkf));
@@ -123,7 +123,7 @@ int sp_butbp_create(sp_butbp **p)
     return SP_OK;
 }
 
-int sp_butbp_destroy(sp_butbp **p) 
+int sp_butbp_destroy(sp_butbp **p)
 {
     free(*p);
     return SP_OK;
@@ -147,17 +147,17 @@ int sp_butbp_compute(sp_data *sp, sp_butbp *p, SPFLOAT *in, SPFLOAT *out)
 {
     SPFLOAT *a = p->a;
     SPFLOAT t, y;
-    
+
     *out = p->sr;
     if (p->bw <= 0.0) {
-       *out = 0; 
+       *out = 0;
        return SP_OK;
     }
-    
+
     SPFLOAT bw, fr;
     bw = p->bw;
     fr = p->freq;
-    
+
     if (bw != p->lkb || fr != p->lkf) {
         SPFLOAT c, d;
         p->lkf = fr;

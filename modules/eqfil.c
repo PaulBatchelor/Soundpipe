@@ -1,9 +1,9 @@
 /*
  * Equalization Filter
- * 
+ *
  * This code has been extracted from the Csound eqfil module.
  * It has been modified to work as a Soundpipe module.
- * 
+ *
  * Original Author(s): Victor Lazzarini
  * Year: 2007
  * Location: Opcodes/eqfil.c
@@ -15,7 +15,7 @@
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
-#endif 
+#endif
 
 #include "soundpipe.h"
 
@@ -48,7 +48,7 @@ int sp_eqfil_init(sp_data *sp, sp_eqfil *p)
 int sp_eqfil_compute(sp_data *sp, sp_eqfil *p, SPFLOAT *in, SPFLOAT *out)
 {
     SPFLOAT z1 = p->z1, z2 = p->z2, c, d, w, a, y;
-    SPFLOAT  g;
+    SPFLOAT g;
 
     if(p->bw != p->bwv || p->freq != p->frv) {
         SPFLOAT sr = sp->sr;

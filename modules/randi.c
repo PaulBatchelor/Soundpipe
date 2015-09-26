@@ -74,8 +74,8 @@ int sp_randi_init(sp_data *sp, sp_randi *p, int seed)
 int sp_randi_compute(sp_data *sp, sp_randi *p, SPFLOAT *in, SPFLOAT *out)
 {
     int32_t phs = p->phs, inc;
-    SPFLOAT       cpsp;
-    SPFLOAT       amp, min;
+    SPFLOAT cpsp;
+    SPFLOAT amp, min;
 
     cpsp = p->cps;
     min = p->min;
