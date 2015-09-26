@@ -3,10 +3,15 @@ MODULES=base event noise tone moogladder butter revsc ftbl osc posc3 randi \
 	dcblock tevent metro tenv maygate fofilt biquad tbvcf mode reverse \
 	dtrig rpt dust port vdelay count streson tseq bal drip clip fosc dist \
 	gbuzz rms jitter lpf18 randmt allpass comb phasor tabread \
-	eqfil foo butbr in diskin nsmp prop samphold delay switch dmetro random \
+	eqfil foo butbr in prop samphold delay switch dmetro random \
 	pluck atone tin scale pan2 jcrev tenv2 fold decimator inverse mul add sub \
 	div abs panst bar progress pareq
 
+ifndef NO_LIBSNDFILE
+	MODULES += nsmp diskin
+else
+	CFLAGS += -DNO_LIBSNDFILE
+endif
 
 # ini parser needed for nsmp module
 include lib/inih/Makefile
