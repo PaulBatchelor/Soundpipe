@@ -26,7 +26,7 @@ sptbl["tin"] = {
     inputs = { 
         {
             name = "trig",
-            description = "When non-zero, reads a single SPFLOAt from standard input."
+            description = "When non-zero, reads a single SPFLOAT from standard input."
         },
     },
     
