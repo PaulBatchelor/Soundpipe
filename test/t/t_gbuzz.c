@@ -7,14 +7,14 @@ typedef struct {
     sp_gbuzz *buzz;
     sp_ftbl *ft; 
     int counter;
-} udata;
+} UserData;
 
 int t_gbuzz(sp_test *tst, sp_data *sp, const char *hash) 
 {
     uint32_t n;
     int fail = 0;
 
-    udata ud;
+    UserData ud;
     ud.counter = 0;
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_gbuzz_create(&ud.buzz);

@@ -8,7 +8,7 @@ typedef struct {
    sp_osc *osc;
    sp_clip *clp;
    sp_moogladder *filt;
-} udata;
+} UserData;
 
 int t_clip(sp_test *tst, sp_data *sp, const char *hash) 
 {
@@ -16,7 +16,7 @@ int t_clip(sp_test *tst, sp_data *sp, const char *hash)
     int fail = 0;
     SPFLOAT out, osc, filt;
     
-    udata ud;
+    UserData ud;
     sp_clip_create(&ud.clp);
     sp_osc_create(&ud.osc);
     sp_ftbl_create(sp, &ud.ft, 4096);

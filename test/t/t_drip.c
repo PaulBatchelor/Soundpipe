@@ -7,14 +7,14 @@ typedef struct {
     sp_drip *drip;
     sp_dust *trig;
     sp_revsc *rev;
-} udata;
+} UserData;
 
 int t_drip(sp_test *tst, sp_data *sp, const char *hash) 
 {
     uint32_t n;
     int fail = 0;
     SPFLOAT trig, rev1, rev2, drip;
-    udata ud;
+    UserData ud;
 
     sp_revsc_create(&ud.rev);
     sp_drip_create(&ud.drip);

@@ -8,7 +8,7 @@ typedef struct {
     sp_osc *osc;
     sp_ftbl *ft;
     sp_metro *met;
-} udata;
+} UserData;
 
 int t_pluck(sp_test *tst, sp_data *sp, const char *hash) 
 {
@@ -16,7 +16,7 @@ int t_pluck(sp_test *tst, sp_data *sp, const char *hash)
     int fail = 0;
 
     /* allocate / initialize modules here */
-    udata ud;
+    UserData ud;
     sp_srand(sp, 0); 
 
     sp_pluck_create(&ud.pluck);

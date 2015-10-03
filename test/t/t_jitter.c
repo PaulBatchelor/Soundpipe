@@ -7,14 +7,14 @@ typedef struct {
     sp_fosc *osc;
     sp_ftbl *ft; 
     sp_jitter *jit;
-} udata;
+} UserData;
 
 int t_jitter(sp_test *tst, sp_data *sp, const char *hash) 
 {
     uint32_t n;
     int fail = 0;
 
-    udata ud;
+    UserData ud;
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_fosc_create(&ud.osc);
     sp_jitter_create(&ud.jit);   
