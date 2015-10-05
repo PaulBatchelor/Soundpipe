@@ -7,7 +7,7 @@ typedef struct {
     sp_pareq *pareq;
     sp_noise *noise;
     sp_ftbl *ft; 
-} udata;
+} UserData;
 
 int t_pareq(sp_test *tst, sp_data *sp, const char *hash) 
 {
@@ -15,7 +15,7 @@ int t_pareq(sp_test *tst, sp_data *sp, const char *hash)
     uint32_t n;
     int fail = 0;
 
-    udata ud;
+    UserData ud;
 
     sp_pareq_create(&ud.pareq);
     sp_noise_create(&ud.noise);

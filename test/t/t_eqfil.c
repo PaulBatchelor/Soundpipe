@@ -8,14 +8,14 @@ typedef struct {
     sp_noise *ns;
     sp_eqfil *eqfil;
     int counter;
-} udata;
+} UserData;
 
 int t_eqfil(sp_test *tst, sp_data *sp, const char *hash) 
 {
     sp_srand(sp, 0); 
     uint32_t n;
     int fail = 0;
-    udata ud;
+    UserData ud;
     SPFLOAT in = 0;
     SPFLOAT out = 0;
     

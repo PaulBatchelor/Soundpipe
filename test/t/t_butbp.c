@@ -7,7 +7,7 @@ typedef struct {
     sp_noise *ns;
     sp_butbp *butbp;
     int counter;
-} udata;
+} UserData;
 
 int t_butbp(sp_test *tst, sp_data *sp, const char *hash) 
 {
@@ -16,7 +16,7 @@ int t_butbp(sp_test *tst, sp_data *sp, const char *hash)
     int fail = 0;
     SPFLOAT in = 0;
     SPFLOAT out = 0;
-    udata ud;
+    UserData ud;
     ud.counter = 0;
     sp_noise_create(&ud.ns);
     sp_butbp_create(&ud.butbp);

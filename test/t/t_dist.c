@@ -8,14 +8,14 @@ typedef struct {
     sp_ftbl *ft;
     sp_dist *ds;
     sp_osc *lfo;
-} udata;
+} UserData;
 
 int t_dist(sp_test *tst, sp_data *sp, const char *hash) 
 {
     uint32_t n;
     int fail = 0;
     SPFLOAT osc = 0, lfo = 0, out = 0;
-    udata ud;
+    UserData ud;
     
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_fosc_create(&ud.osc);
