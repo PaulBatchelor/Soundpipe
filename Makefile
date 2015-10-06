@@ -29,7 +29,7 @@ libsoundpipe.a: $(MPATHS) $(LPATHS)
 	ar rcs $@ $(MPATHS) $(LPATHS)
 
 soundpipe.o: $(MPATHS) $(LPATHS)
-	ld -o $@ -r $(MPATHS) $(LPATHS)
+	ld -shared -fPIC -o $@ $(MPATHS) $(LPATHS)
 
 config.mk: config.def.mk
 	cp config.def.mk config.mk
