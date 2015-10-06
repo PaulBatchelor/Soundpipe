@@ -6,7 +6,7 @@
 typedef struct udata {
     sp_noise *ns;
     sp_biquad *tn;
-} udata;
+} UserData;
 
 int t_biquad(sp_test *tst, sp_data *sp, const char *hash) 
 {
@@ -16,7 +16,7 @@ int t_biquad(sp_test *tst, sp_data *sp, const char *hash)
     SPFLOAT in = 0;
     SPFLOAT out = 0;
 
-    udata ud;
+    UserData ud;
 
     sp_noise_create(&ud.ns);
     sp_biquad_create(&ud.tn);

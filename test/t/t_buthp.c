@@ -6,7 +6,7 @@
 typedef struct {
     sp_noise *ns;
     sp_buthp *buthp;
-} udata;
+} UserData;
 
 int t_buthp(sp_test *tst, sp_data *sp, const char *hash) 
 {
@@ -16,7 +16,7 @@ int t_buthp(sp_test *tst, sp_data *sp, const char *hash)
     SPFLOAT in = 0;
     SPFLOAT out = 0;
     
-    udata ud;
+    UserData ud;
     sp_noise_create(&ud.ns);
     sp_buthp_create(&ud.buthp);
     sp_noise_init(sp, ud.ns);

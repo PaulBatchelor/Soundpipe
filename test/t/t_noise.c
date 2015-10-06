@@ -5,7 +5,7 @@
 
 typedef struct {
     sp_noise *ns;
-} udata;
+} UserData;
 
 int t_noise(sp_test *tst, sp_data *sp, const char *hash) 
 {
@@ -13,7 +13,7 @@ int t_noise(sp_test *tst, sp_data *sp, const char *hash)
     uint32_t n;
     int fail = 0;
 
-    udata ud;
+    UserData ud;
     sp_noise_create(&ud.ns);
     sp_noise_init(sp, ud.ns);
 

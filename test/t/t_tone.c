@@ -6,14 +6,14 @@
 typedef struct {
     sp_noise *ns;
     sp_tone *tn;
-} udata;
+} UserData;
 
 int t_tone(sp_test *tst, sp_data *sp, const char *hash) 
 {
     uint32_t n;
     int fail = 0;
 
-    udata ud;
+    UserData ud;
     sp_noise_create(&ud.ns);
     sp_tone_create(&ud.tn);
     sp_noise_init(sp, ud.ns);

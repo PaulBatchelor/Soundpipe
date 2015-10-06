@@ -6,7 +6,7 @@
 typedef struct {
     sp_noise *ns;
     sp_fofilt *ff;
-} udata;
+} UserData;
 
 int t_fofilt(sp_test *tst, sp_data *sp, const char *hash) 
 {
@@ -15,7 +15,7 @@ int t_fofilt(sp_test *tst, sp_data *sp, const char *hash)
     int fail = 0;
     SPFLOAT in = 0;
 
-    udata ud;
+    UserData ud;
     sp_noise_create(&ud.ns);
     sp_fofilt_create(&ud.ff);
     sp_noise_init(sp, ud.ns);
