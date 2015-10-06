@@ -5,6 +5,7 @@
 
 int t_allpass(sp_test *tst, sp_data *sp, const char *hash) 
 {
+    sp_srand(sp, 0); 
     uint32_t n;
     int fail = 0;
     sp_allpass *ap_d;

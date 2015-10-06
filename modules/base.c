@@ -45,6 +45,8 @@ int sp_destroy(sp_data **spp)
     return 0;
 }
 
+#ifndef NO_LIBSNDFILE
+
 int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
 {
     SNDFILE *sf[sp->nchan];
@@ -87,6 +89,8 @@ int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
     }
     return 0;
 }
+
+#endif
 
 int sp_process_raw(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
 {
@@ -180,7 +184,7 @@ uint32_t sp_rand(sp_data *sp)
     return val;
 }
 
-void sp_rseed(sp_data *sp, uint32_t val)
+void sp_srand(sp_data *sp, uint32_t val)
 {
     sp->rand = val;
 }

@@ -4,28 +4,25 @@
 #include "test.h"
 
 typedef struct {
-    sp_noise *ns;
-    sp_fofilt *ff;
+    sp_gbuzz *buzz;
+    sp_ftbl *ft; 
+    int counter;
 } UserData;
 
-int t_fofilt(sp_test *tst, sp_data *sp, const char *hash) 
+int t_gbuzz(sp_test *tst, sp_data *sp, const char *hash) 
 {
-    sp_srand(sp, 0); 
     uint32_t n;
     int fail = 0;
-    SPFLOAT in = 0;
 
     UserData ud;
-    sp_noise_create(&ud.ns);
-    sp_fofilt_create(&ud.ff);
-    sp_noise_init(sp, ud.ns);
-    sp_fofilt_init(sp, ud.ff);
-    ud.ff->freq = 500;
-
+    ud.counter = 0;
+    sp_ftbl_create(sp, &ud.ft, 2048);
+    sp_gbuzz_create(&ud.buzz);
+    sp_gen_sine(sp, ud.ft);
+    sp_gbuzz_init(sp, ud.buzz, ud.ft, 0);
+ 
     for(n = 0; n < tst->size; n++) {
-        in = 0;
-        sp_noise_compute(sp, ud.ns, NULL, &in);
-        sp_fofilt_compute(sp, ud.ff, &in, &sp->out[0]); 
+        sp_gbuzz_compute(sp, ud.buzz, NULL, &sp->out[0]);
         sp_test_add_sample(tst, sp->out[0]);
     }
 
@@ -35,9 +32,10 @@ int t_fofilt(sp_test *tst, sp_data *sp, const char *hash)
         fail = 1;
     }
      
-    sp_noise_destroy(&ud.ns);
-    sp_fofilt_destroy(&ud.ff);
- 
+
+    sp_ftbl_destroy(&ud.ft);
+    sp_gbuzz_destroy(&ud.buzz);
+     
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }

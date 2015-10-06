@@ -11,6 +11,7 @@ typedef struct {
 
 int t_comb(sp_test *tst, sp_data *sp, const char *hash) 
 {
+    sp_srand(sp, 0); 
     uint32_t n;
     int fail = 0;
     SPFLOAT tick = 0, env = 0, noise = 0, comb = 0;

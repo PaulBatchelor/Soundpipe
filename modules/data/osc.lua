@@ -61,7 +61,7 @@ sptbl["osc"] = {
     outputs = {
         {
             name = "out",
-            description = "Signal out."
+            description = "Signal output."
         },
     }
 

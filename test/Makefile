@@ -4,12 +4,12 @@ all: libsptest.a run.bin
 
 tests = t_foo t_osc t_allpass t_atone t_bal t_biquad t_butbp t_butbr t_buthp \
 		t_butlp t_clip t_comb t_decimator t_delay t_dist t_div t_dmetro t_drip \
-		t_dtrig t_dust t_eqfil t_fofilt t_fosc
+		t_dtrig t_dust t_eqfil t_fofilt t_fosc t_gbuzz t_moogladder t_phasor 			t_tone t_noise t_pareq t_jitter t_pluck
 
 OBJ = $(addprefix t/, $(addsuffix .o, $(tests)))
 
 LDFLAGS += -L/usr/local/lib -lsndfile -lm 
-CFLAGS += -g -I../h -I /usr/local/include -I. -O3
+CFLAGS += -g -I../h -I /usr/local/include -I. -O3 -Wall
 
 ifdef WRITE_RAW
 CFLAGS += -DWRITE_RAW

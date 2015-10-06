@@ -4,7 +4,11 @@
 
 default: all
 
-include config.mk
+ifndef CONFIG
+CONFIG=config.mk
+endif
+
+include $(CONFIG)
 
 VERSION=0.4
 

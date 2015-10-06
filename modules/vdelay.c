@@ -1,9 +1,9 @@
 /*
  * Del
- * 
+ *
  * This code has been extracted from the Csound opcode "vdelay3".
  * It has been modified to work as a Soundpipe module.
- * 
+ *
  * Original Author(s): Paris Smaradgis, Istvan Varga
  * Year: 1994
  * Location: OOps/vdelay.c
@@ -13,13 +13,13 @@
 #include <stdlib.h>
 #include "soundpipe.h"
 
-int sp_vdelay_create(sp_vdelay **p) 
+int sp_vdelay_create(sp_vdelay **p)
 {
     *p = malloc(sizeof(sp_vdelay));
     return SP_OK;
 }
 
-int sp_vdelay_destroy(sp_vdelay **p) 
+int sp_vdelay_destroy(sp_vdelay **p)
 {
     sp_vdelay *pp = *p;
     sp_auxdata_free(&pp->buf);
@@ -27,7 +27,7 @@ int sp_vdelay_destroy(sp_vdelay **p)
     return SP_OK;
 }
 
-int sp_vdelay_init(sp_data *sp, sp_vdelay *p, SPFLOAT maxdel) 
+int sp_vdelay_init(sp_data *sp, sp_vdelay *p, SPFLOAT maxdel)
 {
     uint32_t n = (int32_t)(maxdel * sp->sr)+1;
     p->sr = sp->sr;
@@ -38,14 +38,14 @@ int sp_vdelay_init(sp_data *sp, sp_vdelay *p, SPFLOAT maxdel)
     return SP_OK;
 }
 
-int sp_vdelay_compute(sp_data *sp, sp_vdelay *p, SPFLOAT *in, SPFLOAT *out) 
+int sp_vdelay_compute(sp_data *sp, sp_vdelay *p, SPFLOAT *in, SPFLOAT *out)
 {
-    int32_t  maxd, indx;
-    *out = p->sr;  
+    int32_t maxd, indx;
+    *out = p->sr;
     SPFLOAT del = p->del;
     SPFLOAT b0, b1, b2, b3;
     int32_t v0, v1, v2, v3;
-    SPFLOAT  fv1;
+    SPFLOAT fv1;
     indx = p->left;
 
     sp_auxdata_setbuf(&p->buf, indx, in);
@@ -57,8 +57,8 @@ int sp_vdelay_compute(sp_data *sp, sp_vdelay *p, SPFLOAT *in, SPFLOAT *out)
     maxd = (uint32_t) (p->maxdel * p->sr);
     /* Make sure we're inside the buffer */
     if ((v1 < 0) || (fv1 < 0.0)) {
-        fv1++; v1--; 
-        while (v1 < 0) { 
+        fv1++; v1--;
+        while (v1 < 0) {
             v1 += (int32_t)maxd;
         }
     } else {
@@ -76,11 +76,11 @@ int sp_vdelay_compute(sp_data *sp, sp_vdelay *p, SPFLOAT *in, SPFLOAT *out)
     } else {
         v0 = (v1==0 ? maxd-1 : v1-1);
         v3 = (v2==(int32_t)maxd-1 ? 0 : v2+1);
-        {                     
+        {
             SPFLOAT w, x, y, z;
-            z = fv1 * fv1; z--; 
+            z = fv1 * fv1; z--;
             z *= 0.1666666667;
-            y = fv1; 
+            y = fv1;
             y++; w = (y *= 0.5); w--;
             x = 3.0 * z; y -= x; w -= z; x -= fv1;
             sp_auxdata_getbuf(&p->buf, v0, &b0);
@@ -91,7 +91,7 @@ int sp_vdelay_compute(sp_data *sp, sp_vdelay *p, SPFLOAT *in, SPFLOAT *out)
             * fv1 + b1;
         }
     }
-    if (++indx == maxd) indx = 0;             
-    p->left = indx;             
+    if (++indx == maxd) indx = 0;
+    p->left = indx;
     return SP_OK;
 }

@@ -1,5 +1,9 @@
 #include <stdint.h>
+#include <stdio.h>
+
+#ifndef NO_LIBSNDFILE
 #include "sndfile.h"
+#endif 
 
 #define SP_BUFSIZE 4096
 #define SPFLOAT float
@@ -54,4 +58,4 @@ int sp_set(sp_param *p, SPFLOAT val);
 int sp_out(sp_data *sp, uint32_t chan, SPFLOAT val);
 
 uint32_t sp_rand(sp_data *sp);
-void sp_rseed(sp_data *sp, uint32_t val);
+void sp_srand(sp_data *sp, uint32_t val);

@@ -7,17 +7,18 @@ typedef struct {
     sp_noise *ns;
     sp_butlp *butlp;
     int counter;
-} udata;
+} UserData;
 
 int t_butlp(sp_test *tst, sp_data *sp, const char *hash) 
 {
+    sp_srand(sp, 0); 
     uint32_t n;
     int fail = 0;
 
     SPFLOAT in = 0;
     SPFLOAT out = 0;
     
-    udata ud;
+    UserData ud;
     ud.counter = 0;
     sp_noise_create(&ud.ns);
     sp_butlp_create(&ud.butlp);

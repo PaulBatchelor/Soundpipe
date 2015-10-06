@@ -5,14 +5,14 @@
 
 typedef struct {
     sp_dust *dst;
-} udata;
+} UserData;
 
 int t_dust(sp_test *tst, sp_data *sp, const char *hash) 
 {
     uint32_t n;
     int fail = 0;
     SPFLOAT in = 0, out = 0;
-    udata ud;
+    UserData ud;
     
     sp_dust_create(&ud.dst);
     sp_dust_init(sp, ud.dst, 0.3, 10);

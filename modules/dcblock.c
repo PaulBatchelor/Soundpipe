@@ -1,10 +1,10 @@
 /*
  * DCblock
- * 
+ *
  * This code has been extracted from the Csound opcode "dcblock".
  * It has been modified to work as a Soundpipe module.
- * 
- * Original Author(s): Perry R. Cook 
+ *
+ * Original Author(s): Perry R. Cook
  * Year: 1995
  * Location: Opcodes/biquad.c
  *
@@ -35,11 +35,11 @@ int sp_dcblock_init(sp_data *sp, sp_dcblock *p)
     return SP_OK;
 }
 
-int sp_dcblock_compute(sp_data *sp, sp_dcblock *p, SPFLOAT *in, SPFLOAT *out) 
+int sp_dcblock_compute(sp_data *sp, sp_dcblock *p, SPFLOAT *in, SPFLOAT *out)
 {
-    SPFLOAT      gain = p->gain;
-    SPFLOAT      outputs = p->outputs;
-    SPFLOAT      inputs = p->inputs;
+    SPFLOAT gain = p->gain;
+    SPFLOAT outputs = p->outputs;
+    SPFLOAT inputs = p->inputs;
 
     SPFLOAT sample = *in;
     outputs = sample - inputs + (gain * outputs);

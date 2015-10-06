@@ -8,21 +8,19 @@ typedef struct {
     sp_ftbl *ft, *delta;
     sp_tenv *tenv;
     sp_dtrig *dt;
-} udata;
+} UserData;
 
 int t_dtrig(sp_test *tst, sp_data *sp, const char *hash) 
 {
     uint32_t n;
     int fail = 0;
-    udata ud;
+    UserData ud;
 
     SPFLOAT env = 0;
     SPFLOAT osc = 0;
     SPFLOAT dry = 0;
     SPFLOAT trig;
     SPFLOAT dtrig = 0;
-
-    sp_auxdata rvaux;
 
     sp_dtrig_create(&ud.dt);
     sp_tenv_create(&ud.tenv);

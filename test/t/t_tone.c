@@ -5,34 +5,26 @@
 
 typedef struct {
     sp_noise *ns;
-    sp_butbp *butbp;
-    int counter;
+    sp_tone *tn;
 } UserData;
 
-int t_butbp(sp_test *tst, sp_data *sp, const char *hash) 
+int t_tone(sp_test *tst, sp_data *sp, const char *hash) 
 {
-    sp_srand(sp, 0); 
     uint32_t n;
     int fail = 0;
-    SPFLOAT in = 0;
-    SPFLOAT out = 0;
+
     UserData ud;
-    ud.counter = 0;
     sp_noise_create(&ud.ns);
-    sp_butbp_create(&ud.butbp);
+    sp_tone_create(&ud.tn);
     sp_noise_init(sp, ud.ns);
-    sp_butbp_init(sp, ud.butbp);
+    sp_tone_init(sp, ud.tn);
+
+    SPFLOAT in;
 
     for(n = 0; n < tst->size; n++) {
-        in = 0;
-        out = 0;
-        if(ud.counter == 0) {
-            ud.butbp->freq= 500 + sp_rand(sp) % 4000;
-        }
         sp_noise_compute(sp, ud.ns, NULL, &in);
-        sp_butbp_compute(sp, ud.butbp, &in, &out); 
-        ud.counter = (ud.counter + 1) % 5000;
-        sp_test_add_sample(tst, out);
+        sp_tone_compute(sp, ud.tn, &in, &sp->out[0]); 
+        sp_test_add_sample(tst, sp->out[0]);
     }
 
     if(sp_test_compare(tst, hash) == SP_NOT_OK) {
@@ -40,10 +32,10 @@ int t_butbp(sp_test *tst, sp_data *sp, const char *hash)
                 tst->md5string, hash);
         fail = 1;
     }
-    
-    sp_noise_destroy(&ud.ns);
-    sp_butbp_destroy(&ud.butbp);
      
+    sp_tone_destroy(&ud.tn);
+    sp_noise_destroy(&ud.ns);
+
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }

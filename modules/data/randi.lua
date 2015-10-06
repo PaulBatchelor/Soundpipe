@@ -14,15 +14,6 @@ sptbl["randi"] = {
     },
 
     params = {
-        mandatory = {
-            {
-                name = "seed",
-                type = "int",
-                description = "Seed to use. Use time(NULL) to generate seed.",
-                default = "N/A"
-            },
-        },
-
         optional = {
             {
                 name = "min",

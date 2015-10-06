@@ -27,7 +27,7 @@ sptbl["tseq"] = {
             {
                 name = "shuf",
                 type = "int",
-                description = "When shuf is non-zero, randomly pick a value rather than go through sequentially.",
+                description = "When shuf is non-zero, randomly pick a value rather than cycle through sequentially.",
                 default = 0
             },
         }
@@ -52,7 +52,7 @@ sptbl["tseq"] = {
     outputs = {
         {
             name = "val",
-            description = "Value from current position in ftable."
+            description = "Value from current position in the ftable."
         },
     }
 

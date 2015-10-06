@@ -32,14 +32,14 @@ sptbl["moogladder"] = {
 
     modtype = "module",
 
-    description = [[Low pass resonant filter based on the moog ladder filter]],
+    description = [[Low pass resonant filter based on the Moogladder filter]],
 
     ninputs = 1,
     noutputs = 1,
 
     inputs = {
         { name = "input",
-            description = "this is the clock source for a made up plugin."
+            description = "The clock source for a made-up plugin."
         },
     },
 
