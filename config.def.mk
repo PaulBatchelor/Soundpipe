@@ -37,3 +37,6 @@ CFLAGS += -I lib/faust
 
 # If you are on OSX, you may need this 
 # CFLAGS += -I /usr/local/include -L /usr/local/include
+
+# Uncomment for Chuck-Sporth related things
+# CFLAGS += -shared -fPIC
