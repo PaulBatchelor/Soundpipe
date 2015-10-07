@@ -10,6 +10,12 @@ endif
 
 include $(CONFIG)
 
+SPLIBS = libsoundpipe.a
+
+ifdef BUILD_DYNAMIC
+SPLIBS += libsoundpipe.so
+endif
+
 VERSION=0.4
 
 MPATHS=$(addprefix modules/, $(addsuffix .o, $(MODULES)))
@@ -34,11 +40,11 @@ libsoundpipe.so: $(MPATHS) $(LPATHS)
 config.mk: config.def.mk
 	cp config.def.mk config.mk
 
-all: config.mk libsoundpipe.a $(UTIL) sp_dict.lua libsoundpipe.so
+all: config.mk $(SPLIBS) $(UTIL) sp_dict.lua 
 
-install: libsoundpipe.a h/soundpipe.h
+install: $(SPLIBS) h/soundpipe.h
 	install h/soundpipe.h /usr/local/include/
-	install libsoundpipe.a /usr/local/lib/
+	install $(SPLIBS) /usr/local/lib/
 
 sp_dict.lua:
 	cat modules/data/*.lua > sp_dict.lua
@@ -58,4 +64,3 @@ bootstrap:
 
 util/wav2smp: util/wav2smp.c
 	$(CC) $(CFLAGS) $< -lsndfile -o $@
-
