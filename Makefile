@@ -28,13 +28,13 @@ h/soundpipe.h: $(HPATHS)
 libsoundpipe.a: $(MPATHS) $(LPATHS)
 	ar rcs $@ $(MPATHS) $(LPATHS)
 
-soundpipe.o: $(MPATHS) $(LPATHS)
+libsoundpipe.so: $(MPATHS) $(LPATHS)
 	ld -shared -fPIC -o $@ $(MPATHS) $(LPATHS)
 
 config.mk: config.def.mk
 	cp config.def.mk config.mk
 
-all: config.mk libsoundpipe.a $(UTIL) sp_dict.lua
+all: config.mk libsoundpipe.a $(UTIL) sp_dict.lua libsoundpipe.so
 
 install: libsoundpipe.a h/soundpipe.h
 	install h/soundpipe.h /usr/local/include/
@@ -48,7 +48,7 @@ clean:
 	rm -rf $(LPATHS)
 	rm -rf $(UTIL)
 	rm -rf sp_dict.lua
-	rm -rf soundpipe.o
+	rm -rf libsoundpipe.so
 
 docs:
 	util/gendocs.sh
