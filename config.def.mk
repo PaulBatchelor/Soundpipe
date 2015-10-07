@@ -38,5 +38,6 @@ CFLAGS += -I lib/faust
 # If you are on OSX, you may need this 
 # CFLAGS += -I /usr/local/include -L /usr/local/include
 
-# Used for Sporth chugin
+# Build dynamic library. Needed for Sporth chugin
 # CFLAGS += -shared -fPIC
+# BUILD_DYNAMIC=1
