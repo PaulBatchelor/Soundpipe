@@ -92,9 +92,9 @@ int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, const char *argstring)
     int32_t flen = (int32_t)ft->size;
     SPFLOAT tpdlen = 2.0 * M_PI / (SPFLOAT) flen;
 
-    int i, n;
+    int32_t i, n;
 
-    for(i = (int)args->size; i > 0; i--){
+    for(i = (int32_t)args->size; i > 0; i--){
         amp = args->tbl[args->size - i];
         if(amp != 0) {
             for(phs = 0, n = 0; n < ft->size; n++){
