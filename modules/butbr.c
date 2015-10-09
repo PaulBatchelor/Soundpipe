@@ -1,10 +1,22 @@
+/*
+ * Butterworth Filters
+ *
+ * This code has been extracted from the Csound butterworth filter opcodes
+ * It has been modified to work as a Soundpipe module.
+ *
+ * Original Author(s): Paris Smaragdis, John ffitch
+ * Year: 1994
+ * Location: Opcodes/butter.c
+ *
+ */
+
 #include <math.h>
 #include <stdlib.h>
 #include "soundpipe.h"
 
 #ifndef M_PI
-#define M_PI		3.14159265358979323846	
-#endif 
+#define M_PI		3.14159265358979323846
+#endif
 
 int sp_butbr_create(sp_butbr **p)
 {
