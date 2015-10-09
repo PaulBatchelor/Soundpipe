@@ -9,5 +9,3 @@ int sp_butbp_create(sp_butbp **p);
 int sp_butbp_destroy(sp_butbp **p);
 int sp_butbp_init(sp_data *sp, sp_butbp *p);
 int sp_butbp_compute(sp_data *sp, sp_butbp *p, SPFLOAT *in, SPFLOAT *out);
-
-int sp_butter_filter(SPFLOAT *in, SPFLOAT *out, SPFLOAT *a);
