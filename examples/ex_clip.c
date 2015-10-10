@@ -45,7 +45,7 @@ int main() {
     sp_gen_line(sp, ud.ft, "0 1 4096 -1");
     sp_osc_init(sp, ud.osc, ud.ft, 0);
     ud.osc->freq = sp_midi2cps(48);
-    sp_clip_init(sp, ud.clp, 0, 0.5);
+    sp_clip_init(sp, ud.clp);
     sp_moogladder_init(sp, ud.filt);
     ud.filt->freq = 1000; 
     ud.filt->res = 0.8;

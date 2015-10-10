@@ -301,7 +301,7 @@ int main()
         sp_randi_create(&ud.line[i].randi);
         chord_cloud_create(&ud.line[i].cc);
         chord_cloud_init(sp, ud.line[i].cc, notes[i], 0.1);
-        sp_randi_init(sp, ud.line[i].randi, rand());
+        sp_randi_init(sp, ud.line[i].randi);
         ud.line[i].randi->cps = 0.1 + randf(1.5);
     }
     sp_revsc_create(&ud.rev);

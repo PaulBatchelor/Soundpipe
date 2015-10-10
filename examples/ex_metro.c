@@ -45,7 +45,7 @@ int main() {
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_osc_create(&ud.osc);
 
-    sp_randi_init(sp, ud.rand, rand());
+    sp_randi_init(sp, ud.rand);
     ud.rand->min = 2.0;
     ud.rand->max= 10.0;
     sp_metro_init(sp, ud.met);
