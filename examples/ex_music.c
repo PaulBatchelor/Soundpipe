@@ -65,7 +65,7 @@ int main() {
         sp_osc_init(sp, ud.v[i].osc, ud.ft, 0);
         ud.v[i].osc->amp = 0.3;
         ud.v[i].osc->freq = midi2cps(notes[i]);
-        sp_randi_init(sp, ud.v[i].rnd, rand());
+        sp_randi_init(sp, ud.v[i].rnd);
         ud.v[i].rnd->cps = 0.8;
     }
 
