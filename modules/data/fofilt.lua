@@ -19,7 +19,7 @@ sptbl["fofilt"] = {
                 name = "freq",
                 type = "SPFLOAT",
                 description = "Center frequency.",
-                default = 1.5
+                default = 1000
             },
             {
                 name = "atk",

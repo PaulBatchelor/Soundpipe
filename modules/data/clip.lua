@@ -14,21 +14,19 @@ sptbl["clip"] = {
     },
 
     params = {
-        mandatory = {
+        optional = {
             {
                 name = "meth",
                 type = "int",
                 description = "Method of clipping. 0 = Bram de Jong, 1 = Sine, 2 = tanh.",
-                default = 0
+                default = 1
             },
             {
                 name = "lim",
                 type = "SPFLOAT",
                 description = "threshold / limiting value.",
                 default = 1.0
-            }
-        },
-        optional = {
+            },
             {
                 name = "arg",
                 type = "SPFLOAT",

@@ -11,31 +11,34 @@
  */
 
 #include <math.h>
+#include <stdint.h>
 #include <stdlib.h>
-#include "soundpipe.h"
+#define ROOT2 (1.4142135623730950488)
 
 #ifndef M_PI
-#define M_PI		3.14159265358979323846
+#define M_PI		3.14159265358979323846	/* pi */
 #endif
 
-int sp_butbr_create(sp_butbr **p)
+#include "soundpipe.h"
+
+int sp_butbp_create(sp_butbp **p)
 {
-    *p = malloc(sizeof(sp_butbr));
+    *p = malloc(sizeof(sp_butbp));
     return SP_OK;
 }
 
-int sp_butbr_destroy(sp_butbr **p)
+int sp_butbp_destroy(sp_butbp **p)
 {
     free(*p);
     return SP_OK;
 }
 
-int sp_butbr_init(sp_data *sp, sp_butbr *p)
+int sp_butbp_init(sp_data *sp, sp_butbp *p)
 {
     p->istor = 0.0;
     p->sr = sp->sr;
     p->freq = 1000;
-    p->bw = 1000;
+    p->bw = 10;
     p->pidsr = M_PI / sp->sr * 1.0;
     p->tpidsr = 2 * M_PI / sp->sr * 1.0;
     p->a[6] = p->a[7] = 0.0;
@@ -44,35 +47,53 @@ int sp_butbr_init(sp_data *sp, sp_butbr *p)
     return SP_OK;
 }
 
-int sp_butbr_compute(sp_data *sp, sp_butbr *p, SPFLOAT *in, SPFLOAT *out)
+int sp_butbp_compute(sp_data *sp, sp_butbp *p, SPFLOAT *in, SPFLOAT *out)
 {
     SPFLOAT *a = p->a;
     SPFLOAT t, y;
 
+    *out = p->sr;
     if (p->bw <= 0.0) {
-      *out = 0;
-      return SP_OK;
+       *out = 0;
+       return SP_OK;
     }
 
     SPFLOAT bw, fr;
     bw = p->bw;
     fr = p->freq;
+
     if (bw != p->lkb || fr != p->lkf) {
         SPFLOAT c, d;
         p->lkf = fr;
         p->lkb = bw;
-        c = tan((SPFLOAT)(p->pidsr * bw));
+        c = 1.0 / tan((SPFLOAT)(p->pidsr * bw));
         d = 2.0 * cos((SPFLOAT)(p->tpidsr * fr));
         a[1] = 1.0 / (1.0 + c);
-        a[2] = - d * a[1];
-        a[3] = a[1];
-        a[4] = a[2];
-        a[5] = (1.0 - c) * a[1];
+        a[2] = 0.0;
+        a[3] = -a[1];
+        a[4] = - c * d * a[1];
+        a[5] = (c - 1.0) * a[1];
     }
-    t = (SPFLOAT)*in - a[4] * a[6] - a[5] * a[7];
+    t = *in - a[4] * a[6] - a[5] * a[7];
     y = t * a[1] + a[2] * a[6] + a[3] * a[7];
     a[7] = a[6];
     a[6] = t;
     *out = y;
     return SP_OK;
 }
+
+/* Filter loop */
+
+static int sp_butter_filter(SPFLOAT *in, SPFLOAT *out, SPFLOAT *a)
+{
+    SPFLOAT t, y;
+    t = *in - a[4] * a[6] - a[5] * a[7];
+    /*TODO: look into this function */
+    //t = csoundUndenormalizeDouble(t); /* Not needed on AMD */
+    y = t * a[1] + a[2] * a[6] + a[3] * a[7];
+    a[7] = a[6];
+    a[6] = t;
+    *out = y;
+    return SP_OK;
+}
+
