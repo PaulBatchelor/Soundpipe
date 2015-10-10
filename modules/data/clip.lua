@@ -26,7 +26,7 @@ sptbl["clip"] = {
                 type = "SPFLOAT",
                 description = "threshold / limiting value.",
                 default = 1.0
-            }
+            },
             {
                 name = "arg",
                 type = "SPFLOAT",
