@@ -47,11 +47,6 @@ files with a .bin extention. When an example is run, it will generate a
 folder are for optional modules that require third-party libraries. 
 To compile these examples, uncomment the appropriate lines in "config.mk".
 
-
-Future Plans
-------------
-- Faust support
-
 The Soundpipe Model
 -------------------
 
