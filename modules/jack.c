@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <jack/jack.h>
 #include <unistd.h>
-//#include <aaio.h>
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <string.h>
@@ -126,7 +125,6 @@ int sp_jack_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
     jack_set_process_callback (jd.client[0], sp_jack_cb, &jd);
     jack_on_shutdown (jd.client[0], sp_jack_shutdown, 0);
 
-//
 char chan_name[50];
 for(chan = 0; chan < sp->nchan; chan++) {
     sprintf(chan_name, "output_%d", chan);
@@ -156,7 +154,6 @@ for(chan = 0; chan < sp->nchan; chan++) {
         fprintf (stderr, "cannot connect output ports\n");
     }
 }
-//
     free (ports);
     int portnum = 9999;
     printf("To quit, Send the message \"exit\" to UDP port %d.\n", portnum);
