@@ -11,7 +11,7 @@ typedef struct {
     sp_ftbl *sine_ft;
 } UserData;
 
-int t_lfp18(sp_test *tst, sp_data *sp, const char *hash) 
+int t_lpf18(sp_test *tst, sp_data *sp, const char *hash) 
 {
     uint32_t n;
     int fail = 0;
