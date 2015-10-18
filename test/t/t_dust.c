@@ -11,7 +11,7 @@ int t_dust(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
-    SPFLOAT in = 0, out = 0;
+    SPFLOAT out = 0;
     UserData ud;
     
     sp_dust_create(&ud.dst);
@@ -20,7 +20,6 @@ int t_dust(sp_test *tst, sp_data *sp, const char *hash)
     ud.dst->bipolar = 1.0;
 
     for(n = 0; n < tst->size; n++) {
-        in = 0;
         out = 0;
         sp_dust_compute(sp, ud.dst, NULL, &out);
         sp_test_add_sample(tst, out);

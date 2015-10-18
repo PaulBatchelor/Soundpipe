@@ -18,7 +18,6 @@ int t_dtrig(sp_test *tst, sp_data *sp, const char *hash)
 
     SPFLOAT env = 0;
     SPFLOAT osc = 0;
-    SPFLOAT dry = 0;
     SPFLOAT trig;
     SPFLOAT dtrig = 0;
 
@@ -45,7 +44,6 @@ int t_dtrig(sp_test *tst, sp_data *sp, const char *hash)
     for(n = 0; n < tst->size; n++) {
         env = 0;
         osc = 0;
-        dry = 0;
         trig = 0;
         dtrig = 0;
         if(sp->pos == 0){
