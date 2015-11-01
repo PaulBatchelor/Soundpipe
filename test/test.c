@@ -66,11 +66,23 @@ int sp_test_compare(sp_test *t, const char *md5hash)
     }
 }
 
-int sp_test_write_raw(sp_test *t, uint32_t index) {
+int sp_test_write_raw(sp_test *t, uint32_t index) 
+{
     char fname[20];
     sprintf(fname, "%04d.raw", index);
     FILE *fp = fopen(fname, "wb");
     fwrite(t->buf, sizeof(SPFLOAT), t->size, fp);
     fclose(fp);
     return SP_OK;
+}
+
+int sp_test_verify(sp_test *t, const char *refhash)
+{
+    int fail = 0;
+    if(sp_test_compare(t, refhash) == SP_NOT_OK) {
+        printf("Generated hash %s does not match reference hash %s\n", 
+                t->md5string, refhash);
+        fail = 1;
+    }
+    return fail;
 }

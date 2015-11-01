@@ -17,5 +17,8 @@ typedef struct {
 int sp_test_create(sp_test **t, uint32_t bufsize);
 int sp_test_destroy(sp_test **t);
 int sp_test_add_sample(sp_test *t, SPFLOAT sample);
+/* Compares buffer with reference hash */
 int sp_test_compare(sp_test *t, const char *md5hash);
+/* verify wraps compare and error message up together */
+int sp_test_verify(sp_test *t, const char *refhash);
 int sp_test_write_raw(sp_test *t, uint32_t index);

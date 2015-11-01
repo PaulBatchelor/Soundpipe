@@ -53,12 +53,14 @@ int t_delay(sp_test *tst, sp_data *sp, const char *hash)
         sp_test_add_sample(tst, osc + delay);
     }
 
-    if(sp_test_compare(tst, hash) == SP_NOT_OK) {
-        printf("Generated hash %s does not match reference hash %s\n", 
-                tst->md5string, hash);
-        fail = 1;
-    }
-     
+    fail = sp_test_verify(tst, hash);
+    
+    sp_metro_destroy(&ud.met);
+    sp_delay_destroy(&ud.delay);
+    sp_osc_destroy(&ud.osc);
+    sp_ftbl_destroy(&ud.ft);
+    sp_tenv_destroy(&ud.tenv);
+
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }

@@ -42,11 +42,7 @@ int t_dist(sp_test *tst, sp_data *sp, const char *hash)
         sp_test_add_sample(tst, out);
     }
 
-    if(sp_test_compare(tst, hash) == SP_NOT_OK) {
-        printf("Generated hash %s does not match reference hash %s\n", 
-                tst->md5string, hash);
-        fail = 1;
-    }
+    fail = sp_test_verify(tst, hash);
      
     sp_ftbl_destroy(&ud.ft);
     sp_fosc_destroy(&ud.osc);

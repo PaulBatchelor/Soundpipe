@@ -33,11 +33,7 @@ int t_drip(sp_test *tst, sp_data *sp, const char *hash)
         sp_test_add_sample(tst, drip + rev1 * 0.05);
     }
 
-    if(sp_test_compare(tst, hash) == SP_NOT_OK) {
-        printf("Generated hash %s does not match reference hash %s\n", 
-                tst->md5string, hash);
-        fail = 1;
-    }
+    fail = sp_test_verify(tst, hash);
     
     sp_drip_destroy(&ud.drip);
     sp_dust_destroy(&ud.trig);

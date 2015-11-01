@@ -21,11 +21,7 @@ int t_phasor(sp_test *tst, sp_data *sp, const char *hash)
         sp_test_add_sample(tst, sp->out[0]);
     }
 
-    if(sp_test_compare(tst, hash) == SP_NOT_OK) {
-        printf("Generated hash %s does not match reference hash %s\n", 
-                tst->md5string, hash);
-        fail = 1;
-    }
+    fail = sp_test_verify(tst, hash);
 
     sp_phasor_destroy(&ud.phs);
      

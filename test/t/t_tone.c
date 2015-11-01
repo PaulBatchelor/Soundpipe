@@ -26,13 +26,9 @@ int t_tone(sp_test *tst, sp_data *sp, const char *hash)
         sp_tone_compute(sp, ud.tn, &in, &sp->out[0]); 
         sp_test_add_sample(tst, sp->out[0]);
     }
+    
+    fail = sp_test_verify(tst, hash);
 
-    if(sp_test_compare(tst, hash) == SP_NOT_OK) {
-        printf("Generated hash %s does not match reference hash %s\n", 
-                tst->md5string, hash);
-        fail = 1;
-    }
-     
     sp_tone_destroy(&ud.tn);
     sp_noise_destroy(&ud.ns);
 

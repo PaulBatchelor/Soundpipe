@@ -46,13 +46,9 @@ int t_pluck(sp_test *tst, sp_data *sp, const char *hash)
         sp->out[0] = pluck;
         sp_test_add_sample(tst, sp->out[0]);
     }
-
-    if(sp_test_compare(tst, hash) == SP_NOT_OK) {
-        printf("Generated hash %s does not match reference hash %s\n", 
-                tst->md5string, hash);
-        fail = 1;
-    }
     
+    fail = sp_test_verify(tst, hash);
+
     /* destroy functions here */
     sp_pluck_destroy(&ud.pluck);
     sp_ftbl_destroy(&ud.ft);

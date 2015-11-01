@@ -30,12 +30,8 @@ int t_buthp(sp_test *tst, sp_data *sp, const char *hash)
         sp_buthp_compute(sp, ud.buthp, &in, &out); 
         sp_test_add_sample(tst, out);
     }
-
-    if(sp_test_compare(tst, hash) == SP_NOT_OK) {
-        printf("Generated hash %s does not match reference hash %s\n", 
-                tst->md5string, hash);
-        fail = 1;
-    }
+    
+    fail = sp_test_verify(tst, hash);
     
     sp_noise_destroy(&ud.ns);
     sp_buthp_destroy(&ud.buthp);
