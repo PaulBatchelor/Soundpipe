@@ -11,9 +11,9 @@ typedef struct {
 
 void write_posc3(sp_data *data, void *ud) {
     udata *udp = ud;
-    //if(udp->counter == 0){
-    //    udp->posc3->freq = 500 + rand() % 2000;
-    //}
+    if(udp->counter == 0){
+        udp->posc3->freq = 500 + rand() % 2000;
+    }
     sp_posc3_compute(data, udp->posc3, NULL, &data->out[0]);
     udp->counter = (udp->counter + 1) % 4410;
 }

@@ -23,6 +23,7 @@ void process(sp_data *data, void *ud) {
     }
     sp_revsc_compute(data, udata->rev, &in, &in, &data->out[0], &foo); 
 }
+
 int main() {
     srand(time(NULL));
     udata ud;

@@ -1,4 +1,7 @@
 #include "soundpipe.h"
+#include "md5.h"
+#include "tap.h"
+#include "test.h"
 
 typedef struct{
     sp_osc *osc;
@@ -9,24 +12,15 @@ typedef struct{
     sp_maygate *mg;
 } UserData;
 
-void compute(sp_data *sp, void *user_data){
-    UserData *ud = user_data;
-    SPFLOAT met, osc, env, rpt, maygate, trig, dry;
-    sp_metro_compute(sp, ud->mt, NULL, &met);
-    sp_tenv_compute(sp, ud->te, &met, &env);
-    sp_osc_compute(sp, ud->osc, NULL, &osc);
-    dry = osc * env;
-    sp_maygate_compute(sp, ud->mg, &met, &maygate);
-    trig = met * maygate;
-    sp_rpt_compute(sp, ud->rpt, &trig, &dry, &rpt);
-    sp->out[0] = rpt;
-}
+int t_rpt(sp_test *tst, sp_data *sp, const char *hash) 
+{
+    uint32_t n;
+    int fail = 0;
 
-int main(){
-    sp_data *sp;
     UserData ud;
-    sp_create(&sp);
     int tempo = 120;
+    SPFLOAT met, osc, env, rpt, maygate, trig, dry;
+
     sp_rpt_create(&ud.rpt);
     sp_maygate_create(&ud.mg);
     sp_osc_create(&ud.osc);
@@ -50,14 +44,30 @@ int main(){
     ud.te->hold = 0.1;
     ud.te->rel =  0.1;
 
-    sp_process(sp, &ud, compute);
 
+    /* allocate / initialize modules here */
+
+    for(n = 0; n < tst->size; n++) {
+        sp_metro_compute(sp, ud.mt, NULL, &met);
+        sp_tenv_compute(sp, ud.te, &met, &env);
+        sp_osc_compute(sp, ud.osc, NULL, &osc);
+        dry = osc * env;
+        sp_maygate_compute(sp, ud.mg, &met, &maygate);
+        trig = met * maygate;
+        sp_rpt_compute(sp, ud.rpt, &trig, &dry, &rpt);
+        sp_test_add_sample(tst, rpt);
+    }
+
+    fail = sp_test_verify(tst, hash);
+
+    /* destroy functions here */
+    
     sp_tenv_destroy(&ud.te);
     sp_metro_destroy(&ud.mt);
     sp_ftbl_destroy(&ud.ft);
     sp_osc_destroy(&ud.osc);
     sp_rpt_destroy(&ud.rpt);
 
-    sp_destroy(&sp);
-    return 0;
+    if(fail) return SP_NOT_OK;
+    else return SP_OK;
 }
