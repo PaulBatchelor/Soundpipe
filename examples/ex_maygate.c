@@ -11,10 +11,10 @@ typedef struct {
     sp_tenv *tenv;
     sp_maygate *mg;
     SPFLOAT freq;
-} udata;
+} UserData;
 
 void write_osc(sp_data *data, void *ud) {
-    udata *udp = ud;
+    UserData *udp = ud;
     SPFLOAT trig = 0;
     SPFLOAT env = 0;
     SPFLOAT osc = 0;
@@ -39,7 +39,7 @@ void freq_compute(void *ud, SPFLOAT *out){
 
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     SPFLOAT *freqp = &ud.freq;
     ud.freq = 400;
     sp_data *sp;
@@ -66,6 +66,7 @@ int main() {
     sp_osc_init(sp, ud.osc, ud.ft, 0);
     ud.osc->freq = *freqp;
     sp->len = 44100 * 5;
+
     sp_process(sp, &ud, write_osc);
 
     sp_maygate_destroy(&ud.mg);

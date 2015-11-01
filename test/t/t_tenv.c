@@ -1,7 +1,7 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
 #include "soundpipe.h"
+#include "md5.h"
+#include "tap.h"
+#include "test.h"
 
 typedef struct {
     sp_osc *osc;
@@ -11,25 +11,12 @@ typedef struct {
     SPFLOAT freq;
 } UserData;
 
-void write_osc(sp_data *sp, void *ud) {
-    UserData *udp = ud;
-    SPFLOAT trig = 0;
-    SPFLOAT env = 0;
-    SPFLOAT osc = 0;
-    sp_metro_compute(sp, udp->met, NULL, &trig);
-    if(trig) udp->osc->freq = 500 + sp_rand(sp) % 2000;
-    sp_osc_compute(sp, udp->osc, NULL, &osc);
-    sp_tenv_compute(sp, udp->tenv, &trig, &env);
+int t_tenv(sp_test *tst, sp_data *sp, const char *hash) 
+{
+    uint32_t n;
+    int fail = 0;
 
-    sp->out[0] = osc * env;
-}
-
-int main() {
     UserData ud;
-    SPFLOAT *freqp = &ud.freq;
-    ud.freq = 400;
-    sp_data *sp;
-    sp_create(&sp);
     sp_srand(sp, 123456);
 
     sp_tenv_create(&ud.tenv);
@@ -45,14 +32,26 @@ int main() {
     ud.met->freq = 3;
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
-    ud.osc->freq = *freqp;
-    sp->len = 44100 * 5;
-    sp_process(sp, &ud, write_osc);
+
+    for(n = 0; n < tst->size; n++) {
+        SPFLOAT trig = 0;
+        SPFLOAT env = 0;
+        SPFLOAT osc = 0;
+        sp_metro_compute(sp, ud.met, NULL, &trig);
+        if(trig) ud.osc->freq = 500 + sp_rand(sp) % 2000;
+        sp_osc_compute(sp, ud.osc, NULL, &osc);
+        sp_tenv_compute(sp, ud.tenv, &trig, &env);
+        sp->out[0] = osc * env;
+        sp_test_add_sample(tst, sp->out[0]);
+    }
+
+    fail = sp_test_verify(tst, hash);
 
     sp_tenv_destroy(&ud.tenv);
     sp_metro_destroy(&ud.met);
     sp_ftbl_destroy(&ud.ft);
     sp_osc_destroy(&ud.osc);
-    sp_destroy(&sp);
-    return 0;
+
+    if(fail) return SP_NOT_OK;
+    else return SP_OK;
 }

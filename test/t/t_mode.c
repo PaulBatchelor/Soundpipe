@@ -1,5 +1,8 @@
 #include <stdlib.h>
-#include <soundpipe.h>
+#include "soundpipe.h"
+#include "md5.h"
+#include "tap.h"
+#include "test.h"
 
 typedef struct {
     sp_mode *mode[4];
@@ -17,13 +20,13 @@ typedef struct {
     sp_tseq *seq;
 } UserData;
 
-int modal_create(modal **md)
+static int modal_create(modal **md)
 {
     *md = malloc(sizeof(modal));
     return SP_OK;
 }
 
-int modal_init(sp_data *sp, modal *md)
+static int modal_init(sp_data *sp, modal *md)
 {
     int i;
     md->amp = 0.5;
@@ -51,7 +54,7 @@ int modal_init(sp_data *sp, modal *md)
     return SP_OK;
 }
 
-int modal_compute(sp_data *sp, modal *md, SPFLOAT *in, SPFLOAT *out)
+static int modal_compute(sp_data *sp, modal *md, SPFLOAT *in, SPFLOAT *out)
 {
     SPFLOAT exc1, exc2, exc;
     SPFLOAT res1, res2, res;
@@ -81,7 +84,7 @@ int modal_compute(sp_data *sp, modal *md, SPFLOAT *in, SPFLOAT *out)
     return SP_OK;
 }
 
-int modal_destroy(modal **md)
+static int modal_destroy(modal **md)
 {
     int i;
     modal *mdp = *md;
@@ -93,24 +96,12 @@ int modal_destroy(modal **md)
     return SP_OK;
 }
 
-void process(sp_data *sp, void *udata)
+int t_mode(sp_test *tst, sp_data *sp, const char *hash) 
 {
-    UserData *ud = udata;
-    SPFLOAT met = 0, mod = 0, nn;
-    sp_metro_compute(sp, ud->met, NULL, &met);
-    sp_tseq_compute(sp, ud->seq, &met, &nn);
-    *ud->mod->freq = sp_midi2cps(nn);
-    modal_compute(sp, ud->mod, &met, &mod);
-    sp->out[0] = mod;
-}
-
-int main()
-{
+    uint32_t n;
+    int fail = 0;
     UserData ud;
-    sp_data *sp;
-
-    sp_create(&sp);
-    sp->len = sp->sr * 10;
+    SPFLOAT met = 0, mod = 0, nn;
 
     modal_create(&ud.mod);
     modal_init(sp, ud.mod);
@@ -125,13 +116,23 @@ int main()
     sp_tseq_create(&ud.seq);
     sp_tseq_init(sp, ud.seq, ud.notes);
 
-    sp_process(sp, &ud, process);
+    for(n = 0; n < tst->size; n++) {
+        met = 0, mod = 0, nn;
+        sp_metro_compute(sp, ud.met, NULL, &met);
+        sp_tseq_compute(sp, ud.seq, &met, &nn);
+        *ud.mod->freq = sp_midi2cps(nn);
+        modal_compute(sp, ud.mod, &met, &mod);
+        sp->out[0] = mod;
+        sp_test_add_sample(tst, sp->out[0]);
+    }
 
+    fail = sp_test_verify(tst, hash);
+    
     modal_destroy(&ud.mod);
     sp_metro_destroy(&ud.met);
     sp_ftbl_destroy(&ud.notes);
     sp_tseq_destroy(&ud.seq);
 
-    sp_destroy(&sp);
-    return 0;
+    if(fail) return SP_NOT_OK;
+    else return SP_OK;
 }
