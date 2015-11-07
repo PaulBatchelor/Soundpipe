@@ -22,23 +22,13 @@ void write_osc(sp_data *data, void *ud) {
     data->out[0] = tenv * osc;
 }
 
-void freq_reinit(void *ud){
-    SPFLOAT *freq = ud;
-    *freq = 500 + rand() % 2000;
-}
-
-void freq_compute(void *ud, SPFLOAT *out){
-    SPFLOAT *freq = ud;
-    *out = *freq;
-}
-
 int main() {
-    srand(time(NULL));
     udata ud;
     SPFLOAT *freqp = &ud.freq;
     ud.freq = 400;
     sp_data *sp;
     sp_create(&sp);
+    sp_srand(sp, 12345);
 
     sp_randi_create(&ud.rand);
     sp_metro_create(&ud.met);
@@ -48,9 +38,12 @@ int main() {
 
     sp_randi_init(sp, ud.rand);
     ud.rand->min = 2.0;
-    ud.rand->max= 10.0;
+    ud.rand->max= 15.0;
     sp_metro_init(sp, ud.met);
     sp_tenv_init(sp, ud.tenv);
+    ud.tenv->atk = 0.005;
+    ud.tenv->hold = 0.01;
+    ud.tenv->rel = 0.003;
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
     ud.osc->freq = *freqp;
