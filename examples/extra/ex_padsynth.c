@@ -10,7 +10,7 @@ typedef struct user_data {
 void process(sp_data *sp, void *userdata) {
     user_data *ud = userdata;
     //sp->out = ud->ft->tbl[sp->pos % ud->ft->size];
-    sp_osc_compute(sp, ud->osc, NULL, &sp->out);
+    sp_osc_compute(sp, ud->osc, NULL, &sp->out[0]);
 }
 
 int main() {
@@ -35,7 +35,7 @@ int main() {
     ud.fc = 1 / (6.0 * 440); 
     sp_gen_padsynth(sp, ud.ft, ud.amps, 440, 40.0);
 
-    sp_osc_init(sp, ud.osc, ud.ft);
+    sp_osc_init(sp, ud.osc, ud.ft, 0);
     ud.osc->freq = sp_midi2cps(70) * ud.fc;
     ud.osc->amp = 1.0;
     sp_process(sp, &ud, process);

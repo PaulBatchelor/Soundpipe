@@ -12,12 +12,15 @@
 #include <stdlib.h>
 #include <math.h>
 #include "soundpipe.h"
+#include "kiss_fftr.h"
 
 void FFTwrapper_create(FFTwrapper **fw, int fftsize) 
 {
     *fw = malloc(sizeof(FFTwrapper));
     FFTwrapper *fwp = *fw;
     fwp->fftsize = fftsize;
+
+#ifdef USE_FFTW3
     fftw_real *tf1 = malloc(fftsize * sizeof(fftw_real));
     fftw_real *tf2 = malloc(fftsize * sizeof(fftw_real)); 
     fwp->tmpfftdata1 = tf1; 
@@ -26,23 +29,39 @@ void FFTwrapper_create(FFTwrapper **fw, int fftsize)
             fwp->tmpfftdata1, FFTW_R2HC, FFTW_ESTIMATE);
     fwp->planfftw_inv = fftw_plan_r2r_1d(fftsize, fwp->tmpfftdata2, 
             fwp->tmpfftdata2, FFTW_HC2R, FFTW_ESTIMATE);
+#else
+    fwp->fft = kiss_fftr_alloc(fftsize, 0, NULL, NULL);
+    fwp->ifft = kiss_fftr_alloc(fftsize, 1, NULL, NULL);
+    fwp->tmp1 = KISS_FFT_MALLOC(sizeof(SPFLOAT) * fftsize);
+    fwp->tmp2 = KISS_FFT_MALLOC(sizeof(SPFLOAT) * fftsize);
+#endif
+
 }
 
 void FFTwrapper_destroy(FFTwrapper **fw) 
 {
     FFTwrapper *fwp = *fw;
+#ifdef USE_FFTW3
     fftw_destroy_plan(fwp->planfftw);
     fftw_destroy_plan(fwp->planfftw_inv);
     free(fwp->tmpfftdata1);
     free(fwp->tmpfftdata2);
+#else
+    kiss_fftr_free(fwp->fft);
+    kiss_fftr_free(fwp->ifft);
+    KISS_FFT_FREE(fwp->tmp1);
+    KISS_FFT_FREE(fwp->tmp2);
+#endif
     free(*fw);
 }
 
 /* do the Fast Fourier Transform */
 
-void smps2freqs(FFTwrapper *ft, SPFLOAT *smps, FFTFREQS freqs) 
+void smps2freqs(FFTwrapper *ft, SPFLOAT *smps, FFTFREQS *freqs) 
 {
     int i;
+
+#ifdef USE_FFTW3
     for (i = 0; i < ft->fftsize; i++) ft->tmpfftdata1[i]=smps[i];
     fftw_execute(ft->planfftw);
 
@@ -52,21 +71,37 @@ void smps2freqs(FFTwrapper *ft, SPFLOAT *smps, FFTFREQS freqs)
     }
 
     ft->tmpfftdata2[ft->fftsize/2] = 0.0;
+#else
+    kiss_fftr(ft->fft, smps, ft->tmp1);
+    for (i = 0; i < ft->fftsize/2; i++) {
+        freqs->c[i] = ft->tmp1[i].r;
+        freqs->s[i] = ft->tmp1[i].i;
+    }
+#endif
 }
 
 /*
  * do the Inverse Fast Fourier Transform
  */
-void freqs2smps(FFTwrapper *ft, FFTFREQS freqs, SPFLOAT *smps) 
+void freqs2smps(FFTwrapper *ft, FFTFREQS *freqs, SPFLOAT *smps) 
 {
-    ft->tmpfftdata2[ft->fftsize/2]=0.0;
+
     int i;
+#ifdef USE_FFTW3
+    ft->tmpfftdata2[ft->fftsize/2]=0.0;
     for (i=0; i<ft->fftsize/2 ;i++) {
         ft->tmpfftdata2[i]=freqs.c[i];
         if (i != 0) ft->tmpfftdata2[ft->fftsize-i]=freqs.s[i];
     }
     fftw_execute(ft->planfftw_inv);
     for (i = 0; i < ft->fftsize; i++) smps[i]=ft->tmpfftdata2[i];
+#else
+    for(i = 0; i < ft->fftsize / 2; i++) {
+        ft->tmp2[i].r = freqs->c[i];
+        ft->tmp2[i].i = freqs->s[i];
+    }
+    kiss_fftri(ft->ifft, ft->tmp2, smps);
+#endif
 
 }
 

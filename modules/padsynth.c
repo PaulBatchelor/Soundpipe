@@ -97,7 +97,7 @@ int sp_padsynth_ifft(int N, SPFLOAT *freq_amp,
         fftfreqs.c[i]=freq_amp[i]*cos(freq_phase[i]);
         fftfreqs.s[i]=freq_amp[i]*sin(freq_phase[i]);
     };
-    freqs2smps(fft, fftfreqs,smp);
+    freqs2smps(fft, &fftfreqs,smp);
     deleteFFTFREQS(&fftfreqs);
     FFTwrapper_destroy(&fft);
     return SP_OK;
