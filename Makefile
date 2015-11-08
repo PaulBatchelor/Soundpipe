@@ -22,7 +22,7 @@ MPATHS=$(addprefix modules/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
 CPATHS=$(addprefix modules/, $(addsuffix .c, $(MODULES)))
 
-CFLAGS +=  -g --std=c99 -DSP_VERSION=$(VERSION) -O0 -DSPFLOAT=float -Ih
+CFLAGS +=  -g --std=c99 -DSP_VERSION=$(VERSION) -O0 -DSPFLOAT=float -Ih -I/usr/local/include
 UTIL += util/wav2smp
 
 modules/%.o: modules/%.c h/%.h h/soundpipe.h
@@ -63,4 +63,4 @@ bootstrap:
 	util/module_bootstrap.sh $(MODULE_NAME)
 
 util/wav2smp: util/wav2smp.c
-	$(CC) $(CFLAGS) $< -lsndfile -o $@
+	$(CC) $(CFLAGS) -L/usr/local/lib $< -lsndfile -o $@
