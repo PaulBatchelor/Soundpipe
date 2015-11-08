@@ -15,10 +15,6 @@ Features
 - Easily extendable
 - Easily embeddable
 
-Soundpipe is primarily desgined to generate wav files, however there are
-optional modules which allow Soundpipe to be run in realtime via JACK or
-from a Raspberry Pi (ALSA). See the *compilation* section for how to enable
-these.
 
 Compilation
 -----------
@@ -38,8 +34,9 @@ make
 
 sudo make install
 
-To build additional plugins with external library dependencies, uncomment lines
-in the file "config.mk".
+
+Building Examples and Tests
+-----------
 
 To build the examples, go into the examples folder and run "make", which will create
 files with a .bin extention. When an example is run, it will generate a 
@@ -47,12 +44,16 @@ files with a .bin extention. When an example is run, it will generate a
 folder are for optional modules that require third-party libraries. 
 To compile these examples, uncomment the appropriate lines in "config.mk".
 
+Tests in Soundpipe are used to determine whether or not modules behave as expected. Tests write the output of a module to memory, and check the MD5 hash value of the output against the MD5 value of a reference signal. We're currently working to add tests for every Soundpipe module.  
+
+To build a test file, go into the test folder, and run "make". Then, run "./run_bin", which runs the tests. As the tests are run, an "ok" will appear in the log if a test passes, and a "not ok" will appear if a test fails. 
+
 The Soundpipe Model
 -------------------
 
 Soundpipe is callback driven. Every time Soundpipe needs a frame, it will
 call upon a single function specified by the user. Soundpipe modules are
-designed to process a signal, one sample at a time.  Every module follows the
+designed to process a signal one sample at a time.  Every module follows the
 same life cycle:
 
 1. Create: Memory is allocated for the data struct.
@@ -88,7 +89,7 @@ Contributing
 We welcome all contributions! If you find a bug, please feel free to make a bug report or
 a pull-request. 
 
-Additionally, if you'd like to contribute bys adding more modules to Soundpipe, please 
+Additionally, if you'd like to contribute by adding more modules to Soundpipe, please 
 see the Style Guide (util/style\_guide.md) and the Module How-To Guide (util/module\_howto.md).
 
 
