@@ -29,11 +29,11 @@ int main() {
     sp_srand(sp, 1234567);
 
     sp_mincer_create(&ud.mincer);
-    sp_ftbl_create(sp, &ud.ft, 395393);
+    /* allocates loads an audio file into a ftable */
+    sp_ftbl_loadfile(sp, &ud.ft, "oneart.wav");
 
     sp_randi_create(&ud.randi);
 
-    sp_gen_file(sp, ud.ft, "oneart.wav");
     sp_mincer_init(sp, ud.mincer, ud.ft);
     sp_randi_init(sp, ud.randi);
     ud.randi->min = 0;

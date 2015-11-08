@@ -73,3 +73,15 @@ void sp_fft_init(sp_fft *fft, int M);
 void sp_fftr(sp_fft *fft, SPFLOAT *buf, int FFTsize);
 void sp_ifftr(sp_fft *fft, SPFLOAT *buf, int FFTsize);
 void sp_fft_destroy(sp_fft *fft);
+#ifndef kiss_fft_scalar
+#define kiss_fft_scalar SPFLOAT
+#endif
+typedef struct {
+    kiss_fft_scalar r;
+    kiss_fft_scalar i;
+}kiss_fft_cpx;
+
+typedef struct kiss_fft_state* kiss_fft_cfg;
+typedef struct kiss_fftr_state* kiss_fftr_cfg;
+
+

@@ -22,7 +22,8 @@ int main() {
     sp_osc_create(&ud.osc);
 
     sp->sr = 96000;
-    sp->len = ud.ft->size;
+    //sp->len = ud.ft->size;
+    sp->len = sp->sr * 5;
     ud.amps->tbl[0] = 0.0;
 
     for(i = 1; i < ud.amps->size; i++){
@@ -33,7 +34,7 @@ int main() {
     
     /* Discovered empirically. multiply frequency by this constant. */
     ud.fc = 1 / (6.0 * 440); 
-    sp_gen_padsynth(sp, ud.ft, ud.amps, 440, 40.0);
+    sp_gen_padsynth(sp, ud.ft, ud.amps, sp_midi2cps(60), 40.0);
 
     sp_osc_init(sp, ud.osc, ud.ft, 0);
     ud.osc->freq = sp_midi2cps(70) * ud.fc;

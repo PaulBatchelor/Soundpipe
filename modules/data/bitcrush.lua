@@ -1,16 +1,16 @@
-sptbl["decimator"] = {
+sptbl["bitcrush"] = {
 
     files = {
-        module = "decimator.c",
-        header = "decimator.h",
-        example = "ex_decimator.c",
+        module = "bitcrush.c",
+        header = "bitcrush.h",
+        example = "ex_bitcrush.c",
     },
 
     func = {
-        create = "sp_decimator_create",
-        destroy = "sp_decimator_destroy",
-        init = "sp_decimator_init",
-        compute = "sp_decimator_compute",
+        create = "sp_bitcrush_create",
+        destroy = "sp_bitcrush_destroy",
+        init = "sp_bitcrush_init",
+        compute = "sp_bitcrush_compute",
     },
 
     params = {
@@ -34,7 +34,7 @@ sptbl["decimator"] = {
 
     description = [[Digital signal degradation
 
-    Otherwise known as a "bitcrusher", Decimator will digitally degrade a signal by altering the bitdepth and sampling-rate. ]],
+    Bitcrusher will digitally degrade a signal by altering the bitdepth and sampling-rate. ]],
 
     ninputs = 1,
     noutputs = 1,
