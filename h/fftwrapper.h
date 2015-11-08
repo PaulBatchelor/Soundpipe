@@ -22,5 +22,3 @@ void deleteFFTFREQS(FFTFREQS *f);
 
 void smps2freqs(FFTwrapper *ft, SPFLOAT *smps, FFTFREQS freqs);
 void freqs2smps(FFTwrapper *ft, FFTFREQS freqs, SPFLOAT *smps);
-
-

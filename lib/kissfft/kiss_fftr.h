@@ -15,8 +15,11 @@ extern "C" {
  
  */
 
+#ifndef SOUNDPIPE_H
+
 typedef struct kiss_fftr_state *kiss_fftr_cfg;
 
+#endif
 
 kiss_fftr_cfg kiss_fftr_alloc(int nfft,int inverse_fft,void * mem, size_t * lenmem);
 /*

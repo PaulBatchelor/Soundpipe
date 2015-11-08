@@ -22,11 +22,11 @@ MPATHS=$(addprefix modules/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
 CPATHS=$(addprefix modules/, $(addsuffix .c, $(MODULES)))
 
-CFLAGS +=  -g --std=c99 -DSP_VERSION=$(VERSION) -O3
+CFLAGS +=  -g --std=c99 -DSP_VERSION=$(VERSION) -O0 -DSPFLOAT=float -Ih
 UTIL += util/wav2smp
 
 modules/%.o: modules/%.c h/%.h h/soundpipe.h
-	$(CC) -Wall $(CFLAGS) -c -static -Ih $< -o $@
+	$(CC) -Wall $(CFLAGS) -c -static $< -o $@
 
 h/soundpipe.h: $(HPATHS)
 	cat $(HPATHS) > $@
