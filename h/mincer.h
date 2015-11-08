@@ -1,4 +1,3 @@
-#define MAXOUTS 2
 typedef struct {
     SPFLOAT time, amp, pitch, lock, iN,
         idecim, onset, offset, dbthresh;
@@ -9,7 +8,6 @@ typedef struct {
     nwin, prev, framecount, indata[2];
     SPFLOAT *tab;
     int curbuf;
-    SNDFILE *sf;
     SPFLOAT resamp;
     sp_ftbl *ft;
     sp_fft fft;
