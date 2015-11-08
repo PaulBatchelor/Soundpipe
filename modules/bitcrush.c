@@ -2,21 +2,21 @@
 #include <math.h>
 #include "soundpipe.h"
 
-int sp_decimator_create(sp_decimator **p)
+int sp_bitcrush_create(sp_bitcrush **p)
 {
-    *p = malloc(sizeof(sp_decimator));
+    *p = malloc(sizeof(sp_bitcrush));
     return SP_OK;
 }
 
-int sp_decimator_destroy(sp_decimator **p)
+int sp_bitcrush_destroy(sp_bitcrush **p)
 {
-    sp_decimator *pp = *p;
+    sp_bitcrush *pp = *p;
     sp_fold_destroy(&pp->fold);
     free(*p);
     return SP_OK;
 }
 
-int sp_decimator_init(sp_data *sp, sp_decimator *p)
+int sp_bitcrush_init(sp_data *sp, sp_bitcrush *p)
 {
     p->bitdepth = 8;
     p->srate = 10000;
@@ -25,7 +25,7 @@ int sp_decimator_init(sp_data *sp, sp_decimator *p)
     return SP_OK;
 }
 
-int sp_decimator_compute(sp_data *sp, sp_decimator *p, SPFLOAT *in, SPFLOAT *out)
+int sp_bitcrush_compute(sp_data *sp, sp_bitcrush *p, SPFLOAT *in, SPFLOAT *out)
 {
     SPFLOAT bits = pow(2, floor(p->bitdepth));
     SPFLOAT foldamt = sp->sr / p->srate;

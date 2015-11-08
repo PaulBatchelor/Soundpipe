@@ -4,7 +4,7 @@ MODULES=base event noise tone moogladder revsc ftbl osc posc3 randi \
 	dtrig rpt dust port vdelay count streson tseq bal drip clip fosc dist \
 	gbuzz rms jitter lpf18 randmt allpass comb phasor tabread \
 	eqfil foo in prop samphold delay switch dmetro random \
-	pluck atone tin scale pan2 jcrev tenv2 fold decimator inverse mul add sub \
+	pluck atone tin scale pan2 jcrev tenv2 fold bitcrush inverse mul add sub \
 	div abs panst bar progress pareq butbr butbp buthp butlp mincer
 
 ifndef NO_LIBSNDFILE
@@ -19,7 +19,7 @@ include lib/inih/Makefile
 # Header files needed for modules generated with FAUST
 CFLAGS += -I lib/faust
 
-# fft library 
+# fft library
 include lib/fft/Makefile
 
 # JACK module
