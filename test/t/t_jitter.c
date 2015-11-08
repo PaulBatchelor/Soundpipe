@@ -11,6 +11,8 @@ typedef struct {
 
 int t_jitter(sp_test *tst, sp_data *sp, const char *hash) 
 {
+    sp_srand(sp, 1234567);
+
     uint32_t n;
     int fail = 0;
 
