@@ -13,3 +13,4 @@ examples/plot.dat
 examples/*.bin
 config.mk
 test/*.bin
+lib/fft/fft.c
