@@ -11,92 +11,63 @@ sptbl["mincer"] = {
         destroy = "sp_mincer_destroy",
         init = "sp_mincer_init",
         compute = "sp_mincer_compute",
-        other = {
-            sp_mincer_set = {
-                description = "mincer_set description goes here.",
-                args = {
-                    {
-                        name = "var1",
-                        type = "SPFLOAT",
-                        description = "This is the first parameter",
-                        default = 1.5
-                    },
-                    {
-                        name = "var2",
-                        type = "SPFLOAT",
-                        description = "This is the second parameter",
-                        default = 1.5
-                    }
-                }
-            }
-        }
     },
 
     params = {
         mandatory = {
             {
-                name = "bar",
+                name = "ft",
                 type = "sp_ftbl *",
-                description = "This is a mandatory table value. It does not have a default value, so we set it to 'N/A'. Any that does not or cannot have a default value should set this default value to 'N/A'.",
+                description = "ftable containing an audio file.",
                 default = "N/A"
-            },
-            {
-                name = "bar2",
-                type = "SPFLOAT",
-                description = "This is a mandatory parameter. In soundpipe, users will always need to specify this value, but a default value has been giving in case it is needed to write more complicated engines in the future.",
-                default = 123
             }
         },
 
         optional = {
             {
-                name = "blah_1",
+                name = "time",
                 type = "SPFLOAT",
-                description = "This is an optional parameter. These values are always set to a value by default, and can be set after the init function has been called.",
-                default = 1.5
+                description = "Position in time. When non-changing it will do a spectral freeze of a the current point in time.",
+                default = 0
             },
             {
-                name = "blah_2",
+                name = "amp",
                 type = "SPFLOAT",
-                description ="This is yet another optional parameter...",
-                default = 456.7
+                description ="Amplitude.",
+                default = 1
+            },
+            {
+                name = "pitch",
+                type = "SPFLOAT",
+                description ="Pitch ratio. A value of. 1  normal, 2 is double speed, 0.5 is halfspeed, etc.",
+                default = 1
             },
         }
     },
 
     modtype = "module",
 
-    description = [[A short title describing the module
+    description = [[Phase-locked vocoder.
 
-    This is a description of the entire module.  This is not a real module. This description should be a comprehensive sumary of what this function does.
-
-Inside the Lua table, this is expressed as a multiline string, however it does not adhere to the tradtional 80 column rule found in programming.
-
-Write as much text as needed here...
+    Mincer is a phase-locked vocoder. It has the ability to play back an audio 
+file loaded into an ftable like a sampler would. Unlike a typical sampler, mincer allows
+time and pitch to be controlled separately. 
 ]],
 
-    ninputs = 2,
-    noutputs = 2,
+    ninputs = 0,
+    noutputs = 1,
 
     inputs = {
         {
-            name = "clock",
-            description = "this is the clock source for a made up plugin."
-        },
-        {
-            name = "input",
-            description = "this is the audio input for a made up plugin."
+            name = "dummy",
+            description = "This doesn't do anything."
         },
     },
 
     outputs = {
         {
-            name = "out_left",
-            description = "Stereo left output for mincer."
-        },
-        {
-            name = "out_right",
-            description = "Stereo right output for mincer."
+            name = "out",
+            description = "Signal output."
         },
     }
 

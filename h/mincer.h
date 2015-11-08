@@ -1,13 +1,12 @@
 #define MAXOUTS 2
 typedef struct {
-    SPFLOAT out[MAXOUTS], time, amp, pitch, lock, iN,
+    SPFLOAT time, amp, pitch, lock, iN,
         idecim, onset, offset, dbthresh;
     int cnt, hsize, curframe, N, decim,tscale;
-    unsigned int nchans;
     SPFLOAT pos;
     SPFLOAT accum;
-    sp_auxdata outframe[MAXOUTS], win, bwin[MAXOUTS], fwin[MAXOUTS],
-    nwin[MAXOUTS], prev[MAXOUTS], framecount[MAXOUTS], indata[2];
+    sp_auxdata outframe, win, bwin, fwin,
+    nwin, prev, framecount, indata[2];
     SPFLOAT *tab;
     int curbuf;
     SNDFILE *sf;
