@@ -32,11 +32,11 @@ include lib/fft/Makefile
 #MODULES += rpi
 #CFLAGS += -lasound
 
-# Padsynth module
-#
-#MODULES += fftwrapper
-#MODULES += padsynth
-#CFLAGS += -lfftw3
+include lib/kissfft/Makefile
+MODULES += fftwrapper
+MODULES += padsynth
+# Uncomment to use FFTW3 instead of kissfft. 
+# CFLAGS += -lfftw3 -DUSE_FFTW3
 
 # Build dynamic library. Needed for Sporth chugin
 # CFLAGS += -shared -fPIC
