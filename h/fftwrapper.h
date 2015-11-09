@@ -1,4 +1,6 @@
+#ifdef USE_FFTW3
 #include <fftw3.h>
+#endif
 
 #define fftw_real double
 #define rfftw_plan fftw_plan
