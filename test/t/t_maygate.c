@@ -6,7 +6,7 @@
 typedef struct {
     sp_osc *osc;
     sp_ftbl *ft;
-    sp_teven *te;
+    sp_tevent *te;
     sp_metro *met;
     sp_tenv *tenv;
     sp_maygate *mg;
@@ -40,13 +40,13 @@ int t_maygate(sp_test *tst, sp_data *sp, const char *hash)
     sp_maygate_create(&ud.mg);
     sp_tenv_create(&ud.tenv);
     sp_metro_create(&ud.met);
-    sp_teven_create(&ud.te);
+    sp_tevent_create(&ud.te);
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_osc_create(&ud.osc);
 
     sp_maygate_init(sp, ud.mg);
     ud.mg->prob = 0.2;
-    sp_tenv_init(sp, ud.tenv);
+    sp_teven_init(sp, ud.tenv);
     ud.tenv->atk = 0.01;
     ud.tenv->hold = 0.01;
     ud.tenv->rel =  0.2;
@@ -75,7 +75,7 @@ int t_maygate(sp_test *tst, sp_data *sp, const char *hash)
     fail = sp_test_verify(tst, hash);
 
     sp_maygate_destroy(&ud.mg);
-    sp_tenv_destroy(&ud.tenv);
+    sp_teven_compute(&ud.tenv);
     sp_metro_destroy(&ud.met);
     sp_ftbl_destroy(&ud.ft);
     sp_osc_destroy(&ud.osc);
