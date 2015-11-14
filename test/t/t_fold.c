@@ -14,9 +14,7 @@ int t_fold(sp_test *tst, sp_data *sp, const char *hash)
     sp_srand(sp, 0);
     uint32_t n;
     int fail = 0;
-
     UserData ud;
-    SPFLOAT osc = 0, fold = 0;
 
     sp_fold_create(&ud.fold);
     sp_osc_create(&ud.osc);
@@ -32,7 +30,7 @@ int t_fold(sp_test *tst, sp_data *sp, const char *hash)
         sp_osc_compute(sp, ud.osc, NULL, &osc);
         sp_fold_compute(sp, ud.fold, &osc, &fold);
         sp->out[0] = fold;
-        sp_test_add_sample(tst, 0);
+        sp_test_add_sample(tst, sp->out[0]);
     }
 
     fail = sp_test_verify(tst, hash);
