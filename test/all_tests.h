@@ -52,4 +52,5 @@ TEST(t_fold, "fold", "d08344b5dc59f220227818278fe43c26")
 TEST(t_gen_sinesum, "gen_sinesum", "8be57d6b8dc27da0dc094ec0802c4145")
 TEST(t_gen_sine, "gen_sine", "26564cbc0556ae9586c7480d4dec2f83")
 TEST(t_gen_gauss, "gen_guass", "2f60f7c00e6682a14b149f671990d788")
+TEST(t_gen_line, "gen_line", "9eb3fdbed1598e756ed3b2ce7df03889")
 
