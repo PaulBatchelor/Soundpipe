@@ -7,7 +7,8 @@ tests = t_foo t_osc t_allpass t_atone t_bal t_biquad t_butbp t_butbr t_buthp \
 		t_dtrig t_dust t_eqfil t_fofilt t_fosc t_gbuzz t_moogladder t_phasor  \
 		t_tone t_noise t_pareq t_jitter t_pluck t_lpf18 t_tbvcf t_port t_posc3 \
 		t_prop t_randi t_random t_reverse t_revsc t_rpt t_maygate t_samphold \
-		t_scale t_streson t_tenv t_tenv2 t_tseq t_vdelay t_mode t_jcrev t_fold
+		t_scale t_streson t_tenv t_tenv2 t_tseq t_vdelay t_mode t_jcrev t_fold \
+		t_gen_sinesum
 
 OBJ = $(addprefix t/, $(addsuffix .o, $(tests)))
 
@@ -25,7 +26,7 @@ t/%.o: t/%.c
 	$(CC) -c $(CFLAGS) -o $@ $<
 
 test.o: test.c
-	$(CC) -I../h -I /usr/local/include -c -o $@ $<
+	$(CC) -g -I../h -I /usr/local/include -c -o $@ $<
 
 run.bin: run.c test.c md5.c libsptest.a $(OBJ) all_tests.h
 	$(CC) run.c -Wall $(CFLAGS) $(LDFLAGS) -o$@ $(OBJ) ../libsoundpipe.a libsptest.a
