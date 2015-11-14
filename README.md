@@ -43,11 +43,11 @@ files with a .bin extention. To run an example, run "./ex_foo.bin
 ". When an example is run, it will generate a 
 5 second file called "test.wav". Examples in the "extra"
 folder are for optional modules that require third-party libraries. 
-To compile these examples, uncomment the appropriate lines in "config.mk".
+To compile these examples, uncomment the appropriate lines in "config.mk". If you run one of the "gen" examples, and want to see the plot results, you'll need to make sure you have gnuplot installed. 
 
 Tests in Soundpipe are used to determine whether or not modules behave as expected. Tests write the output of a module to memory, and check the MD5 hash value of the output against the MD5 value of a reference signal. We're currently working to add tests for every Soundpipe module.  
 
-To build a test file, go into the test folder, and run "make". Then, run "./run_bin", which runs the tests. As the tests are run, an "ok" will appear in the log if a test passes, and a "not ok" will appear if a test fails. 
+To build a test file, go into the test folder, and run "make". Then, run "./run.bin", which runs the tests. As the tests are run, an "ok" will appear in the log if a test passes, and a "not ok" will appear if a test fails. 
 
 The Soundpipe Model
 -------------------

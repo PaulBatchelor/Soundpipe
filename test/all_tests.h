@@ -50,3 +50,5 @@ TEST(t_mode, "mode", "c7d72851a98e642e6f6881d867fdff14")
 TEST(t_jcrev, "jcrev", "1e7125e4563d588fc8d1b417720087ad")
 TEST(t_fold, "fold", "d08344b5dc59f220227818278fe43c26")
 TEST(t_gen_sinesum, "gen_sinesum", "8be57d6b8dc27da0dc094ec0802c4145")
+TEST(t_gen_sine, "gen_sine", "26564cbc0556ae9586c7480d4dec2f83")
+
