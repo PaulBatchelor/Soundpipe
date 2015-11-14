@@ -1,4 +1,3 @@
-/*
 TEST(t_foo, "dummy", "9b1be87c6b579fde2341515f4d82c008")
 TEST(t_osc, "osc", "c6b5a877a5e4b282262e6b96cb5d37fd")
 TEST(t_atone, "atone filter", "bae03ea296123e33a29211503c30ffc1")
@@ -50,6 +49,4 @@ TEST(t_vdelay, "vdelay", "9b1be87c6b579fde2341515f4d82c008")
 TEST(t_mode, "mode", "c7d72851a98e642e6f6881d867fdff14")
 TEST(t_jcrev, "jcrev", "1e7125e4563d588fc8d1b417720087ad")
 TEST(t_fold, "fold", "d08344b5dc59f220227818278fe43c26")
-TEST(t_gen_sinesum, "gen_sinesum", "8be57d6b8dc27da0dc094ec0802c4145")
-*/
 TEST(t_gen_sinesum, "gen_sinesum", "8be57d6b8dc27da0dc094ec0802c4145")
