@@ -7,13 +7,19 @@ int t_gen_sinesum(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
+    SPFLOAT out = 0;
 
     sp_ftbl *ft;
     sp_ftbl_create(sp, &ft, 4096);
     sp_gen_sinesum(sp, ft, "1 0.5 0.25");
 
-    for(n = 0; n < ft->size; n++) {
-        sp_test_add_sample(tst, ft->tbl[n]);
+    for(n = 0; n < tst->size; n++) {
+        if(n < ft->size) {
+            out = ft->tbl[n];
+        } else {
+            out = 0;
+        }
+        sp_test_add_sample(tst, out);
     }
 
     fail = sp_test_verify(tst, hash);
