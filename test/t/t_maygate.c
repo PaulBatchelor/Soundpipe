@@ -46,14 +46,14 @@ int t_maygate(sp_test *tst, sp_data *sp, const char *hash)
 
     sp_maygate_init(sp, ud.mg);
     ud.mg->prob = 0.2;
-    sp_teven_init(sp, ud.tenv);
+    sp_tenv_init(sp, ud.tenv);
     ud.tenv->atk = 0.01;
     ud.tenv->hold = 0.01;
     ud.tenv->rel =  0.2;
 
     sp_metro_init(sp, ud.met);
     ud.met->freq = 12;
-    sp_teven_init(sp, ud.te, freq_reinit, freq_compute, &ud);
+    sp_tevent_init(sp, ud.te, freq_reinit, freq_compute, &ud);
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
 
@@ -65,7 +65,7 @@ int t_maygate(sp_test *tst, sp_data *sp, const char *hash)
         mgate = 0;
         sp_metro_compute(sp, ud.met, NULL, &trig);
         sp_maygate_compute(sp, ud.mg, &trig, &mgate);
-        sp_teven_compute(sp, ud.te, &trig, &ud.osc->freq);
+        sp_tevent_compute(sp, ud.te, &trig, &ud.osc->freq);
         sp_tenv_compute(sp, ud.tenv, &trig, &env);
         sp_osc_compute(sp, ud.osc, NULL, &osc);
         sp->out[0] = osc * env * mgate;
@@ -75,11 +75,11 @@ int t_maygate(sp_test *tst, sp_data *sp, const char *hash)
     fail = sp_test_verify(tst, hash);
 
     sp_maygate_destroy(&ud.mg);
-    sp_teven_compute(&ud.tenv);
+    sp_tenv_destroy(&ud.tenv);
     sp_metro_destroy(&ud.met);
     sp_ftbl_destroy(&ud.ft);
     sp_osc_destroy(&ud.osc);
-    sp_teven_destroy(&ud.te);
+    sp_tevent_destroy(&ud.te);
 
     if(fail) return SP_NOT_OK;
     else return SP_OK;
