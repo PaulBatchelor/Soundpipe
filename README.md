@@ -39,7 +39,8 @@ Building Examples and Tests
 -----------
 
 To build the examples, go into the examples folder and run "make", which will create
-files with a .bin extention. When an example is run, it will generate a 
+files with a .bin extention. To run an example, run "./ex_foo.bin
+". When an example is run, it will generate a 
 5 second file called "test.wav". Examples in the "extra"
 folder are for optional modules that require third-party libraries. 
 To compile these examples, uncomment the appropriate lines in "config.mk".
