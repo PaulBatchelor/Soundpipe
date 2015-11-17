@@ -1,12 +1,12 @@
 /*
- * Osc
+ * Expon
  *
- * This code has been extracted from the Csound opcode "oscili".
+ * This code has been extracted from the Csound opcode "expon".
  * It has been modified to work as a Soundpipe module.
  *
  * Original Author(s): Barry Vercoe
  * Year: 1991
- * Location: OOps/ugens2.c
+ * Location: OOps/ugens1.c
  *
  */
 
