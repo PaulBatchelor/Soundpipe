@@ -181,6 +181,7 @@ function PG.opt_params(self,sp)
 end
 
 function PG.inputs(self, sp)
+    if sp[self.name].ninputs == 0 then return end;
     self:printheader("Inputs")
     local tbl = sp[self.name].inputs
     for _, v in pairs(tbl) do
