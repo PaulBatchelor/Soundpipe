@@ -49,6 +49,8 @@ Tests in Soundpipe are used to determine whether or not modules behave as expect
 
 To build a test file, go into the test folder, and run "make". Then, run "./run.bin", which runs the tests. As the tests are run, an "ok" will appear in the log if a test passes, and a "not ok" will appear if a test fails. 
 
+If you would like to hear the audio output of the tests, run "make WRITE_RAW=1". This enables the output of the tests to be written to disk. Then, run "./run.bin", which runs the tests. Finally, run "sh write_wav.sh". This shell script produces a file called "out.wav", which is the audio output of every Soundpipe test. The shell script creates this file by concatenating the individual files (in a headerless raw format) to a wav file using SoX. 
+
 The Soundpipe Model
 -------------------
 
