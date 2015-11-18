@@ -34,7 +34,7 @@ int t_line(sp_test *tst, sp_data *sp, const char *hash)
         sp_osc_compute(sp, ud.osc, NULL, &osc);
         sp->out[0] = osc;
 
-        sp_test_add_sample(tst, out);
+        sp_test_add_sample(tst, sp->out[0]);
     }
 
     fail = sp_test_verify(tst, hash);
