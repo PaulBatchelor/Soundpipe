@@ -5,7 +5,8 @@ MODULES=base event noise tone moogladder revsc ftbl osc posc3 randi \
 	gbuzz rms jitter lpf18 randmt allpass comb phasor tabread \
 	eqfil foo in prop samphold delay switch dmetro random \
 	pluck atone tin scale pan2 jcrev tenv2 fold bitcrush inverse mul add sub \
-	div abs panst bar progress pareq butbr butbp buthp butlp mincer line expon
+	div abs panst bar progress pareq butbr butbp buthp butlp mincer line expon \
+	zita
 
 ifndef NO_LIBSNDFILE
 	MODULES += nsmp diskin
@@ -35,7 +36,7 @@ include lib/fft/Makefile
 include lib/kissfft/Makefile
 MODULES += fftwrapper
 MODULES += padsynth
-# Uncomment to use FFTW3 instead of kissfft. 
+# Uncomment to use FFTW3 instead of kissfft.
 # CFLAGS += -lfftw3 -DUSE_FFTW3
 
 # Build dynamic library. Needed for Sporth chugin
