@@ -1011,7 +1011,7 @@ void computezita(zita* dsp, int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs
 static void addHorizontalSlider(void* ui_interface, const char* label, FAUSTFLOAT* zone, FAUSTFLOAT init, FAUSTFLOAT min, FAUSTFLOAT max, FAUSTFLOAT step)
 {
     sp_zita *p = ui_interface;
-    *p->args[p->argpos] = *zone;
+    p->args[p->argpos] = zone;
     p->argpos++;
 }
 
@@ -1036,8 +1036,22 @@ int sp_zita_init(sp_data *sp, sp_zita *p)
     UIGlue UI;
     p->argpos = 0;
     UI.addHorizontalSlider= addHorizontalSlider;
+    UI.uiInterface = p;
     buildUserInterfacezita(dsp, &UI);
     initzita(dsp, sp->sr);
+
+    p->in_delay=p->args[0];
+    p->lf_x=p->args[1];
+    p->rt60_low=p->args[2];
+    p->rt60_mid=p->args[3];
+    p->hf_damping=p->args[4];
+    p->eq1_freq=p->args[5];
+    p->eq1_level=p->args[6];
+    p->eq2_freq=p->args[7];
+    p->eq2_level=p->args[8];
+    p->mix=p->args[9];
+    p->level=p->args[10];
+
     p->ud = dsp;
     return SP_OK;
 }

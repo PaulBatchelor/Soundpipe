@@ -30,6 +30,8 @@ int main() {
 
     sp_diskin_init(sp, ud.disk, "oneart.wav");
     sp_zita_init(sp, ud.rev);
+    *ud.rev->level = 0;
+    *ud.rev->in_delay = 0;
 
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);
