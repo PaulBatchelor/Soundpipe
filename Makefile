@@ -13,7 +13,7 @@ include $(CONFIG)
 SPLIBS = libsoundpipe.a
 
 ifdef BUILD_DYNAMIC
-SPLIBS += libsoundpipe.so
+SPLIBS += libsoundpipe_dyn.so
 endif
 
 VERSION=0.4
@@ -34,7 +34,7 @@ h/soundpipe.h: $(HPATHS)
 libsoundpipe.a: $(MPATHS) $(LPATHS)
 	ar rcs $@ $(MPATHS) $(LPATHS)
 
-libsoundpipe.so: $(MPATHS) $(LPATHS)
+libsoundpipe_dyn.so: $(MPATHS) $(LPATHS)
 	ld -shared -fPIC -o $@ $(MPATHS) $(LPATHS)
 
 config.mk: config.def.mk
@@ -54,7 +54,7 @@ clean:
 	rm -rf $(LPATHS)
 	rm -rf $(UTIL)
 	rm -rf sp_dict.lua
-	rm -rf libsoundpipe.so
+	rm -rf libsoundpipe_dyn.so
 
 docs:
 	util/gendocs.sh
