@@ -23,8 +23,15 @@ By default, Soundpipe needs libsndfile, and a standard build environment.
 Other modules that use other external libraries will need to be explicitly compiled
 by modififying config.mk.
 
-If you are using a Mac, clone and build from the libsndfile repository here 
-located here: https://github.com/erikd/libsndfile/
+If you are using a Mac you can install libsndfile via
+[Homebrew](http://brew.sh/):
+
+```sh
+$ brew install libsndfile
+```
+
+Alternatively, clone and build from the [libsndfile
+repository](https://github.com/erikd/libsndfile/).
 
 On Linux, the libsndfile-dev package will need to be installed.
 
@@ -48,6 +55,8 @@ To compile these examples, uncomment the appropriate lines in "config.mk". If yo
 Tests in Soundpipe are used to determine whether or not modules behave as expected. Tests write the output of a module to memory, and check the MD5 hash value of the output against the MD5 value of a reference signal. We're currently working to add tests for every Soundpipe module.  
 
 To build a test file, go into the test folder, and run "make". Then, run "./run.bin", which runs the tests. As the tests are run, an "ok" will appear in the log if a test passes, and a "not ok" will appear if a test fails. 
+
+If you would like to hear the audio output of the tests, run "make WRITE_RAW=1". This enables the output of the tests to be written to disk. Then, run "./run.bin", which runs the tests. Finally, run "sh write_wav.sh". This shell script produces a file called "out.wav", which is the audio output of every Soundpipe test. The shell script creates this file by concatenating the individual files (in a headerless raw format) to a wav file using SoX. 
 
 The Soundpipe Model
 -------------------
@@ -88,10 +97,7 @@ Aurelius Prochazka
 Contributing
 --------------------------
 We welcome all contributions! If you find a bug, please feel free to make a bug report or
-a pull-request. 
+a pull-request. If you make a pull-request, please make sure that you do so on the develop branch, and not the master branch.  
 
 Additionally, if you'd like to contribute by adding more modules to Soundpipe, please 
 see the Style Guide (util/style\_guide.md) and the Module How-To Guide (util/module\_howto.md).
-
-
-
