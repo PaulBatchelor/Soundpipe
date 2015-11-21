@@ -23,16 +23,17 @@ extern "C" {
 
 #include <math.h>
 
-float powf(float dummy0, float dummy1);
-float sqrtf(float dummy0);
-float cosf(float dummy0);
-float floorf(float dummy0);
-float expf(float dummy0);
-float faustpower2_f(float value) {
+static float powf(float dummy0, float dummy1);
+static float sqrtf(float dummy0);
+static float cosf(float dummy0);
+static float floorf(float dummy0);
+static float expf(float dummy0);
+static float faustpower2_f(float value) {
 	return (value * value);
 
 }
-float tanf(float dummy0);
+
+static float tanf(float dummy0);
 
 typedef struct {
 
@@ -158,11 +159,11 @@ zita* newzita() {
 	return dsp;
 }
 
-void deletezita(zita* dsp) {
+static void deletezita(zita* dsp) {
 	free(dsp);
 }
 
-void instanceInitzita(zita* dsp, int samplingFreq) {
+static void instanceInitzita(zita* dsp, int samplingFreq) {
 	dsp->fSamplingFreq = samplingFreq;
 	dsp->fHslider0 = (FAUSTFLOAT)-20.;
 	/* C99 loop */
@@ -728,11 +729,11 @@ void instanceInitzita(zita* dsp, int samplingFreq) {
 
 }
 
-void initzita(zita* dsp, int samplingFreq) {
+static void initzita(zita* dsp, int samplingFreq) {
 	instanceInitzita(dsp, samplingFreq);
 }
 
-void buildUserInterfacezita(zita* dsp, UIGlue* interface) {
+static void buildUserInterfacezita(zita* dsp, UIGlue* interface) {
 	interface->addHorizontalSlider(interface->uiInterface, "In Delay", &dsp->fHslider9, 60.f, 20.f, 100.f, 1.f);
 	interface->addHorizontalSlider(interface->uiInterface, "LF X", &dsp->fHslider8, 200.f, 50.f, 1000.f, 1.f);
 	interface->addHorizontalSlider(interface->uiInterface, "Low RT60", &dsp->fHslider7, 3.f, 1.f, 8.f, 0.1f);
@@ -746,7 +747,7 @@ void buildUserInterfacezita(zita* dsp, UIGlue* interface) {
 	interface->addHorizontalSlider(interface->uiInterface, "Level", &dsp->fHslider0, -20.f, -70.f, 40.f, 0.1f);
 }
 
-void computezita(zita* dsp, int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs) {
+static void computezita(zita* dsp, int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs) {
 	FAUSTFLOAT* input0 = inputs[0];
 	FAUSTFLOAT* input1 = inputs[1];
 	FAUSTFLOAT* output0 = outputs[0];
