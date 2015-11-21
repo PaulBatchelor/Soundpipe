@@ -1,16 +1,16 @@
-sptbl["zita"] = {
+sptbl["zitarev"] = {
 
     files = {
-        module = "zita.c",
-        header = "zita.h",
-        example = "ex_zita.c",
+        module = "zitarev.c",
+        header = "zitarev.h",
+        example = "ex_zitarev.c",
     },
 
     func = {
-        create = "sp_zita_create",
-        destroy = "sp_zita_destroy",
-        init = "sp_zita_init",
-        compute = "sp_zita_compute",
+        create = "sp_zitarev_create",
+        destroy = "sp_zitarev_destroy",
+        init = "sp_zitarev_init",
+        compute = "sp_zitarev_compute",
     },
 
     params = {
@@ -86,7 +86,7 @@ sptbl["zita"] = {
 
     modtype = "module",
 
-    description = [[8 FDN stereo zita-reverb algorithm, imported from Faust.]],
+    description = [[8 FDN stereo zitareverb algorithm, imported from Faust.]],
 
     ninputs = 2,
     noutputs = 2,
