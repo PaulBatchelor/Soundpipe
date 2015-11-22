@@ -1,5 +1,29 @@
 # Change log
 
+0.5 "Spectral"
+--------------
+    - Internal RNG created for cross-platform consistency
+    - NO_LIBSOUNDFILE compilation flag
+    - config.mk can be a variable for multiple config files
+    - kissfft library codebase added
+    - gen_padsynth uses kissfft instead of fftw (and is now a default module)
+    - FFTs for RISC by John Green added to Soundpipe codebase
+    - improved testing interface 
+    - Many tests (50+) created
+    - New Modules:
+        - mincer
+        - line
+        - expon
+        - tenvx 
+        - zitarev
+     - New gen routine: load_soundfile
+     - Fixes:
+        - Removed AAIO dependency in sp_jack
+        - fixed interpolation bug with fosc, posc3, and osc
+        - better comments in boilerplate code
+        - removed seed argument in sp_randi_init
+        - osx makefile fixes
+
 0.4 
 ---
     - License change: GPL to MIT
@@ -27,7 +51,7 @@
         - dmetro
         - samphold
     - Module boostrapper with documentation
-    - renamed delay to vdelaya
+    - renamed delay to vdelay
     - Documented gen routines
     - Style guide written
 
