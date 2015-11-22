@@ -10,6 +10,7 @@
     - FFTs for RISC by John Green added to Soundpipe codebase
     - improved testing interface 
     - Many tests (50+) created
+    - Dynamic library generation enabled by default (in addition to static lib)
     - New Modules:
         - mincer
         - line
@@ -23,6 +24,7 @@
         - better comments in boilerplate code
         - removed seed argument in sp_randi_init
         - osx makefile fixes
+        - minor fixes to docgen output
 
 0.4 
 ---
