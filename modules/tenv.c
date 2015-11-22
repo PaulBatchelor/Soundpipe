@@ -17,27 +17,7 @@ int sp_tenv_destroy(sp_tenv **p)
     return SP_OK;
 }
 
-int sp_tenv_init(sp_data *sp, sp_tenv *p)
-{
-    p->pos = 0;
-    p->last = 0;
-    p->atk = 0.1;
-    p->hold = 0.3;
-    p->rel = 0.2;
-    p->sigmode = 0;
-    p->input = 0;
-
-    p->sr = sp->sr;
-    p->atk_end = p->sr * p->atk;
-    p->rel_start = p->sr * (p->atk + p->hold);
-    p->atk_slp = 1.0 / p->atk_end;
-    p->rel_slp = -1.0 / (p->sr * p->rel);
-    p->totaldur = p->sr * (p->atk + p->hold + p->rel);
-    sp_tevent_init(sp, p->te, sp_tenv_reinit, sp_tenv_comp, p);
-    return SP_OK;
-}
-
-void sp_tenv_reinit(void *ud)
+static void sp_tenv_reinit(void *ud)
 {
     sp_tenv *env = ud;
     env->pos = 0;
@@ -48,7 +28,7 @@ void sp_tenv_reinit(void *ud)
     env->totaldur = env->sr * (env->atk + env->hold + env->rel);
 }
 
-void sp_tenv_comp(void *ud, SPFLOAT *out)
+static void sp_tenv_comp(void *ud, SPFLOAT *out)
 {
     sp_tenv *env = ud;
     SPFLOAT sig = 0;
@@ -76,6 +56,26 @@ void sp_tenv_comp(void *ud, SPFLOAT *out)
 
     env->pos++;
     env->last = sig;
+}
+
+int sp_tenv_init(sp_data *sp, sp_tenv *p)
+{
+    p->pos = 0;
+    p->last = 0;
+    p->atk = 0.1;
+    p->hold = 0.3;
+    p->rel = 0.2;
+    p->sigmode = 0;
+    p->input = 0;
+
+    p->sr = sp->sr;
+    p->atk_end = p->sr * p->atk;
+    p->rel_start = p->sr * (p->atk + p->hold);
+    p->atk_slp = 1.0 / p->atk_end;
+    p->rel_slp = -1.0 / (p->sr * p->rel);
+    p->totaldur = p->sr * (p->atk + p->hold + p->rel);
+    sp_tevent_init(sp, p->te, sp_tenv_reinit, sp_tenv_comp, p);
+    return SP_OK;
 }
 
 int sp_tenv_compute(sp_data *sp, sp_tenv *p, SPFLOAT *in, SPFLOAT *out)
