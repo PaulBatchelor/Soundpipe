@@ -1,2 +1,2 @@
-faust -json -lang c -a sp.c my_zita.dsp -o zita.c 
+faust -cn saw -json -lang c -a sp.c saw.dsp -o saw.c 
 
