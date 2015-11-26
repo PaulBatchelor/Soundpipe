@@ -1,2 +1,3 @@
-faust -cn saw -json -lang c -a sp.c saw.dsp -o saw.c 
-
+NAME=triangle
+faust -cn $NAME -json -lang c -a sp.c $NAME.dsp -o $NAME.c 
+go run parse.go $NAME $NAME.dsp.json >> $NAME.c 

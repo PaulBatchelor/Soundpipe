@@ -1,5 +1,6 @@
 typedef struct {
     void *ud;
+    int argpos;
     SPFLOAT *args[{{.Count}}];
     {{range $index, $element := .Params}}SPFLOAT *{{$element}};
     {{end}}

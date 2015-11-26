@@ -14,8 +14,8 @@ type Blah struct {
 
 func main() {
 	
-	if len(os.Args) == 1 {
-		fmt.Println("Please specify a file")
+	if len(os.Args) == 2 {
+		fmt.Println("Please specify the name, then a filename")
 		os.Exit(1)
 	}
 
@@ -25,7 +25,7 @@ func main() {
 	
 	if err != nil { panic(err) }	
 	
-	byt, _ := ioutil.ReadFile(os.Args[1])
+	byt, _ := ioutil.ReadFile(os.Args[2])
 
 	var dat map[string]interface{}
 
@@ -37,10 +37,9 @@ func main() {
 	items := dat["ui"].([]interface{})[0].(map[string]interface{})["items"].([]interface{})
 
 	cnt.Count = len(items)
-	cnt.Name = "saw" 
+	cnt.Name = os.Args[1]
 	for _, val := range items {
 		mymap := val.(map[string]interface{})
-		fmt.Println(mymap["label"])
 		cnt.Params = append(cnt.Params, mymap["label"].(string))
 	}
 

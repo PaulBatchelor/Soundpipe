@@ -9,7 +9,7 @@ files = ex_buthp ex_butlp ex_moogladder ex_noise ex_revsc ex_tone ex_osc \
 	ex_samphold ex_delay ex_switch ex_random ex_dmetro ex_pluck ex_atone ex_tin \
 	ex_scale ex_pan2 ex_jcrev ex_tenv2 ex_fold ex_bitcrush ex_inverse ex_mul \
 	ex_add ex_sub ex_div ex_abs ex_panst ex_bar ex_progress ex_pareq ex_mincer \
-	ex_padsynth ex_line ex_expon ex_zitarev ex_tenvx ex_saw
+	ex_padsynth ex_line ex_expon ex_zitarev ex_tenvx ex_saw ex_triangle
 
 # Jack Module
 #
