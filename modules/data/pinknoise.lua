@@ -1,16 +1,16 @@
-sptbl["noise"] = {
+sptbl["pinknoise"] = {
 
     files = {
-        module = "noise.c",
-        header = "noise.h",
-        example = "ex_noise.c",
+        module = "pinknoise.c",
+        header = "pinknoise.h",
+        example = "ex_pinknoise.c",
     },
 
     func = {
-        create = "sp_noise_create",
-        destroy = "sp_noise_destroy",
-        init = "sp_noise_init",
-        compute = "sp_noise_compute",
+        create = "sp_pinknoise_create",
+        destroy = "sp_pinknoise_destroy",
+        init = "sp_pinknoise_init",
+        compute = "sp_pinknoise_compute",
     },
 
     params = {
@@ -26,7 +26,7 @@ sptbl["noise"] = {
 
     modtype = "module",
 
-    description = [[Pink noise generator]],
+    description = [[Pink pinknoise generator]],
 
     ninputs = 0,
     noutputs = 1,
