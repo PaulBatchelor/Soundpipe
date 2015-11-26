@@ -1,5 +1,5 @@
 typedef struct {
-    void *ud;
+    void *faust;
     int argpos;
     SPFLOAT *args[{{.Count}}];
     {{range $index, $element := .Params}}SPFLOAT *{{$element}};
@@ -28,7 +28,7 @@ int sp_{{.Name}}_create(sp_{{.Name}} **p)
 int sp_{{.Name}}_destroy(sp_{{.Name}} **p)
 {
     sp_{{.Name}} *pp = *p;
-    {{.Name}} *dsp = pp->ud;
+    {{.Name}} *dsp = pp->faust;
     delete{{.Name}} (dsp);
     free(*p);
     return SP_OK;
@@ -36,7 +36,8 @@ int sp_{{.Name}}_destroy(sp_{{.Name}} **p)
 
 int sp_{{.Name}}_init(sp_data *sp, sp_{{.Name}} *p)
 {
-    {{.Name}} *dsp = new{{.Name}}(); UIGlue UI;
+    {{.Name}} *dsp = new{{.Name}}(); 
+    UIGlue UI;
     p->argpos = 0;
     UI.addHorizontalSlider= addHorizontalSlider;
     UI.uiInterface = p;
@@ -46,14 +47,14 @@ int sp_{{.Name}}_init(sp_data *sp, sp_{{.Name}} *p)
     {{range $index, $element := .Params}} 
     p->{{$element}} = p->args[{{$index}}];{{end}}
 
-    p->ud = dsp;
+    p->faust = dsp;
     return SP_OK;
 }
 
 int sp_{{.Name}}_compute(sp_data *sp, sp_{{.Name}} *p, SPFLOAT *in, SPFLOAT *out) 
 {
 
-    {{.Name}} *dsp = p->ud;
+    {{.Name}} *dsp = p->faust;
     SPFLOAT out1 = 0;
     SPFLOAT *faust_out[] = {&out1};
     SPFLOAT *faust_in[] = {in};
