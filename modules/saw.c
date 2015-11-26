@@ -128,7 +128,7 @@ static void addHorizontalSlider(void* ui_interface, const char* label, FAUSTFLOA
 
 int sp_saw_create(sp_saw **p)
 {
-    *p = malloc(sizeof(sp_zitarev));
+    *p = malloc(sizeof(sp_saw));
     return SP_OK;
 }
 
