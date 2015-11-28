@@ -56,4 +56,5 @@ TEST(t_gen_line, "gen_line", "9eb3fdbed1598e756ed3b2ce7df03889")
 TEST(t_gen_vals, "gen_vals", "b40825a6ee05f1219b87f3b30d5f1331")
 TEST(t_gen_xline, "gen_xline", "5c6050443a98326723e1809b67b73a9f")
 TEST(t_gen_line, "gen_line", "9eb3fdbed1598e756ed3b2ce7df03889")
+TEST(t_expon, "expon", "4e7c83be557f938e282c854ba04d4427")
 

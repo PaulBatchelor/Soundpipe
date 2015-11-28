@@ -17,7 +17,6 @@ int t_jcrev(sp_test *tst, sp_data *sp, const char *hash)
     UserData ud;
     SPFLOAT in = 0, out = 0;
 
-    sp_create(&sp);
     sp_srand(sp, 123456);
     sp_jcrev_create(&ud.dsp);
     sp_ftbl_create(sp, &ud.ft, 2048);
