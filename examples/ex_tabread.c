@@ -27,6 +27,7 @@ int main() {
     sp_gen_file(sp, ud.ft, "oneart.wav");
 
     sp_tabread_init(sp, ud.tr, ud.ft);
+    ud.tr->speed = 2;
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);
 

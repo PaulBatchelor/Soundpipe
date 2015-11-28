@@ -28,7 +28,7 @@ float sqrtf(float dummy0);
 float cosf(float dummy0);
 float floorf(float dummy0);
 float expf(float dummy0);
-float faustpower2_f(float value) {
+static float faustpower2_f(float value) {
 	return (value * value);
 
 }

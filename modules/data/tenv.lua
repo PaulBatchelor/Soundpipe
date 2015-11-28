@@ -14,7 +14,7 @@ sptbl["tenv"] = {
     },
 
     params = {
-        mandatory = {
+        optional = {
             {
                 name = "atk",
                 type = "SPFLOAT",
@@ -32,9 +32,7 @@ sptbl["tenv"] = {
                 type = "SPFLOAT",
                 description = "Release time, in seconds.",
                 default = 0.2
-            }
-        },
-        optional = {
+            },
             {
                 name = "sigmode",
                 type = "int",
