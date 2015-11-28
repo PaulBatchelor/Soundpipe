@@ -1,5 +1,8 @@
 typedef struct {
-    SPFLOAT bar;
+    SPFLOAT freq;
+    SPFLOAT min, max;
+    SPFLOAT val;
+    uint32_t counter, dur;
 } sp_randh;
 
 int sp_randh_create(sp_randh **p);

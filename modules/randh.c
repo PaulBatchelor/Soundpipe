@@ -1,11 +1,3 @@
-/*
- * Foo
- * 
- * This is a dummy module. It doesn't do much.
- * Feel free to use this as a boilerplate template.
- * 
- */
-
 #include <stdlib.h>
 #include "soundpipe.h"
 
@@ -23,14 +15,24 @@ int sp_randh_destroy(sp_randh **p)
 
 int sp_randh_init(sp_data *sp, sp_randh *p)
 {
-    /* Initalize variables here. */
-    p->bar = 123;
+    p->counter = 0;
+    p->freq = 10;
+    p->dur = (sp->sr / p->freq);
+    p->min = 0;
+    p->max = 1;
+    p->val = 0;
     return SP_OK;
 }
 
 int sp_randh_compute(sp_data *sp, sp_randh *p, SPFLOAT *in, SPFLOAT *out)
 {
-    /* Send the signal's input to the output */
-    *out = *in;
+    if(p->counter == 0) {
+        p->val = p->min + ((SPFLOAT) sp_rand(sp) / SP_RANDMAX) * (p->max - p->min);
+        p->dur =(sp->sr / p->freq);
+        *out = p->val;
+    } else {
+        *out = p->val;
+    }
+    p->counter = (p->counter + 1) % p->dur;
     return SP_OK;
 }
