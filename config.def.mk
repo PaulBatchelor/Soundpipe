@@ -1,5 +1,8 @@
 # Modules that don't require external libraries go here
 MODULES= \
+base \
+ftbl \
+tevent \
 abs \
 add \
 allpass \
@@ -7,8 +10,8 @@ atone \
 autowah \
 bal \
 bar \
-base \
 biquad \
+fold \
 bitcrush \
 butbp \
 butbr \
@@ -29,10 +32,8 @@ eqfil \
 event \
 expon \
 fofilt \
-fold \
 foo \
 fosc \
-ftbl \
 gbuzz \
 in \
 inverse \
@@ -79,9 +80,9 @@ tbvcf \
 tenv \
 tenv2 \
 tenvx \
-tevent \
 tin \
 tone \
+trand \
 triangle \
 tseq \
 vdelay \
