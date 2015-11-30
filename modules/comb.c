@@ -1,12 +1,12 @@
 /*
- * Allpass 
+ * comb
  * 
  * This code has been extracted from the Csound opcode "comb".
  * It has been modified to work as a Soundpipe module.
  * 
  * Original Author(s): Barry Vercoe, John ffitch
  * Year: 1991
- * Location: Opcodes/ugens6.c
+ * Location: OOps/ugens6.c
  *
  */
 
