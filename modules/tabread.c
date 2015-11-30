@@ -55,24 +55,23 @@ int sp_tabread_compute(sp_data *sp, sp_tabread *p, SPFLOAT *in, SPFLOAT *out)
     SPFLOAT mul = p->mul, tmp, frac;
     int32_t iwrap = (int32_t)p->wrap;
 
-    //for (n=koffset; n < nsmps; n++) {
-      SPFLOAT x1, x2;
-      tmp = (index + offset) * mul;
-      ndx = floor(tmp);
-      frac = tmp - ndx;
-      if (iwrap) {
+    SPFLOAT x1, x2;
+    tmp = (index + offset) * mul;
+    ndx = floor(tmp);
+    frac = tmp - ndx;
+    if (iwrap) {
         if (p->np2) {
-          while(ndx >= len) ndx -= len;
-          while(ndx < 0)  ndx += len;
+            while(ndx >= len) ndx -= len;
+            while(ndx < 0)  ndx += len;
         }
         else ndx &= mask;
-      } else {
+    } else {
         if (ndx >= len) ndx = len - 1;
         else if (ndx < 0) ndx = 0;
-      }
-      x1 = tbl[ndx];
-      x2 = tbl[ndx+1];
-      *out = x1 + (x2 - x1) * frac;
-    //}
+    }
+
+    x1 = tbl[ndx];
+    x2 = tbl[ndx+1];
+    *out = x1 + (x2 - x1) * frac;
     return SP_OK;
 }
