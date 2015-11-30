@@ -14,6 +14,8 @@
 #include <stdlib.h>
 #include "soundpipe.h"
 
+#define log001 (-(SPFLOAT)6.9078)    /* log(.001) */
+
 int sp_comb_create(sp_comb **p)
 {
     *p = malloc(sizeof(sp_comb));
@@ -42,18 +44,25 @@ int sp_comb_init(sp_data *sp, sp_comb *p, SPFLOAT looptime)
 
 int sp_comb_compute(sp_data *sp, sp_comb *p, SPFLOAT *in, SPFLOAT *out)
 {
-    SPFLOAT samp = 0;
+    SPFLOAT tmp = 0;
     SPFLOAT coef = p->coef;
+    SPFLOAT outsamp = 0;
 
     if(p->prvt != p->revtime) {
         p->prvt = p->revtime;
-        coef = p->coef = exp(-6.9078 * p->looptime / p->prvt);
+        SPFLOAT exp_arg = (SPFLOAT) (log001 * p->looptime / p->prvt);
+        if(exp_arg < -36.8413615) {
+            coef = p->coef = 0;
+        } else {
+            coef = p->coef = exp(exp_arg);
+        }
     }
-    sp_auxdata_getbuf(&p->aux, p->bufpos, &samp);
-    *out = samp;
-    samp *= coef;
-    samp += *in;
-    sp_auxdata_setbuf(&p->aux, p->bufpos, &samp);
+    sp_auxdata_getbuf(&p->aux, p->bufpos, &outsamp);
+    *out = outsamp;
+    tmp = outsamp;
+    tmp *= coef;
+    tmp += *in;
+    sp_auxdata_setbuf(&p->aux, p->bufpos, &tmp);
 
     p->bufpos++;
     p->bufpos %= p->bufsize; 

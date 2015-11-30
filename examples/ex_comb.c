@@ -2,19 +2,15 @@
 
 typedef struct {
     sp_comb *comb;
-    sp_tenv *env;
-    sp_noise *nz;
+    sp_diskin *disk;
 } UserData;
 
 void process(sp_data *sp, void *udata) {
     UserData *ud = udata;
-    SPFLOAT tick = 0, env = 0, noise = 0, comb = 0;
-
-    tick = (sp->pos == 0) ? 1 : 0;
-    sp_tenv_compute(sp, ud->env, &tick, &env);
-    sp_noise_compute(sp, ud->nz, NULL, &noise);
-    noise *= env * 0.5;
-    sp_comb_compute(sp, ud->comb, &noise, &comb);
+    SPFLOAT comb = 0, disk = 0;
+    sp_diskin_compute(sp, ud->disk, NULL, &disk);
+    disk *= 0.5;
+    sp_comb_compute(sp, ud->comb, &disk, &comb);
 
     sp->out[0] = comb;
 }
@@ -27,24 +23,17 @@ int main()
     sp_create(&sp);
 
     sp_comb_create(&ud.comb);
-    sp_tenv_create(&ud.env);
-    sp_noise_create(&ud.nz);
+
+    sp_diskin_create(&ud.disk);
 
     sp_comb_init(sp, ud.comb, 0.01);
-    sp_tenv_init(sp, ud.env);
-    ud.env->atk = 0.001;
-    ud.env->hold = 0.00;
-    ud.env->rel =  0.1;
-
-    sp_noise_init(sp, ud.nz);
-
+    sp_diskin_init(sp, ud.disk, "oneart.wav");
+    
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);
 
-    sp_noise_destroy(&ud.nz);
-    sp_tenv_destroy(&ud.env);
     sp_comb_destroy(&ud.comb);
-
+    sp_diskin_destroy(&ud.disk);
     sp_destroy(&sp);
     return 0;
 }
