@@ -32,7 +32,7 @@ int sp_comb_init(sp_data *sp, sp_comb *p, SPFLOAT looptime)
 {
     p->revtime = 3.5;
     p->looptime = looptime;
-    p->bufsize = 0.5 + looptime * sp->sr;
+    p->bufsize = (uint32_t) (0.5 + looptime * sp->sr);
     sp_auxdata_alloc(&p->aux, p->bufsize * sizeof(SPFLOAT));
     p->prvt = 0.0;
     p->coef = 0.0;
