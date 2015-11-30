@@ -15,37 +15,51 @@ sptbl["tabread"] = {
     params = {
         mandatory = {
             {
-                name = "bar",
+                name = "ft",
                 type = "sp_ftbl *",
                 description = "A properly allocated table (using a function like sp_gen_file).",
                 default = "N/A"
-            },
+            }
         },
 
         optional = {
             {
-                name = "speed",
+                name = "index",
                 type = "SPFLOAT",
-                description ="Playback speed. 1.0 = normal. 2.0 = doublespeed, 0.5 = halfspeed, etc...",
+                description ="index position, either scaled or unscaled with mode parameter",
+                default = 0
+            },
+            {
+                name = "mode",
+                type = "SPFLOAT",
+                description ="1 = scaled index, 0 = unscaled index",
                 default = 1.0
             },
+            {
+                name = "offset",
+                type = "SPFLOAT",
+                description ="Offset from beginning of ftable. If the mode is scaled, then it is in range 0-1, other wise it is the index position.",
+                default = 1.0
+            },
+            {
+                name = "wrap",
+                type = "SPFLOAT",
+                description ="Enable wraparound. 1 = on; 0 = 0ff.",
+                default = 1.0
+            }
         }
     },
 
     modtype = "module",
 
-    description = [[Table reader
-
-    Read through a table at audio-rate with varispeed. No interpolation is implemented yet, so this works very quickly.]],
+    description = [[Table 
+        Read through an sp_ftbl with linear interpolation.
+    ]],
 
     ninputs = 0,
     noutputs = 1,
 
     inputs = {
-        {
-            name = "dummy",
-            description = "This doesn't do anything. Can be set to NULL."
-        },
     },
 
     outputs = {
