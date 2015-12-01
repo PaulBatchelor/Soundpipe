@@ -29,7 +29,6 @@ drip \
 dtrig \
 dust \
 eqfil \
-event \
 expon \
 fofilt \
 foo \
