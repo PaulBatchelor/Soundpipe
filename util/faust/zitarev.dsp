@@ -6,32 +6,27 @@ with {
 
   fsmax = 48000.0;  // highest sampling rate that will be used
 
-  fdn_group(x) = hgroup(
-    "[0] Zita_Rev1 [tooltip: ~ ZITA REV1 FEEDBACK DELAY NETWORK (FDN) & SCHROEDER ALLPASS-COMB REVERBERATOR (8x8). See Faust's effect.lib for documentation and references]", x);
 
-  in_group(x) = fdn_group(hgroup("[1] Input", x));
-
-  rdel = in_group(hslider("[1] In Delay [unit:ms] [style:knob]
+  rdel = hslider("[00] In Delay [unit:ms] [style:knob]
                   [tooltip: Delay in ms before reverberation begins]",
-                  60,20,100,1));
+                  60,10,100,1);
 
-  freq_group(x) = fdn_group(hgroup("[2] Decay Times in Bands (see tooltips)", x));
 
-  f1 = freq_group(hslider("[1] LF X [unit:Hz] [style:knob] [scale:log]
+  f1 = hslider("[01] LF X [unit:Hz] [style:knob] [scale:log]
        [tooltip: Crossover frequency (Hz) separating low and middle frequencies]",
-       200, 50, 1000, 1));
+       200, 50, 1000, 1);
 
-  t60dc = freq_group(hslider("[2] Low RT60 [unit:s] [style:knob] [scale:log]
+  t60dc = hslider("[02] Low RT60 [unit:s] [style:knob] [scale:log]
           [style:knob] [tooltip: T60 = time (in seconds) to decay 60dB in low-frequency band]",
-	  3, 1, 8, 0.1));
+	  3, 1, 8, 0.1);
 
-  t60m = freq_group(hslider("[3] Mid RT60 [unit:s] [style:knob] [scale:log]
+  t60m = hslider("[03] Mid RT60 [unit:s] [style:knob] [scale:log]
           [tooltip: T60 = time (in seconds) to decay 60dB in middle band]",
-	  2, 1, 8, 0.1));
+	  2, 1, 8, 0.1);
 
-  f2 = freq_group(hslider("[4] HF Damping [unit:Hz] [style:knob] [scale:log]
+  f2 = hslider("[04] HF Damping [unit:Hz] [style:knob] [scale:log]
        [tooltip: Frequency (Hz) at which the high-frequency T60 is half the middle-band's T60]",
-       6000, 1500, 0.49*fsmax, 1));
+       6000, 1500, 0.49*fsmax, 1);
 
   out_eq = pareq_stereo(eq1f,eq1l,eq1q) : pareq_stereo(eq2f,eq2l,eq2q);
 // Zolzer style peaking eq (not used in zita-rev1) (filter.lib):
@@ -44,49 +39,51 @@ with {
     g = db2linear(eql); // peak gain
   };
 
-  eq1_group(x) = fdn_group(hgroup("[3] RM Peaking Equalizer 1", x));
-
-  eq1f = eq1_group(hslider("[1] Eq1 Freq [unit:Hz] [style:knob] [scale:log]
+  eq1f = hslider("[05] Eq1 Freq [unit:Hz] [style:knob] [scale:log]
        [tooltip: Center-frequency of second-order Regalia-Mitra peaking equalizer section 1]",
-       315, 40, 2500, 1));
+       315, 40, 2500, 1);
 
-  eq1l = eq1_group(hslider("[2] Eq1 Level [unit:dB] [style:knob]
+  eq1l = hslider("[06] Eq1 Level [unit:dB] [style:knob]
        [tooltip: Peak level in dB of second-order Regalia-Mitra peaking equalizer section 1]",
-       0, -15, 15, 0.1));
+       0, -15, 15, 0.1);
 
-  eq1q = eq1_group(hslider("[3] Eq1 Q [style:knob]
+  eq1q = hslider("[07] Eq1 Q [style:knob]
        [tooltip: Q = centerFrequency/bandwidth of second-order peaking equalizer section 1]",
-       3, 0.1, 10, 0.1));
+       3, 0.1, 10, 0.1);
 
-  eq2_group(x) = fdn_group(hgroup("[4] RM Peaking Equalizer 2", x));
+  eq2_group(x) = hgroup("[08] RM Peaking Equalizer 2", x);
 
-  eq2f = eq2_group(hslider("[1] Eq2 Freq [unit:Hz] [style:knob] [scale:log]
+  eq2f = hslider("[09] Eq2 Freq [unit:Hz] [style:knob] [scale:log]
        [tooltip: Center-frequency of second-order Regalia-Mitra peaking equalizer section 2]",
-       1500, 160, 10000, 1));
+       1500, 160, 10000, 1);
 
-  eq2l = eq2_group(hslider("[2] Eq2 Level [unit:dB] [style:knob]
+  eq2l = hslider("[10] Eq2 Level [unit:dB] [style:knob]
        [tooltip: Peak level in dB of second-order Regalia-Mitra peaking equalizer section 2]",
-       0, -15, 15, 0.1));
+       0, -15, 15, 0.1);
 
-  eq2q = eq2_group(hslider("[3] Eq2 Q [style:knob]
+  eq2q = hslider("[11] Eq2 Q [style:knob]
        [tooltip: Q = centerFrequency/bandwidth of second-order peaking equalizer section 2]",
-       3, 0.1, 10, 0.1));
+       3, 0.1, 10, 0.1);
 
-  out_group(x)  = fdn_group(hgroup("[5] Output", x));
+  out_group(x)  = hgroup("[12] Output", x);
 
+  //dry_wet(x,y) = *(wet) + dry*x, *(wet) + dry*y with {
+  //  wet = 0.5*(drywet+1.0);
+  //  dry = 1.0-wet;
+  //};
   dry_wet(x,y) = *(wet) + dry*x, *(wet) + dry*y with {
-    wet = 0.5*(drywet+1.0);
+    wet = drywet;
     dry = 1.0-wet;
   };
 
-  drywet = out_group(hslider("[1] Dry/Wet Mix [style:knob]
-       [tooltip: -1 = dry, 1 = wet]",
-       0, -1.0, 1.0, 0.01)) : smooth(0.999);
+  drywet = hslider("[13] Dry/Wet Mix [style:knob]
+       [tooltip: 0 = dry, 1 = wet]",
+       1, 0.0, 1.0, 0.001) : smooth(0.999);
 
   out_level = *(gain),*(gain);
 
-  gain = out_group(hslider("[2] Level [unit:dB] [style:knob]
-    [tooltip: Output scale factor]", -20, -70, 40, 0.1))
+  gain = hslider("[14] Level [unit:dB] [style:knob]
+    [tooltip: Output scale factor]", -20, -70, 40, 0.1)
     : db2linear : smooth(0.999);
 
 };

@@ -63,6 +63,7 @@ int sp_comb_compute(sp_data *sp, sp_comb *p, SPFLOAT *in, SPFLOAT *out)
     tmp *= coef;
     tmp += *in;
     sp_auxdata_setbuf(&p->aux, p->bufpos, &tmp);
+    
 
     p->bufpos++;
     p->bufpos %= p->bufsize; 
