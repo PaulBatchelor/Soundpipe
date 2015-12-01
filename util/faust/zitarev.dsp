@@ -51,7 +51,7 @@ with {
        [tooltip: Q = centerFrequency/bandwidth of second-order peaking equalizer section 1]",
        3, 0.1, 10, 0.1);
 
-  eq2_group(x) = hgroup("[08] RM Peaking Equalizer 2", x);
+  //eq2_group(x) = hgroup("[08] RM Peaking Equalizer 2", x);
 
   eq2f = hslider("[09] Eq2 Freq [unit:Hz] [style:knob] [scale:log]
        [tooltip: Center-frequency of second-order Regalia-Mitra peaking equalizer section 2]",
