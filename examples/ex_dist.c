@@ -8,10 +8,10 @@ typedef struct {
     sp_ftbl *ft;
     sp_dist *ds;
     sp_osc *lfo;
-} udata;
+} UserData;
 
 void process(sp_data *sp, void *ud) {
-    udata *udp = ud;
+    UserData *udp = ud;
     SPFLOAT osc = 0, lfo = 0;
     sp_osc_compute(sp, udp->lfo, NULL, &lfo);
     lfo = 7 * (0.5 * (lfo + 1));
@@ -22,7 +22,7 @@ void process(sp_data *sp, void *ud) {
 
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     sp_data *sp;
     sp_create(&sp);
     sp_ftbl_create(sp, &ud.ft, 2048);

@@ -6,10 +6,10 @@ typedef struct {
    sp_osc *osc;
    sp_clip *clp;
    sp_moogladder *filt;
-} udata;
+} UserData;
 
 void write_clip(sp_data *sp, void *ud) {
-    udata *udp = ud;
+    UserData *udp = ud;
     SPFLOAT out, osc, filt;
 
     if(sp->pos < (44100 * 2)) {
@@ -34,7 +34,7 @@ void write_clip(sp_data *sp, void *ud) {
 }
 
 int main() {
-    udata ud;
+    UserData ud;
     sp_data *sp;
     sp_create(&sp);
     sp_clip_create(&ud.clp);

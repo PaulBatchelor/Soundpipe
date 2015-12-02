@@ -7,10 +7,10 @@ typedef struct {
     sp_osc *osc, *lfo;
     sp_ftbl *ft, *sine;
     sp_vdelay *del;
-} udata;
+} UserData;
 
 void process(sp_data *sp, void *data) {
-    udata *ud = data;
+    UserData *ud = data;
     SPFLOAT freq = 0.0, del = 0.0, osc = 0.0;
     sp_osc_compute(sp, ud->lfo, NULL, &freq);
     freq = 1.0 + (freq * 0.5);
@@ -22,7 +22,7 @@ void process(sp_data *sp, void *data) {
 }
 
 int main() {
-    udata ud;
+    UserData ud;
     sp_data *sp;
     sp_create(&sp);
 

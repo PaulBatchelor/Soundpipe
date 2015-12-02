@@ -5,16 +5,16 @@
 
 typedef struct {
     sp_noise *ns;
-} udata;
+} UserData;
 
 void write_noise(sp_data *data, void *ud) {
-    udata *udata = ud;
+    UserData *udata = ud;
     SPFLOAT in = 0;
     sp_noise_compute(data, udata->ns, NULL, &data->out[0]);
 }
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     sp_data *sp;
     sp_create(&sp);
     sp_noise_create(&ud.ns);

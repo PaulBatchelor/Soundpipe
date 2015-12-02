@@ -7,10 +7,10 @@ typedef struct {
     sp_noise *ns;
     sp_butbp *butbp;
     int counter;
-} udata;
+} UserData;
 
 void write_noise(sp_data *data, void *ud) {
-    udata *udata = ud;
+    UserData *udata = ud;
     SPFLOAT in = 0;
     SPFLOAT out = 0;
     if(udata->counter == 0) {
@@ -22,7 +22,7 @@ void write_noise(sp_data *data, void *ud) {
 }
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     ud.counter = 0;
     sp_data *sp;
     sp_create(&sp);

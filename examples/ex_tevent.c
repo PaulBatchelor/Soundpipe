@@ -9,10 +9,10 @@ typedef struct {
     sp_tevent *te;
     int counter;
     SPFLOAT freq;
-} udata;
+} UserData;
 
 void write_osc(sp_data *data, void *ud) {
-    udata *udp = ud;
+    UserData *udp = ud;
     SPFLOAT trig = 0;
     if(udp->counter == 0){
         trig = 1.0;
@@ -34,7 +34,7 @@ void freq_compute(void *ud, SPFLOAT *out){
 
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     SPFLOAT *freqp = &ud.freq;
     ud.counter = 0;
     ud.freq = 400;

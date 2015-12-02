@@ -7,10 +7,10 @@ typedef struct {
     sp_osc *osc;
     sp_ftbl *ft; 
     int counter;
-} udata;
+} UserData;
 
 void write_osc(sp_data *data, void *ud) {
-    udata *udp = ud;
+    UserData *udp = ud;
     SPFLOAT osc = 0;
     data->k = !(data->pos % 4);
     if(udp->counter == 0){
@@ -23,7 +23,7 @@ void write_osc(sp_data *data, void *ud) {
 
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     ud.counter = 0;
     sp_data *sp;
     sp_create(&sp);

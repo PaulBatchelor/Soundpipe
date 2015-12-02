@@ -7,10 +7,10 @@ typedef struct {
     sp_noise *ns;
     sp_revsc *rev;
     int counter;
-} udata;
+} UserData;
 
 void process(sp_data *data, void *ud) {
-    udata *udata = ud;
+    UserData *udata = ud;
     SPFLOAT in = 0;
     SPFLOAT out = 0;
     SPFLOAT foo = 0;
@@ -26,7 +26,7 @@ void process(sp_data *data, void *ud) {
 
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     ud.counter = 0;
     sp_data *sp;
     sp_create(&sp);

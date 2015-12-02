@@ -7,10 +7,10 @@ typedef struct {
     sp_osc *osc1, *osc2;
     sp_ftbl *ft;
     int counter1, counter2;
-} udata;
+} UserData;
 
 void write_osc(sp_data *data, void *ud) {
-    udata *udp = ud;
+    UserData *udp = ud;
     if(udp->counter1 == 0){
         udp->osc1->freq = 500 + rand() % 2000;
     }
@@ -25,7 +25,7 @@ void write_osc(sp_data *data, void *ud) {
 
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     ud.counter1 = 0;
     ud.counter2 = 0;
     sp_data *sp;

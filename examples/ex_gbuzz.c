@@ -7,16 +7,16 @@ typedef struct {
     sp_gbuzz *buzz;
     sp_ftbl *ft; 
     int counter;
-} udata;
+} UserData;
 
 void process(sp_data *sp, void *ud) {
-    udata *udp = ud;
+    UserData *udp = ud;
     sp_gbuzz_compute(sp, udp->buzz, NULL, &sp->out[0]);
 }
 
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     sp_data *sp;
     sp_create(&sp);
     sp_ftbl_create(sp, &ud.ft, 2048);
