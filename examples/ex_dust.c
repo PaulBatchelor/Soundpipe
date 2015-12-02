@@ -7,10 +7,10 @@ typedef struct {
     sp_dust *dst;
 } UserData;
 
-void write_dust(sp_data *data, void *ud) {
-    UserData *udata = ud;
+void write_dust(sp_data *sp, void *udata) {
+    UserData *ud = udata;
     SPFLOAT in = 0;
-    sp_dust_compute(data, udata->dst, NULL, &data->out[0]);
+    sp_dust_compute(sp, ud->dst, NULL, &sp->out[0]);
 }
 int main() {
     srand(time(NULL));

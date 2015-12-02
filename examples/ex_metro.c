@@ -12,14 +12,14 @@ typedef struct {
     SPFLOAT freq;
 } UserData;
 
-void write_osc(sp_data *data, void *ud) {
-    UserData *udp = ud;
+void write_osc(sp_data *sp, void *udata) {
+    UserData *ud = udata;
     SPFLOAT osc = 0, trig = 0, tenv = 0;
-    sp_randi_compute(data, udp->rand, NULL, &udp->met->freq);
-    sp_metro_compute(data, udp->met, NULL, &trig);
-    sp_tenv_compute(data, udp->tenv, &trig, &tenv);
-    sp_osc_compute(data, udp->osc, NULL, &osc);
-    data->out[0] = tenv * osc;
+    sp_randi_compute(sp, ud->rand, NULL, &ud->met->freq);
+    sp_metro_compute(sp, ud->met, NULL, &trig);
+    sp_tenv_compute(sp, ud->tenv, &trig, &tenv);
+    sp_osc_compute(sp, ud->osc, NULL, &osc);
+    sp->out[0] = tenv * osc;
 }
 
 int main() {

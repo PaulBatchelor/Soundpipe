@@ -8,13 +8,13 @@ typedef struct {
     int counter;
 } UserData;
 
-void process(sp_data *data, void *ud) {
-    UserData *udp = ud;
-    if(udp->counter == 0){
-        *udp->square->freq = 500 + rand() % 2000;
+void process(sp_data *sp, void *udata) {
+    UserData *ud = udata;
+    if(ud->counter == 0){
+        *ud->square->freq = 500 + rand() % 2000;
     }
-    sp_square_compute(data, udp->square, NULL, &data->out[0]);
-    udp->counter = (udp->counter + 1) % 4410;
+    sp_square_compute(sp, ud->square, NULL, &sp->out[0]);
+    ud->counter = (ud->counter + 1) % 4410;
 }
 
 int main() {

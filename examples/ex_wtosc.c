@@ -9,13 +9,13 @@ typedef struct {
     int counter;
 } UserData;
 
-void write_osc(sp_data *data, void *ud) {
-    UserData *udp = ud;
+void write_osc(sp_data *sp, void *udata) {
+    UserData *ud = udata;
     //if(udp->counter == 0){
     //    udp->osc->freq = 500 + rand() % 2000;
     //}
-    sp_osc_compute(data, udp->osc, NULL, &data->out[0]);
-    udp->counter = (udp->counter + 1) % 4410;
+    sp_osc_compute(sp, ud->osc, NULL, &sp->out[0]);
+    ud->counter = (ud->counter + 1) % 4410;
 }
 
 int main() {

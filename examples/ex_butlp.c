@@ -9,16 +9,16 @@ typedef struct {
     int counter;
 } UserData;
 
-void write_noise(sp_data *data, void *ud) {
-    UserData *udata = ud;
+void write_noise(sp_data *sp, void *udata) {
+    UserData *ud = udata;
     SPFLOAT in = 0;
     SPFLOAT out = 0;
-    if(udata->counter == 0) {
-        udata->butlp->freq= 500 + rand() % 4000;
+    if(ud->counter == 0) {
+        ud->butlp->freq= 500 + rand() % 4000;
     }
-    sp_noise_compute(data, udata->ns, NULL, &in);
-    sp_butlp_compute(data, udata->butlp, &in, &data->out[0]); 
-    udata->counter = (udata->counter + 1) % 5000;
+    sp_noise_compute(sp, ud->ns, NULL, &in);
+    sp_butlp_compute(sp, ud->butlp, &in, &sp->out[0]); 
+    ud->counter = (ud->counter + 1) % 5000;
 }
 int main() {
     srand(time(NULL));

@@ -11,15 +11,15 @@ typedef struct {
     SPFLOAT freq;
 } UserData;
 
-void write_osc(sp_data *data, void *ud) {
-    UserData *udp = ud;
+void write_osc(sp_data *sp, void *udata) {
+    UserData *ud = udata;
     SPFLOAT trig = 0;
-    if(udp->counter == 0){
+    if(ud->counter == 0){
         trig = 1.0;
     }
-    sp_tevent_compute(data, udp->te, &trig, &udp->osc->freq);
-    sp_osc_compute(data, udp->osc, NULL, &data->out[0]);
-    udp->counter = (udp->counter + 1) % 4410;
+    sp_tevent_compute(sp, ud->te, &trig, &ud->osc->freq);
+    sp_osc_compute(sp, ud->osc, NULL, &sp->out[0]);
+    ud->counter = (ud->counter + 1) % 4410;
 }
 
 void freq_reinit(void *ud){

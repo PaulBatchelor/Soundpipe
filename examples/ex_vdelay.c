@@ -9,8 +9,8 @@ typedef struct {
     sp_vdelay *del;
 } UserData;
 
-void process(sp_data *sp, void *data) {
-    UserData *ud = data;
+void process(sp_data *sp, void *udata) {
+    UserData *ud = udata;
     SPFLOAT freq = 0.0, del = 0.0, osc = 0.0;
     sp_osc_compute(sp, ud->lfo, NULL, &freq);
     freq = 1.0 + (freq * 0.5);

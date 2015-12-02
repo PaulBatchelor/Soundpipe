@@ -9,9 +9,9 @@ typedef struct {
     int counter;
 } UserData;
 
-void process(sp_data *sp, void *ud) {
-    UserData *udp = ud;
-    sp_gbuzz_compute(sp, udp->buzz, NULL, &sp->out[0]);
+void process(sp_data *sp, void *udata) {
+    UserData *ud = udata;
+    sp_gbuzz_compute(sp, ud->buzz, NULL, &sp->out[0]);
 }
 
 int main() {

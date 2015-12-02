@@ -9,18 +9,18 @@ typedef struct {
     int counter1, counter2;
 } UserData;
 
-void write_osc(sp_data *data, void *ud) {
-    UserData *udp = ud;
-    if(udp->counter1 == 0){
-        udp->osc1->freq = 500 + rand() % 2000;
+void write_osc(sp_data *sp, void *udata) {
+    UserData *ud = udata;
+    if(ud->counter1 == 0){
+        ud->osc1->freq = 500 + rand() % 2000;
     }
-    if(udp->counter2 == 0){
-        udp->osc2->freq = 500 + rand() % 2000;
+    if(ud->counter2 == 0){
+        ud->osc2->freq = 500 + rand() % 2000;
     }
-    sp_osc_compute(data, udp->osc1, NULL, &data->out[0]);
-    sp_osc_compute(data, udp->osc2, NULL, &data->out[1]);
-    udp->counter1 = (udp->counter1 + 1) % 4410;
-    udp->counter2 = (udp->counter2 + 1) % 8000;
+    sp_osc_compute(sp, ud->osc1, NULL, &sp->out[0]);
+    sp_osc_compute(sp, ud->osc2, NULL, &sp->out[1]);
+    ud->counter1 = (ud->counter1 + 1) % 4410;
+    ud->counter2 = (ud->counter2 + 1) % 8000;
 }
 
 int main() {

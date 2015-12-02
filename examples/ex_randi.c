@@ -9,12 +9,12 @@ typedef struct {
     sp_randi *rnd;
 } UserData;
 
-void write_osc(sp_data *data, void *ud) {
-    UserData *udp = ud;
+void write_osc(sp_data *sp, void *udata) {
+    UserData *ud = udata;
     SPFLOAT freq;
-    sp_randi_compute(data, udp->rnd, NULL, &freq);
-    udp->osc->freq = freq;
-    sp_osc_compute(data, udp->osc, NULL, &data->out[0]);
+    sp_randi_compute(sp, ud->rnd, NULL, &freq);
+    ud->osc->freq = freq;
+    sp_osc_compute(sp, ud->osc, NULL, &sp->out[0]);
 }
 
 int main() {
