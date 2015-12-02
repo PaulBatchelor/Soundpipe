@@ -9,10 +9,10 @@ typedef struct {
     sp_moogladder *filt;
     sp_bal *bal;
     sp_tenv *env;
-} udata;
+} UserData;
 
 void process(sp_data *sp, void *ud) {
-    udata *udp = ud;
+    UserData *udp = ud;
     int i;
     SPFLOAT out = 0, osc = 0, filt = 0, bal = 0, env = 0, tick;
     for(i = 0; i < 3; i++) {
@@ -30,7 +30,7 @@ void process(sp_data *sp, void *ud) {
 int main() {
     srand(time(NULL));
     int i;
-    udata ud;
+    UserData ud;
     sp_data *sp;
     sp_create(&sp);
     sp_ftbl_create(sp, &ud.ft, 4096);

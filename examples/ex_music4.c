@@ -8,7 +8,7 @@ typedef struct{
     sp_tenv *tenv[8];
     sp_revsc *rev;
     sp_ftbl *ft;
-}udata;
+}UserData;
 
 void make_note(sp_data *sp, sp_tenv *tenv, sp_posc3 *posc3, unsigned long counter, unsigned long clock, SPFLOAT *output)
 {
@@ -21,7 +21,7 @@ void make_note(sp_data *sp, sp_tenv *tenv, sp_posc3 *posc3, unsigned long counte
 }
 void write_music(sp_data *sp, void *ud)
 {
-    udata *udp = ud;
+    UserData *udp = ud;
     SPFLOAT out[8];
     SPFLOAT mix, verb, foo;
     for(int i = 0; i < 8; i++) {
@@ -35,7 +35,7 @@ void write_music(sp_data *sp, void *ud)
 
 int main()
 {
-    udata ud;
+    UserData ud;
     sp_data *sp;
     sp_create(&sp);
     sp_ftbl_create(sp, &ud.ft, 4096);

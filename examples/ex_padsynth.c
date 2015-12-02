@@ -5,16 +5,16 @@ typedef struct user_data {
     sp_ftbl *ft, *amps;
     sp_osc *osc;
     SPFLOAT fc;
-} user_data;
+} UserData;
 
 void process(sp_data *sp, void *userdata) {
-    user_data *ud = userdata;
+    UserData *ud = userdata;
     //sp->out = ud->ft->tbl[sp->pos % ud->ft->size];
     sp_osc_compute(sp, ud->osc, NULL, &sp->out[0]);
 }
 
 int main() {
-    user_data ud;
+    UserData ud;
     int i;
     sp_data *sp;
     sp_create(&sp); sp_ftbl_create(sp, &ud.amps, 64);

@@ -10,10 +10,10 @@ typedef struct {
     sp_metro *met;
     sp_randi *rand;
     SPFLOAT freq;
-} udata;
+} UserData;
 
 void write_osc(sp_data *data, void *ud) {
-    udata *udp = ud;
+    UserData *udp = ud;
     SPFLOAT osc = 0, trig = 0, tenv = 0;
     sp_randi_compute(data, udp->rand, NULL, &udp->met->freq);
     sp_metro_compute(data, udp->met, NULL, &trig);
@@ -23,7 +23,7 @@ void write_osc(sp_data *data, void *ud) {
 }
 
 int main() {
-    udata ud;
+    UserData ud;
     SPFLOAT *freqp = &ud.freq;
     ud.freq = 400;
     sp_data *sp;

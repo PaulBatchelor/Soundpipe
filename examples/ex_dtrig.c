@@ -8,10 +8,10 @@ typedef struct {
     sp_ftbl *ft, *delta;
     sp_tenv *tenv;
     sp_dtrig *dt;
-} udata;
+} UserData;
 
 void write_osc(sp_data *data, void *ud) {
-    udata *udp = ud;
+    UserData *udp = ud;
     SPFLOAT env = 0;
     SPFLOAT osc = 0;
     SPFLOAT dry = 0;
@@ -30,7 +30,7 @@ void write_osc(sp_data *data, void *ud) {
 
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     uint32_t bufsize;
     sp_data *sp;
     sp_create(&sp);

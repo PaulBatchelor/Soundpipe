@@ -21,10 +21,10 @@ typedef struct {
     sp_revsc *rev;
     sp_rpt *rpt;
     samp_data snare, kick, hh;
-} user_data;
+} UserData;
 
 void process(sp_data *sp, void *udata) {
-    user_data *ud = udata;
+    UserData *ud = udata;
     SPFLOAT dry;
     SPFLOAT kick, snare, hh, clk, dblclk, bar, dtrig, count;
     SPFLOAT revin, revout, rthrow, rgate, rpt, rvs, rvs_switch, foo;
@@ -104,7 +104,7 @@ void samp_destroy(samp_data *sd){
 int main() {
     srand(time(NULL));
     sp_data *sp;
-    user_data ud;
+    UserData ud;
     sp_create(&sp);
 
     SPFLOAT tempo = 144;

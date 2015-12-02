@@ -6,10 +6,10 @@
 typedef struct {
     sp_noise *ns;
     sp_streson *stres;
-} udata;
+} UserData;
 
 void write_noise(sp_data *data, void *ud) {
-    udata *udata = ud;
+    UserData *udata = ud;
     SPFLOAT in = 0;
     SPFLOAT noise = 0;
     sp_noise_compute(data, udata->ns, NULL, &noise);
@@ -17,7 +17,7 @@ void write_noise(sp_data *data, void *ud) {
 }
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     sp_data *sp;
     sp_create(&sp);
     sp_streson_create(&ud.stres);

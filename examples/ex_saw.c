@@ -6,10 +6,10 @@
 typedef struct {
     sp_saw *saw;
     int counter;
-} udata;
+} UserData;
 
 void process(sp_data *data, void *ud) {
-    udata *udp = ud;
+    UserData *udp = ud;
     if(udp->counter == 0){
         *udp->saw->freq = 500 + rand() % 2000;
     }
@@ -19,7 +19,7 @@ void process(sp_data *data, void *ud) {
 
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     ud.counter = 0;
     sp_data *sp;
     sp_create(&sp);
