@@ -1,5 +1,5 @@
 typedef typedef struct {
-    char emptyStruct;
+    char empty;
 } sp_sub;
 
 int sp_sub_create(sp_sub **p);
