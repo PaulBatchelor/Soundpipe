@@ -1,4 +1,5 @@
-typedef struct {
+typedef typedef struct {
+    char emptyStruct;
 } sp_inverse;
 
 int sp_inverse_create(sp_inverse **p);
