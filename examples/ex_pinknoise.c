@@ -7,10 +7,10 @@ typedef struct {
     sp_pinknoise *ns;
 } UserData;
 
-void write_pinknoise(sp_data *data, void *ud) {
-    UserData *udata = ud;
+void write_pinknoise(sp_data *sp, void *udata) {
+    UserData *ud = udata;
     SPFLOAT in = 0;
-    sp_pinknoise_compute(data, udata->ns, NULL, &data->out[0]);
+    sp_pinknoise_compute(sp, ud->ns, NULL, &sp->out[0]);
 }
 
 int main() {

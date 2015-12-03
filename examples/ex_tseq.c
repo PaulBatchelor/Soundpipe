@@ -11,26 +11,26 @@ typedef struct {
     sp_tseq *seq;
 } UserData;
 
-void write_osc(sp_data *data, void *ud) {
-    UserData *udp = ud;
+void write_osc(sp_data *sp, void *udata) {
+    UserData *ud = udata;
     SPFLOAT env = 0;
     SPFLOAT osc = 0;
     SPFLOAT dry = 0;
     SPFLOAT trig;
     SPFLOAT dtrig = 0;
     SPFLOAT note = 0;
-    if(data->pos == 0){
+    if(sp->pos == 0){
         trig = 1.0;
     }else{
         trig = 0.0;
     }
-    sp_dtrig_compute(data, udp->dt, &trig, &dtrig);
-    sp_tseq_compute(data, udp->seq, &dtrig, &note);
-    udp->osc->freq = sp_midi2cps(note + 24);
+    sp_dtrig_compute(sp, ud->dt, &trig, &dtrig);
+    sp_tseq_compute(sp, ud->seq, &dtrig, &note);
+    ud->osc->freq = sp_midi2cps(note + 24);
     env = 1.0;
-    sp_tenv_compute(data, udp->tenv, &dtrig, &env);
-    sp_osc_compute(data, udp->osc, NULL, &osc);
-    data->out[0] = osc * env;
+    sp_tenv_compute(sp, ud->tenv, &dtrig, &env);
+    sp_osc_compute(sp, ud->osc, NULL, &osc);
+    sp->out[0] = osc * env;
 }
 
 int main() {

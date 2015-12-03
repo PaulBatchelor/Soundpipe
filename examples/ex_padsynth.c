@@ -7,8 +7,8 @@ typedef struct user_data {
     SPFLOAT fc;
 } UserData;
 
-void process(sp_data *sp, void *userdata) {
-    UserData *ud = userdata;
+void process(sp_data *sp, void *udata) {
+    UserData *ud = udata;
     //sp->out = ud->ft->tbl[sp->pos % ud->ft->size];
     sp_osc_compute(sp, ud->osc, NULL, &sp->out[0]);
 }
