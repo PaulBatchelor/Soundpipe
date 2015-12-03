@@ -1,5 +1,5 @@
 typedef typedef struct {
-    char empty;
+    char empty; /* Dummy variable to prevent compilation warnings about C/C++ empty structs */
 } sp_mul;
 
 int sp_mul_create(sp_mul **p);
