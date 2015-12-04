@@ -1,5 +1,5 @@
 typedef typedef struct {
-    char empty; /* Dummy variable to prevent compilation warnings about C/C++ empty structs */
+    char empty; /* To prevent warnings about C/C++ empty structs */
 } sp_inverse;
 
 int sp_inverse_create(sp_inverse **p);
