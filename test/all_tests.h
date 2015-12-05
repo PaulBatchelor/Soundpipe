@@ -58,4 +58,5 @@ TEST(t_gen_xline, "gen_xline", "5c6050443a98326723e1809b67b73a9f")
 TEST(t_gen_line, "gen_line", "9eb3fdbed1598e756ed3b2ce7df03889")
 TEST(t_expon, "expon", "4e7c83be557f938e282c854ba04d4427")
 TEST(t_randh, "randh", "2f47093ad75fa1c882a30e8dec8ab220")
+TEST(t_trand, "trand", "9b1be87c6b579fde2341515f4d82c008")
 
