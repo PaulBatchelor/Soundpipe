@@ -70,4 +70,9 @@ of a variable to indicate audio, control, or init-rate variables. Ditch the a's 
 i's can be allowed.
 
 # Tests
+
 If you are adding a test for a module you wrote, make sure the test passes before making a pull-request. 
+
+#Algorithm Explanations
+
+DSP code, especially when written in C, can be difficult to read. Algorithm explanations should be kept in modules/data, and not in the source code itself. Make sure any explanations are clear and concise.  
