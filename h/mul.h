@@ -1,4 +1,4 @@
-typedef typedef struct {
+typedef struct {
     char empty; /* Dummy variable to prevent compilation warnings about C/C++ empty structs */
 } sp_mul;
 

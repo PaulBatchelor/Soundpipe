@@ -1,4 +1,4 @@
-typedef typedef struct {
+typedef struct {
     char empty; /* To prevent warnings about C/C++ empty structs */
 } sp_inverse;
 
