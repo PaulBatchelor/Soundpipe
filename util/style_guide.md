@@ -6,7 +6,7 @@ to these guidelines.
 
 # C Code Conventions
 
-The C code in Soundpipe follows most of the [C style guidelines](http://www.suckless.org/style) found on the
+The C code in Soundpipe follows most of the [C style guidelines](http://suckless.org/coding_style) found on the
 suckless.org website with few exceptions. If you're ever in doubt about something not specified here, use the suckless style guide, or the [Linux Kernel style guide](https://www.kernel.org/doc/Documentation/CodingStyle).
 
 Avoid using macros whenever possible. 
@@ -43,7 +43,7 @@ There are several ported Csound opcodes you can use as reference (metro is a goo
 # Naming
 
 Choose good names for your variables so your code is clear. In C, a good variable name
-has the right balance of terseness and verboseness for maximum clarity and grokking. As an example, abbreviating "frquency" to "freq" is acceptable, but abbreviating "filter cutoff" to "fc" is not. 
+has the right balance of terseness and verboseness for maximum clarity and grokking. As an example, abbreviating "frequency" to "freq" is acceptable, but abbreviating "filter cutoff" to "fc" is not. 
 
 Variables should be one word, but if they must use more than one word, 
 use under\_score\_variables and not camelCase.
