@@ -9,7 +9,7 @@ typedef struct {
     sp_ftbl *ft;
 } UserData;
 
-int t_scale(sp_test *tst, sp_data *sp, const char *hash) 
+int t_scale(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -24,10 +24,8 @@ int t_scale(sp_test *tst, sp_data *sp, const char *hash)
     sp_ftbl_create(sp, &ud.ft, 2048);
 
     sp_scale_init(sp, ud.scale);
-    ud.scale->inmin = 0;
-    ud.scale->inmax = 2;
-    ud.scale->outmin = 0;
-    ud.scale->outmax = 880;
+    ud.scale->min = 0;
+    ud.scale->max = 880;
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
     ud.osc->amp = 0.1;

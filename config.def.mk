@@ -3,8 +3,6 @@ MODULES= \
 base \
 ftbl \
 tevent \
-abs \
-add \
 allpass \
 atone \
 autowah \
@@ -23,7 +21,6 @@ count \
 dcblock \
 delay \
 dist \
-div \
 dmetro \
 drip \
 dtrig \
@@ -35,7 +32,6 @@ foo \
 fosc \
 gbuzz \
 in \
-inverse \
 jcrev \
 jitter \
 line \
@@ -45,7 +41,6 @@ metro \
 mincer \
 mode \
 moogladder \
-mul \
 noise \
 osc \
 pan2 \
@@ -72,7 +67,6 @@ saw \
 scale \
 square \
 streson \
-sub \
 switch \
 tabread \
 tbvcf \

@@ -1,5 +1,5 @@
 typedef struct {
-    SPFLOAT inmin, inmax, outmin, outmax;
+    SPFLOAT min, max;
 } sp_scale;
 
 int sp_scale_create(sp_scale **p);
