@@ -11,7 +11,6 @@ void process(sp_data *sp, void *udata)
 {
     UserData *ud = udata;
     SPFLOAT in = 0, out = 0;
-
     
     if(ud->counter == 0){
         ud->osc->freq = 500 + sp_rand(sp) % 2000;

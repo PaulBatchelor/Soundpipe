@@ -5,17 +5,17 @@
 
 typedef struct {
     sp_pinknoise *ns;
-} udata;
+} UserData;
 
-void write_pinknoise(sp_data *data, void *ud) {
-    udata *udata = ud;
+void write_pinknoise(sp_data *sp, void *udata) {
+    UserData *ud = udata;
     SPFLOAT in = 0;
-    sp_pinknoise_compute(data, udata->ns, NULL, &data->out[0]);
+    sp_pinknoise_compute(sp, ud->ns, NULL, &sp->out[0]);
 }
 
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     sp_data *sp;
     sp_create(&sp);
     sp_pinknoise_create(&ud.ns);

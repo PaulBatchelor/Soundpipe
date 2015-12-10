@@ -1,16 +1,94 @@
-files = ex_buthp ex_butlp ex_moogladder ex_noise ex_revsc ex_tone ex_osc \
-	ex_wtosc ex_posc3 ex_randi ex_music ex_tevent ex_metro ex_tenv \
-	ex_maygate ex_fofilt ex_biquad ex_tbvcf ex_mode ex_reverse ex_dtrig \
-	ex_tseq ex_rpt ex_dust ex_port ex_vdelay ex_gen_sinesum ex_music2 \
-	ex_streson ex_multichan ex_gen_line ex_bal ex_drip ex_clip ex_butbp \
-	ex_music3 ex_fosc ex_dist ex_gbuzz ex_jitter ex_lpf18 ex_music4 \
-	ex_gen_xline ex_gen_gauss ex_allpass ex_comb ex_gen_vals ex_phasor ex_tabread \
-	ex_music5 ex_eqfil ex_foo ex_butbr ex_in ex_diskin ex_nsmp ex_prop \
-	ex_samphold ex_delay ex_switch ex_random ex_dmetro ex_pluck ex_atone ex_tin \
-	ex_scale ex_pan2 ex_jcrev ex_tenv2 ex_fold ex_bitcrush ex_inverse ex_mul \
-	ex_add ex_sub ex_div ex_abs ex_panst ex_bar ex_progress ex_pareq ex_mincer \
-	ex_padsynth ex_line ex_expon ex_zitarev ex_tenvx ex_saw ex_triangle ex_square \
-	ex_pinknoise ex_phaser ex_autowah
+files = \
+ex_allpass \
+ex_atone \
+ex_autowah \
+ex_bal \
+ex_bar \
+ex_biquad \
+ex_bitcrush \
+ex_butbp \
+ex_butbr \
+ex_buthp \
+ex_butlp \
+ex_clip \
+ex_comb \
+ex_delay \
+ex_diskin \
+ex_dist \
+ex_dmetro \
+ex_drip \
+ex_dtrig \
+ex_dust \
+ex_eqfil \
+ex_expon \
+ex_fofilt \
+ex_fold \
+ex_foo \
+ex_fosc \
+ex_gbuzz \
+ex_gen_gauss \
+ex_gen_line \
+ex_gen_sine \
+ex_gen_sinesum \
+ex_gen_vals \
+ex_gen_xline \
+ex_in \
+ex_jcrev \
+ex_jitter \
+ex_line \
+ex_lpf18 \
+ex_maygate \
+ex_metro \
+ex_mincer \
+ex_mode \
+ex_moogladder \
+ex_multichan \
+ex_music \
+ex_music2 \
+ex_music3 \
+ex_music4 \
+ex_music5 \
+ex_noise \
+ex_nsmp \
+ex_osc \
+ex_padsynth \
+ex_pan2 \
+ex_panst \
+ex_pareq \
+ex_phaser \
+ex_phasor \
+ex_pinknoise \
+ex_pluck \
+ex_port \
+ex_posc3 \
+ex_progress \
+ex_prop \
+ex_randh \
+ex_randi \
+ex_random \
+ex_reverse \
+ex_revsc \
+ex_rpt \
+ex_samphold \
+ex_saw \
+ex_scale \
+ex_square \
+ex_streson \
+ex_switch \
+ex_tabread \
+ex_tbvcf \
+ex_tenv \
+ex_tenv2 \
+ex_tenvx \
+ex_tevent \
+ex_tin \
+ex_tone \
+ex_trand \
+ex_triangle \
+ex_tseq \
+ex_vdelay \
+ex_wtosc \
+ex_zitarev
 
 # Jack Module
 #

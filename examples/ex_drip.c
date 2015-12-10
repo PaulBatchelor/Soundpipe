@@ -7,10 +7,10 @@ typedef struct {
     sp_drip *drip;
     sp_dust *trig;
     sp_revsc *rev;
-} udata;
+} UserData;
 
 void write_osc(sp_data *sp, void *ud) {
-    udata *udp = ud;
+    UserData *udp = ud;
     SPFLOAT trig, rev1, rev2, drip;
     sp_dust_compute(sp, udp->trig, NULL, &trig);
     sp_drip_compute(sp, udp->drip, &trig, &drip);
@@ -20,7 +20,7 @@ void write_osc(sp_data *sp, void *ud) {
 
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     sp_data *sp;
     sp_create(&sp);
     sp_revsc_create(&ud.rev);

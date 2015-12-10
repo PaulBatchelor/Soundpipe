@@ -9,10 +9,10 @@ typedef struct {
     sp_ftbl *sine, *nn;
     sp_tseq *seq;
     sp_port *prt;
-} udata;
+} UserData;
 
 void process(sp_data *sp, void *userdata) {
-    udata *ud = userdata;
+    UserData *ud = userdata;
     SPFLOAT osc, mt, nn, freq, pfreq;
     sp_metro_compute(sp, ud->mt, NULL, &mt);
     sp_tseq_compute(sp, ud->seq, &mt, &nn);
@@ -25,7 +25,7 @@ void process(sp_data *sp, void *userdata) {
 
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     sp_data *sp;
     sp_create(&sp);
 

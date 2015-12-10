@@ -6,20 +6,20 @@
 typedef struct {
     sp_triangle *triangle;
     int counter;
-} udata;
+} UserData;
 
-void process(sp_data *data, void *ud) {
-    udata *udp = ud;
-    if(udp->counter == 0){
-        *udp->triangle->freq = 500 + rand() % 2000;
+void process(sp_data *sp, void *udata) {
+    UserData *ud = udata;
+    if(ud->counter == 0){
+        *ud->triangle->freq = 500 + rand() % 2000;
     }
-    sp_triangle_compute(data, udp->triangle, NULL, &data->out[0]);
-    udp->counter = (udp->counter + 1) % 4410;
+    sp_triangle_compute(sp, ud->triangle, NULL, &sp->out[0]);
+    ud->counter = (ud->counter + 1) % 4410;
 }
 
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     ud.counter = 0;
     sp_data *sp;
     sp_create(&sp);

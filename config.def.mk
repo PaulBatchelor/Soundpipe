@@ -1,12 +1,85 @@
 # Modules that don't require external libraries go here
-MODULES=base event noise tone moogladder revsc ftbl osc posc3 randi \
-	dcblock tevent metro tenv maygate fofilt biquad tbvcf mode reverse \
-	dtrig rpt dust port vdelay count streson tseq bal drip clip fosc dist \
-	gbuzz rms jitter lpf18 randmt allpass comb phasor tabread \
-	eqfil foo in prop samphold delay switch dmetro random \
-	pluck atone tin scale pan2 jcrev tenv2 fold bitcrush inverse mul add sub \
-	div abs panst bar progress pareq butbr butbp buthp butlp mincer line expon \
-	zitarev tenvx saw triangle square pinknoise phaser autowah randh
+MODULES= \
+base \
+ftbl \
+tevent \
+allpass \
+atone \
+autowah \
+bal \
+bar \
+biquad \
+fold \
+bitcrush \
+butbp \
+butbr \
+buthp \
+butlp \
+clip \
+comb \
+count \
+dcblock \
+delay \
+dist \
+dmetro \
+drip \
+dtrig \
+dust \
+eqfil \
+expon \
+fofilt \
+foo \
+fosc \
+gbuzz \
+in \
+jcrev \
+jitter \
+line \
+lpf18 \
+maygate \
+metro \
+mincer \
+mode \
+moogladder \
+noise \
+osc \
+pan2 \
+panst \
+pareq \
+phaser \
+phasor \
+pinknoise \
+pluck \
+port \
+posc3 \
+progress \
+prop \
+randh \
+randi \
+randmt \
+random \
+reverse \
+revsc \
+rms \
+rpt \
+samphold \
+saw \
+scale \
+square \
+streson \
+switch \
+tabread \
+tbvcf \
+tenv \
+tenv2 \
+tenvx \
+tin \
+tone \
+trand \
+triangle \
+tseq \
+vdelay \
+zitarev
 
 ifndef NO_LIBSNDFILE
 	MODULES += nsmp diskin

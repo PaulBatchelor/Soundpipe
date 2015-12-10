@@ -8,30 +8,30 @@ typedef struct {
     sp_ftbl *ft;
     sp_tenv *tenv;
     sp_reverse *rv;
-} udata;
+} UserData;
 
-void write_osc(sp_data *data, void *ud) {
-    udata *udp = ud;
+void write_osc(sp_data *sp, void *udata) {
+    UserData *ud = udata;
     SPFLOAT env = 0;
     SPFLOAT osc = 0;
     SPFLOAT rv = 0;
     SPFLOAT dry = 0;
     SPFLOAT trig;
-    if(data->pos == 0){
+    if(sp->pos == 0){
         trig = 1.0;
     }else{
         trig = 0.0;
     }
-    sp_tenv_compute(data, udp->tenv, &trig, &env);
-    sp_osc_compute(data, udp->osc, NULL, &osc);
+    sp_tenv_compute(sp, ud->tenv, &trig, &env);
+    sp_osc_compute(sp, ud->osc, NULL, &osc);
     dry = osc * env;
-    sp_reverse_compute(data, udp->rv, &dry, &rv);
-    data->out[0] = dry + rv;
+    sp_reverse_compute(sp, ud->rv, &dry, &rv);
+    sp->out[0] = dry + rv;
 }
 
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     uint32_t bufsize;
     sp_data *sp;
     sp_create(&sp);

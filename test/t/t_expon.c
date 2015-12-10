@@ -4,49 +4,45 @@
 #include "test.h"
 
 typedef struct {
-    sp_scale *scale;
+    sp_expon *line;
     sp_osc *osc;
     sp_ftbl *ft;
 } UserData;
 
-int t_scale(sp_test *tst, sp_data *sp, const char *hash)
+int t_expon(sp_test *tst, sp_data *sp, const char *hash) 
 {
-    uint32_t n;
-    int fail = 0;
-    SPFLOAT val = 1;
-    SPFLOAT osc = 0, scale = 0;
 
     sp_srand(sp, 1234567);
+    uint32_t n;
+    int fail = 0;
+    SPFLOAT osc = 0, line = 0, out = 0;
     UserData ud;
 
-    sp_scale_create(&ud.scale);
+    sp_expon_create(&ud.line);
     sp_osc_create(&ud.osc);
     sp_ftbl_create(sp, &ud.ft, 2048);
 
-    sp_scale_init(sp, ud.scale);
-    ud.scale->min = 0;
-    ud.scale->max = 880;
+    sp_expon_init(sp, ud.line, 100, 3, 400);
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
-    ud.osc->amp = 0.1;
+
+    sp->len = 44100 * 5;
 
     for(n = 0; n < tst->size; n++) {
-        osc = 0, scale = 0;
-        /* constant set to 1, when scaled, it becomes 440 */
-        val = 1;
-        sp_scale_compute(sp, ud.scale, &val, &scale);
-        ud.osc->freq = scale;
+        sp_expon_compute(sp, ud.line, NULL, &line);
+        ud.osc->freq = line;
         sp_osc_compute(sp, ud.osc, NULL, &osc);
         sp->out[0] = osc;
+
         sp_test_add_sample(tst, sp->out[0]);
     }
 
     fail = sp_test_verify(tst, hash);
 
-    sp_scale_destroy(&ud.scale);
+    sp_expon_destroy(&ud.line);
     sp_ftbl_destroy(&ud.ft);
     sp_osc_destroy(&ud.osc);
-
+ 
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }
