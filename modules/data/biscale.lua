@@ -1,16 +1,16 @@
-sptbl["scale"] = {
+sptbl["biscale"] = {
 
     files = {
-        module = "scale.c",
-        header = "scale.h",
-        example = "ex_scale.c",
+        module = "biscale.c",
+        header = "biscale.h",
+        example = "ex_biscale.c",
     },
 
     func = {
-        create = "sp_scale_create",
-        destroy = "sp_scale_destroy",
-        init = "sp_scale_init",
-        compute = "sp_scale_compute",
+        create = "sp_biscale_create",
+        destroy = "sp_biscale_destroy",
+        init = "sp_biscale_init",
+        compute = "sp_biscale_compute",
     },
 
     params = {
@@ -34,7 +34,7 @@ sptbl["scale"] = {
 
     description = [[Bipolar Scale
 
-    This module scales from unipolar [0, 1] to another range defined by min and max.
+    This module scales from bipolar [-1, 1] to another range defined by min and max.
 ]],
 
     ninputs = 1,

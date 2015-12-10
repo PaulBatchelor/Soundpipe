@@ -2,13 +2,67 @@
 
 all: libsptest.a run.bin
 
-tests = t_foo t_osc t_allpass t_atone t_bal t_biquad t_butbp t_butbr t_buthp \
-		t_butlp t_clip t_comb t_bitcrush t_delay t_dist t_dmetro t_drip \
-		t_dtrig t_dust t_expon t_eqfil t_fofilt t_fosc t_gbuzz t_moogladder t_phasor  \
-		t_tone t_noise t_pareq t_jitter t_pluck t_lpf18 t_tbvcf t_port t_posc3 \
-		t_prop t_randi t_random t_reverse t_revsc t_rpt t_maygate t_samphold \
-		t_scale t_streson t_tenv t_tenv2 t_tseq t_vdelay t_mode t_jcrev t_fold \
-		t_gen_sinesum t_gen_sine t_gen_gauss t_gen_line t_gen_vals t_gen_xline t_line
+tests = \
+t_allpass \
+t_atone \
+t_bal \
+t_biquad \
+t_biscale \
+t_bitcrush \
+t_butbp \
+t_butbr \
+t_buthp \
+t_butlp \
+t_clip \
+t_comb \
+t_delay \
+t_dist \
+t_dmetro \
+t_drip \
+t_dtrig \
+t_dust \
+t_eqfil \
+t_expon \
+t_fofilt \
+t_fold \
+t_foo \
+t_fosc \
+t_gbuzz \
+t_gen_gauss \
+t_gen_line \
+t_gen_sine \
+t_gen_sinesum \
+t_gen_vals \
+t_gen_xline \
+t_jcrev \
+t_jitter \
+t_line \
+t_lpf18 \
+t_maygate \
+t_mode \
+t_moogladder \
+t_noise \
+t_osc \
+t_pareq \
+t_phasor \
+t_pluck \
+t_port \
+t_posc3 \
+t_prop \
+t_randi \
+t_random \
+t_reverse \
+t_revsc \
+t_rpt \
+t_samphold \
+t_scale \
+t_streson \
+t_tbvcf \
+t_tenv \
+t_tenv2 \
+t_tone \
+t_tseq \
+t_vdelay
 
 OBJ = $(addprefix t/, $(addsuffix .o, $(tests)))
 

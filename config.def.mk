@@ -9,6 +9,7 @@ autowah \
 bal \
 bar \
 biquad \
+biscale \
 fold \
 bitcrush \
 butbp \
