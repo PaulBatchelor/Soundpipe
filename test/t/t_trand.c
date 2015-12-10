@@ -14,10 +14,8 @@ int t_trand(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
-    SPFLOAT freq;
     
     UserData ud;
-    sp_create(&sp);
     sp_srand(sp, 1234567);
 
     sp_metro_create(&ud.met);
@@ -42,6 +40,7 @@ int t_trand(sp_test *tst, sp_data *sp, const char *hash)
         sp_trand_compute(sp, ud.trand, &met, &trand);
         ud.osc->freq = trand;
         sp_osc_compute(sp, ud.osc, NULL, &osc);
+        sp->out[0] = osc;
         sp_test_add_sample(tst, sp->out[0]);
     }
 
