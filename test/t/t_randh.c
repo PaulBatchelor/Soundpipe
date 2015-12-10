@@ -19,7 +19,7 @@ int t_randh(sp_test *tst, sp_data *sp, const char *hash)
     sp_srand(sp, 12345);
     sp_ftbl_create(sp, &ud.ft, 1024);
     sp_osc_create(&ud.osc);
-    sp_randi_create(&ud.randh);
+    sp_randh_create(&ud.randh);
 
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);

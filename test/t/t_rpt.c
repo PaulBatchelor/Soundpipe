@@ -61,7 +61,8 @@ int t_rpt(sp_test *tst, sp_data *sp, const char *hash)
     fail = sp_test_verify(tst, hash);
 
     /* destroy functions here */
-    
+
+    sp_maygate_destroy(&ud.mg);    
     sp_tenv_destroy(&ud.te);
     sp_metro_destroy(&ud.mt);
     sp_ftbl_destroy(&ud.ft);
