@@ -40,5 +40,5 @@ MODULES += padsynth
 # CFLAGS += -lfftw3 -DUSE_FFTW3
 
 # Build dynamic library. Needed for Sporth chugin
-CFLAGS += -shared -fPIC
-BUILD_DYNAMIC=1
+# CFLAGS += -shared -fPIC
+# BUILD_DYNAMIC=1
