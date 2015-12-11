@@ -49,6 +49,7 @@ t_pluck \
 t_port \
 t_posc3 \
 t_prop \
+t_randh \
 t_randi \
 t_random \
 t_reverse \
@@ -61,6 +62,7 @@ t_tbvcf \
 t_tenv \
 t_tenv2 \
 t_tone \
+t_trand \
 t_tseq \
 t_vdelay
 

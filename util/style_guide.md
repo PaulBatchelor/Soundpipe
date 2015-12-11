@@ -6,8 +6,8 @@ to these guidelines.
 
 # C Code Conventions
 
-The C code in Soundpipe follows most of the [C style guidelines](http://www.suckless.org/style) found on the
-suckless.org website with few exceptions. When in doubt, use that for reference. 
+The C code in Soundpipe follows most of the [C style guidelines](http://suckless.org/coding_style) found on the
+suckless.org website with few exceptions. If you're ever in doubt about something not specified here, use the suckless style guide, or the [Linux Kernel style guide](https://www.kernel.org/doc/Documentation/CodingStyle).
 
 Avoid using macros whenever possible. 
 
@@ -39,13 +39,14 @@ If you are using DSP code or algorithms from someone else, keep it in the header
 There are several ported Csound opcodes you can use as reference (metro is a good example).
 
 
+
 # Naming
 
 Choose good names for your variables so your code is clear. In C, a good variable name
-has the right balance of terseness and verboseness for maximum clarity and grokking. 
+has the right balance of terseness and verboseness for maximum clarity and grokking. As an example, abbreviating "frequency" to "freq" is acceptable, but abbreviating "filter cutoff" to "fc" is not. 
 
 Variables should be one word, but if they must use more than one word, 
-use underscore\_variables and not camelCase.
+use under\_score\_variables and not camelCase.
 
 Soundpipe has a lot of accepted abbreviations for certain variables. These are okay names
 to use for module parameters:
@@ -68,3 +69,12 @@ If you are porting Csound code, there is often a tendency to put a, k, or i in f
 of a variable to indicate audio, control, or init-rate variables. Ditch the a's and k's...
 i's can be allowed.
 
+# Tests
+
+If you are adding a test for a module you wrote, make sure the test passes before making a pull-request. 
+
+# Algorithm Explanations
+
+DSP code, especially when written in C, can be difficult to read.
+Algorithm explanations should be kept in modules/data, and not 
+in the source code itself. Make sure any explanations are clear and concise.  
