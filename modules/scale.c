@@ -15,13 +15,13 @@ int sp_scale_destroy(sp_scale **p)
 
 int sp_scale_init(sp_data *sp, sp_scale *p)
 {
-    p->min = 0;
+    p->min = -1;
     p->max = 1;
     return SP_OK;
 }
 
 int sp_scale_compute(sp_data *sp, sp_scale *p, SPFLOAT *in, SPFLOAT *out)
 {
-    *out = p->min + (*in + 1.0) / 2.0 * (p->max - p->min);
+    *out =  *in * (p->max - p->min) + p->min;
     return SP_OK;
 }

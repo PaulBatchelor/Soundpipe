@@ -5,6 +5,7 @@ ex_autowah \
 ex_bal \
 ex_bar \
 ex_biquad \
+ex_biscale \
 ex_bitcrush \
 ex_butbp \
 ex_butbr \
