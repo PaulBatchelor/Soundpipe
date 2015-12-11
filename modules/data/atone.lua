@@ -14,10 +14,10 @@ sptbl["atone"] = {
 	},
 
 	params = {
-	    mandatory = {
+	    optional = {
 	        {
 	            name = "hp",
-	            type = "SPFLOAT *",
+	            type = "SPFLOAT",
 	            description = "The response curve's half power point (cutoff frequency).",
 	            default = "1000"
 	        },

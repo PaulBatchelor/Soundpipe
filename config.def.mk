@@ -21,6 +21,7 @@ comb \
 count \
 dcblock \
 delay \
+delay1 \
 dist \
 dmetro \
 drip \
