@@ -14,6 +14,9 @@ Avoid using macros whenever possible.
 If you are creating a new module, the expectation is that all code for that
 module resides in a single c and header file.
 
+Please keep file lines to an 80 character column width. This is 
+easy to overlook, but it helps with readability. 
+
 # Commenting
 
 Comments in Soundpipe are rather sparse, unless they make up the header of a module file. 
@@ -69,9 +72,16 @@ If you are porting Csound code, there is often a tendency to put a, k, or i in f
 of a variable to indicate audio, control, or init-rate variables. Ditch the a's and k's...
 i's can be allowed.
 
-# Tests
+# Tests 
 
 If you are adding a test for a module you wrote, make sure the test passes before making a pull-request. 
+
+# Warnings
+
+If you notice any compiler warnings after adding your code, please 
+do due dilligance and investigate them. If you're unsure of a 
+warning and would like some help, please feel free to ask when you
+make your pull request. 
 
 # Algorithm Explanations
 
