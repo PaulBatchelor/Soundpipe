@@ -83,5 +83,3 @@ typedef struct {
 
 typedef struct kiss_fft_state* kiss_fft_cfg;
 typedef struct kiss_fftr_state* kiss_fftr_cfg;
-
-
