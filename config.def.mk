@@ -21,7 +21,6 @@ comb \
 count \
 dcblock \
 delay \
-delay1 \
 dist \
 dmetro \
 drip \
@@ -51,6 +50,7 @@ pareq \
 phaser \
 phasor \
 pinknoise \
+pitchamdf \
 pluck \
 port \
 posc3 \
