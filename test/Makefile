@@ -56,13 +56,16 @@ t_reverse \
 t_revsc \
 t_rpt \
 t_samphold \
+t_saw \
 t_scale \
+t_square \
 t_streson \
 t_tbvcf \
 t_tenv \
 t_tenv2 \
 t_tone \
 t_trand \
+t_triangle \
 t_tseq \
 t_vdelay
 
