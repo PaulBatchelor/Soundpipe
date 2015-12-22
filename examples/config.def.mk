@@ -7,6 +7,9 @@ ex_bar \
 ex_biquad \
 ex_biscale \
 ex_bitcrush \
+ex_blsaw \
+ex_blsquare \
+ex_bltriangle \
 ex_butbp \
 ex_butbr \
 ex_buthp \
@@ -71,9 +74,7 @@ ex_reverse \
 ex_revsc \
 ex_rpt \
 ex_samphold \
-ex_saw \
 ex_scale \
-ex_square \
 ex_streson \
 ex_switch \
 ex_tabread \
@@ -85,7 +86,6 @@ ex_tevent \
 ex_tin \
 ex_tone \
 ex_trand \
-ex_triangle \
 ex_tseq \
 ex_vdelay \
 ex_wtosc \

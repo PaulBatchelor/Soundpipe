@@ -1,16 +1,16 @@
-sptbl["square"] = {
+sptbl["blsquare"] = {
 
     files = {
-        module = "square.c",
-        header = "square.h",
-        example = "ex_square.c",
+        module = "blsquare.c",
+        header = "blsquare.h",
+        example = "ex_blsquare.c",
     },
 
     func = {
-        create = "sp_square_create",
-        destroy = "sp_square_destroy",
-        init = "sp_square_init",
-        compute = "sp_square_compute",
+        create = "sp_blsquare_create",
+        destroy = "sp_blsquare_destroy",
+        init = "sp_blsquare_init",
+        compute = "sp_blsquare_compute",
     },
 
     params = {
@@ -24,13 +24,13 @@ sptbl["square"] = {
             {
                 name = "amp",
                 type = "SPFLOAT",
-                description ="Amplitude (range 0-1).", 
+                description ="Amplitude (range 0-1).",
 		default = 1.0
             },
             {
                 name = "width",
                 type = "SPFLOAT",
-                description ="Duty cycle width (range 0-1).", 
+                description ="Duty cycle width (range 0-1).",
 		default = 0.5
             },
         }
@@ -39,7 +39,7 @@ sptbl["square"] = {
     modtype = "module",
 
     description = [[Bandlimited square oscillator
-This is a bandlimited square oscillator ported from the "squaretooth" function from the Faust 
+This is a bandlimited square oscillator ported from the "squaretooth" function from the Faust
 programming language.
 ]],
 

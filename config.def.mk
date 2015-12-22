@@ -10,6 +10,9 @@ bal \
 bar \
 biquad \
 biscale \
+blsaw \
+blsquare \
+bltriangle \
 fold \
 bitcrush \
 butbp \
@@ -65,9 +68,7 @@ revsc \
 rms \
 rpt \
 samphold \
-saw \
 scale \
-square \
 streson \
 switch \
 tabread \
@@ -78,7 +79,6 @@ tenvx \
 tin \
 tone \
 trand \
-triangle \
 tseq \
 vdelay \
 zitarev
