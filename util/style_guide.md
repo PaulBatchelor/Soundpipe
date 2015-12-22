@@ -12,8 +12,40 @@ suckless.org website with few exceptions. If you're ever in doubt about
 something not specified here, use the suckless style guide, or the [Linux 
 Kernel style guide](https://www.kernel.org/doc/Documentation/CodingStyle).
 
+Please use K&R style braces, as shown below:
+
+```
+int main(int argc, char *argv[])
+{
+	...
+	while (x = 0) {
+		...
+	}
+
+	method_call();
+	...
+}
+```
+
+When creating a for loop, don't declare int variables inside of 
+the loop; they should be declared before the start of the loop. 
+For example, this is not correct: 
+
+`for(int i = 0; ...)`
+
+...however, this is: 
+
+`int i = 0`
+`for (i; ...)`	
+			
 If you are creating a new module, the expectation is that all code for that
 module resides in a single c and header file.
+
+When creating modules, please take care not to pollute the
+namespace. Use static function naming if a function is not 
+part of a module lifecycle (create, init, compute, destory).
+This helps ensure method naming clarity. 
+
 
 Soundpipe code should have no more than 80 characters per line. 
 
@@ -86,9 +118,13 @@ of a variable to indicate audio, control, or init-rate variables. Ditch the a's
 and k's...
 i's can be allowed.
 
-# Warnings
+# Warnings and Errors
 
 If you notice any compiler warnings after adding your code, please 
 do due dilligance and investigate them. If you're unsure of a 
 warning and would like some help, please feel free to ask when you
 make your pull request. 
+
+When creating an example to highlight a module, there should be 
+no errors. Additionally, each module example should be tested
+using Valgrind. 
