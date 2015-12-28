@@ -26,6 +26,7 @@ int sp_pluck_create(sp_pluck **p)
 int sp_pluck_destroy(sp_pluck **p)
 {
     sp_pluck *pp = *p;
+    sp_auxdata_free(&pp->auxch);
     free(*p);
     return SP_OK;
 }
