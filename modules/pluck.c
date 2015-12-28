@@ -31,13 +31,27 @@ int sp_pluck_destroy(sp_pluck **p)
     return SP_OK;
 }
 
+static void sp_pluck_reinit(sp_data *sp, sp_pluck *p)
+{
+
+    int n;
+    SPFLOAT val = 0;
+    SPFLOAT *ap = (SPFLOAT *)p->auxch.ptr;
+  for (n=p->npts; n--; ) {   
+    val = (SPFLOAT) ((SPFLOAT) sp_rand(sp) / SP_RANDMAX);
+    *ap++ = (val * 2) - 1;
+  }
+    p->phs256 = 0;
+
+}
+
 int sp_pluck_init(sp_data *sp, sp_pluck *p, SPFLOAT ifreq)
 {
-    int n;
     int32_t npts, iphs;
     char *auxp;
     SPFLOAT *ap, *fp;
     SPFLOAT phs, phsinc;
+    SPFLOAT val = 0;
     p->amp = 0.5;
     p->ifreq = ifreq;
     p->freq = ifreq;
@@ -48,18 +62,11 @@ int sp_pluck_init(sp_data *sp, sp_pluck *p, SPFLOAT ifreq)
     sp_auxdata_alloc(&p->auxch, (npts + 1) * sizeof(SPFLOAT));
       auxp = p->auxch.ptr;
       p->maxpts = npts;
-    ap = (SPFLOAT *)auxp;
-    SPFLOAT val = 0;
-  for (n=npts; n--; ) {   
-
-    val = (SPFLOAT) ((SPFLOAT) sp_rand(sp) / SP_RANDMAX);
-    *ap++ = (val * 2) - 1;
-  }
-    //*ap = *(SPFLOAT *)auxp;   /* last = copy of 1st */
     p->npts = npts;
+
+    sp_pluck_reinit(sp, p);
     /* tuned pitch convt */
     p->sicps = (npts * 256.0 + 128.0) * (1.0 / sp->sr);
-    p->phs256 = 0;
     return SP_OK;
 }
 
@@ -68,6 +75,10 @@ int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *trig, SPFLOAT *out)
     SPFLOAT *fp;
     int32_t phs256, phsinc, ltwopi, offset;
     SPFLOAT frac, diff;
+
+    if(*trig != 0) {
+        sp_pluck_reinit(sp, p);
+    }
 
     phsinc = (int32_t)(p->freq * p->sicps);
     phs256 = p->phs256;
