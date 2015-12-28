@@ -1,5 +1,6 @@
 typedef struct {
-    SPFLOAT bar;
+    int mode, init;
+    SPFLOAT prev, thresh;
 } sp_thresh;
 
 int sp_thresh_create(sp_thresh **p);

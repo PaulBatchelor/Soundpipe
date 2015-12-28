@@ -45,11 +45,7 @@ static void sp_pluck_reinit(sp_data *sp, sp_pluck *p)
 
 int sp_pluck_init(sp_data *sp, sp_pluck *p, SPFLOAT ifreq)
 {
-    int32_t npts, iphs;
-    char *auxp;
-    SPFLOAT *ap, *fp;
-    SPFLOAT phs, phsinc;
-    SPFLOAT val = 0;
+    int32_t npts;
     p->amp = 0.5;
     p->ifreq = ifreq;
     p->freq = ifreq;
@@ -59,7 +55,6 @@ int sp_pluck_init(sp_data *sp, sp_pluck *p, SPFLOAT ifreq)
     }
     
     sp_auxdata_alloc(&p->auxch, (npts + 1) * sizeof(SPFLOAT));
-    auxp = p->auxch.ptr;
     p->maxpts = npts;
     p->npts = npts;
 
@@ -89,7 +84,7 @@ int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *trig, SPFLOAT *out)
     *out = (fp[0] + diff*frac) * p->amp; /*  gives output val */
     if ((phs256 += phsinc) >= ltwopi) {
         int nn;
-        SPFLOAT newval, preval;
+        SPFLOAT preval;
         phs256 -= ltwopi;               
         fp=(SPFLOAT *)p->auxch.ptr;
         preval = fp[0];                
