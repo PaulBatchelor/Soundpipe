@@ -12,9 +12,9 @@ void process(sp_data *sp, void *udata) {
     UserData *ud = udata;
     SPFLOAT pluck = 0, met = 0;
     sp_metro_compute(sp, ud->met, NULL, &met);
+    SPFLOAT notes[] = {60, 63, 67, 70, 74};
     if(met) {
-        //ud->pluck->reflect = 0.5;
-        //ud->pluck->freq = ud->pluck->ifreq + rand() % 500;
+        ud->pluck->freq = sp_midi2cps(notes[sp_rand(sp) % 5]);
     }
     sp_pluck_compute(sp, ud->pluck, &met, &pluck);
     sp->out[0] = pluck;
@@ -31,7 +31,7 @@ int main() {
 
     sp_pluck_init(sp, ud.pluck, 400);
     sp_metro_init(sp, ud.met);
-    ud.met->freq = 2;
+    ud.met->freq = 4;
 
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);
