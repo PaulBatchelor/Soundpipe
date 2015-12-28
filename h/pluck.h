@@ -1,15 +1,9 @@
 typedef struct {
-    SPFLOAT plk, amp, freq, pick, reflect;
-    sp_auxdata upper;
-    sp_auxdata lower;
-    sp_auxdata up_data;
-    sp_auxdata down_data;
-    SPFLOAT ifreq;
-    SPFLOAT state;
-    int scale;
-    int rail_len;
-    int irail_len;
-    int plucked;
+    SPFLOAT *ar, *kamp, *kcps, *icps, *ifn, *imeth, *ipar1, *ipar2;
+    SPFLOAT sicps, param1, param2;
+    int16_t thresh1, thresh2, method;
+    int32_t phs256, npts, maxpts;
+    sp_auxdata auxch;
 } sp_pluck;
 
 int sp_pluck_create(sp_pluck **p);
