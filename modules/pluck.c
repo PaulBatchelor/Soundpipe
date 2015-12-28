@@ -30,7 +30,6 @@ int sp_pluck_destroy(sp_pluck **p)
     return SP_OK;
 }
 
-
 int sp_pluck_init(sp_data *sp, sp_pluck *p, SPFLOAT ifreq)
 {
     int n;
@@ -38,20 +37,24 @@ int sp_pluck_init(sp_data *sp, sp_pluck *p, SPFLOAT ifreq)
     char *auxp;
     SPFLOAT *ap, *fp;
     SPFLOAT phs, phsinc;
-
-    if ((npts = (int32_t)(sp->sr / *p->icps)) < PLUKMIN) {
+    p->amp = 0.5;
+    p->ifreq = ifreq;
+    p->freq = ifreq;
+    if ((npts = (int32_t)(sp->sr / p->ifreq)) < PLUKMIN) {
         npts = PLUKMIN;                  
     }
     
     sp_auxdata_alloc(&p->auxch, (npts + 1) * sizeof(SPFLOAT));
       auxp = p->auxch.ptr;
-      p->maxpts = npts;                         /*      if reqd    */
+      p->maxpts = npts;
     ap = (SPFLOAT *)auxp;
-
+    SPFLOAT val = 0;
   for (n=npts; n--; ) {   
-    *ap++ = (SPFLOAT) sp_rand(sp);
-    }
-    *ap = *(SPFLOAT *)auxp;                       /* last = copy of 1st */
+
+    val = (SPFLOAT) ((SPFLOAT) sp_rand(sp) / SP_RANDMAX);
+    *ap++ = (val * 2) - 1;
+  }
+    //*ap = *(SPFLOAT *)auxp;   /* last = copy of 1st */
     p->npts = npts;
     /* tuned pitch convt */
     p->sicps = (npts * 256.0 + 128.0) * (1.0 / sp->sr);
@@ -59,14 +62,13 @@ int sp_pluck_init(sp_data *sp, sp_pluck *p, SPFLOAT ifreq)
     return SP_OK;
 }
 
-int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *trig, SPFLOAT *in, SPFLOAT *out)
+int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *trig, SPFLOAT *out)
 {
-    SPFLOAT *ar, *fp;
+    SPFLOAT *fp;
     int32_t phs256, phsinc, ltwopi, offset;
-    SPFLOAT       frac, diff;
+    SPFLOAT frac, diff;
 
-    ar = p->ar;
-    phsinc = (int32_t)(*p->kcps * p->sicps);
+    phsinc = (int32_t)(p->freq * p->sicps);
     phs256 = p->phs256;
     ltwopi = p->npts << 8;
     //for (n=koffset; n<nsmps; n++) {
@@ -74,7 +76,7 @@ int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *trig, SPFLOAT *in, SPFLO
       fp = (SPFLOAT *)p->auxch.ptr + offset;     /* lookup position   */
       diff = fp[1] - fp[0];
       frac = (SPFLOAT)(phs256 & 255) / 256.0; /*  w. interpolation */
-      *out =   (fp[0] + diff*frac) * *p->kamp; /*  gives output val */
+      *out =   (fp[0] + diff*frac) * p->amp; /*  gives output val */
       if ((phs256 += phsinc) >= ltwopi) {
         int nn;
         SPFLOAT newval, preval;
