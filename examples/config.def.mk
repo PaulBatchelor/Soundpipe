@@ -83,6 +83,7 @@ ex_tenv \
 ex_tenv2 \
 ex_tenvx \
 ex_tevent \
+ex_thresh \
 ex_tin \
 ex_tone \
 ex_trand \

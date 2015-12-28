@@ -76,6 +76,7 @@ tbvcf \
 tenv \
 tenv2 \
 tenvx \
+thresh \
 tin \
 tone \
 trand \
