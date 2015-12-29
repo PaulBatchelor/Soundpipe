@@ -11,6 +11,61 @@
 #include <stdlib.h>
 #include "soundpipe.h"
 
+static void multiply_fft_buffers(SPFLOAT *outBuf, SPFLOAT *ringBuf,
+                                 SPFLOAT *IR_Data, int partSize, int nPartitions,
+                                 int ringBuf_startPos)
+{
+    SPFLOAT   re, im, re1, re2, im1, im2;
+    SPFLOAT   *rbPtr, *irPtr, *outBufPtr, *outBufEndPm2, *rbEndP;
+
+    /* note: partSize must be at least 2 samples */
+    partSize <<= 1;
+    outBufEndPm2 = (SPFLOAT*) outBuf + (int) (partSize - 2);
+    rbEndP = (SPFLOAT*) ringBuf + (int) (partSize * nPartitions);
+    rbPtr = &(ringBuf[ringBuf_startPos]);
+    irPtr = IR_Data;
+    outBufPtr = outBuf;
+    memset(outBuf, 0, sizeof(SPFLOAT)*(partSize));
+    do {
+      /* wrap ring buffer position */
+      if (rbPtr >= rbEndP)
+        rbPtr = ringBuf;
+      outBufPtr = outBuf;
+      *(outBufPtr++) += *(rbPtr++) * *(irPtr++);    /* convolve DC */
+      *(outBufPtr++) += *(rbPtr++) * *(irPtr++);    /* convolve Nyquist */
+      re1 = *(rbPtr++);
+      im1 = *(rbPtr++);
+      re2 = *(irPtr++);
+      im2 = *(irPtr++);
+      re = re1 * re2 - im1 * im2;
+      im = re1 * im2 + re2 * im1;
+      while (outBufPtr < outBufEndPm2) {
+        /* complex multiply */
+        re1 = rbPtr[0];
+        im1 = rbPtr[1];
+        re2 = irPtr[0];
+        im2 = irPtr[1];
+        outBufPtr[0] += re;
+        outBufPtr[1] += im;
+        re = re1 * re2 - im1 * im2;
+        im = re1 * im2 + re2 * im1;
+        re1 = rbPtr[2];
+        im1 = rbPtr[3];
+        re2 = irPtr[2];
+        im2 = irPtr[3];
+        outBufPtr[2] += re;
+        outBufPtr[3] += im;
+        re = re1 * re2 - im1 * im2;
+        im = re1 * im2 + re2 * im1;
+        outBufPtr += 4;
+        rbPtr += 4;
+        irPtr += 4;
+      }
+      outBufPtr[0] += re;
+      outBufPtr[1] += im;
+    } while (--nPartitions);
+}
+
 static inline int buf_bytes_alloc(int nChannels, int partSize, int nPartitions)
 {
     int nSmps;
@@ -52,20 +107,22 @@ int sp_conv_create(sp_conv **p)
 
 int sp_conv_destroy(sp_conv **p)
 {
+    sp_conv *pp = *p;
+    sp_auxdata_free(&pp->auxData);
+    sp_fft_destroy(&pp->fft);
     free(*p);
     return SP_OK;
 }
 
-int sp_conv_init(sp_data *sp, sp_conv *p, sp_ftbl *ft)
+int sp_conv_init(sp_data *sp, sp_conv *p, sp_ftbl *ft, SPFLOAT iPartLen)
 {
     int     i, j, k, n, nBytes, skipSamples;
     SPFLOAT FFTscale;
 
     /* Soundpipe defaults */
-    p->iSkipInit = 0;
+    p->iTotLen = ft->size;
     p->iSkipSamples = 0;
-    p->iPartLen = 2048;
-    //p->iTotLen = 0;
+    p->iPartLen = iPartLen;
 
     /* check parameters */
     p->nChannels = 1;
@@ -76,13 +133,14 @@ int sp_conv_init(sp_data *sp, sp_conv *p, sp_ftbl *ft)
         return SP_NOT_OK;  
     }
     
-    sp_fft_init(&p->fft, log2(p->partSize));
+    sp_fft_init(&p->fft, (int)log2(p->partSize << 1));
     n = (int) ft->size / p->nChannels;
     skipSamples = lrintf(p->iSkipSamples);
     n -= skipSamples;
     if (lrintf(p->iTotLen) > 0 && n > lrintf(p->iTotLen))
       n = lrintf(p->iTotLen);
     if (n <= 0) {
+        fprintf(stderr, "uh oh.\n");
         return SP_NOT_OK;
     }
     p->nPartitions = (n + (p->partSize - 1)) / p->partSize;
@@ -136,7 +194,50 @@ int sp_conv_init(sp_data *sp, sp_conv *p, sp_ftbl *ft)
 
 int sp_conv_compute(sp_data *sp, sp_conv *p, SPFLOAT *in, SPFLOAT *out)
 {
-    /* Send the signal's input to the output */
-    *out = *in;
+    SPFLOAT *x, *rBuf;
+    int           i, n, nSamples, rBufPos;
+
+    nSamples = p->partSize;
+    rBuf = &(p->ringBuf[p->rbCnt * (nSamples << 1)]);
+    //for (nn = offset; nn < nsmps; nn++) {
+      /* store input signal in buffer */
+      rBuf[p->cnt] = *in;
+      /* copy output signals from buffer */
+      //for (n = 0; n < p->nChannels; n++)
+        *out = p->outBuffers[0][p->cnt]; 
+        
+      /* is input buffer full ? */
+      if (++p->cnt < nSamples) {
+        return SP_OK;                   /* no, continue with next sample */
+      }
+      /* reset buffer position */
+      p->cnt = 0;
+      /* calculate FFT of input */
+      for (i = nSamples; i < (nSamples << 1); i++)
+        rBuf[i] = 0.0;          /* pad to double length */
+      //csound->RealFFT(csound, rBuf, (nSamples << 1));
+      sp_fftr(&p->fft, rBuf, (nSamples << 1));
+      /* update ring buffer position */
+      p->rbCnt++;
+      if (p->rbCnt >= p->nPartitions)
+        p->rbCnt = 0;
+      rBufPos = p->rbCnt * (nSamples << 1);
+      rBuf = &(p->ringBuf[rBufPos]);
+      /* for each channel: */
+      for (n = 0; n < p->nChannels; n++) {
+        /* multiply complex arrays */
+        multiply_fft_buffers(p->tmpBuf, p->ringBuf, p->IR_Data[n],
+                             nSamples, p->nPartitions, rBufPos);
+        /* inverse FFT */
+        //csound->InverseRealFFT(csound, p->tmpBuf, (nSamples << 1));
+        sp_ifftr(&p->fft, p->tmpBuf, (nSamples << 1));
+        /* copy to output buffer, overlap with "tail" of previous block */
+        x = &(p->outBuffers[n][0]);
+        for (i = 0; i < nSamples; i++) {
+          x[i] = p->tmpBuf[i] + x[i + nSamples];
+          x[i + nSamples] = p->tmpBuf[i + nSamples];
+        }
+      }
+    //}
     return SP_OK;
 }

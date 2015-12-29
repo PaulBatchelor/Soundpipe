@@ -1,11 +1,9 @@
 typedef struct {
     SPFLOAT aOut[1];
     SPFLOAT aIn;
-    SPFLOAT iFTNum;
     SPFLOAT iPartLen;
     SPFLOAT iSkipSamples;
     SPFLOAT iTotLen;
-    SPFLOAT iSkipInit;
     int initDone;
     int nChannels;
     int cnt;
@@ -23,5 +21,5 @@ typedef struct {
 
 int sp_conv_create(sp_conv **p);
 int sp_conv_destroy(sp_conv **p);
-int sp_conv_init(sp_data *sp, sp_conv *p, sp_ftbl *ft);
+int sp_conv_init(sp_data *sp, sp_conv *p, sp_ftbl *ft, SPFLOAT iPartLen);
 int sp_conv_compute(sp_data *sp, sp_conv *p, SPFLOAT *in, SPFLOAT *out);
