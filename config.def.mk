@@ -22,6 +22,7 @@ butlp \
 clip \
 comb \
 count \
+conv \
 dcblock \
 delay \
 dist \

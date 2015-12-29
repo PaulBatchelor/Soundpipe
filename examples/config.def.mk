@@ -16,6 +16,7 @@ ex_buthp \
 ex_butlp \
 ex_clip \
 ex_comb \
+ex_conv \
 ex_delay \
 ex_diskin \
 ex_dist \
