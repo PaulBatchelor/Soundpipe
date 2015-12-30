@@ -63,4 +63,4 @@ bootstrap:
 	util/module_bootstrap.sh $(MODULE_NAME)
 
 util/wav2smp: util/wav2smp.c
-	$(CC) $(CFLAGS) -L/usr/local/lib $< -lsndfile -o $@
+	$(CC) -L/usr/local/lib $< -lsndfile -o $@

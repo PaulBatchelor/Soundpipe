@@ -23,7 +23,7 @@ void write_sample(SNDFILE *snd, FILE *fp, char *wav, char *name,
 
 int main(int argc, char *argv[]) 
 {
-    if(argc == 1) {
+    if(argc <= 1) {
         printf("Usage: [options] wav2smp in1.wav in1_name in2.wav in2_name...\n\n");
         printf("Flags:\n");
         printf("\t-w\tWAV file to write to (default: out.wav)\n");
