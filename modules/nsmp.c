@@ -110,16 +110,20 @@ int nano_compute(sp_data *sp, nanosamp *smp, float *out)
         return SP_NOT_OK; 
     }
     
-    if(smp->curpos < smp->sample->size) {
+    if(smp->curpos < (SPFLOAT)smp->sample->size) {
         SPFLOAT x1, x2, frac, tmp;
         uint32_t index;
         SPFLOAT *tbl = smp->ft->tbl;
-        tmp = (smp->curpos + smp->sample->pos);
-        index = floor(tmp);
-        frac = tmp - index;
+        tmp = (smp->curpos + (SPFLOAT)smp->sample->pos);
+        index = (uint32_t)floorf(tmp);
+        frac = fabs(tmp - index);
+
+        if(index >= smp->ft->size) {
+            index = smp->ft->size - 1;
+        }
+        
         x1 = tbl[index];
-        index = ((index + 1) < smp->sample->size) ? index + 1 : index;
-        x2 = tbl[index];
+        x2 = tbl[index + 1];
         *out = x1 + (x2 - x1) * frac;
         smp->curpos += smp->sample->speed;
     } else {
