@@ -25,8 +25,7 @@ techniques which include:
 - Padsynth algorithm
 
 More information on specific Soundpipe modules can be found in the
-[Soundpipe module reference guide].
-(https://paulbatchelor.github.com/res/soundpipe/docs/).
+[Soundpipe module reference guide](https://paulbatchelor.github.com/res/soundpipe/docs/).
 
 Features
 ---------
@@ -134,5 +133,5 @@ the develop branch, and not the master branch.
 
 Additionally, if you'd like to contribute by adding more modules to Soundpipe, 
 please 
-see the Style Guide (util/style\_guide.md) and the Module How-To Guide 
+see the [Style Guide](util/style\_guide.md) and the Module How-To Guide 
 (util/module\_howto.md).
