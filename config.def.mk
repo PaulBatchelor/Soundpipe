@@ -113,6 +113,7 @@ include lib/fft/Makefile
 include lib/kissfft/Makefile
 MODULES += fftwrapper
 MODULES += padsynth
+
 # Uncomment to use FFTW3 instead of kissfft.
 # CFLAGS += -lfftw3 -DUSE_FFTW3
 
