@@ -133,5 +133,4 @@ the develop branch, and not the master branch.
 
 Additionally, if you'd like to contribute by adding more modules to Soundpipe, 
 please 
-see the [Style Guide](util/style\_guide.md) and the Module How-To Guide 
-(util/module\_howto.md).
+see the [Style Guide](util/style\_guide.md) and the [Module How-To Guide](util/module\_howto.md).
