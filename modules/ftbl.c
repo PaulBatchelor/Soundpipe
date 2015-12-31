@@ -32,8 +32,8 @@ int sp_ftbl_destroy(sp_ftbl **ft)
 
 int sp_gen_vals(sp_data *sp, sp_ftbl *ft, const char *string)
 {
-    char *str1, *token, *t;
-    char *saveptr1;
+    char *str1 = NULL, *token = NULL, *t;
+    char *saveptr1 = NULL;
     int j;
     char *d;
     d = malloc(sizeof(char) + 1);
@@ -86,6 +86,9 @@ int sp_ftbl_loadfile(sp_data *sp, sp_ftbl **ft, const char *filename)
     SF_INFO info;
     info.format = 0;
     SNDFILE *snd = sf_open(filename, SFM_READ, &info);
+    if(snd == NULL) {
+        return SP_NOT_OK;
+    }
     size_t size = info.frames * info.channels;
     ftp->size = size;
     ftp->tbl = malloc(sizeof(SPFLOAT) * (size + 1));

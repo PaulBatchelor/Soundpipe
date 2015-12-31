@@ -9,8 +9,8 @@ typedef struct{
     sp_maygate *mg;
 } UserData;
 
-void compute(sp_data *sp, void *user_data){
-    UserData *ud = user_data;
+void compute(sp_data *sp, void *udata){
+    UserData *ud = udata;
     SPFLOAT met, osc, env, rpt, maygate, trig, dry;
     sp_metro_compute(sp, ud->mt, NULL, &met);
     sp_tenv_compute(sp, ud->te, &met, &env);

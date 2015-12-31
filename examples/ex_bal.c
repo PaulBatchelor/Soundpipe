@@ -9,28 +9,28 @@ typedef struct {
     sp_moogladder *filt;
     sp_bal *bal;
     sp_tenv *env;
-} udata;
+} UserData;
 
-void process(sp_data *sp, void *ud) {
-    udata *udp = ud;
+void process(sp_data *sp, void *udata) {
+    UserData *ud = udata;
     int i;
     SPFLOAT out = 0, osc = 0, filt = 0, bal = 0, env = 0, tick;
     for(i = 0; i < 3; i++) {
-       sp_osc_compute(sp, udp->osc[i], NULL, &osc);
+       sp_osc_compute(sp, ud->osc[i], NULL, &osc);
        out += osc * 0.5;
     }
     tick = (sp->pos == 0) ? 1.0 : 0.0;
-    sp_tenv_compute(sp, udp->env, &tick, &env);
-    udp->filt->freq = 300 + 3000 * env;
-    sp_moogladder_compute(sp, udp->filt, &out, &filt);
-    sp_bal_compute(sp, udp->bal, &filt, &osc, &bal);
+    sp_tenv_compute(sp, ud->env, &tick, &env);
+    ud->filt->freq = 300 + 3000 * env;
+    sp_moogladder_compute(sp, ud->filt, &out, &filt);
+    sp_bal_compute(sp, ud->bal, &filt, &osc, &bal);
     sp->out[0] = bal * env;
 }
 
 int main() {
     srand(time(NULL));
     int i;
-    udata ud;
+    UserData ud;
     sp_data *sp;
     sp_create(&sp);
     sp_ftbl_create(sp, &ud.ft, 4096);

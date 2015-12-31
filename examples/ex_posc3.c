@@ -7,20 +7,20 @@ typedef struct {
     sp_posc3 *posc3;
     sp_ftbl *ft; 
     int counter;
-} udata;
+} UserData;
 
-void write_posc3(sp_data *data, void *ud) {
-    udata *udp = ud;
-    if(udp->counter == 0){
-        udp->posc3->freq = 500 + rand() % 2000;
+void write_posc3(sp_data *sp, void *udata) {
+    UserData *ud = udata;
+    if(ud->counter == 0){
+        ud->posc3->freq = 500 + rand() % 2000;
     }
-    sp_posc3_compute(data, udp->posc3, NULL, &data->out[0]);
-    udp->counter = (udp->counter + 1) % 4410;
+    sp_posc3_compute(sp, ud->posc3, NULL, &sp->out[0]);
+    ud->counter = (ud->counter + 1) % 4410;
 }
 
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     ud.counter = 0;
     sp_data *sp;
     sp_create(&sp);

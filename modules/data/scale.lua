@@ -16,25 +16,13 @@ sptbl["scale"] = {
     params = {
         optional = {
             {
-                name = "inmin",
-                type = "SPFLOAT",
-                description = "Minimum value to scale from.",
-                default = -1
-            },
-            {
-                name = "inmax",
-                type = "SPFLOAT",
-                description ="Maximum value to scale from.",
-                default = 1
-            },
-            {
-                name = "outmin",
+                name = "min",
                 type = "SPFLOAT",
                 description = "Minimum value to scale to.",
                 default = 0
             },
             {
-                name = "outmax",
+                name = "max",
                 type = "SPFLOAT",
                 description ="Maximum value to scale to.",
                 default = 1
@@ -44,9 +32,9 @@ sptbl["scale"] = {
 
     modtype = "module",
 
-    description = [[Linear transformation
+    description = [[Bipolar Scale
 
-    This module scales from one range to another defined by a minimum and maximum point in the input and output domain.
+    This module scales from unipolar [0, 1] to another range defined by min and max.
 ]],
 
     ninputs = 1,

@@ -16,13 +16,13 @@ ifdef BUILD_DYNAMIC
 SPLIBS += libsoundpipe_dyn.so
 endif
 
-VERSION=0.5.2
+VERSION=0.6
 
 MPATHS=$(addprefix modules/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
 CPATHS=$(addprefix modules/, $(addsuffix .c, $(MODULES)))
 
-CFLAGS +=  -g --std=c99 -DSP_VERSION=$(VERSION) -O3 -DSPFLOAT=float -Ih -I/usr/local/include
+CFLAGS +=  -g -DSP_VERSION=$(VERSION) -O3 -DSPFLOAT=float -Ih -I/usr/local/include
 UTIL += util/wav2smp
 
 modules/%.o: modules/%.c h/%.h h/soundpipe.h
@@ -63,4 +63,4 @@ bootstrap:
 	util/module_bootstrap.sh $(MODULE_NAME)
 
 util/wav2smp: util/wav2smp.c
-	$(CC) $(CFLAGS) -L/usr/local/lib $< -lsndfile -o $@
+	$(CC) -L/usr/local/lib $< -lsndfile -o $@

@@ -6,6 +6,7 @@
 typedef struct {
     sp_metro *met;
     sp_nsmp *nsmp;
+    sp_ftbl *ft;
 } UserData;
 
 void process(sp_data *sp, void *udata) {
@@ -25,12 +26,13 @@ int main() {
     sp_data *sp;
     sp_create(&sp);
 
+    sp_ftbl_loadfile(sp, &ud.ft, "oneart.wav");
     sp_nsmp_create(&ud.nsmp);
     sp_metro_create(&ud.met);
 
     sp_metro_init(sp, ud.met);
     ud.met->freq = 2;
-    sp_nsmp_init(sp, ud.nsmp, "oneart.wav", "oneart.ini");
+    sp_nsmp_init(sp, ud.nsmp, ud.ft, 44100, "oneart.ini");
 
     sp_nsmp_print_index(sp, ud.nsmp);
 
@@ -39,6 +41,8 @@ int main() {
 
     sp_nsmp_destroy(&ud.nsmp);
     sp_metro_destroy(&ud.met);
+
+    sp_ftbl_destroy(&ud.ft);
 
     sp_destroy(&sp);
     return 0;

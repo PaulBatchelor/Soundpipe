@@ -9,10 +9,6 @@
 
     This implementation is tested under GCC/Linux, but it's 
     very easy to port to other compiler/OS.
-    
-    P.S.
-    Please note, that IFFT function depends on the FFTW library, so if you want 
-    to use into commercial products, you must replace it with your IFFT routine
 */
 
 #include <stdlib.h>
@@ -28,8 +24,8 @@ int sp_gen_padsynth(sp_data *sp, sp_ftbl *ps, sp_ftbl *amps,
 {
 
     int i, nh;
-    int N = ps->size;
-    int number_harmonics = amps->size;
+    int N = (int) ps->size;
+    int number_harmonics = (int) amps->size;
     SPFLOAT *A = amps->tbl;
     SPFLOAT *smp = ps->tbl;
 

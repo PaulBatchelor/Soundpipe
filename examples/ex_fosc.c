@@ -7,20 +7,20 @@ typedef struct {
     sp_fosc *osc;
     sp_ftbl *ft; 
     int counter;
-} udata;
+} UserData;
 
-void process(sp_data *data, void *ud) {
-    udata *udp = ud;
-    if(udp->counter == 0){
-        udp->osc->freq = 500 + rand() % 2000;
+void process(sp_data *sp, void *udata) {
+    UserData *ud = ud;
+    if(ud->counter == 0){
+        ud->osc->freq = 500 + rand() % 2000;
     }
-    sp_fosc_compute(data, udp->osc, NULL, &data->out[0]);
-    udp->counter = (udp->counter + 1) % 4410;
+    sp_fosc_compute(sp, ud->osc, NULL, &sp->out[0]);
+    ud->counter = (ud->counter + 1) % 4410;
 }
 
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     ud.counter = 0;
     sp_data *sp;
     sp_create(&sp);

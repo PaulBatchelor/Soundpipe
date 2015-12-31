@@ -5,16 +5,16 @@
 
 typedef struct {
     sp_dust *dst;
-} udata;
+} UserData;
 
-void write_dust(sp_data *data, void *ud) {
-    udata *udata = ud;
+void write_dust(sp_data *sp, void *udata) {
+    UserData *ud = udata;
     SPFLOAT in = 0;
-    sp_dust_compute(data, udata->dst, NULL, &data->out[0]);
+    sp_dust_compute(sp, ud->dst, NULL, &sp->out[0]);
 }
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     sp_data *sp;
     sp_create(&sp);
     sp_dust_create(&ud.dst);

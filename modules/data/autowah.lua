@@ -11,25 +11,6 @@ sptbl["autowah"] = {
         destroy = "sp_autowah_destroy",
         init = "sp_autowah_init",
         compute = "sp_autowah_compute",
-        other = {
-            sp_autowah_set = {
-                description = "autowah_set description goes here.",
-                args = {
-                    {
-                        name = "var1",
-                        type = "SPFLOAT",
-                        description = "This is the first parameter",
-                        default = 1.5
-                    },
-                    {
-                        name = "var2",
-                        type = "SPFLOAT",
-                        description = "This is the second parameter",
-                        default = 1.5
-                    }
-                }
-            }
-        }
     },
 
     params = {

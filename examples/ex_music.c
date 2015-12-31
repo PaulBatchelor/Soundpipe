@@ -19,14 +19,14 @@ typedef struct {
     sp_ftbl *ft;
     sp_revsc *rev;
     sp_dcblock *dcblk;
-} udata;
+} UserData;
 
 SPFLOAT midi2cps(int nn){
     return pow(2, (nn - 69.0) / 12.0) * 440.0;
 }
 
 void write_osc(sp_data *data, void *ud) {
-    udata *udp = ud;
+    UserData *udp = ud;
     int i;
     SPFLOAT amp = 0;
     SPFLOAT osc = 0;
@@ -47,7 +47,7 @@ void write_osc(sp_data *data, void *ud) {
 
 int main() {
     srand(time(NULL));
-    udata ud;
+    UserData ud;
     sp_data *sp;
     sp_create(&sp);
 

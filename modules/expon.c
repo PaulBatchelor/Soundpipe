@@ -34,7 +34,6 @@ int sp_expon_init(sp_data *sp, sp_expon *p, SPFLOAT ia, SPFLOAT idur, SPFLOAT ib
     p->idur = idur;
     p->stime = 0;
     p->sdur = idur * sp->sr;
-    printf("%g %g\n", p->ia, p->ib);
     if((p->ia * p->ib) > 0.0) {
         p->incr = pow((SPFLOAT)(p->ib / p->ia), onedsr / p->idur);
     } else {

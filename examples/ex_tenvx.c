@@ -11,15 +11,15 @@ typedef struct {
     SPFLOAT freq;
 } UserData;
 
-void write_osc(sp_data *sp, void *ud) {
-    UserData *udp = ud;
+void write_osc(sp_data *sp, void *udata) {
+    UserData *ud = udata;
     SPFLOAT trig = 0;
     SPFLOAT env = 0;
     SPFLOAT osc = 0;
-    sp_metro_compute(sp, udp->met, NULL, &trig);
-    if(trig) udp->osc->freq = 500 + sp_rand(sp) % 2000;
-    sp_osc_compute(sp, udp->osc, NULL, &osc);
-    sp_tenvx_compute(sp, udp->tenvx, &trig, &env);
+    sp_metro_compute(sp, ud->met, NULL, &trig);
+    if(trig) ud->osc->freq = 500 + sp_rand(sp) % 2000;
+    sp_osc_compute(sp, ud->osc, NULL, &osc);
+    sp_tenvx_compute(sp, ud->tenvx, &trig, &env);
 
     sp->out[0] = osc * env;
 }

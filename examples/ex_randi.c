@@ -7,18 +7,18 @@ typedef struct {
     sp_osc *osc;
     sp_ftbl *ft; 
     sp_randi *rnd;
-} udata;
+} UserData;
 
-void write_osc(sp_data *data, void *ud) {
-    udata *udp = ud;
+void write_osc(sp_data *sp, void *udata) {
+    UserData *ud = udata;
     SPFLOAT freq;
-    sp_randi_compute(data, udp->rnd, NULL, &freq);
-    udp->osc->freq = freq;
-    sp_osc_compute(data, udp->osc, NULL, &data->out[0]);
+    sp_randi_compute(sp, ud->rnd, NULL, &freq);
+    ud->osc->freq = freq;
+    sp_osc_compute(sp, ud->osc, NULL, &sp->out[0]);
 }
 
 int main() {
-    udata ud;
+    UserData ud;
     sp_data *sp;
     sp_create(&sp);
     sp_srand(sp, 12345);
