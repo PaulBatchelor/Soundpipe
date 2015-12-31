@@ -15,7 +15,7 @@ int t_expon(sp_test *tst, sp_data *sp, const char *hash)
     sp_srand(sp, 1234567);
     uint32_t n;
     int fail = 0;
-    SPFLOAT osc = 0, line = 0, out = 0;
+    SPFLOAT osc = 0, line = 0;
     UserData ud;
 
     sp_expon_create(&ud.line);

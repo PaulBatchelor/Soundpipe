@@ -72,7 +72,7 @@ t_vdelay
 OBJ = $(addprefix t/, $(addsuffix .o, $(tests)))
 
 LDFLAGS += -L/usr/local/lib -lsndfile -lm
-CFLAGS += -g -I../h -I /usr/local/include -I. -O3 -Wall
+CFLAGS += -g -I../h -I /usr/local/include -I. -O3 -Wall -Werror
 
 ifdef WRITE_RAW
 CFLAGS += -DWRITE_RAW

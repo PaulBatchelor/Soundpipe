@@ -117,7 +117,9 @@ int t_mode(sp_test *tst, sp_data *sp, const char *hash)
     sp_tseq_init(sp, ud.seq, ud.notes);
 
     for(n = 0; n < tst->size; n++) {
-        met = 0, mod = 0, nn;
+        met = 0; 
+        mod = 0; 
+        nn = 0;
         sp_metro_compute(sp, ud.met, NULL, &met);
         sp_tseq_compute(sp, ud.seq, &met, &nn);
         *ud.mod->freq = sp_midi2cps(nn);
