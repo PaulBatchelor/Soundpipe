@@ -73,6 +73,7 @@ scale \
 streson \
 switch \
 tabread \
+tadsr \
 tbvcf \
 tenv \
 tenv2 \

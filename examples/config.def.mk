@@ -79,6 +79,7 @@ ex_scale \
 ex_streson \
 ex_switch \
 ex_tabread \
+ex_tadsr \
 ex_tbvcf \
 ex_tenv \
 ex_tenv2 \
