@@ -1,12 +1,3 @@
-/*
- * This is a dummy example.
- * Please implement a small and simple working example of your module, and then
- * remove this header.
- * Don't be clever.
- * Bonus points for musicality. 
- *
- */
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -20,10 +11,11 @@ typedef struct {
 
 void process(sp_data *sp, void *udata) {
     UserData *ud = udata;
-    SPFLOAT osc = 0, tadsr = 0;
+    SPFLOAT osc = 0, tadsr = 0, trig = 0;
+    if(sp->pos == 0 || sp->pos == sp->sr * 2) trig = 1;
+    sp_tadsr_compute(sp, ud->tadsr, &trig, &tadsr);
     sp_osc_compute(sp, ud->osc, NULL, &osc);
-    sp_tadsr_compute(sp, ud->tadsr, &osc, &tadsr);
-    sp->out[0] = tadsr;
+    sp->out[0] = osc * tadsr;
 }
 
 int main() {
