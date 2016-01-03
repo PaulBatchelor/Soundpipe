@@ -86,6 +86,9 @@ int sp_ftbl_loadfile(sp_data *sp, sp_ftbl **ft, const char *filename)
     SF_INFO info;
     info.format = 0;
     SNDFILE *snd = sf_open(filename, SFM_READ, &info);
+    if(snd == NULL) {
+        return SP_NOT_OK;
+    }
     size_t size = info.frames * info.channels;
     ftp->size = size;
     ftp->tbl = malloc(sizeof(SPFLOAT) * (size + 1));

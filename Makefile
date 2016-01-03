@@ -16,7 +16,7 @@ ifdef BUILD_DYNAMIC
 SPLIBS += libsoundpipe_dyn.so
 endif
 
-VERSION=0.5.1
+VERSION=0.6
 
 MPATHS=$(addprefix modules/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
@@ -63,4 +63,4 @@ bootstrap:
 	util/module_bootstrap.sh $(MODULE_NAME)
 
 util/wav2smp: util/wav2smp.c
-	$(CC) $(CFLAGS) -L/usr/local/lib $< -lsndfile -o $@
+	$(CC) -L/usr/local/lib $< -lsndfile -o $@

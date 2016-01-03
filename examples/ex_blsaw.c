@@ -4,16 +4,16 @@
 #include "soundpipe.h"
 
 typedef struct {
-    sp_saw *saw;
+    sp_blsaw *blsaw;
     int counter;
 } UserData;
 
 void process(sp_data *sp, void *udata) {
     UserData *ud = udata;
     if(ud->counter == 0){
-        *ud->saw->freq = 500 + rand() % 2000;
+        *ud->blsaw->freq = 500 + rand() % 2000;
     }
-    sp_saw_compute(sp, ud->saw, NULL, &sp->out[0]);
+    sp_blsaw_compute(sp, ud->blsaw, NULL, &sp->out[0]);
     ud->counter = (ud->counter + 1) % 4410;
 }
 
@@ -23,16 +23,16 @@ int main() {
     ud.counter = 0;
     sp_data *sp;
     sp_create(&sp);
-    
-    sp_saw_create(&ud.saw);
 
-    sp_saw_init(sp, ud.saw);
-    *ud.saw->freq = 500;
-    *ud.saw->amp = 1;
+    sp_blsaw_create(&ud.blsaw);
+
+    sp_blsaw_init(sp, ud.blsaw);
+    *ud.blsaw->freq = 500;
+    *ud.blsaw->amp = 1;
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);
 
-    sp_saw_destroy(&ud.saw);
+    sp_blsaw_destroy(&ud.blsaw);
     sp_destroy(&sp);
     return 0;
 }

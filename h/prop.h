@@ -2,6 +2,7 @@ typedef struct prop_event {
     char type;
     uint32_t pos;
     uint32_t val;
+    uint32_t cons;
     struct prop_event *next;
 } prop_event;
 
@@ -10,6 +11,8 @@ typedef struct {
     uint32_t div;
     uint32_t tmp;
     uint32_t num;
+    uint32_t cons_mul;
+    uint32_t cons_div;
     SPFLOAT scale;
     int mode;
     uint32_t pos;

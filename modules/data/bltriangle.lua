@@ -1,16 +1,16 @@
-sptbl["saw"] = {
+sptbl["bltriangle"] = {
 
     files = {
-        module = "saw.c",
-        header = "saw.h",
-        example = "ex_saw.c",
+        module = "bltriangle.c",
+        header = "bltriangle.h",
+        example = "ex_bltriangle.c",
     },
 
     func = {
-        create = "sp_saw_create",
-        destroy = "sp_saw_destroy",
-        init = "sp_saw_init",
-        compute = "sp_saw_compute",
+        create = "sp_bltriangle_create",
+        destroy = "sp_bltriangle_destroy",
+        init = "sp_bltriangle_init",
+        compute = "sp_bltriangle_compute",
     },
 
     params = {
@@ -24,7 +24,7 @@ sptbl["saw"] = {
             {
                 name = "amp",
                 type = "SPFLOAT",
-                description ="Amplitude (range 0-1).", 
+                description ="Amplitude (range 0-1).",
 		default = 1.0
             },
         }
@@ -32,8 +32,8 @@ sptbl["saw"] = {
 
     modtype = "module",
 
-    description = [[Bandlimited sawtooth oscillator
-This is a bandlimited sawtooth oscillator ported from the "sawtooth" function from the Faust 
+    description = [[Bandlimited triangle oscillator
+This is a bandlimited triangle oscillator ported from the "triangletooth" function from the Faust
 programming language.
 ]],
 

@@ -16,12 +16,6 @@ sptbl["randh"] = {
     params = {
         optional = {
             {
-                name = "freq",
-                type = "SPFLOAT",
-                description = "Frequency of randomization (in Hz)",
-                default = 10
-            },
-            {
                 name = "min",
                 type = "SPFLOAT",
                 description ="Minimum value to use.",
@@ -33,6 +27,12 @@ sptbl["randh"] = {
                 description ="Maximum value to use.",
                 default = 1
             },
+            {
+                name = "freq",
+                type = "SPFLOAT",
+                description = "Frequency of randomization (in Hz)",
+                default = 10
+            },
         }
     },
 
@@ -40,7 +40,7 @@ sptbl["randh"] = {
 
     description = [[Random number generator with hold time.
 Randh is loosely based off of the Csound opcode randomh. The design is equivalent
-to scaled noise sent through a classic sample and hold module. 
+to scaled noise sent through a classic sample and hold module.
 ]],
 
     ninputs = 0,

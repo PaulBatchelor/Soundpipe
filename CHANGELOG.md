@@ -1,5 +1,26 @@
 # Change log
 
+0.6 
+--------------
+    - New Modules:
+        - conv: performs partitioned convolution
+        - pitchamdf: pitch tracking using average magnitude difference function
+        - bandlimited oscillators: saw, square, triangle
+        - autowah
+        - pink noise generator
+        - phaser
+        - thresh
+        - trand: triggerable RNG
+    - pluck rewritten and simplified
+    - removed "event" module
+    - make examples more consistent
+    - prop: added [] to double duration
+    - nsmp: reads from ftbl instead of disk
+    - tabread rewritten to do linear interpolation
+    - attribution for zitarev and tweaks
+    - Makefile/config.mk reorganization
+    - Improvements towards Faust automation
+
 0.5 "Spectral"
 --------------
     - Internal RNG created for cross-platform consistency

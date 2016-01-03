@@ -9,6 +9,10 @@ autowah \
 bal \
 bar \
 biquad \
+biscale \
+blsaw \
+blsquare \
+bltriangle \
 fold \
 bitcrush \
 butbp \
@@ -18,6 +22,7 @@ butlp \
 clip \
 comb \
 count \
+conv \
 dcblock \
 delay \
 dist \
@@ -49,6 +54,7 @@ pareq \
 phaser \
 phasor \
 pinknoise \
+pitchamdf \
 pluck \
 port \
 posc3 \
@@ -63,9 +69,7 @@ revsc \
 rms \
 rpt \
 samphold \
-saw \
 scale \
-square \
 streson \
 switch \
 tabread \
@@ -73,10 +77,10 @@ tbvcf \
 tenv \
 tenv2 \
 tenvx \
+thresh \
 tin \
 tone \
 trand \
-triangle \
 tseq \
 vdelay \
 zitarev
@@ -109,6 +113,7 @@ include lib/fft/Makefile
 include lib/kissfft/Makefile
 MODULES += fftwrapper
 MODULES += padsynth
+
 # Uncomment to use FFTW3 instead of kissfft.
 # CFLAGS += -lfftw3 -DUSE_FFTW3
 
