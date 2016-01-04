@@ -33,6 +33,7 @@ int t_random(sp_test *tst, sp_data *sp, const char *hash)
     fail = sp_test_verify(tst, hash);
 
     /* destroy functions here */
+    sp_random_destroy(&ud.random);
 
     if(fail) return SP_NOT_OK;
     else return SP_OK;

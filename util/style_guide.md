@@ -12,12 +12,28 @@ suckless.org website with few exceptions. If you're ever in doubt about
 something not specified here, use the suckless style guide, or the [Linux 
 Kernel style guide](https://www.kernel.org/doc/Documentation/CodingStyle).
 
+Please use K&R style braces, as shown below:
+
+```
+int the_important_function()
+{
+	...
+	if (something_is_true) {
+		...
+	}
+	...
+}
+```
+
 If you are creating a new module, the expectation is that all code for that
 module resides in a single c and header file.
 
-Soundpipe code should have no more than 80 characters per line. 
+When creating modules, please take care not to pollute the
+namespace. If a function for a particular module is not in the typical 
+lifecycle (create, init, destroy, compute) and doesn't need to be
+directly accessed, it probably should be a static function. 
 
-Code ported from Csound breaks these guidelines often. 
+Soundpipe code should have no more than 80 characters per line. 
 
 # Commenting
 
@@ -34,18 +50,9 @@ documentation format.
 If you do need to comment, use *only* /\* \*/ commenting conventions.
 
 The Linux Kernel convention for commenting is preferred for multiline - block 
-comments, but not necessary.
-
-If you need to explain what your code is doing, there is probably something 
-wrong with your code.
+comments.
 
 If you are doing something necessarily clever, make a comment about it.
-
-If some of your code has bad hacks out of desperation, make a comment about it. 
-It's okay,
-we all have done it before, but note that this will need to be fixed 
-eventually. Feel free to mention
-that you would like some help in your pull-request.
 
 If you are using DSP code or algorithms from someone else, keep it in the 
 header of the .c file. 
@@ -58,7 +65,6 @@ good example).
 In C, a good variable name has the right balance of terseness and verboseness 
 for maximum clarity and grokking. As an example, abbreviating "frequency" 
 to "freq" is acceptable, but abbreviating "filter_cutoff" to "fc" is too ambiguous. 
-
 
 Variables should be one word, but if they must use more than one word, 
 use under\_score\_variables and not camelCase.
@@ -84,11 +90,14 @@ If you are porting Csound code, there is often a tendency to put a, k, or i in
 front
 of a variable to indicate audio, control, or init-rate variables. Ditch the a's 
 and k's...
-i's can be allowed.
+i's can be allowed if they are init-time variables.
 
-# Warnings
+# Warnings and Errors
 
 If you notice any compiler warnings after adding your code, please 
-do due dilligance and investigate them. If you're unsure of a 
+investigate them. If you're unsure of a 
 warning and would like some help, please feel free to ask when you
 make your pull request. 
+
+When creating an example to highlight a module, there should be
+no errors in Valgrind.
