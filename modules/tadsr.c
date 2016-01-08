@@ -29,7 +29,7 @@ static void make_ADSR(sp_tadsr *a)
     a->decayRate = 0.001;
     a->sustainLevel = 0.0;
     a->releaseRate = 0.01;
-    a->state = ATTACK;
+    a->state = CLEAR;
 }
 
 static void ADSR_keyOn(sp_tadsr *a)
