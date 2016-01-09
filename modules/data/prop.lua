@@ -45,9 +45,11 @@ Prop has a few basic rules:
 
 2. On and off values can be strung together to create equally spaced gates: +-+--
 
-3. When notes are enclosed in parantheses following an positive integer N, their duration is reduced N times: ++2(+-)
+3. When notes are enclosed in parantheses '()' following a positive integer N, their duration is reduced N times: ++2(+-)
 
-4. Parenthesis can be nested: +- 3(+2(++)+)
+4. When notes are enclosed in brackets '[]' following a positive integer N, their duration is scaled by a factor of N: ++2[++]
+
+5. Parenthesis and brackets can be nested: +- 2[3(+2(++)+)]2(++)
 
 ]],
 
