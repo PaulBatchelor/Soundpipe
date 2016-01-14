@@ -182,7 +182,10 @@ int sp_tadsr_compute(sp_data *sp, sp_tadsr *p, SPFLOAT *trig, SPFLOAT *out)
 {
     if(*trig != 0) {
 
-        if(p->mode == KEY_OFF) {
+        if(*trig == 2) {
+            ADSR_keyOff(p);
+            p->mode = KEY_OFF;
+        }else if(p->mode == KEY_OFF) {
             ADSR_setAllTimes(sp, p, p->atk, p->dec, p->sus, p->rel);
             ADSR_keyOn(p);
             p->mode = KEY_ON;
