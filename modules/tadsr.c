@@ -52,17 +52,6 @@ static void upslope(SPFLOAT *buf, int steps, SPFLOAT type)
     normalize(buf, steps, max);
 }
 
-static void downslope(SPFLOAT *buf, int steps, SPFLOAT type)
-{
-    SPFLOAT max = 0;
-    SPFLOAT min = 100;
-
-    min = slope(buf, 1, 0.00001, steps, type);
-    max = bias(buf, steps, min); 
-    normalize(buf, steps, max);
-}
-
-
 static void make_Envelope(sp_tadsr *e)
 {
     e->target = 0.0;
