@@ -187,13 +187,13 @@ static SPFLOAT ADSR_tick(sp_tadsr *a)
       //out = a->value;
     } else if (a->state == DECAY) {
       a->value -= a->decayRate;
+      out = a->value;
       if (a->value <= a->sustainLevel) {
         a->value = a->sustainLevel;
+        out = a->sustainLevel;
         a->rate = 0.0;
         a->state = SUSTAIN;
-      }
-      out = scale_to_buf(a->decbuf, 1024, a->value);
-      //out = a->value;
+      }     
     } else if (a->state == RELEASE)  {
       a->value -= a->releaseRate;
       if (a->value <= 0.0) {
@@ -201,6 +201,8 @@ static SPFLOAT ADSR_tick(sp_tadsr *a)
         a->state = CLEAR;
       }
       out = a->value;
+    } else if (a->state == SUSTAIN)  {
+        out = a->sustainLevel;
     }
     return out;
 }
