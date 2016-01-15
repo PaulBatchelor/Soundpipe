@@ -1,4 +1,5 @@
 files = \
+ex_adsr \
 ex_allpass \
 ex_atone \
 ex_autowah \

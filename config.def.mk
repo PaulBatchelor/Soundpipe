@@ -3,6 +3,7 @@ MODULES= \
 base \
 ftbl \
 tevent \
+adsr \ 
 allpass \
 atone \
 autowah \
