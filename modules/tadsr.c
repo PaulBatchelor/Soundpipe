@@ -6,11 +6,62 @@
  */
 
 #include <stdlib.h>
+#include <math.h>
 #include "soundpipe.h"
 
-#define RATE_NORM (22050.0 / sp->sr)
-
 enum{ ATTACK, DECAY, SUSTAIN, RELEASE, CLEAR, KEY_ON, KEY_OFF };
+
+
+static SPFLOAT slope(SPFLOAT *buf, SPFLOAT beg, SPFLOAT end, int steps, SPFLOAT type)
+{
+    int n;
+    SPFLOAT min = 100;
+    for(n = 0; n < steps; n++) {
+        buf[n] = beg + (end - beg) * (1 - exp(n * type / (steps - 1)) / (1 - exp(type)));
+        if(buf[n] < min) min = buf[n];
+    }
+    return min;
+}
+
+static SPFLOAT bias(SPFLOAT *buf, int steps, SPFLOAT min)
+{
+    int n;
+    SPFLOAT max = 0;
+    for(n = 0; n < steps; n++) {
+        buf[n] = (buf[n] - min);
+        if(buf[n] > max) max = buf[n];
+    }
+    return max;
+}
+
+static void normalize(SPFLOAT *buf, int steps, SPFLOAT max)
+{
+    int n;
+    for(n = 0; n < steps; n++) {
+        buf[n] /= (SPFLOAT)max;
+    }
+}
+
+static void upslope(SPFLOAT *buf, int steps, SPFLOAT type)
+{
+    SPFLOAT max = 0;
+    SPFLOAT min = 100;
+
+    min = slope(buf, 0.00001, 1, steps, type);
+    max = bias(buf, steps, min); 
+    normalize(buf, steps, max);
+}
+
+static void downslope(SPFLOAT *buf, int steps, SPFLOAT type)
+{
+    SPFLOAT max = 0;
+    SPFLOAT min = 100;
+
+    min = slope(buf, 1, 0.00001, steps, type);
+    max = bias(buf, steps, min); 
+    normalize(buf, steps, max);
+}
+
 
 static void make_Envelope(sp_tadsr *e)
 {
@@ -117,9 +168,25 @@ static void ADSR_setTarget(sp_data *sp, sp_tadsr *a, SPFLOAT aTarget)
     }
 }
 */
+
+static SPFLOAT scale_to_buf(SPFLOAT *buf, int steps, SPFLOAT pos)
+{
+    int ipos = floor(pos * (steps - 1));
+    SPFLOAT frac = (pos * (steps - 1)) - ipos;
+    SPFLOAT x1 = buf[ipos];
+    SPFLOAT x2 = 0;
+    if(ipos > steps - 2) {
+        x2 = x1;
+    } else {
+        x2 = buf[ipos + 1];
+    }
+    return x1 + (x2 - x1) * frac;
+}
+
 static SPFLOAT ADSR_tick(sp_tadsr *a)
 {
-    if (a->state==ATTACK) {
+    SPFLOAT out = 0;
+    if (a->state == ATTACK) {
       a->value += a->rate;
       if (a->value >= a->target) {
         a->value = a->target;
@@ -127,23 +194,26 @@ static SPFLOAT ADSR_tick(sp_tadsr *a)
         a->target = a->sustainLevel;
         a->state = DECAY;
       }
-    }
-    else if (a->state==DECAY) {
+      out = scale_to_buf(a->atkbuf, 1024, a->value);
+      //out = a->value;
+    } else if (a->state == DECAY) {
       a->value -= a->decayRate;
       if (a->value <= a->sustainLevel) {
         a->value = a->sustainLevel;
         a->rate = 0.0;
         a->state = SUSTAIN;
       }
-    }
-    else if (a->state==RELEASE)  {
+      out = scale_to_buf(a->decbuf, 1024, a->value);
+      //out = a->value;
+    } else if (a->state == RELEASE)  {
       a->value -= a->releaseRate;
       if (a->value <= 0.0) {
         a->value = 0.0;
         a->state = CLEAR;
       }
+      out = a->value;
     }
-    return a->value;
+    return out;
 }
 /*
 static void ADSR_setValue(sp_data *sp, sp_tadsr *a, SPFLOAT aValue)
@@ -175,6 +245,10 @@ int sp_tadsr_init(sp_data *sp, sp_tadsr *p)
     p->sus = 0.0;
     p->rel = 0.5;
     p->mode = KEY_OFF;
+
+    upslope(p->atkbuf, 1024, -3);
+    upslope(p->decbuf, 1024, 3);
+
     return SP_OK;
 }
 

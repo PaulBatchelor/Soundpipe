@@ -16,6 +16,7 @@ void process(sp_data *sp, void *udata) {
     sp_tadsr_compute(sp, ud->tadsr, &trig, &tadsr);
     sp_osc_compute(sp, ud->osc, NULL, &osc);
     sp->out[0] = osc * tadsr;
+    //sp->out[0] = tadsr;
 }
 
 int main() {
