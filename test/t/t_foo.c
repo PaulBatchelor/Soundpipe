@@ -20,5 +20,6 @@ int t_foo(sp_test *tst, sp_data *sp, const char *hash)
     /* destroy functions here */
 
     if(fail) return SP_NOT_OK;
-    else return SP_OK;
+    /* fail by default */
+    else return SP_NOT_OK;
 }

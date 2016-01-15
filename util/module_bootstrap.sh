@@ -34,4 +34,6 @@ makefile $MODNAME h/ h
 makefile $MODNAME modules/data/ lua
 # Example
 makefile $MODNAME examples/ex_ c
-# Example
+# Test file
+makefile $MODNAME test/t/t_ c
+
