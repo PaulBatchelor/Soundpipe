@@ -49,6 +49,7 @@ mode \
 moogladder \
 noise \
 osc \
+oscmorph \
 pan2 \
 panst \
 pareq \
