@@ -18,19 +18,19 @@ sptbl["tadsr"] = {
             {
                 name = "atk",
                 type = "SPFLOAT",
-                description = "Attack",
-                default = 0.5
+                description = "Attack time",
+                default = 0.1
             },
             {
                 name = "dec",
                 type = "SPFLOAT",
-                description ="Sustain",
-                default = 0.5
+                description ="Decay time",
+                default = 0.1
             },
             {
                 name = "sus",
                 type = "SPFLOAT",
-                description ="sustain",
+                description ="Sustain Level",
                 default = 0.5
             },
             {
@@ -44,9 +44,7 @@ sptbl["tadsr"] = {
 
     modtype = "module",
 
-    description = [[Triggerable classic ADSR envelope
-
-]],
+    description = [[Triggerable classic ADSR envelope]],
 
     ninputs = 1,
     noutputs = 1,

@@ -3,6 +3,7 @@ typedef struct {
     SPFLOAT sicps;
     int32_t phs256, npts, maxpts;
     sp_auxdata auxch;
+    char init;
 } sp_pluck;
 
 int sp_pluck_create(sp_pluck **p);
