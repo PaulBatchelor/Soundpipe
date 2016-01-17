@@ -32,9 +32,9 @@ int main() {
     sp_dmetro_create(&ud.dm);
 
     sp_line_init(sp, ud.line);
-    ud.line->ia = 100;
-    ud.line->idur = 1;
-    ud.line->ib = 400;
+    ud.line->a = 100;
+    ud.line->dur = 1;
+    ud.line->b = 400;
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
     sp_dmetro_init(sp, ud.dm);

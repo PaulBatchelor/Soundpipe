@@ -1,5 +1,5 @@
 typedef struct {
-    SPFLOAT ia, idur, ib;
+    SPFLOAT a, dur, b;
     SPFLOAT val, incr; 
     uint32_t sdur, stime;
     int init;

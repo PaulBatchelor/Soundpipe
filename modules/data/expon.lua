@@ -16,19 +16,19 @@ sptbl["expon"] = {
     params = {
         optional = {
             {
-                name = "ia",
+                name = "a",
                 type = "sp_ftbl *",
                 description = "Inital point.",
                 default = 1.0
             },
             {
-                name = "idur",
+                name = "dur",
                 type = "SPFLOAT",
                 description = "Duration (in seconds)",
                 default = 1.0
             },
             {
-                name = "ib",
+                name = "b",
                 type = "SPFLOAT",
                 description = "End point",
                 default = 1.0

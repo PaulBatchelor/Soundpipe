@@ -33,9 +33,9 @@ int main() {
 
     sp_expon_init(sp, ud.line);
 
-    ud.line->ia = 100;
-    ud.line->ib = 400;
-    ud.line->idur = 1;
+    ud.line->a = 100;
+    ud.line->b = 400;
+    ud.line->dur = 1;
 
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);

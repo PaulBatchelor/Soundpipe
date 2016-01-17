@@ -16,19 +16,19 @@ sptbl["line"] = {
     params = {
         optional = {
             {
-                name = "ia",
+                name = "a",
                 type = "sp_ftbl *",
                 description = "Inital point.",
                 default = 0.0
             },
             {
-                name = "idur",
+                name = "dur",
                 type = "SPFLOAT",
                 description = "Duration (in seconds)",
                 default = 0.5
             },
             {
-                name = "ib",
+                name = "b",
                 type = "SPFLOAT",
                 description = "End point",
                 default = 1.0

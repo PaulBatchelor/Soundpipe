@@ -29,24 +29,24 @@ int sp_expon_destroy(sp_expon **p)
 static void expon_reinit(sp_data *sp, sp_expon *p)
 {
     p->stime = 0;
-    p->sdur = p->idur * sp->sr;
+    p->sdur = p->dur * sp->sr;
     SPFLOAT onedsr = 1.0 / sp->sr;
-    if((p->ia * p->ib) > 0.0) {
-        p->incr = pow((SPFLOAT)(p->ib / p->ia), onedsr / p->idur);
+    if((p->a * p->b) > 0.0) {
+        p->incr = pow((SPFLOAT)(p->b / p->a), onedsr / p->dur);
     } else {
         fprintf(stderr, "Warning: p values must be non-zero\n");
         p->incr = 1;
-        p->val = p->ia;
+        p->val = p->a;
     }
 
-    p->val = p->ia;
+    p->val = p->a;
 }
 
 int sp_expon_init(sp_data *sp, sp_expon *p)
 {
-    p->ia = 0.000001;
-    p->ib = 1;
-    p->idur = 1;
+    p->a = 0.000001;
+    p->b = 1;
+    p->dur = 1;
     expon_reinit(sp, p);
     p->init = 1;
     return SP_OK;
@@ -70,7 +70,7 @@ int sp_expon_compute(sp_data *sp, sp_expon *p, SPFLOAT *in, SPFLOAT *out)
         p->stime++;
         *out = val;
     } else {
-        *out = p->ib;
+        *out = p->b;
     }
     return SP_OK;
 }
