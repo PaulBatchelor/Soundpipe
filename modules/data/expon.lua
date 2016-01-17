@@ -17,7 +17,7 @@ sptbl["expon"] = {
         optional = {
             {
                 name = "a",
-                type = "sp_ftbl *",
+                type = "SPFLOAT",
                 description = "Inital point.",
                 default = 1.0
             },

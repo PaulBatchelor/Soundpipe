@@ -17,7 +17,7 @@ sptbl["line"] = {
         optional = {
             {
                 name = "a",
-                type = "sp_ftbl *",
+                type = "SPFLOAT",
                 description = "Inital point.",
                 default = 0.0
             },
