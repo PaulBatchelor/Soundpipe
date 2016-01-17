@@ -43,14 +43,10 @@ sptbl["dust"] = {
 
     description = [[A series of random impulses]],
 
-    ninputs = 1,
+    ninputs = 0,
     noutputs = 1,
 
     inputs = {
-        {
-            name = "dummy",
-            description = "This doesn't do anything."
-        },
     },
 
     outputs = {
