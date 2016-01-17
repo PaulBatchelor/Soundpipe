@@ -14,7 +14,7 @@ sptbl["dust"] = {
     },
 
     params = {
-        mandatory = {
+        optional = {
             {
                 name = "amp",
                 type = "SPFLOAT",
@@ -26,16 +26,13 @@ sptbl["dust"] = {
                 type = "SPFLOAT",
                 description = "",
                 default = 10
-            }
-        },
-
-        optional = {
+            },
             {
                 name = "bipolar",
                 type = "int",
                 description = "Bipolar flag. A non-zero makes the signal bipolar as opposed to unipolar. ",
                 default = 0
-            },
+            }
         }
     },
 
