@@ -57,6 +57,7 @@ ex_music5 \
 ex_noise \
 ex_nsmp \
 ex_osc \
+ex_oscmorph \
 ex_padsynth \
 ex_pan2 \
 ex_panst \

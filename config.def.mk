@@ -3,7 +3,7 @@ MODULES= \
 base \
 ftbl \
 tevent \
-adsr \ 
+adsr \
 allpass \
 atone \
 autowah \
@@ -49,6 +49,7 @@ mode \
 moogladder \
 noise \
 osc \
+oscmorph \
 pan2 \
 panst \
 pareq \
