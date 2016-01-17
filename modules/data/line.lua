@@ -14,21 +14,21 @@ sptbl["line"] = {
     },
 
     params = {
-        mandatory = {
+        optional = {
             {
-                name = "ia",
-                type = "sp_ftbl *",
+                name = "a",
+                type = "SPFLOAT",
                 description = "Inital point.",
-                default = 1.0
+                default = 0.0
             },
             {
-                name = "idur",
+                name = "dur",
                 type = "SPFLOAT",
                 description = "Duration (in seconds)",
-                default = 1.0
+                default = 0.5
             },
             {
-                name = "ib",
+                name = "b",
                 type = "SPFLOAT",
                 description = "End point",
                 default = 1.0
@@ -44,13 +44,13 @@ This will generate a line from value A to value B in given amount of time.
 When it reaches it's target, it will stay at that value. 
 ]],
 
-    ninputs = 0,
+    ninputs = 1,
     noutputs = 1,
 
     inputs = {
         {
-            name = "dummy",
-            description = ""
+            name = "trig",
+            description = "When non-zero, will retrigger the line slope."
         },
     },
 
