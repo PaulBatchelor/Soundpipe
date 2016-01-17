@@ -13,21 +13,37 @@ int sp_line_destroy(sp_line **p)
     return SP_OK;
 }
 
-int sp_line_init(sp_data *sp, sp_line *p, SPFLOAT ia, SPFLOAT idur, SPFLOAT ib)
+static void line_reinit(sp_data *sp, sp_line *p)
 {
     SPFLOAT onedsr = 1.0 / sp->sr;
-    p->ia = ia;
-    p->idur = idur;
-    p->ib = ib;
     p->incr = (SPFLOAT)((p->ib - p->ia) / (p->idur)) * onedsr;
     p->val = p->ia;
     p->stime = 0;
-    p->sdur = sp->sr * idur;
+    p->sdur = sp->sr * p->idur;
+}
+
+int sp_line_init(sp_data *sp, sp_line *p)
+{
+    p->ia = 0;
+    p->idur = 0.5;
+    p->ib = 1;
+    line_reinit(sp, p);
+    p->init = 1;
     return SP_OK;
 }
 
 int sp_line_compute(sp_data *sp, sp_line *p, SPFLOAT *in, SPFLOAT *out)
 {
+    if(*in != 0 ) {
+        line_reinit(sp, p);
+        p->init = 0;
+    }
+
+    if(p->init) {
+        *out = 0;
+        return SP_OK;
+    }
+
     if(p->stime < p->sdur) {
         SPFLOAT val = p->val;
         p->val += p->incr;
@@ -36,5 +52,6 @@ int sp_line_compute(sp_data *sp, sp_line *p, SPFLOAT *in, SPFLOAT *out)
     } else {
         *out = p->ib;
     }
+
     return SP_OK;
 }
