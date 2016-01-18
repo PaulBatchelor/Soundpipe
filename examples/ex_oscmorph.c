@@ -25,7 +25,7 @@ void process(sp_data *sp, void *udata) {
     sp_osc_compute(sp, ud->osc, NULL, &osc);
     osc = (1 + osc) * 0.5;
     ud->oscmorph->wtpos = osc;
-    sp_oscmorph_compute(sp, ud->oscmorph, &osc, &oscmorph);
+    sp_oscmorph_compute(sp, ud->oscmorph, NULL, &oscmorph);
     sp->out[0] = oscmorph;
 }
 
