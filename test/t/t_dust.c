@@ -15,7 +15,7 @@ int t_dust(sp_test *tst, sp_data *sp, const char *hash)
     UserData ud;
     
     sp_dust_create(&ud.dst);
-    sp_dust_init(sp, ud.dst, 0.3, 10);
+    sp_dust_init(sp, ud.dst);
     sp->len = 44100 * 5;
     ud.dst->bipolar = 1.0;
 

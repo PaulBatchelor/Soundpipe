@@ -20,7 +20,7 @@ int t_drip(sp_test *tst, sp_data *sp, const char *hash)
     sp_drip_create(&ud.drip);
     sp_dust_create(&ud.trig);
     
-    sp_dust_init(sp, ud.trig, 1, 1);
+    sp_dust_init(sp, ud.trig);
     sp_drip_init(sp, ud.drip, 0.09);
     ud.drip->amp = 0.3;
     sp_revsc_init(sp, ud.rev);

@@ -16,7 +16,7 @@ int sp_tseq_destroy(sp_tseq **p)
 int sp_tseq_init(sp_data *sp, sp_tseq *p, sp_ftbl *ft)
 {
     p->ft = ft;
-    p->pos = 0;
+    p->pos = -1;
     p->val = 0;
     p->shuf = 0;
     return SP_OK;

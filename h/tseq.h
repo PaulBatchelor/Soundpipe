@@ -1,7 +1,7 @@
 typedef struct sp_tseq {
     sp_ftbl *ft;
     SPFLOAT val;
-    uint32_t pos;
+    int32_t pos;
     int shuf;
 } sp_tseq;
 
