@@ -1,5 +1,15 @@
 # Change log
 
+1.0: AudioKit
+-------------
+    - New Modules:
+        - oscmorph
+        - adsr
+        - tadsr
+    - ftable bug fix
+    - tseq fixes
+    - line/expon are now triggerable
+
 0.6 
 --------------
     - New Modules:
