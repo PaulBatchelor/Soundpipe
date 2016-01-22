@@ -16,7 +16,7 @@ ifdef BUILD_DYNAMIC
 SPLIBS += libsoundpipe_dyn.so
 endif
 
-VERSION=0.6
+VERSION=1.0
 
 MPATHS=$(addprefix modules/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))

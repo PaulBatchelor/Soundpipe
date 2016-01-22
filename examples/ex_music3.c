@@ -152,7 +152,9 @@ int chord_cloud_init(sp_data *sp, chord_cloud *cc, char *notes, SPFLOAT amp)
         tmpdust = grain->dust;
         tmpretrig = grain->retrig;
 
-        sp_dust_init(sp, tmpdust, 1, 8);
+        sp_dust_init(sp, tmpdust);
+        tmpdust->amp = 1;
+        tmpdust->density = 8;
         sp_osc_init(sp, tmposc, cc->sine, 0);
         tmposc->freq = sp_midi2cps(cc->notes->tbl[i]);
         tmposc->amp = 1.0;
