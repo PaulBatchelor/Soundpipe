@@ -14,7 +14,7 @@ type Blah struct {
 
 func main() {
 	
-	if len(os.Args) == 2 {
+	if len(os.Args) < 1 {
 		fmt.Println("Please specify the name, then a filename")
 		os.Exit(1)
 	}
