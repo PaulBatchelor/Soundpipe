@@ -14,6 +14,7 @@ SPLIBS = libsoundpipe.a
 
 ifdef BUILD_DYNAMIC
 SPLIBS += libsoundpipe_dyn.so
+CFLAGS += -fPIC
 endif
 
 VERSION=1.0
