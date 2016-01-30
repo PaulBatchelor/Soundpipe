@@ -5,6 +5,7 @@ typedef struct sp_dtrig{
     int running;
     int loop;
     SPFLOAT delay;
+    SPFLOAT scale;
 } sp_dtrig;
 
 int sp_dtrig_create(sp_dtrig **p);
