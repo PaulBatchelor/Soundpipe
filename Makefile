@@ -38,6 +38,9 @@ libsoundpipe.a: $(MPATHS) $(LPATHS)
 libsoundpipe_dyn.so: $(MPATHS) $(LPATHS)
 	ld -shared -fPIC -o $@ $(MPATHS) $(LPATHS)
 
+soundpipe.o: $(MPATHS) $(LPATHS)
+	gcc $(CFLAGS) -c -combine $(CPATHS) -o $@
+
 config.mk: config.def.mk
 	cp config.def.mk config.mk
 
