@@ -1,9 +1,9 @@
 /*
  * TBVCF
- * 
+ *
  * This code has been extracted from the Csound opcode "tbvcf".
  * It has been modified to work as a Soundpipe module.
- * 
+ *
  * Original Author(s): Hans Mikelson
  * Year: 2000
  * Location: Opcodes/biquad.c
@@ -18,7 +18,7 @@
 
 #ifndef M_PI
 #define M_PI		3.14159265358979323846	/* pi */
-#endif 
+#endif
 
 #include "soundpipe.h"
 
@@ -64,19 +64,16 @@ int sp_tbvcf_compute(sp_data *sp, sp_tbvcf *p, SPFLOAT *in, SPFLOAT *out)
     /* The initialisations are fake to fool compiler warnings */
     SPFLOAT ih, fdbk, d, ad;
     SPFLOAT fc=0.0, fco1=0.0, q=0.0, q1=0.0;
-    SPFLOAT sr;
-
-    sr=44100.0;
 
     ih  = 0.001; /* ih is the incremental factor */
 
- /* Set up the pointers 
+ /* Set up the pointers
     fcoptr  = p->fco;
     resptr  = p->res;
     distptr = p->dist;
     asymptr = p->asym; */
 
- /* Get the values for the k-rate variables 
+ /* Get the values for the k-rate variables
     fco  = (SPFLOAT)*fcoptr;
     res  = (SPFLOAT)*resptr;
     dist = (SPFLOAT)*distptr;
@@ -93,13 +90,13 @@ int sp_tbvcf_compute(sp_data *sp, sp_tbvcf *p, SPFLOAT *in, SPFLOAT *out)
         q1   = res/(1.0 + sqrt(dist));
         fco1 = pow(fco*260.0/(1.0+q1*0.5),0.58);
         q    = q1*fco1*fco1*0.0005;
-        fc   = fco1*p->onedsr*(sr/8.0);
+        fc   = fco1*p->onedsr*(p->sr/8.0);
     }
     if ((p->rezcod!=0) || (p->fcocod!=0)) {
         q1  = res/(1.0 + sqrt(dist));
         fco1 = pow(fco*260.0/(1.0+q1*0.5),0.58);
         q  = q1*fco1*fco1*0.0005;
-        fc  = fco1*p->onedsr*(sr/8.0);
+        fc  = fco1*p->onedsr*(p->sr/8.0);
     }
     x  = *in;
     fdbk = q*y/(1.0 + exp(-3.0*y)*asym);
