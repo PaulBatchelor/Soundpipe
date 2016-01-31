@@ -129,7 +129,7 @@ int sp_conv_init(sp_data *sp, sp_conv *p, sp_ftbl *ft, SPFLOAT iPartLen)
 
     p->nChannels = 1;
     /* partition length */
-    p->partSize = lrintf(p->iPartLen);
+    p->partSize = (int)lrintf(p->iPartLen);
     if (p->partSize < 4 || (p->partSize & (p->partSize - 1)) != 0) {
         fprintf(stderr, "conv: invalid partition size.\n");
         return SP_NOT_OK;  
@@ -137,11 +137,11 @@ int sp_conv_init(sp_data *sp, sp_conv *p, sp_ftbl *ft, SPFLOAT iPartLen)
 
     sp_fft_init(&p->fft, (int)log2(p->partSize << 1));
     n = (int) ft->size / p->nChannels;
-    skipSamples = lrintf(p->iSkipSamples);
+    skipSamples = (int)lrintf(p->iSkipSamples);
     n -= skipSamples;
 
     if (lrintf(p->iTotLen) > 0 && n > lrintf(p->iTotLen)) {
-        n = lrintf(p->iTotLen);
+        n = (int)lrintf(p->iTotLen);
     }
 
     if (n <= 0) {
