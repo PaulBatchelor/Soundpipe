@@ -29,7 +29,7 @@ int sp_tabread_init(sp_data *sp, sp_tabread *p, sp_ftbl *ft)
 {
     p->ft = ft;
     
-    p->lenmask = ft->size - 1;
+    p->lenmask = (int)ft->size - 1;
     p->np2 = p->lenmask ? 0 : 1;
     p->mode = 1;
     p->offset = 0;
@@ -40,7 +40,7 @@ int sp_tabread_init(sp_data *sp, sp_tabread *p, sp_ftbl *ft)
         p->mul = 1;
     }
 
-    p->len = p->ft->size;
+    p->len = (int)p->ft->size;
     p->wrap = 0;
     return SP_OK;
 }

@@ -44,11 +44,11 @@ sptbl["panst"] = {
     inputs = {
         {
             name = "in2",
-            description = "Stero left input signal."
+            description = "Stereo left input signal."
         },
         {
             name = "in2",
-            description = "Stero right input signal."
+            description = "Stereo right input signal."
         },
 
     },
