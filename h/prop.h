@@ -7,6 +7,11 @@ typedef struct prop_event {
 } prop_event;
 
 typedef struct {
+    uint32_t stack[16];
+    int pos;
+} prop_stack;
+
+typedef struct {
     uint32_t mul;
     uint32_t div;
     uint32_t tmp;
@@ -19,6 +24,8 @@ typedef struct {
     uint32_t evtpos;
     prop_event root;
     prop_event *last;
+    prop_stack mstack;
+    prop_stack cstack;
 } prop_data;
 
 typedef struct {
