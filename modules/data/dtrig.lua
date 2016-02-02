@@ -35,7 +35,7 @@ sptbl["dtrig"] = {
                 type = "SPFLOAT",
                 description = "This sets a delay (in seconds) on the triggered output when it is initially triggered. This is useful for rhythmic sequences with rests in the beginnings.",
                 default = 0
-            }
+            },
             {
                 name = "scale",
                 type = "SPFLOAT",
