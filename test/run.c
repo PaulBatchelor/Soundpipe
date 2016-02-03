@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "soundpipe.h"
 #include "md5.h"
 #include "tap.h"
@@ -16,7 +17,7 @@ typedef struct {
     uint32_t size;
 } test_data;
 
-int main() 
+int main(int argc, char *argv[])
 {
     uint32_t n;
     sp_test_entry tests [] = {
@@ -25,6 +26,7 @@ int main()
 #undef TEST
     };
 
+    int err = 0;
     plan(SIZE(tests));
     sp_test *tst;
     sp_data *sp;
@@ -32,15 +34,26 @@ int main()
 
     uint32_t size = 44100 * 5;
 
-    for(n = 0; n < SIZE(tests); n++) {
-        sp_test_create(&tst, size);
-        ok(tests[n].func(tst, sp, tests[n].hash)  == SP_OK, tests[n].desc);
+    if(argc == 1) {
+        for(n = 0; n < SIZE(tests); n++) {
+            sp_test_create(&tst, size);
+            ok(tests[n].func(tst, sp, tests[n].hash)  == SP_OK, tests[n].desc);
 #ifdef WRITE_RAW
-        if(n != 0) sp_test_write_raw(tst, n);
+            if(n != 0) sp_test_write_raw(tst, n);
 #endif
-        sp_test_destroy(&tst);
-    }
-
+            sp_test_destroy(&tst);
+        }
+    } else {
+        if (!strcmp(argv[1], "gen_header")) {
+            for(n = 0; n < SIZE(tests); n++) {
+                printf("TEST(t_%s, \"%s\", \"%s\")\n", 
+                        tests[n].desc, tests[n].desc, tests[n].hash);
+            }
+        } else {
+            fprintf(stderr, "Invalid command %s\n", argv[1]);
+            err = 1;
+        }
+    } 
     sp_destroy(&sp);
-    return 0;
+    return err;
 }
