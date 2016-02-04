@@ -17,7 +17,8 @@ void process(sp_data *sp, void *udata) {
     }
     sp_adsr_compute(sp, ud->adsr, &gate, &adsr);
     sp_osc_compute(sp, ud->osc, NULL, &osc);
-    sp->out[0] = adsr * osc;
+    //sp->out[0] = adsr * osc;
+    sp->out[0] = adsr; 
 }
 
 int main() {
@@ -33,6 +34,7 @@ int main() {
     sp_adsr_init(sp, ud.adsr);
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
+    ud.osc->amp = 1;
 
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);
