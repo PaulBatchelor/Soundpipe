@@ -1,12 +1,12 @@
 /*
  * Moogladder
  *
- * This code has been extracted from the Csound opcode "pitchamdf".
+ * This code has been extracted from the Csound opcode "Moogladder".
  * It has been modified to work as a Soundpipe module.
  *
- * Original Author(s): Peter Neubacker
- * Year: 1999
- * Location: Opcodes/pitch.c
+ * Original Author(s): Victor Lazzarini
+ * Year: 2001
+ * Location: Opcodes/newfils.c
  *
  */
 
