@@ -21,5 +21,5 @@ int t_sdelay(sp_test *tst, sp_data *sp, const char *hash)
 
     if(fail) return SP_NOT_OK;
     /* fail by default */
-    else return SP_OK;
+    else return SP_NOT_OK;
 }
