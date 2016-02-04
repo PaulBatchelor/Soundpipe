@@ -16,7 +16,7 @@
 #include "soundpipe.h"
 
 #ifndef M_PI
-#define M_PI		3.14159265358979323846	/* pi */
+#define M_PI		3.14159265358979323846
 #endif
 
 #define SPFLOAT2LONG(x) lrintf(x)
@@ -25,10 +25,12 @@ int sp_moogladder_create(sp_moogladder **t){
     *t = malloc(sizeof(sp_moogladder));
     return SP_OK;
 }
+
 int sp_moogladder_destroy(sp_moogladder **t){
     free(*t);
     return SP_OK;
 }
+
 int sp_moogladder_init(sp_data *sp, sp_moogladder *p){
     p->istor = 0.0;
     p->res = 0.4;
