@@ -1,6 +1,6 @@
-typedef struct {
-    struct overlap *nxtact;
-    struct overlap *nxtfree;
+typedef struct sp_fog_overlap {
+    struct sp_fog_overlap *nxtact;
+    struct sp_fog_overlap *nxtfree;
     int32_t timrem, dectim, formphs, forminc;
     uint32_t risphs;
     int32_t risinc, decphs, decinc;
@@ -13,7 +13,7 @@ typedef struct {
     sp_fog_overlap basovrlap;
     int32_t durtogo, fundphs, fofcount, prvsmps, spdphs;
     SPFLOAT prvband, expamp, preamp, fogcvt; 
-    int16_t xincod, ampcod, fundcod;
+    //int16_t xincod, ampcod, fundcod;
     int16_t formcod, fmtmod, speedcod;
     sp_auxdata auxch;
     sp_ftbl *ftp1, *ftp2;
