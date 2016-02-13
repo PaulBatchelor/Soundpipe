@@ -11,92 +11,104 @@ sptbl["fof"] = {
         destroy = "sp_fof_destroy",
         init = "sp_fof_init",
         compute = "sp_fof_compute",
-        other = {
-            sp_fof_set = {
-                description = "fof_set description goes here.",
-                args = {
-                    {
-                        name = "var1",
-                        type = "SPFLOAT",
-                        description = "This is the first parameter",
-                        default = 1.5
-                    },
-                    {
-                        name = "var2",
-                        type = "SPFLOAT",
-                        description = "This is the second parameter",
-                        default = 1.5
-                    }
-                }
-            }
-        }
     },
 
     params = {
         mandatory = {
             {
-                name = "bar",
+                name = "sine",
                 type = "sp_ftbl *",
-                description = "This is a mandatory table value. It does not have a default value, so we set it to 'N/A'. Any that does not or cannot have a default value should set this default value to 'N/A'.",
+                description = "ftable for sine wave.",
                 default = "N/A"
             },
             {
-                name = "bar2",
+                name = "win",
+                type = "sp_ftbl *",
+                description = "Ftable for envelope function (use either gen_line or gen_sinecomp)",
+                default = "N/A"
+            },
+            {
+                name = "iolaps",
+                type = "int",
+                description = "Maximum number of foflet overlaps.",
+                default = 100 
+            },
+            {
+                name = "iphs",
                 type = "SPFLOAT",
-                description = "This is a mandatory parameter. In soundpipe, users will always need to specify this value, but a default value has been giving in case it is needed to write more complicated engines in the future.",
-                default = 123
+                description = "Phase",
+                default = 0
             }
         },
 
         optional = {
             {
-                name = "blah_1",
+                name = "amp",
                 type = "SPFLOAT",
-                description = "This is an optional parameter. These values are always set to a value by default, and can be set after the init function has been called.",
-                default = 1.5
+                description = "Overall amplitude",
+                default = 0.5
             },
             {
-                name = "blah_2",
+                name = "fund",
                 type = "SPFLOAT",
-                description ="This is yet another optional parameter...",
-                default = 456.7
+                description = "Fundamental frequency",
+                default = 100
+            },
+            {
+                name = "form",
+                type = "SPFLOAT",
+                description = "Formant frequency.",
+                default = 500
+            },
+            {
+                name = "oct",
+                type = "SPFLOAT",
+                description = "Octaviation index, if greater than zero, lowers the effective fund frequency by attenuating odd-numbered sine bursts. whole numbers are full octaves. fractions transpositional.",
+                default = 0
+            },
+            {
+                name = "band",
+                type = "SPFLOAT",
+                description = "Bandwidth (in -6db) expressed in Hz. The bandwidth determines the rate of exponential decay throughout the sineburst, before the enveloping is applied.",
+                default = 50
+            },
+            {
+                name = "ris",
+                type = "SPFLOAT",
+                description = "Rise of sinusoid burst (in seconds)",
+                default = 0.003
+            },
+            {
+                name = "dec",
+                type = "SPFLOAT",
+                description = "Decay of the sinusoid burst (in seconds).",
+                default = 0.0007
+            },
+            {
+                name = "dur",
+                type = "SPFLOAT",
+                description = "OVerall duration of sinusoid burst (in seconds).",
+                default = 0.02
             },
         }
     },
 
     modtype = "module",
 
-    description = [[A short title describing the module
+    description = [[Produces sinusoid bursts for granular and formant synthesis
 
-    This is a description of the entire module.  This is not a real module. This description should be a comprehensive sumary of what this function does.
-
-Inside the Lua table, this is expressed as a multiline string, however it does not adhere to the tradtional 80 column rule found in programming.
-
-Write as much text as needed here...
 ]],
 
-    ninputs = 2,
-    noutputs = 2,
+    ninputs = 0,
+    noutputs = 1,
 
     inputs = {
-        {
-            name = "clock",
-            description = "this is the clock source for a made up plugin."
-        },
-        {
-            name = "input",
-            description = "this is the audio input for a made up plugin."
-        },
     },
 
     outputs = {
         {
-            name = "out_left",
-            description = "Stereo left output for fof."
-        },
-        {
-            name = "out_right",
-            description = "Stereo right output for fof."
+            name = "out",
+            description = "Signal output."
         },
     }
 

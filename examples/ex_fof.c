@@ -40,7 +40,7 @@ int main() {
 
     sp_fof_init(sp, ud.fof, ud.sine, ud.win, 100, 0);
 
-    sp->len = 44100 * 5;
+    sp->len = 44100 * 10;
     sp_process(sp, &ud, process);
 
     sp_fof_destroy(&ud.fof);

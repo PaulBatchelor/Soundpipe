@@ -113,8 +113,8 @@ int sp_fof_destroy(sp_fof **p)
 int sp_fof_init(sp_data *sp, sp_fof *p, sp_ftbl *sine, sp_ftbl *win, int iolaps, SPFLOAT iphs)
 {
     p->amp = 0.5;
-    p->fund = 440;
-    p->form = 1000;
+    p->fund = 100;
+    p->form = 500;
     p->oct = 0;
     p->band = 50;
     p->ris = 0.003;
@@ -178,18 +178,18 @@ int sp_fof_compute(sp_data *sp, sp_fof *p, SPFLOAT *in, SPFLOAT *out)
     fund_inc = (int32_t)(fund * ftp1->sicvt);
     form_inc = (int32_t)(form * ftp1->sicvt);
 
-      if (p->fundphs & SP_FT_MAXLEN) {
+    if (p->fundphs & SP_FT_MAXLEN) {
         p->fundphs &= SP_FT_PHMASK;
         ovp = p->basovrlap.nxtfree;
         if (newpulse(sp, p, ovp, amp, fund, form)) {
-          ovp->nxtact = p->basovrlap.nxtact;
-          p->basovrlap.nxtact = ovp;
-          p->basovrlap.nxtfree = ovp->nxtfree;
+            ovp->nxtact = p->basovrlap.nxtact;
+            p->basovrlap.nxtact = ovp;
+            p->basovrlap.nxtfree = ovp->nxtfree;
         }
-      }
-      *out = 0.0;
-      ovp = &p->basovrlap;
-      while (ovp->nxtact != NULL) {
+    }
+    *out = 0.0;
+    ovp = &p->basovrlap;
+    while (ovp->nxtact != NULL) {
         SPFLOAT  result;
         sp_fof_overlap *prvact = ovp;
         ovp = ovp->nxtact;
@@ -198,43 +198,36 @@ int sp_fof_compute(sp_data *sp, sp_fof *p, SPFLOAT *in, SPFLOAT *out)
         v1 = *ftab++;
         result = v1 + (*ftab - v1) * fract;
         if (p->foftype) {
-          if (p->fmtmod)
+            if (p->fmtmod)
             ovp->formphs += form_inc;           
-          else ovp->formphs += ovp->forminc;
+            else ovp->formphs += ovp->forminc;
         }
         else {
-          /* SPFLOAT ovp->glissbas = kgliss / grain length. ovp->sampct is
+            /* SPFLOAT ovp->glissbas = kgliss / grain length. ovp->sampct is
              incremented each sample. We add glissbas * sampct to the
              pitch of grain at each a-rate pass (ovp->formphs is the
              index into ifna; ovp->forminc is the stepping factor that
              decides pitch) */
-          ovp->formphs += (int32_t)(ovp->forminc + ovp->glissbas * ovp->sampct++);
+            ovp->formphs += (int32_t)(ovp->forminc + ovp->glissbas * ovp->sampct++);
         }
         ovp->formphs &= SP_FT_PHMASK;
         if (ovp->risphs < SP_FT_MAXLEN) {
-          result *= *(ftp2->tbl + (ovp->risphs >> ftp2->lobits) );
-          ovp->risphs += ovp->risinc;
+            result *= *(ftp2->tbl + (ovp->risphs >> ftp2->lobits) );
+            ovp->risphs += ovp->risinc;
         }
         if (ovp->timrem <= ovp->dectim) {
-          result *= *(ftp2->tbl + (ovp->decphs >> ftp2->lobits) );
-          if ((ovp->decphs -= ovp->decinc) < 0)
-            ovp->decphs = 0;
+            result *= *(ftp2->tbl + (ovp->decphs >> ftp2->lobits) );
+            if ((ovp->decphs -= ovp->decinc) < 0) ovp->decphs = 0;
         }
         *out += (result * ovp->curamp);
-        if (--ovp->timrem)
-          ovp->curamp *= ovp->expamp;
+        if (--ovp->timrem) ovp->curamp *= ovp->expamp;
         else {
-          prvact->nxtact = ovp->nxtact;
-          ovp->nxtfree = p->basovrlap.nxtfree;
-          p->basovrlap.nxtfree = ovp;
-          ovp = prvact;
+            prvact->nxtact = ovp->nxtact;
+            ovp->nxtfree = p->basovrlap.nxtfree;
+            p->basovrlap.nxtfree = ovp;
+            ovp = prvact;
         }
-      }
-      p->fundphs += fund_inc;
-      if (p->xincod) {
-        if (p->ampcod)    amp++;
-        if (p->fundcod)   fund_inc = (int32_t)(fund * ftp1->sicvt);
-        if (p->formcod)   form_inc = (int32_t)(form * ftp1->sicvt);
-      }
+    }
+    p->fundphs += fund_inc;
     return SP_OK;
 }
