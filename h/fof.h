@@ -8,7 +8,8 @@ typedef struct sp_fof_overlap {
 
 typedef struct {
     SPFLOAT xamp, xfund, xform, koct, kband, kris, kdur, kdec;
-    SPFLOAT iolaps, ifna, ifnb, itotdur, iphs, ifmode;
+    //SPFLOAT iolaps, ifna, ifnb, itotdur, iphs, ifmode;
+    SPFLOAT iolaps, iphs;
     /* kgliss and ifmode are same field */
     int32_t durtogo, fundphs, fofcount, prvsmps;
     SPFLOAT prvband, expamp, preamp;
@@ -21,5 +22,5 @@ typedef struct {
 
 int sp_fof_create(sp_fof **p);
 int sp_fof_destroy(sp_fof **p);
-int sp_fof_init(sp_data *sp, sp_fof *p);
+int sp_fof_init(sp_data *sp, sp_fof *p, sp_ftbl *sine, sp_ftbl *win, int iolaps, SPFLOAT iphs);
 int sp_fof_compute(sp_data *sp, sp_fof *p, SPFLOAT *in, SPFLOAT *out);
