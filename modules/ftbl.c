@@ -92,8 +92,14 @@ int sp_ftbl_loadfile(sp_data *sp, sp_ftbl **ft, const char *filename)
         return SP_NOT_OK;
     }
     size_t size = info.frames * info.channels;
+
     ftp->size = size;
+    ftp->sicvt = 1.0 * SP_FT_MAXLEN / sp->sr;
     ftp->tbl = malloc(sizeof(SPFLOAT) * (size + 1));
+    ftp->lobits = log2(SP_FT_MAXLEN / size);
+    ftp->lomask = (2^ftp->lobits) - 1;
+    ftp->lodiv = 1.0 / pow(2, ftp->lobits);
+
     sf_readf_float(snd, ftp->tbl, ftp->size);
     sf_close(snd);
     return SP_OK;

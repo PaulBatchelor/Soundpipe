@@ -107,6 +107,20 @@ int sp_fog_destroy(sp_fog **p)
 
 int sp_fog_init(sp_data *sp, sp_fog *p, sp_ftbl *wav, sp_ftbl *win, int iolaps, SPFLOAT iphs)
 {
+    p->amp = 0.5;
+    p->dens = 40;
+    p->trans = 1;
+    p->spd = 0;
+    p->oct = 0;
+    p->band = 50;
+    p->ris = 0.003;
+    p->dec = 0.0007;
+    p->dur = 0.02;
+    p->iolaps = iolaps;
+    p->iphs = iphs;
+    p->ftp1 = wav;
+    p->ftp2 = win;
+
     /* legato test, not sure if the last bit (auxch) is correct? */
     //int skip = (*p->iskip != FL(0.0) && p->auxch.auxp != 0);
     //if ((p->ftp1 = csound->FTFind(csound, p->ifna)) != NULL &&
@@ -152,5 +166,65 @@ int sp_fog_init(sp_data *sp, sp_fog *p, sp_ftbl *wav, sp_ftbl *win, int iolaps, 
 
 int sp_fog_compute(sp_data *sp, sp_fog *p, SPFLOAT *in, SPFLOAT *out)
 {
+    sp_fog_overlap *ovp;
+    sp_ftbl *ftp1,  *ftp2;
+    SPFLOAT  amp, fund, ptch, speed;
+    SPFLOAT v1, fract ,*ftab, fogcvt = p->fogcvt;
+    int32_t fund_inc, form_inc;
+
+    amp = p->amp;
+    fund = p->dens;
+    ptch = p->trans;
+    speed = p->spd;
+    ftp1 = p->ftp1;
+    ftp2 = p->ftp2;
+    fund_inc = (int32_t)(fund * ftp1->sicvt);
+    form_inc = (int32_t)(ptch * fogcvt);
+      if (p->fundphs & SP_FT_MAXLEN) {
+        p->fundphs &= SP_FT_PHMASK;
+        ovp = p->basovrlap.nxtfree;
+        if (newpulse(sp, p, ovp, amp, fund, ptch)) {
+          ovp->nxtact = p->basovrlap.nxtact;
+          p->basovrlap.nxtact = ovp;
+          p->basovrlap.nxtfree = ovp->nxtfree;
+        }
+      }
+      *out = 0.0;
+      ovp = &p->basovrlap;
+      while (ovp->nxtact != NULL) {
+        SPFLOAT result;
+        sp_fog_overlap *prvact = ovp;
+        ovp = ovp->nxtact;
+        fract = PFRAC1(ovp->formphs);
+        ftab = ftp1->tbl + (ovp->formphs >> ftp1->lobits);
+        v1 = *ftab++;
+        result = v1 + (*ftab - v1) * fract;
+        if (p->fmtmod)
+          ovp->formphs += form_inc;
+        else ovp->formphs += ovp->forminc;
+        ovp->formphs &= SP_FT_PHMASK;
+        if (ovp->risphs < SP_FT_MAXLEN) {
+          result *= *(ftp2->tbl + (ovp->risphs >> ftp2->lobits) );
+          ovp->risphs += ovp->risinc;
+        }
+        if (ovp->timrem <= ovp->dectim) {
+          result *= *(ftp2->tbl + (ovp->decphs >> ftp2->lobits) );
+          if ((ovp->decphs -= ovp->decinc) < 0)
+            ovp->decphs = 0;
+        }
+        *out += (result * ovp->curamp);
+        if (--ovp->timrem)
+          ovp->curamp *= ovp->expamp;
+        else {
+          prvact->nxtact = ovp->nxtact;
+          ovp->nxtfree = p->basovrlap.nxtfree;
+          p->basovrlap.nxtfree = ovp;
+          ovp = prvact;
+        }
+      }
+      p->fundphs += fund_inc;
+      p->spdphs = (int32_t)(speed * SP_FT_MAXLEN);
+      p->spdphs &= SP_FT_PHMASK;
+    //}
     return SP_OK;
 }
