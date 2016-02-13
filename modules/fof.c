@@ -51,9 +51,9 @@ static int newpulse(sp_data *sp,
     SPFLOAT   octamp = amp, oct;
     int32_t   rismps, newexp = 0;
 
-    ovp->timrem = p->kdur * sp->sr;
+    ovp->timrem = p->dur * sp->sr;
 
-    if ((oct = p->koct) > 0.0) {
+    if ((oct = p->oct) > 0.0) {
         int32_t ioct = (int32_t)oct, bitpat = ~(-1L << ioct);
         if (bitpat & ++p->fofcount) return(0);
         if ((bitpat += 1) & p->fofcount) octamp *= (1.0 + ioct - oct);
@@ -63,20 +63,20 @@ static int newpulse(sp_data *sp,
 
     ovp->forminc = (int32_t)(form * p->ftp1->sicvt);
 
-    if (p->kband != p->prvband) {
-        p->prvband = p->kband;
-        p->expamp = exp(p->kband * MPIDSR);
+    if (p->band != p->prvband) {
+        p->prvband = p->band;
+        p->expamp = exp(p->band * MPIDSR);
         newexp = 1;
     }
     /* Init grain rise ftable phase. Negative kform values make
     the kris (ifnb) initial index go negative and crash csound.
     So insert another if-test with compensating code. */
-    if (p->kris >= (1.0 / sp->sr) && form != 0.0) {
+    if (p->ris >= (1.0 / sp->sr) && form != 0.0) {
         if (form < 0.0 && ovp->formphs != 0)
-            ovp->risphs = (int32_t)((SP_FT_MAXLEN - ovp->formphs) / -form / p->kris);
-        else ovp->risphs = (int32_t)(ovp->formphs / form / p->kris);
+            ovp->risphs = (int32_t)((SP_FT_MAXLEN - ovp->formphs) / -form / p->ris);
+        else ovp->risphs = (int32_t)(ovp->formphs / form / p->ris);
 
-        ovp->risinc = (int32_t)(p->ftp1->sicvt / p->kris);
+        ovp->risinc = (int32_t)(p->ftp1->sicvt / p->ris);
         rismps = SP_FT_MAXLEN / ovp->risinc;
     } else {
         ovp->risphs = SP_FT_MAXLEN;
@@ -91,8 +91,8 @@ static int newpulse(sp_data *sp,
 
     ovp->curamp = octamp * p->preamp;
     ovp->expamp = p->expamp;
-    if ((ovp->dectim = (int32_t)(p->kdec * sp->sr)) > 0)
-        ovp->decinc = (int32_t)(p->ftp1->sicvt / p->kdec);
+    if ((ovp->dectim = (int32_t)(p->dec * sp->sr)) > 0)
+        ovp->decinc = (int32_t)(p->ftp1->sicvt / p->dec);
     ovp->decphs = SP_FT_PHMASK;
     return 1;
 }
@@ -113,39 +113,38 @@ int sp_fof_destroy(sp_fof **p)
 
 int sp_fof_init(sp_data *sp, sp_fof *p, sp_ftbl *sine, sp_ftbl *win, int iolaps, SPFLOAT iphs)
 {
-
-    p->xamp = 0.5;
-    p->xfund = 440;
-    p->xform = 1000;
-    p->koct = 0;
-    p->kband = 50;
-    p->kris = 0.003;
-    p->kdec = 0.0007;
-    p->kdur = 0.02;
+    p->amp = 0.5;
+    p->fund = 440;
+    p->form = 1000;
+    p->oct = 0;
+    p->band = 50;
+    p->ris = 0.003;
+    p->dec = 0.0007;
+    p->dur = 0.02;
     p->iolaps = iolaps;
     p->iphs = iphs;
     p->ftp1 = sine;
     p->ftp2 = win;
 
-      sp_fof_overlap *ovp, *nxtovp;
-      int32_t olaps;
-      if (1) {
+    sp_fof_overlap *ovp, *nxtovp;
+    int32_t olaps;
+    //if (1) {
         if (p->iphs == 0.0) p->fundphs = SP_FT_MAXLEN;                  
         else p->fundphs = (int32_t)(p->iphs * SP_FT_MAXLEN) & SP_FT_PHMASK;
 
         olaps = (int32_t)p->iolaps;
 
         if (p->iphs >= 0.0) {
-          sp_auxdata_alloc(&p->auxch, (size_t)olaps * sizeof(sp_fof_overlap));
+            sp_auxdata_alloc(&p->auxch, (size_t)olaps * sizeof(sp_fof_overlap));
         }
 
         ovp = &p->basovrlap;
         nxtovp = (sp_fof_overlap *) p->auxch.ptr;
 
         do {
-          ovp->nxtact = NULL;
-          ovp->nxtfree = nxtovp;
-          ovp = nxtovp++;
+            ovp->nxtact = NULL;
+            ovp->nxtfree = nxtovp;
+            ovp = nxtovp++;
         } while (--olaps);
         ovp->nxtact = NULL;
         ovp->nxtfree = NULL;
@@ -154,12 +153,12 @@ int sp_fof_init(sp_data *sp, sp_fof *p, sp_ftbl *sine, sp_ftbl *win, int iolaps,
         p->expamp = 1.0;
         p->prvsmps = (int32_t)0;
         p->preamp = 1.0;
-      } 
-      p->ampcod   = 1;
-      p->fundcod  = 1;
-      p->formcod  = 1;
-      p->xincod   = p->ampcod || p->fundcod || p->formcod;
-      p->fmtmod = 0;
+    //} 
+    p->ampcod   = 1;
+    p->fundcod  = 1;
+    p->formcod  = 1;
+    p->xincod   = p->ampcod || p->fundcod || p->formcod;
+    p->fmtmod = 0;
     p->foftype = 1;
     return SP_OK;
 }
@@ -172,9 +171,9 @@ int sp_fof_compute(sp_data *sp, sp_fof *p, SPFLOAT *in, SPFLOAT *out)
     int32_t fund_inc, form_inc;
     SPFLOAT v1, fract ,*ftab;
 
-    amp = p->xamp;
-    fund = p->xfund;
-    form = p->xform;
+    amp = p->amp;
+    fund = p->fund;
+    form = p->form;
     ftp1 = p->ftp1;
     ftp2 = p->ftp2;
     fund_inc = (int32_t)(fund * ftp1->sicvt);
