@@ -7,8 +7,8 @@ typedef struct sp_fof_overlap {
 } sp_fof_overlap;
 
 typedef struct {
-    SPFLOAT *ar, *xamp, *xfund, *xform, *koct, *kband, *kris, *kdur, *kdec;
-    SPFLOAT *iolaps, *ifna, *ifnb, *itotdur, *iphs, *ifmode, *iskip;
+    SPFLOAT xamp, xfund, xform, koct, kband, kris, kdur, kdec;
+    SPFLOAT iolaps, ifna, ifnb, itotdur, iphs, ifmode;
     /* kgliss and ifmode are same field */
     int32_t durtogo, fundphs, fofcount, prvsmps;
     SPFLOAT prvband, expamp, preamp;
