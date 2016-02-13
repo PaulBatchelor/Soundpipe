@@ -22,7 +22,6 @@
 #endif
 
 #define MPIDSR -M_PI/sp->sr
-#define kgliss ifmode
 
 static inline SPFLOAT intpow1(SPFLOAT x, int32_t n)
 {
@@ -128,32 +127,32 @@ int sp_fof_init(sp_data *sp, sp_fof *p, sp_ftbl *sine, sp_ftbl *win, int iolaps,
 
     sp_fof_overlap *ovp, *nxtovp;
     int32_t olaps;
-    //if (1) {
-        if (p->iphs == 0.0) p->fundphs = SP_FT_MAXLEN;                  
-        else p->fundphs = (int32_t)(p->iphs * SP_FT_MAXLEN) & SP_FT_PHMASK;
 
-        olaps = (int32_t)p->iolaps;
+    if (p->iphs == 0.0) p->fundphs = SP_FT_MAXLEN;                  
+    else p->fundphs = (int32_t)(p->iphs * SP_FT_MAXLEN) & SP_FT_PHMASK;
 
-        if (p->iphs >= 0.0) {
-            sp_auxdata_alloc(&p->auxch, (size_t)olaps * sizeof(sp_fof_overlap));
-        }
+    olaps = (int32_t)p->iolaps;
 
-        ovp = &p->basovrlap;
-        nxtovp = (sp_fof_overlap *) p->auxch.ptr;
+    if (p->iphs >= 0.0) {
+        sp_auxdata_alloc(&p->auxch, (size_t)olaps * sizeof(sp_fof_overlap));
+    }
 
-        do {
-            ovp->nxtact = NULL;
-            ovp->nxtfree = nxtovp;
-            ovp = nxtovp++;
-        } while (--olaps);
+    ovp = &p->basovrlap;
+    nxtovp = (sp_fof_overlap *) p->auxch.ptr;
+
+    do {
         ovp->nxtact = NULL;
-        ovp->nxtfree = NULL;
-        p->fofcount = -1;
-        p->prvband = 0.0;
-        p->expamp = 1.0;
-        p->prvsmps = (int32_t)0;
-        p->preamp = 1.0;
-    //} 
+        ovp->nxtfree = nxtovp;
+        ovp = nxtovp++;
+    } while (--olaps);
+    ovp->nxtact = NULL;
+    ovp->nxtfree = NULL;
+    p->fofcount = -1;
+    p->prvband = 0.0;
+    p->expamp = 1.0;
+    p->prvsmps = (int32_t)0;
+    p->preamp = 1.0;
+
     p->ampcod   = 1;
     p->fundcod  = 1;
     p->formcod  = 1;
