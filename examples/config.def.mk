@@ -27,6 +27,7 @@ ex_dtrig \
 ex_dust \
 ex_eqfil \
 ex_expon \
+ex_fof \
 ex_fofilt \
 ex_fold \
 ex_foo \

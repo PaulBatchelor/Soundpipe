@@ -33,6 +33,7 @@ dtrig \
 dust \
 eqfil \
 expon \
+fof \
 fofilt \
 foo \
 fosc \
