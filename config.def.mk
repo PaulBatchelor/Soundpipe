@@ -22,6 +22,7 @@ buthp \
 butlp \
 clip \
 comb \
+compressor \
 count \
 conv \
 dcblock \
