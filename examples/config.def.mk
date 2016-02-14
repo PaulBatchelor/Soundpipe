@@ -28,6 +28,7 @@ ex_dust \
 ex_eqfil \
 ex_expon \
 ex_fof \
+ex_fog \
 ex_fofilt \
 ex_fold \
 ex_foo \

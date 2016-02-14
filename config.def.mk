@@ -34,6 +34,7 @@ dust \
 eqfil \
 expon \
 fof \
+fog \
 fofilt \
 foo \
 fosc \
