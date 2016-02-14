@@ -25,20 +25,18 @@ int main() {
     sp_data *sp;
     sp_create(&sp);
 
-    //sp_ftbl_loadfile(sp, &ud.wav, "oneart.wav");
-    sp_ftbl_create(sp, &ud.wav, 524288);
+    sp_ftbl_loadfile(sp, &ud.wav, "oneart.wav");
     sp_ftbl_create(sp, &ud.win, 1024);
     sp_fog_create(&ud.fog);
     sp_phasor_create(&ud.phs);
 
-    sp_gen_file(sp, ud.wav, "oneart.wav");
     sp_gen_sinecomp(sp, ud.win, "0.5 0.5 270 0.5");
 
     sp_fog_init(sp, ud.fog, ud.wav, ud.win, 100, 0);
+    ud.fog->trans = 0.9;
 
     sp_phasor_init(sp, ud.phs, 0);
-    ud.phs->freq = 0.1;
-    //ud.phs->freq = 1.0;
+    ud.phs->freq = 0.3 / ((SPFLOAT)ud.wav->size / sp->sr); 
 
     sp->len = 44100 * 10;
     sp_process(sp, &ud, process);

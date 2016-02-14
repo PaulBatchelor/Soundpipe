@@ -5,6 +5,7 @@ typedef struct sp_fog_overlap {
     uint32_t risphs;
     int32_t risinc, decphs, decinc;
     SPFLOAT curamp, expamp;
+    SPFLOAT pos, inc;
 } sp_fog_overlap;
 
 typedef struct {

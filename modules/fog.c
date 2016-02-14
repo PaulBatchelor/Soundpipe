@@ -90,6 +90,10 @@ static int newpulse(sp_data *sp, sp_fog *p, sp_fog_overlap *ovp, SPFLOAT amp,
     if ((ovp->dectim = (int32_t)(p->dec * sp->sr )) > 0) /*      fnb dec  */
       ovp->decinc = (int32_t)(p->ftp1->sicvt / p->dec);
     ovp->decphs = SP_FT_PHMASK;
+
+    ovp->pos = p->spd * p->ftp1->size;
+    ovp->inc = p->trans;
+
     return 1;
 }
 
@@ -108,14 +112,14 @@ int sp_fog_destroy(sp_fog **p)
 int sp_fog_init(sp_data *sp, sp_fog *p, sp_ftbl *wav, sp_ftbl *win, int iolaps, SPFLOAT iphs)
 {
     p->amp = 0.5;
-    p->dens = 40;
+    p->dens = 80;
     p->trans = 1;
     p->spd = 0;
     p->oct = 0;
     p->band = 50;
-    p->ris = 0.003;
-    p->dec = 0.0007;
-    p->dur = 0.02;
+    p->ris = 0.01;
+    p->dec = 0.07;
+    p->dur = 0.1;
     p->iolaps = iolaps;
     p->iphs = iphs;
     p->ftp1 = wav;
@@ -136,10 +140,6 @@ int sp_fog_init(sp_data *sp, sp_fog *p, sp_ftbl *wav, sp_ftbl *win, int iolaps, 
 
         olaps = (int32_t)p->iolaps;
 
-
-        //if (p->iphs > =0.0)
-          //csound->AuxAlloc(csound, (size_t)olaps * sizeof(OVERLAP), &p->auxch);
-          
         sp_auxdata_alloc(&p->auxch, (size_t)olaps * sizeof(sp_fog_overlap));
         ovp = &p->basovrlap;
         nxtovp = (sp_fog_overlap *) p->auxch.ptr;
@@ -171,6 +171,11 @@ int sp_fog_compute(sp_data *sp, sp_fog *p, SPFLOAT *in, SPFLOAT *out)
     SPFLOAT  amp, fund, ptch, speed;
     SPFLOAT v1, fract ,*ftab, fogcvt = p->fogcvt;
     int32_t fund_inc, form_inc;
+    
+    int32_t ndx;
+    SPFLOAT index;
+    SPFLOAT x1, x2, tmp;
+
 
     amp = p->amp;
     fund = p->dens;
@@ -195,14 +200,30 @@ int sp_fog_compute(sp_data *sp, sp_fog *p, SPFLOAT *in, SPFLOAT *out)
         SPFLOAT result;
         sp_fog_overlap *prvact = ovp;
         ovp = ovp->nxtact;
-        fract = PFRAC1(ovp->formphs);
-        ftab = ftp1->tbl + (ovp->formphs >> ftp1->lobits);
-        v1 = *ftab++;
-        result = v1 + (*ftab - v1) * fract;
-        if (p->fmtmod)
-          ovp->formphs += form_inc;
-        else ovp->formphs += ovp->forminc;
+        ndx = floor(ovp->pos);
+        fract = ovp->pos - ndx;
+
+        while(ndx >= ftp1->size) {
+            ndx -= ftp1->size;
+        }
+        while(ndx < 0) ndx += ftp1->size;
+
+        x1 = ftp1->tbl[ndx];
+        x2 = ftp1->tbl[ndx + 1];
+
+        result = x1 + (x2 - x1) * fract;
+
+        ovp->pos += ovp->inc;
+        //fract = PFRAC1(ovp->formphs);
+        //ftab = ftp1->tbl + (ovp->formphs >> ftp1->lobits);
+        //v1 = *ftab++;
+
+        //result = v1 + (*ftab - v1) * fract;
+
+        ovp->formphs += ovp->forminc;
+
         ovp->formphs &= SP_FT_PHMASK;
+
         if (ovp->risphs < SP_FT_MAXLEN) {
           result *= *(ftp2->tbl + (ovp->risphs >> ftp2->lobits) );
           ovp->risphs += ovp->risinc;
@@ -213,8 +234,7 @@ int sp_fog_compute(sp_data *sp, sp_fog *p, SPFLOAT *in, SPFLOAT *out)
             ovp->decphs = 0;
         }
         *out += (result * ovp->curamp);
-        if (--ovp->timrem)
-          ovp->curamp *= ovp->expamp;
+        if (--ovp->timrem) ovp->curamp *= ovp->expamp;
         else {
           prvact->nxtact = ovp->nxtact;
           ovp->nxtfree = p->basovrlap.nxtfree;
