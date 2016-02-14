@@ -1,6 +1,6 @@
 #include <math.h>
 #include <stdlib.h>
-#include <soundpipe.h>
+#include "soundpipe.h"
 #include "CUI.h"
 
 #define max(a,b) ((a < b) ? b : a)
@@ -17,7 +17,6 @@ float log10f(float dummy0);
 float powf(float dummy0, float dummy1);
 
 typedef struct {
-	
 	float fRec2[2];
 	float fRec1[2];
 	float fRec0[2];
@@ -29,19 +28,18 @@ typedef struct {
 	float fConst2;
 	FAUSTFLOAT fHslider2;
 	FAUSTFLOAT fHslider3;
-	
 } compressor;
 
-compressor* newcompressor() { 
+static compressor* newcompressor() { 
 	compressor* dsp = (compressor*)malloc(sizeof(compressor));
 	return dsp;
 }
 
-void deletecompressor(compressor* dsp) { 
+static void deletecompressor(compressor* dsp) { 
 	free(dsp);
 }
 
-void instanceInitcompressor(compressor* dsp, int samplingFreq) {
+static void instanceInitcompressor(compressor* dsp, int samplingFreq) {
 	dsp->fSamplingFreq = samplingFreq;
 	dsp->iConst0 = min(192000, max(1, dsp->fSamplingFreq));
 	dsp->fConst1 = (2.f / (float)dsp->iConst0);
@@ -80,18 +78,18 @@ void instanceInitcompressor(compressor* dsp, int samplingFreq) {
 	
 }
 
-void initcompressor(compressor* dsp, int samplingFreq) {
+static void initcompressor(compressor* dsp, int samplingFreq) {
 	instanceInitcompressor(dsp, samplingFreq);
 }
 
-void buildUserInterfacecompressor(compressor* dsp, UIGlue* interface) {
+static void buildUserInterfacecompressor(compressor* dsp, UIGlue* interface) {
 	interface->addHorizontalSlider(interface->uiInterface, "ratio", &dsp->fHslider1, 1.f, 1.f, 40.f, 0.001f);
 	interface->addHorizontalSlider(interface->uiInterface, "thresh", &dsp->fHslider3, 0.f, -80.f, 0.f, 0.001f);
 	interface->addHorizontalSlider(interface->uiInterface, "atk", &dsp->fHslider0, 0.1f, 0.f, 10.f, 0.001f);
 	interface->addHorizontalSlider(interface->uiInterface, "rel", &dsp->fHslider2, 0.1f, 0.f, 10.f, 0.001f);
 }
 
-void computecompressor(compressor* dsp, int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs) {
+static void computecompressor(compressor* dsp, int count, FAUSTFLOAT** inputs, FAUSTFLOAT** outputs) {
 	FAUSTFLOAT* input0 = inputs[0];
 	FAUSTFLOAT* output0 = outputs[0];
 	float fSlow0 = (float)dsp->fHslider0;

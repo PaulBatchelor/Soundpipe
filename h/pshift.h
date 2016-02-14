@@ -1,5 +1,10 @@
 typedef struct {
-    SPFLOAT bar;
+    void *faust;
+    int argpos;
+    SPFLOAT *args[3];
+    SPFLOAT *shift;
+    SPFLOAT *window;
+    SPFLOAT *xfade;
 } sp_pshift;
 
 int sp_pshift_create(sp_pshift **p);

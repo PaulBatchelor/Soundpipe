@@ -65,6 +65,7 @@ port \
 posc3 \
 progress \
 prop \
+pshift \
 randh \
 randi \
 randmt \
