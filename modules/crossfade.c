@@ -21,6 +21,6 @@ int sp_crossfade_init(sp_data *sp, sp_crossfade *p)
 
 int sp_crossfade_compute(sp_data *sp, sp_crossfade *p, SPFLOAT *in1, SPFLOAT *in2, SPFLOAT *out)
 {
-    *out = *in1 * p->pos + *in2 * (1 - p->pos);
+    *out = *in2 * p->pos + *in1 * (1 - p->pos);
     return SP_OK;
 }

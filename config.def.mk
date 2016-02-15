@@ -25,6 +25,7 @@ comb \
 compressor \
 count \
 conv \
+crossfade \
 dcblock \
 delay \
 dist \

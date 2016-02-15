@@ -19,6 +19,7 @@ ex_clip \
 ex_comb \
 ex_compressor \
 ex_conv \
+ex_crossfade \
 ex_delay \
 ex_diskin \
 ex_dist \
