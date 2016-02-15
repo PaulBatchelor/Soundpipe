@@ -92,6 +92,7 @@ ex_tenv2 \
 ex_tenvx \
 ex_tevent \
 ex_thresh \
+ex_timer \
 ex_tin \
 ex_tone \
 ex_trand \
