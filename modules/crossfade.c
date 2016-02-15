@@ -1,11 +1,3 @@
-/*
- * Foo
- * 
- * This is a dummy module. It doesn't do much.
- * Feel free to use this as a boilerplate template.
- * 
- */
-
 #include <stdlib.h>
 #include "soundpipe.h"
 
@@ -23,14 +15,12 @@ int sp_crossfade_destroy(sp_crossfade **p)
 
 int sp_crossfade_init(sp_data *sp, sp_crossfade *p)
 {
-    /* Initalize variables here. */
-    p->bar = 123;
+    p->pos = 0.5;
     return SP_OK;
 }
 
-int sp_crossfade_compute(sp_data *sp, sp_crossfade *p, SPFLOAT *in, SPFLOAT *out)
+int sp_crossfade_compute(sp_data *sp, sp_crossfade *p, SPFLOAT *in1, SPFLOAT *in2, SPFLOAT *out)
 {
-    /* Send the signal's input to the output */
-    *out = *in;
+    *out = *in1 * p->pos + *in2 * (1 - p->pos);
     return SP_OK;
 }
