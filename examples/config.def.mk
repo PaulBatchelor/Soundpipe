@@ -17,6 +17,7 @@ ex_buthp \
 ex_butlp \
 ex_clip \
 ex_comb \
+ex_compressor \
 ex_conv \
 ex_delay \
 ex_diskin \
@@ -27,6 +28,8 @@ ex_dtrig \
 ex_dust \
 ex_eqfil \
 ex_expon \
+ex_fof \
+ex_fog \
 ex_fofilt \
 ex_fold \
 ex_foo \
@@ -70,6 +73,7 @@ ex_port \
 ex_posc3 \
 ex_progress \
 ex_prop \
+ex_pshift \
 ex_randh \
 ex_randi \
 ex_random \
@@ -88,6 +92,7 @@ ex_tenv2 \
 ex_tenvx \
 ex_tevent \
 ex_thresh \
+ex_timer \
 ex_tin \
 ex_tone \
 ex_trand \

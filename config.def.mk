@@ -22,6 +22,7 @@ buthp \
 butlp \
 clip \
 comb \
+compressor \
 count \
 conv \
 dcblock \
@@ -33,6 +34,8 @@ dtrig \
 dust \
 eqfil \
 expon \
+fof \
+fog \
 fofilt \
 foo \
 fosc \
@@ -62,6 +65,7 @@ port \
 posc3 \
 progress \
 prop \
+pshift \
 randh \
 randi \
 randmt \
@@ -81,6 +85,7 @@ tenv \
 tenv2 \
 tenvx \
 thresh \
+timer \
 tin \
 tone \
 trand \
