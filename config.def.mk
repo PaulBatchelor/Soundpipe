@@ -85,6 +85,7 @@ tenv \
 tenv2 \
 tenvx \
 thresh \
+timer \
 tin \
 tone \
 trand \

@@ -14,9 +14,6 @@ sptbl["pshift"] = {
     },
 
     params = {
-        mandatory = {
-        },
-
         optional = {
             {
                 name = "shift",
@@ -41,8 +38,7 @@ sptbl["pshift"] = {
 
     modtype = "module",
 
-    description = [[Time-domain pitch shifter.
-]],
+    description = [[Time-domain pitch shifter.]],
 
     ninputs = 1,
     noutputs = 1,

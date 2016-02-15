@@ -49,7 +49,7 @@ sptbl["fog"] = {
                 default = 0.5
             },
             {
-                name = "dense",
+                name = "dens",
                 type = "SPFLOAT",
                 description = "Density. The frequency of grains/second.",
                 default = 80 
@@ -101,9 +101,7 @@ sptbl["fog"] = {
 
     modtype = "module",
 
-    description = [[Output is a sucession of grains from data in a stored function table]]
-
-]],
+    description = [[Sucession of grains from data in a stored function table]],
 
     ninputs = 0,
     noutputs = 1,
