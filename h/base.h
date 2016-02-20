@@ -52,6 +52,7 @@ int sp_createn(sp_data **spp, int nchan);
 int sp_destroy(sp_data **spp);
 int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *));
 int sp_process_raw(sp_data *sp, void *ud, void (*callback)(sp_data *, void *));
+int sp_process_plot(sp_data *sp, void *ud, void (*callback)(sp_data *, void *));
 
 SPFLOAT sp_midi2cps(SPFLOAT nn);
 
