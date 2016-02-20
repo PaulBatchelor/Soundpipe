@@ -100,6 +100,7 @@ ex_trand \
 ex_tseq \
 ex_vdelay \
 ex_wtosc \
+ex_vocoder \
 ex_zitarev
 
 # Jack Module
