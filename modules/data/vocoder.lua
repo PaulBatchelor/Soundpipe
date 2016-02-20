@@ -42,7 +42,7 @@ sptbl["vocoder"] = {
 
     modtype = "module",
 
-    description = [[32-band channel vocoder]],
+    description = [[16-band channel vocoder]],
 
     ninputs = 2,
     noutputs = 1,
