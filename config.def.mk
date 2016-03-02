@@ -92,6 +92,7 @@ tone \
 trand \
 tseq \
 vdelay \
+vocoder \
 zitarev
 
 ifndef NO_LIBSNDFILE
