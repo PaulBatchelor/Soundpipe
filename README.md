@@ -126,7 +126,7 @@ Aurelius Prochazka
 
 Contributing
 --------------------------
-We welcome all contributions! If you find a bug, please feel free to make a bug 
+If you find a bug, please feel free to make a bug 
 report or
 a pull-request. If you make a pull-request, please make sure that you do so on 
 the develop branch, and not the master branch.  
