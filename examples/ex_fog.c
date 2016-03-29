@@ -30,7 +30,7 @@ int main() {
     sp_fog_create(&ud.fog);
     sp_phasor_create(&ud.phs);
 
-    sp_gen_sinecomp(sp, ud.win, "0.5 0.5 270 0.5");
+    sp_gen_composite(sp, ud.win, "0.5 0.5 270 0.5");
 
     sp_fog_init(sp, ud.fog, ud.wav, ud.win, 100, 0);
     ud.fog->trans = 0.9;
