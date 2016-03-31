@@ -1,5 +1,20 @@
 # Change log
 
+1.01 
+----
+    - New modules:
+        - fof 
+        - fog
+        - compressor
+        - pshift: pitch shifter
+        - timer
+        - adsr
+        - tadsr
+        - crossfade
+        - oscmorph
+        - vocoder
+    - New ftable gen routine: gen_composite (needed for fof/fog)
+
 1.0: AudioKit
 -------------
     - New Modules:

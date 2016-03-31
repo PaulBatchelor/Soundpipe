@@ -6,7 +6,7 @@ int main() {
     sp_create(&sp);
     sp_ftbl *ft;
     sp_ftbl_create(sp, &ft, 1024);
-    sp_gen_sinecomp(sp, ft, "0.5 0.5 270 0.5");
+    sp_gen_composite(sp, ft, "0.5 0.5 270 0.5");
     int i;
     FILE *fp= fopen("plot.dat", "w");
     for(i = 0; i < ft->size; i++) {

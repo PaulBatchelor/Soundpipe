@@ -36,6 +36,7 @@ ex_fold \
 ex_foo \
 ex_fosc \
 ex_gbuzz \
+ex_gen_composite \
 ex_gen_gauss \
 ex_gen_line \
 ex_gen_sine \

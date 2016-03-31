@@ -17,7 +17,7 @@ SPLIBS += libsoundpipe_dyn.so
 CFLAGS += -fPIC
 endif
 
-VERSION=1.0
+VERSION=1.01
 
 MPATHS=$(addprefix modules/, $(addsuffix .o, $(MODULES)))
 HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))

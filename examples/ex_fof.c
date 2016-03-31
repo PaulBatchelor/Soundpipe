@@ -27,7 +27,7 @@ int main() {
     sp_fof_create(&ud.fof);
 
     sp_gen_sine(sp, ud.sine);
-    sp_gen_sinecomp(sp, ud.win, "0.5 0.5 270 0.5");
+    sp_gen_composite(sp, ud.win, "0.5 0.5 270 0.5");
 
     sp_fof_init(sp, ud.fof, ud.sine, ud.win, 100, 0);
 
