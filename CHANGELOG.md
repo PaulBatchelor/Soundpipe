@@ -1,5 +1,9 @@
 # Change log
 
+1.1.1
+-----
+    - Fixed clicking in static delay (simplified code)
+
 1.01 
 ----
     - New modules:
