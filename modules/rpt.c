@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include "soundpipe.h"
 
+static int sp_rpt_set(sp_rpt *p, SPFLOAT bpm, int div, int rep);
+
 int sp_rpt_create(sp_rpt **p)
 {
     *p = malloc(sizeof(sp_rpt));
@@ -60,7 +62,7 @@ int sp_rpt_compute(sp_data *sp, sp_rpt *p, SPFLOAT *trig,
     return SP_OK;
 }
 
-int sp_rpt_set(sp_rpt *p, SPFLOAT bpm, int div, int rep)
+static int sp_rpt_set(sp_rpt *p, SPFLOAT bpm, int div, int rep)
 {
     uint32_t size = (p->sr * (60.0 / bpm)) / (SPFLOAT) div;
     p->reps = rep;

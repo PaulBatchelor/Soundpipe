@@ -22,26 +22,6 @@ sptbl["rpt"] = {
                 default = "0.7"
             }
         },
-        optional = {
-            {
-                name = "bpm",
-                type = "SPFLOAT",
-                description = "Beats per minute.",
-                default = 130
-            },
-            {
-                name = "div",
-                type = "int",
-                description = "Division amount of the beat. 1 = quarter, 2 = eight, 4 = sixteenth, 8 = thirty-second, etc. Any whole number integer is acceptable.",
-                default = 8
-            },
-            {
-                name = "rep",
-                type = "int",
-                description = "Number of times to repeat.",
-                default = 4
-            },
-        }
     },
 
     modtype = "module",
