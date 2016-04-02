@@ -1,3 +1,8 @@
+enum {
+NORMAL,
+HEADER
+};
+
 typedef struct {
     SPFLOAT *buf;
     uint32_t size;
@@ -6,9 +11,11 @@ typedef struct {
     md5_byte_t digest[16];
     char md5string[33];
     char *md5;
+    int mode;
+    struct sp_test_entry *cur_entry;
 } sp_test;
 
-typedef struct {
+typedef struct sp_test_entry {
     int (* func)(sp_test *, sp_data *, const char*);
     const char *desc;
     const char *hash;

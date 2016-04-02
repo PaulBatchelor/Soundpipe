@@ -27,7 +27,6 @@ int main(int argc, char *argv[])
     };
 
     int err = 0;
-    plan(SIZE(tests));
     sp_test *tst;
     sp_data *sp;
     sp_create(&sp);
@@ -35,6 +34,7 @@ int main(int argc, char *argv[])
     uint32_t size = 44100 * 5;
 
     if(argc == 1) {
+        plan(SIZE(tests));
         for(n = 0; n < SIZE(tests); n++) {
             sp_test_create(&tst, size);
             ok(tests[n].func(tst, sp, tests[n].hash)  == SP_OK, tests[n].desc);
@@ -48,6 +48,29 @@ int main(int argc, char *argv[])
             for(n = 0; n < SIZE(tests); n++) {
                 printf("TEST(t_%s, \"%s\", \"%s\")\n", 
                         tests[n].desc, tests[n].desc, tests[n].hash);
+            }
+        } else if (!strcmp(argv[1], "test")) {
+            if(argc < 3) {
+                fprintf(stderr, "Not enough options for test!\n");
+                err = 1;
+            } else {
+                unsigned int pos = atoi(argv[2]) - 1;
+                if(pos > SIZE(tests)) {
+                    fprintf(stderr, "Test number %d exceeds size\n", pos);
+                } else {
+                    plan(SIZE(tests));
+                    sp_test_create(&tst, size);
+                    ok(tests[pos].func(tst, sp, tests[pos].hash)  == SP_OK, tests[pos].desc);
+                    sp_test_destroy(&tst);
+                }
+            }
+        } else if (!strcmp(argv[1], "regen_header")) {
+            for(n = 0; n < SIZE(tests); n++) {
+                sp_test_create(&tst, size);
+                tst->mode = HEADER;
+                tst->cur_entry = &tests[n];
+                tests[n].func(tst, sp, tests[n].hash);
+                sp_test_destroy(&tst);
             }
         } else {
             fprintf(stderr, "Invalid command %s\n", argv[1]);
