@@ -3,7 +3,14 @@
 1.1.1
 -----
     - Fixed clicking in static delay (simplified code)
-
+    - Testing improvemnts:
+        - test utility now has command line args:
+            - "./run.bin" works like it did before
+            - "./run.bin gen_header" rewrites all_tests.h 
+            - "./run.bin regen_header" rewrites all_tests.h, but regenerates 
+md5 hashes
+            - "./run.bin test id" runs a single test
+            - "./run.bin render id" renders a single test
 1.01 
 ----
     - New modules:
