@@ -72,6 +72,21 @@ int main(int argc, char *argv[])
                 tests[n].func(tst, sp, tests[n].hash);
                 sp_test_destroy(&tst);
             }
+        } else if (!strcmp(argv[1], "render")) {
+            if(argc < 3) {
+                fprintf(stderr, "Not enough options for render!\n");
+                err = 1;
+            } else {
+                unsigned int pos = atoi(argv[2]) - 1;
+                if(pos > SIZE(tests)) {
+                    fprintf(stderr, "Test number %d exceeds size\n", pos);
+                } else {
+                    sp_test_create(&tst, size);
+                    tests[pos].func(tst, sp, tests[pos].hash);
+                    sp_test_write_raw(tst, pos + 1);
+                    sp_test_destroy(&tst);
+                }
+            }
         } else {
             fprintf(stderr, "Invalid command %s\n", argv[1]);
             err = 1;
