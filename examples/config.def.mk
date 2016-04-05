@@ -102,6 +102,7 @@ ex_tseq \
 ex_vdelay \
 ex_wtosc \
 ex_vocoder \
+ex_wpkorg35 \
 ex_zitarev
 
 # Jack Module
