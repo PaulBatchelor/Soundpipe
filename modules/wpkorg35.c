@@ -1,13 +1,55 @@
 /*
- * Foo
+ * WPKorg35
  * 
- * This is a dummy module. It doesn't do much.
- * Feel free to use this as a boilerplate template.
+ * This is a filter based off of an implemenation the Korg35 filter by Will
+ * Pirke. It has been ported from the CCRMA chugin by the same name.
  * 
  */
 
 #include <stdlib.h>
 #include "soundpipe.h"
+
+enum{LPF1, HPF1};
+enum{OFF, ON};
+
+/* VAOnePoleFilter methods */
+
+static void va_getFeedbackOutput(sp_va_onepole *va)
+{
+
+}
+
+static void va_reset(sp_va_onepole *va)
+{
+
+}
+
+static void va_updateFilter(sp_va_onepole *va)
+{
+
+}
+
+static void va_doFilter(sp_va_onepole *va)
+{
+
+}
+
+/* WPKorg35 Methods */
+
+static uint32_t wpk_prepareForPlay(sp_wpkorg35 *wpk)
+{
+    return 1;
+}
+
+static void wpk_updateFilters(sp_wpkorg35 *wpk)
+{
+
+}
+
+SPFLOAT wpk_doFilter(sp_wpkorg35 *wpk)
+{
+    return 0.0;
+}
 
 int sp_wpkorg35_create(sp_wpkorg35 **p)
 {
@@ -24,7 +66,6 @@ int sp_wpkorg35_destroy(sp_wpkorg35 **p)
 int sp_wpkorg35_init(sp_data *sp, sp_wpkorg35 *p)
 {
     /* Initalize variables here. */
-    p->bar = 123;
     return SP_OK;
 }
 

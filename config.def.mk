@@ -93,6 +93,7 @@ trand \
 tseq \
 vdelay \
 vocoder \
+wpkorg35 \
 zitarev
 
 ifndef NO_LIBSNDFILE
