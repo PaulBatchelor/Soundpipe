@@ -10,7 +10,12 @@ typedef struct {
     sp_va_onepole m_LPF1;
     sp_va_onepole m_LPF2;
     sp_va_onepole m_HPF1;
-
+    SPFLOAT m_dAlpha0;
+    SFPLOAT m_nSampleRate;
+    SPFLOAT m_dFC;
+    SPFLOAT m_dK;
+    SPFLOAT m_dSaturation;
+    uint32_t m_uNonLinearProcessing;
 } sp_wpkorg35;
 
 int sp_wpkorg35_create(sp_wpkorg35 **p);
