@@ -14,16 +14,27 @@
 
 typedef struct {
     sp_tblrec *tblrec;
-    sp_osc *osc;
     sp_ftbl *ft; 
+    sp_ftbl *seq;
+    sp_tseq *tseq;
+    sp_metro *met;
+    sp_pluck *plk;
+    sp_randi *randi;
+    sp_tabread *tr;
 } UserData;
 
 void process(sp_data *sp, void *udata) {
     UserData *ud = udata;
-    SPFLOAT osc = 0, tblrec = 0;
-    sp_osc_compute(sp, ud->osc, NULL, &osc);
-    sp_tblrec_compute(sp, ud->tblrec, &osc, &tblrec);
-    sp->out[0] = tblrec;
+    SPFLOAT trig, pluck, rand, tr;
+    SPFLOAT tick = (sp->pos == 0 ? 1 : 0);
+    sp_metro_compute(sp, ud->met, NULL, &trig);
+    sp_pluck_compute(sp, ud->plk, &trig, &pluck);
+    sp_tblrec_compute(sp, ud->tblrec, &pluck, &tick, NULL);
+    sp_randi_compute(sp, ud->randi, NULL, &rand);
+    ud->tr->index = rand * ud->ft->size;
+    sp_tabread_compute(sp, ud->tr, NULL, &tr);
+
+    sp->out[0] = tr;
 }
 
 int main() {
@@ -31,21 +42,40 @@ int main() {
     UserData ud;
     sp_data *sp;
     sp_create(&sp);
-
-    sp_tblrec_create(&ud.tblrec);
-    sp_osc_create(&ud.osc);
-    sp_ftbl_create(sp, &ud.ft, 2048);
-
-    sp_tblrec_init(sp, ud.tblrec);
-    sp_gen_sine(sp, ud.ft);
-    sp_osc_init(sp, ud.osc, ud.ft, 0);
-
     sp->len = 44100 * 5;
+
+    /* create */
+    sp_tblrec_create(&ud.tblrec);
+    sp_ftbl_create(sp, &ud.ft, sp->sr * 0.5);
+    sp_ftbl_create(sp, &ud.seq, 1);
+    sp_gen_vals(sp, ud.seq, "0 2 7 11");
+
+    sp_tseq_create(&ud.tseq);
+    sp_metro_create(&ud.met);
+    sp_pluck_create(&ud.plk); 
+    sp_randi_create(&ud.randi);
+    sp_tabread_create(&ud.tr);
+
+    /* init */
+    sp_tblrec_init(sp, ud.tblrec, ud.ft);
+    sp_metro_init(sp, ud.met);
+    ud.met->freq = 2.5;
+    sp_pluck_init(sp, ud.plk, 110);
+    ud.plk->freq = 440;
+    sp_randi_init(sp, ud.randi);
+    sp_tabread_init(sp, ud.tr, ud.ft);
+
     sp_process(sp, &ud, process);
 
+    /* destroy */
     sp_tblrec_destroy(&ud.tblrec);
     sp_ftbl_destroy(&ud.ft);
-    sp_osc_destroy(&ud.osc);
+    sp_ftbl_destroy(&ud.seq);
+    sp_tseq_create(&ud.tseq);
+    sp_metro_destroy(&ud.met);
+    sp_pluck_destroy(&ud.plk); 
+    sp_randi_destroy(&ud.randi);
+    sp_tabread_destroy(&ud.tr);
 
     sp_destroy(&sp);
     return 0;

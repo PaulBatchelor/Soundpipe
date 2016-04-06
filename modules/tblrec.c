@@ -1,12 +1,5 @@
-/*
- * Foo
- * 
- * This is a dummy module. It doesn't do much.
- * Feel free to use this as a boilerplate template.
- * 
- */
-
 #include <stdlib.h>
+#include <string.h>
 #include "soundpipe.h"
 
 int sp_tblrec_create(sp_tblrec **p)
@@ -21,16 +14,30 @@ int sp_tblrec_destroy(sp_tblrec **p)
     return SP_OK;
 }
 
-int sp_tblrec_init(sp_data *sp, sp_tblrec *p)
+int sp_tblrec_init(sp_data *sp, sp_tblrec *p, sp_ftbl *ft)
 {
-    /* Initalize variables here. */
-    p->bar = 123;
+    p->val = 0;
+    p->index = 0;
+    p->record = 0;
+    p->ft = ft;
     return SP_OK;
 }
 
-int sp_tblrec_compute(sp_data *sp, sp_tblrec *p, SPFLOAT *in, SPFLOAT *out)
+int sp_tblrec_compute(sp_data *sp, sp_tblrec *p, SPFLOAT *in, SPFLOAT *trig, SPFLOAT *out)
 {
-    /* Send the signal's input to the output */
-    *out = *in;
+    if(*trig != 0) {
+        if(p->record == 1) {
+            p->record = 0;
+        } else {
+            p->record = 1;
+            p->index = 0;
+            memset(p->ft->tbl, 0, sizeof(SPFLOAT) * p->ft->size);
+        }
+    }
+
+    if(p->record) {
+        p->ft->tbl[p->index] = p->val;
+        p->index = (p->index + 1) % p->ft->size;
+    }
     return SP_OK;
 }
