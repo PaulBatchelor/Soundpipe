@@ -16,7 +16,6 @@ int sp_tblrec_destroy(sp_tblrec **p)
 
 int sp_tblrec_init(sp_data *sp, sp_tblrec *p, sp_ftbl *ft)
 {
-    p->val = 0;
     p->index = 0;
     p->record = 0;
     p->ft = ft;
@@ -36,7 +35,7 @@ int sp_tblrec_compute(sp_data *sp, sp_tblrec *p, SPFLOAT *in, SPFLOAT *trig, SPF
     }
 
     if(p->record) {
-        p->ft->tbl[p->index] = p->val;
+        p->ft->tbl[p->index] = *in;
         p->index = (p->index + 1) % p->ft->size;
     }
     return SP_OK;

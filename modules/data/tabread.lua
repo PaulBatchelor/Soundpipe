@@ -19,7 +19,13 @@ sptbl["tabread"] = {
                 type = "sp_ftbl *",
                 description = "A properly allocated table (using a function like sp_gen_file).",
                 default = "N/A"
-            }
+            },
+            {
+                name = "mode",
+                type = "SPFLOAT",
+                description ="1 = scaled index, 0 = unscaled index",
+                default = 1.0
+            },
         },
 
         optional = {
@@ -28,12 +34,6 @@ sptbl["tabread"] = {
                 type = "SPFLOAT",
                 description ="index position, either scaled or unscaled with mode parameter",
                 default = 0
-            },
-            {
-                name = "mode",
-                type = "SPFLOAT",
-                description ="1 = scaled index, 0 = unscaled index",
-                default = 1.0
             },
             {
                 name = "offset",

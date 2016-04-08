@@ -1,7 +1,6 @@
 typedef struct {
     sp_ftbl *ft;
-    SPFLOAT val;
-    unsigned int index;
+    uint32_t index;
     int record;
 } sp_tblrec;
 
