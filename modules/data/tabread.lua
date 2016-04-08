@@ -60,6 +60,10 @@ sptbl["tabread"] = {
     noutputs = 1,
 
     inputs = {
+        {
+            name = "in",
+            description = "Signal in."
+        },
     },
 
     outputs = {
