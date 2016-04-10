@@ -16,7 +16,7 @@ md5 hashes
     - Added module 'tblrec' 
     - Fixes to tabread: 'mode' is now mandatory value in the init function
     - dist: removed mode (internal code change)
-    - clip: fixed bug related to switching methods at control-rate
+    - clip: simplified immensly. Now only does method 1 from Csound (sine method)
 1.01 
 ----
     - New modules:
