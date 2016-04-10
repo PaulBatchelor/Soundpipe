@@ -28,7 +28,7 @@ int sp_dist_destroy(sp_dist **p)
 
 int sp_dist_init(sp_data *sp, sp_dist *p)
 {
-    p->mode = 0;
+    p->mode = 1;
     p->pregain = 2.0;
     p->postgain = 0.5;
     p->shape1 = 0;
