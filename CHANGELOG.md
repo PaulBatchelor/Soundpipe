@@ -15,6 +15,7 @@ md5 hashes
         - adsr
     - Added module 'tblrec' 
     - Fixes to tabread: 'mode' is now mandatory value in the init function
+    - dist: mode is hard coded to 1 by default
 1.01 
 ----
     - New modules:
