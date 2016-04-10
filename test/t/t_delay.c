@@ -37,8 +37,6 @@ int t_delay(sp_test *tst, sp_data *sp, const char *hash)
     ud.tenv->hold = 0.1;
     ud.tenv->rel =  0.1;
 
-
-
     for(n = 0; n < tst->size; n++) {
         osc = 0, delay = 0, met = 0, tenv = 0;
         sp_metro_compute(sp, ud.met, NULL, &met);

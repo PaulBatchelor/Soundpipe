@@ -1,5 +1,21 @@
 # Change log
 
+1.1.1
+-----
+    - Fixed clicking in static delay (simplified code)
+    - Testing improvements:
+        - test utility now has command line args:
+            - "./run.bin" works like it did before
+            - "./run.bin gen_header" rewrites all_tests.h 
+            - "./run.bin regen_header" rewrites all_tests.h, but regenerates 
+md5 hashes
+            - "./run.bin test id" runs a single test
+            - "./run.bin render id" renders a single test
+    - Tests added:
+        - adsr
+    - Added module 'tblrec' 
+    - Fixes to tabread: 'mode' is now mandatory value in the init function
+    - dist: mode is hard coded to 1 by default
 1.01 
 ----
     - New modules:

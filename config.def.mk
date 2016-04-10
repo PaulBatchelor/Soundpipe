@@ -81,6 +81,7 @@ streson \
 switch \
 tabread \
 tadsr \
+tblrec \
 tbvcf \
 tenv \
 tenv2 \

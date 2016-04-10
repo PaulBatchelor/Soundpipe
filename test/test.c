@@ -5,6 +5,7 @@
 #include "md5.h"
 #include "test.h"
 
+
 int sp_test_create(sp_test **t, uint32_t bufsize)
 {
     uint32_t i;
@@ -20,6 +21,7 @@ int sp_test_create(sp_test **t, uint32_t bufsize)
     md5_init(&tp->state);
     tp->md5string[32] = '\0';
     tp->md5 = tp->md5string;
+    tp->mode = NORMAL;
     return SP_OK;
 }
 
@@ -78,11 +80,19 @@ int sp_test_write_raw(sp_test *t, uint32_t index)
 
 int sp_test_verify(sp_test *t, const char *refhash)
 {
-    int fail = 0;
-    if(sp_test_compare(t, refhash) == SP_NOT_OK) {
-        printf("Generated hash %s does not match reference hash %s\n", 
-                t->md5string, refhash);
-        fail = 1;
+    if(t->mode == NORMAL) {
+        int fail = 0;
+        if(sp_test_compare(t, refhash) == SP_NOT_OK) {
+            printf("Generated hash %s does not match reference hash %s\n", 
+                    t->md5string, refhash);
+            fail = 1;
+        }
+        return fail;
+    } else {
+        sp_test_entry *tst = t->cur_entry;
+        sp_test_compare(t, refhash);
+        printf("TEST(t_%s, \"%s\", \"%s\")\n",
+                tst->desc, tst->desc, t->md5string);
+        return 0;
     }
-    return fail;
 }

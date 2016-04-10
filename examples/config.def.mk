@@ -88,6 +88,7 @@ ex_streson \
 ex_switch \
 ex_tabread \
 ex_tadsr \
+ex_tblrec \
 ex_tbvcf \
 ex_tenv \
 ex_tenv2 \

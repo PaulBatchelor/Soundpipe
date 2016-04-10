@@ -5,7 +5,6 @@ typedef struct {
     sp_auxdata buf;
     uint32_t bufsize;
     uint32_t bufpos;
-    int init;
 } sp_delay;
 
 int sp_delay_create(sp_delay **p);
