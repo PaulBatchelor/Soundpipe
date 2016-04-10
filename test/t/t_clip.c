@@ -32,21 +32,6 @@ int t_clip(sp_test *tst, sp_data *sp, const char *hash)
 
     for(n = 0; n < tst->size; n++) {
         out = 0 , osc = 0 , filt = 0;
-
-        if(sp->pos < (44100 * 2)) {
-            sp_osc_compute(sp, ud.osc, NULL, &osc);
-            sp_moogladder_compute(sp, ud.filt, &osc, &filt);
-            out = filt;
-        } else if(sp->pos >= (44100 * 2) && sp->pos < (44100 * 3)) {
-            ud.clp->meth = 0;
-        } else if(sp->pos >= (44100 * 3) && sp->pos < (44100 * 4)) {
-            ud.clp->meth = 1;
-            ud.clp->lim = 0.2;
-        } else {
-            ud.clp->meth = 2;
-            ud.clp->lim = 0.03;
-        }
-
         sp_osc_compute(sp, ud.osc, NULL, &osc);
         sp_moogladder_compute(sp, ud.filt, &osc, &filt);
         sp_clip_compute(sp, ud.clp, &filt, &out);
