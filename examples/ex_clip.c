@@ -11,22 +11,6 @@ typedef struct {
 void write_clip(sp_data *sp, void *ud) {
     UserData *udp = ud;
     SPFLOAT out, osc, filt;
-
-    if(sp->pos < (44100 * 2)) {
-        sp_osc_compute(sp, udp->osc, NULL, &osc);
-        sp_moogladder_compute(sp, udp->filt, &osc, &filt);
-        sp->out[0] = filt;
-        return;
-    } else if(sp->pos >= (44100 * 2) && sp->pos < (44100 * 3)) {
-        udp->clp->meth = 0;
-    } else if(sp->pos >= (44100 * 3) && sp->pos < (44100 * 4)) {
-        udp->clp->meth = 1;
-        udp->clp->lim = 0.2;
-    } else {
-        udp->clp->meth = 2;
-        udp->clp->lim = 0.03;
-    }
-
     sp_osc_compute(sp, udp->osc, NULL, &osc);
     sp_moogladder_compute(sp, udp->filt, &osc, &filt);
     sp_clip_compute(sp, udp->clp, &filt, &out);

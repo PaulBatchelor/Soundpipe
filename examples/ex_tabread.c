@@ -31,10 +31,8 @@ int main() {
     sp_ftbl_create(sp, &ud.ft, 395393);
     sp_gen_file(sp, ud.ft, "oneart.wav");
 
-    sp_tabread_init(sp, ud.tr, ud.ft);
+    sp_tabread_init(sp, ud.tr, ud.ft, 1);
 
-    /* mode 1: indexing scaled 0-1; mode 0: unscaled direct indexing */
-    ud.tr->mode = 1;
     /* since mode = 1, offset 5% into file */
     ud.tr->offset = 0.05;
     /* no wraparound */
