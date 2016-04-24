@@ -24,7 +24,7 @@ int main() {
     sp_paulstretch_create(&ud.paulstretch);
     sp_ftbl_loadfile(sp, &ud.ft, "oneart.wav");
 
-    sp_paulstretch_init(sp, ud.paulstretch, ud.ft, 1.0);
+    sp_paulstretch_init(sp, ud.paulstretch, ud.ft, 1.0, 10);
 
     sp->len = 44100 * 20;
     sp_process(sp, &ud, process);

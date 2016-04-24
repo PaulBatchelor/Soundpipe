@@ -17,5 +17,5 @@ typedef struct {
 
 int sp_paulstretch_create(sp_paulstretch **p);
 int sp_paulstretch_destroy(sp_paulstretch **p);
-int sp_paulstretch_init(sp_data *sp, sp_paulstretch *p, sp_ftbl *ft, SPFLOAT windowsize);
+int sp_paulstretch_init(sp_data *sp, sp_paulstretch *p, sp_ftbl *ft, SPFLOAT windowsize, SPFLOAT stretch);
 int sp_paulstretch_compute(sp_data *sp, sp_paulstretch *p, SPFLOAT *in, SPFLOAT *out);

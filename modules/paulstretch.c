@@ -78,12 +78,12 @@ int sp_paulstretch_destroy(sp_paulstretch **p)
     return SP_OK;
 }
 
-int sp_paulstretch_init(sp_data *sp, sp_paulstretch *p, sp_ftbl *ft, SPFLOAT windowsize)
+int sp_paulstretch_init(sp_data *sp, sp_paulstretch *p, sp_ftbl *ft, SPFLOAT windowsize, SPFLOAT stretch)
 {
     uint32_t i;
     p->ft = ft;
     p->windowsize = (uint32_t)(sp->sr * windowsize);
-    p->stretch = 10;
+    p->stretch = stretch;
     if(p->windowsize < 16) {
         p->windowsize = 16;
     }

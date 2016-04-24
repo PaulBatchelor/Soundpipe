@@ -27,15 +27,15 @@ sptbl["paulstretch"] = {
                 description = "Window size, in seconds.",
                 default = 10
             }
-        },
-
-        optional = {
             {
                 name = "stretch",
                 type = "SPFLOAT",
                 description = "Stretch factor, 1.0 is no stretch.",
                 default = 10
             },
+        },
+
+        optional = {
         }
     },
 
