@@ -1,5 +1,5 @@
 typedef struct{
-    SPFLOAT arg, lim, k1;
+    SPFLOAT lim, k1;
 }sp_clip;
 
 int sp_clip_create(sp_clip **p);
