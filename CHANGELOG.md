@@ -18,6 +18,7 @@ md5 hashes
     - Fixes to tabread: 'mode' is now mandatory value in the init function
     - dist: removed mode (internal code change)
     - clip: simplified immensly. Now only does method 1 from Csound (sine method)
+    - padsynth: fixed a malloc issue that was causing valgrind to complain
 1.01 
 ----
     - New modules:
