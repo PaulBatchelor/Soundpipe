@@ -26,7 +26,7 @@ sptbl["paulstretch"] = {
                 type = "SPFLOAT",
                 description = "Window size, in seconds.",
                 default = 10
-            }
+            },
             {
                 name = "stretch",
                 type = "SPFLOAT",
