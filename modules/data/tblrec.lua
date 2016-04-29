@@ -48,7 +48,7 @@ previous information that was on it.
 
     outputs = {
         {
-            name = "out"
+            name = "out",
             description = "This doesn't do anything. should be NULL"
         }
     }
