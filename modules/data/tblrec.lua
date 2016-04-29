@@ -33,7 +33,7 @@ previous information that was on it.
 ]],
 
     ninputs = 2,
-    noutputs = 0,
+    noutputs = 1,
 
     inputs = {
         {
@@ -47,6 +47,10 @@ previous information that was on it.
     },
 
     outputs = {
+        {
+            name = "out"
+            description = "This doesn't do anything. should be NULL"
+        }
     }
 
 }
