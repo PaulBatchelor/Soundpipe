@@ -13,6 +13,11 @@ typedef struct {
     kiss_fftr_cfg fft, ifft;
     kiss_fft_cpx *tmp1, *tmp2;
     uint32_t counter;
+    sp_auxdata m_window;
+    sp_auxdata m_old_windowed_buf;
+    sp_auxdata m_hinv_buf;
+    sp_auxdata m_buf;
+    sp_auxdata m_output;
 } sp_paulstretch;
 
 int sp_paulstretch_create(sp_paulstretch **p);

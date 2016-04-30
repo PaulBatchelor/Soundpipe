@@ -66,11 +66,11 @@ int sp_paulstretch_create(sp_paulstretch **p)
 int sp_paulstretch_destroy(sp_paulstretch **p)
 {
     sp_paulstretch *pp = *p;
-    free(pp->window);
-    free(pp->old_windowed_buf);
-    free(pp->hinv_buf);
-    free(pp->buf);
-    free(pp->output);
+    sp_auxdata_free(&pp->m_window);
+    sp_auxdata_free(&pp->m_old_windowed_buf);
+    sp_auxdata_free(&pp->m_hinv_buf);
+    sp_auxdata_free(&pp->m_buf);
+    sp_auxdata_free(&pp->m_output);
     kiss_fftr_free(pp->fft);
     kiss_fftr_free(pp->ifft);
     KISS_FFT_FREE(pp->tmp1);
@@ -90,20 +90,20 @@ int sp_paulstretch_init(sp_data *sp, sp_paulstretch *p, sp_ftbl *ft, SPFLOAT win
     p->half_windowsize = p->windowsize / 2;
     p->displace_pos = (p->windowsize * 0.5) / p->stretch;
 
-    p->window = malloc(sizeof(SPFLOAT) * p->windowsize);
-    memset(p->window, 0, sizeof(SPFLOAT) * p->windowsize);
+    sp_auxdata_alloc(&p->m_window, sizeof(SPFLOAT) * p->windowsize);
+    p->window = p->m_window.ptr;
 
-    p->old_windowed_buf = malloc(sizeof(SPFLOAT) * p->windowsize);
-    memset(p->old_windowed_buf, 0, sizeof(SPFLOAT) * p->windowsize);
+    sp_auxdata_alloc(&p->m_old_windowed_buf, sizeof(SPFLOAT) * p->windowsize);
+    p->old_windowed_buf = p->m_old_windowed_buf.ptr;
 
-    p->hinv_buf = malloc(sizeof(SPFLOAT) * p->half_windowsize);
-    memset(p->hinv_buf, 0, sizeof(SPFLOAT) * p->half_windowsize);
+    sp_auxdata_alloc(&p->m_hinv_buf, sizeof(SPFLOAT) * p->half_windowsize);
+    p->hinv_buf = p->m_hinv_buf.ptr;
 
-    p->buf = malloc(sizeof(SPFLOAT) * p->windowsize);
-    memset(p->buf, 0, sizeof(SPFLOAT) * p->windowsize);
+    sp_auxdata_alloc(&p->m_buf, sizeof(SPFLOAT) * p->windowsize);
+    p->buf = p->m_buf.ptr;
 
-    p->output = malloc(sizeof(SPFLOAT) * p->half_windowsize);
-    memset(p->output, 0, sizeof(SPFLOAT) * p->half_windowsize);
+    sp_auxdata_alloc(&p->m_output, sizeof(SPFLOAT) * p->half_windowsize);
+    p->output = p->m_output.ptr;
 
     /* Create Hann window */
     for(i = 0; i < p->windowsize; i++) {

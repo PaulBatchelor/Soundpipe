@@ -57,6 +57,7 @@ oscmorph \
 pan2 \
 panst \
 pareq \
+paulstretch \
 phaser \
 phasor \
 pinknoise \

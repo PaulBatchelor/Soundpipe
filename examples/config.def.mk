@@ -67,6 +67,7 @@ ex_padsynth \
 ex_pan2 \
 ex_panst \
 ex_pareq \
+ex_paulstretch \
 ex_phaser \
 ex_phasor \
 ex_pinknoise \
