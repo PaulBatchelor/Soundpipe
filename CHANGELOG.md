@@ -19,6 +19,8 @@ md5 hashes
     - dist: removed mode (internal code change)
     - clip: simplified immensly. Now only does method 1 from Csound (sine method)
     - padsynth: fixed a malloc issue that was causing valgrind to complain
+    - Fixes to rpt: no longer freaks out if repeat sizes are out of bounds
+    - Replaced pink noise algorithm from faust code to Protrekkr code
 1.01 
 ----
     - New modules:
