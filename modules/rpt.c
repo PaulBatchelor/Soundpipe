@@ -30,21 +30,26 @@ int sp_rpt_init(sp_data *sp, sp_rpt *p, SPFLOAT maxdur)
     p->bpm = 130;
     p->div = 4;
     p->rep = 4;
+    p->rc = SP_OK;
     return SP_OK;
 }
 
 int sp_rpt_compute(sp_data *sp, sp_rpt *p, SPFLOAT *trig,
         SPFLOAT *in, SPFLOAT *out)
 {
+    if(p->rc == SP_NOT_OK) {
+        *out = 0;
+        return SP_NOT_OK;
+    }
     if(*trig > 0){
-        sp_rpt_set(p, p->bpm, p->div, p->rep);
+        p->rc = sp_rpt_set(p, p->bpm, p->div, p->rep);
         p->running = 1;
         p->playpos = 0;
         p->bufpos = 0;
         p->count = p->reps + 1;
     }
     if(p->bufpos * sizeof(SPFLOAT) < p->aux.size){
-        sp_rpt_set(p, p->bpm, p->div, p->rep);
+        p->rc = sp_rpt_set(p, p->bpm, p->div, p->rep);
         sp_auxdata_setbuf(&p->aux, p->bufpos, in);
         p->bufpos++;
     }else{

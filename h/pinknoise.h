@@ -1,8 +1,12 @@
 typedef struct {
-    void *faust;
-    int argpos;
-    SPFLOAT *args[1];
-    SPFLOAT *amp;
+    SPFLOAT amp;
+    unsigned int newrand;
+    unsigned int prevrand;
+    unsigned int k;
+    unsigned int seed;
+    unsigned int total;
+    uint32_t counter;
+    unsigned int dice[7];
 } sp_pinknoise;
 
 int sp_pinknoise_create(sp_pinknoise **p);
