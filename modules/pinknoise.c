@@ -1,8 +1,17 @@
+/*
+ * Pinknoise
+ *
+ * This code has been extracted the pink noise synthesizer from Protrekkr
+ * It has been modified to work as a Soundpipe module.
+ *
+ * Original Author(s): McCartney, Juan Antonio Arguelles
+ * Location: release/distrib/replay/lib/replay.cpp
+ *
+ */
 #include <stdlib.h>
 #include <math.h>
 #include "soundpipe.h"
 
-// McCartney pink noise generator
 
 static uint32_t ctz[64] =
 {
