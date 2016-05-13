@@ -8,15 +8,16 @@ ifndef CONFIG
 CONFIG=config.mk
 endif
 
-include $(CONFIG)
 
 SPLIBS = libsoundpipe.a
 
 VERSION=1.1.1
 
-MPATHS=$(addprefix modules/, $(addsuffix .o, $(MODULES)))
-HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
-CPATHS=$(addprefix modules/, $(addsuffix .c, $(MODULES)))
+MPATHS+=$(addprefix modules/, $(addsuffix .o, $(MODULES)))
+HPATHS+=$(addprefix h/, $(addsuffix .h, $(MODULES)))
+CPATHS+=$(addprefix modules/, $(addsuffix .c, $(MODULES)))
+
+include $(CONFIG)
 
 CFLAGS +=  -g -DSP_VERSION=$(VERSION) -O3 -DSPFLOAT=float -Ih -I/usr/local/include
 UTIL += util/wav2smp

@@ -129,6 +129,8 @@ MODULES += padsynth
 # Uncomment to use FFTW3 instead of kissfft.
 # CFLAGS += -lfftw3 -DUSE_FFTW3
 
-# Build dynamic library. Needed for Sporth chugin
-# CFLAGS += -shared -fPIC
-# BUILD_DYNAMIC=1
+# Soundpipe audio 
+include lib/spa/Makefile
+
+# Needed for Sporth chugin
+# CFLAGS += -fPIC
