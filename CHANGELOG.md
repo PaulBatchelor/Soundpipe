@@ -1,5 +1,10 @@
 # Change log
 
+1.2.0
+-----
+    - added internal soundpipe file 
+    - removed sp->k
+
 1.1.1
 -----
     - Fixed clicking in static delay (simplified code)
