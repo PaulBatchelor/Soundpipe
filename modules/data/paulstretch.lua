@@ -45,6 +45,9 @@ sptbl["paulstretch"] = {
 This is an implementation of the popular paulstretch algorithm used for time
 stretching an audio signal to create ambient textures. Ideally, this algorithm 
 is best used for stretching signals by very very long amounts. 
+
+This version of paulstretch will take an ftable and loop through it, make
+it an ideal means for creating sustained pads. 
 ]],
 
     ninputs = 0,

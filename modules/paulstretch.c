@@ -31,7 +31,8 @@ static void compute_block(sp_data *sp, sp_paulstretch *p) {
     SPFLOAT *window = p->window;
     SPFLOAT *output= p->output;
     for(i = 0; i < windowsize; i++) {
-        pos = istart_pos + i;
+        /* Loop through buffer */
+        pos = (istart_pos + i) % p->ft->size;
         if(pos < p->ft->size) {
             buf[i] = tbl[pos] * window[i];
         } else {

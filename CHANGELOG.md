@@ -2,8 +2,9 @@
 
 1.2.0
 -----
-    - added internal soundpipe file 
+    - added internal soundpipe file (SPA)
     - removed sp->k
+    - paulstretch now loops
 
 1.1.1
 -----
