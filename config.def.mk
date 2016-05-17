@@ -52,6 +52,7 @@ mincer \
 mode \
 moogladder \
 noise \
+nsmp \
 osc \
 oscmorph \
 pan2 \
@@ -98,7 +99,7 @@ vocoder \
 zitarev
 
 ifndef NO_LIBSNDFILE
-	MODULES += nsmp diskin
+	MODULES += diskin
 else
 	CFLAGS += -DNO_LIBSNDFILE
 endif
