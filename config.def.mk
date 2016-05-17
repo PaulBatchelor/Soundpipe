@@ -133,4 +133,4 @@ MODULES += padsynth
 include lib/spa/Makefile
 
 # Needed for Sporth chugin
-# CFLAGS += -fPIC
+CFLAGS += -fPIC
