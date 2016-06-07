@@ -5,6 +5,7 @@
     - added internal soundpipe file (SPA)
     - removed sp->k
     - paulstretch now loops
+    - added tdiv ugen
 
 1.1.1
 -----
