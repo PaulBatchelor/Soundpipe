@@ -84,6 +84,7 @@ tabread \
 tadsr \
 tblrec \
 tbvcf \
+tdiv \
 tenv \
 tenv2 \
 tenvx \

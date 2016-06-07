@@ -91,6 +91,7 @@ ex_tabread \
 ex_tadsr \
 ex_tblrec \
 ex_tbvcf \
+ex_tdiv \
 ex_tenv \
 ex_tenv2 \
 ex_tenvx \

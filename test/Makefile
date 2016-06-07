@@ -63,6 +63,7 @@ t_samphold \
 t_scale \
 t_streson \
 t_tbvcf \
+t_tdiv \
 t_tenv \
 t_tenv2 \
 t_tone \
