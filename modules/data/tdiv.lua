@@ -1,102 +1,56 @@
-sptbl["clockdiv"] = {
+sptbl["tdiv"] = {
 
     files = {
-        module = "clockdiv.c",
-        header = "clockdiv.h",
-        example = "ex_clockdiv.c",
+        module = "tdiv.c",
+        header = "tdiv.h",
+        example = "ex_tdiv.c",
     },
 
     func = {
-        create = "sp_clockdiv_create",
-        destroy = "sp_clockdiv_destroy",
-        init = "sp_clockdiv_init",
-        compute = "sp_clockdiv_compute",
-        other = {
-            sp_clockdiv_set = {
-                description = "clockdiv_set description goes here.",
-                args = {
-                    {
-                        name = "var1",
-                        type = "SPFLOAT",
-                        description = "This is the first parameter",
-                        default = 1.5
-                    },
-                    {
-                        name = "var2",
-                        type = "SPFLOAT",
-                        description = "This is the second parameter",
-                        default = 1.5
-                    }
-                }
-            }
-        }
+        create = "sp_tdiv_create",
+        destroy = "sp_tdiv_destroy",
+        init = "sp_tdiv_init",
     },
 
     params = {
-        mandatory = {
-            {
-                name = "bar",
-                type = "sp_ftbl *",
-                description = "This is a mandatory table value. It does not have a default value, so we set it to 'N/A'. Any that does not or cannot have a default value should set this default value to 'N/A'.",
-                default = "N/A"
-            },
-            {
-                name = "bar2",
-                type = "SPFLOAT",
-                description = "This is a mandatory parameter. In soundpipe, users will always need to specify this value, but a default value has been giving in case it is needed to write more complicated engines in the future.",
-                default = 123
-            }
-        },
-
         optional = {
             {
-                name = "blah_1",
+                name = "num",
                 type = "SPFLOAT",
-                description = "This is an optional parameter. These values are always set to a value by default, and can be set after the init function has been called.",
-                default = 1.5
-            },
-            {
-                name = "blah_2",
-                type = "SPFLOAT",
-                description ="This is yet another optional parameter...",
-                default = 456.7
+                description = "Triggers every N times.",
+                default = 2
             },
         }
     },
 
     modtype = "module",
 
-    description = [[A short title describing the module
+    description = [[Trigger divider.
+This module will take in a trigger signal, and output a trigger signal
+every N times.
 
-    This is a description of the entire module.  This is not a real module. This description should be a comprehensive sumary of what this function does.
+For instance, when N = 3:
 
-Inside the Lua table, this is expressed as a multiline string, however it does not adhere to the tradtional 80 column rule found in programming.
+in: * * * * * * * * *
 
-Write as much text as needed here...
+out *     *     *   
+
 ]],
 
-    ninputs = 2,
-    noutputs = 2,
+    ninputs = 1,
+    noutputs = 1,
 
     inputs = {
         {
-            name = "clock",
-            description = "this is the clock source for a made up plugin."
-        },
-        {
-            name = "input",
-            description = "this is the audio input for a made up plugin."
+            name = "trigger",
+            description = "Trigger. Should be a non-zero value"
         },
     },
 
     outputs = {
         {
-            name = "out_left",
-            description = "Stereo left output for clockdiv."
-        },
-        {
-            name = "out_right",
-            description = "Stereo right output for clockdiv."
+            name = "out",
+            description = "Signal output."
         },
     }
 
