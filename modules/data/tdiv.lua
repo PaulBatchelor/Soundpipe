@@ -20,6 +20,12 @@ sptbl["tdiv"] = {
                 description = "Triggers every N times.",
                 default = 2
             },
+            {
+                name = "offset",
+                type = "SPFLOAT",
+                description = "Offset amoutn.",
+                default = 0
+            },
         }
     },
 

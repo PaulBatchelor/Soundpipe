@@ -1,5 +1,5 @@
 typedef struct {
-    uint32_t num, counter;
+    uint32_t num, counter, offset;
 } sp_tdiv;
 
 int sp_tdiv_create(sp_tdiv **p);
