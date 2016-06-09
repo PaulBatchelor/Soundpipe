@@ -6,6 +6,7 @@
     - removed sp->k
     - paulstretch now loops
     - added tdiv ugen
+    - Completly removed setbuf and getbuf helper functions
 
 1.1.1
 -----
