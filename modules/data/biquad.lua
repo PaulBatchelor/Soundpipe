@@ -19,37 +19,37 @@ sptbl["biquad"] = {
                 name = "b0",
                 type = "SPFLOAT",
                 description = "biquad coefficient.",
-                default = "???"
+                default = 0
             },
             {
                 name = "b1",
                 type = "SPFLOAT",
                 description = "biquad coefficient.",
-                default = "???"
+                default = 0
             },
             {
                 name = "b2",
                 type = "SPFLOAT",
                 description = "biquad coefficient.",
-                default = "???"
+                default = 0
             },
             {
                 name = "a0",
                 type = "SPFLOAT",
                 description = "biquad coefficient.",
-                default = "???"
+                default = 0
             },
             {
                 name = "a1",
                 type = "SPFLOAT",
                 description = "biquad coefficient.",
-                default = "???"
+                default = 0
             },
             {
                 name = "a2",
                 type = "SPFLOAT",
                 description = "biquad coefficient.",
-                default = "???"
+                default = 0
             }
         }
     },
@@ -58,7 +58,7 @@ sptbl["biquad"] = {
 
     description = [[A sweepable biquadratic general purpose filter
 
-    More work needs to be done here... at some point the biquadratic equation will placed here, along with a brief explanation on how to use the coefficients.]],
+    ]],
 
     ninputs = 1,
     noutputs = 1,
