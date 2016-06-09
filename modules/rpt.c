@@ -37,6 +37,7 @@ int sp_rpt_init(sp_data *sp, sp_rpt *p, SPFLOAT maxdur)
 int sp_rpt_compute(sp_data *sp, sp_rpt *p, SPFLOAT *trig,
         SPFLOAT *in, SPFLOAT *out)
 {
+    SPFLOAT *buf = (SPFLOAT *)p->aux.ptr;
     if(p->rc == SP_NOT_OK) {
         *out = 0;
         return SP_NOT_OK;
@@ -50,7 +51,7 @@ int sp_rpt_compute(sp_data *sp, sp_rpt *p, SPFLOAT *trig,
     }
     if(p->bufpos * sizeof(SPFLOAT) < p->aux.size){
         p->rc = sp_rpt_set(p, p->bpm, p->div, p->rep);
-        sp_auxdata_setbuf(&p->aux, p->bufpos, in);
+        buf[p->bufpos] = *in;
         p->bufpos++;
     }else{
         p->running = 0;
@@ -59,7 +60,7 @@ int sp_rpt_compute(sp_data *sp, sp_rpt *p, SPFLOAT *trig,
         if(p->playpos == 0){
             p->count--;
         }
-        sp_auxdata_getbuf(&p->aux, p->playpos, out);
+        *out = buf[p->playpos];
         p->playpos = (p->playpos + 1) % p->size;
     }else{
         *out = *in;
