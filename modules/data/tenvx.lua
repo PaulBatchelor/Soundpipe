@@ -18,39 +18,32 @@ sptbl["tenvx"] = {
             {
                 name = "atk",
                 type = "SPFLOAT",
-                description = "Attack time, in seconds. Must be non-zero.",
+                description = "Tau attack time, in seconds. Must be non-zero.",
                 default = 0.1
             },
             {
                 name = "hold",
                 type = "SPFLOAT",
-                description = "Hold time, in seconds.",
+                description = "Hold time, in seconds. The duration of the gate signal.",
                 default = 0.3
             },
             {
                 name = "rel",
                 type = "SPFLOAT",
-                description = "Release time, in seconds. Must be non-zero.",
+                description = "Tau release time, in seconds. Must be non-zero.",
                 default = 0.2
             },
-            {
-                name = "sigmode",
-                type = "int",
-                description = "If set to non-zero value, tenvx will multiply the envelope with an internal signal instead of just returning an enveloped signal.",
-                default = 0
-            },
-            {
-                name = "input",
-                type = "SPFLOAT",
-                description = "Internal input signal. If sigmode variable is set, it will multiply the envelope by this variable. Most of the time, this should be updated at audiorate.",
-                default = 0
-            }
         }
     },
 
     modtype = "module",
 
-    description = [[Trigger based exponential AHD envelope generator]],
+    description = [[Trigger based exponential AHD envelope generator.
+    This envelope generator emulates the exponential behavior of analogue 
+envelope generators by passing a gate signal (whose duration is specified via
+the hold parameter) through a one-pole filter, whose filter coefficeints are
+calculated in terms of tau.  
+    ]],
 
     ninputs = 1,
     noutputs = 1,
