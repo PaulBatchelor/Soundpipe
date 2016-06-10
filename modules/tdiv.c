@@ -17,7 +17,7 @@ int sp_tdiv_init(sp_data *sp, sp_tdiv *p)
 {
     p->num = 2;
     p->counter = 0;
-    p->offset == 0;
+    p->offset = 0;
     return SP_OK;
 }
 
