@@ -1,11 +1,10 @@
 typedef struct sp_tenvx{
-    sp_tevent *te;
-    uint32_t pos, atk_end, rel_start, sr, totaldur;
     SPFLOAT atk, rel, hold;
-    SPFLOAT atk_slp, rel_slp;
-    SPFLOAT last;
-    int sigmode;
-    SPFLOAT input;
+    SPFLOAT patk, prel;
+    uint32_t count;
+    SPFLOAT a_a, b_a;
+    SPFLOAT a_r, b_r;
+    SPFLOAT y;
 } sp_tenvx;
 
 int sp_tenvx_create(sp_tenvx **p);
