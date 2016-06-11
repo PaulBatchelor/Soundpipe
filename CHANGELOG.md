@@ -7,6 +7,7 @@
     - paulstretch now loops
     - added tdiv ugen
     - Completly removed setbuf and getbuf helper functions
+    - added hilbert transform
 
 1.1.1
 -----
