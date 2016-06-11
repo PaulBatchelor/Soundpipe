@@ -41,6 +41,7 @@ fofilt \
 foo \
 fosc \
 gbuzz \
+hilbert \
 in \
 jcrev \
 jitter \

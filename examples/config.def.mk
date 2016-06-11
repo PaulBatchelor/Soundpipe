@@ -43,6 +43,7 @@ ex_gen_sine \
 ex_gen_sinesum \
 ex_gen_vals \
 ex_gen_xline \
+ex_hilbert \
 ex_in \
 ex_jcrev \
 ex_jitter \
