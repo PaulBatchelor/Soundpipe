@@ -54,31 +54,29 @@ int sp_hilbert_compute(sp_data *sp, sp_hilbert *p, SPFLOAT *in, SPFLOAT *out1, S
 
     coef = p->coef;
 
-    //for (n=offset; n<nsmps; n++) {
-      xn1 = *in;
-      /* 6th order allpass filter for sine output. Structure is
-       * 6 first-order allpass sections in series. Coefficients
-       * taken from arrays calculated at i-time.
-       */
-      for (j=0; j < 6; j++) {
+    xn1 = *in;
+    /* 6th order allpass filter for sine output. Structure is
+    * 6 first-order allpass sections in series. Coefficients
+    * taken from arrays calculated at i-time.
+    */
+    for (j=0; j < 6; j++) {
         yn1 = coef[j] * (xn1 - p->ynm1[j]) + p->xnm1[j];
         p->xnm1[j] = xn1;
         p->ynm1[j] = yn1;
         xn1 = yn1;
-      }
-      xn2 = *in;
-      /* 6th order allpass filter for cosine output. Structure is
-       * 6 first-order allpass sections in series. Coefficients
-       * taken from arrays calculated at i-time.
-       */
-      for (j=6; j < 12; j++) {
+    }
+    xn2 = *in;
+    /* 6th order allpass filter for cosine output. Structure is
+    * 6 first-order allpass sections in series. Coefficients
+    * taken from arrays calculated at i-time.
+    */
+    for (j=6; j < 12; j++) {
         yn2 = coef[j] * (xn2 - p->ynm1[j]) + p->xnm1[j];
         p->xnm1[j] = xn2;
         p->ynm1[j] = yn2;
         xn2 = yn2;
-      }
-      *out1 = yn2;
-      *out2 = yn1;
-    //}
+    }
+    *out1 = yn2;
+    *out2 = yn1;
     return SP_OK;
 }
