@@ -7,7 +7,12 @@
  */
 
 #include <stdlib.h>
+#include <math.h>
 #include "soundpipe.h"
+
+#ifndef M_PI
+#define M_PI		3.14159265358979323846
+#endif
 
 enum{LPF1, HPF1};
 enum{OFF, ON};
@@ -65,7 +70,27 @@ int sp_wpkorg35_destroy(sp_wpkorg35 **p)
 
 int sp_wpkorg35_init(sp_data *sp, sp_wpkorg35 *p)
 {
-    /* Initalize variables here. */
+    /* reset memory for filters */
+    p->lpf1_z = 0;
+    p->lpf2_z = 0;
+    p->hpf_z = 0;
+
+    /* update filters */
+
+    
+	/* prewarp for BZT */
+	SPFLOAT wd = 2*M_PI*p->m_dFC;          
+	SPFLOAT T  = 1.0/(SPFLOAT)sp->sr;             
+	SPFLOAT wa = (2/T)*tan(wd*T/2); 
+	SPFLOAT g  = wa*T/2;    
+
+	/* the feedforward coeff in the VA One Pole */
+	SPFLOAT G = g/(1.0 + g);
+
+    p->lpf1_a = G;
+    p->lpf2_a = G;
+    p->hpf_a = G;
+
     return SP_OK;
 }
 
