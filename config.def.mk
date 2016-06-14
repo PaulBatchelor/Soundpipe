@@ -95,6 +95,7 @@ timer \
 tin \
 tone \
 trand \
+tseg \
 tseq \
 vdelay \
 vocoder \

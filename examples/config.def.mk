@@ -103,6 +103,7 @@ ex_tin \
 ex_tone \
 ex_trand \
 ex_tseq \
+ex_tseg \
 ex_vdelay \
 ex_wtosc \
 ex_vocoder \
