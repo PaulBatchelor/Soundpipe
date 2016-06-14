@@ -39,7 +39,7 @@ sptbl["tseg"] = {
             {
                 name = "type",
                 type = "SPFLOAT",
-                description ="The type of line.",
+                description ="The type of line, which determines slope of line",
                 default = -1.0
             },
         }
@@ -47,7 +47,7 @@ sptbl["tseg"] = {
 
     modtype = "module",
 
-    description = [[A short title describing the module
+    description = [[This module creates a series of line segments. 
 ]],
 
     ninputs = 1,
