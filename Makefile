@@ -29,10 +29,10 @@ h/soundpipe.h: $(HPATHS)
 	cat $(HPATHS) > $@
 
 libsoundpipe.a: $(MPATHS) $(LPATHS)
-	ar rcs $@ $(MPATHS) $(LPATHS)
+	$(AR) rcs $@ $(MPATHS) $(LPATHS)
 
 soundpipe.o: $(MPATHS) $(LPATHS)
-	gcc $(CFLAGS) -c -combine $(CPATHS) -o $@
+	$(CC) $(CFLAGS) -c -combine $(CPATHS) -o $@
 
 config.mk: config.def.mk
 	cp config.def.mk config.mk

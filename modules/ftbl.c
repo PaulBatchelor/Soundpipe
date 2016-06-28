@@ -106,6 +106,7 @@ int sp_ftbl_loadfile(sp_data *sp, sp_ftbl **ft, const char *filename)
 }
 #endif
 
+#ifdef USE_SPA
 int sp_ftbl_loadspa(sp_data *sp, sp_ftbl **ft, const char *filename)
 {
     *ft = malloc(sizeof(sp_ftbl));
@@ -128,6 +129,7 @@ int sp_ftbl_loadspa(sp_data *sp, sp_ftbl **ft, const char *filename)
     spa_close(&spa);
     return SP_OK;
 }
+#endif
 
 /* port of GEN10 from Csound */
 int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, const char *argstring)

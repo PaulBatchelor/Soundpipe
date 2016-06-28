@@ -134,7 +134,9 @@ MODULES += padsynth
 # CFLAGS += -lfftw3 -DUSE_FFTW3
 
 # Soundpipe audio 
-include lib/spa/Makefile
+# Soundpipe audio 
+#include lib/spa/Makefile
+#CFLAGS += -DUSE_SPA
 
 # Needed for Sporth chugin
 CFLAGS += -fPIC
