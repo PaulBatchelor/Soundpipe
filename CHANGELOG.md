@@ -3,6 +3,7 @@
 1.3.0
 -----
     - added tseg module
+    - added wpkorg35 module
 1.2.0
 -----
     - added internal soundpipe file (SPA)
