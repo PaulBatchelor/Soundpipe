@@ -1,9 +1,21 @@
 # Change log
 
+1.3.0
+-----
+    - added tseg module
+1.2.0
+-----
+    - added internal soundpipe file (SPA)
+    - removed sp->k
+    - paulstretch now loops
+    - added tdiv ugen
+    - Completly removed setbuf and getbuf helper functions
+    - added hilbert transform
+
 1.1.1
 -----
     - Fixed clicking in static delay (simplified code)
-    - Testing improvemnts:
+    - Testing improvements:
         - test utility now has command line args:
             - "./run.bin" works like it did before
             - "./run.bin gen_header" rewrites all_tests.h 
@@ -11,6 +23,16 @@
 md5 hashes
             - "./run.bin test id" runs a single test
             - "./run.bin render id" renders a single test
+    - Tests added:
+        - adsr
+    - Added module 'tblrec' 
+    - Added module 'paulstretch'
+    - Fixes to tabread: 'mode' is now mandatory value in the init function
+    - dist: removed mode (internal code change)
+    - clip: simplified immensly. Now only does method 1 from Csound (sine method)
+    - padsynth: fixed a malloc issue that was causing valgrind to complain
+    - Fixes to rpt: no longer freaks out if repeat sizes are out of bounds
+    - Replaced pink noise algorithm from faust code to Protrekkr code
 1.01 
 ----
     - New modules:

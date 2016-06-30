@@ -8,7 +8,7 @@ and creative coders.
 Soundpipe supports a wide range of synthesis and audio DSP 
 techniques which include:
 
-- Classic Filters (Moog, Butterworth, etc)
+- Classic Filter Design (Moog, Butterworth, etc)
 - High-precision and linearly interpolated wavetable oscillators
 - Bandlimited oscillators (square, saw, triangle)
 - FM synthesis
@@ -17,12 +17,16 @@ techniques which include:
 - String resonators
 - Spectral Resynthesis
 - Partitioned Convolution
-- Physical modeling 
+- Physical modeling
 - Pitch tracking
 - Distortion
 - Reverberation
-- Samplers and sample playback
+- Samplers / sample playback
 - Padsynth algorithm
+- Beat repeat
+- Paulstretch algorithm
+- FOF and FOG granular synthesis
+- Time-domain pitch shifting
 
 More information on specific Soundpipe modules can be found in the
 [Soundpipe module reference guide](https://paulbatchelor.github.com/res/soundpipe/docs/).

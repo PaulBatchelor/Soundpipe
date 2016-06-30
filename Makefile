@@ -8,20 +8,16 @@ ifndef CONFIG
 CONFIG=config.mk
 endif
 
-include $(CONFIG)
 
 SPLIBS = libsoundpipe.a
 
-ifdef BUILD_DYNAMIC
-SPLIBS += libsoundpipe_dyn.so
-CFLAGS += -fPIC
-endif
+VERSION=1.2.0
 
-VERSION=1.1.1
+MPATHS+=$(addprefix modules/, $(addsuffix .o, $(MODULES)))
+HPATHS+=$(addprefix h/, $(addsuffix .h, $(MODULES)))
+CPATHS+=$(addprefix modules/, $(addsuffix .c, $(MODULES)))
 
-MPATHS=$(addprefix modules/, $(addsuffix .o, $(MODULES)))
-HPATHS=$(addprefix h/, $(addsuffix .h, $(MODULES)))
-CPATHS=$(addprefix modules/, $(addsuffix .c, $(MODULES)))
+include $(CONFIG)
 
 CFLAGS +=  -g -DSP_VERSION=$(VERSION) -O3 -DSPFLOAT=float -Ih -I/usr/local/include
 UTIL += util/wav2smp
@@ -33,13 +29,10 @@ h/soundpipe.h: $(HPATHS)
 	cat $(HPATHS) > $@
 
 libsoundpipe.a: $(MPATHS) $(LPATHS)
-	ar rcs $@ $(MPATHS) $(LPATHS)
-
-libsoundpipe_dyn.so: $(MPATHS) $(LPATHS)
-	ld -shared -fPIC -o $@ $(MPATHS) $(LPATHS)
+	$(AR) rcs $@ $(MPATHS) $(LPATHS)
 
 soundpipe.o: $(MPATHS) $(LPATHS)
-	gcc $(CFLAGS) -c -combine $(CPATHS) -o $@
+	$(CC) $(CFLAGS) -c -combine $(CPATHS) -o $@
 
 config.mk: config.def.mk
 	cp config.def.mk config.mk
@@ -58,7 +51,6 @@ clean:
 	rm -rf $(LPATHS)
 	rm -rf $(UTIL)
 	rm -rf sp_dict.lua
-	rm -rf libsoundpipe_dyn.so
 
 docs:
 	util/gendocs.sh

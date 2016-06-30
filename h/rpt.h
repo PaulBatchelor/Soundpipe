@@ -8,6 +8,7 @@ typedef struct sp_rpt{
     SPFLOAT bpm;
     int div, rep;
     sp_auxdata aux;
+    int rc;
 } sp_rpt;
 
 int sp_rpt_create(sp_rpt **p);

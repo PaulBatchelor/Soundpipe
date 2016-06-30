@@ -43,6 +43,7 @@ ex_gen_sine \
 ex_gen_sinesum \
 ex_gen_vals \
 ex_gen_xline \
+ex_hilbert \
 ex_in \
 ex_jcrev \
 ex_jitter \
@@ -67,6 +68,7 @@ ex_padsynth \
 ex_pan2 \
 ex_panst \
 ex_pareq \
+ex_paulstretch \
 ex_phaser \
 ex_phasor \
 ex_pinknoise \
@@ -88,7 +90,9 @@ ex_streson \
 ex_switch \
 ex_tabread \
 ex_tadsr \
+ex_tblrec \
 ex_tbvcf \
+ex_tdiv \
 ex_tenv \
 ex_tenv2 \
 ex_tenvx \
@@ -99,6 +103,7 @@ ex_tin \
 ex_tone \
 ex_trand \
 ex_tseq \
+ex_tseg \
 ex_vdelay \
 ex_wtosc \
 ex_vocoder \

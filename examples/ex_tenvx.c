@@ -39,12 +39,13 @@ int main() {
 
     sp_tenvx_init(sp, ud.tenvx);
     ud.tenvx->atk = 0.03;
-    ud.tenvx->hold = 0.01;
+    ud.tenvx->hold = 0.1;
     ud.tenvx->rel = 0.1;
     sp_metro_init(sp, ud.met);
     ud.met->freq = 3;
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
+    ud.osc->amp = 0.5;
     ud.osc->freq = *freqp;
     sp->len = 44100 * 5;
     sp_process(sp, &ud, write_osc);

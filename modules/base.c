@@ -16,7 +16,6 @@ int sp_create(sp_data **spp)
     sp->sr = 44100;
     sp->len = 5 * sp->sr;
     sp->pos = 0;
-    sp->k = 1;
     sp->rand = 0;
     return 0;
 }
@@ -33,7 +32,6 @@ int sp_createn(sp_data **spp, int nchan)
     sp->sr = 44100;
     sp->len = 5 * sp->sr;
     sp->pos = 0;
-    sp->k = 1;
     sp->rand = 0;
     return 0;
 }
@@ -117,6 +115,24 @@ int sp_process_raw(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
     return SP_OK;
 }
 
+#ifdef USE_SPA
+int sp_process_spa(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
+{
+    sp_audio spa;
+    if(spa_open(sp, &spa, sp->filename, SPA_WRITE) == SP_NOT_OK) {
+        fprintf(stderr, "Error: could not open file %s.\n", sp->filename);    
+    }
+    while(sp->len > 0) {
+        callback(sp, ud);
+        spa_write_buf(sp, &spa, sp->out, sp->nchan);
+        sp->len--;
+        sp->pos++;
+    }
+    spa_close(&spa);
+    return SP_OK;
+}
+#endif
+
 int sp_process_plot(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
 {
     int chan;
@@ -154,32 +170,6 @@ int sp_auxdata_free(sp_auxdata *aux)
     return SP_OK;
 }
 
-int sp_auxdata_getbuf(sp_auxdata *aux, uint32_t pos, SPFLOAT *out)
-{
-    if(pos * sizeof(SPFLOAT) > aux->size){
-        fprintf(stderr, "Error: Buffer overflow!\n");
-        *out = 0;
-        return SP_NOT_OK;
-    }else{
-        SPFLOAT *tmp = aux->ptr;
-        *out = tmp[pos];
-    }
-    return SP_OK;
-
-}
-
-int sp_auxdata_setbuf(sp_auxdata *aux, uint32_t pos, SPFLOAT *in)
-{
-    if((pos * sizeof(SPFLOAT)) > aux->size){
-        fprintf(stderr, "Error: Buffer overflow!\n");
-        return SP_NOT_OK;
-    }else{
-        SPFLOAT *tmp = aux->ptr;
-        SPFLOAT n = *in;
-        tmp[pos] = n;
-    }
-    return SP_OK;
-}
 
 SPFLOAT sp_midi2cps(SPFLOAT nn)
 {

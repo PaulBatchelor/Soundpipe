@@ -39,7 +39,7 @@ int main() {
 
     sp_tenv_init(sp, ud.tenv);
     ud.tenv->atk = 0.03;
-    ud.tenv->hold = 0.01;
+    ud.tenv->hold = 0.1;
     ud.tenv->rel = 0.1;
     sp_metro_init(sp, ud.met);
     ud.met->freq = 3;

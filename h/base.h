@@ -32,7 +32,6 @@ typedef struct sp_data {
     unsigned long len;
     unsigned long pos;
     char filename[200];
-    int k;
     uint32_t rand;
 } sp_data; 
 
@@ -43,8 +42,6 @@ typedef struct {
 
 int sp_auxdata_alloc(sp_auxdata *aux, size_t size);
 int sp_auxdata_free(sp_auxdata *aux);
-int sp_auxdata_getbuf(sp_auxdata *aux, uint32_t pos, SPFLOAT *out);
-int sp_auxdata_setbuf(sp_auxdata *aux, uint32_t pos, SPFLOAT *in);
 
 int sp_create(sp_data **spp);
 int sp_createn(sp_data **spp, int nchan);
@@ -53,6 +50,7 @@ int sp_destroy(sp_data **spp);
 int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *));
 int sp_process_raw(sp_data *sp, void *ud, void (*callback)(sp_data *, void *));
 int sp_process_plot(sp_data *sp, void *ud, void (*callback)(sp_data *, void *));
+int sp_process_spa(sp_data *sp, void *ud, void (*callback)(sp_data *, void *));
 
 SPFLOAT sp_midi2cps(SPFLOAT nn);
 

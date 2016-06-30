@@ -3,6 +3,7 @@
 all: libsptest.a run.bin
 
 tests = \
+t_adsr \
 t_allpass \
 t_atone \
 t_bal \
@@ -62,6 +63,7 @@ t_samphold \
 t_scale \
 t_streson \
 t_tbvcf \
+t_tdiv \
 t_tenv \
 t_tenv2 \
 t_tone \

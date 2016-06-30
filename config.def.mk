@@ -41,6 +41,7 @@ fofilt \
 foo \
 fosc \
 gbuzz \
+hilbert \
 in \
 jcrev \
 jitter \
@@ -52,11 +53,13 @@ mincer \
 mode \
 moogladder \
 noise \
+nsmp \
 osc \
 oscmorph \
 pan2 \
 panst \
 pareq \
+paulstretch \
 phaser \
 phasor \
 pinknoise \
@@ -81,7 +84,9 @@ streson \
 switch \
 tabread \
 tadsr \
+tblrec \
 tbvcf \
+tdiv \
 tenv \
 tenv2 \
 tenvx \
@@ -90,6 +95,7 @@ timer \
 tin \
 tone \
 trand \
+tseg \
 tseq \
 vdelay \
 vocoder \
@@ -97,7 +103,7 @@ wpkorg35 \
 zitarev
 
 ifndef NO_LIBSNDFILE
-	MODULES += nsmp diskin
+	MODULES += diskin
 else
 	CFLAGS += -DNO_LIBSNDFILE
 endif
@@ -128,6 +134,10 @@ MODULES += padsynth
 # Uncomment to use FFTW3 instead of kissfft.
 # CFLAGS += -lfftw3 -DUSE_FFTW3
 
-# Build dynamic library. Needed for Sporth chugin
-# CFLAGS += -shared -fPIC
-# BUILD_DYNAMIC=1
+# Soundpipe audio 
+# Soundpipe audio 
+#include lib/spa/Makefile
+#CFLAGS += -DUSE_SPA
+
+# Needed for Sporth chugin
+CFLAGS += -fPIC

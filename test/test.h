@@ -1,8 +1,9 @@
+#define SAMPDIR "../examples/"
+
 enum {
 NORMAL,
 HEADER
 };
-
 typedef struct {
     SPFLOAT *buf;
     uint32_t size;
