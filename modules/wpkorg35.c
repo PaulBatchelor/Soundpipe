@@ -115,8 +115,9 @@ int sp_wpkorg35_compute(sp_data *sp, sp_wpkorg35 *p, SPFLOAT *in, SPFLOAT *out)
 
     /* Feed it to LPF2 */
     vn = (u - p->lpf2_z) * p->lpf2_a;
-    y = p->res * (vn + p->lpf2_z);
+    y = (vn + p->lpf2_z);
     p->lpf2_z = y + vn;
+    y *= p->res;
 
     /* Feed y to HPF2 */
 
