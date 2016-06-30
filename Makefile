@@ -19,7 +19,7 @@ CPATHS+=$(addprefix modules/, $(addsuffix .c, $(MODULES)))
 
 include $(CONFIG)
 
-CFLAGS +=  -g -DSP_VERSION=$(VERSION) -O3 -DSPFLOAT=float -Ih -I/usr/local/include
+CFLAGS +=  -g -DSP_VERSION=$(VERSION) -O0 -DSPFLOAT=float -Ih -I/usr/local/include
 UTIL += util/wav2smp
 
 modules/%.o: modules/%.c h/%.h h/soundpipe.h

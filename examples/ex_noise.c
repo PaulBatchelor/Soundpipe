@@ -19,6 +19,7 @@ int main() {
     sp_create(&sp);
     sp_noise_create(&ud.ns);
     sp_noise_init(sp, ud.ns);
+    ud.ns->amp = 0.5;
     sp->len = 44100 * 5;
     sp_process(sp, &ud, write_noise);
     sp_noise_destroy(&ud.ns);
