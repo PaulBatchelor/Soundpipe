@@ -19,6 +19,9 @@ typedef struct {
     SPFLOAT res;
     SPFLOAT saturation;
 
+    SPFLOAT pcutoff;
+    SPFLOAT pres;
+
     uint32_t nonlinear;
 } sp_wpkorg35;
 

@@ -57,9 +57,8 @@ int sp_wpkorg35_destroy(sp_wpkorg35 **p)
 int sp_wpkorg35_init(sp_data *sp, sp_wpkorg35 *p)
 {
     p->alpha = 0.0;
-    p->cutoff = 1000; /* ? */
-    p->res = 0.2; /* ? */
-    p->saturation = 0.0; /* ? */
+    p->pcutoff = p->cutoff = 1000; 
+    p->pres = p->res = 1.0; 
 
     /* reset memory for filters */
     p->lpf1_z = 0;
@@ -87,7 +86,9 @@ int sp_wpkorg35_init(sp_data *sp, sp_wpkorg35 *p)
 int sp_wpkorg35_compute(sp_data *sp, sp_wpkorg35 *p, SPFLOAT *in, SPFLOAT *out)
 {
     /* TODO: add previous values */
-    update(sp, p);
+
+    if(p->pcutoff != p->cutoff || p->pres != p->res) update(sp, p);
+
     /* initialize variables */
     SPFLOAT y1 = 0.0;
     SPFLOAT S35 = 0.0;
@@ -109,7 +110,7 @@ int sp_wpkorg35_compute(sp_data *sp, sp_wpkorg35 *p, SPFLOAT *in, SPFLOAT *out)
 
     /* Naive NLP */
 
-    if(p->nonlinear == 1) {
+    if(p->saturation > 0) {
         u = tanh(p->saturation * u);
     }
 
@@ -132,5 +133,7 @@ int sp_wpkorg35_compute(sp_data *sp, sp_wpkorg35 *p, SPFLOAT *in, SPFLOAT *out)
 
     *out = y;
 
+    p->pcutoff = p->cutoff;
+    p->pres = p->res;
     return SP_OK;
 }
