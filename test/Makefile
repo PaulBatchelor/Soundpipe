@@ -66,6 +66,7 @@ t_revsc \
 t_rpt \
 t_samphold \
 t_scale \
+t_sdelay \
 t_streson \
 t_tbvcf \
 t_tdiv \

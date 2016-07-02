@@ -80,6 +80,7 @@ rms \
 rpt \
 samphold \
 scale \
+sdelay \
 streson \
 switch \
 tabread \
