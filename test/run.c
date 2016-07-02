@@ -17,6 +17,15 @@ typedef struct {
     uint32_t size;
 } test_data;
 
+static void print_help()
+{
+    printf("Commands:\n");
+    printf("\tgen_header: print header.\n");
+    printf("\tregen_header: regenerate header\n");
+    printf("\trender NUM: render output at position NUM\n");
+    printf("\ttest NUM: test position NUM\n");
+}
+
 int main(int argc, char *argv[])
 {
     uint32_t n;
@@ -87,6 +96,8 @@ int main(int argc, char *argv[])
                     sp_test_destroy(&tst);
                 }
             }
+        } else if (!strcmp(argv[1], "help")) {
+            print_help();
         } else {
             fprintf(stderr, "Invalid command %s\n", argv[1]);
             err = 1;

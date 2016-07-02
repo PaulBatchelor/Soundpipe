@@ -48,6 +48,7 @@ t_moogladder \
 t_noise \
 t_osc \
 t_pareq \
+t_paulstretch \
 t_phasor \
 t_pluck \
 t_port \
