@@ -78,6 +78,7 @@ t_trand \
 t_tseq \
 t_tseg \
 t_vdelay \
+t_vocoder \
 t_wpkorg35
 
 OBJ = $(addprefix t/, $(addsuffix .o, $(tests)))
