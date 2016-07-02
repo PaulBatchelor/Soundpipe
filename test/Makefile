@@ -68,6 +68,7 @@ t_samphold \
 t_scale \
 t_sdelay \
 t_streson \
+t_tblrec \
 t_tbvcf \
 t_tdiv \
 t_tenv \
