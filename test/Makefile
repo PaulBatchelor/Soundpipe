@@ -76,6 +76,7 @@ t_tenv2 \
 t_tone \
 t_trand \
 t_tseq \
+t_tseg \
 t_vdelay \
 t_wpkorg35
 
