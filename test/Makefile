@@ -19,6 +19,7 @@ t_buthp \
 t_butlp \
 t_clip \
 t_comb \
+t_crossfade \
 t_delay \
 t_dist \
 t_dmetro \
