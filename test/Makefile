@@ -76,7 +76,8 @@ t_tenv2 \
 t_tone \
 t_trand \
 t_tseq \
-t_vdelay
+t_vdelay \
+t_wpkorg35
 
 OBJ = $(addprefix t/, $(addsuffix .o, $(tests)))
 
