@@ -31,6 +31,7 @@ t_expon \
 t_fofilt \
 t_fold \
 t_foo \
+t_fof \
 t_fosc \
 t_gbuzz \
 t_gen_gauss \
