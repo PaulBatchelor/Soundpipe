@@ -49,6 +49,7 @@ t_mode \
 t_moogladder \
 t_noise \
 t_osc \
+t_oscmorph \
 t_pareq \
 t_paulstretch \
 t_phasor \
