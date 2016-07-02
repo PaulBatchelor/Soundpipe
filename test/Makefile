@@ -57,6 +57,7 @@ t_pluck \
 t_port \
 t_posc3 \
 t_prop \
+t_pshift \
 t_randh \
 t_randi \
 t_random \
