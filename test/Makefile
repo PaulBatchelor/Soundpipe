@@ -55,6 +55,7 @@ t_nsmp \
 t_osc \
 t_oscmorph \
 t_pareq \
+t_padsynth \
 t_paulstretch \
 t_phasor \
 t_pluck \
@@ -78,6 +79,7 @@ t_tbvcf \
 t_tdiv \
 t_tenv \
 t_tenv2 \
+t_thresh \
 t_timer \
 t_tone \
 t_trand \
