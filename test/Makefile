@@ -51,6 +51,7 @@ t_jitter \
 t_line \
 t_lpf18 \
 t_maygate \
+t_metro \
 t_mode \
 t_moogladder \
 t_noise \
