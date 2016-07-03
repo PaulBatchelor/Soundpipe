@@ -8,6 +8,7 @@ t_adsr \
 t_allpass \
 t_atone \
 t_bal \
+t_bar \
 t_biquad \
 t_biscale \
 t_bitcrush \
