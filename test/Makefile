@@ -57,6 +57,7 @@ t_oscmorph \
 t_pareq \
 t_padsynth \
 t_paulstretch \
+t_phaser \
 t_phasor \
 t_pluck \
 t_port \
