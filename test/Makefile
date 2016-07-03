@@ -75,6 +75,7 @@ t_tbvcf \
 t_tdiv \
 t_tenv \
 t_tenv2 \
+t_timer \
 t_tone \
 t_trand \
 t_tseq \
