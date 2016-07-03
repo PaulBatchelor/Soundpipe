@@ -3,6 +3,7 @@
 all: libsptest.a run.bin
 
 tests = \
+t_autowah\
 t_adsr \
 t_allpass \
 t_atone \
