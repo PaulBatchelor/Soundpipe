@@ -24,6 +24,7 @@ t_comb \
 t_conv \
 t_crossfade \
 t_delay \
+t_diskin \
 t_dist \
 t_dmetro \
 t_drip \
