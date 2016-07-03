@@ -51,6 +51,7 @@ t_maygate \
 t_mode \
 t_moogladder \
 t_noise \
+t_nsmp \
 t_osc \
 t_oscmorph \
 t_pareq \
