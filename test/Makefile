@@ -41,6 +41,7 @@ t_gen_sine \
 t_gen_sinesum \
 t_gen_vals \
 t_gen_xline \
+t_hilbert \
 t_jcrev \
 t_jitter \
 t_line \
