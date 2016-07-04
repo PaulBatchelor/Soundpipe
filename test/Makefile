@@ -82,7 +82,9 @@ t_samphold \
 t_scale \
 t_sdelay \
 t_streson \
+t_switch \
 t_tabread \
+t_tadsr \
 t_tblrec \
 t_tbvcf \
 t_tdiv \
