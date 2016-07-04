@@ -12,7 +12,6 @@ typedef struct {
 void process(sp_data *sp, void *udata) {
     UserData *ud = udata;
     SPFLOAT osc = 0, mincer = 0, randi = 0;
-   
     
     sp_randi_compute(sp, ud->randi, NULL, &randi);
     ud->mincer->time = randi;
@@ -24,8 +23,6 @@ void process(sp_data *sp, void *udata) {
 
 int main() {
     UserData ud;
-    sp_data *sp;
-    sp_create(&sp);
     sp_srand(sp, 1234567);
 
     sp_mincer_create(&ud.mincer);
