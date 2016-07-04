@@ -40,6 +40,7 @@ t_fog \
 t_fosc \
 t_gbuzz \
 t_gen_composite \
+t_gen_file \
 t_gen_gauss \
 t_gen_line \
 t_gen_sine \
@@ -86,6 +87,7 @@ t_tblrec \
 t_tbvcf \
 t_tdiv \
 t_tenv \
+t_tenvx \
 t_tenv2 \
 t_thresh \
 t_timer \
