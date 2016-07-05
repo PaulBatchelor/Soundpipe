@@ -39,6 +39,8 @@ t_fof \
 t_fog \
 t_fosc \
 t_gbuzz \
+t_gen_composite \
+t_gen_file \
 t_gen_gauss \
 t_gen_line \
 t_gen_sine \
@@ -52,12 +54,14 @@ t_line \
 t_lpf18 \
 t_maygate \
 t_metro \
+t_mincer \
 t_mode \
 t_moogladder \
 t_noise \
 t_nsmp \
 t_osc \
 t_oscmorph \
+t_pan2\
 t_pareq \
 t_padsynth \
 t_paulstretch \
@@ -78,11 +82,14 @@ t_samphold \
 t_scale \
 t_sdelay \
 t_streson \
+t_switch \
 t_tabread \
+t_tadsr \
 t_tblrec \
 t_tbvcf \
 t_tdiv \
 t_tenv \
+t_tenvx \
 t_tenv2 \
 t_thresh \
 t_timer \
