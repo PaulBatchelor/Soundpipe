@@ -11,92 +11,53 @@ sptbl["waveset"] = {
         destroy = "sp_waveset_destroy",
         init = "sp_waveset_init",
         compute = "sp_waveset_compute",
-        other = {
-            sp_waveset_set = {
-                description = "waveset_set description goes here.",
-                args = {
-                    {
-                        name = "var1",
-                        type = "SPFLOAT",
-                        description = "This is the first parameter",
-                        default = 1.5
-                    },
-                    {
-                        name = "var2",
-                        type = "SPFLOAT",
-                        description = "This is the second parameter",
-                        default = 1.5
-                    }
-                }
-            }
-        }
     },
 
     params = {
         mandatory = {
             {
-                name = "bar",
-                type = "sp_ftbl *",
-                description = "This is a mandatory table value. It does not have a default value, so we set it to 'N/A'. Any that does not or cannot have a default value should set this default value to 'N/A'.",
-                default = "N/A"
-            },
-            {
-                name = "bar2",
+                name = "ilen",
                 type = "SPFLOAT",
-                description = "This is a mandatory parameter. In soundpipe, users will always need to specify this value, but a default value has been giving in case it is needed to write more complicated engines in the future.",
-                default = 123
+                description = "Length of buffer (in seconds).",
+                default = 1.0 
             }
         },
 
         optional = {
             {
-                name = "blah_1",
+                name = "rep",
                 type = "SPFLOAT",
-                description = "This is an optional parameter. These values are always set to a value by default, and can be set after the init function has been called.",
+                description = "Number of repeats.",
                 default = 1.5
-            },
-            {
-                name = "blah_2",
-                type = "SPFLOAT",
-                description ="This is yet another optional parameter...",
-                default = 456.7
             },
         }
     },
 
     modtype = "module",
 
-    description = [[A short title describing the module
+    description = [[Simple Time-stretching from repeating wavecyles
+This module looks for zero-crossings and repeats them by a integer factor.
+While a crude means for time stretching, it is a very aesthetically pleasing 
+effect to use on sounds and often produces at "wet" sound.
 
-    This is a description of the entire module.  This is not a real module. This description should be a comprehensive sumary of what this function does.
-
-Inside the Lua table, this is expressed as a multiline string, however it does not adhere to the tradtional 80 column rule found in programming.
-
-Write as much text as needed here...
+The waveset algorithm was originally created by Trevor Wishart for the Composer
+Desktop Project (CDP), and was then ported to Csound. 
 ]],
 
-    ninputs = 2,
-    noutputs = 2,
+    ninputs = 1,
+    noutputs = 1,
 
     inputs = {
         {
-            name = "clock",
-            description = "this is the clock source for a made up plugin."
-        },
-        {
             name = "input",
-            description = "this is the audio input for a made up plugin."
+            description = "Signal input."
         },
     },
 
     outputs = {
         {
-            name = "out_left",
-            description = "Stereo left output for waveset."
-        },
-        {
-            name = "out_right",
-            description = "Stereo right output for waveset."
+            name = "out",
+            description = "signal output."
         },
     }
 
