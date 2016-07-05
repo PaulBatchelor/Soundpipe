@@ -68,6 +68,7 @@ int sp_waveset_compute(sp_data *sp, sp_waveset *p, SPFLOAT *in, SPFLOAT *out)
     if (index==p->length) {
         index = 0;
         insert = (SPFLOAT*)(p->auxch.ptr);
+        p->noinsert = 0;
     }
 
     if (samp != 0.0 && p->lastsamp*samp < 0.0) {
