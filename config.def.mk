@@ -99,6 +99,7 @@ tseg \
 tseq \
 vdelay \
 vocoder \
+waveset \
 wpkorg35 \
 zitarev
 
