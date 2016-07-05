@@ -7,7 +7,8 @@
     - removed complex.h dependency
     - added "help" option to test CLI
     - more tests added
-    -
+    - added "waveset" module
+
 1.2.0
 -----
     - added internal soundpipe file (SPA)

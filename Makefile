@@ -11,7 +11,7 @@ endif
 
 SPLIBS = libsoundpipe.a
 
-VERSION=1.3.0
+VERSION=1.2.5
 
 MPATHS+=$(addprefix modules/, $(addsuffix .o, $(MODULES)))
 HPATHS+=$(addprefix h/, $(addsuffix .h, $(MODULES)))
