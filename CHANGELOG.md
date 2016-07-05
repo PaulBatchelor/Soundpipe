@@ -4,6 +4,10 @@
 -----
     - added tseg module
     - added wpkorg35 module
+    - removed complex.h dependency
+    - added "help" option to test CLI
+    - more tests added
+    -
 1.2.0
 -----
     - added internal soundpipe file (SPA)

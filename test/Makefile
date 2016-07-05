@@ -3,10 +3,12 @@
 all: libsptest.a run.bin
 
 tests = \
+t_autowah\
 t_adsr \
 t_allpass \
 t_atone \
 t_bal \
+t_bar \
 t_biquad \
 t_biscale \
 t_bitcrush \
@@ -19,7 +21,10 @@ t_buthp \
 t_butlp \
 t_clip \
 t_comb \
+t_conv \
+t_crossfade \
 t_delay \
+t_diskin \
 t_dist \
 t_dmetro \
 t_drip \
@@ -30,6 +35,8 @@ t_expon \
 t_fofilt \
 t_fold \
 t_foo \
+t_fof \
+t_fog \
 t_fosc \
 t_gbuzz \
 t_gen_gauss \
@@ -38,21 +45,29 @@ t_gen_sine \
 t_gen_sinesum \
 t_gen_vals \
 t_gen_xline \
+t_hilbert \
 t_jcrev \
 t_jitter \
 t_line \
 t_lpf18 \
 t_maygate \
+t_metro \
 t_mode \
 t_moogladder \
 t_noise \
+t_nsmp \
 t_osc \
+t_oscmorph \
 t_pareq \
+t_padsynth \
+t_paulstretch \
+t_phaser \
 t_phasor \
 t_pluck \
 t_port \
 t_posc3 \
 t_prop \
+t_pshift \
 t_randh \
 t_randi \
 t_random \
@@ -61,15 +76,25 @@ t_revsc \
 t_rpt \
 t_samphold \
 t_scale \
+t_sdelay \
 t_streson \
+t_tabread \
+t_tblrec \
 t_tbvcf \
 t_tdiv \
 t_tenv \
 t_tenv2 \
+t_thresh \
+t_timer \
 t_tone \
 t_trand \
 t_tseq \
-t_vdelay
+t_tseg \
+t_vdelay \
+t_vocoder \
+t_compressor \
+t_wpkorg35 \
+t_zitarev
 
 OBJ = $(addprefix t/, $(addsuffix .o, $(tests)))
 

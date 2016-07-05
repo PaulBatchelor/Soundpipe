@@ -37,7 +37,8 @@ int main() {
     sp_pshift_init(sp, ud.pshift);
     *ud.pshift->shift = 7;
     *ud.pshift->window = 500;
-    *ud.pshift->xfade = 100;
+    /* half window size is smoothest sounding */
+    *ud.pshift->xfade = 250;
     sp_diskin_init(sp, ud.diskin, "oneart.wav");
 
     sp->len = 44100 * 5;

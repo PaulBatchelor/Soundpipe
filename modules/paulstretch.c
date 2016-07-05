@@ -10,7 +10,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
-#include <complex.h>
 #include "soundpipe.h"
 #include "kiss_fftr.h"
 
@@ -42,9 +41,9 @@ static void compute_block(sp_data *sp, sp_paulstretch *p) {
     kiss_fftr(p->fft, buf, p->tmp1);
     for(i = 0; i < windowsize / 2; i++) {
         SPFLOAT mag = sqrt(p->tmp1[i].r*p->tmp1[i].r + p->tmp1[i].i*p->tmp1[i].i);
-        complex ph = cexpf(I * ((SPFLOAT)sp_rand(sp) / SP_RANDMAX) * 2 * M_PI);
-        p->tmp1[i].r = mag * crealf(ph); 
-        p->tmp1[i].i = mag * cimagf(ph); 
+        SPFLOAT ph = ((SPFLOAT)sp_rand(sp) / SP_RANDMAX) * 2 * M_PI;
+        p->tmp1[i].r = mag * cos(ph); 
+        p->tmp1[i].i = mag * sin(ph); 
     }
     kiss_fftri(p->ifft, p->tmp1, buf);
     for(i = 0; i < windowsize; i++) {

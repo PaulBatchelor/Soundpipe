@@ -20,7 +20,7 @@ int main() {
     sp_dust_create(&ud.dst);
     sp_dust_init(sp, ud.dst);
     ud.dst->amp = 0.3;
-    ud.dst->density = 10;
+    ud.dst->density = 30;
     sp->len = 44100 * 5;
     ud.dst->bipolar = 1.0;
     sp_process(sp, &ud, write_dust);
