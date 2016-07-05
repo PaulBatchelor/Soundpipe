@@ -27,10 +27,10 @@ void process(sp_data *sp, void *udata) {
 }
 
 int main() {
-    srand(1234567);
     UserData ud;
     sp_data *sp;
     sp_create(&sp);
+    sp_srand(sp, 1234567);
 
     sp_foo_create(&ud.foo);
     sp_osc_create(&ud.osc);

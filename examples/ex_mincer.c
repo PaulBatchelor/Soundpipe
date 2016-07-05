@@ -23,6 +23,8 @@ void process(sp_data *sp, void *udata) {
 
 int main() {
     UserData ud;
+    sp_data *sp;
+    sp_create(&sp);
     sp_srand(sp, 1234567);
 
     sp_mincer_create(&ud.mincer);
