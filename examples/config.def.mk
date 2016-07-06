@@ -81,6 +81,7 @@ ex_pshift \
 ex_randh \
 ex_randi \
 ex_random \
+ex_reson \
 ex_reverse \
 ex_revsc \
 ex_rpt \

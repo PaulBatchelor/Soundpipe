@@ -75,6 +75,7 @@ randi \
 randmt \
 random \
 reverse \
+reson \
 revsc \
 rms \
 rpt \
