@@ -1,18 +1,16 @@
 #!/bin/sh
 
-if [ ! -d docs ]; then
-    mkdir docs
-	cp -r util/css docs
-fi
+mkdir -p $INTERMEDIATES_PREFIX/docs
+cp -r util/css $INTERMEDIATES_PREFIX/docs
 
-> docs/modules.txt
+> $INTERMEDIATES_PREFIX/docs/modules.txt
 
 for d in modules/data/*.lua
 do
     module=$(basename ${d%.*})
     echo "writing $module"
-	util/data2html.lua $module > docs/$module.html
-	echo $module >> docs/modules.txt
+    util/data2html.lua $module > $INTERMEDIATES_PREFIX/docs/$module.html
+    echo $module >> $INTERMEDIATES_PREFIX/docs/modules.txt
 done
 
-util/gen_index.lua docs/modules.txt > docs/index.html
+util/gen_index.lua $INTERMEDIATES_PREFIX/docs/modules.txt > $INTERMEDIATES_PREFIX/docs/index.html
