@@ -1,8 +1,8 @@
-.PHONY: all bootstrap clean docs install
+.PHONY: all clean install
 
 default: all
 
-VERSION = 1.2.6
+VERSION = 1.2.7
 
 INTERMEDIATES_PREFIX ?= .
 PREFIX ?= /usr/local
@@ -17,7 +17,7 @@ MPATHS += $(addprefix $(INTERMEDIATES_PREFIX)/modules/, $(addsuffix .o, $(MODULE
 
 include $(CONFIG)
 
-CFLAGS += -g -DSP_VERSION=$(VERSION) -O0 -DSPFLOAT=float -I$(INTERMEDIATES_PREFIX)/h -Ih -I/usr/local/include
+CFLAGS += -g -DSP_VERSION=$(VERSION) -O3 -DSPFLOAT=float -I$(INTERMEDIATES_PREFIX)/h -Ih -I/usr/local/include
 UTIL += $(INTERMEDIATES_PREFIX)/util/wav2smp
 
 $(INTERMEDIATES_PREFIX) \
@@ -56,20 +56,19 @@ bootstrap:
 docs:
 	export INTERMEDIATES_PREFIX=$(INTERMEDIATES_PREFIX) && util/gendocs.sh
 
-all: \
-  $(INTERMEDIATES_PREFIX)/config.mk \
-  $(INTERMEDIATES_PREFIX)/libsoundpipe.a \
-  $(INTERMEDIATES_PREFIX)/sp_dict.lua \
-  $(UTIL) \
-  docs
+all: 
+	$(INTERMEDIATES_PREFIX)/config.mk \
+	$(INTERMEDIATES_PREFIX)/libsoundpipe.a \
+	$(INTERMEDIATES_PREFIX)/sp_dict.lua \
+	$(UTIL)
 
 install: \
-  $(INTERMEDIATES_PREFIX)/h/soundpipe.h \
-  $(INTERMEDIATES_PREFIX)/libsoundpipe.a \
-  docs | \
-    $(PREFIX)/include \
-    $(PREFIX)/lib \
-    $(PREFIX)/share/doc/soundpipe
+	$(INTERMEDIATES_PREFIX)/h/soundpipe.h \
+	$(INTERMEDIATES_PREFIX)/libsoundpipe.a \
+	docs | \
+	$(PREFIX)/include \
+	$(PREFIX)/lib \
+	$(PREFIX)/share/doc/soundpipe
 	install $(INTERMEDIATES_PREFIX)/h/soundpipe.h $(PREFIX)/include/
 	install $(INTERMEDIATES_PREFIX)/libsoundpipe.a $(PREFIX)/lib/
 	cp -a $(INTERMEDIATES_PREFIX)/docs/* $(PREFIX)/share/doc/soundpipe
