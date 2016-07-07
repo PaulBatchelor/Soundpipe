@@ -115,7 +115,7 @@ endif
 include lib/inih/Makefile
 
 # Header files needed for modules generated with FAUST
-CFLAGS += -I lib/faust
+CFLAGS += -Ilib/faust
 
 # fft library
 include lib/fft/Makefile

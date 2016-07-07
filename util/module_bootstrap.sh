@@ -6,7 +6,7 @@ makefile () {
     local EXT=$3
 
     local FOO="$FILEPATH"foo."$EXT"
-   
+
     if [ ! -f "$FILEPATH$NAME.$EXT" ]
     then
         echo "creating $FILEPATH$NAME.$EXT"
@@ -28,7 +28,7 @@ MODNAME=$1
 
 # Source
 makefile $MODNAME modules/ c
-# Header 
+# Header
 makefile $MODNAME h/ h
 # Documentation
 makefile $MODNAME modules/data/ lua
@@ -36,4 +36,3 @@ makefile $MODNAME modules/data/ lua
 makefile $MODNAME examples/ex_ c
 # Test file
 makefile $MODNAME test/t/t_ c
-
