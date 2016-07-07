@@ -7,17 +7,25 @@ VERSION = 1.2.7
 INTERMEDIATES_PREFIX ?= .
 PREFIX ?= /usr/local
 
+LIBSOUNDPIPE = $(INTERMEDIATES_PREFIX)/libsoundpipe.a
+SOUNDPIPEO = $(INTERMEDIATES_PREFIX)/soundpipe.o
+MODDIR = $(INTERMEDIATES_PREFIX)/modules
+HDIR = $(INTERMEDIATES_PREFIX)/h
+UTILDIR = $(INTERMEDIATES_PREFIX)/util
+
+
 ifndef CONFIG
 CONFIG = $(INTERMEDIATES_PREFIX)/config.mk
 endif
 
 HPATHS += $(addprefix h/, $(addsuffix .h, $(MODULES)))
 CPATHS += $(addprefix modules/, $(addsuffix .c, $(MODULES)))
-MPATHS += $(addprefix $(INTERMEDIATES_PREFIX)/modules/, $(addsuffix .o, $(MODULES)))
+MPATHS += $(addprefix $(MODDIR)/, $(addsuffix .o, $(MODULES)))
 
 include $(CONFIG)
 
-CFLAGS += -g -DSP_VERSION=$(VERSION) -O3 -DSPFLOAT=float -I$(INTERMEDIATES_PREFIX)/h -Ih -I/usr/local/include
+CFLAGS += -g -DSP_VERSION=$(VERSION) -O3 -DSPFLOAT=float 
+CFLAGS += -I$(INTERMEDIATES_PREFIX)/h -Ih -I/usr/local/include
 UTIL += $(INTERMEDIATES_PREFIX)/util/wav2smp
 
 $(INTERMEDIATES_PREFIX) \
@@ -29,35 +37,34 @@ $(PREFIX)/lib \
 $(PREFIX)/share/doc/soundpipe:
 	mkdir -p $@
 
-$(INTERMEDIATES_PREFIX)/libsoundpipe.a: $(MPATHS) $(LPATHS) | $(INTERMEDIATES_PREFIX)
+$(LIBSOUNDPIPE): $(MPATHS) $(LPATHS) | $(INTERMEDIATES_PREFIX)
 	$(AR) rcs $@ $(MPATHS) $(LPATHS)
 
-$(INTERMEDIATES_PREFIX)/h/soundpipe.h: $(HPATHS) | $(INTERMEDIATES_PREFIX)/h
+$(HDIR)/soundpipe.h: $(HPATHS) | $(INTERMEDIATES_PREFIX)/h
 	cat $(HPATHS) > $@
 
-$(INTERMEDIATES_PREFIX)/modules/%.o: modules/%.c h/%.h $(INTERMEDIATES_PREFIX)/h/soundpipe.h | $(INTERMEDIATES_PREFIX)/modules
+$(MODDIR)/%.o: modules/%.c h/%.h $(HDIR)/soundpipe.h | $(MODDIR)
 	$(CC) -Wall $(CFLAGS) -c -static $< -o $@
 
-$(INTERMEDIATES_PREFIX)/soundpipe.o: $(MPATHS) $(LPATHS) | $(INTERMEDIATES_PREFIX)
+$(SOUNDPIPEO): $(MPATHS) $(LPATHS) | $(INTERMEDIATES_PREFIX)
 	$(CC) $(CFLAGS) -c -combine $(CPATHS) -o $@
 
 $(INTERMEDIATES_PREFIX)/config.mk: config.def.mk | $(INTERMEDIATES_PREFIX)
 	cp config.def.mk $@
 
-$(INTERMEDIATES_PREFIX)/util/wav2smp: util/wav2smp.c | $(INTERMEDIATES_PREFIX)/util
+$(UTILDIR)/wav2smp: util/wav2smp.c | $(UTILDIR)
 	$(CC) $(CFLAGS) -L/usr/local/lib $< -lsndfile -o $@
 
 $(INTERMEDIATES_PREFIX)/sp_dict.lua: | $(INTERMEDIATES_PREFIX)
 	cat modules/data/*.lua > $@
 
 bootstrap:
-	export PREFIX=$(PREFIX) INTERMEDIATES_PREFIX=$(INTERMEDIATES_PREFIX) && util/module_bootstrap.sh $(MODULE_NAME)
+	util/module_bootstrap.sh $(MODULE_NAME)
 
 docs:
 	export INTERMEDIATES_PREFIX=$(INTERMEDIATES_PREFIX) && util/gendocs.sh
 
-all: 
-	$(INTERMEDIATES_PREFIX)/config.mk \
+all: $(INTERMEDIATES_PREFIX)/config.mk \
 	$(INTERMEDIATES_PREFIX)/libsoundpipe.a \
 	$(INTERMEDIATES_PREFIX)/sp_dict.lua \
 	$(UTIL)
@@ -65,23 +72,21 @@ all:
 install: \
 	$(INTERMEDIATES_PREFIX)/h/soundpipe.h \
 	$(INTERMEDIATES_PREFIX)/libsoundpipe.a \
-	docs | \
 	$(PREFIX)/include \
 	$(PREFIX)/lib \
 	$(PREFIX)/share/doc/soundpipe
 	install $(INTERMEDIATES_PREFIX)/h/soundpipe.h $(PREFIX)/include/
 	install $(INTERMEDIATES_PREFIX)/libsoundpipe.a $(PREFIX)/lib/
-	cp -a $(INTERMEDIATES_PREFIX)/docs/* $(PREFIX)/share/doc/soundpipe
 
 clean:
 	rm -rf $(INTERMEDIATES_PREFIX)/config.mk
 	rm -rf $(INTERMEDIATES_PREFIX)/docs
 	rm -rf $(INTERMEDIATES_PREFIX)/gen_noise
-	rm -rf $(INTERMEDIATES_PREFIX)/h/soundpipe.h
+	rm -rf $(HDIR)/soundpipe.h
 	rm -rf $(INTERMEDIATES_PREFIX)/libsoundpipe.a
 	rm -rf $(INTERMEDIATES_PREFIX)/sp_dict.lua
 	rm -rf $(INTERMEDIATES_PREFIX)/soundpipe.c
-	rm -rf $(INTERMEDIATES_PREFIX)/util/wav2smp.dSYM
+	rm -rf $(UTILDIR)/wav2smp.dSYM
 	rm -rf $(MPATHS)
 	rm -rf $(LPATHS)
 	rm -rf $(UTIL)
