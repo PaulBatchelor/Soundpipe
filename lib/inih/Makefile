@@ -1,8 +1,8 @@
-LPATHS += $(INTERMEDIATES_PREFIX)/lib/inih/ini.o
+LPATHS += $(LIBDIR)/inih/ini.o
 CFLAGS += -Ilib/inih/
 
-$(INTERMEDIATES_PREFIX)/lib/inih:
+$(LIBDIR)/inih:
 	mkdir -p $@
 
-$(INTERMEDIATES_PREFIX)/lib/inih/ini.o: lib/inih/ini.c | $(INTERMEDIATES_PREFIX)/lib/inih
+$(LIBDIR)/inih/ini.o: lib/inih/ini.c | $(LIBDIR)/inih
 	$(CC) $(CFLAGS) $< -c -o $@

@@ -1,9 +1,9 @@
-LPATHS += $(INTERMEDIATES_PREFIX)/lib/spa/spa.o
+LPATHS += $(LIBDIR)/spa/spa.o
 CFLAGS += -Ilib/spa/
 HPATHS += lib/spa/spa.h
 
-$(INTERMEDIATES_PREFIX)/lib/spa:
+$(LIBDIR)/spa:
 	mkdir -p $@
 
-$(INTERMEDIATES_PREFIX)/lib/spa/spa.o: lib/spa/spa.c | $(INTERMEDIATES_PREFIX)/lib/spa
+$(LIBDIR)/spa/spa.o: lib/spa/spa.c | $(LIBDIR)/spa
 	gcc $(CFLAGS) $< -c -o $@
