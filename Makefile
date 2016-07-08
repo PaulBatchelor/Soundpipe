@@ -75,8 +75,8 @@ install: \
 	$(INTERMEDIATES_PREFIX)/libsoundpipe.a | \
 		$(PREFIX)/include \
 		$(PREFIX)/lib
-	install $(INTERMEDIATES_PREFIX)/h/soundpipe.h $(PREFIX)/include/
-	install $(INTERMEDIATES_PREFIX)/libsoundpipe.a $(PREFIX)/lib/
+	install $(HDIR)/soundpipe.h $(PREFIX)/include/
+	install $(LIBSOUNDPIPE) $(PREFIX)/lib/
 
 clean:
 	rm -rf $(HDIR)/soundpipe.h
