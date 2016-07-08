@@ -112,6 +112,17 @@ void sp_fftr(sp_fft *fft, SPFLOAT *buf, int FFTsize)
     rffts1(buf, M, fft->utbl, fft->BRLow);
 }
 
+void sp_fft_cpx(sp_fft *fft, SPFLOAT *buf, int FFTsize)
+{
+    SPFLOAT *Utbl;
+    int16_t *BRLow;
+    int   M = log2(FFTsize);
+
+    ffts1(buf, M, fft->utbl, fft->BRLow);
+}
+
+
+
 void sp_ifftr(sp_fft *fft, SPFLOAT *buf, int FFTsize)
 {
     SPFLOAT *Utbl;

@@ -14,9 +14,10 @@ typedef struct {
     SPFLOAT npartial;
     SPFLOAT dbfs;
     SPFLOAT prevf;
+    sp_fft fft;
 } sp_ptrack;
 
 int sp_ptrack_create(sp_ptrack **p);
 int sp_ptrack_destroy(sp_ptrack **p);
 int sp_ptrack_init(sp_data *sp, sp_ptrack *p, int ihopsize, int ipeaks);
-int sp_ptrack_compute(sp_data *sp, sp_ptrack *p, SPFLOAT *in, SPFLOAT *out);
+int sp_ptrack_compute(sp_data *sp, sp_ptrack *p, SPFLOAT *in, SPFLOAT *freq, SPFLOAT *amp);
