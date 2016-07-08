@@ -78,6 +78,7 @@ ex_posc3 \
 ex_progress \
 ex_prop \
 ex_pshift \
+ex_ptrack \
 ex_randh \
 ex_randi \
 ex_random \
