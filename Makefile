@@ -1,4 +1,4 @@
-.PHONY: all clean install
+.PHONY: all clean install docs bootstrap
 
 default: all
 
