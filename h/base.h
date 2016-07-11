@@ -65,6 +65,7 @@ void sp_srand(sp_data *sp, uint32_t val);
 typedef struct {
     SPFLOAT *utbl;
     int16_t *BRLow;
+    int16_t *BRLowCpx;
 } sp_fft;
 
 void sp_fft_create(sp_fft **fft);

@@ -151,12 +151,13 @@ int sp_ptrack_init(sp_data *sp, sp_ptrack *p, int ihopsize, int ipeaks)
       tmpb[i] = 0.0;
     for (i = 0, tmpb = (SPFLOAT *)p->prev.ptr; i < winsize + 4 * FLTLEN; i++)
       tmpb[i] = 0.0;
-    for (i = 0, tmpb = (SPFLOAT *)p->sin.ptr; i < p->hopsize; i++)
-      tmpb[2*i] =   (SPFLOAT) cos((M_PI*i)/(winsize)),
-        tmpb[2*i+1] = -(SPFLOAT)sin((M_PI*i)/(winsize));
+    for (i = 0, tmpb = (SPFLOAT *)p->sin.ptr; i < p->hopsize; i++) {
+      tmpb[2*i] =   (SPFLOAT) cos((M_PI*i)/(winsize));
+      tmpb[2*i+1] = -(SPFLOAT)sin((M_PI*i)/(winsize));
+    }
 
     p->cnt = 0;
-   p->numpks = ipeaks;
+    p->numpks = ipeaks;
 
     sp_auxdata_alloc(&p->peakarray, (p->numpks+1)*sizeof(PEAK));
 
@@ -167,8 +168,9 @@ int sp_ptrack_init(sp_data *sp, sp_ptrack *p, int ihopsize, int ipeaks)
     p->amplo = MINAMPS;
     p->amphi = MAXAMPS;
     p->npartial = 7;
-    p->dbfs = 32768.0;
-    p->prevf = p->cps = 200.0;
+    //p->dbfs = 32768.0;
+    p->dbfs = 1.0;
+    p->prevf = p->cps = 100.0;
 
     return SP_OK;
 }
@@ -182,10 +184,10 @@ static void ptrack(sp_data *sp, sp_ptrack *p)
     SPFLOAT *prev  = (SPFLOAT *)p->prev.ptr;
     PEAK  *peaklist = (PEAK *)p->peakarray.ptr;
     HISTOPEAK histpeak;
-    int i, j, k, hop = p->hopsize, n = 2*hop, npeak, logn = -1, count, tmp;
-    SPFLOAT totalpower, totalloudness, totaldb;
+    int i, j, k, hop = p->hopsize, n = 2*hop, npeak = 0, logn = -1, count, tmp;
+    SPFLOAT totalpower = 0, totalloudness = 0, totaldb = 0;
     SPFLOAT maxbin,  *histogram = spectmp + BINGUARD;
-    SPFLOAT hzperbin = p->sr / (n + n);
+    SPFLOAT hzperbin = (SPFLOAT) p->sr / (n + n);
     int numpks = p->numpks;
     int indx, halfhop = hop>>1;
     SPFLOAT best;
@@ -203,7 +205,6 @@ static void ptrack(sp_data *sp, sp_ptrack *p)
       logn++;
     }
     maxbin = BINPEROCT * (logn-2);
-
     for (i = 0, k = 0; i < hop; i++, k += 2) {
       spec[k]   = sig[i] * sinus[k];
       spec[k+1] = sig[i] * sinus[k+1];
@@ -281,15 +282,16 @@ static void ptrack(sp_data *sp, sp_ptrack *p)
     }
 
     if (totalpower > 1.0e-9) {
-      totaldb = DBSCAL * log(totalpower/n);
-      totalloudness = sqrt(sqrt(totalpower));
+      totaldb = (SPFLOAT)DBSCAL * logf(totalpower/n);
+      totalloudness = (SPFLOAT)sqrtf((SPFLOAT)sqrtf(totalpower));
       if (totaldb < 0) totaldb = 0;
     }
     else totaldb = totalloudness = 0.0;
 
     p->dbs[count] = totaldb + DBOFFSET;
 
-    if (totaldb >= p->amplo) {
+    //if (totaldb >= p->amplo) {
+    if (1) {
         npeak = 0;
 
         for (i = 4*MINBIN;i < (4*(n-2)) && npeak < numpks; i+=4) {
@@ -325,7 +327,7 @@ static void ptrack(sp_data *sp, sp_ptrack *p)
             if (var * totalpower > THRSH * height
             || var < 1.0e-30) continue;
 
-            stdev = (SPFLOAT)sqrt((double)var);
+            stdev = (SPFLOAT)sqrt((SPFLOAT)var);
             if (totalfreq < 4) totalfreq = 4;
 
 
@@ -339,7 +341,7 @@ static void ptrack(sp_data *sp, sp_ptrack *p)
           if (npeak > numpks) npeak = numpks;
           for (i = 0; i < maxbin; i++) histogram[i] = 0;
           for (i = 0; i < npeak; i++) {
-            SPFLOAT pit = (SPFLOAT)(BPEROOVERLOG2 * log(peaklist[i].pfreq) - 96.0);
+            SPFLOAT pit = (SPFLOAT)(BPEROOVERLOG2 * logf(peaklist[i].pfreq) - 96.0);
             SPFLOAT binbandwidth = FACTORTOBINS * peaklist[i].pwidth/peaklist[i].pfreq;
             SPFLOAT putbandwidth = (binbandwidth < 2.0 ? 2.0 : binbandwidth);
             SPFLOAT weightbandwidth = (binbandwidth < 1.0 ? 1.0 : binbandwidth);
@@ -363,13 +365,17 @@ static void ptrack(sp_data *sp, sp_ptrack *p)
           }
 
 
-        for (best = 0, indx = -1, j=0; j < maxbin; j++)
-            if (histogram[j] > best) indx = j,  best = histogram[j];
+        for (best = 0, indx = -1, j=0; j < maxbin; j++) {
+            if (histogram[j] > best) {
+                indx = j;  
+                best = histogram[j];
+            }
+        }
 
         histpeak.hvalue = best;
         histpeak.hindex = indx;
 
-        putfreq = exp((1.0 / BPEROOVERLOG2) * (histpeak.hindex + 96.0));
+        putfreq = expf((1.0 / BPEROOVERLOG2) * (histpeak.hindex + 96.0));
 
         for (j = 0; j < npeak; j++) {
             SPFLOAT fpnum = peaklist[j].pfreq/putfreq;
@@ -394,7 +400,7 @@ static void ptrack(sp_data *sp, sp_ptrack *p)
         if ((nbelow8 < 4 || npartials < 7) && cumpow < 0.01 * totalpower) {
             histpeak.hvalue = 0;
         } else {
-            double pitchpow = (cumstrength * cumstrength);
+            SPFLOAT pitchpow = (cumstrength * cumstrength);
             SPFLOAT freqinbins = freqnum/freqden;
             pitchpow = pitchpow * pitchpow;
 
@@ -402,7 +408,7 @@ static void ptrack(sp_data *sp, sp_ptrack *p)
                 histpeak.hvalue = 0;
             } else {
                 p->cps = histpeak.hpitch = hzperbin * freqnum/freqden;
-                histpeak.hloud = DBSCAL * log(pitchpow/n);
+                histpeak.hloud = DBSCAL * logf(pitchpow/n);
             }
         }
     }
@@ -410,19 +416,23 @@ static void ptrack(sp_data *sp, sp_ptrack *p)
 
 int sp_ptrack_compute(sp_data *sp, sp_ptrack *p, SPFLOAT *in, SPFLOAT *freq, SPFLOAT *amp)
 {
+    //MYFLT *sig = p->asig; int i;
+    SPFLOAT *sig = in; int i;
     SPFLOAT *buf = (SPFLOAT *)p->signal.ptr;
     int pos = p->cnt, h = p->hopsize;
     SPFLOAT scale = p->dbfs;
 
+    for (i=0; i<1 ; i++,pos++) {
       if (pos == h) {
         ptrack(sp,p);
         pos = 0;
       }
-      buf[pos] = *in * scale;
+      buf[pos] = sig[i]*scale;
+    }
+
     *freq = p->cps;
 
     *amp =  p->dbs[p->histcnt];
-    pos++;
     p->cnt = pos;
 
     return SP_OK;
