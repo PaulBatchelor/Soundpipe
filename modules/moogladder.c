@@ -4,7 +4,7 @@
  * This code has been extracted from the Csound opcode "Moogladder".
  * It has been modified to work as a Soundpipe module.
  *
- * Original Author(s): Victor Lazzarini, Miller Puckette (original algorithm)
+ * Original Author(s): Victor Lazzarini
  * Year: 2007
  * Location: Opcodes/pitchtrack.c
  *
