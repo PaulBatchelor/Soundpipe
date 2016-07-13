@@ -100,9 +100,6 @@ void sp_fftr(sp_fft *fft, SPFLOAT *buf, int FFTsize)
     SPFLOAT *Utbl;
     int16_t *BRLow;
     int   M = log2(FFTsize);
-
-    //M = ConvertFFTSize(fft, FFTsize);
-    //getTablePointers(fft, &Utbl, &BRLow, M, (M - 1) / 2);
     rffts1(buf, M, fft->utbl, fft->BRLow);
 }
 
@@ -121,9 +118,6 @@ void sp_ifftr(sp_fft *fft, SPFLOAT *buf, int FFTsize)
     SPFLOAT *Utbl;
     int16_t *BRLow;
     int   M = log2(FFTsize);
-
-    //M = ConvertFFTSize(fft, FFTsize);
-    //getTablePointers(fft, &Utbl, &BRLow, M, (M - 1) / 2);
     riffts1(buf, M, fft->utbl, fft->BRLow);
 }
 
@@ -131,4 +125,5 @@ void sp_fft_destroy(sp_fft *fft)
 {
     free(fft->utbl);
     free(fft->BRLow);
+    free(fft->BRLowCpx);
 }

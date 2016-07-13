@@ -48,7 +48,7 @@ static void fftCosInit(int M, SPFLOAT *Utbl)
     Utbl[fftN/4] = 0.0;
 }
 
-static void fftBRInit(int M, int16_t *BRLow)
+void fftBRInit(int M, int16_t *BRLow)
 {
     /* Compute BRLow, the bit reversed table for ffts */
     /* of size pow(2,M/2 -1)                          */
