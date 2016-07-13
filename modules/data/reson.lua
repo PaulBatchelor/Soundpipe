@@ -14,7 +14,7 @@ sptbl["reson"] = {
     },
     
     params = {
-        mandatory = {
+        optional = {
             {
                 name = "freq",
                 type = "SPFLOAT",

@@ -6,7 +6,6 @@
 typedef struct {
     sp_noise *ns;
     sp_reson *reson;
-    int counter;
 } udata;
 
 void write_noise(sp_data *data, void *ud) {
@@ -14,19 +13,20 @@ void write_noise(sp_data *data, void *ud) {
     SPFLOAT in = 0;
     SPFLOAT out = 0;
     sp_noise_compute(data, udata->ns, NULL, &in);
+    udata->reson->freq = 4000;
+    udata->reson->bw = 1000;
     sp_reson_compute(data, udata->reson, &in, &out); 
     data->out[0] = out * 0.1;
-    udata->counter = (udata->counter + 1) % 5000;
 }
 int main() {
-    srand(time(NULL));
     udata ud;
-    ud.counter = 0;
     sp_data *sp;
     sp_create(&sp);
+    sp_srand(sp, 12345);
     sp_noise_create(&ud.ns);
     sp_reson_create(&ud.reson);
     sp_noise_init(sp, ud.ns);
+    ud.ns->amp = 1.0;
     sp_reson_init(sp, ud.reson);
     sp->len = 44100 * 5;
     sp_process(sp, &ud, write_noise);
