@@ -9,8 +9,9 @@ typedef struct {
 
 void write_pinknoise(sp_data *sp, void *udata) {
     UserData *ud = udata;
-    SPFLOAT in = 0;
-    sp_pinknoise_compute(sp, ud->ns, NULL, &sp->out[0]);
+    SPFLOAT out = 0;
+    sp_pinknoise_compute(sp, ud->ns, NULL, &out);
+    sp_out(sp, 0, out);
 }
 
 int main() {
