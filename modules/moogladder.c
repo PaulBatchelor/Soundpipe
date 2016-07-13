@@ -5,9 +5,8 @@
  * It has been modified to work as a Soundpipe module.
  *
  * Original Author(s): Victor Lazzarini
- * Year: 2007
- * Location: Opcodes/pitchtrack.c
- *
+ * Year: 2001
+ * Location: Opcodes/newfils.c
  */
 
 #include <stdint.h>

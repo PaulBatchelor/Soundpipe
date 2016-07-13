@@ -1,8 +1,8 @@
 typedef struct {
-        SPFLOAT freq, bw;
-        int scale;
-        SPFLOAT c1, c2, c3, yt1, yt2, cosf, prvfreq, prvbw;
-        SPFLOAT tpidsr;
+    SPFLOAT freq, bw;
+    int scale;
+    SPFLOAT c1, c2, c3, yt1, yt2, cosf, prvfreq, prvbw;
+    SPFLOAT tpidsr;
 } sp_reson;
 
 int sp_reson_create(sp_reson **p);
