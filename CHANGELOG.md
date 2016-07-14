@@ -10,6 +10,7 @@
     - added "waveset" module
     - adsr bugfix: retriggering is possible when sustain is 0
     - added ptrack module
+    - (re)-added reson module
 
 1.2.0
 -----
