@@ -79,18 +79,25 @@ Tests
 
 Tests in Soundpipe are used to determine whether or not modules behave as 
 expected. Tests write the output of a module to memory, and check the MD5 hash 
-value of the output against the MD5 value of a reference signal. 
+value of the output against the MD5 value of a reference signal.
 
 To build a test file, go into the test folder, and run "make". Then, run 
 "./run.bin", which runs the tests. As the tests are run, an "ok" will appear in 
 the log if a test passes, and a "not ok" will appear if a test fails. 
 
-If you would like to hear the audio output of the tests, run "make 
-WRITE_RAW=1". This enables the output of the tests to be written to disk. Then, 
-run "./run.bin", which runs the tests. Finally, run "sh write_wav.sh". This 
-shell script produces a file called "out.wav", which is the audio output of 
-every Soundpipe test. The shell script creates this file by concatenating the 
-individual files (in a headerless raw format) to a wav file using SoX. 
+It is possible to hear the output of a particular test if you know the test 
+number. You will need to have sox installed. For example, 
+to hear what test 11 sounds like, run the following
+commands:
+
+./run.bin render 11
+
+./write_wave.sh 0011.raw
+
+This will generate a file called out.wav.
+
+The testing utility has a few optional arguments. To see all possible arguments,
+run "./run.bin help".
 
 The Soundpipe Model
 -------------------
@@ -112,20 +119,6 @@ Documentation
 If you have lua installed on your computer, you can generate the current html
 documentation for soundpipe by running "make docs". A folder called "docs"
 will be created. The top page for the documentation is docs/index.html.
-
-
-
-Contributors of Soundpipe:
---------------------------
-Paul Batchelor
-
-Alex Tape
-
-Daniel Friedman
-
-Nick Arner
-
-Aurelius Prochazka 
 
 
 Contributing
