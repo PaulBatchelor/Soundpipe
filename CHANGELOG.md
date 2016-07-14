@@ -11,6 +11,7 @@
     - adsr bugfix: retriggering is possible when sustain is 0
     - added ptrack module
     - (re)-added reson module
+    - added pdhalf module
 
 1.2.0
 -----
