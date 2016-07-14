@@ -60,6 +60,7 @@ pan2 \
 panst \
 pareq \
 paulstretch \
+pdhalf \
 phaser \
 phasor \
 pinknoise \

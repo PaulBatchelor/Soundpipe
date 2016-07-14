@@ -69,6 +69,7 @@ ex_pan2 \
 ex_panst \
 ex_pareq \
 ex_paulstretch \
+ex_pdhalf \
 ex_phaser \
 ex_phasor \
 ex_pinknoise \

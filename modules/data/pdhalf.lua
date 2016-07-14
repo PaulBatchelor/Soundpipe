@@ -66,13 +66,8 @@ sptbl["pdhalf"] = {
 
     modtype = "module",
 
-    description = [[A short title describing the module
+    description = [[Casio-style phase distortion with "pivot point" on the X axis
 
-    This is a description of the entire module.  This is not a real module. This description should be a comprehensive sumary of what this function does.
-
-Inside the Lua table, this is expressed as a multiline string, however it does not adhere to the tradtional 80 column rule found in programming.
-
-Write as much text as needed here...
 ]],
 
     ninputs = 2,
