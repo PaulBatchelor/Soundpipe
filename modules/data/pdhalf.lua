@@ -11,55 +11,15 @@ sptbl["pdhalf"] = {
         destroy = "sp_pdhalf_destroy",
         init = "sp_pdhalf_init",
         compute = "sp_pdhalf_compute",
-        other = {
-            sp_pdhalf_set = {
-                description = "pdhalf_set description goes here.",
-                args = {
-                    {
-                        name = "var1",
-                        type = "SPFLOAT",
-                        description = "This is the first parameter",
-                        default = 1.5
-                    },
-                    {
-                        name = "var2",
-                        type = "SPFLOAT",
-                        description = "This is the second parameter",
-                        default = 1.5
-                    }
-                }
-            }
-        }
     },
 
     params = {
-        mandatory = {
-            {
-                name = "bar",
-                type = "sp_ftbl *",
-                description = "This is a mandatory table value. It does not have a default value, so we set it to 'N/A'. Any that does not or cannot have a default value should set this default value to 'N/A'.",
-                default = "N/A"
-            },
-            {
-                name = "bar2",
-                type = "SPFLOAT",
-                description = "This is a mandatory parameter. In soundpipe, users will always need to specify this value, but a default value has been giving in case it is needed to write more complicated engines in the future.",
-                default = 123
-            }
-        },
-
         optional = {
             {
-                name = "blah_1",
+                name = "amount",
                 type = "SPFLOAT",
-                description = "This is an optional parameter. These values are always set to a value by default, and can be set after the init function has been called.",
-                default = 1.5
-            },
-            {
-                name = "blah_2",
-                type = "SPFLOAT",
-                description ="This is yet another optional parameter...",
-                default = 456.7
+                description = "Amount of distortion, within the range [-1, 1]. 0 is no distortion.",
+                default = 0
             },
         }
     },
@@ -67,31 +27,26 @@ sptbl["pdhalf"] = {
     modtype = "module",
 
     description = [[Casio-style phase distortion with "pivot point" on the X axis
-
+This module is designed to emulate the classic phase distortion synthesis technique.
+From the mid 90's. The technique reads the first and second halves of the ftbl
+at different rates in order to warp the waveform. For example, pdhalf can 
+smoothly transition a sinewave into something approximating a sawtooth wave.
 ]],
 
-    ninputs = 2,
-    noutputs = 2,
+    ninputs = 1,
+    noutputs = 1,
 
     inputs = {
         {
-            name = "clock",
-            description = "this is the clock source for a made up plugin."
-        },
-        {
-            name = "input",
-            description = "this is the audio input for a made up plugin."
+            name = "sig",
+            description = "Input signal, typically a phasor normalize 0-1."
         },
     },
 
     outputs = {
         {
-            name = "out_left",
-            description = "Stereo left output for pdhalf."
-        },
-        {
-            name = "out_right",
-            description = "Stereo right output for pdhalf."
+            name = "out",
+            description = "Signal output."
         },
     }
 
