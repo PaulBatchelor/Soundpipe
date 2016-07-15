@@ -12,6 +12,7 @@
     - added ptrack module
     - (re)-added reson module
     - added pdhalf module
+    - tabread tweaks for audiokit
 
 1.2.0
 -----
