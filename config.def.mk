@@ -99,6 +99,7 @@ timer \
 tin \
 tone \
 trand \
+trem \
 tseg \
 tseq \
 vdelay \
