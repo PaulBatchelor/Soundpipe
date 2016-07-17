@@ -12,6 +12,8 @@
     - added ptrack module
     - (re)-added reson module
     - added pdhalf module
+    - removed strok_r dependency
+    - rewrote sp_gen_vals
 
 1.2.0
 -----
