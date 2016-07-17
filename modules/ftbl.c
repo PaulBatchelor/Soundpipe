@@ -46,7 +46,7 @@ static char * tokenize(char **next, int *size)
             *str = 0;
             if(*peak != ' ') break;
         }
-        *str++;
+        str = str + 1;
         peak = str + 1;
     }
     *next = peak;
