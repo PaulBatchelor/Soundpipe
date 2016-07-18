@@ -33,8 +33,7 @@
         - test utility now has command line args:
             - "./run.bin" works like it did before
             - "./run.bin gen_header" rewrites all_tests.h 
-            - "./run.bin regen_header" rewrites all_tests.h, but regenerates 
-md5 hashes
+            - "./run.bin regen_header" rewrites all_tests.h, but regenerates md5 hashes
             - "./run.bin test id" runs a single test
             - "./run.bin render id" renders a single test
     - Tests added:
@@ -47,6 +46,7 @@ md5 hashes
     - padsynth: fixed a malloc issue that was causing valgrind to complain
     - Fixes to rpt: no longer freaks out if repeat sizes are out of bounds
     - Replaced pink noise algorithm from faust code to Protrekkr code
+
 1.01 
 ----
     - New modules:
