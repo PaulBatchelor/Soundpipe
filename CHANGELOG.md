@@ -6,7 +6,7 @@
     - added wpkorg35 module
     - removed complex.h dependency
     - added "help" option to test CLI
-    - more tests added
+    - lots and lots of tests added
     - added "waveset" module
     - adsr bugfix: retriggering is possible when sustain is 0
     - added ptrack module
