@@ -69,6 +69,7 @@ t_pdhalf \
 t_phaser \
 t_phasor \
 t_pinknoise \
+t_pitchamdf \
 t_pluck \
 t_port \
 t_posc3 \
