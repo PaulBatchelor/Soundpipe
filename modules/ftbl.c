@@ -32,30 +32,46 @@ int sp_ftbl_destroy(sp_ftbl **ft)
     return SP_OK;
 }
 
+/* TODO: handle spaces at beginning of string */
+static char * tokenize(char **next, int *size)
+{
+    if(*size <= 0) return NULL;
+    char *token = *next;
+    char *str = *next;
+
+    char *peak = str + 1;
+
+    while((*size)--) {
+        if(*str == ' ') {
+            *str = 0;
+            if(*peak != ' ') break;
+        }
+        str = str + 1;
+        peak = str + 1;
+    }
+    *next = peak;
+    return token;
+}
+
 int sp_gen_vals(sp_data *sp, sp_ftbl *ft, const char *string)
 {
-    char *str1 = NULL, *token = NULL, *t;
-    char *saveptr1 = NULL;
-    int j;
-    char *d;
-    d = malloc(sizeof(char) + 1);
-    d[0] = ' ';
-    d[1] = 0;
-    t = malloc(sizeof(char) * (strlen(string) + 1));
-    strcpy(t, string);
-    for (j = 0, str1 = t; ; j++, str1 = NULL) {
-        token = strtok_r(str1, d, &saveptr1);
-        if (token == NULL)
-            break;
+    int size = strlen(string);
+    char *str = malloc(sizeof(char) * size + 1);
+    strcpy(str, string);
+    char *out; 
+    char *ptr = str;
+    int j = 0;
+    while(size > 0) {
+        out = tokenize(&str, &size);
         if(ft->size < j + 1){
             ft->tbl = realloc(ft->tbl, sizeof(SPFLOAT) * (ft->size + 2));
             ft->size++;
         }
-        ft->tbl[j] = atof(token);
+        ft->tbl[j] = atof(out);
+        j++;
     }
-
-    free(t);
-    free(d);
+   
+    free(ptr); 
     return SP_OK;
 }
 
