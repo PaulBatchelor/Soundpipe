@@ -61,7 +61,8 @@ t_noise \
 t_nsmp \
 t_osc \
 t_oscmorph \
-t_pan2\
+t_pan2 \
+t_panst \
 t_pareq \
 t_padsynth \
 t_paulstretch \
