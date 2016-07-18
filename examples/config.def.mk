@@ -70,6 +70,7 @@ ex_panst \
 ex_pareq \
 ex_paulstretch \
 ex_pdhalf \
+ex_peaklim \
 ex_phaser \
 ex_phasor \
 ex_pinknoise \

@@ -14,15 +14,14 @@
 
 typedef struct {
     sp_peaklim *peaklim;
-    sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_diskin *diskin;
 } UserData;
 
 void process(sp_data *sp, void *udata) {
     UserData *ud = udata;
-    SPFLOAT osc = 0, peaklim = 0;
-    sp_osc_compute(sp, ud->osc, NULL, &osc);
-    sp_peaklim_compute(sp, ud->peaklim, &osc, &peaklim);
+    SPFLOAT diskin = 0, peaklim = 0;
+    sp_diskin_compute(sp, ud->diskin, NULL, &diskin);
+    sp_peaklim_compute(sp, ud->peaklim, &diskin, &peaklim);
     sp->out[0] = peaklim;
 }
 
@@ -33,19 +32,20 @@ int main() {
     sp_srand(sp, 1234567);
 
     sp_peaklim_create(&ud.peaklim);
-    sp_osc_create(&ud.osc);
-    sp_ftbl_create(sp, &ud.ft, 2048);
+    sp_diskin_create(&ud.diskin);
 
     sp_peaklim_init(sp, ud.peaklim);
-    sp_gen_sine(sp, ud.ft);
-    sp_osc_init(sp, ud.osc, ud.ft, 0);
+    ud.peaklim->atk = 0.1;
+    ud.peaklim->rel = 0.1;
+    ud.peaklim->thresh = -30;
+    sp_diskin_init(sp, ud.diskin, "oneart.wav");
+
 
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);
 
     sp_peaklim_destroy(&ud.peaklim);
-    sp_ftbl_destroy(&ud.ft);
-    sp_osc_destroy(&ud.osc);
+    sp_diskin_destroy(&ud.diskin);
 
     sp_destroy(&sp);
     return 0;
