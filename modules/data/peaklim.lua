@@ -11,92 +11,52 @@ sptbl["peaklim"] = {
         destroy = "sp_peaklim_destroy",
         init = "sp_peaklim_init",
         compute = "sp_peaklim_compute",
-        other = {
-            sp_peaklim_set = {
-                description = "peaklim_set description goes here.",
-                args = {
-                    {
-                        name = "var1",
-                        type = "SPFLOAT",
-                        description = "This is the first parameter",
-                        default = 1.5
-                    },
-                    {
-                        name = "var2",
-                        type = "SPFLOAT",
-                        description = "This is the second parameter",
-                        default = 1.5
-                    }
-                }
-            }
-        }
     },
 
     params = {
-        mandatory = {
-            {
-                name = "bar",
-                type = "sp_ftbl *",
-                description = "This is a mandatory table value. It does not have a default value, so we set it to 'N/A'. Any that does not or cannot have a default value should set this default value to 'N/A'.",
-                default = "N/A"
-            },
-            {
-                name = "bar2",
-                type = "SPFLOAT",
-                description = "This is a mandatory parameter. In soundpipe, users will always need to specify this value, but a default value has been giving in case it is needed to write more complicated engines in the future.",
-                default = 123
-            }
-        },
-
         optional = {
             {
-                name = "blah_1",
+                name = "atk",
                 type = "SPFLOAT",
-                description = "This is an optional parameter. These values are always set to a value by default, and can be set after the init function has been called.",
-                default = 1.5
+                description = "Attack time, in seconds",
+                default = 0.01
             },
             {
-                name = "blah_2",
+                name = "rel",
                 type = "SPFLOAT",
-                description ="This is yet another optional parameter...",
-                default = 456.7
+                description ="Release time, in seconds",
+                default = 0.1
+            },
+            {
+                name = "thresh",
+                type = "SPFLOAT",
+                description ="Threshold, in dB",
+                default = 0
             },
         }
     },
 
     modtype = "module",
 
-    description = [[A short title describing the module
-
-    This is a description of the entire module.  This is not a real module. This description should be a comprehensive sumary of what this function does.
-
-Inside the Lua table, this is expressed as a multiline string, however it does not adhere to the tradtional 80 column rule found in programming.
-
-Write as much text as needed here...
+    description = [[Peak limiter 
+This is a simple peak limiting algorithm, based off code from the Stanford
+Music-424 class.
 ]],
 
-    ninputs = 2,
-    noutputs = 2,
+    ninputs = 1,
+    noutputs = 1,
 
     inputs = {
         {
-            name = "clock",
-            description = "this is the clock source for a made up plugin."
-        },
-        {
             name = "input",
-            description = "this is the audio input for a made up plugin."
+            description = "Input signal."
         },
     },
 
     outputs = {
         {
-            name = "out_left",
-            description = "Stereo left output for peaklim."
-        },
-        {
-            name = "out_right",
-            description = "Stereo right output for peaklim."
+            name = "out",
+            description = "Output signal."
         },
     }
 
