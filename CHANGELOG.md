@@ -15,6 +15,7 @@
     - removed strok_r dependency
     - rewrote sp_gen_vals
     - tabread tweaks for audiokit
+    - added peaklim module
 
 1.2.0
 -----
