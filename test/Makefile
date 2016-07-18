@@ -61,13 +61,17 @@ t_noise \
 t_nsmp \
 t_osc \
 t_oscmorph \
-t_pan2\
+t_pan2 \
+t_panst \
 t_pareq \
 t_padsynth \
 t_paulstretch \
 t_peaklim \
+t_pdhalf \
 t_phaser \
 t_phasor \
+t_pinknoise \
+t_pitchamdf \
 t_pluck \
 t_port \
 t_posc3 \
