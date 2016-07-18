@@ -68,6 +68,7 @@ t_paulstretch \
 t_pdhalf \
 t_phaser \
 t_phasor \
+t_pinknoise \
 t_pluck \
 t_port \
 t_posc3 \
