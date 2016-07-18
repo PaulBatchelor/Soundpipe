@@ -65,6 +65,7 @@ t_pan2\
 t_pareq \
 t_padsynth \
 t_paulstretch \
+t_peaklim \
 t_phaser \
 t_phasor \
 t_pluck \
