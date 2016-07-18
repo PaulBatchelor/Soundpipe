@@ -14,6 +14,7 @@
     - added pdhalf module
     - removed strok_r dependency
     - rewrote sp_gen_vals
+    - tabread tweaks for audiokit
 
 1.2.0
 -----

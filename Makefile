@@ -26,7 +26,7 @@ MPATHS += $(addprefix $(MODDIR)/, $(addsuffix .o, $(MODULES)))
 include $(CONFIG)
 
 CFLAGS += -g -DSP_VERSION=$(VERSION) -O3 -DSPFLOAT=float -std=c99
-CFLAGS += -I$(INTERMEDIATES_PREFIX)/h -Ih -I/usr/local/include
+CFLAGS += -I$(INTERMEDIATES_PREFIX)/h -Ih -I/usr/local/include -fPIC
 UTIL += $(INTERMEDIATES_PREFIX)/util/wav2smp
 
 $(INTERMEDIATES_PREFIX) \

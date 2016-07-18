@@ -2,9 +2,6 @@ typedef struct {
     SPFLOAT sig;
     SPFLOAT index, mode, offset, wrap;
     SPFLOAT mul;
-    int32_t np2;
-    int32_t len;
-    int32_t lenmask;
     sp_ftbl *ft;
 } sp_tabread;
 
