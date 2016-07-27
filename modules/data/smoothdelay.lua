@@ -11,92 +11,63 @@ sptbl["smoothdelay"] = {
         destroy = "sp_smoothdelay_destroy",
         init = "sp_smoothdelay_init",
         compute = "sp_smoothdelay_compute",
-        other = {
-            sp_smoothdelay_set = {
-                description = "smoothdelay_set description goes here.",
-                args = {
-                    {
-                        name = "var1",
-                        type = "SPFLOAT",
-                        description = "This is the first parameter",
-                        default = 1.5
-                    },
-                    {
-                        name = "var2",
-                        type = "SPFLOAT",
-                        description = "This is the second parameter",
-                        default = 1.5
-                    }
-                }
-            }
-        }
     },
 
     params = {
         mandatory = {
             {
-                name = "bar",
-                type = "sp_ftbl *",
-                description = "This is a mandatory table value. It does not have a default value, so we set it to 'N/A'. Any that does not or cannot have a default value should set this default value to 'N/A'.",
-                default = "N/A"
+                name = "maxdel",
+                type = "SPFLOAT",
+                description = "Maximum delay time (in seconds)",
+                default = 1.0
             },
             {
-                name = "bar2",
-                type = "SPFLOAT",
-                description = "This is a mandatory parameter. In soundpipe, users will always need to specify this value, but a default value has been giving in case it is needed to write more complicated engines in the future.",
-                default = 123
+                name = "interp",
+                type = "uint32_t",
+                description = "interpolation time (in samples)",
+                default = 1024
             }
         },
 
         optional = {
             {
-                name = "blah_1",
+                name = "feedback",
                 type = "SPFLOAT",
-                description = "This is an optional parameter. These values are always set to a value by default, and can be set after the init function has been called.",
-                default = 1.5
+                description ="",
+                default = 456.7
             },
             {
-                name = "blah_2",
+                name = "del",
                 type = "SPFLOAT",
-                description ="This is yet another optional parameter...",
-                default = 456.7
+                description = "",
+                default = 0.5
             },
         }
     },
 
     modtype = "module",
 
-    description = [[A short title describing the module
-
-    This is a description of the entire module.  This is not a real module. This description should be a comprehensive sumary of what this function does.
-
-Inside the Lua table, this is expressed as a multiline string, however it does not adhere to the tradtional 80 column rule found in programming.
-
-Write as much text as needed here...
+    description = [[Smooth variable delay line without varispeed pitch.
+Smooth delay is based off the sdelay module in Faust. The smooth delay 
+algorithm involves a double delay line. Any time the delay time changes, 
+the delay time of buffer not heard changes, then is crossfaded to 
+that buffer.
 ]],
 
-    ninputs = 2,
-    noutputs = 2,
+    ninputs = 1,
+    noutputs = 1,
 
     inputs = {
         {
-            name = "clock",
-            description = "this is the clock source for a made up plugin."
-        },
-        {
-            name = "input",
-            description = "this is the audio input for a made up plugin."
+            name = "in",
+            description = "Signal input."
         },
     },
 
     outputs = {
         {
-            name = "out_left",
-            description = "Stereo left output for smoothdelay."
-        },
-        {
-            name = "out_right",
-            description = "Stereo right output for smoothdelay."
+            name = "out",
+            description = "Signal output."
         },
     }
 

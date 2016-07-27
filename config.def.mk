@@ -85,6 +85,7 @@ rpt \
 samphold \
 scale \
 sdelay \
+smoothdelay \
 streson \
 switch \
 tabread \

@@ -91,6 +91,7 @@ ex_rpt \
 ex_samphold \
 ex_scale \
 ex_streson \
+ex_smoothdelay \
 ex_switch \
 ex_tabread \
 ex_tadsr \
