@@ -1,13 +1,14 @@
-/*
- * Foo
- * 
- * This is a dummy module. It doesn't do much.
- * Feel free to use this as a boilerplate template.
- * 
- */
-
 #include <stdlib.h>
 #include "soundpipe.h"
+
+#ifndef max
+#define max(a, b) ((a > b) ? a : b)
+#endif
+
+#ifndef min
+#define min(a, b) ((a < b) ? a : b)
+#endif
+
 
 int sp_smoothdelay_create(sp_smoothdelay **p)
 {
@@ -33,7 +34,7 @@ int sp_smoothdelay_init(sp_data *sp, sp_smoothdelay *p,
     p->pdel = -1;
     p->maxdel = maxdel;
     p->feedback = 0;
-    p->maxbuf = n;
+    p->maxbuf = n - 1;
     p->maxcount = interp;
 
     sp_auxdata_alloc(&p->buf1, n * sizeof(SPFLOAT));
@@ -67,21 +68,25 @@ int sp_smoothdelay_compute(sp_data *sp, sp_smoothdelay *p, SPFLOAT *in, SPFLOAT 
     *out = 0;
     if(p->del != p->pdel && p->counter == 0) {
         p->pdel = p->del;
+        uint32_t dels = min((uint32_t)(p->del * sp->sr), p->maxbuf);
+
+        if(dels == 0) dels = 1;
+
         if(p->curbuf == 0) {
             p->curbuf = 1;
-            p->deltime2 = (uint32_t)(p->del * sp->sr) % p->maxbuf;
+            p->deltime2 = dels;
         } else {
             p->curbuf = 0;
-            p->deltime1 = (uint32_t)(p->del * sp->sr) % p->maxbuf;
+            p->deltime1 = dels;
         }
-        p->counter = 1024;
+        p->counter = p->maxcount;
     }
 
 
 
     SPFLOAT *buf1 = (SPFLOAT *)p->buf1.ptr; 
     SPFLOAT *buf2 = (SPFLOAT *)p->buf2.ptr; 
-    SPFLOAT it = (SPFLOAT)p->counter / 1024;
+    SPFLOAT it = (SPFLOAT)p->counter / p->maxcount;
     if(p->counter != 0) p->counter--;
   
     SPFLOAT del1 = delay_sig(buf1, &p->bufpos1, 
