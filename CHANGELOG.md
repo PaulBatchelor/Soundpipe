@@ -1,5 +1,10 @@
 # Change log
 
+1.4.0
+-----
+    - added smoothdelay module
+    - changed padsynth gen routine behavior to play nicer with oscillator
+
 1.3.0
 -----
     - added tseg module
