@@ -70,6 +70,7 @@ ex_panst \
 ex_pareq \
 ex_paulstretch \
 ex_pdhalf \
+ex_peaklim \
 ex_phaser \
 ex_phasor \
 ex_pinknoise \
@@ -90,6 +91,7 @@ ex_rpt \
 ex_samphold \
 ex_scale \
 ex_streson \
+ex_smoothdelay \
 ex_switch \
 ex_tabread \
 ex_tadsr \

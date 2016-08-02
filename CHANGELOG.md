@@ -1,18 +1,26 @@
 # Change log
 
+1.4.0
+-----
+    - added smoothdelay module
+    - changed padsynth gen routine behavior to play nicer with oscillator
+
 1.3.0
 -----
     - added tseg module
     - added wpkorg35 module
     - removed complex.h dependency
     - added "help" option to test CLI
-    - more tests added
+    - lots and lots of tests added
     - added "waveset" module
     - adsr bugfix: retriggering is possible when sustain is 0
     - added ptrack module
     - (re)-added reson module
     - added pdhalf module
+    - removed strok_r dependency
+    - rewrote sp_gen_vals
     - tabread tweaks for audiokit
+    - added peaklim module
 
 1.2.0
 -----
@@ -30,8 +38,7 @@
         - test utility now has command line args:
             - "./run.bin" works like it did before
             - "./run.bin gen_header" rewrites all_tests.h 
-            - "./run.bin regen_header" rewrites all_tests.h, but regenerates 
-md5 hashes
+            - "./run.bin regen_header" rewrites all_tests.h, but regenerates md5 hashes
             - "./run.bin test id" runs a single test
             - "./run.bin render id" renders a single test
     - Tests added:
@@ -44,6 +51,7 @@ md5 hashes
     - padsynth: fixed a malloc issue that was causing valgrind to complain
     - Fixes to rpt: no longer freaks out if repeat sizes are out of bounds
     - Replaced pink noise algorithm from faust code to Protrekkr code
+
 1.01 
 ----
     - New modules:

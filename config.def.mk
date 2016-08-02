@@ -61,6 +61,7 @@ panst \
 pareq \
 paulstretch \
 pdhalf \
+peaklim \
 phaser \
 phasor \
 pinknoise \
@@ -84,6 +85,7 @@ rpt \
 samphold \
 scale \
 sdelay \
+smoothdelay \
 streson \
 switch \
 tabread \
