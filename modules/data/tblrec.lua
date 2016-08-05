@@ -33,7 +33,7 @@ previous information that was on it.
 ]],
 
     ninputs = 2,
-    noutputs = 1,
+    noutputs = 0,
 
     inputs = {
         {
