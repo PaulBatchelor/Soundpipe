@@ -34,7 +34,7 @@ sptbl["smoothdelay"] = {
                 name = "feedback",
                 type = "SPFLOAT",
                 description ="",
-                default = 456.7
+                default = 0.1
             },
             {
                 name = "del",
