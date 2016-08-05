@@ -96,6 +96,7 @@ tdiv \
 tenv \
 tenv2 \
 tenvx \
+tgate \
 thresh \
 timer \
 tin \

@@ -102,6 +102,7 @@ ex_tenv \
 ex_tenv2 \
 ex_tenvx \
 ex_tevent \
+ex_tgate \
 ex_thresh \
 ex_timer \
 ex_tin \
