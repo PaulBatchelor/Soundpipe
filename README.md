@@ -48,16 +48,6 @@ By default, Soundpipe needs libsndfile, and a standard build environment.
 Other modules that use other external libraries will need to be explicitly compiled
 by modifying config.mk.
 
-If you are using a Mac you can install libsndfile via
-[Homebrew](http://brew.sh/):
-
-```sh
-$ brew install libsndfile
-```
-
-Alternatively, clone and build from the [libsndfile
-repository](https://github.com/erikd/libsndfile/).
-
 On Linux, the libsndfile-dev package will need to be installed.
 
 To compile:
