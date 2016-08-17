@@ -4,6 +4,7 @@
 -----
     - added smoothdelay module
     - changed padsynth gen routine behavior to play nicer with oscillator
+    - randh: divide by zero fixes
 
 1.3.0
 -----
