@@ -48,8 +48,6 @@ By default, Soundpipe needs libsndfile, and a standard build environment.
 Other modules that use other external libraries will need to be explicitly compiled
 by modifying config.mk.
 
-On Linux, the libsndfile-dev package will need to be installed.
-
 To compile:
 
 make
