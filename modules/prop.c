@@ -186,7 +186,8 @@ static int prop_create(prop_data **pd)
     pdp->mode = PMODE_INIT;
     pdp->pos = 1;
     pdp->evtpos = 0;
-    pdp->last = &pdp->root;
+    pdp->main = &pdp->root;
+    pdp->last = pdp->main;
     pdp->tmp = 0;
 
     stack_init(&pdp->mstack);
@@ -265,14 +266,14 @@ static int prop_parse(prop_data *pd, const char *str)
         pd->pos++;
         str++;
     }
-    pd->last = &pd->root;
+    pd->last = pd->main;
     return PSTATUS_OK;
 }
 
 prop_event prop_next(prop_data *pd)
 {
     if(pd->evtpos >= pd->num ) {
-        pd->last = &pd->root;
+        pd->last = pd->main;
         pd->evtpos = 0;
     }
     prop_event p = *pd->last->next;
@@ -292,7 +293,7 @@ static int prop_destroy(prop_data **pd)
     prop_data *pdp = *pd;
     prop_event *evt, *next;
 
-    evt = pdp->root.next;
+    evt = pdp->main->next;
 
     for(i = 0; i < pdp->num; i++) {
         next = evt->next;

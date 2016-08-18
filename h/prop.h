@@ -23,6 +23,7 @@ typedef struct {
     uint32_t pos;
     uint32_t evtpos;
     prop_event root;
+    prop_event *main;
     prop_event *last;
     prop_stack mstack;
     prop_stack cstack;
