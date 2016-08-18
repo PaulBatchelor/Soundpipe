@@ -1,5 +1,5 @@
 typedef struct {
-    SPFLOAT incr;
+    SPFLOAT step;
     SPFLOAT min;
     SPFLOAT max;
     SPFLOAT val;

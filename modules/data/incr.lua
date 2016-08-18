@@ -16,9 +16,9 @@ sptbl["incr"] = {
     params = {
         optional = {
             {
-                name = "incr",
+                name = "step",
                 type = "SPFLOAT",
-                description = "Value to increment by",
+                description = "Step value to increment by.",
                 default = 0.1
             },
             {
