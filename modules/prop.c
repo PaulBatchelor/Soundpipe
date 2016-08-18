@@ -9,9 +9,16 @@
 #include <stdlib.h>
 #include "soundpipe.h"
 
+static int prop_create(prop_data **pd);
+static int prop_parse(prop_data *pd, const char *str);
+static prop_event prop_next(prop_data *pd);
+static float prop_time(prop_data *pd, prop_event evt);
+static int prop_destroy(prop_data **pd);
+
 enum {
 PTYPE_OFF,
 PTYPE_ON,
+PTYPE_MAYBE,
 PMODE_INSERT,
 PMODE_SETDIV,
 PMODE_SETMUL,
@@ -58,10 +65,17 @@ int sp_prop_compute(sp_data *sp, sp_prop *p, SPFLOAT *in, SPFLOAT *out)
         }
         p->evt = prop_next(p->prp);
         p->count = prop_time(p->prp, p->evt) * sp->sr;
-        if(p->evt.type == PTYPE_ON) {
-            *out = 1.0;
-        } else {
-            *out = 0.0;
+        switch(p->evt.type) {
+            case PTYPE_ON: 
+                *out = 1.0;
+                break;
+            case PTYPE_MAYBE: 
+                if( ((SPFLOAT) sp_rand(sp) / SP_RANDMAX) > 0.5) *out = 1.0;
+                else *out = 0.0;
+                break;
+            default:
+                *out = 0.0;
+                break;
         }
         return SP_OK;
     }
@@ -158,7 +172,7 @@ static void mode_unsetcons(prop_data *pd)
     pd->cons_mul /= div;
 }
 
-int prop_create(prop_data **pd)
+static int prop_create(prop_data **pd)
 {
     *pd = malloc(sizeof(prop_data));
     prop_data *pdp = *pd;
@@ -181,7 +195,7 @@ int prop_create(prop_data **pd)
     return PSTATUS_OK;
 }
 
-int prop_parse(prop_data *pd, const char *str)
+static int prop_parse(prop_data *pd, const char *str)
 {
     char c;
     while(*str != 0) {
@@ -191,6 +205,9 @@ int prop_parse(prop_data *pd, const char *str)
 
             case '+':
                 mode_insert(pd, PTYPE_ON);
+                break;
+            case '?':
+                mode_insert(pd, PTYPE_MAYBE);
                 break;
             case '-':
                 mode_insert(pd, PTYPE_OFF);
@@ -264,12 +281,12 @@ prop_event prop_next(prop_data *pd)
     return p;
 }
 
-float prop_time(prop_data *pd, prop_event evt)
+static float prop_time(prop_data *pd, prop_event evt)
 {
     return evt.cons * (pd->scale / evt.val);
 }
 
-int prop_destroy(prop_data **pd)
+static int prop_destroy(prop_data **pd)
 {
     uint32_t i;
     prop_data *pdp = *pd;

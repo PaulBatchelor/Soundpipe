@@ -36,13 +36,6 @@ typedef struct {
    SPFLOAT lbpm;
 } sp_prop;
 
-
-int prop_create(prop_data **pd);
-int prop_parse(prop_data *pd, const char *str);
-prop_event prop_next(prop_data *pd);
-float prop_time(prop_data *pd, prop_event evt);
-int prop_destroy(prop_data **pd);
-
 int sp_prop_create(sp_prop **p);
 int sp_prop_destroy(sp_prop **p);
 int sp_prop_init(sp_data *sp, sp_prop *p, const char *str);
