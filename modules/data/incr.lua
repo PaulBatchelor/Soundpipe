@@ -11,92 +11,53 @@ sptbl["incr"] = {
         destroy = "sp_incr_destroy",
         init = "sp_incr_init",
         compute = "sp_incr_compute",
-        other = {
-            sp_incr_set = {
-                description = "incr_set description goes here.",
-                args = {
-                    {
-                        name = "var1",
-                        type = "SPFLOAT",
-                        description = "This is the first parameter",
-                        default = 1.5
-                    },
-                    {
-                        name = "var2",
-                        type = "SPFLOAT",
-                        description = "This is the second parameter",
-                        default = 1.5
-                    }
-                }
-            }
-        }
     },
 
     params = {
-        mandatory = {
-            {
-                name = "bar",
-                type = "sp_ftbl *",
-                description = "This is a mandatory table value. It does not have a default value, so we set it to 'N/A'. Any that does not or cannot have a default value should set this default value to 'N/A'.",
-                default = "N/A"
-            },
-            {
-                name = "bar2",
-                type = "SPFLOAT",
-                description = "This is a mandatory parameter. In soundpipe, users will always need to specify this value, but a default value has been giving in case it is needed to write more complicated engines in the future.",
-                default = 123
-            }
-        },
-
         optional = {
             {
-                name = "blah_1",
+                name = "incr",
                 type = "SPFLOAT",
-                description = "This is an optional parameter. These values are always set to a value by default, and can be set after the init function has been called.",
-                default = 1.5
+                description = "Value to increment by",
+                default = 0.1
             },
             {
-                name = "blah_2",
+                name = "min",
                 type = "SPFLOAT",
-                description ="This is yet another optional parameter...",
-                default = 456.7
+                description = "Minimum value",
+                default = 0
+            },
+            {
+                name = "max",
+                type = "SPFLOAT",
+                description = "Maximum value",
+                default = 1
             },
         }
     },
 
     modtype = "module",
 
-    description = [[A short title describing the module
-
-    This is a description of the entire module.  This is not a real module. This description should be a comprehensive sumary of what this function does.
-
-Inside the Lua table, this is expressed as a multiline string, however it does not adhere to the tradtional 80 column rule found in programming.
-
-Write as much text as needed here...
+    description = [[Trigger-based Incrementor
+When triggered, this module will increment and decrement a value bounded between a min
+and max. Initially, this was designed for the specific use case of interfacing with the
+griffin knob. 
 ]],
 
-    ninputs = 2,
-    noutputs = 2,
+    ninputs = 1,
+    noutputs = 1,
 
     inputs = {
         {
-            name = "clock",
-            description = "this is the clock source for a made up plugin."
-        },
-        {
-            name = "input",
-            description = "this is the audio input for a made up plugin."
+            name = "trig",
+            description = "Trigger signal. When positive, the value will increase. When negative, the value will decrease."
         },
     },
 
     outputs = {
         {
-            name = "out_left",
-            description = "Stereo left output for incr."
-        },
-        {
-            name = "out_right",
-            description = "Stereo right output for incr."
+            name = "out",
+            description = "incr output."
         },
     }
 
