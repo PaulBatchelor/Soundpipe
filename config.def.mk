@@ -43,6 +43,7 @@ fosc \
 gbuzz \
 hilbert \
 in \
+incr \
 jcrev \
 jitter \
 line \

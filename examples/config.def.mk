@@ -45,6 +45,7 @@ ex_gen_vals \
 ex_gen_xline \
 ex_hilbert \
 ex_in \
+ex_incr \
 ex_jcrev \
 ex_jitter \
 ex_line \
