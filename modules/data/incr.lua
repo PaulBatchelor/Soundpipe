@@ -14,6 +14,14 @@ sptbl["incr"] = {
     },
 
     params = {
+        mandatory = {
+            {
+                name = "val",
+                type = "SPFLOAT",
+                description = "Initial value",
+                default = 0.5
+            },
+        },
         optional = {
             {
                 name = "step",

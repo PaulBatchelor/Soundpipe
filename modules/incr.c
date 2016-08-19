@@ -22,22 +22,17 @@ int sp_incr_destroy(sp_incr **p)
     return SP_OK;
 }
 
-int sp_incr_init(sp_data *sp, sp_incr *p)
+int sp_incr_init(sp_data *sp, sp_incr *p, SPFLOAT val)
 {
     p->min = 0;
     p->max = 1;
     p->step = 0.1;
-    p->val = 0;
-    p->init = 1;
+    p->val = val;
     return SP_OK;
 }
 
 int sp_incr_compute(sp_data *sp, sp_incr *p, SPFLOAT *in, SPFLOAT *out)
 {
-    if(p->init) {
-        p->val = p->min;
-        p->init = 0;
-    }
     if(*in > 0 ) {
         p->val += p->step;
         p->val = max(min(p->val, p->max), p->min);
