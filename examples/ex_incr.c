@@ -44,10 +44,10 @@ int main()
 
     sp_metro_init(sp, ud.met);
     ud.met->freq = 3;
-    sp_incr_init(sp, ud.incr);
+    sp_incr_init(sp, ud.incr, 300);
     ud.incr->min = 300;
     ud.incr->max = 900;
-    ud.incr->incr = 30;
+    ud.incr->step = 30;
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
     ud.osc->amp = 0.5;

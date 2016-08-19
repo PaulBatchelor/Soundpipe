@@ -31,7 +31,8 @@ int main() {
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_tenv_create(&ud.tenv);
 
-    sp_prop_init(sp, ud.prop, "2(++)3(+++)-2(-2(++))+5(+++++)");
+    //sp_prop_init(sp, ud.prop, "2(++)3(+++)-2(-2(++))+5(+++++)");
+    sp_prop_init(sp, ud.prop, "2(++)+");
     ud.prop->bpm = 80;
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);

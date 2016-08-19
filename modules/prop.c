@@ -15,7 +15,14 @@ static prop_event prop_next(prop_data *pd);
 static float prop_time(prop_data *pd, prop_event evt);
 static int prop_destroy(prop_data **pd);
 
+static int prop_val_free(prop_val val);
+static int prop_list_init(prop_list *lst);
+static int prop_list_destroy(prop_list *lst);
+static int prop_list_append(prop_list *lst, prop_val val);
+static void prop_list_reset(prop_list *lst);
+
 enum {
+PTYPE_EVENT,
 PTYPE_OFF,
 PTYPE_ON,
 PTYPE_MAYBE,
@@ -120,15 +127,14 @@ static void mode_insert(prop_data *pd, char type)
             pd->mul, pd->num, pd->cons_mul, pd->div);
 #endif
 
+    prop_val val;
+    val.type = PTYPE_EVENT;
     prop_event *evt = malloc(sizeof(prop_event));
     evt->type = type;
     evt->val = pd->mul;
-    evt->pos = pd->num;
     evt->cons = pd->cons_mul;
-    pd->last->next = evt;
-    pd->last = evt;
-    pd->num++;
-
+    val.ud = evt;
+    prop_list_append(pd->main, val);
 }
 
 static void mode_setdiv(prop_data *pd, char n)
@@ -177,7 +183,6 @@ static int prop_create(prop_data **pd)
     *pd = malloc(sizeof(prop_data));
     prop_data *pdp = *pd;
 
-    pdp->num = 0;
     pdp->mul = 1;
     pdp->div = 0;
     pdp->scale = 1;
@@ -185,13 +190,12 @@ static int prop_create(prop_data **pd)
     pdp->cons_div = 0;
     pdp->mode = PMODE_INIT;
     pdp->pos = 1;
-    pdp->evtpos = 0;
     pdp->main = &pdp->root;
-    pdp->last = pdp->main;
     pdp->tmp = 0;
 
     stack_init(&pdp->mstack);
     stack_init(&pdp->cstack);
+    prop_list_init(pdp->main);
 
     return PSTATUS_OK;
 }
@@ -266,20 +270,26 @@ static int prop_parse(prop_data *pd, const char *str)
         pd->pos++;
         str++;
     }
-    pd->last = pd->main;
+    prop_list_reset(pd->main);
     return PSTATUS_OK;
+}
+
+prop_val prop_list_iterate(prop_list *lst)
+{
+    if(lst->pos >= lst->size) {
+        prop_list_reset(lst);
+    }
+    prop_val val = lst->last->val;
+    lst->last = lst->last->next;
+    lst->pos++;
+    return val; 
 }
 
 prop_event prop_next(prop_data *pd)
 {
-    if(pd->evtpos >= pd->num ) {
-        pd->last = pd->main;
-        pd->evtpos = 0;
-    }
-    prop_event p = *pd->last->next;
-    pd->last = pd->last->next;
-    pd->evtpos++;
-    return p;
+    prop_val val = prop_list_iterate(pd->main);
+    prop_event *p = (prop_event *)val.ud;
+    return *p;
 }
 
 static float prop_time(prop_data *pd, prop_event evt)
@@ -291,16 +301,54 @@ static int prop_destroy(prop_data **pd)
 {
     uint32_t i;
     prop_data *pdp = *pd;
-    prop_event *evt, *next;
 
-    evt = pdp->main->next;
-
-    for(i = 0; i < pdp->num; i++) {
-        next = evt->next;
-        free(evt);
-        evt = next;
-    }
+    prop_list_destroy(pdp->main);
 
     free(*pd);
     return PSTATUS_OK;
 }
+
+static int prop_list_init(prop_list *lst)
+{
+    lst->last = &lst->root;
+    lst->size = 0;
+    lst->pos = 0;
+    return PSTATUS_OK;
+}
+
+static int prop_list_append(prop_list *lst, prop_val val)
+{
+    prop_entry *new = malloc(sizeof(prop_entry));
+    new->val = val;
+    lst->last->next = new;
+    lst->last = new;
+    lst->size++;
+    return PSTATUS_OK;
+}
+
+static int prop_val_free(prop_val val)
+{
+    free(val.ud);
+    return PSTATUS_OK;
+}
+
+static int prop_list_destroy(prop_list *lst) 
+{
+    prop_entry *entry = lst->root.next;
+    prop_entry *next;
+    uint32_t i;
+
+    for(i = 0; i < lst->size; i++) {
+        next = entry->next;
+        prop_val_free(entry->val);
+        free(entry);
+        entry = next;
+    }
+    return PSTATUS_OK;
+}
+
+static void prop_list_reset(prop_list *lst)
+{
+    lst->last = lst->root.next;
+    lst->pos = 0;
+}   
