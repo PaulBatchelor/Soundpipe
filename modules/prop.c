@@ -7,11 +7,17 @@
  */
 
 #include <stdlib.h>
+#include <math.h>
 #include "soundpipe.h"
+
+typedef struct {
+    uint32_t size;
+    prop_list **ar;
+} prop_slice;
 
 static int prop_create(prop_data **pd);
 static int prop_parse(prop_data *pd, const char *str);
-static prop_event prop_next(prop_data *pd);
+static prop_event prop_next(sp_data *sp, prop_data *pd);
 static float prop_time(prop_data *pd, prop_event evt);
 static int prop_destroy(prop_data **pd);
 
@@ -20,8 +26,18 @@ static int prop_list_init(prop_list *lst);
 static int prop_list_destroy(prop_list *lst);
 static int prop_list_append(prop_list *lst, prop_val val);
 static void prop_list_reset(prop_list *lst);
+static int prop_list_copy(prop_list *src, prop_list **dst);
+
+static void mode_insert_event(prop_data *pd, char type);
+static void mode_insert_slice(prop_data *pd);
+static void mode_list_start(prop_data *pd);
+static void mode_list_end(prop_data *pd);
+static void prop_slice_encap(prop_data *pd);
+static void prop_slice_append(prop_data *pd);
 
 enum {
+PTYPE_SLICE,
+PTYPE_LIST,
 PTYPE_EVENT,
 PTYPE_OFF,
 PTYPE_ON,
@@ -32,7 +48,8 @@ PMODE_SETMUL,
 PMODE_UNSETMUL,
 PMODE_INIT,
 PSTATUS_NOTOK,
-PSTATUS_OK
+PSTATUS_OK,
+PTYPE_NULL
 };
 
 int sp_prop_create(sp_prop **p)
@@ -70,7 +87,7 @@ int sp_prop_compute(sp_data *sp, sp_prop *p, SPFLOAT *in, SPFLOAT *out)
             p->prp->scale = (SPFLOAT) 60.0 / p->bpm;
             p->lbpm = p->bpm;
         }
-        p->evt = prop_next(p->prp);
+        p->evt = prop_next(sp, p->prp);
         p->count = prop_time(p->prp, p->evt) * sp->sr;
         switch(p->evt.type) {
             case PTYPE_ON: 
@@ -115,7 +132,7 @@ static uint32_t stack_pop(prop_stack *ps)
     return 1;
 }
 
-static void mode_insert(prop_data *pd, char type)
+static void mode_insert_event(prop_data *pd, char type)
 {
 #ifdef DEBUG_PROP
     if(type == PTYPE_ON) {
@@ -190,7 +207,8 @@ static int prop_create(prop_data **pd)
     pdp->cons_div = 0;
     pdp->mode = PMODE_INIT;
     pdp->pos = 1;
-    pdp->main = &pdp->root;
+    pdp->main = &pdp->top;
+    pdp->main->lvl = 0;
     pdp->tmp = 0;
 
     stack_init(&pdp->mstack);
@@ -207,15 +225,14 @@ static int prop_parse(prop_data *pd, const char *str)
         c = str[0];
 
         switch(c) {
-
             case '+':
-                mode_insert(pd, PTYPE_ON);
+                mode_insert_event(pd, PTYPE_ON);
                 break;
             case '?':
-                mode_insert(pd, PTYPE_MAYBE);
+                mode_insert_event(pd, PTYPE_MAYBE);
                 break;
             case '-':
-                mode_insert(pd, PTYPE_OFF);
+                mode_insert_event(pd, PTYPE_OFF);
                 break;
 
             case '0':
@@ -260,6 +277,15 @@ static int prop_parse(prop_data *pd, const char *str)
             case ']':
                 mode_unsetcons(pd);
                 break;
+            case '|':
+                mode_insert_slice(pd);
+                break;
+            case '{':
+                mode_list_start(pd);
+                break;
+            case '}':
+                mode_list_end(pd);
+                break;
             case ' ': break;
             case '\n': break;
             case '\t': break;
@@ -270,7 +296,8 @@ static int prop_parse(prop_data *pd, const char *str)
         pd->pos++;
         str++;
     }
-    prop_list_reset(pd->main);
+    prop_list_reset(&pd->top);
+    pd->main = &pd->top;
     return PSTATUS_OK;
 }
 
@@ -285,24 +312,69 @@ prop_val prop_list_iterate(prop_list *lst)
     return val; 
 }
 
-prop_event prop_next(prop_data *pd)
+static void reset(prop_data *pd)
 {
-    prop_val val = prop_list_iterate(pd->main);
+    prop_list *lst = pd->main;
+    if(lst->pos >= lst->size) {
+        prop_list_reset(lst);
+        pd->main = lst->top;
+        reset(pd);
+    }
+}
+
+prop_event prop_next(sp_data *sp, prop_data *pd)
+{
+    //prop_list *lst = pd->main;
+
+    //if(lst->pos >= lst->size) {
+    //    //prop_list_reset(lst);
+    //    pd->main = lst->top;
+    //}
+    reset(pd); 
+    prop_list *lst = pd->main;
+
+    prop_val val = lst->last->val;
+    lst->last = lst->last->next;
+    lst->pos++;
+
+    switch(val.type) {
+        case PTYPE_SLICE: {
+            prop_slice *slice = (prop_slice *)val.ud;
+
+            uint32_t pos = floor(
+                ((SPFLOAT)sp_rand(sp) / SP_RANDMAX) 
+                * slice->size);
+
+            pd->main = slice->ar[pos];
+            prop_list_reset(pd->main);
+            return prop_next(sp, pd);
+            break;
+        }
+        case PTYPE_LIST: {
+            prop_list *lst = (prop_list *)val.ud;
+            pd->main = lst;
+            prop_list_reset(pd->main);
+            return prop_next(sp, pd);
+            break;
+        }
+        default:
+            break;
+    }
     prop_event *p = (prop_event *)val.ud;
     return *p;
 }
 
 static float prop_time(prop_data *pd, prop_event evt)
 {
-    return evt.cons * (pd->scale / evt.val);
+    float val = evt.cons * (pd->scale / evt.val);
+    return val;
 }
 
 static int prop_destroy(prop_data **pd)
 {
-    uint32_t i;
     prop_data *pdp = *pd;
 
-    prop_list_destroy(pdp->main);
+    prop_list_destroy(&pdp->top);
 
     free(*pd);
     return PSTATUS_OK;
@@ -313,6 +385,8 @@ static int prop_list_init(prop_list *lst)
     lst->last = &lst->root;
     lst->size = 0;
     lst->pos = 0;
+    lst->root.val.type = PTYPE_NULL;
+    lst->top = lst;
     return PSTATUS_OK;
 }
 
@@ -326,9 +400,32 @@ static int prop_list_append(prop_list *lst, prop_val val)
     return PSTATUS_OK;
 }
 
+static int prop_slice_free(prop_slice *slice)
+{
+    uint32_t i;
+    for(i = 0; i < slice->size; i++) {
+        prop_list_destroy(slice->ar[i]);   
+        free(slice->ar[i]); 
+    }
+    free(slice->ar);
+    return PSTATUS_OK;
+}
+
 static int prop_val_free(prop_val val)
 {
-    free(val.ud);
+    switch(val.type) {
+        case PTYPE_SLICE:
+            prop_slice_free((prop_slice *)val.ud);
+            free(val.ud);
+            break;
+        case PTYPE_LIST:
+            prop_list_destroy((prop_list *)val.ud);
+            free(val.ud);
+            break;
+        default:
+            free(val.ud);
+            break;
+    }
     return PSTATUS_OK;
 }
 
@@ -352,3 +449,85 @@ static void prop_list_reset(prop_list *lst)
     lst->last = lst->root.next;
     lst->pos = 0;
 }   
+
+static void mode_insert_slice(prop_data *pd)
+{
+    prop_entry *entry = pd->main->top->last;
+    if(entry->val.type != PTYPE_SLICE) {
+        prop_slice_encap(pd);
+    } else {
+        prop_slice_append(pd);
+    }
+}
+
+static void prop_slice_encap(prop_data *pd)
+{
+    prop_val val;
+    prop_list *top = pd->main->top;
+    val.type = PTYPE_SLICE;
+    prop_slice *slice = malloc(sizeof(prop_slice));
+    val.ud = slice;
+    prop_list *lst, *new;
+    prop_list_copy(pd->main, &lst);
+    new = malloc(sizeof(prop_list));
+    new->lvl = pd->main->lvl;
+    slice->size = 2;
+    slice->ar = 
+        (prop_list **)malloc(sizeof(prop_list *) * slice->size);
+    slice->ar[0] = lst;
+    /* reinit main list */
+    prop_list_init(pd->main);
+    prop_list_append(pd->main, val);
+    slice->ar[1] = new;
+    prop_list_init(slice->ar[1]);
+    pd->main = slice->ar[1];
+
+    slice->ar[0]->top = top;
+    slice->ar[1]->top = top;
+}
+
+static void prop_slice_append(prop_data *pd)
+{
+    prop_entry *entry = pd->main->top->last;
+    prop_slice *slice = (prop_slice *)entry->val.ud;
+    
+    prop_list *new = malloc(sizeof(prop_list));
+    prop_list_init(new);
+    slice->size++;
+    printf("the size is now %d\n", slice->size);
+    slice->ar = (prop_list **)
+        realloc(slice->ar, sizeof(prop_list *) * slice->size);
+    slice->ar[slice->size - 1] = new;
+    new->top = pd->main->top;
+    pd->main = new;
+}
+
+static int prop_list_copy(prop_list *src, prop_list **dst)
+{
+    *dst = malloc(sizeof(prop_list));
+    prop_list *pdst = *dst;
+    pdst->root = src->root;
+    pdst->last = src->last;
+    pdst->size = src->size;
+    pdst->pos = src->pos;
+    pdst->lvl = src->lvl;
+    return PSTATUS_OK;
+}
+
+static void mode_list_start(prop_data *pd)
+{
+    prop_val val;
+    val.type = PTYPE_LIST;
+    prop_list *new = malloc(sizeof(prop_list));
+    prop_list_init(new);
+    new->lvl = pd->main->lvl + 1;
+    val.ud = new;
+    prop_list_append(pd->main, val);
+    new->top = pd->main;
+    pd->main = new;
+}
+
+static void mode_list_end(prop_data *pd)
+{
+    pd->main = pd->main->top;
+}

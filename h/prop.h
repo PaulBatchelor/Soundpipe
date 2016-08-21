@@ -1,5 +1,12 @@
 typedef struct {
     char type;
+    uint32_t pos;
+    uint32_t val;
+    uint32_t cons;
+} prop_event;
+
+typedef struct {
+    char type;
     void *ud;
 } prop_val;
 
@@ -8,19 +15,14 @@ typedef struct prop_entry {
     struct prop_entry *next;
 } prop_entry;
 
-typedef struct {
+typedef struct prop_list {
     prop_entry root;
     prop_entry *last;
     uint32_t size;
     uint32_t pos;
+    struct prop_list *top;
+    uint32_t lvl;
 } prop_list;
-
-typedef struct {
-    char type;
-    uint32_t pos;
-    uint32_t val;
-    uint32_t cons;
-} prop_event;
 
 typedef struct {
     uint32_t stack[16];
@@ -36,7 +38,7 @@ typedef struct {
     SPFLOAT scale;
     int mode;
     uint32_t pos;
-    prop_list root;
+    prop_list top;
     prop_list *main;
     prop_stack mstack;
     prop_stack cstack;

@@ -13,7 +13,6 @@ typedef struct {
 void process(sp_data *sp, void *udata) {
     UserData *ud = udata;
     SPFLOAT osc = 0, prop = 0, tenv = 0;
-    ud->prop->bpm = 80;
     sp_osc_compute(sp, ud->osc, NULL, &osc);
     sp_prop_compute(sp, ud->prop, NULL, &prop);
     sp_tenv_compute(sp, ud->tenv, &prop, &tenv);
@@ -21,29 +20,28 @@ void process(sp_data *sp, void *udata) {
 }
 
 int main() {
-    srand(1234567);
     UserData ud;
     sp_data *sp;
     sp_create(&sp);
+    sp_srand(sp, 123345);
 
     sp_prop_create(&ud.prop);
     sp_osc_create(&ud.osc);
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_tenv_create(&ud.tenv);
 
-    //sp_prop_init(sp, ud.prop, "2(++)3(+++)-2(-2(++))+5(+++++)");
-    sp_prop_init(sp, ud.prop, "2(++)+");
+    sp_prop_init(sp, ud.prop, "2(+{3(+++)|+}){4(+?+?)|+|-}");
     ud.prop->bpm = 80;
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
     sp_tenv_init(sp, ud.tenv);
-    ud.tenv->atk = 0.01;
-    ud.tenv->hold = 0.01;
+    ud.tenv->atk = 0.003;
+    ud.tenv->hold = 0.001;
     ud.tenv->rel =  0.2;
 
     ud.osc->freq = 500;
 
-    sp->len = 44100 * 5;
+    sp->len = 44100 * 20;
     sp_process(sp, &ud, process);
 
     sp_prop_destroy(&ud.prop);
