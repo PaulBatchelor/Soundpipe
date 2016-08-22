@@ -494,7 +494,6 @@ static void prop_slice_append(prop_data *pd)
     prop_list *new = malloc(sizeof(prop_list));
     prop_list_init(new);
     slice->size++;
-    printf("the size is now %d\n", slice->size);
     slice->ar = (prop_list **)
         realloc(slice->ar, sizeof(prop_list *) * slice->size);
     slice->ar[slice->size - 1] = new;
