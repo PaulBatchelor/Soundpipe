@@ -39,6 +39,7 @@ ex_gbuzz \
 ex_gen_composite \
 ex_gen_gauss \
 ex_gen_line \
+ex_gen_rand \
 ex_gen_sine \
 ex_gen_sinesum \
 ex_gen_vals \

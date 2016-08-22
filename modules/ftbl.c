@@ -346,3 +346,24 @@ int sp_gen_composite(sp_data *sp, sp_ftbl *ft, const char *argstring)
     sp_ftbl_destroy(&args);
     return SP_OK;
 }
+
+int sp_gen_rand(sp_data *sp, sp_ftbl *ft, const char *argstring)
+{
+    sp_ftbl *args;
+    sp_ftbl_create(sp, &args, 1);
+    sp_gen_vals(sp, args, argstring);
+    int n, pos = 0, i, size = 0;
+
+    for(n = 0; n < args->size; n += 2) {
+        size = round(ft->size * args->tbl[n + 1]);
+        for(i = 0; i < size; i++) {
+            if(pos < ft->size) {
+                ft->tbl[pos] = args->tbl[n];
+            }
+            pos++;
+        }
+    }
+
+    sp_ftbl_destroy(&args);
+    return SP_OK;
+}
