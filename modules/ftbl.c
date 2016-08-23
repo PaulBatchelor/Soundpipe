@@ -359,11 +359,13 @@ int sp_gen_rand(sp_data *sp, sp_ftbl *ft, const char *argstring)
         for(i = 0; i < size; i++) {
             if(pos < ft->size) {
                 ft->tbl[pos] = args->tbl[n];
+                pos++;
             }
-            pos++;
         }
     }
-
+    if(pos <= ft->size) {
+        ft->size = pos;
+    }
     sp_ftbl_destroy(&args);
     return SP_OK;
 }
