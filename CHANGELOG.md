@@ -7,7 +7,9 @@
     - randh: divide by zero fixes
     - prop: added {}, |, and ? operators
     - added gen_rand
-
+    - CFLAGS use -ansi flag instead of -std=c99
+    - debugging symbol flag (-g) added to config.mk instead of Makefile
+ 
 1.3.0
 -----
     - added tseg module
