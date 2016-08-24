@@ -148,5 +148,4 @@ MODULES += padsynth
 #include lib/spa/Makefile
 #CFLAGS += -DUSE_SPA
 
-# Needed for Sporth chugin
-CFLAGS += -fPIC
+CFLAGS += -fPIC -g

@@ -324,12 +324,14 @@ static void reset(prop_data *pd)
 
 prop_event prop_next(sp_data *sp, prop_data *pd)
 {
-    //prop_list *lst = pd->main;
+/*
+    prop_list *lst = pd->main;
 
-    //if(lst->pos >= lst->size) {
-    //    //prop_list_reset(lst);
-    //    pd->main = lst->top;
-    //}
+    if(lst->pos >= lst->size) {
+        //prop_list_reset(lst);
+        pd->main = lst->top;
+    }
+*/
     reset(pd); 
     prop_list *lst = pd->main;
 

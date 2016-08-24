@@ -14,7 +14,6 @@ typedef struct {
     sp_fog_overlap basovrlap;
     int32_t durtogo, fundphs, fofcount, prvsmps, spdphs;
     SPFLOAT prvband, expamp, preamp, fogcvt; 
-    //int16_t xincod, ampcod, fundcod;
     int16_t formcod, fmtmod, speedcod;
     sp_auxdata auxch;
     sp_ftbl *ftp1, *ftp2;
