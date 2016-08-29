@@ -86,6 +86,7 @@ rpt \
 samphold \
 scale \
 sdelay \
+slice \
 smoothdelay \
 streson \
 switch \
