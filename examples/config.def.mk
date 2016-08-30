@@ -94,6 +94,7 @@ ex_samphold \
 ex_scale \
 ex_streson \
 ex_smoothdelay \
+ex_slice \
 ex_switch \
 ex_tabread \
 ex_tadsr \

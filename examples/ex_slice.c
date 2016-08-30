@@ -14,16 +14,19 @@
 
 typedef struct {
     sp_slice *slice;
-    sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *vals; 
+    sp_ftbl *buf; 
+    sp_dmetro *met;
 } UserData;
 
 void process(sp_data *sp, void *udata) {
     UserData *ud = udata;
-    SPFLOAT osc = 0, slice = 0;
-    sp_osc_compute(sp, ud->osc, NULL, &osc);
-    sp_slice_compute(sp, ud->slice, &osc, &slice);
-    sp->out[0] = slice;
+    SPFLOAT slice = 0;
+    SPFLOAT dm = 0;
+    sp_dmetro_compute(sp, ud->met, NULL, &dm);
+    ud->slice->id = 2;
+    sp_slice_compute(sp, ud->slice, &dm, &slice);
+    sp_out(sp, 0, slice);
 }
 
 int main() {
@@ -33,19 +36,24 @@ int main() {
     sp_srand(sp, 1234567);
 
     sp_slice_create(&ud.slice);
-    sp_osc_create(&ud.osc);
-    sp_ftbl_create(sp, &ud.ft, 2048);
+    sp_ftbl_create(sp, &ud.vals, 1);
+    sp_ftbl_loadfile(sp, &ud.buf, "oneart.wav");
+    sp_dmetro_create(&ud.met);
 
-    sp_slice_init(sp, ud.slice);
-    sp_gen_sine(sp, ud.ft);
-    sp_osc_init(sp, ud.osc, ud.ft, 0);
+    sp_gen_vals(sp, ud.vals, 
+    "6770 96139 159104 228847");
+
+    sp_slice_init(sp, ud.slice, ud.vals, ud.buf);
+    sp_dmetro_init(sp, ud.met);
+    ud.met->time = 0.75;
 
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);
 
     sp_slice_destroy(&ud.slice);
-    sp_ftbl_destroy(&ud.ft);
-    sp_osc_destroy(&ud.osc);
+    sp_dmetro_destroy(&ud.met);
+    sp_ftbl_destroy(&ud.buf);
+    sp_ftbl_destroy(&ud.vals);
 
     sp_destroy(&sp);
     return 0;

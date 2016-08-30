@@ -1,11 +1,3 @@
-/*
- * Foo
- * 
- * This is a dummy module. It doesn't do much.
- * Feel free to use this as a boilerplate template.
- * 
- */
-
 #include <stdlib.h>
 #include "soundpipe.h"
 
@@ -21,16 +13,34 @@ int sp_slice_destroy(sp_slice **p)
     return SP_OK;
 }
 
-int sp_slice_init(sp_data *sp, sp_slice *p)
+int sp_slice_init(sp_data *sp, sp_slice *p, sp_ftbl *vals, sp_ftbl *buf)
 {
-    /* Initalize variables here. */
-    p->bar = 123;
+    p->vals = vals;
+    p->buf = buf;
+    p->pos = 0;
+    p->nextpos = 0;
+    p->id = 0;
     return SP_OK;
 }
 
 int sp_slice_compute(sp_data *sp, sp_slice *p, SPFLOAT *in, SPFLOAT *out)
 {
-    /* Send the signal's input to the output */
-    *out = *in;
+    *out = 0;
+    if(*in != 0) {
+        if(p->id < p->vals->size) {
+            p->pos = p->vals->tbl[p->id];
+            if(p->id == p->vals->size - 1) {
+                p->nextpos = p->buf->size;
+            } else {
+                p->nextpos = p->vals->tbl[p->id + 1];
+            }
+        }
+    }
+
+    if(p->pos < p->nextpos) {
+        *out = p->buf->tbl[p->pos];
+        p->pos++;
+    }
+
     return SP_OK;
 }
