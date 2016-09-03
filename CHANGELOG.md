@@ -7,8 +7,9 @@
     - randh: divide by zero fixes
     - prop: added {}, |, and ? operators
     - added gen_rand
-    - CFLAGS use -ansi flag instead of -std=c99
     - debugging symbol flag (-g) added to config.mk instead of Makefile
+    - added slice ugen
+    - fixed wpkorg35 bug when cutoff is set to 1000  and res to 1.0
  
 1.3.0
 -----
