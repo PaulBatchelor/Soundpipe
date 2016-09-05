@@ -85,6 +85,7 @@ rms \
 rpt \
 samphold \
 scale \
+scrambler \
 sdelay \
 slice \
 smoothdelay \

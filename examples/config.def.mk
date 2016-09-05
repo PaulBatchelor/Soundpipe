@@ -92,6 +92,7 @@ ex_revsc \
 ex_rpt \
 ex_samphold \
 ex_scale \
+ex_scrambler \
 ex_streson \
 ex_smoothdelay \
 ex_slice \
