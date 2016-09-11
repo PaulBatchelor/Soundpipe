@@ -129,7 +129,7 @@ test.o: test.c
 	$(CC) -g -I../h -I /usr/local/include -c -o $@ $<
 
 run.bin: run.c test.c md5.c libsptest.a $(OBJ) all_tests.h
-	$(CC) run.c -Wall $(CFLAGS) $(LDFLAGS) -o$@ $(OBJ) ../libsoundpipe.a libsptest.a
+	$(CC) run.c -Wall $(CFLAGS) $(LDFLAGS) -o$@ $(OBJ) ../libsoundpipe.a libsptest.a -lm -lsndfile
 
 clean:
 	rm -rf run.bin libsptest.a *.o $(OBJ) *.raw
