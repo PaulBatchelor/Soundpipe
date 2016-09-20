@@ -12,7 +12,6 @@ int sp_gen_scrambler(sp_data *sp, sp_ftbl *src, sp_ftbl **dest)
     uint32_t size = (src->size % 2 == 0) ? src->size : src->size - 1;
     sp_ftbl *dst;
     sp_ftbl_create(sp, &dst, size);
-    SPFLOAT *buf;
     kiss_fftr_cfg fft, ifft;
     kiss_fft_cpx *tmp;
 
@@ -31,6 +30,11 @@ int sp_gen_scrambler(sp_data *sp, sp_ftbl *src, sp_ftbl **dest)
         tmp[i].r = mag * cos(phs);
         tmp[i].i = mag * sin(phs);
     }
+
+    tmp[0].r = 0;
+    tmp[0].i = 0;
+    tmp[size / 2 - 1].r = 0;
+    tmp[size / 2 - 1].i = 0;
 
     kiss_fftri(ifft, tmp, dst->tbl);
     SPFLOAT max = -1;
