@@ -34,6 +34,8 @@ static void mode_list_start(prop_data *pd);
 static void mode_list_end(prop_data *pd);
 static void prop_slice_encap(prop_data *pd);
 static void prop_slice_append(prop_data *pd);
+static void reset(prop_data *pd);
+static void back_to_top(prop_data *pd);
 
 enum {
 PTYPE_SLICE,
@@ -312,13 +314,19 @@ prop_val prop_list_iterate(prop_list *lst)
     return val; 
 }
 
+static void back_to_top(prop_data *pd)
+{
+    prop_list *lst = pd->main;
+    prop_list_reset(lst);
+    pd->main = lst->top;
+    reset(pd);
+}
+
 static void reset(prop_data *pd)
 {
     prop_list *lst = pd->main;
     if(lst->pos >= lst->size) {
-        prop_list_reset(lst);
-        pd->main = lst->top;
-        reset(pd);
+        back_to_top(pd);
     }
 }
 
@@ -531,4 +539,11 @@ static void mode_list_start(prop_data *pd)
 static void mode_list_end(prop_data *pd)
 {
     pd->main = pd->main->top;
+}
+
+int sp_prop_reset(sp_data *sp, sp_prop *p)
+{
+    back_to_top(p->prp);
+    p->count = 0;
+    return SP_OK;
 }

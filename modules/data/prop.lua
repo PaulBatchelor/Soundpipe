@@ -11,6 +11,11 @@ sptbl["prop"] = {
         destroy = "sp_prop_destroy",
         init = "sp_prop_init",
         compute = "sp_prop_compute",
+        other = {
+            sp_prop_reset = {
+                description = "Resets prop back to starting position.",
+            }
+        }
     },
 
     params = {

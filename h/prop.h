@@ -54,5 +54,6 @@ typedef struct {
 
 int sp_prop_create(sp_prop **p);
 int sp_prop_destroy(sp_prop **p);
+int sp_prop_reset(sp_data *sp, sp_prop *p);
 int sp_prop_init(sp_data *sp, sp_prop *p, const char *str);
 int sp_prop_compute(sp_data *sp, sp_prop *p, SPFLOAT *in, SPFLOAT *out);
