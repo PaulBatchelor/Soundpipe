@@ -51,6 +51,7 @@ int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
     SNDFILE *sf[sp->nchan];
     char tmp[140];
     SF_INFO info;
+    memset(&info, 0, sizeof(SF_INFO));
     SPFLOAT buf[sp->nchan][SP_BUFSIZE];
     info.samplerate = sp->sr;
     info.channels = 1;
