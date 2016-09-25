@@ -14,10 +14,6 @@
 
 #define SP_RANDMAX 2147483648
 
-#ifndef SOUNDPIPE_H
-#define SOUNDPIPE_H
-#endif
-
 typedef unsigned long sp_frame;
 
 typedef struct sp_auxdata {

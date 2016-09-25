@@ -42,7 +42,10 @@ $(LIBSOUNDPIPE): $(MPATHS) $(LPATHS) | $(INTERMEDIATES_PREFIX)
 	$(AR) rcs $@ $(MPATHS) $(LPATHS)
 
 $(HDIR)/soundpipe.h: $(HPATHS) | $(INTERMEDIATES_PREFIX)/h
-	cat $(HPATHS) > $@
+	echo "#ifndef SOUNDPIPE_H" >> $@
+	echo "#define SOUNDPIPE_H" >> $@
+	cat $(HPATHS) >> $@
+	echo "#endif" >> $@
 
 $(MODDIR)/%.o: modules/%.c h/%.h $(HDIR)/soundpipe.h | $(MODDIR)
 	$(CC) -Wall $(CFLAGS) -c -static $< -o $@
