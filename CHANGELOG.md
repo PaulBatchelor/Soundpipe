@@ -12,6 +12,7 @@
     - fixed wpkorg35 bug when cutoff is set to 1000  and res to 1.0
     - prop: added sp_prop_reset
     - added scrambler gen routine
+    - header file more robust
  
 1.3.0
 -----
