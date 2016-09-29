@@ -14,6 +14,8 @@ sptbl["prop"] = {
         other = {
             sp_prop_reset = {
                 description = "Resets prop back to starting position.",
+                args = {
+                }
             }
         }
     },
