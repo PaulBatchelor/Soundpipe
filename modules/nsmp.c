@@ -7,6 +7,9 @@
 int nano_dict_add(nano_dict *dict, const char *name)
 {
     nano_entry *entry = malloc(sizeof(nano_entry));
+    entry->size = 0;
+    entry->speed = 1;
+    entry->pos = 0;
     strcpy(entry->name, name);
     dict->last->next = entry;
     dict->last = entry;
@@ -110,12 +113,13 @@ int nano_compute(sp_data *sp, nanosamp *smp, float *out)
         return SP_NOT_OK; 
     }
     
+
     if(smp->curpos < (SPFLOAT)smp->sample->size) {
-        SPFLOAT x1, x2, frac, tmp;
-        uint32_t index;
+        SPFLOAT x1 = 0 , x2 = 0, frac = 0, tmp = 0;
+        uint32_t index = 0;
         SPFLOAT *tbl = smp->ft->tbl;
-        tmp = (smp->curpos + (SPFLOAT)smp->sample->pos);
-        index = (uint32_t)floorf(tmp);
+        tmp = (smp->curpos + smp->sample->pos);
+        index = floorf(tmp);
         frac = fabs(tmp - index);
 
         if(index >= smp->ft->size) {
