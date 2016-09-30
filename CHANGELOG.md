@@ -13,6 +13,7 @@
     - prop: added sp_prop_reset
     - added scrambler gen routine
     - header file more robust
+    - nsmp valgrind fixes
  
 1.3.0
 -----
