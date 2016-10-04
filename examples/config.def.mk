@@ -39,12 +39,14 @@ ex_gbuzz \
 ex_gen_composite \
 ex_gen_gauss \
 ex_gen_line \
+ex_gen_rand \
 ex_gen_sine \
 ex_gen_sinesum \
 ex_gen_vals \
 ex_gen_xline \
 ex_hilbert \
 ex_in \
+ex_incr \
 ex_jcrev \
 ex_jitter \
 ex_line \
@@ -90,7 +92,10 @@ ex_revsc \
 ex_rpt \
 ex_samphold \
 ex_scale \
+ex_scrambler \
 ex_streson \
+ex_smoothdelay \
+ex_slice \
 ex_switch \
 ex_tabread \
 ex_tadsr \
@@ -101,6 +106,7 @@ ex_tenv \
 ex_tenv2 \
 ex_tenvx \
 ex_tevent \
+ex_tgate \
 ex_thresh \
 ex_timer \
 ex_tin \

@@ -30,7 +30,7 @@ sptbl["metro"] = {
 
     Metro produces a series of 1-sample ticks at a regular rate. Typically, this is used alongside trigger-driven modules.]],
 
-    ninputs = 1,
+    ninputs = 0,
     noutputs = 1,
 
     inputs = {

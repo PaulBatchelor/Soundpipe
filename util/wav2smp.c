@@ -8,6 +8,7 @@ void write_sample(SNDFILE *snd, FILE *fp, char *wav, char *name,
         float *buf, int bufsize, uint32_t *pos, int sr)
 {
     SF_INFO info;
+    memset(&info, 0, sizeof(SF_INFO));
     info.format = 0;
     int count;
     SNDFILE *in = sf_open(wav, SFM_READ, &info);

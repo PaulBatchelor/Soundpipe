@@ -1,5 +1,21 @@
 # Change log
 
+1.4.0
+-----
+    - added smoothdelay module
+    - changed padsynth gen routine behavior to play nicer with oscillator
+    - randh: divide by zero fixes
+    - prop: added {}, |, and ? operators
+    - added gen_rand
+    - debugging symbol flag (-g) added to config.mk instead of Makefile
+    - added slice ugen
+    - fixed wpkorg35 bug when cutoff is set to 1000  and res to 1.0
+    - prop: added sp_prop_reset
+    - added scrambler gen routine
+    - header file more robust
+    - nsmp valgrind fixes
+    - added performance testing utility (initial steps)
+ 
 1.3.0
 -----
     - added tseg module
@@ -33,8 +49,7 @@
         - test utility now has command line args:
             - "./run.bin" works like it did before
             - "./run.bin gen_header" rewrites all_tests.h 
-            - "./run.bin regen_header" rewrites all_tests.h, but regenerates 
-md5 hashes
+            - "./run.bin regen_header" rewrites all_tests.h, but regenerates md5 hashes
             - "./run.bin test id" runs a single test
             - "./run.bin render id" renders a single test
     - Tests added:
@@ -47,6 +62,7 @@ md5 hashes
     - padsynth: fixed a malloc issue that was causing valgrind to complain
     - Fixes to rpt: no longer freaks out if repeat sizes are out of bounds
     - Replaced pink noise algorithm from faust code to Protrekkr code
+
 1.01 
 ----
     - New modules:

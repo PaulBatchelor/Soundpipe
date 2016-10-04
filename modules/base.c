@@ -51,6 +51,7 @@ int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
     SNDFILE *sf[sp->nchan];
     char tmp[140];
     SF_INFO info;
+    memset(&info, 0, sizeof(SF_INFO));
     SPFLOAT buf[sp->nchan][SP_BUFSIZE];
     info.samplerate = sp->sr;
     info.channels = 1;
@@ -140,7 +141,7 @@ int sp_process_plot(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
     while(sp->len > 0) {
         callback(sp, ud);
         for (chan = 0; chan < sp->nchan; chan++) {
-            //fwrite(&sp->out[chan], sizeof(SPFLOAT), 1, stdout);
+            /* fwrite(&sp->out[chan], sizeof(SPFLOAT), 1, stdout); */
             fprintf(stdout, "%g ", sp->out[chan]);
         }
         fprintf(stdout, "; ...\n");

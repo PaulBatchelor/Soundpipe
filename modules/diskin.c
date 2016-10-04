@@ -19,6 +19,7 @@ int sp_diskin_destroy(sp_diskin **p)
 int sp_diskin_init(sp_data *sp, sp_diskin *p, const char *filename)
 {
     p->info.format = 0;
+    memset(&p->info, 0, sizeof(SF_INFO));
     p->file = sf_open(filename, SFM_READ, &p->info);
     p->loaded = 0;
     p->bufpos = 0;

@@ -43,6 +43,7 @@ fosc \
 gbuzz \
 hilbert \
 in \
+incr \
 jcrev \
 jitter \
 line \
@@ -84,7 +85,10 @@ rms \
 rpt \
 samphold \
 scale \
+scrambler \
 sdelay \
+slice \
+smoothdelay \
 streson \
 switch \
 tabread \
@@ -95,6 +99,7 @@ tdiv \
 tenv \
 tenv2 \
 tenvx \
+tgate \
 thresh \
 timer \
 tin \
@@ -145,5 +150,4 @@ MODULES += padsynth
 #include lib/spa/Makefile
 #CFLAGS += -DUSE_SPA
 
-# Needed for Sporth chugin
-CFLAGS += -fPIC
+CFLAGS += -fPIC -g

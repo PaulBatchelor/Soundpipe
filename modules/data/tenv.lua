@@ -33,18 +33,6 @@ sptbl["tenv"] = {
                 description = "Release time, in seconds.",
                 default = 0.2
             },
-            {
-                name = "sigmode",
-                type = "int",
-                description = "If set to non-zero value, tenv will multiply the envelope with an internal signal instead of just returning an enveloped signal.",
-                default = 0
-            },
-            {
-                name = "input",
-                type = "SPFLOAT",
-                description = "Internal input signal. If sigmode variable is set, it will multiply the envelope by this variable. Most of the time, this should be updated at audiorate.",
-                default = 0
-            }
         }
     },
 
