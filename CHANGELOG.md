@@ -14,6 +14,7 @@
     - added scrambler gen routine
     - header file more robust
     - nsmp valgrind fixes
+    - added performance testing utility (initial steps)
  
 1.3.0
 -----

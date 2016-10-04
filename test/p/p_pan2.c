@@ -17,6 +17,7 @@ int main() {
     for(u = 0; u < NUM; u++) { 
         sp_pan2_create(&unit[u]);
         sp_pan2_init(sp, unit[u]);
+        unit[u]->type  = 1;
     }
 
     for(t = 0; t < sp->len; t++) {
