@@ -4,24 +4,26 @@
 #include "config.h"
 
 int main() {
-    srand(time(NULL));
     sp_data *sp;
     sp_create(&sp);
+    sp_srand(sp, 12345);
     sp->sr = SR;
     sp->len = sp->sr * LEN;
-    uint32_t t;
+    uint32_t t, u;
     SPFLOAT in = 0, out = 0;
 
-    sp_butlp *unit;
-    sp_butlp_create(&unit);
+    sp_butlp *unit[NUM];
 
-    sp_butlp_init(sp, unit);
-
-    for(t = 0; t < sp->len; t++) {
-        sp_butlp_compute(sp, unit, &in, &out);
+    for(u = 0; u < NUM; u++) { 
+        sp_butlp_create(&unit[u]);
+        sp_butlp_init(sp, unit[u]);
     }
 
-    sp_butlp_destroy(&unit);
+    for(t = 0; t < sp->len; t++) {
+        for(u = 0; u < NUM; u++) sp_butlp_compute(sp, unit[u], &in, &out);
+    }
+
+    for(u = 0; u < NUM; u++) sp_butlp_destroy(&unit[u]);
 
     sp_destroy(&sp);
     return 0;

@@ -10,26 +10,28 @@ header=[[
 #include "config.h"
 
 int main() {
-    srand(time(NULL));
     sp_data *sp;
     sp_create(&sp);
+    sp_srand(sp, 12345);
     sp->sr = SR;
     sp->len = sp->sr * LEN;
-    uint32_t t;
+    uint32_t t, u;
     SPFLOAT in = 0, out = 0;
 ]]
 
 compute=[[
-    sp_FOO *unit;
-    sp_FOO_create(&unit);
+    sp_FOO *unit[NUM];
 
-    sp_FOO_init(sp, unit);
-
-    for(t = 0; t < sp->len; t++) {
-        sp_FOO_compute(sp, unit, &in, &out);
+    for(u = 0; u < NUM; u++) { 
+        sp_FOO_create(&unit[u]);
+        sp_FOO_init(sp, unit[u]);
     }
 
-    sp_FOO_destroy(&unit);
+    for(t = 0; t < sp->len; t++) {
+        for(u = 0; u < NUM; u++) sp_FOO_compute(sp, unit[u], &in, &out);
+    }
+
+    for(u = 0; u < NUM; u++) sp_FOO_destroy(&unit[u]);
 ]]
 
 

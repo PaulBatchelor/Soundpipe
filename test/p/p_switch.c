@@ -10,20 +10,21 @@ int main() {
     sp->sr = SR;
     sp->len = sp->sr * LEN;
     uint32_t t, u;
-    SPFLOAT in = 0, out = 0;
+    SPFLOAT trig = 0, in1 = 0, in2 = 0, out = 0;
 
-    sp_moogladder *unit[NUM];
+    sp_switch *unit[NUM];
 
     for(u = 0; u < NUM; u++) { 
-        sp_moogladder_create(&unit[u]);
-        sp_moogladder_init(sp, unit[u]);
+        sp_switch_create(&unit[u]);
+        sp_switch_init(sp, unit[u]);
     }
 
     for(t = 0; t < sp->len; t++) {
-        for(u = 0; u < NUM; u++) sp_moogladder_compute(sp, unit[u], &in, &out);
+        for(u = 0; u < NUM; u++) sp_switch_compute(sp, unit[u], 
+                &trig, &in1, &in2, &out);
     }
 
-    for(u = 0; u < NUM; u++) sp_moogladder_destroy(&unit[u]);
+    for(u = 0; u < NUM; u++) sp_switch_destroy(&unit[u]);
 
     sp_destroy(&sp);
     return 0;

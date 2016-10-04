@@ -10,20 +10,21 @@ int main() {
     sp->sr = SR;
     sp->len = sp->sr * LEN;
     uint32_t t, u;
-    SPFLOAT in = 0, out = 0;
+    SPFLOAT in = 0, out1 = 0, out2 = 0;
 
-    sp_moogladder *unit[NUM];
+    sp_hilbert *unit[NUM];
 
     for(u = 0; u < NUM; u++) { 
-        sp_moogladder_create(&unit[u]);
-        sp_moogladder_init(sp, unit[u]);
+        sp_hilbert_create(&unit[u]);
+        sp_hilbert_init(sp, unit[u]);
     }
 
     for(t = 0; t < sp->len; t++) {
-        for(u = 0; u < NUM; u++) sp_moogladder_compute(sp, unit[u], &in, &out);
+        for(u = 0; u < NUM; u++) sp_hilbert_compute(sp, unit[u], &in, 
+                &out1, &out2);
     }
 
-    for(u = 0; u < NUM; u++) sp_moogladder_destroy(&unit[u]);
+    for(u = 0; u < NUM; u++) sp_hilbert_destroy(&unit[u]);
 
     sp_destroy(&sp);
     return 0;

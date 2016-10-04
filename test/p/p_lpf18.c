@@ -4,24 +4,26 @@
 #include "config.h"
 
 int main() {
-    srand(time(NULL));
     sp_data *sp;
     sp_create(&sp);
+    sp_srand(sp, 12345);
     sp->sr = SR;
     sp->len = sp->sr * LEN;
-    uint32_t t;
+    uint32_t t, u;
     SPFLOAT in = 0, out = 0;
 
-    sp_lpf18 *unit;
-    sp_lpf18_create(&unit);
+    sp_lpf18 *unit[NUM];
 
-    sp_lpf18_init(sp, unit);
-
-    for(t = 0; t < sp->len; t++) {
-        sp_lpf18_compute(sp, unit, &in, &out);
+    for(u = 0; u < NUM; u++) { 
+        sp_lpf18_create(&unit[u]);
+        sp_lpf18_init(sp, unit[u]);
     }
 
-    sp_lpf18_destroy(&unit);
+    for(t = 0; t < sp->len; t++) {
+        for(u = 0; u < NUM; u++) sp_lpf18_compute(sp, unit[u], &in, &out);
+    }
+
+    for(u = 0; u < NUM; u++) sp_lpf18_destroy(&unit[u]);
 
     sp_destroy(&sp);
     return 0;

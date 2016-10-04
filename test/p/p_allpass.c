@@ -12,18 +12,18 @@ int main() {
     uint32_t t, u;
     SPFLOAT in = 0, out = 0;
 
-    sp_moogladder *unit[NUM];
+    sp_allpass *unit[NUM];
 
     for(u = 0; u < NUM; u++) { 
-        sp_moogladder_create(&unit[u]);
-        sp_moogladder_init(sp, unit[u]);
+        sp_allpass_create(&unit[u]);
+        sp_allpass_init(sp, unit[u], 1.5);
     }
 
     for(t = 0; t < sp->len; t++) {
-        for(u = 0; u < NUM; u++) sp_moogladder_compute(sp, unit[u], &in, &out);
+        for(u = 0; u < NUM; u++) sp_allpass_compute(sp, unit[u], &in, &out);
     }
 
-    for(u = 0; u < NUM; u++) sp_moogladder_destroy(&unit[u]);
+    for(u = 0; u < NUM; u++) sp_allpass_destroy(&unit[u]);
 
     sp_destroy(&sp);
     return 0;
