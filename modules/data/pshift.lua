@@ -17,19 +17,19 @@ sptbl["pshift"] = {
         optional = {
             {
                 name = "shift",
-                type = "SPFLOAT",
+                type = "SPFLOAT*",
                 description = "Pitch shift (in semitones), range -24/24.",
                 default = 0
             },
             {
                 name = "window",
-                type = "SPFLOAT",
+                type = "SPFLOAT*",
                 description ="Window size (in samples), max 10000",
                 default = 1000
             },
             {
                 name = "xfade",
-                type = "SPFLOAT",
+                type = "SPFLOAT*",
                 description ="Crossfade (in samples), max 10000",
                 default = 10
             },

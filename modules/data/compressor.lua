@@ -20,25 +20,25 @@ sptbl["compressor"] = {
         optional = {
             {
                 name = "ratio",
-                type = "SPFLOAT",
+                type = "SPFLOAT*",
                 description = "Ratio to compress with, a value > 1 will compress",
                 default = 1
             },
             {
                 name = "thresh",
-                type = "SPFLOAT",
+                type = "SPFLOAT*",
                 description ="Threshold (in dB) 0 = max",
                 default = 0
             },
             {
                 name = "atk",
-                type = "SPFLOAT",
+                type = "SPFLOAT*",
                 description ="Compressor attack",
                 default = 0.1
             },
             {
                 name = "rel",
-                type = "SPFLOAT",
+                type = "SPFLOAT*",
                 description ="Compressor release",
                 default = 0.1
             },

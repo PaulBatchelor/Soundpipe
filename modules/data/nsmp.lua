@@ -23,15 +23,21 @@ sptbl["nsmp"] = {
     params = {
         mandatory = {
             {
-                name = "wav",
-                type = "const char *",
-                description = "The filepath of the audio file. It should be mono and matching the samplerate of the project, as no resampling is done.",
+                name = "ft",
+                type = "sp_ftbl*",
+                description = "ftbl of the audio file. It should be mono.",
                 default = "N/A"
             },
             {
-                name = "ini",
-                type = "const char *",
-                description = "The filepath of the INI file. See oneart.ini in the examples folder for an example of an INI file.",
+                name = "sr",
+                type = "int",
+                description = "samplerate.",
+                default = "N/A"
+            },
+            {
+                name = "init",
+                type = "const char*",
+                description = "ini file.",
                 default = "N/A"
             }
         },

@@ -1,4 +1,4 @@
-sptbl["padsynth"] = {
+sptbl["gen_padsynth"] = {
 
     files = {
         module = "ftbl.c",
