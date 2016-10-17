@@ -17,13 +17,13 @@ sptbl["blsaw"] = {
         optional = {
             {
                 name = "freq",
-                type = "SPFLOAT",
+                type = "SPFLOAT*",
                 description = "Frequency, (range 0-20000)",
                 default = 440
             },
             {
                 name = "amp",
-                type = "SPFLOAT",
+                type = "SPFLOAT*",
                 description ="Amplitude (range 0-1).",
 		default = 1.0
             },

@@ -17,19 +17,19 @@ sptbl["autowah"] = {
         optional = {
             {
                 name = "level",
-                type = "SPFLOAT",
+                type = "SPFLOAT*",
                 description = "Overall level (between 0 and 1)",
                 default = 0.1
             },
             {
                 name = "wah",
-                type = "SPFLOAT",
+                type = "SPFLOAT*",
                 description ="wah amount",
                 default = 0
             },
             {
                 name = "mix",
-                type = "SPFLOAT",
+                type = "SPFLOAT*",
                 description ="Wet/dry amount (100 = wet, 0 = dry)",
                 default = 100
             },
