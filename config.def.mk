@@ -146,8 +146,7 @@ MODULES += padsynth
 # CFLAGS += -lfftw3 -DUSE_FFTW3
 
 # Soundpipe audio 
-# Soundpipe audio 
-#include lib/spa/Makefile
-#CFLAGS += -DUSE_SPA
+include lib/spa/Makefile
+CFLAGS += -DUSE_SPA
 
 CFLAGS += -fPIC -g
