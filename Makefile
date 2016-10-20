@@ -83,7 +83,6 @@ install: \
 
 clean:
 	rm -rf $(HDIR)/soundpipe.h
-	rm -rf $(INTERMEDIATES_PREFIX)/config.mk
 	rm -rf $(INTERMEDIATES_PREFIX)/docs
 	rm -rf $(INTERMEDIATES_PREFIX)/gen_noise
 	rm -rf $(INTERMEDIATES_PREFIX)/libsoundpipe.a
