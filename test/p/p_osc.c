@@ -29,6 +29,7 @@ int main() {
 
     for(u = 0; u < NUM; u++) sp_osc_destroy(&unit[u]);
 
+    sp_ftbl_destroy(&ft);
     sp_destroy(&sp);
     return 0;
 }
