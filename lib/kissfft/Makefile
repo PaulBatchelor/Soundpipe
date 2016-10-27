@@ -1,5 +1,5 @@
 LPATHS += $(LIBDIR)/kissfft/kiss_fft.o $(LIBDIR)/kissfft/kiss_fftr.o
-CFLAGS += -Ilib/kissfft/ -Dkiss_fft_scalar=float
+CFLAGS += -Ilib/kissfft/ -Dkiss_fft_scalar=${SPFLOAT}
 
 $(LIBDIR)/kissfft:
 	mkdir -p $@
