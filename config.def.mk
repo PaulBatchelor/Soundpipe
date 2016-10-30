@@ -150,4 +150,6 @@ include lib/spa/Makefile
 CFLAGS += -DUSE_SPA
 
 CFLAGS += -fPIC -g
-USE_DOUBLE=1
+
+# Uncomment this to use double precision
+#USE_DOUBLE=1
