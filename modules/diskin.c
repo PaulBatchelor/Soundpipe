@@ -48,7 +48,11 @@ int sp_diskin_init(sp_data *sp, sp_diskin *p, const char *filename)
 int sp_diskin_compute(sp_data *sp, sp_diskin *p, SPFLOAT *in, SPFLOAT *out)
 {
     if(p->bufpos == 0 && p->loaded && p->count > 0) {
+#ifdef USE_DOUBLE
+        p->count = sf_read_double(p->file, p->buffer, p->count);
+#else
         p->count = sf_read_float(p->file, p->buffer, p->count);
+#endif
     } 
 
     if(p->count <= 0) {

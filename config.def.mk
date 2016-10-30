@@ -150,4 +150,4 @@ include lib/spa/Makefile
 CFLAGS += -DUSE_SPA
 
 CFLAGS += -fPIC -g
-SPFLOAT=float
+USE_DOUBLE=1

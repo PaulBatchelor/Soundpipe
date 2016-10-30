@@ -80,7 +80,11 @@ int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
             sp->pos++;
         }
         for(chan = 0; chan < sp->nchan; chan++) {
+#ifdef USE_DOUBLE
+            sf_write_double(sf[chan], buf[chan], numsamps);
+#else
             sf_write_float(sf[chan], buf[chan], numsamps);
+#endif
         }
         sp->len -= numsamps;
     }

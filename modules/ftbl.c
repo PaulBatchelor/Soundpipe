@@ -93,7 +93,11 @@ int sp_gen_file(sp_data *sp, sp_ftbl *ft, const char *filename)
     memset(&info, 0, sizeof(SF_INFO));
     info.format = 0;
     SNDFILE *snd = sf_open(filename, SFM_READ, &info);
+#ifdef USE_DOUBLE
+    sf_readf_double(snd, ft->tbl, ft->size);
+#else
     sf_readf_float(snd, ft->tbl, ft->size);
+#endif
     sf_close(snd);
     return SP_OK;
 }
@@ -118,7 +122,11 @@ int sp_ftbl_loadfile(sp_data *sp, sp_ftbl **ft, const char *filename)
     ftp->lomask = (2^ftp->lobits) - 1;
     ftp->lodiv = 1.0 / pow(2, ftp->lobits);
 
+#ifdef USE_DOUBLE
+    sf_readf_double(snd, ftp->tbl, ftp->size);
+#else
     sf_readf_float(snd, ftp->tbl, ftp->size);
+#endif
     sf_close(snd);
     return SP_OK;
 }
