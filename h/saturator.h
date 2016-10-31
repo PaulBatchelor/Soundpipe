@@ -13,7 +13,6 @@ typedef struct
 
     SPFLOAT dcBlocker[2][7];
 
-		enum {kAAOrder = 6, kUSRatio = 8} absat_enum;
 		SPFLOAT AIFilter[kAAOrder][7];
 		SPFLOAT AAFilter[kAAOrder][7];
 } sp_saturator;
