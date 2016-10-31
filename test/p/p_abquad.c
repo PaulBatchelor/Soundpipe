@@ -12,18 +12,18 @@ int main() {
     uint32_t t, u;
     SPFLOAT in = 0, out = 0;
 
-    sp_adsr *unit[NUM];
+    sp_abquad *unit[NUM];
 
     for(u = 0; u < NUM; u++) {
-        sp_adsr_create(&unit[u]);
-        sp_adsr_init(sp, unit[u]);
+        sp_abquad_create(&unit[u]);
+        sp_abquad_init(sp, unit[u]);
     }
 
     for(t = 0; t < sp->len; t++) {
-        for(u = 0; u < NUM; u++) sp_adsr_compute(sp, unit[u], &in, &out);
+        for(u = 0; u < NUM; u++) sp_abquad_compute(sp, unit[u], &in, &out);
     }
 
-    for(u = 0; u < NUM; u++) sp_adsr_destroy(&unit[u]);
+    for(u = 0; u < NUM; u++) sp_abquad_destroy(&unit[u]);
 
     sp_destroy(&sp);
     return 0;

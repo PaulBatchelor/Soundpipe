@@ -1,5 +1,7 @@
 TESTS = \
 t_autowah\
+t_abquad \
+t_absat \
 t_adsr \
 t_allpass \
 t_atone \
@@ -107,6 +109,8 @@ t_waveset \
 t_zitarev
 
 PERF=\
+p_abquad \
+p_absat \
 p_adsr \
 p_allpass \
 p_atone \
@@ -138,8 +142,6 @@ p_eqfil \
 p_expon \
 p_fofilt \
 p_fold \
-p_fosc \
-p_gbuzz \
 p_hilbert \
 p_incr \
 p_jcrev \
@@ -151,7 +153,6 @@ p_metro \
 p_mode \
 p_moogladder \
 p_noise \
-p_osc \
 p_pan2 \
 p_panst \
 p_pareq \
@@ -163,7 +164,6 @@ p_pinknoise \
 p_pitchamdf \
 p_pluck \
 p_port \
-p_posc3 \
 p_prop \
 p_pshift \
 p_ptrack \

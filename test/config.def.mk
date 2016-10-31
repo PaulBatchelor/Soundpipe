@@ -1,5 +1,7 @@
 TESTS = \
 t_autowah\
+t_abquad \
+t_absat \
 t_adsr \
 t_allpass \
 t_atone \
@@ -107,6 +109,8 @@ t_waveset \
 t_zitarev
 
 PERF=\
+p_abquad \
+p_absat \
 p_adsr \
 p_allpass \
 p_atone \
