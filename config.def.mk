@@ -3,8 +3,6 @@ MODULES= \
 base \
 ftbl \
 tevent \
-abquad \
-absat \
 adsr \
 allpass \
 atone \
@@ -86,6 +84,7 @@ revsc \
 rms \
 rpt \
 samphold \
+saturator \
 scale \
 scrambler \
 sdelay \

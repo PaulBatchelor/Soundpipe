@@ -1,7 +1,5 @@
 TESTS = \
 t_autowah\
-t_abquad \
-t_absat \
 t_adsr \
 t_allpass \
 t_atone \
@@ -82,6 +80,7 @@ t_random \
 t_reverse \
 t_revsc \
 t_rpt \
+t_saturator \
 t_samphold \
 t_scale \
 t_sdelay \
@@ -109,8 +108,6 @@ t_waveset \
 t_zitarev
 
 PERF=\
-p_abquad \
-p_absat \
 p_adsr \
 p_allpass \
 p_atone \
@@ -175,6 +172,7 @@ p_reverse \
 p_revsc \
 p_rms \
 p_rpt \
+p_saturator \
 p_samphold \
 p_scale \
 p_sdelay \

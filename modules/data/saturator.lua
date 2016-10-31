@@ -1,16 +1,16 @@
-sptbl["absat"] = {
+sptbl["saturator"] = {
 
     files = {
-        module = "absat.c",
-        header = "absat.h",
-        example = "ex_absat.c",
+        module = "saturator.c",
+        header = "saturator.h",
+        example = "ex_saturator.c",
     },
 
     func = {
-        create = "sp_absat_create",
-        destroy = "sp_absat_destroy",
-        init = "sp_absat_init",
-        compute = "sp_absat_compute",
+        create = "sp_saturator_create",
+        destroy = "sp_saturator_destroy",
+        init = "sp_saturator_init",
+        compute = "sp_saturator_compute",
     },
 
     params = {
