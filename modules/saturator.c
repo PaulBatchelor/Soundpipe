@@ -60,7 +60,7 @@ int sp_saturator_init(sp_data *sp, sp_saturator *p)
 		p->drive = 1;
     p->dcOffset = 0;
 
-    for(i = 0; i < kAAOrder; i++){
+    for(i = 0; i < 6; i++){
 	    for(j = 0; j < 7; j++){
 				p->AAFilter[i][j] =  AACoefs[i][j];
 				p->AIFilter[i][j] =  AACoefs[i][j];
@@ -94,8 +94,8 @@ int sp_saturator_compute(sp_data *sp, sp_saturator *p, SPFLOAT *in, SPFLOAT *out
 
     fsignal = p->drive * *in;
     for(i = 0; i < kUSRatio; i++){
-				usignal = (i == 0) ? kUSRatio*fsignal : 0.0;
-      	for(j = 0; j < kAAOrder; j++){
+				usignal = (i == 0) ? 8 *fsignal : 0.0;
+      	for(j = 0; j < 6; j++){
 						quad_compute(p->AIFilter[j], &usignal, &usignal);
 				}
         dsignal = (usignal + p->dcOffset) / (1.0 + fabs(usignal + p->dcOffset));
@@ -103,7 +103,7 @@ int sp_saturator_compute(sp_data *sp, sp_saturator *p, SPFLOAT *in, SPFLOAT *out
 				quad_compute(p->dcBlocker[0], &dsignal, &dsignal);
 				quad_compute(p->dcBlocker[1], &dsignal, &dsignal);
 
-      	for(j = 0; j < kAAOrder; j++){
+      	for(j = 0; j < 6; j++){
 					quad_compute(p->AAFilter[j], &dsignal, out);
 				}
     }
