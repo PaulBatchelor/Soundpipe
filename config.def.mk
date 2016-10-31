@@ -3,6 +3,8 @@ MODULES= \
 base \
 ftbl \
 tevent \
+abquad \
+absat \
 adsr \
 allpass \
 atone \
