@@ -15,7 +15,7 @@ int t_saturator(sp_test *tst, sp_data *sp, const char *hash)
     uint32_t n;
     int fail = 0;
     UserData ud;
-		SPFLOAT osc = 0, saturator = 0;
+        SPFLOAT osc = 0, saturator = 0;
 
     sp_saturator_create(&ud.saturator);
     sp_osc_create(&ud.osc);
@@ -25,19 +25,19 @@ int t_saturator(sp_test *tst, sp_data *sp, const char *hash)
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
     ud.osc->amp = 0.5;
-		ud.saturator->dcOffset = 4;
-		ud.saturator->drive = 20;
+    ud.saturator->dcOffset = 4;
+    ud.saturator->drive = 20;
     sp->len = 44100 * 5;
 
-		for(n = 0; n < tst->size; n++) {
-				sp_osc_compute(sp, ud.osc, NULL, &osc);
-   			sp_saturator_compute(sp, ud.saturator, &osc, &saturator);
-				sp_test_add_sample(tst, saturator);
-		}
+    for(n = 0; n < tst->size; n++) {
+        sp_osc_compute(sp, ud.osc, NULL, &osc);
+        sp_saturator_compute(sp, ud.saturator, &osc, &saturator);
+        sp_test_add_sample(tst, saturator);
+    }
 
-		fail = sp_test_verify(tst, hash);
+    fail = sp_test_verify(tst, hash);
 
-		sp_saturator_destroy(&ud.saturator);
+    sp_saturator_destroy(&ud.saturator);
     sp_ftbl_destroy(&ud.ft);
     sp_osc_destroy(&ud.osc);
 

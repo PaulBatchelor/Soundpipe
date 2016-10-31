@@ -1,5 +1,9 @@
 # Change log
 
+1.5.0
+-----
+    - added saturator module
+
 1.4.0
 -----
     - added smoothdelay module

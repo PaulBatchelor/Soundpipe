@@ -9,7 +9,8 @@ typedef struct {
     sp_ftbl *ft;
 } UserData;
 
-void process(sp_data *sp, void *udata) {
+void process(sp_data *sp, void *udata) 
+{
     UserData *ud = udata;
     SPFLOAT osc = 0, saturator = 0;
     sp_osc_compute(sp, ud->osc, NULL, &osc);
@@ -17,7 +18,8 @@ void process(sp_data *sp, void *udata) {
     sp->out[0] = saturator;
 }
 
-int main() {
+int main() 
+{
     srand(1234567);
     UserData ud;
     sp_data *sp;
@@ -29,8 +31,8 @@ int main() {
     sp_saturator_init(sp, ud.saturator);
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
-		ud.saturator->drive = 20;
-		ud.saturator->dcOffset = 4;
+    ud.saturator->drive = 20;
+    ud.saturator->dcOffset = 4;
     ud.osc->amp = 0.5;
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);
