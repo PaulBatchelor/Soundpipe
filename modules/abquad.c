@@ -35,13 +35,13 @@ int sp_abquad_compute(sp_data* sp, sp_abquad* p, SPFLOAT *input, SPFLOAT* output
 		return SP_OK;
 }
 
-int sp_abquad_set(sp_data* sp, sp_abquad* p, SPFLOAT b0, SPFLOAT b1, SPFLOAT b2, SPFLOAT a1, SPFLOAT a2)
+int sp_abquad_set(sp_data* sp, sp_abquad* p, const SPFLOAT coefs[5])
 {
-		p->b0 = b0;
-		p->b1 = b1;
-		p->b2 = b2;
-		p->a1 = a1;
-		p->a2 = a2;
+		p->b0 = coefs[0];
+		p->b1 = coefs[1];
+		p->b2 = coefs[2];
+		p->a1 = coefs[3];
+		p->a2 = coefs[4];
 		return SP_OK;
 }
 

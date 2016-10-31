@@ -3,6 +3,10 @@
 #include <time.h>
 #include "soundpipe.h"
 
+
+static const SPFLOAT coefs[] =
+	{2.60687e-05, 2.98697e-05, 2.60687e-05, -1.31885, 0.437162};
+
 typedef struct {
     sp_abquad *abquad;
     sp_osc *osc;
@@ -29,7 +33,7 @@ int main() {
     sp_abquad_init(sp, ud.abquad);
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
-		sp_abquad_set(sp, ud.abquad, 2.60687e-05, 2.98697e-05, 2.60687e-05, -1.31885, 0.437162);
+		sp_abquad_set(sp, ud.abquad, coefs);
     ud.osc->amp = 0.5;
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);

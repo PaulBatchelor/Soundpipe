@@ -16,35 +16,11 @@ sptbl["abquad"] = {
                 description = "set coefs at once.",
                 args = {
 				            {
-  		  		            name = "b0",
-    		  		          type = "SPFLOAT",
-      		  		        description = "biquad coefficient.",
+  		  		            name = "coefs",
+    		  		          type = "SPFLOAT[5]",
+      		  		        description = "b0, b1, b2, a1, a2.",
   		        		      default = 0
   		          		},
-    		        		{
-       		         		name = "b1",
-          		      		type = "SPFLOAT",
-              		  		description = "biquad coefficient.",
-                				default = 0
-		            		},
-    		        		{
-        		        		name = "b2",
-            		    		type = "SPFLOAT",
-                				description = "biquad coefficient.",
-                				default = 0
-		            		},
-    		        		{
-        		        		name = "a1",
-            		    		type = "SPFLOAT",
-                				description = "biquad coefficient.",
-                				default = 0
-		            		},
-    		        		{
-        		        		name = "a2",
-            		    		type = "SPFLOAT",
-                				description = "biquad coefficient.",
-                				default = 0
-		            		}
                 }
             }
         }

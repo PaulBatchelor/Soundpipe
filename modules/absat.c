@@ -80,19 +80,15 @@ int sp_absat_init(sp_data *sp, sp_absat *p)
     for(i = 0; i < kAAOrder; i++){
 				sp_abquad_init(sp, p->AAFilter[i]);
 				sp_abquad_init(sp, p->AIFilter[i]);
-				sp_abquad_set(sp, p->AAFilter[i],
-					AACoefs[i][0], AACoefs[i][1], AACoefs[i][2], AACoefs[i][3], AACoefs[i][4]);
-				sp_abquad_set(sp, p->AIFilter[i],
-					AACoefs[i][0], AACoefs[i][1], AACoefs[i][2], AACoefs[i][3], AACoefs[i][4]);
+				sp_abquad_set(sp, p->AAFilter[i], AACoefs[i]);
+				sp_abquad_set(sp, p->AIFilter[i], AACoefs[i]);
      }
 
     bilinearTranform(Scoeffs, Zcoeffs, sp->sr*kUSRatio);
 		sp_abquad_init(sp, p->dcBlocker[0]);
-		sp_abquad_set(sp, p->dcBlocker[0],
-				Zcoeffs[0], Zcoeffs[1], Zcoeffs[2], Zcoeffs[3], Zcoeffs[4]);
+		sp_abquad_set(sp, p->dcBlocker[0], Zcoeffs);
 		sp_abquad_init(sp, p->dcBlocker[1]);
-		sp_abquad_set(sp, p->dcBlocker[1],
-				Zcoeffs[0], Zcoeffs[1], Zcoeffs[2], Zcoeffs[3], Zcoeffs[4]);
+		sp_abquad_set(sp, p->dcBlocker[1], Zcoeffs);
 		return SP_OK;
 }
 
