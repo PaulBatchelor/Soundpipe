@@ -80,6 +80,7 @@ t_random \
 t_reverse \
 t_revsc \
 t_rpt \
+t_saturator \
 t_samphold \
 t_scale \
 t_sdelay \
@@ -171,6 +172,7 @@ p_reverse \
 p_revsc \
 p_rms \
 p_rpt \
+p_saturator \
 p_samphold \
 p_scale \
 p_sdelay \

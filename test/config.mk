@@ -80,6 +80,7 @@ t_random \
 t_reverse \
 t_revsc \
 t_rpt \
+t_saturator \
 t_samphold \
 t_scale \
 t_sdelay \
@@ -138,8 +139,6 @@ p_eqfil \
 p_expon \
 p_fofilt \
 p_fold \
-p_fosc \
-p_gbuzz \
 p_hilbert \
 p_incr \
 p_jcrev \
@@ -151,7 +150,6 @@ p_metro \
 p_mode \
 p_moogladder \
 p_noise \
-p_osc \
 p_pan2 \
 p_panst \
 p_pareq \
@@ -163,7 +161,6 @@ p_pinknoise \
 p_pitchamdf \
 p_pluck \
 p_port \
-p_posc3 \
 p_prop \
 p_pshift \
 p_ptrack \
@@ -175,6 +172,7 @@ p_reverse \
 p_revsc \
 p_rms \
 p_rpt \
+p_saturator \
 p_samphold \
 p_scale \
 p_sdelay \

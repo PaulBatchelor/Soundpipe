@@ -90,6 +90,7 @@ ex_reson \
 ex_reverse \
 ex_revsc \
 ex_rpt \
+ex_saturator \
 ex_samphold \
 ex_scale \
 ex_scrambler \

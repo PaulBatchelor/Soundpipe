@@ -84,6 +84,7 @@ revsc \
 rms \
 rpt \
 samphold \
+saturator \
 scale \
 scrambler \
 sdelay \
