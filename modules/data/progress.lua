@@ -37,7 +37,7 @@ sptbl["progress"] = {
     Mostly ideal for offline renderings and programs with finite length. Escape characters are used to show/hide the cursor. Interruption before finishing may cause the cursor to disappear.]],
 
     ninputs = 0,
-    noutputs = 0,
+    noutputs = 1,
 
     inputs = {
         {

@@ -4,7 +4,18 @@
 -----
     - added smoothdelay module
     - changed padsynth gen routine behavior to play nicer with oscillator
-
+    - randh: divide by zero fixes
+    - prop: added {}, |, and ? operators
+    - added gen_rand
+    - debugging symbol flag (-g) added to config.mk instead of Makefile
+    - added slice ugen
+    - fixed wpkorg35 bug when cutoff is set to 1000  and res to 1.0
+    - prop: added sp_prop_reset
+    - added scrambler gen routine
+    - header file more robust
+    - nsmp valgrind fixes
+    - added performance testing utility (initial steps)
+ 
 1.3.0
 -----
     - added tseg module

@@ -20,19 +20,19 @@ sptbl["vocoder"] = {
         optional = {
             {
                 name = "atk",
-                type = "SPFLOAT",
+                type = "SPFLOAT*",
                 description = "Attack time . (Range 0.001 and 0.5 seconds)",
                 default = 0.1
             },
             {
                 name = "rel",
-                type = "SPFLOAT",
+                type = "SPFLOAT*",
                 description = "Release time",
                 default = 0.1
             },
             {
                 name = "bwratio",
-                type = "SPFLOAT",
+                type = "SPFLOAT*",
                 description = "Coeffecient to adjust the bandwidth of each band (0.1 - 2)",
                 default = 0.5
             },

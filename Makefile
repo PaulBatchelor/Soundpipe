@@ -2,7 +2,7 @@
 
 default: all
 
-VERSION = 1.3.3
+VERSION = 1.4.0
 
 INTERMEDIATES_PREFIX ?= .
 PREFIX ?= /usr/local
@@ -25,7 +25,14 @@ MPATHS += $(addprefix $(MODDIR)/, $(addsuffix .o, $(MODULES)))
 
 include $(CONFIG)
 
-CFLAGS += -g -DSP_VERSION=$(VERSION) -O3 -DSPFLOAT=float -std=c99
+ifeq ($(USE_DOUBLE), 1)
+CFLAGS+=-DUSE_DOUBLE
+SPFLOAT=double
+else
+SPFLOAT=float
+endif
+
+CFLAGS += -DSP_VERSION=$(VERSION) -O3 -DSPFLOAT=${SPFLOAT} -std=c99
 CFLAGS += -I$(INTERMEDIATES_PREFIX)/h -Ih -I/usr/local/include -fPIC
 UTIL += $(INTERMEDIATES_PREFIX)/util/wav2smp
 
@@ -42,7 +49,10 @@ $(LIBSOUNDPIPE): $(MPATHS) $(LPATHS) | $(INTERMEDIATES_PREFIX)
 	$(AR) rcs $@ $(MPATHS) $(LPATHS)
 
 $(HDIR)/soundpipe.h: $(HPATHS) | $(INTERMEDIATES_PREFIX)/h
-	cat $(HPATHS) > $@
+	echo "#ifndef SOUNDPIPE_H" >> $@
+	echo "#define SOUNDPIPE_H" >> $@
+	cat $(HPATHS) >> $@
+	echo "#endif" >> $@
 
 $(MODDIR)/%.o: modules/%.c h/%.h $(HDIR)/soundpipe.h | $(MODDIR)
 	$(CC) -Wall $(CFLAGS) -c -static $< -o $@
@@ -80,7 +90,6 @@ install: \
 
 clean:
 	rm -rf $(HDIR)/soundpipe.h
-	rm -rf $(INTERMEDIATES_PREFIX)/config.mk
 	rm -rf $(INTERMEDIATES_PREFIX)/docs
 	rm -rf $(INTERMEDIATES_PREFIX)/gen_noise
 	rm -rf $(INTERMEDIATES_PREFIX)/libsoundpipe.a

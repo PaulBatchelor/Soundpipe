@@ -8,9 +8,9 @@ config.mk: config.def.mk
 include config.mk
 
 
-all: config.mk $(addsuffix .bin, $(files)) 
+all: config.mk $(addsuffix .bin, $(files))
 
-%.bin : %.c 
+%.bin : %.c
 	gcc -g --std=c99 -I ../h -L /usr/local/lib -I /usr/local/include $< ../libsoundpipe.a -lsndfile -o $@ -lm
 
 clean:

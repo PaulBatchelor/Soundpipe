@@ -22,3 +22,4 @@ int sp_gen_gauss(sp_data *sp, sp_ftbl *ft, SPFLOAT scale, uint32_t seed);
 int sp_ftbl_loadfile(sp_data *sp, sp_ftbl **ft, const char *filename);
 int sp_ftbl_loadspa(sp_data *sp, sp_ftbl **ft, const char *filename);
 int sp_gen_composite(sp_data *sp, sp_ftbl *ft, const char *argstring);
+int sp_gen_rand(sp_data *sp, sp_ftbl *ft, const char *argstring);

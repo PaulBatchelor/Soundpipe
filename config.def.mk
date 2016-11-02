@@ -43,6 +43,7 @@ fosc \
 gbuzz \
 hilbert \
 in \
+incr \
 jcrev \
 jitter \
 line \
@@ -84,7 +85,9 @@ rms \
 rpt \
 samphold \
 scale \
+scrambler \
 sdelay \
+slice \
 smoothdelay \
 streson \
 switch \
@@ -143,9 +146,10 @@ MODULES += padsynth
 # CFLAGS += -lfftw3 -DUSE_FFTW3
 
 # Soundpipe audio 
-# Soundpipe audio 
-#include lib/spa/Makefile
-#CFLAGS += -DUSE_SPA
+include lib/spa/Makefile
+CFLAGS += -DUSE_SPA
 
-# Needed for Sporth chugin
-CFLAGS += -fPIC
+CFLAGS += -fPIC -g
+
+# Uncomment this to use double precision
+#USE_DOUBLE=1

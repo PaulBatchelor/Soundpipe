@@ -1,4 +1,3 @@
-//static void fftInit(sp_fft *fft, int M)
 void sp_fft_init(sp_fft *fft, int M)
 {
     SPFLOAT *utbl;
