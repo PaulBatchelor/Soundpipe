@@ -83,6 +83,7 @@ reson \
 revsc \
 rms \
 rpt \
+saturator \
 samphold \
 scale \
 scrambler \

@@ -2,13 +2,11 @@
 #include <math.h>
 #include "soundpipe.h"
 
-#define KUSRATIO 8
-
 #ifndef M_PI
 #define M_PI    3.14159265358979323846
 #endif
 
-static void bilinearTransform(SPFLOAT acoefs[], SPFLOAT dcoefs[], SPFLOAT fs)
+static void bilinear_transform(SPFLOAT acoefs[], SPFLOAT dcoefs[], SPFLOAT fs)
 {
     SPFLOAT b0, b1, b2, a0, a1, a2;
     SPFLOAT bz0, bz1, bz2, az0, az1, az2;
@@ -46,7 +44,7 @@ int sp_saturator_destroy(sp_saturator **p)
 int sp_saturator_init(sp_data *sp, sp_saturator *p)
 {
     int i, j;
-    const SPFLOAT AACoefs[6][7] =
+    const SPFLOAT aacoefs[6][7] =
     {
         {2.60687e-05, 2.98697e-05, 2.60687e-05, -1.31885, 0.437162, 0.0, 0.0},
         {1, -0.800256, 1, -1.38301, 0.496576, 0.0, 0.0},
@@ -57,28 +55,25 @@ int sp_saturator_init(sp_data *sp, sp_saturator *p)
     };
 
     SPFLOAT wc_dc = 5*2*M_PI;
-    SPFLOAT Scoeffs[6] = {  0, 1, 0, wc_dc, 1, 0 };
-    SPFLOAT Zcoeffs[5];
+    SPFLOAT scoeffs[6] = {  0, 1, 0, wc_dc, 1, 0 };
+    SPFLOAT zcoeffs[5];
     p->drive = 1;
-    p->dcOffset = 0;
+    p->dcoffset = 0;
 
-    for(i = 0; i < 6; i++) {
-        for(j = 0; j < 7; j++) {
-            p->AAFilter[i][j] =  AACoefs[i][j];
-            p->AIFilter[i][j] =  AACoefs[i][j];
+    for(i = 0; i < 6; i++){
+        for(j = 0; j < 7; j++){
+            p->aa[i][j] =  aacoefs[i][j];
+            p->ai[i][j] =  aacoefs[i][j];
         }
     }
-
-    bilinearTransform(Scoeffs, Zcoeffs, sp->sr*KUSRATIO);
-
-    for(i = 0; i < 2; i++) {
-        for(j = 0; j < 5; j++){
-            p->dcBlocker[i][j] = Zcoeffs[j];
-        }
-        p->dcBlocker[i][5] = 0.0;
-        p->dcBlocker[i][6] = 0.0;
+    bilinear_transform(scoeffs, zcoeffs, sp->sr*8);
+    for(i = 0; i < 2; i++){
+        for(j = 0; j < 5; j++)
+            p->dcblocker[i][j] = zcoeffs[j];
+        p->dcblocker[i][5] = 0.0;
+        p->dcblocker[i][6] = 0.0;
     }
-    return SP_OK;
+        return SP_OK;
 }
 
 static int quad_compute(SPFLOAT p[7],  SPFLOAT *input, SPFLOAT* output)
@@ -97,19 +92,18 @@ int sp_saturator_compute(sp_data *sp, sp_saturator *p, SPFLOAT *in, SPFLOAT *out
     SPFLOAT fsignal, usignal, dsignal;
 
     fsignal = p->drive * *in;
-    for(i = 0; i < KUSRATIO; i++) {
+    for(i = 0; i < 8; i++){
         usignal = (i == 0) ? 8 *fsignal : 0.0;
-        for(j = 0; j < 6; j++) {
-            quad_compute(p->AIFilter[j], &usignal, &usignal);
-        }
-        dsignal = (usignal + p->dcOffset) / (1.0 + fabs(usignal + p->dcOffset));
+        for(j = 0; j < 6; j++)
+            quad_compute(p->ai[j], &usignal, &usignal);
 
-        quad_compute(p->dcBlocker[0], &dsignal, &dsignal);
-        quad_compute(p->dcBlocker[1], &dsignal, &dsignal);
+        dsignal = (usignal + p->dcoffset) / (1.0 + fabs(usignal + p->dcoffset));
 
-        for(j = 0; j < 6; j++){
-            quad_compute(p->AAFilter[j], &dsignal, out);
-        }
+        quad_compute(p->dcblocker[0], &dsignal, &dsignal);
+        quad_compute(p->dcblocker[1], &dsignal, &dsignal);
+
+        for(j = 0; j < 6; j++)
+            quad_compute(p->aa[j], &dsignal, out);
     }
     return SP_OK;
 }
