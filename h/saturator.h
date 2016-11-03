@@ -13,8 +13,8 @@ typedef struct
 
     SPFLOAT dcBlocker[2][7];
 
-		SPFLOAT AIFilter[kAAOrder][7];
-		SPFLOAT AAFilter[kAAOrder][7];
+		SPFLOAT AIFilter[6][7];
+		SPFLOAT AAFilter[6][7];
 } sp_saturator;
 
 int sp_saturator_create(sp_saturator **p);

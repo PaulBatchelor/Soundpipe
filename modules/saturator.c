@@ -66,7 +66,7 @@ int sp_saturator_init(sp_data *sp, sp_saturator *p)
 				p->AIFilter[i][j] =  AACoefs[i][j];
 	    }
 		}
-    bilinearTranform(Scoeffs, Zcoeffs, sp->sr*kUSRatio);
+    bilinearTranform(Scoeffs, Zcoeffs, sp->sr*8);
     for(i = 0; i < 2; i++){
 			for(j = 0; j < 5; j++){
 				p->dcBlocker[i][j] = Zcoeffs[j];
@@ -93,7 +93,7 @@ int sp_saturator_compute(sp_data *sp, sp_saturator *p, SPFLOAT *in, SPFLOAT *out
 		SPFLOAT fsignal, usignal, dsignal;
 
     fsignal = p->drive * *in;
-    for(i = 0; i < kUSRatio; i++){
+    for(i = 0; i < 8; i++){
 				usignal = (i == 0) ? 8 *fsignal : 0.0;
       	for(j = 0; j < 6; j++){
 						quad_compute(p->AIFilter[j], &usignal, &usignal);
