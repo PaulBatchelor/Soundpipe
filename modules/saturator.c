@@ -68,9 +68,8 @@ int sp_saturator_init(sp_data *sp, sp_saturator *p)
     }
     bilinear_transform(scoeffs, zcoeffs, sp->sr*8);
     for(i = 0; i < 2; i++){
-        for(j = 0; j < 5; j++){
+        for(j = 0; j < 5; j++)
             p->dcblocker[i][j] = zcoeffs[j];
-        }
         p->dcblocker[i][5] = 0.0;
         p->dcblocker[i][6] = 0.0;
     }
@@ -95,17 +94,16 @@ int sp_saturator_compute(sp_data *sp, sp_saturator *p, SPFLOAT *in, SPFLOAT *out
     fsignal = p->drive * *in;
     for(i = 0; i < 8; i++){
         usignal = (i == 0) ? 8 *fsignal : 0.0;
-        for(j = 0; j < 6; j++){
+        for(j = 0; j < 6; j++)
             quad_compute(p->ai[j], &usignal, &usignal);
-        }
+
         dsignal = (usignal + p->dcoffset) / (1.0 + fabs(usignal + p->dcoffset));
 
         quad_compute(p->dcblocker[0], &dsignal, &dsignal);
         quad_compute(p->dcblocker[1], &dsignal, &dsignal);
 
-        for(j = 0; j < 6; j++){
+        for(j = 0; j < 6; j++)
             quad_compute(p->aa[j], &dsignal, out);
-        }
     }
     return SP_OK;
 }
