@@ -11,6 +11,19 @@ sptbl["port"] = {
         destroy = "sp_port_destroy",
         init = "sp_port_init",
         compute = "sp_port_compute",
+        other = {
+            sp_port_reset = {
+                description = "Resets internal buffers, snapping to input value instead of ramping to it.",
+                args = {
+                    {
+                        name = "input",
+                        type = "SPFLOAT *",
+                        description = "input value to snap to.",
+                        default = 0.0
+                    },
+                }
+            }
+        }
     },
 
     params = {

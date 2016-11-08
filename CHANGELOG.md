@@ -3,6 +3,7 @@
 1.5.0
 -----
     - added saturator module
+    - added sp_prop_reset to sp_prop
 
 1.4.0
 -----
