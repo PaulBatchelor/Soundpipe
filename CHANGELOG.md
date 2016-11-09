@@ -4,6 +4,7 @@
 -----
     - added saturator module
     - added sp_prop_reset to sp_prop
+    - USE_DOUBLE definition in soundpipe header file
 
 1.4.0
 -----
