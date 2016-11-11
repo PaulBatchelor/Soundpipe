@@ -25,7 +25,7 @@ int t_saturator(sp_test *tst, sp_data *sp, const char *hash)
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
     ud.osc->amp = 0.5;
-    ud.saturator->dcOffset = 4;
+    ud.saturator->dcoffset = 4;
     ud.saturator->drive = 20;
     sp->len = 44100 * 5;
 
