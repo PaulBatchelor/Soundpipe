@@ -1,20 +1,12 @@
 typedef struct
 {
     SPFLOAT drive;
-    SPFLOAT dcOffset;
+    SPFLOAT dcoffset;
 
-    SPFLOAT inputFilterGain;
-    SPFLOAT inputFilterCutoff;
-    SPFLOAT inputFilterQ;
+    SPFLOAT dcblocker[2][7];
 
-    SPFLOAT outputFilterGain;
-    SPFLOAT outputFilterCutoff;
-    SPFLOAT outputFilterQ;
-
-    SPFLOAT dcBlocker[2][7];
-
-		SPFLOAT AIFilter[kAAOrder][7];
-		SPFLOAT AAFilter[kAAOrder][7];
+    SPFLOAT ai[6][7];
+    SPFLOAT aa[6][7];
 } sp_saturator;
 
 int sp_saturator_create(sp_saturator **p);

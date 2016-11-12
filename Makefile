@@ -2,7 +2,7 @@
 
 default: all
 
-VERSION = 1.4.0
+VERSION = 1.4.4
 
 INTERMEDIATES_PREFIX ?= .
 PREFIX ?= /usr/local
@@ -50,6 +50,9 @@ $(LIBSOUNDPIPE): $(MPATHS) $(LPATHS) | $(INTERMEDIATES_PREFIX)
 
 $(HDIR)/soundpipe.h: $(HPATHS) | $(INTERMEDIATES_PREFIX)/h
 	echo "#ifndef SOUNDPIPE_H" >> $@
+ifdef USE_DOUBLE
+	echo "#define USE_DOUBLE" >> $@
+endif
 	echo "#define SOUNDPIPE_H" >> $@
 	cat $(HPATHS) >> $@
 	echo "#endif" >> $@

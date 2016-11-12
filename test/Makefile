@@ -25,7 +25,7 @@ t/%.o: t/%.c
 
 perf: $(PERF_OBJ)
 p/p_%: p/p_%.c
-	$(CC) $< $(CFLAGS) -lsoundpipe -lsndfile -lm -o $@
+	$(CC) $< $(CFLAGS) ../libsoundpipe.a -lsndfile -lm -o $@
 
 perftest: 
 	./perf_test $(PERF_OBJ)
