@@ -20,6 +20,12 @@ sptbl["mincer"] = {
                 type = "sp_ftbl *",
                 description = "ftable containing an audio file.",
                 default = "N/A"
+            },
+            {
+                name = "winsize",
+                type = "int",
+                description = "FFT window size. Should be a power of 2.",
+                default = "2048"
             }
         },
 

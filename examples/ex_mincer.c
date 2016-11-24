@@ -33,7 +33,7 @@ int main() {
 
     sp_randi_create(&ud.randi);
 
-    sp_mincer_init(sp, ud.mincer, ud.ft, 128);
+    sp_mincer_init(sp, ud.mincer, ud.ft, 16384);
     sp_randi_init(sp, ud.randi);
     ud.randi->min = 0;
     ud.randi->max = 1;
