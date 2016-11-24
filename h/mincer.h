@@ -15,5 +15,5 @@ typedef struct {
 
 int sp_mincer_create(sp_mincer **p);
 int sp_mincer_destroy(sp_mincer **p);
-int sp_mincer_init(sp_data *sp, sp_mincer *p, sp_ftbl *ft);
+int sp_mincer_init(sp_data *sp, sp_mincer *p, sp_ftbl *ft, int winsize);
 int sp_mincer_compute(sp_data *sp, sp_mincer *p, SPFLOAT *in, SPFLOAT *out);
