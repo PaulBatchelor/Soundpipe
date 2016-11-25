@@ -34,7 +34,6 @@ sptbl["clock"] = {
     modtype = "module",
 
     description = [[Resettable clock with subdivisions
-
 ]],
 
     ninputs = 1,
@@ -43,7 +42,7 @@ sptbl["clock"] = {
     inputs = {
         {
             name = "trig",
-            description = When non-zero, will reset clock""
+            description = "When non-zero, will reset clock"
         },
     },
 
