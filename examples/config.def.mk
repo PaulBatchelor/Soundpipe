@@ -16,6 +16,7 @@ ex_butbr \
 ex_buthp \
 ex_butlp \
 ex_clip \
+ex_clock \
 ex_comb \
 ex_compressor \
 ex_conv \

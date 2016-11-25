@@ -21,6 +21,7 @@ butbr \
 buthp \
 butlp \
 clip \
+clock \
 comb \
 compressor \
 count \
