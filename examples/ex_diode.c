@@ -40,9 +40,6 @@ int main() {
     ud.lfo->freq = 0.5;
     ud.lfo->amp = 1.0;
     ud.diode->res = 0.9;
-    ud.diode->sat = 100;
-    ud.diode->nlp = 1;
-    ud.diode->norm = 1;
 
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);

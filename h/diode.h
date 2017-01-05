@@ -14,10 +14,7 @@ typedef struct {
     SPFLOAT gamma;
     SPFLOAT freq;
     SPFLOAT K;
-    SPFLOAT sat;
     SPFLOAT res;
-    unsigned char nlp;
-    unsigned char norm;
 } sp_diode;
 
 int sp_diode_create(sp_diode **p);

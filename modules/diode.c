@@ -137,16 +137,8 @@ int sp_diode_init(sp_data *sp, sp_diode *p)
     p->opva_eps[3] = 0.0;
     p->opva_fdbk[3] = 0.0;
 
-
-    /* turn off non-linear processing */
-    p->nlp = 0;
-
-    /* set norm off by default */
-    p->norm = 0;
-
     /* default cutoff to 1000hz */
     p->freq = 1000;
-    p->sat = 0;
     p->res = 0;
     /* update filter coefs */
 
@@ -174,15 +166,6 @@ int sp_diode_compute(sp_data *sp, sp_diode *p, SPFLOAT *in, SPFLOAT *out)
         p->SG[1] * sp_diode_opva_fdbk_out(sp, p, 1) +
         p->SG[2] * sp_diode_opva_fdbk_out(sp, p, 2) +
         p->SG[3] * sp_diode_opva_fdbk_out(sp, p, 3);
-
-    /* TODO: does this even do anything? */
-    if(p->nlp == 1) {
-        if(p->norm == 1) {
-            *in = (1.0/tanh(p->sat))*tanh(p->sat*(*in));
-        } else {
-			*in = tanh(p->sat * (*in));
-        }
-    }
 
     un = (*in - p->K * sigma) / (1 + p->K * p->gamma);
     tmp = un;
