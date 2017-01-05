@@ -24,6 +24,7 @@ ex_crossfade \
 ex_delay \
 ex_diskin \
 ex_dist \
+ex_diode \
 ex_dmetro \
 ex_drip \
 ex_dtrig \

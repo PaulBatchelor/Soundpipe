@@ -29,6 +29,7 @@ conv \
 crossfade \
 dcblock \
 delay \
+diode \
 dist \
 dmetro \
 drip \
