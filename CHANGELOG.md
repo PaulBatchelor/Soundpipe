@@ -7,6 +7,7 @@
     - USE_DOUBLE definition in soundpipe header file
     - fog: segfault fix related to bounds checking
     - mincer: exposed window size variable (2048 default)
+    - added diode module
 
 1.4.0
 -----
