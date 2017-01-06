@@ -16,16 +16,16 @@ sptbl["saturator"] = {
     params = {
         optional = {
             {
-                name = "dcoffset",
-                type = "SPFLOAT",
-                description = "Constant linear offset applied to the signal. A small offset will introduce odd harmonics into the distoration spectrum, whereas a zero offset will have only even harmonics.",
-                default = 0.0
-            },
-            {
                 name = "drive",
                 type = "SPFLOAT",
                 description ="Input gain into the distortion section, in decibels. Controls overall amount of distortion.",
                 default = 1.0
+            },
+            {
+                name = "dcoffset",
+                type = "SPFLOAT",
+                description = "Constant linear offset applied to the signal. A small offset will introduce odd harmonics into the distoration spectrum, whereas a zero offset will have only even harmonics.",
+                default = 0.0
             },
         }
     },
