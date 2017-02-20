@@ -21,6 +21,7 @@ butbr \
 buthp \
 butlp \
 clip \
+clock \
 comb \
 compressor \
 count \
@@ -28,6 +29,7 @@ conv \
 crossfade \
 dcblock \
 delay \
+diode \
 dist \
 dmetro \
 drip \

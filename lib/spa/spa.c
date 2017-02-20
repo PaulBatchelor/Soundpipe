@@ -49,4 +49,5 @@ int spa_read_buf(sp_data *sp, sp_audio *spa, SPFLOAT *buf, uint32_t size)
 int spa_close(sp_audio *spa)
 {
     fclose(spa->fp);
+    return SP_OK;
 }
