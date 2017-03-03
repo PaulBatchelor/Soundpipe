@@ -11,6 +11,7 @@ ex_bitcrush \
 ex_blsaw \
 ex_blsquare \
 ex_bltriangle \
+ex_brown \
 ex_butbp \
 ex_butbr \
 ex_buthp \

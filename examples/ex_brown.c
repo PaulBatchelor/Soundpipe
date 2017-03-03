@@ -21,8 +21,7 @@ typedef struct {
 void process(sp_data *sp, void *udata) {
     UserData *ud = udata;
     SPFLOAT osc = 0, brown = 0;
-    sp_osc_compute(sp, ud->osc, NULL, &osc);
-    sp_brown_compute(sp, ud->brown, &osc, &brown);
+    sp_brown_compute(sp, ud->brown, NULL, &brown);
     sp->out[0] = brown;
 }
 

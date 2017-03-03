@@ -1,5 +1,5 @@
 typedef struct {
-    SPFLOAT bar;
+    SPFLOAT brown;
 } sp_brown;
 
 int sp_brown_create(sp_brown **p);
