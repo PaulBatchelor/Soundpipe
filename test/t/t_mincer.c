@@ -24,7 +24,7 @@ int t_mincer(sp_test *tst, sp_data *sp, const char *hash)
 
     sp_randi_create(&ud.randi);
 
-    sp_mincer_init(sp, ud.mincer, ud.ft);
+    sp_mincer_init(sp, ud.mincer, ud.ft, 2048);
     sp_randi_init(sp, ud.randi);
     ud.randi->min = 0;
     ud.randi->max = 5;
