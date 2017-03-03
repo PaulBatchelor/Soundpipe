@@ -1,7 +1,3 @@
-typedef struct{
-size_t size;
-void *auxp;
-}auxData;
 typedef struct {
     int     writePos;
     int     bufferSize;

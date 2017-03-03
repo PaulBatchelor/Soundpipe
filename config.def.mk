@@ -16,6 +16,7 @@ blsquare \
 bltriangle \
 fold \
 bitcrush \
+brown \
 butbp \
 butbr \
 buthp \
