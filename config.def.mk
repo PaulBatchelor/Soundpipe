@@ -94,6 +94,7 @@ sdelay \
 slice \
 smoothdelay \
 spa \
+sparec \
 streson \
 switch \
 tabread \
