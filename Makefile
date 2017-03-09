@@ -2,7 +2,7 @@
 
 default: all
 
-VERSION = 1.4.6
+VERSION = 1.4.8
 
 INTERMEDIATES_PREFIX ?= .
 PREFIX ?= /usr/local

@@ -8,6 +8,8 @@
     - fog: segfault fix related to bounds checking
     - mincer: exposed window size variable (2048 default)
     - added diode module
+    - better support for SPA filetype
+    - added spa module
 
 1.4.0
 -----
