@@ -93,6 +93,7 @@ scrambler \
 sdelay \
 slice \
 smoothdelay \
+spa \
 streson \
 switch \
 tabread \

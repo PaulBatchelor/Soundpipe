@@ -14,15 +14,12 @@
 
 typedef struct {
     sp_spa *spa;
-    sp_osc *osc;
-    sp_ftbl *ft; 
 } UserData;
 
 void process(sp_data *sp, void *udata) {
     UserData *ud = udata;
-    SPFLOAT osc = 0, spa = 0;
-    sp_osc_compute(sp, ud->osc, NULL, &osc);
-    sp_spa_compute(sp, ud->spa, &osc, &spa);
+    SPFLOAT spa = 0;
+    sp_spa_compute(sp, ud->spa, NULL, &spa);
     sp->out[0] = spa;
 }
 
@@ -33,19 +30,13 @@ int main() {
     sp_srand(sp, 1234567);
 
     sp_spa_create(&ud.spa);
-    sp_osc_create(&ud.osc);
-    sp_ftbl_create(sp, &ud.ft, 2048);
 
-    sp_spa_init(sp, ud.spa);
-    sp_gen_sine(sp, ud.ft);
-    sp_osc_init(sp, ud.osc, ud.ft, 0);
+    sp_spa_init(sp, ud.spa, "oneart.spa");
 
-    sp->len = 44100 * 5;
+    sp->len = 44100 * 10;
     sp_process(sp, &ud, process);
 
     sp_spa_destroy(&ud.spa);
-    sp_ftbl_destroy(&ud.ft);
-    sp_osc_destroy(&ud.osc);
 
     sp_destroy(&sp);
     return 0;

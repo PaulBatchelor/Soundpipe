@@ -28,22 +28,20 @@ int spa_open(sp_data *sp, sp_audio *spa, const char *name, int mode)
     return SP_OK;
 }
 
-int spa_write_buf(sp_data *sp, sp_audio *spa, SPFLOAT *buf, uint32_t size)
+size_t spa_write_buf(sp_data *sp, sp_audio *spa, SPFLOAT *buf, uint32_t size)
 {
     if(spa->mode != SPA_WRITE) {
-        return SP_NOT_OK;
+        return 0;
     }
-    fwrite(buf, sizeof(SPFLOAT), size, spa->fp);
-    return SP_OK;
+    return fwrite(buf, sizeof(SPFLOAT), size, spa->fp);
 }
 
-int spa_read_buf(sp_data *sp, sp_audio *spa, SPFLOAT *buf, uint32_t size)
+size_t spa_read_buf(sp_data *sp, sp_audio *spa, SPFLOAT *buf, uint32_t size)
 {
     if(spa->mode != SPA_READ) {
-        return SP_NOT_OK;
+        return 0;
     }
-    fread(buf, sizeof(SPFLOAT), size, spa->fp);
-    return SP_OK;
+    return fread(buf, sizeof(SPFLOAT), size, spa->fp);
 }
 
 int spa_close(sp_audio *spa)
