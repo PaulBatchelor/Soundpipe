@@ -36,7 +36,6 @@ int sp_spa_init(sp_data *sp, sp_spa *p, const char *filename)
 
 int sp_spa_compute(sp_data *sp, sp_spa *p, SPFLOAT *in, SPFLOAT *out)
 {
-
     if(p->bufsize == 0) {
         *out = 0.0;
         return SP_OK;
@@ -49,6 +48,7 @@ int sp_spa_compute(sp_data *sp, sp_spa *p, SPFLOAT *in, SPFLOAT *out)
             return SP_OK;
         }
     }
+
     *out = p->buf[p->pos];
     p->pos = (p->pos + 1) % p->bufsize;
     return SP_OK;
