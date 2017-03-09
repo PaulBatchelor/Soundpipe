@@ -151,7 +151,6 @@ MODULES += padsynth
 
 # Soundpipe audio 
 include lib/spa/Makefile
-CFLAGS += -DUSE_SPA
 
 CFLAGS += -fPIC -g
 
