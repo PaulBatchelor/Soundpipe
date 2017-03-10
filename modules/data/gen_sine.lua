@@ -10,9 +10,6 @@ sptbl["gen_sine"] = {
         name = "sp_gen_sine",
     },
 
-    params = {
-    },
-
     modtype = "gen",
 
     description = [[generates a sampled sinusoid]],
