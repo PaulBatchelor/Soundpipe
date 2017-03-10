@@ -15,6 +15,6 @@ sptbl["gen_sine"] = {
 
     modtype = "gen",
 
-    description = [[A sinusoid]],
+    description = [[generates a sampled sinusoid]],
 
 }
