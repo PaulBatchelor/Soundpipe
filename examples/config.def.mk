@@ -11,6 +11,7 @@ ex_bitcrush \
 ex_blsaw \
 ex_blsquare \
 ex_bltriangle \
+ex_brown \
 ex_butbp \
 ex_butbr \
 ex_buthp \
@@ -99,6 +100,8 @@ ex_scrambler \
 ex_streson \
 ex_smoothdelay \
 ex_slice \
+ex_spa \
+ex_sparec \
 ex_switch \
 ex_tabread \
 ex_tadsr \

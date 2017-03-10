@@ -11,6 +11,7 @@ t_bitcrush \
 t_blsaw \
 t_blsquare \
 t_bltriangle \
+t_brown \
 t_butbp \
 t_butbr \
 t_buthp \

@@ -80,3 +80,23 @@ typedef struct {
 
 typedef struct kiss_fft_state* kiss_fft_cfg;
 typedef struct kiss_fftr_state* kiss_fftr_cfg;
+
+/* SPA: Soundpipe Audio */
+
+enum { SPA_READ, SPA_WRITE, SPA_NULL };
+
+typedef struct {
+    char magic;
+    char nchan;
+    uint16_t sr;
+    uint32_t len;
+} spa_header;
+
+typedef struct {
+    spa_header header;
+    size_t offset;
+    int mode;
+    FILE *fp;
+    uint32_t pos;
+} sp_audio;
+

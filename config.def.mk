@@ -16,6 +16,7 @@ blsquare \
 bltriangle \
 fold \
 bitcrush \
+brown \
 butbp \
 butbr \
 buthp \
@@ -92,6 +93,8 @@ scrambler \
 sdelay \
 slice \
 smoothdelay \
+spa \
+sparec \
 streson \
 switch \
 tabread \
@@ -150,7 +153,6 @@ MODULES += padsynth
 
 # Soundpipe audio 
 include lib/spa/Makefile
-CFLAGS += -DUSE_SPA
 
 CFLAGS += -fPIC -g
 
