@@ -43,6 +43,7 @@ int sp_sparec_compute(sp_data *sp, sp_sparec *p, SPFLOAT *in, SPFLOAT *out)
     p->buf[p->bufsize - p->pos] = *in;
 
     p->pos--;
+    *out = *in;
     return SP_OK;
 }
 

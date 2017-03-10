@@ -37,7 +37,7 @@ sptbl["sparec"] = {
     description = [[Writes signal to spa file.]],
 
     ninputs = 1,
-    noutputs = 0,
+    noutputs = 1,
 
     inputs = {
         {
@@ -47,6 +47,10 @@ sptbl["sparec"] = {
     },
 
     outputs = {
+        {
+            name = "out",
+            description = "Copy of input signal."
+        }
     }
 
 }
