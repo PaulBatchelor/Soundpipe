@@ -86,6 +86,7 @@ reson \
 revsc \
 rms \
 rpt \
+rspline \
 saturator \
 samphold \
 scale \
