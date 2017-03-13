@@ -11,6 +11,7 @@
     - added brown noise module sp_brown
     - better support for SPA filetype
     - added spa module
+    - added rspline module
 
 1.4.0
 -----
