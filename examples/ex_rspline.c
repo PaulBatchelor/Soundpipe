@@ -29,10 +29,10 @@ int main() {
     sp_ftbl_create(sp, &ud.ft, 2048);
 
     sp_rspline_init(sp, ud.rspline);
-    ud.rspine->min = 300;
-    ud.rspine->max = 900;
-    ud.rspine->csp_min = 0.1;
-    ud.rspine->csp_max = 3;
+    ud.rspline->min = 300;
+    ud.rspline->max = 900;
+    ud.rspline->cps_min = 0.1;
+    ud.rspline->cps_max = 3;
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
 
