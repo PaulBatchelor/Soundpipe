@@ -120,7 +120,6 @@ int sp_process_raw(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
     return SP_OK;
 }
 
-#ifdef USE_SPA
 int sp_process_spa(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
 {
     sp_audio spa;
@@ -136,7 +135,6 @@ int sp_process_spa(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
     spa_close(&spa);
     return SP_OK;
 }
-#endif
 
 int sp_process_plot(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
 {

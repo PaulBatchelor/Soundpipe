@@ -49,7 +49,7 @@ previous information that was on it.
     outputs = {
         {
             name = "out",
-            description = "This doesn't do anything. should be NULL"
+            description = "Copy of the input signal."
         }
     }
 

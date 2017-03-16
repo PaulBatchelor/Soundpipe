@@ -86,6 +86,7 @@ reson \
 revsc \
 rms \
 rpt \
+rspline \
 saturator \
 samphold \
 scale \
@@ -93,6 +94,8 @@ scrambler \
 sdelay \
 slice \
 smoothdelay \
+spa \
+sparec \
 streson \
 switch \
 tabread \
@@ -151,7 +154,6 @@ MODULES += padsynth
 
 # Soundpipe audio 
 include lib/spa/Makefile
-CFLAGS += -DUSE_SPA
 
 CFLAGS += -fPIC -g
 

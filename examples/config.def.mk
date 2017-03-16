@@ -93,6 +93,7 @@ ex_reson \
 ex_reverse \
 ex_revsc \
 ex_rpt \
+ex_rspline  \
 ex_saturator \
 ex_samphold \
 ex_scale \
@@ -100,6 +101,8 @@ ex_scrambler \
 ex_streson \
 ex_smoothdelay \
 ex_slice \
+ex_spa \
+ex_sparec \
 ex_switch \
 ex_tabread \
 ex_tadsr \

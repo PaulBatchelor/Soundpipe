@@ -16,7 +16,7 @@ int t_tblrec(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
-    SPFLOAT trig, pluck, rand, tr;
+    SPFLOAT trig, pluck, rand, tr, tblrec;
     SPFLOAT tick = (sp->pos == 0 ? 1 : 0);
 
     sp_srand(sp, 1234567);
@@ -43,10 +43,11 @@ int t_tblrec(sp_test *tst, sp_data *sp, const char *hash)
         pluck = 0;
         rand = 0;
         tr = 0;
-        tick = (sp->pos == 0 ? 1 : 0);
+        tick = (n == 0 ? 1 : 0);
+        tblrec = 0;
         sp_metro_compute(sp, ud.met, NULL, &trig);
         sp_pluck_compute(sp, ud.plk, &trig, &pluck);
-        sp_tblrec_compute(sp, ud.tblrec, &pluck, &tick, NULL);
+        sp_tblrec_compute(sp, ud.tblrec, &pluck, &tick, &tblrec);
         sp_randi_compute(sp, ud.randi, NULL, &rand);
         ud.tr->index = rand;
         sp_tabread_compute(sp, ud.tr, NULL, &tr);

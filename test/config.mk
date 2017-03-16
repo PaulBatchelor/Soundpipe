@@ -81,10 +81,12 @@ t_random \
 t_reverse \
 t_revsc \
 t_rpt \
+t_rspline \
 t_saturator \
 t_samphold \
 t_scale \
 t_sdelay \
+t_spa \
 t_streson \
 t_switch \
 t_tabread \
