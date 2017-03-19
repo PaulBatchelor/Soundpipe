@@ -12,6 +12,7 @@ PERF_OBJ = $(addprefix p/, $(PERF))
 
 LDFLAGS += -L/usr/local/lib -lsndfile -lm
 CFLAGS += -g -I../h -I /usr/local/include -I. -O3 -Wall -Werror
+CFLAGS += -DSAMPDIR="\"../examples/\""
 
 ifdef WRITE_RAW
 CFLAGS += -DWRITE_RAW

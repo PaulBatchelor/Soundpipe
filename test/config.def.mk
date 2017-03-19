@@ -130,6 +130,7 @@ p_butlp \
 p_clip \
 p_comb \
 p_compressor \
+p_conv \
 p_count \
 p_crossfade \
 p_dcblock \

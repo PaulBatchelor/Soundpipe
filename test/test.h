@@ -1,4 +1,6 @@
+#ifndef SAMPDIR
 #define SAMPDIR "../examples/"
+#endif
 
 enum {
 NORMAL,
