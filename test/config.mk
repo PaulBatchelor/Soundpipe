@@ -154,6 +154,7 @@ p_line \
 p_lpf18 \
 p_maygate \
 p_metro \
+p_mincer \
 p_mode \
 p_moogladder \
 p_noise \
