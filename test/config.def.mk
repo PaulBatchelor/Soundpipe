@@ -171,6 +171,7 @@ p_pinknoise \
 p_pitchamdf \
 p_pluck \
 p_port \
+p_posc3 \
 p_prop \
 p_pshift \
 p_ptrack \
