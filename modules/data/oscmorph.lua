@@ -68,6 +68,10 @@ between an arbitrary number of wavetables.
     noutputs = 1,
 
     inputs = {
+        {
+            name = "in",
+            description = "This does nothing."
+        },
     },
 
     outputs = {
