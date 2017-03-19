@@ -158,6 +158,7 @@ p_mincer \
 p_mode \
 p_moogladder \
 p_oscmorph \
+p_paulstretch \
 p_noise \
 p_pan2 \
 p_panst \
