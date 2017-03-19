@@ -144,6 +144,7 @@ p_eqfil \
 p_expon \
 p_fofilt \
 p_fof \
+p_fog \
 p_fold \
 p_hilbert \
 p_incr \
