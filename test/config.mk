@@ -135,6 +135,7 @@ p_count \
 p_crossfade \
 p_dcblock \
 p_delay \
+p_diskin \
 p_dist \
 p_dmetro \
 p_drip \
