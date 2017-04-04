@@ -92,11 +92,11 @@ Guitarix project.
     inputs = {
         {
             name = "input1",
-            description = "This probably the left audio input signal."
+            description = "Left audio input signal."
         },
         {
             name = "input2",
-            description = "This probably the right audio input signal."
+            description = "Right audio input signal."
         },
     },
 

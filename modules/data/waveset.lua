@@ -37,8 +37,8 @@ sptbl["waveset"] = {
 
     description = [[Simple Time-stretching from repeating wavecyles
 This module looks for zero-crossings and repeats them by a integer factor.
-While a crude means for time stretching, it is a very aesthetically pleasing 
-effect to use on sounds and often produces at "wet" sound.
+While a crude means for time stretching, it is a very aesthetically pleasing
+effect to use on sounds and often produces a "wet" sound.
 
 The waveset algorithm was originally created by Trevor Wishart for the Composer
 Desktop Project (CDP), and was then ported to Csound. 
