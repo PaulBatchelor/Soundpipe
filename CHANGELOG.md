@@ -1,5 +1,9 @@
 # Change log
 
+1.6.0
+-----
+    - unitialized variable in wpkorg35 fix
+
 1.5.0
 -----
     - added saturator module
