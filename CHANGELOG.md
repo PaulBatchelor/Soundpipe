@@ -3,6 +3,7 @@
 1.6.0
 -----
     - unitialized variable in wpkorg35 fix
+    - fixed memory leak in testing utility
 
 1.5.0
 -----
