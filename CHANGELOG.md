@@ -4,6 +4,7 @@
 -----
     - unitialized variable in wpkorg35 fix
     - fixed memory leak in testing utility
+    - README added in test utility folder
 
 1.5.0
 -----
