@@ -8,6 +8,7 @@ typedef struct sp_ftbl{
     SPFLOAT lodiv;
     SPFLOAT sicvt;
     SPFLOAT *tbl;
+    char del;
 }sp_ftbl;
 
 int sp_ftbl_create(sp_data *sp, sp_ftbl **ft, size_t size);
