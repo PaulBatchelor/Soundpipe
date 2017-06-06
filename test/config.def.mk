@@ -104,6 +104,7 @@ t_trand \
 t_tseq \
 t_tseg \
 t_vdelay \
+t_voc \
 t_vocoder \
 t_compressor \
 t_wpkorg35 \
