@@ -33,6 +33,8 @@ int t_waveset(sp_test *tst, sp_data *sp, const char *hash)
 
     fail = sp_test_verify(tst, hash);
 
+    sp_waveset_destroy(&ud.waveset);
+    sp_diskin_destroy(&ud.diskin);
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }

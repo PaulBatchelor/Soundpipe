@@ -88,6 +88,17 @@ int t_pdhalf(sp_test *tst, sp_data *sp, const char *hash)
     }
 
     fail = sp_test_verify(tst, hash);
+    
+    sp_pdhalf_destroy(&ud.pdhalf);
+    sp_ftbl_destroy(&ud.ft);
+    sp_metro_destroy(&ud.met);
+
+    sp_tabread_destroy(&ud.tab);
+    sp_tenv_destroy(&ud.tenv);
+    sp_phasor_destroy(&ud.phs);
+    sp_scale_destroy(&ud.scl);
+    sp_ftbl_destroy(&ud.seq);
+    sp_tseq_destroy(&ud.ts);
 
     if(fail) return SP_NOT_OK;
     else return SP_OK;
