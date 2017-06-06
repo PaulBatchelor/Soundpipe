@@ -115,6 +115,7 @@ trand \
 tseg \
 tseq \
 vdelay \
+voc \
 vocoder \
 waveset \
 wpkorg35 \

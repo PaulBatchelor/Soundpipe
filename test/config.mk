@@ -104,6 +104,7 @@ t_trand \
 t_tseq \
 t_tseg \
 t_vdelay \
+t_voc \
 t_vocoder \
 t_compressor \
 t_wpkorg35 \
@@ -130,12 +131,10 @@ p_butlp \
 p_clip \
 p_comb \
 p_compressor \
-p_conv \
 p_count \
 p_crossfade \
 p_dcblock \
 p_delay \
-p_diskin \
 p_dist \
 p_dmetro \
 p_drip \
@@ -143,8 +142,6 @@ p_dust \
 p_eqfil \
 p_expon \
 p_fofilt \
-p_fof \
-p_fog \
 p_fold \
 p_hilbert \
 p_incr \
@@ -154,11 +151,8 @@ p_line \
 p_lpf18 \
 p_maygate \
 p_metro \
-p_mincer \
 p_mode \
 p_moogladder \
-p_oscmorph \
-p_paulstretch \
 p_noise \
 p_pan2 \
 p_panst \
