@@ -1,4 +1,4 @@
-/*73:*/
+/*77:*/
 #line 94 "./sp.w"
 
 
@@ -50,8 +50,7 @@ sp_ftbl_destroy(&ud.ft);
 sp_osc_destroy(&ud.osc);
 
 if(fail)return SP_NOT_OK;
-
-else return SP_NOT_OK;
+else return SP_OK;
 }
 
-/*:73*/
+/*:77*/
