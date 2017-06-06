@@ -131,10 +131,12 @@ p_butlp \
 p_clip \
 p_comb \
 p_compressor \
+p_conv \
 p_count \
 p_crossfade \
 p_dcblock \
 p_delay \
+p_diskin \
 p_dist \
 p_dmetro \
 p_drip \
@@ -142,7 +144,10 @@ p_dust \
 p_eqfil \
 p_expon \
 p_fofilt \
+p_fof \
+p_fog \
 p_fold \
+p_fosc \
 p_hilbert \
 p_incr \
 p_jcrev \
@@ -151,8 +156,12 @@ p_line \
 p_lpf18 \
 p_maygate \
 p_metro \
+p_mincer \
 p_mode \
 p_moogladder \
+p_osc \
+p_oscmorph \
+p_paulstretch \
 p_noise \
 p_pan2 \
 p_panst \
@@ -198,6 +207,7 @@ p_tone \
 p_trand \
 p_tseg \
 p_vdelay \
+p_voc \
 p_waveset \
 p_wpkorg35 \
 p_zitarev \
