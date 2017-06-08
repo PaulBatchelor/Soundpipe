@@ -1,5 +1,14 @@
 # Change log
 
+1.6.0
+-----
+    - unitialized variable in wpkorg35 fix
+    - fixed memory leak in testing utility
+    - README added in test utility folder
+    - added "del" parameter to sp_ftbl. When 0, it will not free the table
+    - sp_ftbl_bind does not free table data by default (del is to be 0)
+    - added sp_voc
+
 1.5.0
 -----
     - added saturator module

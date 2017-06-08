@@ -104,6 +104,7 @@ t_trand \
 t_tseq \
 t_tseg \
 t_vdelay \
+t_voc \
 t_vocoder \
 t_compressor \
 t_wpkorg35 \
@@ -146,6 +147,7 @@ p_fofilt \
 p_fof \
 p_fog \
 p_fold \
+p_fosc \
 p_hilbert \
 p_incr \
 p_jcrev \
@@ -157,6 +159,7 @@ p_metro \
 p_mincer \
 p_mode \
 p_moogladder \
+p_osc \
 p_oscmorph \
 p_paulstretch \
 p_noise \
@@ -204,6 +207,7 @@ p_tone \
 p_trand \
 p_tseg \
 p_vdelay \
+p_voc \
 p_waveset \
 p_wpkorg35 \
 p_zitarev \

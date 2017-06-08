@@ -33,7 +33,8 @@ perftest:
 
 plot:
 	gnuplot plot.plt
-	convert -rotate 90 demo.png out.png
+	convert -rotate 90 demo.png perftest.png
+	rm demo.png
 
 test.o: test.c
 	$(CC) -g -I../h -I /usr/local/include -c -o $@ $<
