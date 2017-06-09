@@ -435,7 +435,7 @@ tr->nose_reflection[i]= (tr->noseA[i-1]-tr->noseA[i])/
 #line 351 "./tract.w"
 
 /*60:*/
-#line 392 "./tract.w"
+#line 396 "./tract.w"
 
 static int append_transient(transient_pool*pool,int position)
 {
@@ -474,7 +474,7 @@ return 0;
 #line 352 "./tract.w"
 
 /*61:*/
-#line 439 "./tract.w"
+#line 443 "./tract.w"
 
 
 static void remove_transient(transient_pool*pool,unsigned int id)
@@ -682,6 +682,10 @@ tr->tpool.next_free= 0;
 for(i= 0;i<MAX_TRANSIENTS;i++){
 tr->tpool.pool[i].is_free= 1;
 tr->tpool.pool[i].id= i;
+tr->tpool.pool[i].position= 0;
+tr->tpool.pool[i].time_alive= 0;
+tr->tpool.pool[i].strength= 0;
+tr->tpool.pool[i].exponent= 0;
 }
 
 /*:59*/
@@ -710,7 +714,7 @@ SPFLOAT noise;
 
 
 /*62:*/
-#line 490 "./tract.w"
+#line 494 "./tract.w"
 
 pool= &tr->tpool;
 current_size= pool->size;
