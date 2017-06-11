@@ -136,6 +136,7 @@ int sp_ftbl_loadfile(sp_data *sp, sp_ftbl **ft, const char *filename)
     ftp->lobits = log2(SP_FT_MAXLEN / size);
     ftp->lomask = (2^ftp->lobits) - 1;
     ftp->lodiv = 1.0 / pow(2, ftp->lobits);
+    ftp->del = 1;
 
 #ifdef USE_DOUBLE
     sf_readf_double(snd, ftp->tbl, ftp->size);
@@ -164,6 +165,7 @@ int sp_ftbl_loadspa(sp_data *sp, sp_ftbl **ft, const char *filename)
     ftp->lobits = log2(SP_FT_MAXLEN / size);
     ftp->lomask = (2^ftp->lobits) - 1;
     ftp->lodiv = 1.0 / pow(2, ftp->lobits);
+    ftp->del = 1;
 
     spa_read_buf(sp, &spa, ftp->tbl, ftp->size);
     spa_close(&spa);
