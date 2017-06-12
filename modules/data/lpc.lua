@@ -11,6 +11,21 @@ sptbl["lpc"] = {
         destroy = "sp_lpc_destroy",
         init = "sp_lpc_init",
         compute = "sp_lpc_compute",
+        other = {
+            sp_lpc_synth = {
+                description = [[Toggle synth mode. 
+                Instead of reading an input, manipulate the parameters in  
+                a scaled ftable.]],
+                args = { 
+                    {
+                        name = "ft",
+                        type = "sp_ftbl *",
+                        description = "ftable of size 7",
+                        default = "N/A"
+                    }
+                }
+            }
+        }
     },
 
     params = {
@@ -39,8 +54,12 @@ communication.
 
 Because the LPC10 encoder
 relies on frames for encoding, the output signal has a few milliseconds of
-delay. 
- 
+delay. The delay can be calculated in seconds as (framesize * 4) / samplerate.
+
+In addition to using the LPC as a decoder/encoder, this module can also be 
+set to synth mode. Instead of reading from an input signal, the LPC can
+instead read from parameters set directly in a scaled ftable. 
+
 ]],
 
     ninputs = 1,

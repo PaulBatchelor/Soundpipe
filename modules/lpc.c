@@ -27,6 +27,7 @@ int sp_lpc_init(sp_data *sp, sp_lpc *lpc, int framesize)
     lpc->clock = 0;
     lpc->block = 4;
     lpc->samp = 0;
+    lpc->mode = 0;
     lpc->framesize = framesize;
     openlpc_sr(sp->sr / lpc->block);
 
@@ -54,14 +55,20 @@ int sp_lpc_init(sp_data *sp, sp_lpc *lpc, int framesize)
 
 int sp_lpc_compute(sp_data *sp, sp_lpc *lpc, SPFLOAT *in, SPFLOAT *out)
 {
+    int i;
     if(lpc->clock == 0) {
         if(lpc->counter == 0) {
-
-            openlpc_encode(lpc->in, lpc->data, lpc->e);
+            if(lpc->mode == 0) { 
+                openlpc_encode(lpc->in, lpc->data, lpc->e);
+            } else {
+                for(i = 0; i < 7; i++) {
+                    lpc->data[i] = 255 * lpc->ft->tbl[i];
+                }
+            }
             openlpc_decode(lpc->data, lpc->out, lpc->d);
         }
 
-        lpc->in[lpc->counter] = *in * 32767; 
+        if(lpc->mode == 0) lpc->in[lpc->counter] = *in * 32767; 
         lpc->samp = lpc->out[lpc->counter] / 32767.0;
 
         lpc->counter = (lpc->counter + 1) % lpc->framesize;
@@ -70,5 +77,12 @@ int sp_lpc_compute(sp_data *sp, sp_lpc *lpc, SPFLOAT *in, SPFLOAT *out)
     lpc->clock = (lpc->clock + 1) % lpc->block;
     *out = lpc->samp;
 
+    return SP_OK;
+}
+
+int sp_lpc_synth(sp_data *sp, sp_lpc *lpc, sp_ftbl *ft)
+{
+    lpc->ft = ft;
+    lpc->mode = 1;
     return SP_OK;
 }

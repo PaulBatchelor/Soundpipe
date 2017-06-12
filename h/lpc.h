@@ -13,9 +13,12 @@ typedef struct {
     sp_auxdata m_out;
     sp_auxdata m_e;
     sp_auxdata m_d;
+    int mode;
+    sp_ftbl *ft;
 } sp_lpc;
 
 int sp_lpc_create(sp_lpc **lpc);
 int sp_lpc_destroy(sp_lpc **lpc);
 int sp_lpc_init(sp_data *sp, sp_lpc *lpc, int framesize);
+int sp_lpc_synth(sp_data *sp, sp_lpc *lpc, sp_ftbl *ft);
 int sp_lpc_compute(sp_data *sp, sp_lpc *lpc, SPFLOAT *in, SPFLOAT *out);
