@@ -5,6 +5,8 @@ typedef struct {
     short *in;
     short *out;
     unsigned char data[7];
+    SPFLOAT y[7];
+    SPFLOAT smooth;
     SPFLOAT samp;
     unsigned int clock;
     unsigned int block;

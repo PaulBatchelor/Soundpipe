@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <math.h>
 #include "soundpipe.h"
 #include "openlpc.h"
 
@@ -56,13 +57,18 @@ int sp_lpc_init(sp_data *sp, sp_lpc *lpc, int framesize)
 int sp_lpc_compute(sp_data *sp, sp_lpc *lpc, SPFLOAT *in, SPFLOAT *out)
 {
     int i;
+
+
     if(lpc->clock == 0) {
         if(lpc->counter == 0) {
             if(lpc->mode == 0) { 
                 openlpc_encode(lpc->in, lpc->data, lpc->e);
             } else {
                 for(i = 0; i < 7; i++) {
-                    lpc->data[i] = 255 * lpc->ft->tbl[i];
+                    lpc->y[i] = 
+                        lpc->smooth*lpc->y[i] + 
+                        (1-lpc->smooth)*lpc->ft->tbl[i];
+                    lpc->data[i] = 255 * lpc->y[i];
                 }
             }
             openlpc_decode(lpc->data, lpc->out, lpc->d);
@@ -74,6 +80,7 @@ int sp_lpc_compute(sp_data *sp, sp_lpc *lpc, SPFLOAT *in, SPFLOAT *out)
         lpc->counter = (lpc->counter + 1) % lpc->framesize;
     }
 
+
     lpc->clock = (lpc->clock + 1) % lpc->block;
     *out = lpc->samp;
 
@@ -82,7 +89,15 @@ int sp_lpc_compute(sp_data *sp, sp_lpc *lpc, SPFLOAT *in, SPFLOAT *out)
 
 int sp_lpc_synth(sp_data *sp, sp_lpc *lpc, sp_ftbl *ft)
 {
+    int i;
+    int sr;
+    sr = sp->sr;
+
+    sr = sr / 4;
+    sr = sr / lpc->framesize;
     lpc->ft = ft;
     lpc->mode = 1;
+    for(i = 0; i < 7; i++) lpc->y[i] = 0;
+    lpc->smooth = exp(-1.0 / (0.01 * sr));
     return SP_OK;
 }
