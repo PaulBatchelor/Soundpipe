@@ -1,52 +1,44 @@
-/*
- * This is a dummy example.
- * Please implement a small and simple working example of your module, and then
- * remove this header.
- * Don't be clever.
- * Bonus points for musicality. 
- *
- */
-
 #include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
 #include "soundpipe.h"
 
 typedef struct {
+    sp_diskin *wav;
     sp_lpc *lpc;
-    sp_osc *osc;
-    sp_ftbl *ft; 
-} UserData;
+} user_data;
 
-void process(sp_data *sp, void *udata) {
-    UserData *ud = udata;
-    SPFLOAT osc = 0, lpc = 0;
-    sp_osc_compute(sp, ud->osc, NULL, &osc);
-    sp_lpc_compute(sp, ud->lpc, &osc, &lpc);
-    sp->out[0] = lpc;
+static void process(sp_data *sp, void *ud)
+{
+    user_data *dt;
+    SPFLOAT diskin;
+    SPFLOAT out;
+    dt = ud;
+
+    sp_diskin_compute(sp, dt->wav, NULL, &diskin);
+    sp_lpc_compute(sp, dt->lpc, &diskin, &out);
+
+
+    sp_out(sp, 0, out);
 }
 
-int main() {
-    UserData ud;
+int main(int argc, char **argv)
+{
+    user_data dt;
     sp_data *sp;
+
     sp_create(&sp);
-    sp_srand(sp, 1234567);
+    sp->sr = 44100;
+    sp->len = sp->sr * 8;
 
-    sp_lpc_create(&ud.lpc);
-    sp_osc_create(&ud.osc);
-    sp_ftbl_create(sp, &ud.ft, 2048);
+    sp_lpc_create(&dt.lpc);
+    sp_lpc_init(sp, dt.lpc, 512);
 
-    sp_lpc_init(sp, ud.lpc);
-    sp_gen_sine(sp, ud.ft);
-    sp_osc_init(sp, ud.osc, ud.ft, 0);
+    sp_diskin_create(&dt.wav);
+    sp_diskin_init(sp, dt.wav, "oneart.wav");
 
-    sp->len = 44100 * 5;
-    sp_process(sp, &ud, process);
 
-    sp_lpc_destroy(&ud.lpc);
-    sp_ftbl_destroy(&ud.ft);
-    sp_osc_destroy(&ud.osc);
-
+    sp_process(sp, &dt, process);
+    sp_diskin_destroy(&dt.wav);
+    sp_lpc_destroy(&dt.lpc);
     sp_destroy(&sp);
     return 0;
 }
