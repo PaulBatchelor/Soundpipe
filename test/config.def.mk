@@ -48,6 +48,7 @@ t_hilbert \
 t_jcrev \
 t_jitter \
 t_line \
+t_lpc \
 t_lpf18 \
 t_maygate \
 t_metro \
