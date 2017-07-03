@@ -1,6 +1,6 @@
 typedef struct {
-    int mode, init;
-    SPFLOAT prev, thresh;
+    int init;
+    SPFLOAT prev, thresh, mode;
 } sp_thresh;
 
 int sp_thresh_create(sp_thresh **p);
