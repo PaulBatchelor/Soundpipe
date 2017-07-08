@@ -8,6 +8,7 @@
     - added "del" parameter to sp_ftbl. When 0, it will not free the table
     - sp_ftbl_bind does not free table data by default (del is to be 0)
     - added sp_voc
+    - added sp_lpc
 
 1.5.0
 -----

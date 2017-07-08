@@ -50,6 +50,7 @@ incr \
 jcrev \
 jitter \
 line \
+lpc \
 lpf18 \
 maygate \
 metro \
@@ -155,6 +156,9 @@ MODULES += padsynth
 
 # Soundpipe audio 
 include lib/spa/Makefile
+
+# openlpc
+include lib/openlpc/Makefile
 
 CFLAGS += -fPIC -g
 

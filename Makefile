@@ -2,7 +2,7 @@
 
 default: all
 
-VERSION = 1.5.3
+VERSION = 1.5.4
 
 INTERMEDIATES_PREFIX ?= .
 PREFIX ?= /usr/local
@@ -57,6 +57,16 @@ endif
 	cat $(HPATHS) >> $@
 	echo "#endif" >> $@
 
+$(HDIR)/sp_base.h: h/base.h 
+	>$@
+	echo "#ifndef SOUNDPIPE_H" >> $@
+ifdef USE_DOUBLE
+	echo "#define USE_DOUBLE" >> $@
+endif
+	echo "#define SOUNDPIPE_H" >> $@
+	cat $< >> $@
+	echo "#endif" >> $@
+
 $(MODDIR)/%.o: modules/%.c h/%.h $(HDIR)/soundpipe.h | $(MODDIR)
 	$(CC) -Wall $(CFLAGS) -c -static $< -o $@
 
@@ -81,7 +91,8 @@ docs:
 all: $(INTERMEDIATES_PREFIX)/config.mk \
 	$(INTERMEDIATES_PREFIX)/libsoundpipe.a \
 	$(INTERMEDIATES_PREFIX)/sp_dict.lua \
-	$(UTIL)
+	$(UTIL) \
+	$(HDIR)/sp_base.h
 
 install: \
 	$(INTERMEDIATES_PREFIX)/h/soundpipe.h \
@@ -89,6 +100,7 @@ install: \
 		$(PREFIX)/include \
 		$(PREFIX)/lib
 	install $(HDIR)/soundpipe.h $(PREFIX)/include/
+	install $(HDIR)/sp_base.h $(PREFIX)/include/
 	install $(LIBSOUNDPIPE) $(PREFIX)/lib/
 
 clean:
@@ -102,3 +114,4 @@ clean:
 	rm -rf $(MPATHS)
 	rm -rf $(UTIL)
 	rm -rf $(UTILDIR)/wav2smp.dSYM
+	rm -rf $(HDIR)/sp_base.h

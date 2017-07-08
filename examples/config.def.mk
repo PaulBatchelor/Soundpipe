@@ -53,6 +53,7 @@ ex_incr \
 ex_jcrev \
 ex_jitter \
 ex_line \
+ex_lpc \
 ex_lpf18 \
 ex_maygate \
 ex_metro \

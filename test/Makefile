@@ -21,7 +21,7 @@ endif
 libsptest.a: md5.o test.o libtap.o
 	ld -o $@ -r md5.o libtap.o test.o
 
-t/%.o: t/%.c
+t/%.o: t/%.c all_tests.h
 	$(CC) -c $(CFLAGS) -o $@ $<
 
 perf: $(PERF_OBJ)
