@@ -20,7 +20,7 @@ int sp_ftbl_create(sp_data *sp, sp_ftbl **ft, size_t size)
     ftp->sicvt = 1.0 * SP_FT_MAXLEN / sp->sr;
     ftp->lobits = log2(SP_FT_MAXLEN / size);
     ftp->lomask = (2^ftp->lobits) - 1;
-    ftp->lodiv = 1.0 / pow(2, ftp->lobits);
+    ftp->lodiv = 1.0 / (2^ftp->lobits);
     ftp->del = 1;
     return SP_OK;
 }
@@ -34,7 +34,7 @@ int sp_ftbl_bind(sp_data *sp, sp_ftbl **ft, SPFLOAT *tbl, size_t size)
     ftp->sicvt = 1.0 * SP_FT_MAXLEN / sp->sr;
     ftp->lobits = log2(SP_FT_MAXLEN / size);
     ftp->lomask = (2^ftp->lobits) - 1;
-    ftp->lodiv = 1.0 / pow(2, ftp->lobits);
+    ftp->lodiv = 1.0 / (2^ftp->lobits);
     ftp->del = 0;
     return SP_OK;
 }
@@ -135,7 +135,7 @@ int sp_ftbl_loadfile(sp_data *sp, sp_ftbl **ft, const char *filename)
     ftp->tbl = malloc(sizeof(SPFLOAT) * (size + 1));
     ftp->lobits = log2(SP_FT_MAXLEN / size);
     ftp->lomask = (2^ftp->lobits) - 1;
-    ftp->lodiv = 1.0 / pow(2, ftp->lobits);
+    ftp->lodiv = 1.0 / (2^ftp->lobits);
     ftp->del = 1;
 
 #ifdef USE_DOUBLE
@@ -164,7 +164,7 @@ int sp_ftbl_loadspa(sp_data *sp, sp_ftbl **ft, const char *filename)
     ftp->tbl = malloc(sizeof(SPFLOAT) * (size + 1));
     ftp->lobits = log2(SP_FT_MAXLEN / size);
     ftp->lomask = (2^ftp->lobits) - 1;
-    ftp->lodiv = 1.0 / pow(2, ftp->lobits);
+    ftp->lodiv = 1.0 / (2^ftp->lobits);
     ftp->del = 1;
 
     spa_read_buf(sp, &spa, ftp->tbl, ftp->size);
