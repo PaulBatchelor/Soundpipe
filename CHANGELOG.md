@@ -9,6 +9,7 @@
     - sp_ftbl_bind does not free table data by default (del is to be 0)
     - added sp_voc
     - added sp_lpc
+    - padsynth: change from RANDMAX to SP_RANDMAX
 
 1.5.0
 -----
