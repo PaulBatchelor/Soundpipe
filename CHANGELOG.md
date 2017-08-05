@@ -10,6 +10,7 @@
     - added sp_voc
     - added sp_lpc
     - padsynth: change from RANDMAX to SP_RANDMAX
+    - smoothdelay: initial delay times work now. 
 
 1.5.0
 -----
