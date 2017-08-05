@@ -34,6 +34,7 @@ int main() {
 
     sp_smoothdelay_init(sp, ud.smoothdelay, 1.0, 1024);
     ud.smoothdelay->feedback = 0.5;
+    ud.smoothdelay->del = 0.1;
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
     ud.osc->freq = 0.2;
