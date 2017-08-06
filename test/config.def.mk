@@ -87,6 +87,7 @@ t_saturator \
 t_samphold \
 t_scale \
 t_sdelay \
+t_smoothdelay \
 t_spa \
 t_streson \
 t_switch \
