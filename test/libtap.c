@@ -12,11 +12,12 @@ void plan( unsigned int num )
            num );
 }
 
-void ok( unsigned int ok, const char* msg )
+unsigned int ok( unsigned int ok, const char* msg )
 {
    static int testnum = 0;
    printf( "%s %d - %s\n",
            ( ok ? "ok" : "not ok" ),
            ++testnum,
            msg );
+   return ok;
 }

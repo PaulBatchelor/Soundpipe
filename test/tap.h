@@ -7,7 +7,7 @@
 
 void plan( unsigned int num );
 
-void ok( unsigned int ok, const char* msg );
+unsigned int ok( unsigned int ok, const char* msg );
 
 #endif
 

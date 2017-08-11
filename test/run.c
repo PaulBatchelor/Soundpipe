@@ -26,6 +26,7 @@ static void print_help()
     printf("\ttest NUM: test position NUM\n");
 }
 
+/* TODO: refactor */
 int main(int argc, char *argv[])
 {
     uint32_t n;
@@ -36,21 +37,30 @@ int main(int argc, char *argv[])
     };
 
     int err = 0;
+    unsigned int rc;
+    unsigned int errcnt;
     sp_test *tst;
     sp_data *sp;
     sp_create(&sp);
 
     uint32_t size = 44100 * 5;
 
+    errcnt = 0;
     if(argc == 1) {
         plan(SIZE(tests));
         for(n = 0; n < SIZE(tests); n++) {
             sp_test_create(&tst, size);
-            ok(tests[n].func(tst, sp, tests[n].hash)  == SP_OK, tests[n].desc);
+            rc = ok(tests[n].func(tst, sp, tests[n].hash)  == SP_OK, tests[n].desc);
 #ifdef WRITE_RAW
             if(n != 0) sp_test_write_raw(tst, n);
 #endif
+            if(n != 0 && !rc) {
+                errcnt++; 
+            }
             sp_test_destroy(&tst);
+        }
+        if(errcnt > 0) {
+            fprintf(stderr, "Testing resulted in %d error(s).\n", errcnt);
         }
     } else {
         if (!strcmp(argv[1], "gen_header")) {
