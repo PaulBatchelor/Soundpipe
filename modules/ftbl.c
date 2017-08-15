@@ -89,7 +89,8 @@ int sp_gen_vals(sp_data *sp, sp_ftbl *ft, const char *string)
         ft->tbl[j] = atof(out);
         j++;
     }
-   
+  
+    sp_ftbl_init(sp, ft, ft->size);
     free(ptr); 
     return SP_OK;
 }
