@@ -12,6 +12,7 @@
     - padsynth: change from RANDMAX to SP_RANDMAX
     - smoothdelay: initial delay times work now. 
     - fixed ftable constants. oscillators are now less noisy.
+    - gen_vals: ftable constants initialized now
 
 1.5.0
 -----
