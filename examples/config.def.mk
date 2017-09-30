@@ -107,6 +107,7 @@ ex_sparec \
 ex_switch \
 ex_tabread \
 ex_tadsr \
+ex_talkbox \
 ex_tblrec \
 ex_tbvcf \
 ex_tdiv \

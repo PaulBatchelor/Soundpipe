@@ -101,6 +101,7 @@ streson \
 switch \
 tabread \
 tadsr \
+talkbox \
 tblrec \
 tbvcf \
 tdiv \
