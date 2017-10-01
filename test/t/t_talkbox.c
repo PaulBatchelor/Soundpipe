@@ -72,6 +72,5 @@ int t_talkbox(sp_test *tst, sp_data *sp, const char *hash)
     sp_diskin_destroy(&ud.diskin);
 
     if(fail) return SP_NOT_OK;
-    /* fail by default */
-    else return SP_NOT_OK;
+    else return SP_OK;
 }
