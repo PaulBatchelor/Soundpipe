@@ -93,6 +93,7 @@ t_streson \
 t_switch \
 t_tabread \
 t_tadsr \
+t_talkbox \
 t_tblrec \
 t_tbvcf \
 t_tdiv \
