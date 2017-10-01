@@ -1,6 +1,6 @@
 # Change log
 
-1.6.0
+1.6.0 "Talky"
 -----
     - unitialized variable in wpkorg35 fix
     - fixed memory leak in testing utility
@@ -13,6 +13,7 @@
     - smoothdelay: initial delay times work now. 
     - fixed ftable constants. oscillators are now less noisy.
     - gen_vals: ftable constants initialized now
+    - Added sp_talkbox
 
 1.5.0
 -----
