@@ -42,6 +42,7 @@ int main() {
     sp_diskin_create(&ud.diskin);
 	sp_talkbox_create(&ud.talkbox);
 	sp_talkbox_init(sp, ud.talkbox);
+	ud.talkbox->quality = 0.2;
 
 	for(i = 0; i < NOSC; i++) {
 		sp_blsaw_create(&ud.saw[i]);

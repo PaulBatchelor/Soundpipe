@@ -2,9 +2,9 @@
  * Talkbox
  * 
  * This module is ported from the mdaTalkbox plugin by Paul Kellet 
- * (maxim digital audio).
+ * (maxim digital audio). 
  *
- * More information on his plugins can be found here:
+ * More information on his plugins and the original code can be found here:
  * 
  * http://mda.smartelectronix.com/ 
  * 
@@ -14,10 +14,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "soundpipe.h"
-
-#ifndef M_PI
-#define M_PI 3.14159265358979323846
-#endif
 
 #ifndef TWO_PI
 #define TWO_PI 6.28318530717958647692528676655901
@@ -30,7 +26,7 @@ static void lpc_durbin(SPFLOAT *r, int p, float *k, float *g)
   int i, j;
   SPFLOAT a[ORD_MAX], at[ORD_MAX], e=r[0];
     
-  for(i=0; i<=p; i++) a[i] = at[i] = 0.0f; //probably don't need to clear at[] or k[]
+  for(i=0; i<=p; i++) a[i] = at[i] = 0.0f;
 
   for(i=1; i<=p; i++) 
   {
@@ -103,17 +99,12 @@ int sp_talkbox_destroy(sp_talkbox **p)
 int sp_talkbox_init(sp_data *sp, sp_talkbox *p)
 {
     uint32_t n;
-    p->wet = 0.5f;
-    p->dry = 0.f;
-    p->swap = 0.f;
-    p->quality = 0.f;
+    p->quality = 1.f;
     p->N = 1;
     p->K = 0;
 
     n = (uint32_t)(0.01633f * sp->sr);
     if(n > SP_TALKBOX_BUFMAX) n = SP_TALKBOX_BUFMAX;
-
-    p->O = (uint32_t)((0.0001f + 0.0004f * p->quality) * sp->sr);
 
     /* calculate hanning window */
     if(n != p->N) {
@@ -143,24 +134,13 @@ int sp_talkbox_init(sp_data *sp, sp_talkbox *p)
 
 int sp_talkbox_compute(sp_data *sp, sp_talkbox *t, SPFLOAT *src, SPFLOAT *exc, SPFLOAT *out)
 {
-    /*
-    if(swap) {
-        in1 = inputs[1];
-        in2 = inputs[0];
-    }*/
     int32_t p0=t->pos, p1 = (t->pos + t->N/2) % t->N;
     SPFLOAT e=t->emphasis, w, o, x, dr, fx=t->FX;
     SPFLOAT p, q, h0=0.3f, h1=0.77f;
+    SPFLOAT den;
 
-    /*
-    --in1;
-    --in2;
-    --out1;
-    --out2;
-    */
-    //while(--sampleFrames >= 0)
-    //{
-    /* TODO: maybe swap src and exc */
+    t->O = (uint32_t)((0.0001f + 0.0004f * t->quality) * sp->sr);
+
     o = *src;
     x = *exc;
     dr = o;
@@ -180,11 +160,14 @@ int sp_talkbox_compute(sp_data *sp, sp_talkbox *t, SPFLOAT *src, SPFLOAT *exc, S
     if(t->K++) {
         t->K = 0;
 
-        t->car0[p0] = t->car1[p1] = x; //carrier input
+        /* carrier input */
+        t->car0[p0] = t->car1[p1] = x;
 
-        x = o - e;  e = o;  //6dB/oct pre-emphasis
+        /* 6dB/oct pre-emphasis */
+        x = o - e;  e = o;  
 
-        w = t->window[p0]; fx = t->buf0[p0] * w;  t->buf0[p0] = x * w;  //50% overlapping hanning windows
+        /* 50% overlapping hanning windows */
+        w = t->window[p0]; fx = t->buf0[p0] * w;  t->buf0[p0] = x * w;  
         if(++p0 >= t->N) { lpc(t->buf0, t->car0, t->N, t->O);  p0 = 0; }
 
         w = 1.0f - w;  fx += t->buf1[p1] * w;  t->buf1[p1] = x * w;
@@ -202,15 +185,15 @@ int sp_talkbox_compute(sp_data *sp, sp_talkbox *t, SPFLOAT *src, SPFLOAT *exc, S
     t->u4 = fx;
     x = p + q;
 
-    o = t->wet * x + t->dry * dr;
+    o = x * 0.5;
     *out = o;
-    //}
     t->emphasis = e;
     t->pos = p0;
     t->FX = fx;
 
-    SPFLOAT den = 1.0e-10f; //(SPFLOAT)pow(10.0f, -10.0f * param[4]);
-    if(fabs(t->d0) < den) t->d0 = 0.0f; //anti-denormal (doesn't seem necessary but P4?)
+    den = 1.0e-10f; 
+    /* anti-denormal */
+    if(fabs(t->d0) < den) t->d0 = 0.0f; 
     if(fabs(t->d1) < den) t->d1 = 0.0f;
     if(fabs(t->d2) < den) t->d2 = 0.0f;
     if(fabs(t->d3) < den) t->d3 = 0.0f;

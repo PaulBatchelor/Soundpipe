@@ -4,9 +4,6 @@
 #endif
 
 typedef struct {
-    SPFLOAT wet;
-    SPFLOAT dry;
-    SPFLOAT swap;
     SPFLOAT quality;
     SPFLOAT d0, d1, d2, d3, d4;
     SPFLOAT u0, u1, u2, u3, u4;
