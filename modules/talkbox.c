@@ -135,7 +135,7 @@ int sp_talkbox_init(sp_data *sp, sp_talkbox *p)
 int sp_talkbox_compute(sp_data *sp, sp_talkbox *t, SPFLOAT *src, SPFLOAT *exc, SPFLOAT *out)
 {
     int32_t p0=t->pos, p1 = (t->pos + t->N/2) % t->N;
-    SPFLOAT e=t->emphasis, w, o, x, dr, fx=t->FX;
+    SPFLOAT e=t->emphasis, w, o, x, fx=t->FX;
     SPFLOAT p, q, h0=0.3f, h1=0.77f;
     SPFLOAT den;
 
@@ -143,7 +143,6 @@ int sp_talkbox_compute(sp_data *sp, sp_talkbox *t, SPFLOAT *src, SPFLOAT *exc, S
 
     o = *src;
     x = *exc;
-    dr = o;
 
     p = t->d0 + h0 * x; 
     t->d0 = t->d1;  
