@@ -6,7 +6,7 @@
 typedef struct {
     sp_vocoder *vocoder;
     sp_blsaw *saw[3];
-    sp_diskin *diskin;
+    sp_spa *diskin;
 } UserData;
 
 int t_vocoder(sp_test *tst, sp_data *sp, const char *hash) 
@@ -25,8 +25,8 @@ int t_vocoder(sp_test *tst, sp_data *sp, const char *hash)
     sp_vocoder_create(&ud.vocoder);
     sp_vocoder_init(sp, ud.vocoder);
    
-    sp_diskin_create(&ud.diskin); 
-    sp_diskin_init(sp, ud.diskin, SAMPDIR "oneart.wav");
+    sp_spa_create(&ud.diskin); 
+    sp_spa_init(sp, ud.diskin, SAMPDIR "oneart.spa");
 
     for(i = 0; i < 3; i++) {
         sp_blsaw_create(&ud.saw[i]);
@@ -39,7 +39,7 @@ int t_vocoder(sp_test *tst, sp_data *sp, const char *hash)
         vocoder = 0; 
         saw = 0; 
         tmp = 0;
-        sp_diskin_compute(sp, ud.diskin, NULL, &diskin);
+        sp_spa_compute(sp, ud.diskin, NULL, &diskin);
         for(i = 0; i < 3; i++) {
             sp_blsaw_compute(sp, ud.saw[i], NULL, &tmp);
             saw += tmp;
@@ -57,7 +57,7 @@ int t_vocoder(sp_test *tst, sp_data *sp, const char *hash)
         sp_blsaw_destroy(&ud.saw[i]);
     }
 
-    sp_diskin_destroy(&ud.diskin); 
+    sp_spa_destroy(&ud.diskin); 
 
     if(fail) return SP_NOT_OK;
     else return SP_OK;
