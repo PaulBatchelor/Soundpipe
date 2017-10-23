@@ -15,6 +15,7 @@
     - gen_vals: ftable constants initialized now
     - Added sp_talkbox
     - Quick fix to sp_osc to make things less noisy
+    - added stretcher utility
 
 1.5.0
 -----
