@@ -18,6 +18,7 @@ typedef struct {
     sp_auxdata m_hinv_buf;
     sp_auxdata m_buf;
     sp_auxdata m_output;
+    unsigned char wrap;
 } sp_paulstretch;
 
 int sp_paulstretch_create(sp_paulstretch **p);

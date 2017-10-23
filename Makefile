@@ -79,6 +79,9 @@ $(INTERMEDIATES_PREFIX)/config.mk: config.def.mk | $(INTERMEDIATES_PREFIX)
 $(UTILDIR)/wav2smp: util/wav2smp.c | $(UTILDIR)
 	$(CC) $(CFLAGS) -L/usr/local/lib $< -lsndfile -o $@
 
+$(UTILDIR)/stretcher: util/stretcher.c | $(UTILDIR)
+	$(CC) $(CFLAGS) -L/usr/local/lib $< -L. -lsoundpipe -lsndfile -o $@
+
 $(INTERMEDIATES_PREFIX)/sp_dict.lua: | $(INTERMEDIATES_PREFIX)
 	cat modules/data/*.lua > $@
 
