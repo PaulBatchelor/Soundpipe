@@ -89,6 +89,7 @@
 #include <string.h>
 #include <stdlib.h>							   
 
+#include "soundpipe.h"
 #include "openlpc.h"
 #include "ftol.h"
 
@@ -556,7 +557,7 @@ void init_openlpc_decoder_state(openlpc_decoder_state *st, int framelen)
 
 /* LPC Synthesis (decoding) */
 
-int openlpc_decode(unsigned char *parm, short *buf, openlpc_decoder_state *st)
+int openlpc_decode(sp_data *sp, unsigned char *parm, short *buf, openlpc_decoder_state *st)
 {
     int i, j, flen=st->framelen;
     float per, gain, k[LPC_FILTORDER+1];
@@ -649,7 +650,7 @@ int openlpc_decode(unsigned char *parm, short *buf, openlpc_decoder_state *st)
         
         for (i=0; i < flen/2; i++, ii++) {
             if (Newper == 0.f) {
-                u = (float)(((rand()*(1/(1.0f+RAND_MAX))) - 0.5f ) * newgain * gainadj); 
+                u = (float)(((sp_rand(sp)*(1/(1.0f+RAND_MAX))) - 0.5f ) * newgain * gainadj); 
             } else {			/* voiced: send a delta every per samples */
                 /* triangular excitation */
                 if (st->pitchctr == 0) {

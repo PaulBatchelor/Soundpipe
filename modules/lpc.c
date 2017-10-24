@@ -71,7 +71,7 @@ int sp_lpc_compute(sp_data *sp, sp_lpc *lpc, SPFLOAT *in, SPFLOAT *out)
                     lpc->data[i] = 255 * lpc->y[i];
                 }
             }
-            openlpc_decode(lpc->data, lpc->out, lpc->d);
+            openlpc_decode(sp, lpc->data, lpc->out, lpc->d);
         }
 
         if(lpc->mode == 0) lpc->in[lpc->counter] = *in * 32767; 

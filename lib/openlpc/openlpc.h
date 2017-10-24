@@ -23,7 +23,7 @@ void destroy_openlpc_encoder_state(openlpc_encoder_state *st);
 
 openlpc_decoder_state *create_openlpc_decoder_state(void);
 void init_openlpc_decoder_state(openlpc_decoder_state *st, int framelen);
-int  openlpc_decode(unsigned char *in, short *out, openlpc_decoder_state *st);
+int  openlpc_decode(sp_data *sp, unsigned char *in, short *out, openlpc_decoder_state *st);
 void destroy_openlpc_decoder_state(openlpc_decoder_state *st);
 
 void openlpc_sr(float sr);
