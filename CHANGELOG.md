@@ -16,6 +16,7 @@
     - Added sp_talkbox
     - Quick fix to sp_osc to make things less noisy
     - added stretcher utility
+    - maygate: RAND_MAX -> SP_RANDMAX
 
 1.5.0
 -----
