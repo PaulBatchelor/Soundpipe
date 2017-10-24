@@ -152,25 +152,6 @@ int sp_ftbl_loadfile(sp_data *sp, sp_ftbl **ft, const char *filename)
 }
 #endif
 
-int sp_ftbl_loadspa(sp_data *sp, sp_ftbl **ft, const char *filename)
-{
-    *ft = malloc(sizeof(sp_ftbl));
-    sp_ftbl *ftp = *ft;
-
-    sp_audio spa;
-
-    spa_open(sp, &spa, filename, SPA_READ);
-
-    size_t size = spa.header.len;
-
-    ftp->tbl = malloc(sizeof(SPFLOAT) * (size + 1));
-    sp_ftbl_init(sp, ftp, size);
-
-    spa_read_buf(sp, &spa, ftp->tbl, ftp->size);
-    spa_close(&spa);
-    return SP_OK;
-}
-
 /* port of GEN10 from Csound */
 int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, const char *argstring)
 {

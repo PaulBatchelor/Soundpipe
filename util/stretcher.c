@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "soundpipe.h"
 
 
@@ -22,7 +23,7 @@ int main(int argc, char *argv[])
 
     if(argc < 7) {
         fprintf(stderr, 
-            "Usage: %s window_size sr stretch window  out_dur in.wav out.wav\n", 
+            "Usage: %s sr window_size stretch window  out_dur in.wav out.wav\n", 
             argv[0]
         );
         return 1;
@@ -45,10 +46,12 @@ int main(int argc, char *argv[])
     sp_ftbl_loadfile(sp, &ft, argv[5]);
     printf("output = %s\n", argv[6]);
 
-    /* write to test.wav for now */
+    strncpy(sp->filename, argv[6], 60);
 
     ps->wrap = 0;
+
     sp_paulstretch_init(sp, ps, ft, window, stretch);
+
 
     sp_process(sp, NULL, process);
 
