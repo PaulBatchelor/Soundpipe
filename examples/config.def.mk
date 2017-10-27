@@ -45,6 +45,7 @@ ex_gen_line \
 ex_gen_rand \
 ex_gen_sine \
 ex_gen_sinesum \
+ex_gen_triangle \
 ex_gen_vals \
 ex_gen_xline \
 ex_hilbert \
