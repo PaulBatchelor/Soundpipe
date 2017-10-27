@@ -17,6 +17,7 @@
     - Quick fix to sp_osc to make things less noisy
     - added stretcher utility
     - maygate: RAND_MAX -> SP_RANDMAX
+    - added gen_triangle
 
 1.5.0
 -----
