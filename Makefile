@@ -1,4 +1,4 @@
-.PHONY: all clean install docs bootstrap
+.PHONY: all clean install docs bootstrap util
 
 default: all
 
@@ -96,8 +96,9 @@ docs:
 all: $(INTERMEDIATES_PREFIX)/config.mk \
 	$(INTERMEDIATES_PREFIX)/libsoundpipe.a \
 	$(INTERMEDIATES_PREFIX)/sp_dict.lua \
-	$(UTIL) \
 	$(HDIR)/sp_base.h
+
+util: $(UTIL)
 
 install: \
 	$(INTERMEDIATES_PREFIX)/h/soundpipe.h \
