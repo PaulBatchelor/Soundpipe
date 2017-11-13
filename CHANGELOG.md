@@ -3,6 +3,7 @@
 1.7.0
 -----
     - added sp_vdelay_reset
+    - made sp_diskin opaque pointer
 
 1.6.0 "Talky"
 -----
