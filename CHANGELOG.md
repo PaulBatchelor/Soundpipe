@@ -1,5 +1,9 @@
 # Change log
 
+1.7.0
+-----
+    - added sp_vdelay_reset
+
 1.6.0 "Talky"
 -----
     - unitialized variable in wpkorg35 fix
