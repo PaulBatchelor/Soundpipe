@@ -130,6 +130,7 @@ ex_vocoder \
 ex_voc \
 ex_waveset \
 ex_wavout \
+ex_wavin \
 ex_wpkorg35 \
 ex_zitarev
 
