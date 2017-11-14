@@ -166,6 +166,9 @@ include lib/openlpc/Makefile
 # tinywav
 include lib/tinywav/Makefile
 
+# drwav
+include lib/dr_wav/Makefile
+
 CFLAGS += -fPIC -g
 
 # Uncomment this to use double precision
