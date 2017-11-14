@@ -161,6 +161,9 @@ include lib/spa/Makefile
 # openlpc
 include lib/openlpc/Makefile
 
+# tinywav
+include lib/tinywav/Makefile
+
 CFLAGS += -fPIC -g
 
 # Uncomment this to use double precision
