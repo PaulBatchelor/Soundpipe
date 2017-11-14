@@ -120,6 +120,7 @@ vdelay \
 voc \
 vocoder \
 waveset \
+wavout \
 wpkorg35 \
 zitarev
 

@@ -129,6 +129,7 @@ ex_wtosc \
 ex_vocoder \
 ex_voc \
 ex_waveset \
+ex_wavout \
 ex_wpkorg35 \
 ex_zitarev
 
