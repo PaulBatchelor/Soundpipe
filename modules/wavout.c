@@ -21,10 +21,8 @@ int sp_wavout_destroy(sp_wavout **p)
 {
     /* write any remaining samples */
     if((*p)->count != 0) {
-        /* tinywav_write_f(&(*p)->tw, (*p)->buf, (*p)->count); */
+        drwav_write(p->wav, WAVOUT_BUFSIZE, p->count);
     }
-    /* close the file */
-    /* tinywav_close_write(&(*p)->tw); */
     drwav_close((*p)->wav);
     free(*p);
     return SP_OK;
@@ -33,7 +31,6 @@ int sp_wavout_destroy(sp_wavout **p)
 int sp_wavout_init(sp_data *sp, sp_wavout *p, const char *filename)
 {
     p->count = 0;
-    /* tinywav_open_write(&p->tw, 1, sp->sr, TW_FLOAT32, TW_INLINE, filename); */
     p->format.container = drwav_container_riff;
     p->format.format = DR_WAVE_FORMAT_IEEE_FLOAT;
     p->format.channels = 1;
