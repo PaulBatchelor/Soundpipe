@@ -1,5 +1,10 @@
 # Change log
 
+1.7.0
+-----
+    - added sp_wavout and sp_wavin
+    - added third-party library dr_wav 
+
 1.6.0 "Talky"
 -----
     - unitialized variable in wpkorg35 fix

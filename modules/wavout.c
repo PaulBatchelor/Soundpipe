@@ -21,7 +21,7 @@ int sp_wavout_destroy(sp_wavout **p)
 {
     /* write any remaining samples */
     if((*p)->count != 0) {
-        drwav_write(p->wav, WAVOUT_BUFSIZE, p->count);
+        drwav_write((*p)->wav, (*p)->count, (*p)->buf);
     }
     drwav_close((*p)->wav);
     free(*p);
