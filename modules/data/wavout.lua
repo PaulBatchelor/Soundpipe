@@ -27,7 +27,7 @@ sptbl["wavout"] = {
     modtype = "module",
 
     description = [[Writes a mono signal to a WAV file.
-This module uses the tinywav library by Martin Roth to write WAV files
+This module uses the public-domain dr_wav library to write WAV files
 to disk. This module is ideal for instances where GPL-licensed libsndfile 
 cannot be used for legal reasons.
 ]],

@@ -1,11 +1,12 @@
 #include <stdlib.h>
 #include "soundpipe.h"
-#include "tinywav.h"
+#include "dr_wav.h"
 
 #define WAVOUT_BUFSIZE 1024
 
 struct sp_wavout {
-    TinyWav tw; 
+    drwav *wav;
+    drwav_data_format format;
     SPFLOAT buf[WAVOUT_BUFSIZE];
     int count;
 };
@@ -20,10 +21,11 @@ int sp_wavout_destroy(sp_wavout **p)
 {
     /* write any remaining samples */
     if((*p)->count != 0) {
-        tinywav_write_f(&(*p)->tw, (*p)->buf, (*p)->count);
+        /* tinywav_write_f(&(*p)->tw, (*p)->buf, (*p)->count); */
     }
     /* close the file */
-    tinywav_close_write(&(*p)->tw);
+    /* tinywav_close_write(&(*p)->tw); */
+    drwav_close((*p)->wav);
     free(*p);
     return SP_OK;
 }
@@ -31,7 +33,13 @@ int sp_wavout_destroy(sp_wavout **p)
 int sp_wavout_init(sp_data *sp, sp_wavout *p, const char *filename)
 {
     p->count = 0;
-    tinywav_open_write(&p->tw, 1, sp->sr, TW_FLOAT32, TW_INLINE, filename);
+    /* tinywav_open_write(&p->tw, 1, sp->sr, TW_FLOAT32, TW_INLINE, filename); */
+    p->format.container = drwav_container_riff;
+    p->format.format = DR_WAVE_FORMAT_IEEE_FLOAT;
+    p->format.channels = 1;
+    p->format.sampleRate = sp->sr;
+    p->format.bitsPerSample = 32;
+    p->wav = drwav_open_file_write(filename, &p->format);
     return SP_OK;
 }
 
@@ -39,7 +47,7 @@ int sp_wavout_compute(sp_data *sp, sp_wavout *p, SPFLOAT *in, SPFLOAT *out)
 {
     *out = *in;
     if(p->count == WAVOUT_BUFSIZE) {
-        tinywav_write_f(&p->tw, p->buf, WAVOUT_BUFSIZE);
+        drwav_write(p->wav, WAVOUT_BUFSIZE, p->buf);
         p->count = 0;
     }
     p->buf[p->count] = *in;
