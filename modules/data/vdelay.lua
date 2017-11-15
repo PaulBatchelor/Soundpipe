@@ -11,6 +11,13 @@ sptbl["vdelay"] = {
         destroy = "sp_vdelay_destroy",
         init = "sp_vdelay_init",
         compute = "sp_vdelay_compute",
+        other = {
+            sp_vdelay_reset = {
+                description = "Resets delay buffer and delay pointer.",
+                args = {
+                }
+            }
+        }
     },
 
     params = {
