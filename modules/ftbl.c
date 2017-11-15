@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifndef NO_LIBSNDFILE
+#include <sndfile.h>
+#endif
 #include "soundpipe.h"
 
 #ifndef M_PI
