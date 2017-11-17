@@ -57,8 +57,8 @@ int sp_osc_compute(sp_data *sp, sp_osc *osc, SPFLOAT *in, SPFLOAT *out)
     osc->inc = (int32_t)lrintf(cps * sicvt);
 
     fract = ((phs) & ftp->lomask) * ftp->lodiv;
-    /* added modulo operation to prevent clicking */
-    ftab = ft + ((phs >> lobits) % (ftp->size - 1));
+    /* added AND operation to prevent clicking */
+    ftab = ft + ((phs >> lobits) & (ftp->size - 1));
     v1 = ftab[0];
     v2 = ftab[1];
     *out = (v1 + (v2 - v1) * fract) * amp;
