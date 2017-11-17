@@ -37,11 +37,6 @@ int sp_osc_init(sp_data *sp, sp_osc *osc, sp_ftbl *ft, SPFLOAT iphs)
         osc->lphs = ((int32_t)(osc->iphs * SP_FT_MAXLEN)) & SP_FT_PHMASK;
     }
 
-    /* HACK: osc relies on ftables which one extra value. Set this to be 
-     * the first value of the ftable for wrap-around. 
-     */
-
-    ft->tbl[ft->size] = ft->tbl[0];
     return SP_OK;
 }
 
@@ -62,7 +57,8 @@ int sp_osc_compute(sp_data *sp, sp_osc *osc, SPFLOAT *in, SPFLOAT *out)
     osc->inc = (int32_t)lrintf(cps * sicvt);
 
     fract = ((phs) & ftp->lomask) * ftp->lodiv;
-    ftab = ft + (phs >> lobits);
+    /* added modulo operation to prevent clicking */
+    ftab = ft + ((phs >> lobits) % (ftp->size - 1));
     v1 = ftab[0];
     v2 = ftab[1];
     *out = (v1 + (v2 - v1) * fract) * amp;

@@ -69,8 +69,8 @@ int sp_oscmorph_compute(sp_data *sp, sp_oscmorph *osc, SPFLOAT *in, SPFLOAT *out
     osc->inc = (int32_t)lrintf(cps * sicvt);
 
     fract = ((phs) & ftp1->lomask) * ftp1->lodiv;
-    ftab1 = ft1 + (phs >> lobits);
-    ftab2 = ft2 + (phs >> lobits);
+    ftab1 = ft1 + (phs >> lobits % (ftp1->size - 1));
+    ftab2 = ft2 + (phs >> lobits % (ftp1->size - 1));
 
     v1 = (1 - wtfrac) * ftab1[0] + wtfrac * ftab2[0];
     v2 = (1 - wtfrac) * ftab1[1] + wtfrac * ftab2[1];
