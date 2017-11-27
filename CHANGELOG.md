@@ -6,6 +6,7 @@
     - added third-party library dr_wav 
     - added sp_vdelay_reset
     - made sp_diskin opaque pointer
+    - even more fixes to interpolated oscillator algorithm to avoid clicks
 
 1.6.0 "Talky"
 -----
