@@ -1,5 +1,7 @@
 typedef struct sp_vdelay{
     SPFLOAT del, maxdel;
+    SPFLOAT feedback;
+    SPFLOAT prev;
     SPFLOAT sr;
     sp_auxdata buf;
     int32_t left;

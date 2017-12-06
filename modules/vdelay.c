@@ -35,6 +35,8 @@ int sp_vdelay_init(sp_data *sp, sp_vdelay *p, SPFLOAT maxdel)
     p->maxdel = maxdel;
     sp_auxdata_alloc(&p->buf, n * sizeof(SPFLOAT));
     p->left = 0;
+    p->feedback = 0;
+    p->prev = 0;
     return SP_OK;
 }
 
