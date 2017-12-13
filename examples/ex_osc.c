@@ -12,9 +12,6 @@ typedef struct {
 void write_osc(sp_data *sp, void *udata) {
     UserData *ud = udata;
     SPFLOAT osc = 0;
-    //if(ud->counter == 0){
-    //    ud->osc->freq = 500 + rand() % 2000;
-    //}
     sp_osc_compute(sp, ud->osc, NULL, &osc);
     ud->counter = (ud->counter + 1) % 4410;
     sp_out(sp, 0, osc);
@@ -29,7 +26,7 @@ int main() {
     sp_ftbl_create(sp, &ud.ft, 8192);
     sp_osc_create(&ud.osc);
     
-    sp_gen_sine(sp, ud.ft);
+    sp_gen_triangle(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
     ud.osc->freq = 500;
     sp->len = 44100 * 5;
