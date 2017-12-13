@@ -6,6 +6,7 @@
     - added third-party library dr_wav 
     - added sp_vdelay_reset
     - made sp_diskin opaque pointer
+    - added feedback to vdelay
 
 1.6.0 "Talky"
 -----

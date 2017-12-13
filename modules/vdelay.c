@@ -51,7 +51,7 @@ int sp_vdelay_compute(sp_data *sp, sp_vdelay *p, SPFLOAT *in, SPFLOAT *out)
     indx = p->left;
     SPFLOAT *buf = (SPFLOAT *)p->buf.ptr;
 
-    buf[indx] = *in;
+    buf[indx] = *in + p->prev*p->feedback;
 
     fv1 = del * (-1.0 * sp->sr);
     v1 = (int32_t)fv1;
@@ -96,6 +96,7 @@ int sp_vdelay_compute(sp_data *sp, sp_vdelay *p, SPFLOAT *in, SPFLOAT *out)
     }
     if (++indx == maxd) indx = 0;
     p->left = indx;
+    p->prev = *out;
     return SP_OK;
 }
 
