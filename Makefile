@@ -102,6 +102,7 @@ util: $(UTIL)
 
 install: \
 	$(INTERMEDIATES_PREFIX)/h/soundpipe.h \
+	$(INTERMEDIATES_PREFIX)/h/sp_base.h \
 	$(INTERMEDIATES_PREFIX)/libsoundpipe.a | \
 		$(PREFIX)/include \
 		$(PREFIX)/lib
