@@ -2,7 +2,7 @@
 
 default: all
 
-VERSION = 1.6.3
+VERSION = 1.6.7
 
 INTERMEDIATES_PREFIX ?= .
 PREFIX ?= /usr/local
@@ -102,6 +102,7 @@ util: $(UTIL)
 
 install: \
 	$(INTERMEDIATES_PREFIX)/h/soundpipe.h \
+	$(INTERMEDIATES_PREFIX)/h/sp_base.h \
 	$(INTERMEDIATES_PREFIX)/libsoundpipe.a | \
 		$(PREFIX)/include \
 		$(PREFIX)/lib

@@ -38,6 +38,12 @@ sptbl["vdelay"] = {
                 description = "Delay time (in seconds) that can be changed during performance. This value must not exceed the maximum delay time.",
                 default = "maxdel * 0.5"
             },
+            {
+                name = "feedback",
+                type = "SPFLOAT",
+                description = "Amount of feedback in delay line. Should be in range 0-1.",
+                default = "0"
+            },
         }
     },
 

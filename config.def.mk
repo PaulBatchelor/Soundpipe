@@ -120,6 +120,8 @@ vdelay \
 voc \
 vocoder \
 waveset \
+wavin \
+wavout \
 wpkorg35 \
 zitarev
 
@@ -141,25 +143,26 @@ include lib/fft/Makefile
 # JACK module
 #
 #MODULES += jack
-#CFLAGS += -ljack
 
 # RPi Module
 #
 #MODULES += rpi
-#CFLAGS += -lasound
 
 include lib/kissfft/Makefile
 MODULES += fftwrapper
 MODULES += padsynth
 
 # Uncomment to use FFTW3 instead of kissfft.
-# CFLAGS += -lfftw3 -DUSE_FFTW3
+# CFLAGS += -DUSE_FFTW3
 
 # Soundpipe audio 
 include lib/spa/Makefile
 
 # openlpc
 include lib/openlpc/Makefile
+
+# drwav
+include lib/dr_wav/Makefile
 
 CFLAGS += -fPIC -g
 

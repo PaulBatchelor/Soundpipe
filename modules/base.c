@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#ifndef NO_LIBSNDFILE
+#include <sndfile.h>
+#endif
 #include "soundpipe.h"
 
 int sp_create(sp_data **spp)
