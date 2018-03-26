@@ -6,4 +6,4 @@ $(LIBDIR)/spa:
 	mkdir -p $@
 
 $(LIBDIR)/spa/spa.o: lib/spa/spa.c | $(LIBDIR)/spa
-	gcc $(CFLAGS) $< -c -o $@
+	$(CC) $(CFLAGS) $< -c -o $@
