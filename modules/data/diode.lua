@@ -33,7 +33,9 @@ sptbl["diode"] = {
     modtype = "module",
 
     description = [[Diode-ladder virtual analogue low-pass filter
-This is a diode-ladder filter, designed by Will Pirkle. 
+This is a diode-ladder filter designed by Will Pirkle. 
+More information can be found in this paper here: 
+http://www.willpirkle.com/Downloads/AN-6DiodeLadderFilter.pdf
 ]],
 
     ninputs = 1,
