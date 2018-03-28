@@ -8,6 +8,7 @@
     - made sp_diskin opaque pointer
     - even more fixes to interpolated oscillator algorithm to avoid clicks
     - added feedback to vdelay
+    - dr_wav: removed c99 for loop declarations
 
 1.6.0 "Talky"
 -----

@@ -2,7 +2,7 @@
 
 default: all
 
-VERSION = 1.6.7
+VERSION = 1.6.8
 
 INTERMEDIATES_PREFIX ?= .
 PREFIX ?= /usr/local
@@ -32,7 +32,7 @@ else
 SPFLOAT=float
 endif
 
-CFLAGS += -DSP_VERSION=$(VERSION) -O3 -DSPFLOAT=${SPFLOAT} -std=c99
+CFLAGS += -DSP_VERSION=$(VERSION) -O3 -DSPFLOAT=${SPFLOAT} #-std=c99
 CFLAGS += -I$(INTERMEDIATES_PREFIX)/h -Ih -I/usr/local/include -fPIC
 UTIL += $(INTERMEDIATES_PREFIX)/util/wav2smp
 
