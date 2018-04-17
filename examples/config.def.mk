@@ -45,6 +45,7 @@ ex_gen_line \
 ex_gen_rand \
 ex_gen_sine \
 ex_gen_sinesum \
+ex_gen_triangle \
 ex_gen_vals \
 ex_gen_xline \
 ex_hilbert \
@@ -128,24 +129,10 @@ ex_wtosc \
 ex_vocoder \
 ex_voc \
 ex_waveset \
+ex_wavout \
+ex_wavin \
 ex_wpkorg35 \
 ex_zitarev
-
-# Jack Module
-#
-#files += extra/ex_jack
-#extra/ex_jack.bin: extra/ex_jack.c
-#	gcc -g --std=c99 -I ../h $< ../libsoundpipe.a -lsndfile -ljack -o $@ -lm
-
-# RPI Module
-#
-#files += extra/ex_rpi
-#extra/ex_rpi.bin: extra/ex_rpi.c
-#	gcc -g --std=c99 -I ../h $< ../libsoundpipe.a -lsndfile -lasound -o $@ -lm
-
-#files += extra/ex_rpi_v2
-#extra/ex_rpi_v2.bin: extra/ex_rpi_v2.c
-#	gcc -g --std=c99 -I ../h $< ../libsoundpipe.a -lsndfile -lasound -o $@ -lm
 
 # Padsynth Module
 #

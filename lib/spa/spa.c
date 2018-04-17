@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include "soundpipe.h"
 
 #define CHECK_NULL_FILE(fp) if(fp == NULL) return SP_NOT_OK

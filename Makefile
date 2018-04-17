@@ -1,8 +1,8 @@
-.PHONY: all clean install docs bootstrap
+.PHONY: all clean install docs bootstrap util
 
 default: all
 
-VERSION = 1.6.0
+VERSION = 1.6.9
 
 INTERMEDIATES_PREFIX ?= .
 PREFIX ?= /usr/local
@@ -32,7 +32,7 @@ else
 SPFLOAT=float
 endif
 
-CFLAGS += -DSP_VERSION=$(VERSION) -O3 -DSPFLOAT=${SPFLOAT} -std=c99
+CFLAGS += -DSP_VERSION=$(VERSION) -O3 -DSPFLOAT=${SPFLOAT} #-std=c99
 CFLAGS += -I$(INTERMEDIATES_PREFIX)/h -Ih -I/usr/local/include -fPIC
 UTIL += $(INTERMEDIATES_PREFIX)/util/wav2smp
 
@@ -96,11 +96,13 @@ docs:
 all: $(INTERMEDIATES_PREFIX)/config.mk \
 	$(INTERMEDIATES_PREFIX)/libsoundpipe.a \
 	$(INTERMEDIATES_PREFIX)/sp_dict.lua \
-	$(UTIL) \
 	$(HDIR)/sp_base.h
+
+util: $(UTIL)
 
 install: \
 	$(INTERMEDIATES_PREFIX)/h/soundpipe.h \
+	$(INTERMEDIATES_PREFIX)/h/sp_base.h \
 	$(INTERMEDIATES_PREFIX)/libsoundpipe.a | \
 		$(PREFIX)/include \
 		$(PREFIX)/lib

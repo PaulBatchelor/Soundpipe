@@ -1,6 +1,16 @@
 #include <stdlib.h>
 #include <string.h>
 #include "soundpipe.h"
+#include "sndfile.h"
+
+struct sp_diskin {
+    SNDFILE *file;
+    SF_INFO info;
+    SPFLOAT buffer[1024];
+    int bufpos;
+    int loaded;
+    int count;
+};
 
 int sp_diskin_create(sp_diskin **p)
 {
