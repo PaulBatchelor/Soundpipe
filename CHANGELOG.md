@@ -3,11 +3,13 @@
 1.7.0
 -----
     - added sp_wavout and sp_wavin
-    - added third-party library dr_wav 
+    - added third-party library dr_wav
     - added sp_vdelay_reset
     - made sp_diskin opaque pointer
     - even more fixes to interpolated oscillator algorithm to avoid clicks
     - added feedback to vdelay
+    - dr_wav: removed c99 for loop declarations
+    - removed jack and raspberry pi modules
 
 1.6.0 "Talky"
 -----
@@ -19,7 +21,7 @@
     - added sp_voc
     - added sp_lpc
     - padsynth: change from RANDMAX to SP_RANDMAX
-    - smoothdelay: initial delay times work now. 
+    - smoothdelay: initial delay times work now.
     - fixed ftable constants. oscillators are now less noisy.
     - gen_vals: ftable constants initialized now
     - Added sp_talkbox
@@ -56,7 +58,7 @@
     - header file more robust
     - nsmp valgrind fixes
     - added performance testing utility (initial steps)
- 
+
 1.3.0
 -----
     - added tseg module
@@ -89,13 +91,13 @@
     - Testing improvements:
         - test utility now has command line args:
             - "./run.bin" works like it did before
-            - "./run.bin gen_header" rewrites all_tests.h 
+            - "./run.bin gen_header" rewrites all_tests.h
             - "./run.bin regen_header" rewrites all_tests.h, but regenerates md5 hashes
             - "./run.bin test id" runs a single test
             - "./run.bin render id" renders a single test
     - Tests added:
         - adsr
-    - Added module 'tblrec' 
+    - Added module 'tblrec'
     - Added module 'paulstretch'
     - Fixes to tabread: 'mode' is now mandatory value in the init function
     - dist: removed mode (internal code change)
@@ -104,10 +106,10 @@
     - Fixes to rpt: no longer freaks out if repeat sizes are out of bounds
     - Replaced pink noise algorithm from faust code to Protrekkr code
 
-1.01 
+1.01
 ----
     - New modules:
-        - fof 
+        - fof
         - fog
         - compressor
         - pshift: pitch shifter
@@ -129,7 +131,7 @@
     - tseq fixes
     - line/expon are now triggerable
 
-0.6 
+0.6
 --------------
     - New Modules:
         - conv: performs partitioned convolution
@@ -158,14 +160,14 @@
     - kissfft library codebase added
     - gen_padsynth uses kissfft instead of fftw (and is now a default module)
     - FFTs for RISC by John Green added to Soundpipe codebase
-    - improved testing interface 
+    - improved testing interface
     - Many tests (50+) created
     - Dynamic library generation enabled by default (in addition to static lib)
     - New Modules:
         - mincer
         - line
         - expon
-        - tenvx 
+        - tenvx
         - zitarev
      - New gen routine: load_soundfile
      - Fixes:
@@ -176,7 +178,7 @@
         - osx makefile fixes
         - minor fixes to docgen output
 
-0.4 
+0.4
 ---
     - License change: GPL to MIT
     - sp_progress CLI progress bar
@@ -228,7 +230,7 @@
 0.2.0
 -----
     - html documentation generator
-    - metadata for current modules created in modules/data 
+    - metadata for current modules created in modules/data
     - improved build instructions for OSX
     - example cleanup
     - module variable cleanup

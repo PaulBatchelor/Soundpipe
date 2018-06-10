@@ -140,14 +140,6 @@ CFLAGS += -Ilib/faust
 # fft library
 include lib/fft/Makefile
 
-# JACK module
-#
-#MODULES += jack
-
-# RPi Module
-#
-#MODULES += rpi
-
 include lib/kissfft/Makefile
 MODULES += fftwrapper
 MODULES += padsynth
@@ -155,7 +147,7 @@ MODULES += padsynth
 # Uncomment to use FFTW3 instead of kissfft.
 # CFLAGS += -DUSE_FFTW3
 
-# Soundpipe audio 
+# Soundpipe audio
 include lib/spa/Makefile
 
 # openlpc

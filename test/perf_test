@@ -4,5 +4,5 @@ for p in $*
 do
     echo "testing $p"
     printf "$p " | sed "s/^p\/p_//" >> time.log
-    /usr/bin/time -p ./$p 2>&1 | grep real | cut -d ' ' -f 2 >> time.log
+    /usr/bin/time -p ./$p 2>&1 | grep real | sed -E 's/[[:space:]]+/ /' | cut -d ' ' -f 2 >> time.log
 done

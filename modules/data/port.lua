@@ -35,6 +35,14 @@ sptbl["port"] = {
                 default = 0.02
             },
         },
+        optional = {
+            {
+                name = "htime",
+                type = "SPFLOAT",
+                description = "",
+                default = 0.02
+            },
+        },
     },
 
     modtype = "module",
