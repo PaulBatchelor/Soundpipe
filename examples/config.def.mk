@@ -128,6 +128,7 @@ ex_vdelay \
 ex_wtosc \
 ex_vocoder \
 ex_voc \
+ex_voctract \
 ex_waveset \
 ex_wavout \
 ex_wavin \
