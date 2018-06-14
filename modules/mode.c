@@ -1,9 +1,9 @@
 /*
- * Mode 
- * 
+ * Mode
+ *
  * This code has been extracted from the Csound opcode "mode".
  * It has been modified to work as a Soundpipe module.
- * 
+ *
  * Original Author(s): Francois Blanc, Steven Yi
  * Year: 2001
  * Location: Opcodes/biquad.c
@@ -17,7 +17,7 @@
 
 #ifndef M_PI
 #define M_PI		3.14159265358979323846	/* pi */
-#endif 
+#endif
 
 #include "soundpipe.h"
 
@@ -58,30 +58,37 @@ int sp_mode_compute(sp_data *sp, sp_mode *p, SPFLOAT *in, SPFLOAT *out)
     SPFLOAT kfq = p->freq;
     SPFLOAT kq  = p->q;
     if (lfq != kfq || lq != kq) {
-        SPFLOAT kfreq  = kfq*(2.0 * M_PI);
+        SPFLOAT kfreq = kfq*(2.0 * M_PI);
         SPFLOAT kalpha = (p->sr/kfreq);
-        SPFLOAT kbeta  = kalpha*kalpha;
-               d      = 0.5*kalpha;
+        SPFLOAT kbeta = kalpha*kalpha;
+        d = 0.5*kalpha;
 
         lq = kq; lfq = kfq;
-        a0     = 1.0/ (kbeta+d/kq);
-        a1     = a0 * (1.0-2.0*kbeta);
-        a2     = a0 * (kbeta-d/kq);
-     }
-     xn = *in;
+        a0 = 1.0/ (kbeta+d/kq);
+        a1 = a0 * (1.0-2.0*kbeta);
+        a2 = a0 * (kbeta-d/kq);
+    }
+    xn = *in;
 
-     yn = a0*xnm1 - a1*ynm1 - a2*ynm2;
+    yn = a0*xnm1 - a1*ynm1 - a2*ynm2;
 
-     xnm1 = xn;
-     ynm2 = ynm1;
-     ynm1 = yn;
+    xnm1 = xn;
+    ynm2 = ynm1;
+    ynm1 = yn;
 
-     yn = yn*d;
+    yn = yn*d;
 
-     *out  = yn;
+    *out  = yn;
 
-    p->xnm1 = xnm1;  p->ynm1 = ynm1;  p->ynm2 = ynm2;
-    p->lfq = lfq;    p->lq = lq;      p->d = d;
-    p->a0 = a0;      p->a1 = a1;      p->a2 = a2;
+    p->xnm1 = xnm1;
+    p->ynm1 = ynm1;
+    p->ynm2 = ynm2;
+
+    p->lfq = lfq;
+    p->lq = lq;
+    p->d = d;
+    p->a0 = a0;
+    p->a1 = a1;
+    p->a2 = a2;
     return SP_OK;
 }
