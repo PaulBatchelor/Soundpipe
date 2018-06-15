@@ -1,5 +1,9 @@
 # Change log
 
+1.8.0
+-----
+    - added sp_clamp
+
 1.7.0
 -----
     - added sp_wavout and sp_wavin
