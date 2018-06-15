@@ -21,6 +21,7 @@ butbp \
 butbr \
 buthp \
 butlp \
+clamp \
 clip \
 clock \
 comb \

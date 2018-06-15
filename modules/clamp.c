@@ -1,11 +1,3 @@
-/*
- * Foo
- * 
- * This is a dummy module. It doesn't do much.
- * Feel free to use this as a boilerplate template.
- * 
- */
-
 #include <stdlib.h>
 #include "soundpipe.h"
 
@@ -23,14 +15,15 @@ int sp_clamp_destroy(sp_clamp **p)
 
 int sp_clamp_init(sp_data *sp, sp_clamp *p)
 {
-    /* Initalize variables here. */
-    p->bar = 123;
+    p->min = 0;
+    p->max = 1;
     return SP_OK;
 }
 
 int sp_clamp_compute(sp_data *sp, sp_clamp *p, SPFLOAT *in, SPFLOAT *out)
 {
-    /* Send the signal's input to the output */
-    *out = *in;
+    if(*in < p->min) *out = p->min;
+    else if(*in > p->max) *out = p->max;
+    else *out = *in;
     return SP_OK;
 }

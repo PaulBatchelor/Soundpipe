@@ -1,5 +1,6 @@
 typedef struct {
-    SPFLOAT bar;
+    SPFLOAT min;
+    SPFLOAT max;
 } sp_clamp;
 
 int sp_clamp_create(sp_clamp **p);
