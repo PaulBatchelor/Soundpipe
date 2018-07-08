@@ -3,6 +3,7 @@
 1.8.0
 -----
     - added sp_clamp
+    - added sp_ftbl_loadwav
 
 1.7.0
 -----

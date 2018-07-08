@@ -51,6 +51,7 @@ incr \
 jcrev \
 jitter \
 line \
+loadwav \
 lpc \
 lpf18 \
 maygate \
