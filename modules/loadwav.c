@@ -9,7 +9,9 @@ int sp_ftbl_loadwav(sp_data *sp, sp_ftbl **ft, const char *filename)
     SPFLOAT *tbl;
     sp_ftbl *ftp;
 
-    drwav_init_file(&wav, filename);
+    if(!drwav_init_file(&wav, filename)) {
+        return SP_NOT_OK;
+    }
     size = wav.totalSampleCount;
     *ft = malloc(sizeof(sp_ftbl));
     ftp = *ft;
