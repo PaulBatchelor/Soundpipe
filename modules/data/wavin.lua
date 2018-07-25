@@ -11,6 +11,19 @@ sptbl["wavin"] = {
         destroy = "sp_wavin_destroy",
         init = "sp_wavin_init",
         compute = "sp_wavin_compute",
+        other = {
+            sp_wavin_seek = {
+                description = "Seeks to position in file.",
+                args = {
+                    {
+                        name = "sample",
+                        type = "long",
+                        description = "Sample position",
+                        default = 0
+                    }
+                }
+            }
+        }
     },
 
     params = {
