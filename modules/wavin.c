@@ -8,7 +8,7 @@ struct sp_wavin {
     SPFLOAT buf[WAVIN_BUFSIZE];
     int count;
     drwav wav;
-    drwav_uint64 pos;
+    unsigned long pos;
 };
 
 int sp_wavin_create(sp_wavin **p)
@@ -45,5 +45,11 @@ int sp_wavin_compute(sp_data *sp, sp_wavin *p, SPFLOAT *in, SPFLOAT *out)
     *out = p->buf[p->count];
     p->count = (p->count + 1) % WAVIN_BUFSIZE;
     p->pos++;
+    return SP_OK;
+}
+
+int sp_wavin_seek(sp_data *sp, sp_wavin *p, unsigned long sample)
+{
+    drwav_seek_to_sample(&p->wav, sample);
     return SP_OK;
 }
