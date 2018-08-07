@@ -4,6 +4,7 @@
 -----
     - added sp_clamp
     - added sp_ftbl_loadwav
+    - fixed soundpipe.h generation bug
 
 1.7.0
 -----
