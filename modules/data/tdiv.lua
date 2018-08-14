@@ -8,6 +8,7 @@ sptbl["tdiv"] = {
 
     func = {
         create = "sp_tdiv_create",
+        compute = "sp_tdiv_compute",
         destroy = "sp_tdiv_destroy",
         init = "sp_tdiv_init",
     },
