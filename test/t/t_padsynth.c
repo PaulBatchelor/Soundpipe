@@ -9,7 +9,7 @@ typedef struct user_data {
     SPFLOAT fc;
 } UserData;
 
-int t_padsynth(sp_test *tst, sp_data *sp, const char *hash) 
+int t_padsynth(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -26,12 +26,12 @@ int t_padsynth(sp_test *tst, sp_data *sp, const char *hash)
 
     for(i = 1; i < ud.amps->size; i++){
         ud.amps->tbl[i] = 1.0 / i;
-        if((i % 2) == 0) ud.amps->tbl[i] *= 2.0; 
+        if((i % 2) == 0) ud.amps->tbl[i] *= 2.0;
     }
 
-    
+
     /* Discovered empirically. multiply frequency by this constant. */
-    ud.fc = 1 / (6.0 * 440); 
+    ud.fc = 1 / (6.0 * 440);
     sp_gen_padsynth(sp, ud.ft, ud.amps, sp_midi2cps(60), 40.0);
 
     sp_osc_init(sp, ud.osc, ud.ft, 0);

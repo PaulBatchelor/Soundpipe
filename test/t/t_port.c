@@ -11,20 +11,20 @@ typedef struct {
     sp_port *prt;
 } UserData;
 
-int t_port(sp_test *tst, sp_data *sp, const char *hash) 
+int t_port(sp_test *tst, sp_data *sp, const char *hash)
 {
     sp_srand(sp,123456);
     uint32_t n;
     int fail = 0;
     UserData ud;
     SPFLOAT osc, mt, nn, freq, pfreq;
-    
+
     sp_metro_create(&ud.mt);
     sp_ftbl_create(sp, &ud.sine, 2048);
     sp_ftbl_create(sp, &ud.nn, 1);
     sp_osc_create(&ud.osc);
     sp_port_create(&ud.prt);
-    
+
     sp_gen_vals(sp, ud.nn, "60 63 65 60 63 67");
     sp_tseq_create(&ud.seq);
     sp_tseq_init(sp, ud.seq, ud.nn);
@@ -48,7 +48,7 @@ int t_port(sp_test *tst, sp_data *sp, const char *hash)
     }
 
     fail = sp_test_verify(tst, hash);
-    
+
     sp_port_destroy(&ud.prt);
     sp_tseq_destroy(&ud.seq);
     sp_metro_destroy(&ud.mt);

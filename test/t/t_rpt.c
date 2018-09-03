@@ -12,7 +12,7 @@ typedef struct{
     sp_maygate *mg;
 } UserData;
 
-int t_rpt(sp_test *tst, sp_data *sp, const char *hash) 
+int t_rpt(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -62,7 +62,7 @@ int t_rpt(sp_test *tst, sp_data *sp, const char *hash)
 
     /* destroy functions here */
 
-    sp_maygate_destroy(&ud.mg);    
+    sp_maygate_destroy(&ud.mg);
     sp_tenv_destroy(&ud.te);
     sp_metro_destroy(&ud.mt);
     sp_ftbl_destroy(&ud.ft);

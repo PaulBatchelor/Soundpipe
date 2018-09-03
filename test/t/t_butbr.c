@@ -8,9 +8,9 @@ typedef struct {
     sp_noise *ns;
 } UserData;
 
-int t_butbr(sp_test *tst, sp_data *sp, const char *hash) 
+int t_butbr(sp_test *tst, sp_data *sp, const char *hash)
 {
-    sp_srand(sp, 0); 
+    sp_srand(sp, 0);
     uint32_t n;
     int fail = 0;
     SPFLOAT noise = 0, butbr = 0;
@@ -33,7 +33,7 @@ int t_butbr(sp_test *tst, sp_data *sp, const char *hash)
 
     sp_butbr_destroy(&ud.butbr);
     sp_noise_destroy(&ud.ns);
-     
+
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }

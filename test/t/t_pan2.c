@@ -7,10 +7,10 @@ typedef struct {
     sp_pan2 *pan2;
     sp_osc *osc;
     sp_osc *lfo;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
 } UserData;
 
-int t_pan2(sp_test *tst, sp_data *sp, const char *hash) 
+int t_pan2(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;

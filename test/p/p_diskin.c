@@ -14,7 +14,7 @@ int main() {
 
     sp_diskin *unit[NUM];
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_diskin_create(&unit[u]);
         sp_diskin_init(sp, unit[u], SAMPDIR "oneart.wav");
     }
@@ -28,4 +28,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

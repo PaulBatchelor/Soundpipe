@@ -6,7 +6,7 @@
 typedef struct {
     sp_crossfade *crossfade;
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_osc *lfo;
     sp_noise *ns;
 } UserData;

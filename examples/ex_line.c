@@ -6,7 +6,7 @@
 typedef struct {
     sp_line *line;
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_dmetro *dm;
 } UserData;
 

@@ -11,7 +11,7 @@ typedef struct {
     SPFLOAT freq;
 } UserData;
 
-int t_tenv(sp_test *tst, sp_data *sp, const char *hash) 
+int t_tenv(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;

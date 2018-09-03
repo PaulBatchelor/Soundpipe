@@ -6,13 +6,13 @@ typedef struct {
     SPFLOAT out;
 } UserData;
 
-void process(sp_data *sp, void *udata) 
+void process(sp_data *sp, void *udata)
 {
     UserData *ud = udata;
     if(ud->counter == 0) {
         uint16_t t = ud->t;
 
-        ud->out = 
+        ud->out =
             (SPFLOAT)((t*(((t>>12)|(t>>8))&(63&(t>>4)))) & 0xFF);
         ud->out /= 0xFF;
         ud->out -= 0.5;

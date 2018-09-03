@@ -5,14 +5,14 @@
 
 typedef struct {
     sp_tblrec *tblrec;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_metro *met;
     sp_pluck *plk;
     sp_randi *randi;
     sp_tabread *tr;
 } UserData;
 
-int t_tblrec(sp_test *tst, sp_data *sp, const char *hash) 
+int t_tblrec(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -26,7 +26,7 @@ int t_tblrec(sp_test *tst, sp_data *sp, const char *hash)
     sp_ftbl_create(sp, &ud.ft, sp->sr * 0.5);
 
     sp_metro_create(&ud.met);
-    sp_pluck_create(&ud.plk); 
+    sp_pluck_create(&ud.plk);
     sp_randi_create(&ud.randi);
     sp_tabread_create(&ud.tr);
 
@@ -39,7 +39,7 @@ int t_tblrec(sp_test *tst, sp_data *sp, const char *hash)
     sp_tabread_init(sp, ud.tr, ud.ft, 1);
 
     for(n = 0; n < tst->size; n++) {
-        trig = 0; 
+        trig = 0;
         pluck = 0;
         rand = 0;
         tr = 0;
@@ -59,7 +59,7 @@ int t_tblrec(sp_test *tst, sp_data *sp, const char *hash)
     sp_tblrec_destroy(&ud.tblrec);
     sp_ftbl_destroy(&ud.ft);
     sp_metro_destroy(&ud.met);
-    sp_pluck_destroy(&ud.plk); 
+    sp_pluck_destroy(&ud.plk);
     sp_randi_destroy(&ud.randi);
     sp_tabread_destroy(&ud.tr);
 

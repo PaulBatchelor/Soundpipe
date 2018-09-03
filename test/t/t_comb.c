@@ -7,15 +7,15 @@ typedef struct {
     sp_comb *comb;
     sp_tenv *env;
     sp_noise *nz;
-} UserData; 
+} UserData;
 
-int t_comb(sp_test *tst, sp_data *sp, const char *hash) 
+int t_comb(sp_test *tst, sp_data *sp, const char *hash)
 {
-    sp_srand(sp, 0); 
+    sp_srand(sp, 0);
     uint32_t n;
     int fail = 0;
     SPFLOAT tick = 0, env = 0, noise = 0, comb = 0;
-    
+
     UserData ud;
 
     sp_comb_create(&ud.comb);
@@ -42,11 +42,11 @@ int t_comb(sp_test *tst, sp_data *sp, const char *hash)
     }
 
     fail = sp_test_verify(tst, hash);
-    
+
     sp_noise_destroy(&ud.nz);
     sp_tenv_destroy(&ud.env);
     sp_comb_destroy(&ud.comb);
-     
+
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }

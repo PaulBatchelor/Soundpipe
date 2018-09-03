@@ -3,7 +3,7 @@
  * Please implement a small and simple working example of your module, and then
  * remove this header.
  * Don't be clever.
- * Bonus points for musicality. 
+ * Bonus points for musicality.
  *
  */
 
@@ -16,10 +16,10 @@ typedef struct {
     sp_metro *met;
     sp_incr *incr;
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
 } UserData;
 
-void process(sp_data *sp, void *udata) 
+void process(sp_data *sp, void *udata)
 {
     UserData *ud = udata;
     SPFLOAT osc = 0, incr = 0, met = 0;
@@ -30,7 +30,7 @@ void process(sp_data *sp, void *udata)
     sp->out[0] = osc;
 }
 
-int main() 
+int main()
 {
     UserData ud;
     sp_data *sp;

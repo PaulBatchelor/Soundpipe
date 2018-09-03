@@ -31,7 +31,7 @@ int main() {
     ud.osc->freq = sp_midi2cps(48);
     sp_clip_init(sp, ud.clp);
     sp_moogladder_init(sp, ud.filt);
-    ud.filt->freq = 1000; 
+    ud.filt->freq = 1000;
     ud.filt->res = 0.8;
     sp->len = 44100 * 5;
     sp_process(sp, &ud, write_clip);

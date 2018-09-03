@@ -9,9 +9,9 @@ typedef struct {
     int counter;
 } UserData;
 
-int t_moogladder(sp_test *tst, sp_data *sp, const char *hash) 
+int t_moogladder(sp_test *tst, sp_data *sp, const char *hash)
 {
-    sp_srand(sp, 0); 
+    sp_srand(sp, 0);
     uint32_t n;
     int fail = 0;
 
@@ -33,14 +33,14 @@ int t_moogladder(sp_test *tst, sp_data *sp, const char *hash)
         }
 
         sp_noise_compute(sp, ud.ns, NULL, &in);
-        sp_moogladder_compute(sp, ud.moog, &in, &sp->out[0]); 
+        sp_moogladder_compute(sp, ud.moog, &in, &sp->out[0]);
         ud.counter = (ud.counter + 1) % 5000;
 
         sp_test_add_sample(tst, sp->out[0]);
     }
 
     fail = sp_test_verify(tst, hash);
- 
+
     sp_noise_destroy(&ud.ns);
     sp_moogladder_destroy(&ud.moog);
 

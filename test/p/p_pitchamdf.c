@@ -14,7 +14,7 @@ int main() {
 
     sp_pitchamdf *unit[NUM];
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_pitchamdf_create(&unit[u]);
         sp_pitchamdf_init(sp, unit[u], 100, 400);
     }
@@ -28,4 +28,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

@@ -4,7 +4,7 @@
 #include <string.h>
 #include <sndfile.h>
 
-void write_sample(SNDFILE *snd, FILE *fp, char *wav, char *name, 
+void write_sample(SNDFILE *snd, FILE *fp, char *wav, char *name,
         float *buf, int bufsize, uint32_t *pos, int sr)
 {
     SF_INFO info;
@@ -22,7 +22,7 @@ void write_sample(SNDFILE *snd, FILE *fp, char *wav, char *name,
     sf_close(in);
 }
 
-int main(int argc, char *argv[]) 
+int main(int argc, char *argv[])
 {
     if(argc <= 1) {
         printf("Usage: [options] wav2smp in1.wav in1_name in2.wav in2_name...\n\n");
@@ -45,25 +45,25 @@ int main(int argc, char *argv[])
 
     while(argv[0][0] == '-') {
         switch(argv[0][1]) {
-            case 'w': 
+            case 'w':
                 strncpy(wavfile, argv[1], 30);
-                argv++; 
+                argv++;
                 argpos++;
                 break;
 
-            case 'o': 
+            case 'o':
                 strncpy(inifile, argv[1], 30);
-                argv++; 
+                argv++;
                 argpos++;
                 break;
 
-            case 'r': 
+            case 'r':
                 sr = atoi(argv[1]);
-                argv++; 
+                argv++;
                 argpos++;
                 break;
-                
-            default: 
+
+            default:
                 fprintf(stderr, "Uknown option '%c'\n", argv[0][1]);
                 break;
 
@@ -73,21 +73,21 @@ int main(int argc, char *argv[])
     }
 
     SF_INFO info;
-    info.samplerate = sr; 
+    info.samplerate = sr;
     info.channels = 1;
     info.format = SF_FORMAT_WAV | SF_FORMAT_FLOAT;
     SNDFILE *snd = sf_open(wavfile, SFM_WRITE, &info);
     FILE *fp = fopen(inifile, "w");
-    uint32_t pos = 0; 
+    uint32_t pos = 0;
 
 
     for(i = argpos; i < argc; ) {
-        write_sample(snd, fp, argv[0], argv[1], buf, 4096, &pos, sr); 
+        write_sample(snd, fp, argv[0], argv[1], buf, 4096, &pos, sr);
         argv += 2;
         i += 2;
     }
 
-    fclose(fp); 
+    fclose(fp);
     sf_close(snd);
     return 0;
 }

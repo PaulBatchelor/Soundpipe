@@ -10,13 +10,13 @@ typedef struct {
     sp_osc *lfo;
 } UserData;
 
-int t_dist(sp_test *tst, sp_data *sp, const char *hash) 
+int t_dist(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
     SPFLOAT osc = 0, lfo = 0, out = 0;
     UserData ud;
-    
+
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_fosc_create(&ud.osc);
     sp_dist_create(&ud.ds);
@@ -43,7 +43,7 @@ int t_dist(sp_test *tst, sp_data *sp, const char *hash)
     }
 
     fail = sp_test_verify(tst, hash);
-     
+
     sp_ftbl_destroy(&ud.ft);
     sp_fosc_destroy(&ud.osc);
     sp_dist_destroy(&ud.ds);

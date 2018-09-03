@@ -6,12 +6,12 @@
 typedef struct {
     sp_crossfade *crossfade;
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_osc *lfo;
     sp_noise *ns;
 } UserData;
 
-int t_crossfade(sp_test *tst, sp_data *sp, const char *hash) 
+int t_crossfade(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -34,7 +34,7 @@ int t_crossfade(sp_test *tst, sp_data *sp, const char *hash)
     sp_noise_init(sp, ud.ns);
     ud.ns->amp = 0.1;
 
-    
+
     for(n = 0; n < tst->size; n++) {
         osc = 0, crossfade = 0, ns = 0, lfo = 0;
         sp_osc_compute(sp, ud.osc, NULL, &osc);

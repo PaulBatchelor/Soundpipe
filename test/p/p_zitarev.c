@@ -15,13 +15,13 @@ int main() {
 
     sp_zitarev *unit[NUM];
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_zitarev_create(&unit[u]);
         sp_zitarev_init(sp, unit[u]);
     }
 
     for(t = 0; t < sp->len; t++) {
-        for(u = 0; u < NUM; u++) sp_zitarev_compute(sp, unit[u], 
+        for(u = 0; u < NUM; u++) sp_zitarev_compute(sp, unit[u],
                 &in1, &in2, &out1, &out2);
     }
 
@@ -30,4 +30,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

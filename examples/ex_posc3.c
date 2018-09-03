@@ -5,7 +5,7 @@
 
 typedef struct {
     sp_posc3 *posc3;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     int counter;
 } UserData;
 

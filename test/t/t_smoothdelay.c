@@ -12,7 +12,7 @@ typedef struct {
 } UserData;
 
 
-int t_smoothdelay(sp_test *tst, sp_data *sp, const char *hash) 
+int t_smoothdelay(sp_test *tst, sp_data *sp, const char *hash)
 {
     sp_srand(sp, 0);
     uint32_t n;
@@ -54,7 +54,7 @@ int t_smoothdelay(sp_test *tst, sp_data *sp, const char *hash)
     }
 
     fail = sp_test_verify(tst, hash);
-    
+
     sp_metro_destroy(&ud.met);
     sp_smoothdelay_destroy(&ud.smoothdelay);
     sp_osc_destroy(&ud.osc);

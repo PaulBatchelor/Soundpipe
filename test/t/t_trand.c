@@ -7,14 +7,14 @@ typedef struct {
     sp_trand *trand;
     sp_metro *met;
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
 } UserData;
 
-int t_trand(sp_test *tst, sp_data *sp, const char *hash) 
+int t_trand(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
-    
+
     UserData ud;
     sp_srand(sp, 1234567);
 
@@ -32,7 +32,7 @@ int t_trand(sp_test *tst, sp_data *sp, const char *hash)
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
 
-    sp->len = 44100 * 5;  
+    sp->len = 44100 * 5;
 
     for(n = 0; n < tst->size; n++) {
         SPFLOAT osc = 0, trand = 0, met = 0;

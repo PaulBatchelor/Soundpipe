@@ -5,12 +5,12 @@
 
 typedef struct {
     sp_fosc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_jcrev *dsp;
     int counter;
 } UserData;
 
-int t_jcrev(sp_test *tst, sp_data *sp, const char *hash) 
+int t_jcrev(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -44,7 +44,7 @@ int t_jcrev(sp_test *tst, sp_data *sp, const char *hash)
     }
 
     fail = sp_test_verify(tst, hash);
-    
+
     sp_jcrev_destroy(&ud.dsp);
     sp_ftbl_destroy(&ud.ft);
     sp_fosc_destroy(&ud.osc);

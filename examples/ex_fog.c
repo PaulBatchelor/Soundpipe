@@ -36,7 +36,7 @@ int main() {
     ud.fog->trans = 0.9;
 
     sp_phasor_init(sp, ud.phs, 0);
-    ud.phs->freq = 0.3 / ((SPFLOAT)ud.wav->size / sp->sr); 
+    ud.phs->freq = 0.3 / ((SPFLOAT)ud.wav->size / sp->sr);
 
     sp->len = 44100 * 10;
     sp_process(sp, &ud, process);

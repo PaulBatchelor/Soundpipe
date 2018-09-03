@@ -6,7 +6,7 @@
 typedef struct {
     sp_tseg *tseg;
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
 } UserData;
 
 void process(sp_data *sp, void *udata) {

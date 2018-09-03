@@ -8,7 +8,7 @@ typedef struct {
     sp_tone *tn;
 } UserData;
 
-int t_tone(sp_test *tst, sp_data *sp, const char *hash) 
+int t_tone(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -23,10 +23,10 @@ int t_tone(sp_test *tst, sp_data *sp, const char *hash)
 
     for(n = 0; n < tst->size; n++) {
         sp_noise_compute(sp, ud.ns, NULL, &in);
-        sp_tone_compute(sp, ud.tn, &in, &sp->out[0]); 
+        sp_tone_compute(sp, ud.tn, &in, &sp->out[0]);
         sp_test_add_sample(tst, sp->out[0]);
     }
-    
+
     fail = sp_test_verify(tst, hash);
 
     sp_tone_destroy(&ud.tn);

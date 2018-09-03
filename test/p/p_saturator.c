@@ -28,4 +28,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

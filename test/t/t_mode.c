@@ -96,7 +96,7 @@ static int modal_destroy(modal **md)
     return SP_OK;
 }
 
-int t_mode(sp_test *tst, sp_data *sp, const char *hash) 
+int t_mode(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -117,8 +117,8 @@ int t_mode(sp_test *tst, sp_data *sp, const char *hash)
     sp_tseq_init(sp, ud.seq, ud.notes);
 
     for(n = 0; n < tst->size; n++) {
-        met = 0; 
-        mod = 0; 
+        met = 0;
+        mod = 0;
         nn = 0;
         sp_metro_compute(sp, ud.met, NULL, &met);
         sp_tseq_compute(sp, ud.seq, &met, &nn);
@@ -129,7 +129,7 @@ int t_mode(sp_test *tst, sp_data *sp, const char *hash)
     }
 
     fail = sp_test_verify(tst, hash);
-    
+
     modal_destroy(&ud.mod);
     sp_metro_destroy(&ud.met);
     sp_ftbl_destroy(&ud.notes);

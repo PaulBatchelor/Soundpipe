@@ -193,5 +193,3 @@ void sp_srand(sp_data *sp, uint32_t val)
 {
     sp->rand = val;
 }
-
-

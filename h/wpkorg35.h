@@ -2,12 +2,12 @@ typedef struct {
     /* LPF1 */
     SPFLOAT lpf1_a;
     SPFLOAT lpf1_z;
-    
+
     /* LPF2 */
     SPFLOAT lpf2_a;
     SPFLOAT lpf2_b;
     SPFLOAT lpf2_z;
-    
+
     /* HPF */
     SPFLOAT hpf_a;
     SPFLOAT hpf_b;

@@ -5,14 +5,14 @@
 
 typedef struct {
     sp_mincer *mincer;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_randi *randi;
 } UserData;
 
 void process(sp_data *sp, void *udata) {
     UserData *ud = udata;
     SPFLOAT osc = 0, mincer = 0, randi = 0;
-    
+
     sp_randi_compute(sp, ud->randi, NULL, &randi);
     ud->mincer->time = randi;
     ud->mincer->amp = 1;

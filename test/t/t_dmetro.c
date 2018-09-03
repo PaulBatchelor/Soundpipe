@@ -11,13 +11,13 @@ typedef struct {
     sp_tenv *tenv;
 } UserData;
 
-int t_dmetro(sp_test *tst, sp_data *sp, const char *hash) 
+int t_dmetro(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
     UserData ud;
     SPFLOAT osc = 0, dmetro = 0, tenv = 0, lfo = 0;
-    
+
     sp_dmetro_create(&ud.dmetro);
     sp_osc_create(&ud.osc);
     sp_osc_create(&ud.lfo);
@@ -48,13 +48,13 @@ int t_dmetro(sp_test *tst, sp_data *sp, const char *hash)
     }
 
     fail = sp_test_verify(tst, hash);
-    
+
     sp_dmetro_destroy(&ud.dmetro);
     sp_ftbl_destroy(&ud.ft);
     sp_osc_destroy(&ud.osc);
     sp_osc_destroy(&ud.lfo);
     sp_tenv_destroy(&ud.tenv);
-     
+
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }

@@ -19,7 +19,7 @@ typedef struct {
     nano_dict dict;
     int selected;
     nano_entry *sample;
-    nano_entry **index; 
+    nano_entry **index;
     sp_ftbl *ft;
     int sr;
 } nanosamp;

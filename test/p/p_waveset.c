@@ -14,7 +14,7 @@ int main() {
 
     sp_waveset *unit[NUM];
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_waveset_create(&unit[u]);
         sp_waveset_init(sp, unit[u], 5.0);
     }
@@ -28,4 +28,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

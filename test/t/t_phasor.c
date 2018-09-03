@@ -7,7 +7,7 @@ typedef struct {
     sp_phasor *phs;
 } UserData;
 
-int t_phasor(sp_test *tst, sp_data *sp, const char *hash) 
+int t_phasor(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -24,7 +24,7 @@ int t_phasor(sp_test *tst, sp_data *sp, const char *hash)
     fail = sp_test_verify(tst, hash);
 
     sp_phasor_destroy(&ud.phs);
-     
+
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }

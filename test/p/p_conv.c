@@ -17,7 +17,7 @@ int main() {
 
     sp_ftbl_loadfile(sp, &ft, SAMPDIR "oneart.wav");
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_conv_create(&unit[u]);
         sp_conv_init(sp, unit[u], ft, 2048);
     }
@@ -32,4 +32,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

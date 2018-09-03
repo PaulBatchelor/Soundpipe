@@ -1,4 +1,4 @@
-typedef struct { 
+typedef struct {
     SPFLOAT min;
     SPFLOAT max;
 } sp_random;

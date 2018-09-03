@@ -14,7 +14,7 @@ int main() {
 
     sp_comb *unit[NUM];
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_comb_create(&unit[u]);
         sp_comb_init(sp, unit[u], 1.1);
     }
@@ -28,4 +28,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

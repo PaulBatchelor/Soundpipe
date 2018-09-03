@@ -9,7 +9,7 @@ typedef struct {
     sp_vdelay *del;
 } UserData;
 
-int t_vdelay(sp_test *tst, sp_data *sp, const char *hash) 
+int t_vdelay(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -44,7 +44,7 @@ int t_vdelay(sp_test *tst, sp_data *sp, const char *hash)
     }
 
     fail = sp_test_verify(tst, hash);
-    
+
     sp_vdelay_destroy(&ud.del);
     sp_ftbl_destroy(&ud.ft);
     sp_ftbl_destroy(&ud.sine);

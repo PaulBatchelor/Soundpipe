@@ -6,12 +6,12 @@
 typedef struct {
     sp_timer *timer;
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_tenv *tenv;
     sp_dmetro *dmetro;
 } UserData;
 
-int t_timer(sp_test *tst, sp_data *sp, const char *hash) 
+int t_timer(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;

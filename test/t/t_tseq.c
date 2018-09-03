@@ -11,7 +11,7 @@ typedef struct {
     sp_tseq *seq;
 } UserData;
 
-int t_tseq(sp_test *tst, sp_data *sp, const char *hash) 
+int t_tseq(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -20,7 +20,7 @@ int t_tseq(sp_test *tst, sp_data *sp, const char *hash)
     SPFLOAT trig;
     SPFLOAT dtrig = 0;
     SPFLOAT note = 0;
-    
+
     sp_srand(sp, 123456);
     UserData ud;
     sp_dtrig_create(&ud.dt);
@@ -69,7 +69,7 @@ int t_tseq(sp_test *tst, sp_data *sp, const char *hash)
     }
 
     fail = sp_test_verify(tst, hash);
-    
+
     sp_dtrig_destroy(&ud.dt);
     sp_tseq_destroy(&ud.seq);
     sp_tenv_destroy(&ud.tenv);

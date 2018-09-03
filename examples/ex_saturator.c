@@ -9,7 +9,7 @@ typedef struct {
     sp_dcblock *dcblk;
 } UserData;
 
-void process(sp_data *sp, void *udata) 
+void process(sp_data *sp, void *udata)
 {
     UserData *ud = udata;
     SPFLOAT diskin = 0, saturator = 0, dcblk = 0;
@@ -19,7 +19,7 @@ void process(sp_data *sp, void *udata)
     sp_out(sp, 0, dcblk);
 }
 
-int main() 
+int main()
 {
     UserData ud;
     sp_data *sp;

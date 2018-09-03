@@ -6,7 +6,7 @@
 typedef struct {
     sp_hilbert *hilbert;
     sp_osc *cos, *sin;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_diskin *diskin;
 } UserData;
 

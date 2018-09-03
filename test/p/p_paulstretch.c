@@ -17,7 +17,7 @@ int main() {
 
     sp_ftbl_loadfile(sp, &wav, SAMPDIR "oneart.wav");
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_paulstretch_create(&unit[u]);
         sp_paulstretch_init(sp, unit[u], wav, 1.0, 10);
     }
@@ -32,4 +32,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

@@ -9,7 +9,7 @@ typedef struct {
     SPFLOAT u0, u1, u2, u3, u4;
     SPFLOAT FX;
     SPFLOAT emphasis;
-    SPFLOAT car0[SP_TALKBOX_BUFMAX]; 
+    SPFLOAT car0[SP_TALKBOX_BUFMAX];
     SPFLOAT car1[SP_TALKBOX_BUFMAX];
     SPFLOAT window[SP_TALKBOX_BUFMAX];
     SPFLOAT buf0[SP_TALKBOX_BUFMAX];

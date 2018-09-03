@@ -3,7 +3,7 @@
  * Please implement a small and simple working example of your module, and then
  * remove this header.
  * Don't be clever.
- * Bonus points for musicality. 
+ * Bonus points for musicality.
  *
  */
 
@@ -16,7 +16,7 @@ typedef struct {
     sp_oscmorph *oscmorph;
     sp_ftbl *wt1;
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
 } UserData;
 
 void process(sp_data *sp, void *udata) {
@@ -56,7 +56,7 @@ int main() {
     sp_ftbl_destroy(&ud.ft);
     sp_ftbl_destroy(&ud.wt1);
     sp_osc_destroy(&ud.osc);
-    
+
     sp_destroy(&sp);
     return 0;
 }

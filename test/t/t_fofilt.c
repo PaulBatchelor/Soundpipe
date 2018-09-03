@@ -8,9 +8,9 @@ typedef struct {
     sp_fofilt *ff;
 } UserData;
 
-int t_fofilt(sp_test *tst, sp_data *sp, const char *hash) 
+int t_fofilt(sp_test *tst, sp_data *sp, const char *hash)
 {
-    sp_srand(sp, 0); 
+    sp_srand(sp, 0);
     uint32_t n;
     int fail = 0;
     SPFLOAT in = 0;
@@ -25,7 +25,7 @@ int t_fofilt(sp_test *tst, sp_data *sp, const char *hash)
     for(n = 0; n < tst->size; n++) {
         in = 0;
         sp_noise_compute(sp, ud.ns, NULL, &in);
-        sp_fofilt_compute(sp, ud.ff, &in, &sp->out[0]); 
+        sp_fofilt_compute(sp, ud.ff, &in, &sp->out[0]);
         sp_test_add_sample(tst, sp->out[0]);
     }
 
@@ -33,7 +33,7 @@ int t_fofilt(sp_test *tst, sp_data *sp, const char *hash)
 
     sp_noise_destroy(&ud.ns);
     sp_fofilt_destroy(&ud.ff);
- 
+
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }

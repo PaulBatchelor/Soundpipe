@@ -6,11 +6,11 @@
 typedef struct {
     sp_hilbert *hilbert;
     sp_osc *cos, *sin;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_diskin *diskin;
 } UserData;
 
-int t_hilbert(sp_test *tst, sp_data *sp, const char *hash) 
+int t_hilbert(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -36,10 +36,10 @@ int t_hilbert(sp_test *tst, sp_data *sp, const char *hash)
     sp_diskin_init(sp, ud.diskin, SAMPDIR "oneart.wav");
 
     for(n = 0; n < tst->size; n++) {
-        real = 0; 
+        real = 0;
         imag = 0;
         diskin = 0;
-        sin = 0; 
+        sin = 0;
         cos = 0;
 
         sp_diskin_compute(sp, ud.diskin, NULL, &diskin);

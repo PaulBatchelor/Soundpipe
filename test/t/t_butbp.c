@@ -9,9 +9,9 @@ typedef struct {
     int counter;
 } UserData;
 
-int t_butbp(sp_test *tst, sp_data *sp, const char *hash) 
+int t_butbp(sp_test *tst, sp_data *sp, const char *hash)
 {
-    sp_srand(sp, 0); 
+    sp_srand(sp, 0);
     uint32_t n;
     int fail = 0;
     SPFLOAT in = 0;
@@ -30,16 +30,16 @@ int t_butbp(sp_test *tst, sp_data *sp, const char *hash)
             ud.butbp->freq= 500 + sp_rand(sp) % 4000;
         }
         sp_noise_compute(sp, ud.ns, NULL, &in);
-        sp_butbp_compute(sp, ud.butbp, &in, &out); 
+        sp_butbp_compute(sp, ud.butbp, &in, &out);
         ud.counter = (ud.counter + 1) % 5000;
         sp_test_add_sample(tst, out);
     }
 
     fail = sp_test_verify(tst, hash);
-    
+
     sp_noise_destroy(&ud.ns);
     sp_butbp_destroy(&ud.butbp);
-     
+
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }

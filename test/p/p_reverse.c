@@ -14,7 +14,7 @@ int main() {
 
     sp_reverse *unit[NUM];
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_reverse_create(&unit[u]);
         sp_reverse_init(sp, unit[u], 1.0);
     }
@@ -28,4 +28,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

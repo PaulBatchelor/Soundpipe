@@ -14,13 +14,13 @@ int main() {
 
     sp_switch *unit[NUM];
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_switch_create(&unit[u]);
         sp_switch_init(sp, unit[u]);
     }
 
     for(t = 0; t < sp->len; t++) {
-        for(u = 0; u < NUM; u++) sp_switch_compute(sp, unit[u], 
+        for(u = 0; u < NUM; u++) sp_switch_compute(sp, unit[u],
                 &trig, &in1, &in2, &out);
     }
 
@@ -29,4 +29,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

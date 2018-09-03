@@ -3,7 +3,7 @@
  * Please implement a small and simple working example of your module, and then
  * remove this header.
  * Don't be clever.
- * Bonus points for musicality. 
+ * Bonus points for musicality.
  *
  */
 
@@ -15,7 +15,7 @@
 typedef struct {
     sp_clock *clock;
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_tenv *te;
 } UserData;
 
@@ -49,7 +49,7 @@ int main() {
     ud.te->atk = 0.001;
     ud.te->hold = 0.001;
     ud.te->rel = 0.001;
-    
+
 
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);

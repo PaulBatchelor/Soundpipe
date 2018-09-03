@@ -8,7 +8,7 @@ typedef struct {
     sp_lpc *lpc;
 } user_data;
 
-int t_lpc(sp_test *tst, sp_data *sp, const char *hash) 
+int t_lpc(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;

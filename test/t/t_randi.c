@@ -5,16 +5,16 @@
 
 typedef struct {
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_randi *rnd;
 } UserData;
 
-int t_randi(sp_test *tst, sp_data *sp, const char *hash) 
+int t_randi(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
     SPFLOAT freq;
-    
+
     UserData ud;
     sp_srand(sp, 12345);
     sp_ftbl_create(sp, &ud.ft, 1024);
@@ -24,9 +24,9 @@ int t_randi(sp_test *tst, sp_data *sp, const char *hash)
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
     sp_randi_init(sp, ud.rnd);
-    
-    ud.rnd->min = 300;  
-    ud.rnd->max = 3000;  
+
+    ud.rnd->min = 300;
+    ud.rnd->max = 3000;
 
     for(n = 0; n < tst->size; n++) {
         sp_randi_compute(sp, ud.rnd, NULL, &freq);

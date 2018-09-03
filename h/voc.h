@@ -37,4 +37,3 @@ int sp_voc_get_counter(sp_voc *voc);
 
 
 #endif
-

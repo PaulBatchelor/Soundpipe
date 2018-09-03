@@ -5,7 +5,7 @@
 
 typedef struct {
     sp_tblrec *tblrec;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_metro *met;
     sp_pluck *plk;
     sp_randi *randi;
@@ -38,7 +38,7 @@ int main() {
     sp_ftbl_create(sp, &ud.ft, sp->sr * 0.5);
 
     sp_metro_create(&ud.met);
-    sp_pluck_create(&ud.plk); 
+    sp_pluck_create(&ud.plk);
     sp_randi_create(&ud.randi);
     sp_tabread_create(&ud.tr);
 
@@ -57,7 +57,7 @@ int main() {
     sp_tblrec_destroy(&ud.tblrec);
     sp_ftbl_destroy(&ud.ft);
     sp_metro_destroy(&ud.met);
-    sp_pluck_destroy(&ud.plk); 
+    sp_pluck_destroy(&ud.plk);
     sp_randi_destroy(&ud.randi);
     sp_tabread_destroy(&ud.tr);
 

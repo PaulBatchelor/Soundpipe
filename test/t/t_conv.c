@@ -6,14 +6,14 @@
 typedef struct {
     sp_diskin *diskin;
     sp_conv *conv;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
 } UserData;
 
-int t_conv(sp_test *tst, sp_data *sp, const char *hash) 
+int t_conv(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
-    SPFLOAT conv = 0, diskin = 0; 
+    SPFLOAT conv = 0, diskin = 0;
 
     sp_srand(sp, 1234567);
     UserData ud;

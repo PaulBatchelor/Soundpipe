@@ -6,12 +6,12 @@
 typedef struct {
     sp_pareq *pareq;
     sp_noise *noise;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
 } UserData;
 
-int t_pareq(sp_test *tst, sp_data *sp, const char *hash) 
+int t_pareq(sp_test *tst, sp_data *sp, const char *hash)
 {
-    sp_srand(sp, 0); 
+    sp_srand(sp, 0);
     uint32_t n;
     int fail = 0;
 
@@ -37,7 +37,7 @@ int t_pareq(sp_test *tst, sp_data *sp, const char *hash)
 
     sp_pareq_destroy(&ud.pareq);
     sp_noise_destroy(&ud.noise);
- 
+
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }

@@ -68,13 +68,13 @@ typedef struct {
 
 typedef struct {
     int n;
-     
+
     SPFLOAT  diameter[44];
     SPFLOAT  rest_diameter[44];
     SPFLOAT  target_diameter[44];
     SPFLOAT  new_diameter[44];
-    SPFLOAT  R[44]; 
-    SPFLOAT  L[44]; 
+    SPFLOAT  R[44];
+    SPFLOAT  L[44];
     SPFLOAT  reflection[45];
     SPFLOAT  new_reflection[45];
     SPFLOAT  junction_outL[45];
@@ -84,7 +84,7 @@ typedef struct {
     int nose_length;
 
 
-    int nose_start; 
+    int nose_start;
 
     int tip_start;
     SPFLOAT  noseL[28];
@@ -109,7 +109,7 @@ typedef struct {
     SPFLOAT  lip_reflection;
     int  last_obstruction;
     SPFLOAT  fade;
-    SPFLOAT  movement_speed; 
+    SPFLOAT  movement_speed;
     SPFLOAT  lip_output;
     SPFLOAT  nose_output;
     SPFLOAT  block_time;
@@ -132,74 +132,74 @@ struct sp_voc {
 
 static void glottis_setup_waveform(glottis *glot, SPFLOAT lambda)
 {
-    
+
     SPFLOAT Rd;
     SPFLOAT Ra;
     SPFLOAT Rk;
     SPFLOAT Rg;
-    
+
     SPFLOAT Ta;
     SPFLOAT Tp;
     SPFLOAT Te;
-    
+
     SPFLOAT epsilon;
     SPFLOAT shift;
     SPFLOAT delta;
     SPFLOAT rhs_integral;
-    
+
     SPFLOAT lower_integral;
     SPFLOAT upper_integral;
-    
+
     SPFLOAT omega;
     SPFLOAT s;
     SPFLOAT y;
     SPFLOAT z;
-    
+
     SPFLOAT alpha;
     SPFLOAT E0;
 
-    
+
     glot->Rd = 3 * (1 - glot->tenseness);
     glot->waveform_length = 1.0 / glot->freq;
-    
+
     Rd = glot->Rd;
     if(Rd < 0.5) Rd = 0.5;
     if(Rd > 2.7) Rd = 2.7;
 
-    
+
     Ra = -0.01 + 0.048*Rd;
     Rk = 0.224 + 0.118*Rd;
     Rg = (Rk/4)*(0.5 + 1.2*Rk)/(0.11*Rd-Ra*(0.5+1.2*Rk));
 
-    
+
     Ta = Ra;
     Tp = (SPFLOAT)1.0 / (2*Rg);
     Te = Tp + Tp*Rk;
 
 
-    
+
     epsilon = (SPFLOAT)1.0 / Ta;
     shift = exp(-epsilon * (1 - Te));
     delta = 1 - shift;
 
 
-    
+
     rhs_integral = (SPFLOAT)(1.0/epsilon) * (shift-1) + (1-Te)*shift;
     rhs_integral = rhs_integral / delta;
     lower_integral = - (Te - Tp) / 2 + rhs_integral;
     upper_integral = -lower_integral;
 
-    
+
     omega = M_PI / Tp;
     s = sin(omega * Te);
-    
+
     y = -M_PI * s * upper_integral / (Tp*2);
     z = log(y);
     alpha = z / (Tp/2 - Te);
     E0 = -1 / (s * exp(alpha*Te));
 
 
-    
+
     glot->alpha = alpha;
     glot->E0 = E0;
     glot->epsilon = epsilon;
@@ -267,7 +267,7 @@ static SPFLOAT glottis_compute(sp_data *sp, glottis *glot, SPFLOAT lambda)
 static void tract_calculate_reflections(tract *tr)
 {
     int i;
-    SPFLOAT  sum; 
+    SPFLOAT  sum;
 
     for(i = 0; i < tr->n; i++) {
         tr->A[i] = tr->diameter[i] * tr->diameter[i];
@@ -433,11 +433,11 @@ static void tract_init(sp_data *sp, tract *tr)
 {
     int i;
     SPFLOAT diameter, d; /* needed to set up diameter arrays */
-    
+
     tr->n = 44;
     tr->nose_length = 28;
     tr->nose_start = 17;
-    
+
     tr->reflection_left = 0.0;
     tr->reflection_right = 0.0;
     tr->reflection_nose = 0.0;
@@ -453,7 +453,7 @@ static void tract_init(sp_data *sp, tract *tr)
     tr->nose_output = 0;
     tr->tip_start = 32;
 
-    
+
     memset(tr->diameter, 0, tr->n * sizeof(SPFLOAT));
     memset(tr->rest_diameter, 0, tr->n * sizeof(SPFLOAT));
     memset(tr->target_diameter, 0, tr->n * sizeof(SPFLOAT));
@@ -472,7 +472,7 @@ static void tract_init(sp_data *sp, tract *tr)
     memset(tr->nose_diameter, 0, tr->nose_length * sizeof(SPFLOAT));
     memset(tr->noseA, 0, tr->nose_length * sizeof(SPFLOAT));
 
-    
+
     for(i = 0; i < tr->n; i++) {
         diameter = 0;
         if(i < 7 * (SPFLOAT)tr->n / 44 - 0.5) {
@@ -482,15 +482,15 @@ static void tract_init(sp_data *sp, tract *tr)
         } else {
             diameter = 1.5;
         }
-    
+
         tr->diameter[i] =
             tr->rest_diameter[i] =
             tr->target_diameter[i] =
             tr->new_diameter[i] = diameter;
-    
+
     }
 
-    
+
         for(i = 0; i < tr->nose_length; i++) {
             d = 2 * ((SPFLOAT)i / tr->nose_length);
             if(d < 1) {
@@ -509,7 +509,7 @@ static void tract_init(sp_data *sp, tract *tr)
 
     tr->block_time = 512.0 / (SPFLOAT)sp->sr;
     tr->T = 1.0 / (SPFLOAT)sp->sr;
-    
+
     tr->tpool.size = 0;
     tr->tpool.next_free = 0;
     for(i = 0; i < MAX_TRANSIENTS; i++) {
@@ -534,8 +534,8 @@ static void tract_compute(sp_data *sp, tract *tr,
     transient_pool *pool;
     transient *n;
 
-    
-    
+
+
         pool = &tr->tpool;
         current_size = pool->size;
         n = pool->root;
@@ -550,10 +550,10 @@ static void tract_compute(sp_data *sp, tract *tr,
             n = n->next;
         }
 
-    
+
     tr->junction_outR[0] = tr->L[0] * tr->glottal_reflection + in;
     tr->junction_outL[tr->n] = tr->R[tr->n - 1] * tr->lip_reflection;
-    
+
     for(i = 1; i < tr->n; i++) {
         r = tr->reflection[i] * (1 - lambda) + tr->new_reflection[i] * lambda;
         w = r * (tr->R[i - 1] + tr->L[i]);
@@ -561,7 +561,7 @@ static void tract_compute(sp_data *sp, tract *tr,
         tr->junction_outL[i] = tr->L[i] + w;
     }
 
-    
+
     i = tr->nose_start;
     r = tr->new_reflection_left * (1-lambda) + tr->reflection_left*lambda;
     tr->junction_outL[i] = r*tr->R[i-1] + (1+r)*(tr->noseL[0]+tr->L[i]);
@@ -570,24 +570,24 @@ static void tract_compute(sp_data *sp, tract *tr,
     r = tr->new_reflection_nose * (1 - lambda) + tr->reflection_nose * lambda;
     tr->nose_junc_outR[0] = r * tr->noseL[0]+(1+r)*(tr->L[i]+tr->R[i-1]);
 
-    
+
     for(i = 0; i < tr->n; i++) {
         tr->R[i] = tr->junction_outR[i]*0.999;
         tr->L[i] = tr->junction_outL[i + 1]*0.999;
     }
     tr->lip_output = tr->R[tr->n - 1];
 
-    
+
     tr->nose_junc_outL[tr->nose_length] =
         tr->noseR[tr->nose_length-1] * tr->lip_reflection;
-    
+
     for(i = 1; i < tr->nose_length; i++) {
         w = tr->nose_reflection[i] * (tr->noseR[i-1] + tr->noseL[i]);
         tr->nose_junc_outR[i] = tr->noseR[i - 1] - w;
         tr->nose_junc_outL[i] = tr->noseL[i] + w;
     }
 
-    
+
     for(i = 0; i < tr->nose_length; i++) {
         tr->noseR[i] = tr->nose_junc_outR[i];
         tr->noseL[i] = tr->nose_junc_outL[i + 1];
@@ -628,7 +628,7 @@ int sp_voc_compute(sp_data *sp, sp_voc *voc, SPFLOAT *out)
     SPFLOAT lambda1, lambda2;
     int i;
 
-    
+
 
     if(voc->counter == 0) {
         tract_reshape(&voc->tr);
@@ -723,12 +723,12 @@ int sp_voc_get_nose_size(sp_voc *voc)
 }
 
 
-void sp_voc_set_diameters(sp_voc *voc, 
-    int blade_start, 
-    int lip_start, 
-    int tip_start, 
+void sp_voc_set_diameters(sp_voc *voc,
+    int blade_start,
+    int lip_start,
+    int tip_start,
     SPFLOAT tongue_index,
-    SPFLOAT tongue_diameter, 
+    SPFLOAT tongue_diameter,
     SPFLOAT *diameters) {
 
     int i;
@@ -750,7 +750,7 @@ void sp_voc_set_diameters(sp_voc *voc,
 
 
 void sp_voc_set_tongue_shape(sp_voc *voc,
-    SPFLOAT tongue_index, 
+    SPFLOAT tongue_index,
     SPFLOAT tongue_diameter) {
     SPFLOAT *diameters;
     diameters = sp_voc_get_tract_diameters(voc);
@@ -787,6 +787,3 @@ SPFLOAT *sp_voc_get_velum_ptr(sp_voc *voc)
 {
     return &voc->tr.velum_target;
 }
-
-
-

@@ -19,7 +19,7 @@ void write_noise(sp_data *data, void *ud) {
         udata->eqfil->bw = fabs(udata->eqfil->freq * 0.5);
     }
     sp_noise_compute(data, udata->ns, NULL, &in);
-    sp_eqfil_compute(data, udata->eqfil, &in, &data->out[0]); 
+    sp_eqfil_compute(data, udata->eqfil, &in, &data->out[0]);
     udata->counter = (udata->counter + 1) % 5000;
 }
 int main() {

@@ -11,12 +11,12 @@ typedef struct {
     sp_ftbl *sine_ft;
 } UserData;
 
-int t_lpf18(sp_test *tst, sp_data *sp, const char *hash) 
+int t_lpf18(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
 
-    sp_srand(sp, 0); 
+    sp_srand(sp, 0);
     int i;
     UserData ud;
     sp_ftbl_create(sp, &ud.ft, 4096);
@@ -50,7 +50,7 @@ int t_lpf18(sp_test *tst, sp_data *sp, const char *hash)
         out = filt;
         sp_test_add_sample(tst, out);
     }
-    
+
     fail = sp_test_verify(tst, hash);
 
     sp_ftbl_destroy(&ud.ft);

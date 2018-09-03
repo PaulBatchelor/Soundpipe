@@ -1,6 +1,6 @@
 typedef struct {
     SPFLOAT a, dur, b;
-    SPFLOAT val, incr; 
+    SPFLOAT val, incr;
     uint32_t sdur, stime;
     int init;
 } sp_expon;

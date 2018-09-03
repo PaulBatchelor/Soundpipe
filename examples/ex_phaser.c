@@ -27,7 +27,7 @@ int main() {
 
     sp_diskin_init(sp, ud.disk, "oneart.wav");
     sp_phaser_init(sp, ud.phaser);
-    
+
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);
 

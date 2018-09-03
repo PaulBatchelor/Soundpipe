@@ -40,7 +40,7 @@ int sp_diskin_init(sp_data *sp, sp_diskin *p, const char *filename)
     }
 
     if(p->info.channels != 1) {
-        fprintf(stderr, "Warning: file \"%s\" has %d channels," 
+        fprintf(stderr, "Warning: file \"%s\" has %d channels,"
                 "when it is expecting only 1\n", filename, p->info.channels);
     }
 
@@ -63,7 +63,7 @@ int sp_diskin_compute(sp_data *sp, sp_diskin *p, SPFLOAT *in, SPFLOAT *out)
 #else
         p->count = sf_read_float(p->file, p->buffer, p->count);
 #endif
-    } 
+    }
 
     if(p->count <= 0) {
         *out = 0;
@@ -71,6 +71,6 @@ int sp_diskin_compute(sp_data *sp, sp_diskin *p, SPFLOAT *in, SPFLOAT *out)
     }
 
     *out = p->buffer[p->bufpos++];
-    p->bufpos %= 1024; 
+    p->bufpos %= 1024;
     return SP_OK;
 }

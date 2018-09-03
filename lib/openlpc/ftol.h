@@ -3,13 +3,13 @@
 __inline int lrintf(float flt)
 {
     int intgr;
-    
+
     _asm
     {
         fld flt
         fistp intgr
     };
-    
+
     return intgr ;
 }
 #else
@@ -29,4 +29,3 @@ static int lrintf(float inval)
 }
 #endif
 #endif
-

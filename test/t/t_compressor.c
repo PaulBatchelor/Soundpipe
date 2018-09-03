@@ -8,7 +8,7 @@ typedef struct {
     sp_diskin *diskin;
 } UserData;
 
-int t_compressor(sp_test *tst, sp_data *sp, const char *hash) 
+int t_compressor(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;

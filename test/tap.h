@@ -10,5 +10,3 @@ void plan( unsigned int num );
 unsigned int ok( unsigned int ok, const char* msg );
 
 #endif
-
-

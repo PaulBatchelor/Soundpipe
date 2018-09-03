@@ -6,7 +6,7 @@
 typedef struct {
     sp_smoothdelay *smoothdelay;
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_diskin *diskin;
 } UserData;
 

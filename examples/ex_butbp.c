@@ -17,7 +17,7 @@ void write_noise(sp_data *sp, void *udata) {
         ud->butbp->freq= 500 + rand() % 4000;
     }
     sp_noise_compute(sp, ud->ns, NULL, &in);
-    sp_butbp_compute(sp, ud->butbp, &in, &sp->out[0]); 
+    sp_butbp_compute(sp, ud->butbp, &in, &sp->out[0]);
     ud->counter = (ud->counter + 1) % 5000;
 }
 int main() {

@@ -11,16 +11,16 @@ int t_osc(sp_test *tst, sp_data *sp, const char *hash) {
     int fail = 0;
     SPFLOAT osc;
     sp_osc *osc_d;
-    sp_ftbl *ft_d; 
+    sp_ftbl *ft_d;
 
     sp_ftbl_create(sp, &ft_d, 2048);
     sp_osc_create(&osc_d);
-    
+
     sp_gen_sine(sp, ft_d);
     sp_osc_init(sp, osc_d, ft_d, 0);
     osc_d->freq = 500;
     sp->len = 44100 * 5;
-    
+
     for(n = 0; n < tst->size; n++) {
         osc = 0;
         sp_osc_compute(sp, osc_d, NULL, &osc);
@@ -36,4 +36,3 @@ int t_osc(sp_test *tst, sp_data *sp, const char *hash) {
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }
-

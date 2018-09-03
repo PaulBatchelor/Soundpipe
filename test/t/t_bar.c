@@ -8,7 +8,7 @@ typedef struct {
     sp_metro *met;
 } UserData;
 
-int t_bar(sp_test *tst, sp_data *sp, const char *hash) 
+int t_bar(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -26,7 +26,7 @@ int t_bar(sp_test *tst, sp_data *sp, const char *hash)
     ud.met->freq = 1;
 
     for(n = 0; n < tst->size; n++) {
-        bar = 0; 
+        bar = 0;
         met = 0;
         sp_metro_compute(sp, ud.met, NULL, &met);
         sp_bar_compute(sp, ud.bar, &met, &bar);

@@ -10,7 +10,7 @@ typedef struct {
     sp_phasor *phs;
 } UserData;
 
-int t_fog(sp_test *tst, sp_data *sp, const char *hash) 
+int t_fog(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -30,10 +30,10 @@ int t_fog(sp_test *tst, sp_data *sp, const char *hash)
     ud.fog->trans = 0.9;
 
     sp_phasor_init(sp, ud.phs, 0);
-    ud.phs->freq = 0.3 / ((SPFLOAT)ud.wav->size / sp->sr); 
+    ud.phs->freq = 0.3 / ((SPFLOAT)ud.wav->size / sp->sr);
 
     for(n = 0; n < tst->size; n++) {
-        phs = 0; 
+        phs = 0;
         fog = 0;
         sp_phasor_compute(sp, ud.phs, NULL, &phs);
         ud.fog->spd = phs;

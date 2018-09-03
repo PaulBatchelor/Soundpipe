@@ -5,7 +5,7 @@
 
 typedef struct {
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_randi *rnd;
 } UserData;
 
@@ -29,9 +29,9 @@ int main() {
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
     sp_randi_init(sp, ud.rnd);
-    
-    ud.rnd->min = 300;  
-    ud.rnd->max = 3000;  
+
+    ud.rnd->min = 300;
+    ud.rnd->max = 3000;
 
     sp->len = 44100 * 5;
 

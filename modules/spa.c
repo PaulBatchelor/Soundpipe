@@ -23,7 +23,7 @@ int sp_spa_init(sp_data *sp, sp_spa *p, const char *filename)
     if(spa_open(sp, &p->spa, filename, SPA_READ) != SP_OK) {
         return SP_NOT_OK;
     }
-    
+
     p->pos = 0;
 
     p->bufsize = SPA_BUFSIZE;

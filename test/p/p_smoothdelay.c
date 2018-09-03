@@ -14,7 +14,7 @@ int main() {
 
     sp_smoothdelay *unit[NUM];
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_smoothdelay_create(&unit[u]);
         sp_smoothdelay_init(sp, unit[u], 1.0, 1024);
     }
@@ -28,4 +28,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

@@ -18,7 +18,7 @@ void write_noise(sp_data *sp, void *udata) {
         ud->moog->freq = 500 + rand() % 4000;
     }
     sp_noise_compute(sp, ud->ns, NULL, &in);
-    sp_moogladder_compute(sp, ud->moog, &in, &sp->out[0]); 
+    sp_moogladder_compute(sp, ud->moog, &in, &sp->out[0]);
     ud->counter = (ud->counter + 1) % 5000;
 }
 int main() {

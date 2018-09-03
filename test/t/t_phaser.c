@@ -8,7 +8,7 @@ typedef struct {
     sp_diskin *disk;
 } UserData;
 
-int t_phaser(sp_test *tst, sp_data *sp, const char *hash) 
+int t_phaser(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -21,7 +21,7 @@ int t_phaser(sp_test *tst, sp_data *sp, const char *hash)
 
     sp_diskin_init(sp, ud.disk, SAMPDIR "oneart.wav");
     sp_phaser_init(sp, ud.phaser);
-    
+
     for(n = 0; n < tst->size; n++) {
         disk1 = 0; disk2 = 0; phaser = 0; foo = 0;
         sp_diskin_compute(sp, ud.disk, NULL, &disk1);

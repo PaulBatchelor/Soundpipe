@@ -8,7 +8,7 @@ typedef struct {
     sp_diskin *diskin;
 } UserData;
 
-int t_pshift(sp_test *tst, sp_data *sp, const char *hash) 
+int t_pshift(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -18,7 +18,7 @@ int t_pshift(sp_test *tst, sp_data *sp, const char *hash)
     SPFLOAT diskin = 0, pshift = 0;
 
     sp_pshift_create(&ud.pshift);
-    sp_diskin_create(&ud.diskin);    
+    sp_diskin_create(&ud.diskin);
 
     sp_pshift_init(sp, ud.pshift);
     *ud.pshift->shift = 7;

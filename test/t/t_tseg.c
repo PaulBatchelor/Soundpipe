@@ -6,10 +6,10 @@
 typedef struct {
     sp_tseg *tseg;
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
 } UserData;
 
-int t_tseg(sp_test *tst, sp_data *sp, const char *hash) 
+int t_tseg(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -31,7 +31,7 @@ int t_tseg(sp_test *tst, sp_data *sp, const char *hash)
     sp_osc_init(sp, ud.osc, ud.ft, 0);
 
     for(n = 0; n < tst->size; n++) {
-        osc = 0; 
+        osc = 0;
         tseg = 0;
         trig = (sp->pos == 0);
         sp_tseg_compute(sp, ud.tseg, &trig, &tseg);

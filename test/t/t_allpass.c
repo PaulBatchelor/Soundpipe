@@ -3,9 +3,9 @@
 #include "tap.h"
 #include "test.h"
 
-int t_allpass(sp_test *tst, sp_data *sp, const char *hash) 
+int t_allpass(sp_test *tst, sp_data *sp, const char *hash)
 {
-    sp_srand(sp, 0); 
+    sp_srand(sp, 0);
     uint32_t n;
     int fail = 0;
     sp_allpass *ap_d;
@@ -43,7 +43,7 @@ int t_allpass(sp_test *tst, sp_data *sp, const char *hash)
     sp_noise_destroy(&nz_d);
     sp_tenv_destroy(&env_d);
     sp_allpass_destroy(&ap_d);
-     
+
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }

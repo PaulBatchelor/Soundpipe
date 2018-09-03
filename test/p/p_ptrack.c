@@ -14,13 +14,13 @@ int main() {
 
     sp_ptrack *unit[NUM];
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_ptrack_create(&unit[u]);
         sp_ptrack_init(sp, unit[u], 512, 20);
     }
 
     for(t = 0; t < sp->len; t++) {
-        for(u = 0; u < NUM; u++) sp_ptrack_compute(sp, unit[u], &in, 
+        for(u = 0; u < NUM; u++) sp_ptrack_compute(sp, unit[u], &in,
                 &freq, &amp);
     }
 
@@ -29,4 +29,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

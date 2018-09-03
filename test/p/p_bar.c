@@ -14,7 +14,7 @@ int main() {
 
     sp_bar *unit[NUM];
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_bar_create(&unit[u]);
         sp_bar_init(sp, unit[u], 3, 0.0001);
     }
@@ -28,4 +28,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

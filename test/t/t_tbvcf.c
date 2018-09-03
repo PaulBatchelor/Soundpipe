@@ -9,12 +9,12 @@ typedef struct {
     sp_tbvcf *tn;
 } UserData;
 
-int t_tbvcf(sp_test *tst, sp_data *sp, const char *hash) 
+int t_tbvcf(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
 
-    sp_srand(sp, 0); 
+    sp_srand(sp, 0);
     UserData ud;
     sp_noise_create(&ud.ns);
     sp_tbvcf_create(&ud.tn);
@@ -27,12 +27,12 @@ int t_tbvcf(sp_test *tst, sp_data *sp, const char *hash)
         in = 0;
 
         sp_noise_compute(sp, ud.ns, NULL, &in);
-        sp_tbvcf_compute(sp, ud.tn, &in, &sp->out[0]); 
+        sp_tbvcf_compute(sp, ud.tn, &in, &sp->out[0]);
         sp_test_add_sample(tst, sp->out[0]);
     }
 
     fail = sp_test_verify(tst, hash);
-    
+
     sp_noise_destroy(&ud.ns);
     sp_tbvcf_destroy(&ud.tn);
 

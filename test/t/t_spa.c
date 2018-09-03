@@ -7,7 +7,7 @@ typedef struct {
     sp_spa *spa;
 } UserData;
 
-int t_spa(sp_test *tst, sp_data *sp, const char *hash) 
+int t_spa(sp_test *tst, sp_data *sp, const char *hash)
 {
     UserData ud;
     uint32_t n;

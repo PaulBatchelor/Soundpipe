@@ -14,7 +14,7 @@ int main() {
 
     sp_dtrig *unit[NUM];
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_dtrig_create(&unit[u]);
         sp_dtrig_init(sp, unit[u]);
     }
@@ -28,4 +28,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

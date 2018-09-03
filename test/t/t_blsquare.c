@@ -33,4 +33,3 @@ int t_blsquare(sp_test *tst, sp_data *sp, const char *hash) {
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }
-

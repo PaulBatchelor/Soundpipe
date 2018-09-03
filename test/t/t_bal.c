@@ -3,18 +3,18 @@
 #include "tap.h"
 #include "test.h"
 
-int t_bal(sp_test *tst, sp_data *sp, const char *hash) 
+int t_bal(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n, i;
     int fail = 0;
     SPFLOAT out = 0, osc = 0, filt = 0, bal = 0, env = 0, tick;
-    
+
     sp_osc *osc_d[3];
     sp_ftbl *ft_d;
     sp_moogladder *filt_d;
     sp_bal *bal_d;
     sp_tenv *env_d;
-    
+
     sp_ftbl_create(sp, &ft_d, 4096);
     for(i = 0; i < 3; i++) {
         sp_osc_create(&osc_d[i]);
@@ -56,13 +56,13 @@ int t_bal(sp_test *tst, sp_data *sp, const char *hash)
     }
 
     fail = sp_test_verify(tst, hash);
-    
+
     sp_ftbl_destroy(&ft_d);
     for(i = 0; i < 3; i++) sp_osc_destroy(&osc_d[i]);
     sp_bal_destroy(&bal_d);
     sp_moogladder_destroy(&filt_d);
     sp_tenv_destroy(&env_d);
-     
+
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }

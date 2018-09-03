@@ -10,12 +10,12 @@ typedef struct {
    sp_moogladder *filt;
 } UserData;
 
-int t_clip(sp_test *tst, sp_data *sp, const char *hash) 
+int t_clip(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
     SPFLOAT out, osc, filt;
-    
+
     UserData ud;
     sp_clip_create(&ud.clp);
     sp_osc_create(&ud.osc);
@@ -27,7 +27,7 @@ int t_clip(sp_test *tst, sp_data *sp, const char *hash)
     ud.osc->freq = sp_midi2cps(48);
     sp_clip_init(sp, ud.clp);
     sp_moogladder_init(sp, ud.filt);
-    ud.filt->freq = 1000; 
+    ud.filt->freq = 1000;
     ud.filt->res = 0.8;
 
     for(n = 0; n < tst->size; n++) {
@@ -44,7 +44,7 @@ int t_clip(sp_test *tst, sp_data *sp, const char *hash)
     sp_clip_destroy(&ud.clp);
     sp_ftbl_destroy(&ud.ft);
     sp_moogladder_destroy(&ud.filt);
-     
+
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }

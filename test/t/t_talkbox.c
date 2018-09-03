@@ -32,7 +32,7 @@ static SPFLOAT process(sp_data *sp, void *udata) {
     return talkbox;
 }
 
-int t_talkbox(sp_test *tst, sp_data *sp, const char *hash) 
+int t_talkbox(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     UserData ud;

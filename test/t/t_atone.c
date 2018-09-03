@@ -3,13 +3,13 @@
 #include "tap.h"
 #include "test.h"
 
-int t_atone(sp_test *tst, sp_data *sp, const char *hash) 
+int t_atone(sp_test *tst, sp_data *sp, const char *hash)
 {
-    sp_srand(sp, 0); 
+    sp_srand(sp, 0);
     uint32_t n;
     int fail = 0;
     SPFLOAT noise = 0, atone = 0;
-    
+
     sp_atone *atone_d;
     sp_noise *noise_d;
 
@@ -30,7 +30,7 @@ int t_atone(sp_test *tst, sp_data *sp, const char *hash)
 
     sp_atone_destroy(&atone_d);
     sp_noise_destroy(&noise_d);
-     
+
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }

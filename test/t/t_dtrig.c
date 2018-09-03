@@ -10,7 +10,7 @@ typedef struct {
     sp_dtrig *dt;
 } UserData;
 
-int t_dtrig(sp_test *tst, sp_data *sp, const char *hash) 
+int t_dtrig(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -56,9 +56,9 @@ int t_dtrig(sp_test *tst, sp_data *sp, const char *hash)
         sp_osc_compute(sp, ud.osc, NULL, &osc);
         sp_test_add_sample(tst, osc * env);
     }
-    
+
     fail = sp_test_verify(tst, hash);
-     
+
     sp_dtrig_destroy(&ud.dt);
     sp_tenv_destroy(&ud.tenv);
     sp_ftbl_destroy(&ud.ft);

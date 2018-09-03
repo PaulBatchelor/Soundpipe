@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 {
     uint32_t n;
     sp_test_entry tests [] = {
-#define TEST(str, desc, md5hash) {str, desc, md5hash}, 
+#define TEST(str, desc, md5hash) {str, desc, md5hash},
 #include "all_tests.h"
 #undef TEST
     };
@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
             if(n != 0) sp_test_write_raw(tst, n);
 #endif
             if(n != 0 && !rc) {
-                errcnt++; 
+                errcnt++;
             }
             sp_test_destroy(&tst);
         }
@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
     } else {
         if (!strcmp(argv[1], "gen_header")) {
             for(n = 0; n < SIZE(tests); n++) {
-                printf("TEST(t_%s, \"%s\", \"%s\")\n", 
+                printf("TEST(t_%s, \"%s\", \"%s\")\n",
                         tests[n].desc, tests[n].desc, tests[n].hash);
             }
         } else if (!strcmp(argv[1], "test")) {
@@ -112,7 +112,7 @@ int main(int argc, char *argv[])
             fprintf(stderr, "Invalid command %s\n", argv[1]);
             err = 1;
         }
-    } 
+    }
     sp_destroy(&sp);
     return err;
 }

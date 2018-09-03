@@ -15,12 +15,12 @@ int main() {
     sp_ftbl *win;
 
     sp_fog *unit[NUM];
-    
+
     sp_ftbl_loadfile(sp, &wav, SAMPDIR "oneart.wav");
     sp_ftbl_create(sp, &win, 1024);
     sp_gen_composite(sp, win, "0.5 0.5 270 0.5");
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_fog_create(&unit[u]);
         sp_fog_init(sp, unit[u], win, wav, 100, 0);
     }
@@ -36,4 +36,3 @@ int main() {
     sp_ftbl_destroy(&win);
     return 0;
 }
-

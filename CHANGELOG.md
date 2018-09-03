@@ -5,6 +5,7 @@
     - added sp_clamp
     - added sp_ftbl_loadwav
     - fixed soundpipe.h generation bug
+    - automated whitespace removal for C and header files
 
 1.7.0
 -----

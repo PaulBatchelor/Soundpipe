@@ -5,7 +5,7 @@
 
 typedef struct {
     sp_gbuzz *buzz;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     int counter;
 } UserData;
 

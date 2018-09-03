@@ -27,7 +27,7 @@ int main() {
     sp_diskin_init(sp, ud.disk, "riff.wav");
     sp_autowah_init(sp, ud.autowah);
     *ud.autowah->wah = 1.0;
-    
+
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);
 

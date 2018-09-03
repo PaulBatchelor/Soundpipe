@@ -6,10 +6,10 @@
 typedef struct {
     sp_fold *fold;
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
 } UserData;
 
-int t_fold(sp_test *tst, sp_data *sp, const char *hash) 
+int t_fold(sp_test *tst, sp_data *sp, const char *hash)
 {
     sp_srand(sp, 0);
     uint32_t n;

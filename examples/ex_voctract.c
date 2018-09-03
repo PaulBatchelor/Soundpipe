@@ -1,5 +1,5 @@
 /* ex_voctract:
- * 
+ *
  * This example shows how one can use Voc with a custom excitation signal.
  * Instead of using sp_voc_compute, use sp_voc_tract_compute
  */

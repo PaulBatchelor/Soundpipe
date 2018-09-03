@@ -6,15 +6,15 @@
 typedef struct {
     sp_randh *randh;
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
 } UserData;
 
-int t_randh(sp_test *tst, sp_data *sp, const char *hash) 
+int t_randh(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
     SPFLOAT freq;
-    
+
     UserData ud;
     sp_srand(sp, 12345);
     sp_ftbl_create(sp, &ud.ft, 1024);
@@ -24,9 +24,9 @@ int t_randh(sp_test *tst, sp_data *sp, const char *hash)
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);
     sp_randh_init(sp, ud.randh);
-    
-    ud.randh->min = 300;  
-    ud.randh->max = 3000;  
+
+    ud.randh->min = 300;
+    ud.randh->max = 3000;
 
     for(n = 0; n < tst->size; n++) {
         sp_randh_compute(sp, ud.randh, NULL, &freq);

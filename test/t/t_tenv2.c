@@ -6,10 +6,10 @@
 typedef struct {
     sp_tenv2 *tenv2;
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
 } UserData;
 
-int t_tenv2(sp_test *tst, sp_data *sp, const char *hash) 
+int t_tenv2(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -40,7 +40,7 @@ int t_tenv2(sp_test *tst, sp_data *sp, const char *hash)
     }
 
     fail = sp_test_verify(tst, hash);
-    
+
     sp_tenv2_destroy(&ud.tenv2);
     sp_ftbl_destroy(&ud.ft);
     sp_osc_destroy(&ud.osc);

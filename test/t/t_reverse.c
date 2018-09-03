@@ -10,18 +10,18 @@ typedef struct {
     sp_reverse *rv;
 } UserData;
 
-int t_reverse(sp_test *tst, sp_data *sp, const char *hash) 
+int t_reverse(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
     sp_srand(sp, 123456);
-    UserData ud; 
+    UserData ud;
     SPFLOAT env = 0;
     SPFLOAT osc = 0;
     SPFLOAT rv = 0;
     SPFLOAT dry = 0;
     SPFLOAT trig;
-    
+
     sp_reverse_create(&ud.rv);
     sp_tenv_create(&ud.tenv);
     sp_ftbl_create(sp, &ud.ft, 2048);
@@ -63,7 +63,7 @@ int t_reverse(sp_test *tst, sp_data *sp, const char *hash)
     fail = sp_test_verify(tst, hash);
 
     /* destroy functions here */
-    
+
     sp_reverse_destroy(&ud.rv);
     sp_tenv_destroy(&ud.tenv);
     sp_ftbl_destroy(&ud.ft);

@@ -7,7 +7,7 @@ typedef struct {
     sp_brown *brown;
 } UserData;
 
-int t_brown(sp_test *tst, sp_data *sp, const char *hash) 
+int t_brown(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -24,7 +24,7 @@ int t_brown(sp_test *tst, sp_data *sp, const char *hash)
     }
 
     fail = sp_test_verify(tst, hash);
-    
+
     sp_brown_destroy(&ud.brown);
 
     if(fail) return SP_NOT_OK;

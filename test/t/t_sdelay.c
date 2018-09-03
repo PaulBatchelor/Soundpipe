@@ -10,7 +10,7 @@ typedef struct {
     sp_metro *met;
 } UserData;
 
-int t_sdelay(sp_test *tst, sp_data *sp, const char *hash) 
+int t_sdelay(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -41,7 +41,7 @@ int t_sdelay(sp_test *tst, sp_data *sp, const char *hash)
     for(n = 0; n < tst->size; n++) {
         met = 0;
         sdelay = 0;
-        filt1 = 0; 
+        filt1 = 0;
         filt2 = 0;
         sp_metro_compute(sp, ud.met, NULL, &met);
         sp_sdelay_compute(sp, ud.sdelay, &met, &sdelay);

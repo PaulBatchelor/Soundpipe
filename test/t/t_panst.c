@@ -10,7 +10,7 @@ typedef struct {
     sp_ftbl *ft;
 } UserData;
 
-int t_panst(sp_test *tst, sp_data *sp, const char *hash) 
+int t_panst(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;

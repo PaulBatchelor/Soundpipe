@@ -10,15 +10,15 @@ typedef struct {
     sp_tenv *tenv;
 } UserData;
 
-int t_prop(sp_test *tst, sp_data *sp, const char *hash) 
+int t_prop(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
     SPFLOAT osc = 0, prop = 0, tenv = 0;
-    
+
     sp_srand(sp, 1234567);
     UserData ud;
-    
+
     sp_prop_create(&ud.prop);
     sp_osc_create(&ud.osc);
     sp_ftbl_create(sp, &ud.ft, 2048);
@@ -47,7 +47,7 @@ int t_prop(sp_test *tst, sp_data *sp, const char *hash)
     }
 
     fail = sp_test_verify(tst, hash);
-    
+
     sp_prop_destroy(&ud.prop);
     sp_ftbl_destroy(&ud.ft);
     sp_osc_destroy(&ud.osc);

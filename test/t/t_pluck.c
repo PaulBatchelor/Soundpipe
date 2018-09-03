@@ -8,13 +8,13 @@ typedef struct {
     sp_metro *met;
 } UserData;
 
-int t_pluck(sp_test *tst, sp_data *sp, const char *hash) 
+int t_pluck(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
 
     UserData ud;
-    sp_srand(sp, 1337); 
+    sp_srand(sp, 1337);
     SPFLOAT pluck = 0, met = 0;
     SPFLOAT notes[] = {60, 63, 67, 70, 74};
 
@@ -34,7 +34,7 @@ int t_pluck(sp_test *tst, sp_data *sp, const char *hash)
         sp_pluck_compute(sp, ud.pluck, &met, &pluck);
         sp_test_add_sample(tst, pluck);
     }
-    
+
     fail = sp_test_verify(tst, hash);
 
     sp_pluck_destroy(&ud.pluck);

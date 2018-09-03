@@ -5,21 +5,21 @@
 
 typedef struct {
     sp_posc3 *posc3;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     int counter;
 } UserData;
 
-int t_posc3(sp_test *tst, sp_data *sp, const char *hash) 
+int t_posc3(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
-    
+
     sp_srand(sp, 123456);
     UserData ud;
     ud.counter = 0;
     sp_ftbl_create(sp, &ud.ft, 1024);
     sp_posc3_create(&ud.posc3);
-    
+
     sp_gen_sine(sp, ud.ft);
     sp_posc3_init(sp, ud.posc3, ud.ft);
     ud.posc3->freq = 500;

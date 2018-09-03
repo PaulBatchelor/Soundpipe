@@ -9,7 +9,7 @@ typedef struct {
     sp_phasor *phasor;
 } UserData;
 
-int t_tabread(sp_test *tst, sp_data *sp, const char *hash) 
+int t_tabread(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;

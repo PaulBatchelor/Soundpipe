@@ -7,9 +7,9 @@ typedef struct {
     sp_noise *ns;
 } UserData;
 
-int t_noise(sp_test *tst, sp_data *sp, const char *hash) 
+int t_noise(sp_test *tst, sp_data *sp, const char *hash)
 {
-    sp_srand(sp, 0); 
+    sp_srand(sp, 0);
     uint32_t n;
     int fail = 0;
 
@@ -20,14 +20,14 @@ int t_noise(sp_test *tst, sp_data *sp, const char *hash)
     SPFLOAT in;
 
     for(n = 0; n < tst->size; n++) {
-        sp_noise_compute(sp, ud.ns, &in, &sp->out[0]); 
+        sp_noise_compute(sp, ud.ns, &in, &sp->out[0]);
         sp_test_add_sample(tst, sp->out[0]);
     }
 
     fail = sp_test_verify(tst, hash);
 
     sp_noise_destroy(&ud.ns);
-    
+
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }

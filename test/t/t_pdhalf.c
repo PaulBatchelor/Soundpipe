@@ -5,17 +5,17 @@
 
 typedef struct {
     sp_metro *met;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_tabread *tab;
     sp_phasor *phs;
     sp_tenv *tenv;
     sp_pdhalf *pdhalf;
     sp_scale *scl;
     sp_tseq *ts;
-    sp_ftbl *seq; 
+    sp_ftbl *seq;
 } UserData;
 
-int t_pdhalf(sp_test *tst, sp_data *sp, const char *hash) 
+int t_pdhalf(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -88,7 +88,7 @@ int t_pdhalf(sp_test *tst, sp_data *sp, const char *hash)
     }
 
     fail = sp_test_verify(tst, hash);
-    
+
     sp_pdhalf_destroy(&ud.pdhalf);
     sp_ftbl_destroy(&ud.ft);
     sp_metro_destroy(&ud.met);

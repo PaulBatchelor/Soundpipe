@@ -9,7 +9,7 @@ typedef struct {
     sp_ftbl *ft;
 } UserData;
 
-int t_expon(sp_test *tst, sp_data *sp, const char *hash) 
+int t_expon(sp_test *tst, sp_data *sp, const char *hash)
 {
 
     sp_srand(sp, 1234567);
@@ -47,7 +47,7 @@ int t_expon(sp_test *tst, sp_data *sp, const char *hash)
     sp_expon_destroy(&ud.line);
     sp_ftbl_destroy(&ud.ft);
     sp_osc_destroy(&ud.osc);
- 
+
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }

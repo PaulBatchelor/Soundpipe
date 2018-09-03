@@ -11,7 +11,7 @@ typedef struct {
     sp_noise *noise;
 } UserData;
 
-int t_samphold(sp_test *tst, sp_data *sp, const char *hash) 
+int t_samphold(sp_test *tst, sp_data *sp, const char *hash)
 {
     sp_srand(sp, 1234567);
     UserData ud;

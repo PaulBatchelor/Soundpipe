@@ -1,13 +1,13 @@
 /*
  * Talkbox
- * 
- * This module is ported from the mdaTalkbox plugin by Paul Kellet 
- * (maxim digital audio). 
+ *
+ * This module is ported from the mdaTalkbox plugin by Paul Kellet
+ * (maxim digital audio).
  *
  * More information on his plugins and the original code can be found here:
- * 
- * http://mda.smartelectronix.com/ 
- * 
+ *
+ * http://mda.smartelectronix.com/
+ *
  */
 
 #include <math.h>
@@ -25,24 +25,24 @@ static void lpc_durbin(SPFLOAT *r, int p, float *k, float *g)
 {
   int i, j;
   SPFLOAT a[ORD_MAX], at[ORD_MAX], e=r[0];
-    
+
   for(i=0; i<=p; i++) a[i] = at[i] = 0.0f;
 
-  for(i=1; i<=p; i++) 
+  for(i=1; i<=p; i++)
   {
     k[i] = -r[i];
 
-    for(j=1; j<i; j++) 
-    { 
+    for(j=1; j<i; j++)
+    {
       at[j] = a[j];
-      k[i] -= a[j] * r[i-j]; 
+      k[i] -= a[j] * r[i-j];
     }
     if(fabs(e) < 1.0e-20f) { e = 0.0f;  break; }
     k[i] /= e;
-    
+
     a[i] = k[i];
     for(j=1; j<i; j++) a[j] = at[j] + k[i] * at[i-j];
-    
+
     e *= 1.0f - k[i] * k[i];
   }
 
@@ -63,9 +63,9 @@ static void lpc(float *buf, float *car, uint32_t n, uint32_t o)
     }
 
     r[0] *= 1.001f;  /* stability fix */
-    
+
     min = 0.00001f;
-    if(r[0] < min) { for(i=0; i<n; i++) buf[i] = 0.0f; return; } 
+    if(r[0] < min) { for(i=0; i<n; i++) buf[i] = 0.0f; return; }
 
     lpc_durbin(r, o, k, &G);  /* calc reflection coeffs */
 
@@ -76,7 +76,7 @@ static void lpc(float *buf, float *car, uint32_t n, uint32_t o)
     for(i=0; i<n; i++) {
         x = G * car[i];
         /* lattice filter */
-        for(j=o; j>0; j--) { 
+        for(j=o; j>0; j--) {
             x -= k[j] * z[j-1];
             z[j] = z[j-1] + k[j] * x;
         }
@@ -116,7 +116,7 @@ int sp_talkbox_init(sp_data *sp, sp_talkbox *p)
             pos += dp;
         }
     }
- 
+
     /* zero out variables and buffers */
     p->pos = p->K = 0;
     p->emphasis = 0.0f;
@@ -144,13 +144,13 @@ int sp_talkbox_compute(sp_data *sp, sp_talkbox *t, SPFLOAT *src, SPFLOAT *exc, S
     o = *src;
     x = *exc;
 
-    p = t->d0 + h0 * x; 
-    t->d0 = t->d1;  
+    p = t->d0 + h0 * x;
+    t->d0 = t->d1;
     t->d1 = x - h0 * p;
 
     q = t->d2 + h1 * t->d4;
     t->d2 = t->d3;
-    t->d3 = t->d4 - h1 * q;  
+    t->d3 = t->d4 - h1 * q;
 
     t->d4 = x;
 
@@ -163,23 +163,23 @@ int sp_talkbox_compute(sp_data *sp, sp_talkbox *t, SPFLOAT *src, SPFLOAT *exc, S
         t->car0[p0] = t->car1[p1] = x;
 
         /* 6dB/oct pre-emphasis */
-        x = o - e;  e = o;  
+        x = o - e;  e = o;
 
         /* 50% overlapping hanning windows */
-        w = t->window[p0]; fx = t->buf0[p0] * w;  t->buf0[p0] = x * w;  
+        w = t->window[p0]; fx = t->buf0[p0] * w;  t->buf0[p0] = x * w;
         if(++p0 >= t->N) { lpc(t->buf0, t->car0, t->N, t->O);  p0 = 0; }
 
         w = 1.0f - w;  fx += t->buf1[p1] * w;  t->buf1[p1] = x * w;
         if(++p1 >= t->N) { lpc(t->buf1, t->car1, t->N, t->O);  p1 = 0; }
     }
 
-    p = t->u0 + h0 * fx; 
-    t->u0 = t->u1;  
+    p = t->u0 + h0 * fx;
+    t->u0 = t->u1;
     t->u1 = fx - h0 * p;
 
     q = t->u2 + h1 * t->u4;
     t->u2 = t->u3;
-    t->u3 = t->u4 - h1 * q;  
+    t->u3 = t->u4 - h1 * q;
 
     t->u4 = fx;
     x = p + q;
@@ -190,9 +190,9 @@ int sp_talkbox_compute(sp_data *sp, sp_talkbox *t, SPFLOAT *src, SPFLOAT *exc, S
     t->pos = p0;
     t->FX = fx;
 
-    den = 1.0e-10f; 
+    den = 1.0e-10f;
     /* anti-denormal */
-    if(fabs(t->d0) < den) t->d0 = 0.0f; 
+    if(fabs(t->d0) < den) t->d0 = 0.0f;
     if(fabs(t->d1) < den) t->d1 = 0.0f;
     if(fabs(t->d2) < den) t->d2 = 0.0f;
     if(fabs(t->d3) < den) t->d3 = 0.0f;

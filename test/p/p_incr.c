@@ -14,7 +14,7 @@ int main() {
 
     sp_incr *unit[NUM];
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_incr_create(&unit[u]);
         sp_incr_init(sp, unit[u], 0);
     }
@@ -28,4 +28,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

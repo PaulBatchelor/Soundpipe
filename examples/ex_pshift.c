@@ -3,7 +3,7 @@
  * Please implement a small and simple working example of your module, and then
  * remove this header.
  * Don't be clever.
- * Bonus points for musicality. 
+ * Bonus points for musicality.
  *
  */
 
@@ -32,7 +32,7 @@ int main() {
     sp_create(&sp);
 
     sp_pshift_create(&ud.pshift);
-    sp_diskin_create(&ud.diskin);    
+    sp_diskin_create(&ud.diskin);
 
     sp_pshift_init(sp, ud.pshift);
     *ud.pshift->shift = 7;

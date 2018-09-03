@@ -20,11 +20,11 @@ int main() {
     sp_ftbl_create(sp, &sine, 2048);
     sp_ftbl_create(sp, &win, 1024);
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_fof_create(&unit[u]);
         sp_fof_init(sp, unit[u], sine, win, 100, 0);
     }
-    
+
 
     for(t = 0; t < sp->len; t++) {
         for(u = 0; u < NUM; u++) sp_fof_compute(sp, unit[u], &in, &out);
@@ -37,4 +37,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

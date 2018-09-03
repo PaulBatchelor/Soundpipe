@@ -3,7 +3,7 @@
  * Please implement a small and simple working example of your module, and then
  * remove this header.
  * Don't be clever.
- * Bonus points for musicality. 
+ * Bonus points for musicality.
  *
  */
 

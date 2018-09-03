@@ -2,7 +2,7 @@
 
 typedef struct {
     sp_fosc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_jcrev *dsp;
     int counter;
 } UserData;
@@ -11,7 +11,7 @@ void process(sp_data *sp, void *udata)
 {
     UserData *ud = udata;
     SPFLOAT in = 0, out = 0;
-    
+
     if(ud->counter == 0){
         ud->osc->freq = 500 + sp_rand(sp) % 2000;
     }
@@ -45,6 +45,6 @@ int main()
     sp_jcrev_destroy(&ud.dsp);
     sp_ftbl_destroy(&ud.ft);
     sp_fosc_destroy(&ud.osc);
-    
+
     sp_destroy(&sp);
 }

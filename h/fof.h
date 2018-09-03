@@ -11,7 +11,7 @@ typedef struct {
     SPFLOAT iolaps, iphs;
     int32_t durtogo, fundphs, fofcount, prvsmps;
     SPFLOAT prvband, expamp, preamp;
-    int16_t foftype;        
+    int16_t foftype;
     int16_t xincod, ampcod, fundcod, formcod, fmtmod;
     sp_auxdata auxch;
     sp_ftbl *ftp1, *ftp2;

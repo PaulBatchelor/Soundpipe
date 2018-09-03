@@ -9,7 +9,7 @@ typedef struct {
     sp_randi *randi;
 } UserData;
 
-int t_wpkorg35(sp_test *tst, sp_data *sp, const char *hash) 
+int t_wpkorg35(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -32,8 +32,8 @@ int t_wpkorg35(sp_test *tst, sp_data *sp, const char *hash)
     ud.randi->cps = 10;
 
     for(n = 0; n < tst->size; n++) {
-        noise = 0; 
-        wpkorg35 = 0; 
+        noise = 0;
+        wpkorg35 = 0;
         randi = 0;
         sp_randi_compute(sp, ud.randi, NULL, &randi);
         sp_noise_compute(sp, ud.noise, NULL, &noise);

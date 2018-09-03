@@ -35,8 +35,8 @@ int main() {
 
     sp_vocoder_create(&ud.vocoder);
     sp_vocoder_init(sp, ud.vocoder);
-   
-    sp_diskin_create(&ud.diskin); 
+
+    sp_diskin_create(&ud.diskin);
     sp_diskin_init(sp, ud.diskin, "oneart.wav");
 
     for(i = 0; i < 3; i++) {
@@ -52,7 +52,7 @@ int main() {
     for(i = 0; i < 3; i++) {
         sp_blsaw_destroy(&ud.saw[i]);
     }
-    sp_diskin_destroy(&ud.diskin); 
+    sp_diskin_destroy(&ud.diskin);
 
     sp_destroy(&sp);
     return 0;

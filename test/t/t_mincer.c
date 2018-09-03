@@ -5,11 +5,11 @@
 
 typedef struct {
     sp_mincer *mincer;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_randi *randi;
 } UserData;
 
-int t_mincer(sp_test *tst, sp_data *sp, const char *hash) 
+int t_mincer(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -32,7 +32,7 @@ int t_mincer(sp_test *tst, sp_data *sp, const char *hash)
 
     for(n = 0; n < tst->size; n++) {
         mincer = 0; randi = 0;
-        
+
         sp_randi_compute(sp, ud.randi, NULL, &randi);
         ud.mincer->time = randi;
         ud.mincer->amp = 1;

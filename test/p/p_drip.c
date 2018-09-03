@@ -14,7 +14,7 @@ int main() {
 
     sp_drip *unit[NUM];
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_drip_create(&unit[u]);
         sp_drip_init(sp, unit[u], 0.09);
     }
@@ -28,4 +28,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

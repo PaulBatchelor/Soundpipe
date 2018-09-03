@@ -7,15 +7,15 @@ typedef struct {
     sp_random *random;
 } UserData;
 
-int t_random(sp_test *tst, sp_data *sp, const char *hash) 
+int t_random(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
     SPFLOAT random = 0;
-    
+
     sp_srand(sp,1234567);
     UserData ud;
-    
+
     sp_random_create(&ud.random);
 
     sp_random_init(sp, ud.random);

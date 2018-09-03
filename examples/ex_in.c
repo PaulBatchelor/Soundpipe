@@ -1,6 +1,6 @@
 /*
  * This module reads from standard input, and writes it to a wave file.
- * 
+ *
  * To write 5 seconds of white noise:
  *
  * cat /dev/urandom | ./ex_in.bin

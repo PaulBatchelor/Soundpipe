@@ -6,10 +6,10 @@
 typedef struct {
     sp_rspline *rspline;
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
 } UserData;
 
-int t_rspline(sp_test *tst, sp_data *sp, const char *hash) 
+int t_rspline(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -17,7 +17,7 @@ int t_rspline(sp_test *tst, sp_data *sp, const char *hash)
 
     UserData ud;
     sp_srand(sp, 1234567);
-    
+
     sp_rspline_create(&ud.rspline);
     sp_osc_create(&ud.osc);
     sp_ftbl_create(sp, &ud.ft, 2048);
@@ -32,7 +32,7 @@ int t_rspline(sp_test *tst, sp_data *sp, const char *hash)
 
     for(n = 0; n < tst->size; n++) {
         /* compute samples and add to test buffer */
-        osc = 0; 
+        osc = 0;
         rspline = 0;
         sp_rspline_compute(sp, ud.rspline, NULL, &rspline);
         ud.osc->freq = rspline;
@@ -41,7 +41,7 @@ int t_rspline(sp_test *tst, sp_data *sp, const char *hash)
     }
 
     fail = sp_test_verify(tst, hash);
-    
+
     sp_rspline_destroy(&ud.rspline);
     sp_ftbl_destroy(&ud.ft);
     sp_osc_destroy(&ud.osc);

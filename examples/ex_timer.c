@@ -6,7 +6,7 @@
 typedef struct {
     sp_timer *timer;
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_tenv *tenv;
     sp_dmetro *dmetro;
 } UserData;

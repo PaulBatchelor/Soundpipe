@@ -17,7 +17,7 @@ int main() {
 
     sp_ftbl_loadfile(sp, &wav, SAMPDIR "oneart.wav");
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_mincer_create(&unit[u]);
         sp_mincer_init(sp, unit[u], wav, 2048);
     }
@@ -32,4 +32,3 @@ int main() {
     sp_ftbl_destroy(&wav);
     return 0;
 }
-

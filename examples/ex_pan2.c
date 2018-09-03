@@ -16,7 +16,7 @@ typedef struct {
     sp_pan2 *pan2;
     sp_osc *osc;
     sp_osc *lfo;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
 } UserData;
 
 void process(sp_data *sp, void *udata) {

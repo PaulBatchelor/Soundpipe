@@ -9,7 +9,7 @@ typedef struct {
     int counter;
 } UserData;
 
-int t_revsc(sp_test *tst, sp_data *sp, const char *hash) 
+int t_revsc(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -29,18 +29,18 @@ int t_revsc(sp_test *tst, sp_data *sp, const char *hash)
         in = 0;
         foo = 0;
         sp_noise_compute(sp, ud.ns, NULL, &in);
-        
+
         if(ud.counter < 2000) {
             ud.counter = (ud.counter + 1) % 5000;
         }else{
             in = 0;
         }
-        sp_revsc_compute(sp, ud.rev, &in, &in, &sp->out[0], &foo); 
+        sp_revsc_compute(sp, ud.rev, &in, &in, &sp->out[0], &foo);
         sp_test_add_sample(tst, sp->out[0]);
     }
 
     fail = sp_test_verify(tst, hash);
-    
+
     sp_noise_destroy(&ud.ns);
     sp_revsc_destroy(&ud.rev);
 

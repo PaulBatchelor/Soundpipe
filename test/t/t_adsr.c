@@ -6,20 +6,20 @@
 typedef struct {
     sp_adsr *adsr;
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
 } UserData;
 
-int t_adsr(sp_test *tst, sp_data *sp, const char *hash) 
+int t_adsr(sp_test *tst, sp_data *sp, const char *hash)
 {
     sp_srand(sp, 12345);
     uint32_t n;
     int fail = 0;
-    UserData ud; 
+    UserData ud;
     sp_adsr_create(&ud.adsr);
     sp_osc_create(&ud.osc);
     sp_ftbl_create(sp, &ud.ft, 8192);
     SPFLOAT osc = 0, adsr = 0, gate = 0;
-    
+
 
     sp_adsr_init(sp, ud.adsr);
     sp_gen_sine(sp, ud.ft);

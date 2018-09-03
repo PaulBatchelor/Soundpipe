@@ -4,7 +4,7 @@
 #define SP_BUFSIZE 4096
 #ifndef SPFLOAT
 #define SPFLOAT float
-#endif 
+#endif
 #define SP_OK 1
 #define SP_NOT_OK 0
 
@@ -17,7 +17,7 @@ typedef struct sp_auxdata {
     void *ptr;
 } sp_auxdata;
 
-typedef struct sp_data { 
+typedef struct sp_data {
     SPFLOAT *out;
     int sr;
     int nchan;
@@ -25,7 +25,7 @@ typedef struct sp_data {
     unsigned long pos;
     char filename[200];
     uint32_t rand;
-} sp_data; 
+} sp_data;
 
 typedef struct {
     char state;
@@ -95,4 +95,3 @@ typedef struct {
     FILE *fp;
     uint32_t pos;
 } sp_audio;
-

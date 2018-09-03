@@ -61,12 +61,12 @@ int sp_lpc_compute(sp_data *sp, sp_lpc *lpc, SPFLOAT *in, SPFLOAT *out)
 
     if(lpc->clock == 0) {
         if(lpc->counter == 0) {
-            if(lpc->mode == 0) { 
+            if(lpc->mode == 0) {
                 openlpc_encode(lpc->in, lpc->data, lpc->e);
             } else {
                 for(i = 0; i < 7; i++) {
-                    lpc->y[i] = 
-                        lpc->smooth*lpc->y[i] + 
+                    lpc->y[i] =
+                        lpc->smooth*lpc->y[i] +
                         (1-lpc->smooth)*lpc->ft->tbl[i];
                     lpc->data[i] = 255 * lpc->y[i];
                 }
@@ -74,7 +74,7 @@ int sp_lpc_compute(sp_data *sp, sp_lpc *lpc, SPFLOAT *in, SPFLOAT *out)
             openlpc_decode(sp, lpc->data, lpc->out, lpc->d);
         }
 
-        if(lpc->mode == 0) lpc->in[lpc->counter] = *in * 32767; 
+        if(lpc->mode == 0) lpc->in[lpc->counter] = *in * 32767;
         lpc->samp = lpc->out[lpc->counter] / 32767.0;
 
         lpc->counter = (lpc->counter + 1) % lpc->framesize;

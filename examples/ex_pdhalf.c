@@ -5,17 +5,17 @@
 
 typedef struct {
     sp_metro *met;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_tabread *tab;
     sp_phasor *phs;
     sp_tenv *tenv;
     sp_pdhalf *pdhalf;
     sp_scale *scl;
     sp_tseq *ts;
-    sp_ftbl *seq; 
+    sp_ftbl *seq;
 } UserData;
 
-void process(sp_data *sp, void *udata) 
+void process(sp_data *sp, void *udata)
 {
     UserData *ud = udata;
     SPFLOAT met = 0;
@@ -44,7 +44,7 @@ void process(sp_data *sp, void *udata)
 
 }
 
-int main() 
+int main()
 {
     UserData ud;
     sp_data *sp;

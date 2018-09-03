@@ -26,7 +26,7 @@ int main() {
     sp_revsc_create(&ud.rev);
     sp_drip_create(&ud.drip);
     sp_dust_create(&ud.trig);
-    
+
     sp_dust_init(sp, ud.trig);
     ud.trig->amp = 1;
     ud.trig->density = 1;
@@ -34,7 +34,7 @@ int main() {
     ud.drip->amp = 0.3;
     sp_revsc_init(sp, ud.rev);
     ud.rev->feedback = 0.9;
-    
+
     sp->len = 44100 * 30;
     sp_process(sp, &ud, write_osc);
     sp_drip_destroy(&ud.drip);

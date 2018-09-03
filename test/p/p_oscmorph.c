@@ -26,7 +26,7 @@ int main() {
     ft[0] = ft1;
     ft[1] = ft2;
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_oscmorph_create(&unit[u]);
         sp_oscmorph_init(sp, unit[u], ft, 2, 0);
     }
@@ -42,4 +42,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

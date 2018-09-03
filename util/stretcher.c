@@ -22,8 +22,8 @@ int main(int argc, char *argv[])
     SPFLOAT window;
 
     if(argc < 7) {
-        fprintf(stderr, 
-            "Usage: %s sr window_size stretch window  out_dur in.wav out.wav\n", 
+        fprintf(stderr,
+            "Usage: %s sr window_size stretch window  out_dur in.wav out.wav\n",
             argv[0]
         );
         return 1;

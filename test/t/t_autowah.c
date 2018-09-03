@@ -8,7 +8,7 @@ typedef struct {
     sp_spa *disk;
 } UserData;
 
-int t_autowah(sp_test *tst, sp_data *sp, const char *hash) 
+int t_autowah(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -22,9 +22,9 @@ int t_autowah(sp_test *tst, sp_data *sp, const char *hash)
     sp_spa_init(sp, ud.disk, SAMPDIR "oneart.spa");
     sp_autowah_init(sp, ud.autowah);
     *ud.autowah->wah = 1.0;
-    
+
     for(n = 0; n < tst->size; n++) {
-        disk = 0; 
+        disk = 0;
         autowah = 0;
         sp_spa_compute(sp, ud.disk, NULL, &disk);
         sp_autowah_compute(sp, ud.autowah, &disk, &autowah);

@@ -27,12 +27,12 @@ int main() {
 
     for(i = 1; i < ud.amps->size; i++){
         ud.amps->tbl[i] = 1.0 / i;
-        if((i % 2) == 0) ud.amps->tbl[i] *= 2.0; 
+        if((i % 2) == 0) ud.amps->tbl[i] *= 2.0;
     }
 
-    
+
     /* Discovered empirically. multiply frequency by this constant. */
-    ud.fc = 1 / (6.0 * 440); 
+    ud.fc = 1 / (6.0 * 440);
     sp_gen_padsynth(sp, ud.ft, ud.amps, 440, 40.0);
 
     sp_osc_init(sp, ud.osc, ud.ft, 0);

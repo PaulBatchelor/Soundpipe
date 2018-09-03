@@ -15,13 +15,13 @@ void process(sp_data *data, void *ud) {
     SPFLOAT out = 0;
     SPFLOAT foo = 0;
     sp_noise_compute(data, udata->ns, NULL, &in);
-    
+
     if(udata->counter < 2000) {
         udata->counter = (udata->counter + 1) % 5000;
     }else{
         in = 0;
     }
-    sp_revsc_compute(data, udata->rev, &in, &in, &data->out[0], &foo); 
+    sp_revsc_compute(data, udata->rev, &in, &in, &data->out[0], &foo);
 }
 
 int main() {

@@ -6,11 +6,11 @@
 typedef struct {
     sp_thresh *thresh;
     sp_osc *osc, *lfo;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_tenv *tenv;
 } UserData;
 
-int t_thresh(sp_test *tst, sp_data *sp, const char *hash) 
+int t_thresh(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;

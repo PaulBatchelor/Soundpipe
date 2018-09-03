@@ -14,7 +14,7 @@ int main() {
 
     sp_moogladder *unit[NUM];
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_moogladder_create(&unit[u]);
         sp_moogladder_init(sp, unit[u]);
     }
@@ -28,4 +28,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

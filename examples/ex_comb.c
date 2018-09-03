@@ -28,7 +28,7 @@ int main()
 
     sp_comb_init(sp, ud.comb, 0.01);
     sp_diskin_init(sp, ud.disk, "oneart.wav");
-    
+
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);
 

@@ -6,7 +6,7 @@
 typedef struct {
     sp_thresh *thresh;
     sp_osc *osc, *lfo;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     sp_tenv *tenv;
 } UserData;
 

@@ -15,7 +15,7 @@ void write_noise(sp_data *data, void *ud) {
     sp_noise_compute(data, udata->ns, NULL, &in);
     udata->reson->freq = 4000;
     udata->reson->bw = 1000;
-    sp_reson_compute(data, udata->reson, &in, &out); 
+    sp_reson_compute(data, udata->reson, &in, &out);
     data->out[0] = out * 0.1;
 }
 int main() {

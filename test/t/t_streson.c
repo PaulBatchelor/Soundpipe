@@ -8,7 +8,7 @@ typedef struct {
     sp_streson *stres;
 } UserData;
 
-int t_streson(sp_test *tst, sp_data *sp, const char *hash) 
+int t_streson(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -31,7 +31,7 @@ int t_streson(sp_test *tst, sp_data *sp, const char *hash)
     }
 
     fail = sp_test_verify(tst, hash);
-    
+
     sp_noise_destroy(&ud.ns);
     sp_streson_destroy(&ud.stres);
 

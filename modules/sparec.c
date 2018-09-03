@@ -23,7 +23,7 @@ int sp_sparec_init(sp_data *sp, sp_sparec *p, const char *filename)
     if(spa_open(sp, &p->spa, filename, SPA_WRITE) != SP_OK) {
         return SP_NOT_OK;
     }
-    
+
     p->pos = SPA_BUFSIZE;
 
     p->bufsize = SPA_BUFSIZE;

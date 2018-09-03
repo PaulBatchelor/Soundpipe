@@ -9,7 +9,7 @@ typedef struct {
     sp_spa *diskin;
 } UserData;
 
-int t_vocoder(sp_test *tst, sp_data *sp, const char *hash) 
+int t_vocoder(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -24,8 +24,8 @@ int t_vocoder(sp_test *tst, sp_data *sp, const char *hash)
 
     sp_vocoder_create(&ud.vocoder);
     sp_vocoder_init(sp, ud.vocoder);
-   
-    sp_spa_create(&ud.diskin); 
+
+    sp_spa_create(&ud.diskin);
     sp_spa_init(sp, ud.diskin, SAMPDIR "oneart.spa");
 
     for(i = 0; i < 3; i++) {
@@ -35,9 +35,9 @@ int t_vocoder(sp_test *tst, sp_data *sp, const char *hash)
     }
 
     for(n = 0; n < tst->size; n++) {
-        diskin = 0; 
-        vocoder = 0; 
-        saw = 0; 
+        diskin = 0;
+        vocoder = 0;
+        saw = 0;
         tmp = 0;
         sp_spa_compute(sp, ud.diskin, NULL, &diskin);
         for(i = 0; i < 3; i++) {
@@ -57,7 +57,7 @@ int t_vocoder(sp_test *tst, sp_data *sp, const char *hash)
         sp_blsaw_destroy(&ud.saw[i]);
     }
 
-    sp_spa_destroy(&ud.diskin); 
+    sp_spa_destroy(&ud.diskin);
 
     if(fail) return SP_NOT_OK;
     else return SP_OK;

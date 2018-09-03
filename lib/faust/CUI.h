@@ -14,4 +14,3 @@ typedef struct {
     addVerticalSliderFun addVerticalSlider;
     addCheckButtonFun addCheckButton;
 } UIGlue;
-

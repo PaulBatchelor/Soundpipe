@@ -8,7 +8,7 @@ typedef struct {
     sp_metro *met;
     sp_trand *trand;
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
 } UserData;
 
 void process(sp_data *sp, void *udata) {

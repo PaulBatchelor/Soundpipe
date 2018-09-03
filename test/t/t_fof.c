@@ -9,7 +9,7 @@ typedef struct {
     sp_ftbl *win;
 } UserData;
 
-int t_fof(sp_test *tst, sp_data *sp, const char *hash) 
+int t_fof(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -35,7 +35,7 @@ int t_fof(sp_test *tst, sp_data *sp, const char *hash)
     }
 
     fail = sp_test_verify(tst, hash);
-    
+
     sp_fof_destroy(&ud.fof);
     sp_ftbl_destroy(&ud.sine);
     sp_ftbl_destroy(&ud.win);

@@ -13,7 +13,7 @@ typedef struct {
     sp_tdiv *tdiv;
 } UserData;
 
-int t_tdiv(sp_test *tst, sp_data *sp, const char *hash) 
+int t_tdiv(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -50,10 +50,10 @@ int t_tdiv(sp_test *tst, sp_data *sp, const char *hash)
     ud.met->freq = 3;
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc1, ud.ft, 0);
-    ud.osc1->freq = 400; 
+    ud.osc1->freq = 400;
     sp_osc_init(sp, ud.osc2, ud.ft, 0);
-    ud.osc2->freq = 800; 
-    
+    ud.osc2->freq = 800;
+
     sp_tdiv_init(sp, ud.tdiv);
     ud.tdiv->num = 3;
 

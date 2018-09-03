@@ -7,13 +7,13 @@ typedef struct {
     sp_dust *dst;
 } UserData;
 
-int t_dust(sp_test *tst, sp_data *sp, const char *hash) 
+int t_dust(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
     SPFLOAT out = 0;
     UserData ud;
-    
+
     sp_dust_create(&ud.dst);
     sp_dust_init(sp, ud.dst);
     sp->len = 44100 * 5;
@@ -28,7 +28,7 @@ int t_dust(sp_test *tst, sp_data *sp, const char *hash)
     fail = sp_test_verify(tst, hash);
 
     sp_dust_destroy(&ud.dst);
-     
+
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }

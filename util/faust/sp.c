@@ -72,4 +72,3 @@ static void declare (void* ui_interface, FAUSTFLOAT* zone, const char* key, cons
 {
 
 }
-

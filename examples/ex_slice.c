@@ -3,7 +3,7 @@
  * Please implement a small and simple working example of your module, and then
  * remove this header.
  * Don't be clever.
- * Bonus points for musicality. 
+ * Bonus points for musicality.
  *
  */
 
@@ -14,8 +14,8 @@
 
 typedef struct {
     sp_slice *slice;
-    sp_ftbl *vals; 
-    sp_ftbl *buf; 
+    sp_ftbl *vals;
+    sp_ftbl *buf;
     sp_dmetro *met;
 } UserData;
 
@@ -40,7 +40,7 @@ int main() {
     sp_ftbl_loadfile(sp, &ud.buf, "oneart.wav");
     sp_dmetro_create(&ud.met);
 
-    sp_gen_vals(sp, ud.vals, 
+    sp_gen_vals(sp, ud.vals,
     "6770 96139 159104 228847");
 
     sp_slice_init(sp, ud.slice, ud.vals, ud.buf);

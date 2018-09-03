@@ -14,7 +14,7 @@ int main() {
 
     sp_butlp *unit[NUM];
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_butlp_create(&unit[u]);
         sp_butlp_init(sp, unit[u]);
     }
@@ -28,4 +28,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

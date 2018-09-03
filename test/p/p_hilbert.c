@@ -14,13 +14,13 @@ int main() {
 
     sp_hilbert *unit[NUM];
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_hilbert_create(&unit[u]);
         sp_hilbert_init(sp, unit[u]);
     }
 
     for(t = 0; t < sp->len; t++) {
-        for(u = 0; u < NUM; u++) sp_hilbert_compute(sp, unit[u], &in, 
+        for(u = 0; u < NUM; u++) sp_hilbert_compute(sp, unit[u], &in,
                 &out1, &out2);
     }
 
@@ -29,4 +29,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-

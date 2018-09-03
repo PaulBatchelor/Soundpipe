@@ -64,20 +64,20 @@ int sp_oscmorph_compute(sp_data *sp, sp_oscmorph *osc, SPFLOAT *in, SPFLOAT *out
     } else {
         ft2 = osc->tbl[index + 1]->tbl;
     }
-    
+
     osc->inc = (int32_t)lrintf(cps * sicvt);
 
     fract = ((phs) & ftp1->lomask) * ftp1->lodiv;
 
     pos = phs >> lobits;
 
-    v1 = (1 - wtfrac) * 
-        *(ft1 + pos) + 
-        wtfrac * 
+    v1 = (1 - wtfrac) *
+        *(ft1 + pos) +
+        wtfrac *
         *(ft2 + pos);
-    v2 = (1 - wtfrac) * 
-        *(ft1 + ((pos + 1) % ftp1->size))+ 
-        wtfrac * 
+    v2 = (1 - wtfrac) *
+        *(ft1 + ((pos + 1) % ftp1->size))+
+        wtfrac *
         *(ft2 + ((pos + 1) % ftp1->size));
 
     *out = (v1 + (v2 - v1) * fract) * amp;

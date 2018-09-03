@@ -24,7 +24,7 @@ static void freq_compute(void *ud, SPFLOAT *out){
     *out = udata->osc->freq;
 }
 
-int t_maygate(sp_test *tst, sp_data *sp, const char *hash) 
+int t_maygate(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -32,11 +32,11 @@ int t_maygate(sp_test *tst, sp_data *sp, const char *hash)
     SPFLOAT env = 0;
     SPFLOAT osc = 0;
     SPFLOAT mgate = 0;
-    
+
     sp_srand(sp, 123456);
     UserData ud;
     ud.freq = 400;
-    ud.sp = sp; 
+    ud.sp = sp;
     sp_maygate_create(&ud.mg);
     sp_tenv_create(&ud.tenv);
     sp_metro_create(&ud.met);

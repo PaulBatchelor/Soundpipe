@@ -12,7 +12,7 @@ typedef struct {
     sp_fosc *fosc;
 } UserData;
 
-int t_switch(sp_test *tst, sp_data *sp, const char *hash) 
+int t_switch(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;

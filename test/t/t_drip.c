@@ -9,7 +9,7 @@ typedef struct {
     sp_revsc *rev;
 } UserData;
 
-int t_drip(sp_test *tst, sp_data *sp, const char *hash) 
+int t_drip(sp_test *tst, sp_data *sp, const char *hash)
 {
     uint32_t n;
     int fail = 0;
@@ -19,13 +19,13 @@ int t_drip(sp_test *tst, sp_data *sp, const char *hash)
     sp_revsc_create(&ud.rev);
     sp_drip_create(&ud.drip);
     sp_dust_create(&ud.trig);
-    
+
     sp_dust_init(sp, ud.trig);
     sp_drip_init(sp, ud.drip, 0.09);
     ud.drip->amp = 0.3;
     sp_revsc_init(sp, ud.rev);
     ud.rev->feedback = 0.9;
-    
+
     for(n = 0; n < tst->size; n++) {
         sp_dust_compute(sp, ud.trig, NULL, &trig);
         sp_drip_compute(sp, ud.drip, &trig, &drip);
@@ -34,11 +34,11 @@ int t_drip(sp_test *tst, sp_data *sp, const char *hash)
     }
 
     fail = sp_test_verify(tst, hash);
-    
+
     sp_drip_destroy(&ud.drip);
     sp_dust_destroy(&ud.trig);
     sp_revsc_destroy(&ud.rev);
-     
+
     if(fail) return SP_NOT_OK;
     else return SP_OK;
 }

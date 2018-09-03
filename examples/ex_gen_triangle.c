@@ -12,7 +12,7 @@ int main() {
     for(i = 0; i < ft->size; i++) {
         fprintf(fp, "%d %g\n", i, ft->tbl[i]);
     }
-    printf( "%d plot points written to plot.dat.\n", ft->size); 
+    printf( "%d plot points written to plot.dat.\n", ft->size);
     printf("Run write_plot.sh to see the result.\n");
     fclose(fp);
     sp_ftbl_destroy(&ft);

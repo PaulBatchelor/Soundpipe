@@ -5,7 +5,7 @@
 
 typedef struct {
     sp_osc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     int counter;
 } UserData;
 
@@ -26,7 +26,7 @@ int main() {
     sp_create(&sp);
     sp_ftbl_create(sp, &ud.ft, 2048);
     sp_osc_create(&ud.osc);
-    
+
     sp_gen_file(sp, ud.ft, "Formant04.wav");
     sp_osc_init(sp, ud.osc, ud.ft, 0);
     ud.osc->freq = 440;

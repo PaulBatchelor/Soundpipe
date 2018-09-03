@@ -5,11 +5,11 @@
 
 typedef struct {
     sp_fosc *osc;
-    sp_ftbl *ft; 
+    sp_ftbl *ft;
     int counter;
 } UserData;
 
-int t_fosc(sp_test *tst, sp_data *sp, const char *hash) 
+int t_fosc(sp_test *tst, sp_data *sp, const char *hash)
 {
     sp_srand(sp, 0);
     uint32_t n;

@@ -18,7 +18,7 @@ int main() {
     sp_ftbl_create(sp, &ft, 8192);
     sp_gen_sine(sp, ft);
 
-    for(u = 0; u < NUM; u++) { 
+    for(u = 0; u < NUM; u++) {
         sp_posc3_create(&unit[u]);
         sp_posc3_init(sp, unit[u], ft);
     }
@@ -33,4 +33,3 @@ int main() {
     sp_destroy(&sp);
     return 0;
 }
-
