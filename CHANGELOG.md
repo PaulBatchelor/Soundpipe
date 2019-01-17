@@ -6,6 +6,7 @@
     - added sp_ftbl_loadwav
     - fixed soundpipe.h generation bug
     - automated whitespace removal for C and header files
+    - updated documentation for sp_adsr
 
 1.7.0
 -----

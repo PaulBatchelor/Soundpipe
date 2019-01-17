@@ -18,13 +18,13 @@ sptbl["adsr"] = {
             {
                 name = "atk",
                 type = "SPFLOAT",
-                description = "Attack time (in seconds)",
+                description = "Attack",
                 default = 0.1
             },
             {
                 name = "dec",
                 type = "SPFLOAT",
-                description ="Decay time (in seconds)",
+                description ="Decay",
                 default = 0.1
             },
             {
@@ -36,7 +36,7 @@ sptbl["adsr"] = {
             {
                 name = "rel",
                 type = "SPFLOAT",
-                description ="Release time (in seconds)",
+                description ="Release",
                 default = 0.3
             },
         }
@@ -46,6 +46,13 @@ sptbl["adsr"] = {
 
     description = [[ADSR generator
 This is an ADSR generator whose curves are created using a one-pole low pass filter.
+
+NOTE: The attack, decay, and release parameters are "fuzzy" values that don't
+exactly correspond to duration in seconds. More accurately, they are special
+tau constant units that feed into the filter used to generate the envelope. The
+attack value specificly undergoes some "creative" modificiations in order to
+create snappier attack times. It is highly recommend to tune parameters by
+ear rather than to read the values literally.
 ]],
 
     ninputs = 1,
