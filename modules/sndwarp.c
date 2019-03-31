@@ -42,7 +42,7 @@ int sp_sndwarp_init(sp_data *sp,
                     SPFLOAT irandw,
                     int32_t ioverlap,
                     sp_ftbl *ftpWind,
-                    SPFLOAT itimemode)
+                    int itimemode)
 {
     int32_t         i;
     int32_t         nsections;
@@ -53,16 +53,12 @@ int sp_sndwarp_init(sp_data *sp,
     p->iwsize = iwsize;
     p->irandw = irandw;
     p->ioverlap = ioverlap;
+    p->itimemode = itimemode;
 
     nsections = ioverlap;
-    if ((auxp = p->auxch.ptr) == NULL || nsections != p->nsections) {
-      if (nsections != p->nsections)
-        auxp = p->auxch.ptr = NULL;
-
-      sp_auxdata_alloc(&p->auxch, (size_t)nsections*sizeof(sp_sndwarp_warpsection));
-      auxp = p->auxch.ptr;
-      p->nsections = nsections;
-    }
+    sp_auxdata_alloc(&p->auxch, (size_t)nsections*sizeof(sp_sndwarp_warpsection));
+    auxp = p->auxch.ptr;
+    p->nsections = nsections;
     p->exp = (sp_sndwarp_warpsection *)auxp;
 
     p->ftpSamp  = ftpSamp;
@@ -95,6 +91,9 @@ int sp_sndwarp_init(sp_data *sp,
     p->ampcode = 1;
     p->timewarpcode = 1;
     p->resamplecode = 1;
+    p->amp = 1;
+    p->timewarp = 2;
+    p->resample = 2;
     return SP_OK;
 }
 

@@ -103,6 +103,7 @@ ex_scale \
 ex_scrambler \
 ex_streson \
 ex_smoothdelay \
+ex_sndwarp \
 ex_slice \
 ex_spa \
 ex_sparec \

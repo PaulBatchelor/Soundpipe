@@ -22,5 +22,5 @@ int sp_sndwarp_init(sp_data *sp,
                     SPFLOAT irandw,
                     int32_t ioverlap,
                     sp_ftbl *ft2,
-                    SPFLOAT itimemode);
+                    int itimemode);
 int sp_sndwarp_compute(sp_data *sp, sp_sndwarp *p, SPFLOAT *in, SPFLOAT *out);
