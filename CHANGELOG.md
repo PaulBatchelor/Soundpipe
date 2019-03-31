@@ -7,6 +7,7 @@
     - fixed soundpipe.h generation bug
     - automated whitespace removal for C and header files
     - updated documentation for sp_adsr
+    - added sp_sndwarp
 
 1.7.0
 -----

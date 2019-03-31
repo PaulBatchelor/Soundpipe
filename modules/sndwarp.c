@@ -15,7 +15,7 @@
 #define unirand(x) ((SPFLOAT) sp_rand(x) / SP_RANDMAX)
 
 struct sp_sndwarp_warpsection {
-    int32_t    cnt, wsize, flag; /* , section; */
+    int32_t    cnt, wsize, flag;
     SPFLOAT ampincr, ampphs, offset;
 };
 
@@ -99,12 +99,10 @@ int sp_sndwarp_init(sp_data *sp,
 
 int sp_sndwarp_compute(sp_data *sp, sp_sndwarp *p, SPFLOAT *in, SPFLOAT *out)
 {
-    /* uint32_t n, nsmps = CS_KSMPS; */
     SPFLOAT       frm_0,frm_1;
     int32_t       base, longphase;
     SPFLOAT       frac, frIndx;
     SPFLOAT       r1, amp, timewarpby, resample;
-    /* SPFLOAT r2; */
     sp_sndwarp_warpsection *exp;
     sp_ftbl *ftpWind, *ftpSamp;
     int32_t         i;
@@ -114,43 +112,36 @@ int sp_sndwarp_compute(sp_data *sp, sp_sndwarp *p, SPFLOAT *in, SPFLOAT *out)
     int32_t         overlap = p->ioverlap;
 
     r1 = 0;
-    /* r2 = 0; */
-/*     if (p->OUTOCOUNT >1) memset(r2, 0, nsmps*sizeof(MYFLT)); */
-/* /\*     for (i=0; i<nsmps; i++) { *\/ */
-/* /\*       *r1++ = FL(0.0); *\/ */
-/* /\*       if (p->OUTOCOUNT >1) *r2++ = FL(0.0); *\/ */
-/* /\*     } *\/ */
     exp = p->exp;
     ftpWind = p->ftpWind;
     ftpSamp = p->ftpSamp;
 
     for (i=0; i<overlap; i++) {
-      resample = p->resample;
-      timewarpby = p->timewarp;
-      amp = p->amp;
-     /* for (n=offset; n<nsmps;n++) { */
+        resample = p->resample;
+        timewarpby = p->timewarp;
+        amp = p->amp;
         if (exp[i].cnt < exp[i].wsize) goto skipover;
 
         if (p->itimemode!=0)
-          exp[i].offset=(sp->sr * timewarpby)+p->begin;
+            exp[i].offset=(sp->sr * timewarpby)+p->begin;
         else
-          exp[i].offset += (SPFLOAT)exp[i].wsize/(timewarpby);
+            exp[i].offset += (SPFLOAT)exp[i].wsize/(timewarpby);
 
         exp[i].cnt=0;
         exp[i].wsize = (int32_t) (iwsize + (unirand(sp) * (p->irandw)));
         exp[i].ampphs = 0.0;
         exp[i].ampincr = flen/(exp[i].wsize-1);
 
-      skipover:
+        skipover:
 
         frIndx =(SPFLOAT)((exp[i].cnt * resample)  + exp[i].offset);
         exp[i].cnt += 1;
         if (frIndx > (SPFLOAT)p->maxFr) { /* not past last one */
-          frIndx = (SPFLOAT)p->maxFr;
-          if (p->prFlg) {
-            p->prFlg = 0;   /* false */
-            fprintf(stderr, "SNDWARP at last sample frame");
-          }
+            frIndx = (SPFLOAT)p->maxFr;
+            if (p->prFlg) {
+                p->prFlg = 0;   /* false */
+                /* fprintf(stderr, "SNDWARP at last sample frame"); */
+            }
         }
         longphase = (int32_t)exp[i].ampphs;
         if (longphase > p->flen-1) longphase = p->flen-1;
@@ -165,21 +156,14 @@ int sp_sndwarp_compute(sp_data *sp, sp_sndwarp *p, SPFLOAT *in, SPFLOAT *out)
         frm_0 = *(ftpSamp->tbl + base);
         frm_1 = *(ftpSamp->tbl + (base+1));
         if (frac != 0.0) {
-          r1 += ((frm_0 + frac*(frm_1-frm_0)) * windowamp) * amp;
-          /* if (i==0) */
-          /*  if (p->OUTOCOUNT > 1) */
-          /*    r2 += (frm_0 + frac*(frm_1-frm_0)) * amp; */
+            r1 += ((frm_0 + frac*(frm_1-frm_0)) * windowamp) * amp;
         }
         else {
-          r1 += (frm_0 * windowamp) * amp;
-          /* if (i==0) */
-          /*   if (p->OUTOCOUNT > 1) */
-          /*     r2 += frm_0 * amp; */
+            r1 += (frm_0 * windowamp) * amp;
         }
         if (p->ampcode) amp++;
         if (p->timewarpcode) timewarpby++;
         if (p->resamplecode) resample++;
-      /* } */
     }
 
     *out = r1;
