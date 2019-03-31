@@ -97,6 +97,7 @@ scrambler \
 sdelay \
 slice \
 smoothdelay \
+sndwarp \
 spa \
 sparec \
 streson \
