@@ -45,6 +45,7 @@ fofilt \
 foo \
 fosc \
 gbuzz \
+granule \
 hilbert \
 in \
 incr \
