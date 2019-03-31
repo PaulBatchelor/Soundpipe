@@ -11,55 +11,72 @@ sptbl["sndwarp"] = {
         destroy = "sp_sndwarp_destroy",
         init = "sp_sndwarp_init",
         compute = "sp_sndwarp_compute",
-        other = {
-            sp_sndwarp_set = {
-                description = "sndwarp_set description goes here.",
-                args = {
-                    {
-                        name = "var1",
-                        type = "SPFLOAT",
-                        description = "This is the first parameter",
-                        default = 1.5
-                    },
-                    {
-                        name = "var2",
-                        type = "SPFLOAT",
-                        description = "This is the second parameter",
-                        default = 1.5
-                    }
-                }
-            }
-        }
     },
 
     params = {
         mandatory = {
             {
-                name = "bar",
+                name = "ftpSamp",
                 type = "sp_ftbl *",
-                description = "This is a mandatory table value. It does not have a default value, so we set it to 'N/A'. Any that does not or cannot have a default value should set this default value to 'N/A'.",
+                description = "Pointer to wave ftable",
                 default = "N/A"
             },
             {
-                name = "bar2",
+                name = "ibegin",
                 type = "SPFLOAT",
-                description = "This is a mandatory parameter. In soundpipe, users will always need to specify this value, but a default value has been giving in case it is needed to write more complicated engines in the future.",
-                default = 123
+                description = "Offset to begin playback.",
+                default = 0
+            },
+            {
+                name = "iwsize",
+                type = "int32_t",
+                description = "Window size (in samples).",
+                default = 4410
+            },
+            {
+                name = "irandw",
+                type = "int32_t",
+                description = "Bandwidth of a random number generator. This is to be added to iwsize.",
+                default = 882
+            },
+            {
+                name = "ioverlap",
+                type = "int32_t",
+                description = "Determines density of overlapping windows.",
+                default = 5
+            },
+            {
+                name = "ftpWind",
+                type = "sp_ftbl *",
+                description = "Pointer to windowing function.",
+                default = "N/A"
+            },
+            {
+                name = "itimemode",
+                type = "int",
+                description = "Some time flag.",
+                default = 1
             }
         },
 
         optional = {
             {
-                name = "blah_1",
+                name = "amp",
                 type = "SPFLOAT",
-                description = "This is an optional parameter. These values are always set to a value by default, and can be set after the init function has been called.",
-                default = 1.5
+                description = "Amplitude.",
+                default = 1
             },
             {
-                name = "blah_2",
+                name = "timewarp",
                 type = "SPFLOAT",
-                description ="This is yet another optional parameter...",
-                default = 456.7
+                description ="Timewarp factor. 1=normal, 2=halfspeed, 0.5=double time",
+                default = 2
+            },
+            {
+                name = "resample",
+                type = "SPFLOAT",
+                description ="Pitch stretch factor. 1=normal, 2=double speed, 0.5=halfspeed",
+                default = 2
             },
         }
     },

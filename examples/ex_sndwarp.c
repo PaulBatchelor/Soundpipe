@@ -38,6 +38,10 @@ int main() {
                     1);
 
     sp->len = 44100 * 10;
+
+    ud.sndwarp->timewarp = 2;
+    ud.sndwarp->resample = 2;
+
     sp_process(sp, &ud, process);
 
     sp_sndwarp_destroy(&ud.sndwarp);
