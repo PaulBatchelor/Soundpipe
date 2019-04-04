@@ -46,9 +46,9 @@ int sp_granule_init(sp_data *sp, sp_granule *p,
                     SPFLOAT ipshift,
                     SPFLOAT igskip,
                     SPFLOAT igskip_os,
-                    SPFLOAT igsize_os,
                     SPFLOAT ilength,
                     SPFLOAT igap_os,
+                    SPFLOAT igsize_os,
                     SPFLOAT iatt,
                     SPFLOAT idec,
                     SPFLOAT iseed,
@@ -63,6 +63,11 @@ int sp_granule_init(sp_data *sp, sp_granule *p,
     int32_t tmplong1, tmplong2;
     SPFLOAT tmpfloat1;
     SPFLOAT pitch[4];
+
+    p->xamp = 1;
+    p->kgap = 50;
+    p->kgsize = 30;
+
 
     p->ftp = ft;
     ftp = ft;
@@ -152,7 +157,7 @@ int sp_granule_init(sp_data *sp, sp_granule *p,
       fprintf(stderr, "igskip_os must be greater than 0\n");
     }
 
-    p->igskip = igskip;
+    p->igskip_os = igskip_os;
 
     p->ilength = ilength;
     p->gstart = (int32_t)(p->igskip * sp->sr);
@@ -173,6 +178,8 @@ int sp_granule_init(sp_data *sp, sp_granule *p,
 
     p->igsize_os = igsize_os;
 
+    p->idec = idec;
+    p->iatt = iatt;
     if (iatt < 0.0 || p->idec < 0.0 ||
                  ((iatt + idec) > 100.0)) {
         fprintf(stderr, "Invalid values for iatt and idec\n");
@@ -239,7 +246,7 @@ int sp_granule_init(sp_data *sp, sp_granule *p,
     }
 
     for (nvoice = 0; nvoice < p->ivoice; nvoice++)
-      p->stretch[nvoice] = p->gsize[nvoice] + p->gap[nvoice];
+        p->stretch[nvoice] = p->gsize[nvoice] + p->gap[nvoice];
 
     if (p->igskip_os != 0) {
         for (nvoice = 0; nvoice < p->ivoice; nvoice++) {
@@ -285,21 +292,18 @@ int sp_granule_init(sp_data *sp, sp_granule *p,
 
 int sp_granule_compute(sp_data *sp, sp_granule *p, SPFLOAT *in, SPFLOAT *out)
 {
-    sp_ftbl *ftp, *ftp_env;
-    SPFLOAT ar, *ftbl, *ftbl_env=NULL;
-    /* uint32_t offset = p->h.insdshead->ksmps_offset; */
-    /* uint32_t early  = p->h.insdshead->ksmps_no_end; */
-    /* uint32_t n, nsmps = CS_KSMPS; */
-    int32_t nvoice;
-    int32_t tmplong1, tmplong2, tmplong3, tmpfpnt, flen_env=0;
-    SPFLOAT fract, v1, tmpfloat1;
-    int32_t att_len, dec_len, att_sus;
-    SPFLOAT envlop;
+   sp_ftbl *ftp, *ftp_env;
+   SPFLOAT ar, *ftbl, *ftbl_env=NULL;
+   int32_t nvoice;
+   int32_t tmplong1, tmplong2, tmplong3, tmpfpnt, flen_env=0;
+   SPFLOAT fract, v1, tmpfloat1;
+   int32_t att_len, dec_len, att_sus;
+   SPFLOAT envlop;
 
-    int32_t gstart  = p->gstart;
-    int32_t gend    = p->gend;
-    int32_t glength = p->glength;
-    SPFLOAT iratio  = p->iratio;
+   int32_t gstart  = p->gstart;
+   int32_t gend    = p->gend;
+   int32_t glength = p->glength;
+   SPFLOAT iratio  = p->iratio;
 
    ftp = p->ftp;
    ftbl = ftp->tbl;
@@ -310,27 +314,27 @@ int sp_granule_compute(sp_data *sp, sp_granule *p, SPFLOAT *in, SPFLOAT *out)
 
    //for (n=offset; n<nsmps; n++) {
                                 /* Optimisations */
-     int32_t *fpnt = p->fpnt, *cnt = p->cnt, *gskip = p->gskip;
-     int32_t *gap = p->gap, *gsize = p->gsize;
-     int32_t *stretch = p->stretch, *mode = p->mode;
-     SPFLOAT *pshift = p->pshift, *phs = p->phs;
-     ar =0.0;
+    int32_t *fpnt = p->fpnt, *cnt = p->cnt, *gskip = p->gskip;
+    int32_t *gap = p->gap, *gsize = p->gsize;
+    int32_t *stretch = p->stretch, *mode = p->mode;
+    SPFLOAT *pshift = p->pshift, *phs = p->phs;
+    ar =0.0;
 
-     for (nvoice = 0; nvoice <  p->ivoice ; nvoice++) {
-         if (*fpnt >= (*gsize -1)) {
-             *cnt +=1L;
-         } else {
-              fract = *phs - *fpnt;
-              if (*mode < 0) {
-                  tmplong1 = *gskip - gstart;
-                  if (*fpnt >= tmplong1) {
-                     tmplong1= *fpnt - tmplong1;
-                     tmplong2= tmplong1/glength;
-                     tmplong1 -= tmplong2 * glength;
-                     tmpfpnt = gend - tmplong1;
-                  } else {
-                      tmpfpnt = *gskip - *fpnt;
-                  }
+    for (nvoice = 0; nvoice <  p->ivoice ; nvoice++) {
+        if (*fpnt >= (*gsize -1)) {
+            *cnt +=1L;
+        } else {
+            fract = *phs - *fpnt;
+            if (*mode < 0) {
+                tmplong1 = *gskip - gstart;
+                if (*fpnt >= tmplong1) {
+                    tmplong1= *fpnt - tmplong1;
+                    tmplong2= tmplong1/glength;
+                    tmplong1 -= tmplong2 * glength;
+                    tmpfpnt = gend - tmplong1;
+                } else {
+                    tmpfpnt = *gskip - *fpnt;
+                }
             } else {
                 tmplong1 = gend - *gskip;
                 if (*fpnt >= tmplong1) {
@@ -351,8 +355,8 @@ int sp_granule_compute(sp_data *sp, sp_granule *p, SPFLOAT *in, SPFLOAT *out)
                 tmpfloat1 = (1.0 * *fpnt) / att_len;
                 envlop = ((tmpfloat1 >=1.0) ? 1.0 : tmpfloat1);
             } else {
-             envlop =
-                 ((SPFLOAT)(dec_len - (SPFLOAT)(*fpnt - att_sus)))/((SPFLOAT)dec_len);
+                envlop =
+                    ((SPFLOAT)(dec_len - (SPFLOAT)(*fpnt - att_sus)))/((SPFLOAT)dec_len);
             }
 
             v1 = *(ftbl + tmpfpnt);
@@ -361,69 +365,74 @@ int sp_granule_compute(sp_data *sp, sp_granule *p, SPFLOAT *in, SPFLOAT *out)
             if (tmpfpnt < gstart) tmpfpnt = gend - (gstart - tmpfpnt) + 1;
             if (tmpfpnt > gend) tmpfpnt = gstart + (tmpfpnt - gend) - 1;
 
-            tmplong3 = (int32_t)(envlop * flen_env) -1L;
-            envlop = *(ftbl_env + tmplong3);
+            tmplong3 = (int32_t)envlop * (flen_env -1);
+            if(tmplong3 < 0) fprintf(stderr, "%d are we here?\n", tmplong3);
+            envlop = ftbl_env[tmplong3];
 
-            ar +=(v1 + ( *(ftbl + tmpfpnt)   - v1) * fract ) * envlop ;
+            ar += (v1 +
+                   (*(ftbl + tmpfpnt) - v1) *
+                   fract)
+                * envlop;
 
             *phs += *pshift;
             *fpnt = (int32_t)*phs;
             *cnt  = (int32_t)*phs;
-         } /* end if (*fpnt >= (*gsize -1)) */
+        } /* end if (*fpnt >= (*gsize -1)) */
 
-         if (*cnt >= *stretch) {
-             *cnt = 0;
-             *fpnt= 0;
-             *phs = 0.0;
+        if (*cnt >= *stretch) {
+            *cnt = 0;
+            *fpnt= 0;
+            *phs = 0.0;
 
-             /* pick up new values... */
+            /* pick up new values... */
 
-             /* Use the old value of the pshift, gsize and gap */
-             /*           to determine the time advanced */
-             /*           *gskip+=
-                          ((*gsize / *pshift) +
-                          *gap) * iratio;
-                          */
-             *gskip += (int32_t)((*gsize / *pshift) * iratio);
+            /* Use the old value of the pshift, gsize and gap */
+            /*           to determine the time advanced */
+            /*           *gskip+=
+                        ((*gsize / *pshift) +
+                        *gap) * iratio;
+                        */
+            *gskip += (int32_t)((*gsize / *pshift) * iratio);
 
-             if (p->igskip_os != 0) {
-                 *gskip  += (int32_t)(p->gskip_os * grand(p));
-             }
+            if (p->igskip_os != 0) {
+                *gskip  += (int32_t)(p->gskip_os * grand(p));
+            }
 
-             if (*gskip >= gend) {
-                 tmplong1 = *gskip - gend;
-                 tmplong2 = tmplong1 /glength;
-                 tmplong1 -= tmplong2 * glength;
-                 *gskip = gstart + tmplong1;
-             }
+            if (*gskip >= gend) {
+                tmplong1 = *gskip - gend;
+                tmplong2 = tmplong1 /glength;
+                tmplong1 -= tmplong2 * glength;
+                *gskip = gstart + tmplong1;
+            }
 
-             if (*gskip < gstart) *gskip = gstart;
+            if (*gskip < gstart) *gskip = gstart;
 
-             if (p->imode == 0) {
-                 *mode = (grand(p) < 0) ? -1 : 1;
-             }
+            if (p->imode == 0) {
+                *mode = (grand(p) < 0) ? -1 : 1;
+            }
 
-             if (p->ipshift == 0) {
-                 tmpfloat1 = grand(p);
-                 *pshift = (tmpfloat1 < 0.0) ?
-                   (tmpfloat1*0.5)+1.0 : tmpfloat1+1.0;
-             }
+            if (p->ipshift == 0) {
+                tmpfloat1 = grand(p);
+                *pshift = (tmpfloat1 < 0.0) ?
+                (tmpfloat1*0.5)+1.0 : tmpfloat1+1.0;
+            }
 
-             *gap = (int32_t)(p->kgap * sp->sr);
-             if (p->igap_os != 0) {
-                 *gap += (int32_t)((*gap * p->gap_os) * grand(p));
-             }
+            *gap = (int32_t)(p->kgap * sp->sr);
+            if (p->igap_os != 0) {
+                *gap += (int32_t)((*gap * p->gap_os) * grand(p));
+            }
 
-             *gsize = (int32_t)(p->kgsize * sp->sr * *pshift);
-             if (p->igsize_os != 0)
-               *gsize += (int32_t)((*gsize * p->gsize_os) * grand(p));
+            *gsize = (int32_t)(p->kgsize * sp->sr * *pshift);
+            if (p->igsize_os != 0)
+            *gsize += (int32_t)((*gsize * p->gsize_os) * grand(p));
 
-             *stretch = *gsize + *gap;
+            *stretch = *gsize + *gap;
 
-         }
-         fpnt++; cnt++; gskip++; gap++; gsize++;
-         stretch++; mode++; pshift++; phs++;
-     }
-     ar *= p->xamp;     /* increment audio pointer and multiply the xamp */
+        }
+        fpnt++; cnt++; gskip++; gap++; gsize++;
+        stretch++; mode++; pshift++; phs++;
+    }
+    ar *= p->xamp;     /* increment audio pointer and multiply the xamp */
+    *out = ar;
     return SP_OK;
 }

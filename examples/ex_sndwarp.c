@@ -35,12 +35,12 @@ int main() {
                     882,
                     5,
                     ud.win,
-                    1);
+                    0);
 
     sp->len = 44100 * 10;
 
-    ud.sndwarp->timewarp = 2;
-    ud.sndwarp->resample = 2;
+    ud.sndwarp->timewarp = 0.5;
+    ud.sndwarp->resample = 1;
 
     sp_process(sp, &ud, process);
 
