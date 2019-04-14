@@ -22,16 +22,10 @@ sptbl["sndwarp"] = {
                 default = "N/A"
             },
             {
-                name = "ftpWind",
+                name = "ft_win",
                 type = "sp_ftbl *",
                 description = "Pointer to windowing function.",
                 default = "N/A"
-            },
-            {
-                name = "ibegin",
-                type = "SPFLOAT",
-                description = "Offset to begin playback.",
-                default = 0
             },
             {
                 name = "maxoverlap",
@@ -61,20 +55,26 @@ sptbl["sndwarp"] = {
                 default = 2
             },
             {
+                name = "begin",
+                type = "SPFLOAT",
+                description = "Offset to begin playback (in seconds).",
+                default = 0
+            },
+            {
                 name = "wsize",
-                type = "int32_t",
+                type = "SPFLOAT",
                 description = "Window size (in second).",
                 default = 0.1
             },
             {
                 name = "randw",
-                type = "int32_t",
+                type = "SPFLOAT",
                 description = "Bandwidth of a random number generator. This is to be added to wsize.",
                 default = 0.02
             },
             {
                 name = "overlap",
-                type = "int32_t",
+                type = "SPFLOAT",
                 description = "Determines density of overlapping windows.",
                 default = 5
             },
@@ -89,38 +89,19 @@ sptbl["sndwarp"] = {
 
     modtype = "module",
 
-    description = [[A short title describing the module
-
-    This is a description of the entire module.  This is not a real module. This description should be a comprehensive sumary of what this function does.
-
-Inside the Lua table, this is expressed as a multiline string, however it does not adhere to the tradtional 80 column rule found in programming.
-
-Write as much text as needed here...
+    description = [[Apply independent pitch and time stretching modification to a sample.
 ]],
 
-    ninputs = 2,
-    noutputs = 2,
+    ninputs = 0,
+    noutputs = 1,
 
     inputs = {
-        {
-            name = "clock",
-            description = "this is the clock source for a made up plugin."
-        },
-        {
-            name = "input",
-            description = "this is the audio input for a made up plugin."
-        },
     },
 
     outputs = {
         {
-            name = "out_left",
-            description = "Stereo left output for sndwarp."
-        },
-        {
-            name = "out_right",
-            description = "Stereo right output for sndwarp."
+            name = "out",
+            description = "Audio output."
         },
     }
-
 }
