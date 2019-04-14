@@ -16,9 +16,15 @@ sptbl["sndwarp"] = {
     params = {
         mandatory = {
             {
-                name = "ftpSamp",
+                name = "ft_samp",
                 type = "sp_ftbl *",
                 description = "Pointer to wave ftable",
+                default = "N/A"
+            },
+            {
+                name = "ftpWind",
+                type = "sp_ftbl *",
+                description = "Pointer to windowing function.",
                 default = "N/A"
             },
             {
@@ -28,35 +34,11 @@ sptbl["sndwarp"] = {
                 default = 0
             },
             {
-                name = "iwsize",
+                name = "maxoverlap",
                 type = "int32_t",
-                description = "Window size (in samples).",
-                default = 4410
-            },
-            {
-                name = "irandw",
-                type = "int32_t",
-                description = "Bandwidth of a random number generator. This is to be added to iwsize.",
-                default = 882
-            },
-            {
-                name = "ioverlap",
-                type = "int32_t",
-                description = "Determines density of overlapping windows.",
+                description = "Maximum density.",
                 default = 5
             },
-            {
-                name = "ftpWind",
-                type = "sp_ftbl *",
-                description = "Pointer to windowing function.",
-                default = "N/A"
-            },
-            {
-                name = "itimemode",
-                type = "int",
-                description = "Some time flag.",
-                default = 1
-            }
         },
 
         optional = {
@@ -78,6 +60,30 @@ sptbl["sndwarp"] = {
                 description ="Pitch stretch factor. 1=normal, 2=double speed, 0.5=halfspeed",
                 default = 2
             },
+            {
+                name = "wsize",
+                type = "int32_t",
+                description = "Window size (in second).",
+                default = 0.1
+            },
+            {
+                name = "randw",
+                type = "int32_t",
+                description = "Bandwidth of a random number generator. This is to be added to wsize.",
+                default = 0.02
+            },
+            {
+                name = "overlap",
+                type = "int32_t",
+                description = "Determines density of overlapping windows.",
+                default = 5
+            },
+            {
+                name = "timemode",
+                type = "int",
+                description = "Timewarp mode. 0=stretch time, 1=scrubbing",
+                default = 0
+            }
         }
     },
 
