@@ -15,7 +15,7 @@
 #define unirand(x) ((SPFLOAT) sp_rand(x) / SP_RANDMAX)
 
 struct sp_sndwarp_warpsection {
-    int32_t    cnt, wsize, flag;
+    int32_t cnt, wsize, flag;
     SPFLOAT ampincr, ampphs, offset;
 };
 
@@ -35,7 +35,7 @@ int sp_sndwarp_destroy(sp_sndwarp **p)
 }
 
 int sp_sndwarp_init(sp_data *sp, sp_sndwarp *p,
-                    sp_ftbl *ftpSamp, sp_ftbl *ftpWind,
+                    sp_ftbl *ft_samp, sp_ftbl *ft_win,
                     int32_t maxoverlap)
 {
     int32_t i;
@@ -43,41 +43,40 @@ int sp_sndwarp_init(sp_data *sp, sp_sndwarp *p,
     sp_sndwarp_warpsection *exp;
     char *auxp;
 
-    p->ibegin = 0;
-    p->iwsize = 0.1;
-    p->irandw = 0.02;
-    p->ioverlap = 5;
-    p->itimemode = 1;
+    p->begin = 0;
+    p->wsize = 0.1;
+    p->randw = 0.02;
+    p->overlap = 5;
+    p->timemode = 1;
 
     nsections = maxoverlap;
-    p->ioverlap = maxoverlap;
+    p->overlap = maxoverlap;
     sp_auxdata_alloc(&p->auxch, (size_t)nsections*sizeof(sp_sndwarp_warpsection));
     auxp = p->auxch.ptr;
     p->nsections = nsections;
     p->exp = (sp_sndwarp_warpsection *)auxp;
 
-    p->ftpSamp  = ftpSamp;
-    p->sampflen = ftpSamp->size;
+    p->ft_samp  = ft_samp;
+    p->sampflen = ft_samp->size;
 
-    p->ftpWind = ftpWind;
-    p->flen = ftpWind->size;
+    p->ft_win = ft_win;
+    p->flen = ft_win->size;
 
-    p->maxFr = -1 + ftpSamp->size;
+    p->maxFr = -1 + ft_samp->size;
     p->prFlg = 1;    /* true */
-    p->begin = (int32_t)(p->ibegin * sp->sr);
 
     exp = p->exp;
     for (i=0; i< p->nsections; i++) {
       if (i==0) {
-        exp[i].wsize = (int32_t)(p->iwsize * sp->sr);
+        exp[i].wsize = (int32_t)(p->wsize * sp->sr);
         exp[i].cnt = 0;
         exp[i].ampphs = 0.0;
       } else {
-        exp[i].wsize = (int32_t) ((p->iwsize + (unirand(sp) * (p->irandw))) * sp->sr);
-        exp[i].cnt=(int32_t)(exp[i].wsize*((SPFLOAT)i/(p->ioverlap)));
-        exp[i].ampphs = p->flen*((SPFLOAT)i/(p->ioverlap));
+        exp[i].wsize = (int32_t) ((p->wsize + (unirand(sp) * (p->randw))) * sp->sr);
+        exp[i].cnt=(int32_t)(exp[i].wsize*((SPFLOAT)i/(p->overlap)));
+        exp[i].ampphs = p->flen*((SPFLOAT)i/(p->overlap));
       }
-      exp[i].offset = (SPFLOAT)p->begin;
+      exp[i].offset = (SPFLOAT)p->begin * sp->sr;
       exp[i].ampincr = (SPFLOAT)p->flen/(exp[i].wsize-1);
     }
     p->ampcode = 1;
@@ -96,17 +95,17 @@ int sp_sndwarp_compute(sp_data *sp, sp_sndwarp *p, SPFLOAT *in, SPFLOAT *out)
     SPFLOAT frac, frIndx;
     SPFLOAT r1, amp, timewarpby, resample;
     sp_sndwarp_warpsection *exp;
-    sp_ftbl *ftpWind, *ftpSamp;
+    sp_ftbl *ft_win, *ft_samp;
     int32_t i;
     SPFLOAT v1, v2, windowamp, fract;
     SPFLOAT flen = (SPFLOAT)p->flen;
-    SPFLOAT iwsize = p->iwsize;
-    int32_t overlap = p->ioverlap;
+    SPFLOAT wsize = p->wsize;
+    int32_t overlap = p->overlap;
 
     r1 = 0;
     exp = p->exp;
-    ftpWind = p->ftpWind;
-    ftpSamp = p->ftpSamp;
+    ft_win = p->ft_win;
+    ft_samp = p->ft_samp;
 
     if(overlap > p->nsections) overlap = p->nsections;
     if(overlap <= 0) overlap = 1;
@@ -117,13 +116,13 @@ int sp_sndwarp_compute(sp_data *sp, sp_sndwarp *p, SPFLOAT *in, SPFLOAT *out)
         amp = p->amp;
         if (exp[i].cnt < exp[i].wsize) goto skipover;
 
-        if (p->itimemode!=0)
-            exp[i].offset=(sp->sr * timewarpby)+p->begin;
+        if (p->timemode)
+            exp[i].offset=(sp->sr * timewarpby)+(p->begin * sp->sr);
         else
             exp[i].offset += (SPFLOAT)exp[i].wsize/(timewarpby);
 
         exp[i].cnt=0;
-        exp[i].wsize = (int32_t) ((iwsize + (unirand(sp) * (p->irandw))) * sp->sr);
+        exp[i].wsize = (int32_t) ((wsize + (unirand(sp) * (p->randw))) * sp->sr);
         exp[i].ampphs = 0.0;
         exp[i].ampincr = flen/(exp[i].wsize-1);
 
@@ -140,16 +139,16 @@ int sp_sndwarp_compute(sp_data *sp, sp_sndwarp *p, SPFLOAT *in, SPFLOAT *out)
         }
         longphase = (int32_t)exp[i].ampphs;
         if (longphase > p->flen-1) longphase = p->flen-1;
-        v1 = *(ftpWind->tbl + longphase);
-        v2 = *(ftpWind->tbl + longphase + 1);
+        v1 = *(ft_win->tbl + longphase);
+        v2 = *(ft_win->tbl + longphase + 1);
         fract = (SPFLOAT)(exp[i].ampphs - (int32_t)exp[i].ampphs);
         windowamp = v1 + (v2 - v1)*fract;
         exp[i].ampphs += exp[i].ampincr;
 
         base = (int32_t)frIndx;    /* index of basis frame of interpolation */
         frac = ((SPFLOAT)(frIndx - (SPFLOAT)base));
-        frm_0 = *(ftpSamp->tbl + base);
-        frm_1 = *(ftpSamp->tbl + (base+1));
+        frm_0 = *(ft_samp->tbl + base);
+        frm_1 = *(ft_samp->tbl + (base+1));
         if (frac != 0.0) {
             r1 += ((frm_0 + frac*(frm_1-frm_0)) * windowamp) * amp;
         }

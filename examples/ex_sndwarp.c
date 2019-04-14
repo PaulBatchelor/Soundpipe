@@ -33,7 +33,7 @@ int main() {
 
     ud.sndwarp->timewarp = 2;
     ud.sndwarp->resample = 2;
-    ud.sndwarp->itimemode = 0;
+    ud.sndwarp->timemode = 0;
     ud.sndwarp->amp = 0.5;
 
     sp_process(sp, &ud, process);
