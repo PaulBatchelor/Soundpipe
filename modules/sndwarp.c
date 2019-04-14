@@ -44,8 +44,8 @@ int sp_sndwarp_init(sp_data *sp, sp_sndwarp *p,
     char *auxp;
 
     p->ibegin = 0;
-    p->iwsize = 4410;
-    p->irandw = 882;
+    p->iwsize = 0.1;
+    p->irandw = 0.02;
     p->ioverlap = 5;
     p->itimemode = 1;
 
@@ -69,11 +69,11 @@ int sp_sndwarp_init(sp_data *sp, sp_sndwarp *p,
     exp = p->exp;
     for (i=0; i< p->nsections; i++) {
       if (i==0) {
-        exp[i].wsize = (int32_t)p->iwsize;
+        exp[i].wsize = (int32_t)(p->iwsize * sp->sr);
         exp[i].cnt = 0;
         exp[i].ampphs = 0.0;
       } else {
-        exp[i].wsize = (int32_t) (p->iwsize + (unirand(sp) * (p->irandw)));
+        exp[i].wsize = (int32_t) ((p->iwsize + (unirand(sp) * (p->irandw))) * sp->sr);
         exp[i].cnt=(int32_t)(exp[i].wsize*((SPFLOAT)i/(p->ioverlap)));
         exp[i].ampphs = p->flen*((SPFLOAT)i/(p->ioverlap));
       }
@@ -123,7 +123,7 @@ int sp_sndwarp_compute(sp_data *sp, sp_sndwarp *p, SPFLOAT *in, SPFLOAT *out)
             exp[i].offset += (SPFLOAT)exp[i].wsize/(timewarpby);
 
         exp[i].cnt=0;
-        exp[i].wsize = (int32_t) (iwsize + (unirand(sp) * (p->irandw)));
+        exp[i].wsize = (int32_t) ((iwsize + (unirand(sp) * (p->irandw))) * sp->sr);
         exp[i].ampphs = 0.0;
         exp[i].ampincr = flen/(exp[i].wsize-1);
 
