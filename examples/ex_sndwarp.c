@@ -27,20 +27,14 @@ int main() {
 
     sp_ftbl_loadfile(sp, &ud.wav, "oneart.wav");
     sp_gen_composite(sp, ud.win, "0.5 1 0 0.5");
-    sp_sndwarp_init(sp,
-                    ud.sndwarp,
-                    ud.wav,
-                    0,
-                    4410,
-                    882,
-                    5,
-                    ud.win,
-                    1);
+    sp_sndwarp_init(sp, ud.sndwarp, ud.wav, ud.win, 8);
 
     sp->len = 44100 * 10;
 
     ud.sndwarp->timewarp = 2;
     ud.sndwarp->resample = 2;
+    ud.sndwarp->itimemode = 0;
+    ud.sndwarp->amp = 0.5;
 
     sp_process(sp, &ud, process);
 

@@ -34,28 +34,23 @@ int sp_sndwarp_destroy(sp_sndwarp **p)
     return SP_OK;
 }
 
-int sp_sndwarp_init(sp_data *sp,
-                    sp_sndwarp *p,
-                    sp_ftbl *ftpSamp,
-                    SPFLOAT ibegin,
-                    int32_t iwsize,
-                    SPFLOAT irandw,
-                    int32_t ioverlap,
-                    sp_ftbl *ftpWind,
-                    int itimemode)
+int sp_sndwarp_init(sp_data *sp, sp_sndwarp *p,
+                    sp_ftbl *ftpSamp, sp_ftbl *ftpWind,
+                    int32_t maxoverlap)
 {
-    int32_t         i;
-    int32_t         nsections;
+    int32_t i;
+    int32_t nsections;
     sp_sndwarp_warpsection *exp;
     char *auxp;
 
-    p->ibegin = ibegin;
-    p->iwsize = iwsize;
-    p->irandw = irandw;
-    p->ioverlap = ioverlap;
-    p->itimemode = itimemode;
+    p->ibegin = 0;
+    p->iwsize = 4410;
+    p->irandw = 882;
+    p->ioverlap = 5;
+    p->itimemode = 1;
 
-    nsections = ioverlap;
+    nsections = maxoverlap;
+    p->ioverlap = maxoverlap;
     sp_auxdata_alloc(&p->auxch, (size_t)nsections*sizeof(sp_sndwarp_warpsection));
     auxp = p->auxch.ptr;
     p->nsections = nsections;
@@ -65,28 +60,25 @@ int sp_sndwarp_init(sp_data *sp,
     p->sampflen = ftpSamp->size;
 
     p->ftpWind = ftpWind;
-    p->flen    = ftpWind->size;
+    p->flen = ftpWind->size;
 
-    p->maxFr   = -1 + ftpSamp->size;
-    p->prFlg   = 1;    /* true */
-    p->begin   = (int32_t)(ibegin * sp->sr);
+    p->maxFr = -1 + ftpSamp->size;
+    p->prFlg = 1;    /* true */
+    p->begin = (int32_t)(p->ibegin * sp->sr);
 
-    exp        = p->exp;
-    iwsize = p->iwsize;
-    for (i=0; i< p->ioverlap; i++) {
+    exp = p->exp;
+    for (i=0; i< p->nsections; i++) {
       if (i==0) {
-        exp[i].wsize = (int32_t)iwsize;
+        exp[i].wsize = (int32_t)p->iwsize;
         exp[i].cnt = 0;
         exp[i].ampphs = 0.0;
-      }
-      else {
-        exp[i].wsize = (int32_t) (iwsize + (unirand(sp) * (p->irandw)));
+      } else {
+        exp[i].wsize = (int32_t) (p->iwsize + (unirand(sp) * (p->irandw)));
         exp[i].cnt=(int32_t)(exp[i].wsize*((SPFLOAT)i/(p->ioverlap)));
         exp[i].ampphs = p->flen*((SPFLOAT)i/(p->ioverlap));
       }
       exp[i].offset = (SPFLOAT)p->begin;
       exp[i].ampincr = (SPFLOAT)p->flen/(exp[i].wsize-1);
-
     }
     p->ampcode = 1;
     p->timewarpcode = 1;
@@ -99,22 +91,25 @@ int sp_sndwarp_init(sp_data *sp,
 
 int sp_sndwarp_compute(sp_data *sp, sp_sndwarp *p, SPFLOAT *in, SPFLOAT *out)
 {
-    SPFLOAT       frm_0,frm_1;
-    int32_t       base, longphase;
-    SPFLOAT       frac, frIndx;
-    SPFLOAT       r1, amp, timewarpby, resample;
+    SPFLOAT frm_0,frm_1;
+    int32_t base, longphase;
+    SPFLOAT frac, frIndx;
+    SPFLOAT r1, amp, timewarpby, resample;
     sp_sndwarp_warpsection *exp;
     sp_ftbl *ftpWind, *ftpSamp;
-    int32_t         i;
-    SPFLOAT       v1, v2, windowamp, fract;
-    SPFLOAT       flen = (SPFLOAT)p->flen;
-    SPFLOAT       iwsize = p->iwsize;
-    int32_t         overlap = p->ioverlap;
+    int32_t i;
+    SPFLOAT v1, v2, windowamp, fract;
+    SPFLOAT flen = (SPFLOAT)p->flen;
+    SPFLOAT iwsize = p->iwsize;
+    int32_t overlap = p->ioverlap;
 
     r1 = 0;
     exp = p->exp;
     ftpWind = p->ftpWind;
     ftpSamp = p->ftpSamp;
+
+    if(overlap > p->nsections) overlap = p->nsections;
+    if(overlap <= 0) overlap = 1;
 
     for (i=0; i<overlap; i++) {
         resample = p->resample;
