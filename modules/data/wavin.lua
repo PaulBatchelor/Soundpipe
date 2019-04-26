@@ -22,6 +22,17 @@ sptbl["wavin"] = {
                         default = 0
                     }
                 }
+            },
+            sp_wavin_getSample = {
+                description = "Get a particular sample from the file.",
+                args = {
+                    {
+                        name = "position",
+                        type = "float",
+                        description = "Sample position",
+                        default = 0
+                    }
+                }
             }
         }
     },

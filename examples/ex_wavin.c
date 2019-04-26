@@ -10,7 +10,7 @@ typedef struct {
 void process(sp_data *sp, void *udata) {
     UserData *ud = udata;
     SPFLOAT wavin = 0;
-    sp_wavin_compute(sp, ud->wavin, NULL, &wavin);
+    sp_wavin_compute(ud->wavin, &wavin);
     sp->out[0] = wavin;
 }
 
@@ -22,7 +22,7 @@ int main() {
 
     sp_wavin_create(&ud.wavin);
 
-    sp_wavin_init(sp, ud.wavin, "oneart.wav");
+    sp_wavin_init(ud.wavin, "oneart.wav");
 
     sp->len = 44100 * 5;
     sp_process(sp, &ud, process);
