@@ -10,8 +10,8 @@ struct sp_wavin {
     int count;
     drwav wav;
     unsigned long pos;
-    unsigned long buffStart;
-    unsigned long buffEnd;
+    unsigned long buf_start;
+    unsigned long buf_end;
 };
 
 int sp_wavin_create(sp_wavin **p)
@@ -27,33 +27,33 @@ int sp_wavin_destroy(sp_wavin **p)
     return SP_OK;
 }
 
-int sp_wavin_init(sp_wavin *p, const char *filename)
+int sp_wavin_init(sp_data *sp, sp_wavin *p, const char *filename)
 {
     p->count = 0;
     p->pos = 0;
-    p->buffStart = 0;
-    p->buffEnd = 0;
+    p->buf_start = 0;
+    p->buf_end = 0;
     drwav_init_file(&p->wav, filename);
     return SP_OK;
 }
 
-int sp_wavin_readBlock(sp_wavin *p, SPFLOAT *out, unsigned long position)
+int sp_wavin_read_block(sp_data *sp, sp_wavin *p, SPFLOAT *out, unsigned long position)
 {
-    sp_wavin_seek(p, position);
-    unsigned long numberOfSampleRead = drwav_read_f32(&p->wav, WAVIN_BUFSIZE, p->buf);
-    p->buffStart = position;
-    p->buffEnd = position += numberOfSampleRead - 1;
+    sp_wavin_seek(sp, p, position);
+    unsigned long samps_read = drwav_read_f32(&p->wav, WAVIN_BUFSIZE, p->buf);
+    p->buf_start = position;
+    p->buf_end = position += samps_read - 1;
     return SP_OK;
 }
 
-int sp_wavin_compute(sp_wavin *p, SPFLOAT *out)
+int sp_wavin_compute(sp_data *sp, sp_wavin *p, SPFLOAT *in, SPFLOAT *out)
 {
     if(p->pos > p->wav.totalSampleCount) {
         *out = 0;
         return SP_OK;
     }
     if(p->count == 0) {
-        sp_wavin_readBlock(p, out, p->pos);
+        sp_wavin_read_block(sp, p, out, p->pos);
     }
 
     *out = p->buf[p->count];
@@ -62,38 +62,38 @@ int sp_wavin_compute(sp_wavin *p, SPFLOAT *out)
     return SP_OK;
 }
 
-int sp_wavin_getSample(sp_wavin *p, SPFLOAT *out, float position)
+int sp_wavin_get_sample(sp_data *sp, sp_wavin *p, SPFLOAT *out, SPFLOAT pos)
 {
-    unsigned int integerPosition;
-    float sample1, sample2;
-    float fraction;
-    int bufferPosition;
+    unsigned int ipos;
+    float samp1, samp2;
+    float frac;
+    int buf_pos;
 
-    integerPosition = floor(position);
+    ipos = floor(pos);
 
-    if(!(integerPosition >= p->buffStart && integerPosition < (p->buffEnd - 1))
-       || (p->buffStart == p->buffEnd)) {
-        sp_wavin_readBlock(p, out, integerPosition);
+    if(!(ipos >= p->buf_start && ipos < (p->buf_end - 1))
+       || (p->buf_start == p->buf_end)) {
+        sp_wavin_read_block(sp, p, out, ipos);
     }
 
-    fraction = position - integerPosition;
+    frac = pos - ipos;
 
-    bufferPosition = (int)(integerPosition - p->buffStart);
-    sample1 = p->buf[bufferPosition];
-    sample2 = p->buf[bufferPosition + 1];
+    buf_pos = (int)(ipos - p->buf_start);
+    samp1 = p->buf[buf_pos];
+    samp2 = p->buf[buf_pos + 1];
 
-    *out = sample1 + (sample2 - sample1) * fraction;
+    *out = samp1 + (samp2 - samp1) * frac;
     return SP_OK;
 }
 
 
-int sp_wavin_resetToStart(sp_wavin *p)
+int sp_wavin_reset_to_start(sp_data *sp, sp_wavin *p)
 {
-    sp_wavin_seek(p, 0);
+    sp_wavin_seek(sp, p, 0);
     return SP_OK;
 }
 
-int sp_wavin_seek(sp_wavin *p, unsigned long sample)
+int sp_wavin_seek(sp_data *sp, sp_wavin *p, unsigned long sample)
 {
     drwav_seek_to_sample(&p->wav, sample);
     return SP_OK;
