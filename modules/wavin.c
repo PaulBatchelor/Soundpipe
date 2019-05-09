@@ -1,7 +1,7 @@
 #include <stdlib.h>
+#include <math.h>
 #include "soundpipe.h"
 #include "dr_wav.h"
-#include <math.h>
 
 #define WAVIN_BUFSIZE 1024
 
