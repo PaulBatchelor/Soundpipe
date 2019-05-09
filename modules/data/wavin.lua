@@ -17,7 +17,18 @@ sptbl["wavin"] = {
                 args = {
                     {
                         name = "sample",
-                        type = "long",
+                        type = "unsigned long",
+                        description = "Sample position",
+                        default = 0
+                    }
+                }
+            },
+            sp_wavin_get_sample = {
+                description = "Get a particular sample from the file.",
+                args = {
+                    {
+                        name = "pos",
+                        type = "SPFLOAT",
                         description = "Sample position",
                         default = 0
                     }
