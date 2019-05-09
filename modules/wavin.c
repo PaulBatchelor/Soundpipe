@@ -63,7 +63,7 @@ int sp_wavin_compute(sp_data *sp, sp_wavin *p, SPFLOAT *in, SPFLOAT *out)
 
 int sp_wavin_get_sample(sp_data *sp, sp_wavin *p, SPFLOAT *out, SPFLOAT pos)
 {
-    unsigned int ipos;
+    unsigned long ipos;
     float samp1, samp2;
     float frac;
     int buf_pos;
