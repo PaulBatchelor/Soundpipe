@@ -17,7 +17,7 @@ sptbl["wavin"] = {
                 args = {
                     {
                         name = "sample",
-                        type = "long",
+                        type = "unsigned long",
                         description = "Sample position",
                         default = 0
                     }
