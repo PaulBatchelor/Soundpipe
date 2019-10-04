@@ -8,6 +8,7 @@
     - automated whitespace removal for C and header files
     - updated documentation for sp_adsr
     - added sp_sndwarp
+    - fixed gen_sinesum: amps no longer flipped
 
 1.7.0
 -----

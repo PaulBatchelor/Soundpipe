@@ -170,7 +170,7 @@ int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, const char *argstring)
     int32_t i, n;
 
     for(i = (int32_t)args->size; i > 0; i--){
-        amp = args->tbl[args->size - i];
+        amp = args->tbl[i - 1];
         if(amp != 0) {
             for(phs = 0, n = 0; n < ft->size; n++){
                 ft->tbl[n] += sin(phs * tpdlen) * amp;
