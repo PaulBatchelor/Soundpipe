@@ -10,7 +10,7 @@ typedef struct {
 } UserData;
 
 void process(sp_data *sp, void *udata) {
-    UserData *ud = ud;
+    UserData *ud = udata;
     if(ud->counter == 0){
         ud->osc->freq = 500 + rand() % 2000;
     }
