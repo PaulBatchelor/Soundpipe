@@ -80,9 +80,9 @@ int main(int argc, char *argv[])
 
     strncpy(sp->filename, fout, 60);
 
-    ps->wrap = 0;
-
     sp_paulstretch_init(sp, ps, ft, window, stretch);
+
+    ps->wrap = 0;
 
     sp_process(sp, NULL, process);
 

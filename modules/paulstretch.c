@@ -31,7 +31,7 @@ static void compute_block(sp_data *sp, sp_paulstretch *p) {
     SPFLOAT *output= p->output;
     for(i = 0; i < windowsize; i++) {
         /* Loop through buffer */
-        pos = (istart_pos + i) % p->ft->size;
+        pos = (istart_pos + i);
 
         if(p->wrap) {
             pos %= p->ft->size;
