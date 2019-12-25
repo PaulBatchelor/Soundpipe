@@ -9,6 +9,8 @@
     - updated documentation for sp_adsr
     - added sp_sndwarp
     - fixed gen_sinesum: amps no longer flipped
+    - paulstretch fix: wrap mode can be disabled now
+    - stretcher utility updated + cleaned up
 
 1.7.0
 -----
