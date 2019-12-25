@@ -8,10 +8,10 @@
 #include "soundpipe.h"
 
 #ifndef M_PI
-#define M_PI		3.14159265358979323846	/* pi */
+#define M_PI 3.14159265358979323846
 #endif
 
-#define tpd360  0.0174532925199433
+#define tpd360 0.0174532925199433
 
 /* initialize constants in ftable */
 int sp_ftbl_init(sp_data *sp, sp_ftbl *ft, size_t size)
@@ -57,16 +57,16 @@ int sp_ftbl_destroy(sp_ftbl **ft)
 /* TODO: handle spaces at beginning of string */
 static char * tokenize(char **next, int *size)
 {
-    if(*size <= 0) return NULL;
+    if (*size <= 0) return NULL;
     char *token = *next;
     char *str = *next;
 
     char *peak = str + 1;
 
-    while((*size)--) {
-        if(*str == ' ') {
+    while ((*size)--) {
+        if (*str == ' ') {
             *str = 0;
-            if(*peak != ' ') break;
+            if (*peak != ' ') break;
         }
         str = str + 1;
         peak = str + 1;
@@ -83,9 +83,9 @@ int sp_gen_vals(sp_data *sp, sp_ftbl *ft, const char *string)
     char *out;
     char *ptr = str;
     int j = 0;
-    while(size > 0) {
+    while (size > 0) {
         out = tokenize(&str, &size);
-        if(ft->size < j + 1){
+        if (ft->size < j + 1) {
             ft->tbl = realloc(ft->tbl, sizeof(SPFLOAT) * (ft->size + 2));
             /* zero out new tables */
             ft->tbl[ft->size] = 0;
@@ -105,7 +105,7 @@ int sp_gen_sine(sp_data *sp, sp_ftbl *ft)
 {
     unsigned long i;
     SPFLOAT step = 2 * M_PI / ft->size;
-    for(i = 0; i < ft->size; i++){
+    for (i = 0; i < ft->size; i++) {
         ft->tbl[i] = sin(i * step);
     }
     return SP_OK;
@@ -136,7 +136,7 @@ int sp_ftbl_loadfile(sp_data *sp, sp_ftbl **ft, const char *filename)
     memset(&info, 0, sizeof(SF_INFO));
     info.format = 0;
     SNDFILE *snd = sf_open(filename, SFM_READ, &info);
-    if(snd == NULL) {
+    if (snd == NULL) {
         return SP_NOT_OK;
     }
     size_t size = info.frames * info.channels;
@@ -169,10 +169,10 @@ int sp_gen_sinesum(sp_data *sp, sp_ftbl *ft, const char *argstring)
 
     int32_t i, n;
 
-    for(i = (int32_t)args->size; i > 0; i--){
+    for (i = (int32_t)args->size; i > 0; i--) {
         amp = args->tbl[i - 1];
-        if(amp != 0) {
-            for(phs = 0, n = 0; n < ft->size; n++){
+        if (amp != 0) {
+            for (phs = 0, n = 0; n < ft->size; n++) {
                 ft->tbl[n] += sin(phs * tpdlen) * amp;
                 phs += i;
                 phs %= flen;
@@ -192,11 +192,11 @@ int sp_gen_line(sp_data *sp, sp_ftbl *ft, const char *argstring)
     sp_ftbl_create(sp, &args, 1);
     sp_gen_vals(sp, args, argstring);
 
-    if((args->size % 2) == 1 || args->size == 1) {
+    if ((args->size % 2) == 1 || args->size == 1) {
         fprintf(stderr, "Error: not enough arguments for gen_line.\n");
         sp_ftbl_destroy(&args);
         return SP_NOT_OK;
-    } else if(args->size == 2) {
+    } else if (args->size == 2) {
         for(i = 0; i < ft->size; i++) {
             ft->tbl[i] = args->tbl[1];
         }
@@ -205,11 +205,11 @@ int sp_gen_line(sp_data *sp, sp_ftbl *ft, const char *argstring)
 
     x1 = args->tbl[0];
     y1 = args->tbl[1];
-    for(i = 2; i < args->size; i += 2) {
+    for (i = 2; i < args->size; i += 2) {
         x2 = args->tbl[i];
         y2 = args->tbl[i + 1];
 
-        if(x2 < x1) {
+        if (x2 < x1) {
             fprintf(stderr, "Error: x coordiates must be sequential!\n");
             break;
         }
@@ -218,8 +218,8 @@ int sp_gen_line(sp_data *sp, sp_ftbl *ft, const char *argstring)
         incr = (SPFLOAT)(y2 - y1) / (seglen - 1);
         amp = y1;
 
-        while(seglen != 0){
-            if(n < ft->size) {
+        while (seglen != 0){
+            if (n < ft->size) {
                 ft->tbl[n] = amp;
                 amp += incr;
                 seglen--;
@@ -245,12 +245,12 @@ int sp_gen_xline(sp_data *sp, sp_ftbl *ft, const char *argstring)
     sp_ftbl_create(sp, &args, 1);
     sp_gen_vals(sp, args, argstring);
 
-    if((args->size % 2) == 1 || args->size == 1) {
+    if ((args->size % 2) == 1 || args->size == 1) {
         fprintf(stderr, "Error: not enough arguments for gen_line.\n");
         sp_ftbl_destroy(&args);
         return SP_NOT_OK;
-    } else if(args->size == 2) {
-        for(i = 0; i < ft->size; i++) {
+    } else if (args->size == 2) {
+        for (i = 0; i < ft->size; i++) {
             ft->tbl[i] = args->tbl[1];
         }
         return SP_OK;
@@ -258,20 +258,20 @@ int sp_gen_xline(sp_data *sp, sp_ftbl *ft, const char *argstring)
 
     x1 = args->tbl[0];
     y1 = args->tbl[1];
-    for(i = 2; i < args->size; i += 2) {
+    for (i = 2; i < args->size; i += 2) {
         x2 = args->tbl[i];
         y2 = args->tbl[i + 1];
 
-        if(x2 < x1) {
+        if (x2 < x1) {
             fprintf(stderr, "Error: x coordiates must be sequential!\n");
             break;
         }
 
-        if(y1 == 0) {
+        if (y1 == 0) {
             y1 = 0.000001;
         }
 
-        if(y2 == 0) {
+        if (y2 == 0) {
             y2 = 0.000001;
         }
 
@@ -280,8 +280,8 @@ int sp_gen_xline(sp_data *sp, sp_ftbl *ft, const char *argstring)
         mult = pow(mult, (SPFLOAT)1.0 / seglen);
         amp = y1;
 
-        while(seglen != 0){
-            if(n < ft->size) {
+        while (seglen != 0){
+            if (n < ft->size) {
                 ft->tbl[n] = amp;
                 amp *= mult;
                 seglen--;
@@ -322,7 +322,7 @@ int sp_gen_gauss(sp_data *sp, sp_ftbl *ft, SPFLOAT scale, uint32_t seed)
 
     sp_randmt_seed(&rand, NULL, seed);
 
-    for(n = 0; n < ft->size; n++) {
+    for (n = 0; n < ft->size; n++) {
         ft->tbl[n] = gaussrand(&rand, scale);
     }
 
@@ -339,7 +339,7 @@ int sp_gen_composite(sp_data *sp, sp_ftbl *ft, const char *argstring)
     sp_ftbl_create(sp, &args, 1);
     sp_gen_vals(sp, args, argstring);
 
-    for(n = 0; n < args->size; n += 4) {
+    for (n = 0; n < args->size; n += 4) {
         inc = args->tbl[n] * tpdlen;
         amp = args->tbl[n + 1];
         phs = args->tbl[n + 2] * tpd360;
@@ -362,16 +362,16 @@ int sp_gen_rand(sp_data *sp, sp_ftbl *ft, const char *argstring)
     sp_gen_vals(sp, args, argstring);
     int n, pos = 0, i, size = 0;
 
-    for(n = 0; n < args->size; n += 2) {
+    for (n = 0; n < args->size; n += 2) {
         size = round(ft->size * args->tbl[n + 1]);
-        for(i = 0; i < size; i++) {
-            if(pos < ft->size) {
+        for (i = 0; i < size; i++) {
+            if (pos < ft->size) {
                 ft->tbl[pos] = args->tbl[n];
                 pos++;
             }
         }
     }
-    if(pos <= ft->size) {
+    if (pos <= ft->size) {
         ft->size = pos;
     }
     sp_ftbl_destroy(&args);
@@ -392,10 +392,11 @@ int sp_gen_triangle(sp_data *sp, sp_ftbl *ft)
 
     counter = 0;
 
-    for(i = 0; i < ft->size; i++) {
-        if(i == ft->size / 2) {
+    for (i = 0; i < ft->size; i++) {
+        if (i == ft->size / 2) {
             step = -1;
         }
+
         ft->tbl[i] = (2.f*(counter * incr) - 1.f);
 
         counter += step;
