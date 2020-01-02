@@ -73,6 +73,7 @@ int sp_butbp_compute(sp_data *sp, sp_butbp *p, SPFLOAT *in, SPFLOAT *out)
         a[4] = - c * d * a[1];
         a[5] = (c - 1.0) * a[1];
     }
+
     t = *in - a[4] * a[6] - a[5] * a[7];
     y = t * a[1] + a[2] * a[6] + a[3] * a[7];
     a[7] = a[6];
