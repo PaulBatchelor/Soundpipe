@@ -56,12 +56,13 @@ int sp_dust_compute(sp_data *sp, sp_dust *p, SPFLOAT *in, SPFLOAT *out)
         thresh = p->thresh;
         scale  = p->scale;
     }
+
     *out = 0;
     SPFLOAT r;
     p->rand = sp_rand(sp);
     r = (SPFLOAT)p->rand * dv2_31;
 
-    if(p->bipolar) {
+    if (p->bipolar) {
         *out = p->amp * (r < thresh ? r*scale - 1.0 : 0.0);
     } else {
         *out = p->amp * (r < thresh ? r*scale : 0.0);
