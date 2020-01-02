@@ -31,42 +31,42 @@ static void multiply_fft_buffers(SPFLOAT *outBuf, SPFLOAT *ringBuf,
     outBufPtr = outBuf;
     memset(outBuf, 0, sizeof(SPFLOAT)*(partSize));
     do {
-      /* wrap ring buffer position */
-      if (rbPtr >= rbEndP)
-        rbPtr = ringBuf;
-      outBufPtr = outBuf;
-      *(outBufPtr++) += *(rbPtr++) * *(irPtr++);    /* convolve DC */
-      *(outBufPtr++) += *(rbPtr++) * *(irPtr++);    /* convolve Nyquist */
-      re1 = *(rbPtr++);
-      im1 = *(rbPtr++);
-      re2 = *(irPtr++);
-      im2 = *(irPtr++);
-      re = re1 * re2 - im1 * im2;
-      im = re1 * im2 + re2 * im1;
-      while (outBufPtr < outBufEndPm2) {
-        /* complex multiply */
-        re1 = rbPtr[0];
-        im1 = rbPtr[1];
-        re2 = irPtr[0];
-        im2 = irPtr[1];
+        /* wrap ring buffer position */
+        if (rbPtr >= rbEndP)
+            rbPtr = ringBuf;
+        outBufPtr = outBuf;
+        *(outBufPtr++) += *(rbPtr++) * *(irPtr++);    /* convolve DC */
+        *(outBufPtr++) += *(rbPtr++) * *(irPtr++);    /* convolve Nyquist */
+        re1 = *(rbPtr++);
+        im1 = *(rbPtr++);
+        re2 = *(irPtr++);
+        im2 = *(irPtr++);
+        re = re1 * re2 - im1 * im2;
+        im = re1 * im2 + re2 * im1;
+        while (outBufPtr < outBufEndPm2) {
+            /* complex multiply */
+            re1 = rbPtr[0];
+            im1 = rbPtr[1];
+            re2 = irPtr[0];
+            im2 = irPtr[1];
+            outBufPtr[0] += re;
+            outBufPtr[1] += im;
+            re = re1 * re2 - im1 * im2;
+            im = re1 * im2 + re2 * im1;
+            re1 = rbPtr[2];
+            im1 = rbPtr[3];
+            re2 = irPtr[2];
+            im2 = irPtr[3];
+            outBufPtr[2] += re;
+            outBufPtr[3] += im;
+            re = re1 * re2 - im1 * im2;
+            im = re1 * im2 + re2 * im1;
+            outBufPtr += 4;
+            rbPtr += 4;
+            irPtr += 4;
+        }
         outBufPtr[0] += re;
         outBufPtr[1] += im;
-        re = re1 * re2 - im1 * im2;
-        im = re1 * im2 + re2 * im1;
-        re1 = rbPtr[2];
-        im1 = rbPtr[3];
-        re2 = irPtr[2];
-        im2 = irPtr[3];
-        outBufPtr[2] += re;
-        outBufPtr[3] += im;
-        re = re1 * re2 - im1 * im2;
-        im = re1 * im2 + re2 * im1;
-        outBufPtr += 4;
-        rbPtr += 4;
-        irPtr += 4;
-      }
-      outBufPtr[0] += re;
-      outBufPtr[1] += im;
     } while (--nPartitions);
 }
 
@@ -86,7 +86,7 @@ static void set_buf_pointers(sp_conv *p,
                              int nChannels, int partSize, int nPartitions)
 {
     SPFLOAT *ptr;
-    int   i;
+    int i;
 
     ptr = (SPFLOAT *) (p->auxData.ptr);
     p->tmpBuf = ptr;
@@ -94,12 +94,12 @@ static void set_buf_pointers(sp_conv *p,
     p->ringBuf = ptr;
     ptr += ((partSize << 1) * nPartitions);
     for (i = 0; i < nChannels; i++) {
-      p->IR_Data[i] = ptr;
-      ptr += ((partSize << 1) * nPartitions);
+        p->IR_Data[i] = ptr;
+        ptr += ((partSize << 1) * nPartitions);
     }
     for (i = 0; i < nChannels; i++) {
-      p->outBuffers[i] = ptr;
-      ptr += (partSize << 1);
+        p->outBuffers[i] = ptr;
+        ptr += (partSize << 1);
     }
 }
 
@@ -176,7 +176,7 @@ int sp_conv_init(sp_data *sp, sp_conv *p, sp_ftbl *ft, SPFLOAT iPartLen)
                 }
                 i += p->nChannels;
             }
-        /* pad second half of IR to zero */
+            /* pad second half of IR to zero */
             for (k = p->partSize; k < (p->partSize << 1); k++) {
                 p->IR_Data[j][n + k] = 0.0;
             }
@@ -188,7 +188,7 @@ int sp_conv_init(sp_data *sp, sp_conv *p, sp_ftbl *ft, SPFLOAT iPartLen)
     /* clear output buffers to zero */
     for (j = 0; j < p->nChannels; j++) {
         for (i = 0; i < (p->partSize << 1); i++)
-        p->outBuffers[j][i] = 0.0;
+            p->outBuffers[j][i] = 0.0;
     }
     p->initDone = 1;
 
@@ -222,7 +222,7 @@ int sp_conv_compute(sp_data *sp, sp_conv *p, SPFLOAT *in, SPFLOAT *out)
     /* update ring buffer position */
     p->rbCnt++;
 
-    if (p->rbCnt >= p->nPartitions){
+    if (p->rbCnt >= p->nPartitions) {
         p->rbCnt = 0;
     }
 
@@ -232,7 +232,7 @@ int sp_conv_compute(sp_data *sp, sp_conv *p, SPFLOAT *in, SPFLOAT *out)
     for (n = 0; n < p->nChannels; n++) {
         /* multiply complex arrays */
         multiply_fft_buffers(p->tmpBuf, p->ringBuf, p->IR_Data[n],
-                     nSamples, p->nPartitions, rBufPos);
+                             nSamples, p->nPartitions, rBufPos);
         /* inverse FFT */
         sp_ifftr(&p->fft, p->tmpBuf, (nSamples << 1));
         /* copy to output buffer, overlap with "tail" of previous block */
