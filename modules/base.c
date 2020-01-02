@@ -60,29 +60,32 @@ int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
     info.channels = 1;
     info.format = SF_FORMAT_WAV | SF_FORMAT_PCM_24;
     int numsamps, i, chan;
-    if(sp->nchan == 1) {
+
+    if (sp->nchan == 1) {
         sf[0] = sf_open(sp->filename, SFM_WRITE, &info);
     } else {
-        for(chan = 0; chan < sp->nchan; chan++) {
+        for (chan = 0; chan < sp->nchan; chan++) {
             sprintf(tmp, "%02d_%s", chan, sp->filename);
             sf[chan] = sf_open(tmp, SFM_WRITE, &info);
         }
     }
 
-    while(sp->len > 0){
-        if(sp->len < SP_BUFSIZE) {
+    while (sp->len > 0) {
+        if (sp->len < SP_BUFSIZE) {
             numsamps = sp->len;
-        }else{
+        } else {
             numsamps = SP_BUFSIZE;
         }
-        for(i = 0; i < numsamps; i++){
+
+        for (i = 0; i < numsamps; i++) {
             callback(sp, ud);
-            for(chan = 0; chan < sp->nchan; chan++) {
+            for (chan = 0; chan < sp->nchan; chan++) {
                 buf[chan][i] = sp->out[chan];
             }
             sp->pos++;
         }
-        for(chan = 0; chan < sp->nchan; chan++) {
+
+        for (chan = 0; chan < sp->nchan; chan++) {
 #ifdef USE_DOUBLE
             sf_write_double(sf[chan], buf[chan], numsamps);
 #else
@@ -91,7 +94,7 @@ int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
         }
         sp->len -= numsamps;
     }
-    for(i = 0; i < sp->nchan; i++) {
+    for (i = 0; i < sp->nchan; i++) {
         sf_close(sf[i]);
     }
     return 0;
@@ -102,7 +105,7 @@ int sp_process(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
 int sp_process_raw(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
 {
     int chan;
-    if(sp->len == 0) {
+    if (sp->len == 0) {
         while(1) {
             callback(sp, ud);
             for (chan = 0; chan < sp->nchan; chan++) {
@@ -111,7 +114,7 @@ int sp_process_raw(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
             sp->len--;
         }
     } else {
-        while(sp->len > 0) {
+        while (sp->len > 0) {
             callback(sp, ud);
             for (chan = 0; chan < sp->nchan; chan++) {
                 fwrite(&sp->out[chan], sizeof(SPFLOAT), 1, stdout);
@@ -127,7 +130,7 @@ int sp_process_plot(sp_data *sp, void *ud, void (*callback)(sp_data *, void *))
 {
     int chan;
     fprintf(stdout, "sp_out =  [ ... \n");
-    while(sp->len > 0) {
+    while (sp->len > 0) {
         callback(sp, ud);
         for (chan = 0; chan < sp->nchan; chan++) {
             /* fwrite(&sp->out[chan], sizeof(SPFLOAT), 1, stdout); */
@@ -174,7 +177,7 @@ int sp_set(sp_param *p, SPFLOAT val) {
 
 int sp_out(sp_data *sp, uint32_t chan, SPFLOAT val)
 {
-    if(chan > sp->nchan - 1) {
+    if (chan > sp->nchan - 1) {
         fprintf(stderr, "sp_out: Invalid channel\n");
         return SP_NOT_OK;
     }
