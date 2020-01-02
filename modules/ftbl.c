@@ -49,7 +49,7 @@ int sp_ftbl_bind(sp_data *sp, sp_ftbl **ft, SPFLOAT *tbl, size_t size)
 int sp_ftbl_destroy(sp_ftbl **ft)
 {
     sp_ftbl *ftp = *ft;
-    if(ftp->del) free(ftp->tbl);
+    if (ftp->del) free(ftp->tbl);
     free(*ft);
     return SP_OK;
 }
@@ -197,7 +197,7 @@ int sp_gen_line(sp_data *sp, sp_ftbl *ft, const char *argstring)
         sp_ftbl_destroy(&args);
         return SP_NOT_OK;
     } else if (args->size == 2) {
-        for(i = 0; i < ft->size; i++) {
+        for (i = 0; i < ft->size; i++) {
             ft->tbl[i] = args->tbl[1];
         }
         return SP_OK;
@@ -218,7 +218,7 @@ int sp_gen_line(sp_data *sp, sp_ftbl *ft, const char *argstring)
         incr = (SPFLOAT)(y2 - y1) / (seglen - 1);
         amp = y1;
 
-        while (seglen != 0){
+        while (seglen != 0) {
             if (n < ft->size) {
                 ft->tbl[n] = amp;
                 amp += incr;
@@ -280,7 +280,7 @@ int sp_gen_xline(sp_data *sp, sp_ftbl *ft, const char *argstring)
         mult = pow(mult, (SPFLOAT)1.0 / seglen);
         amp = y1;
 
-        while (seglen != 0){
+        while (seglen != 0) {
             if (n < ft->size) {
                 ft->tbl[n] = amp;
                 amp *= mult;
