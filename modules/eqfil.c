@@ -50,7 +50,7 @@ int sp_eqfil_compute(sp_data *sp, sp_eqfil *p, SPFLOAT *in, SPFLOAT *out)
     SPFLOAT z1 = p->z1, z2 = p->z2, c, d, w, a, y;
     SPFLOAT g;
 
-    if(p->bw != p->bwv || p->freq != p->frv) {
+    if (p->bw != p->bwv || p->freq != p->frv) {
         SPFLOAT sr = sp->sr;
         p->frv = p->freq; p->bwv = p->bw;
         p->d = cos(2 * M_PI * p->frv / sr);
@@ -71,5 +71,5 @@ int sp_eqfil_compute(sp_data *sp, sp_eqfil *p, SPFLOAT *in, SPFLOAT *out)
     p->z1 = z1;
     p->z2 = z2;
 
-return SP_OK;
+    return SP_OK;
 }
