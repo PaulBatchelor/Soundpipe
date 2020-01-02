@@ -14,7 +14,7 @@
 #define PFRAC1(x)   ((SPFLOAT)((x) & ftp1->lomask) * ftp1->lodiv)
 
 #ifndef M_PI
-#define M_PI		3.14159265358979323846
+#define M_PI 3.14159265358979323846
 #endif
 
 #define MPIDSR -M_PI/sp->sr
@@ -32,7 +32,7 @@ static SPFLOAT intpow1(SPFLOAT x, int32_t n)
 
 static SPFLOAT intpow(SPFLOAT x, int32_t n)
 {
-    if (n<0) {
+    if (n < 0) {
       n = -n;
       x = 1.0/x;
     }
