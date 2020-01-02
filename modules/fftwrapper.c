@@ -99,7 +99,7 @@ void freqs2smps(FFTwrapper *ft, FFTFREQS *freqs, SPFLOAT *smps)
     fftw_execute(ft->planfftw_inv);
     for (i = 0; i < ft->fftsize; i++) smps[i]=ft->tmpfftdata2[i];
 #else
-    for(i = 0; i < ft->fftsize / 2; i++) {
+    for (i = 0; i < ft->fftsize / 2; i++) {
         ft->tmp2[i].r = freqs->c[i];
         ft->tmp2[i].i = freqs->s[i];
     }
@@ -115,7 +115,7 @@ void newFFTFREQS(FFTFREQS *f,int size)
     SPFLOAT *s = malloc(size * sizeof(SPFLOAT));
     f->c = c;
     f->s = s;
-    for (i = 0; i<size ;i++){
+    for (i = 0; i<size ;i++) {
         f->c[i]=0.0;
         f->s[i]=0.0;
     };
