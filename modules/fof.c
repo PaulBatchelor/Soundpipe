@@ -187,8 +187,10 @@ int sp_fof_compute(sp_data *sp, sp_fof *p, SPFLOAT *in, SPFLOAT *out)
             p->basovrlap.nxtfree = ovp->nxtfree;
         }
     }
+
     *out = 0.0;
     ovp = &p->basovrlap;
+
     while (ovp->nxtact != NULL) {
         SPFLOAT  result;
         sp_fof_overlap *prvact = ovp;
@@ -197,12 +199,12 @@ int sp_fof_compute(sp_data *sp, sp_fof *p, SPFLOAT *in, SPFLOAT *out)
         ftab = ftp1->tbl + (ovp->formphs >> ftp1->lobits);
         v1 = *ftab++;
         result = v1 + (*ftab - v1) * fract;
+
         if (p->foftype) {
             if (p->fmtmod)
             ovp->formphs += form_inc;
             else ovp->formphs += ovp->forminc;
-        }
-        else {
+        } else {
             /* SPFLOAT ovp->glissbas = kgliss / grain length. ovp->sampct is
              incremented each sample. We add glissbas * sampct to the
              pitch of grain at each a-rate pass (ovp->formphs is the
@@ -210,11 +212,14 @@ int sp_fof_compute(sp_data *sp, sp_fof *p, SPFLOAT *in, SPFLOAT *out)
              decides pitch) */
             ovp->formphs += (int32_t)(ovp->forminc + ovp->glissbas * ovp->sampct++);
         }
+
         ovp->formphs &= SP_FT_PHMASK;
+
         if (ovp->risphs < SP_FT_MAXLEN) {
             result *= *(ftp2->tbl + (ovp->risphs >> ftp2->lobits) );
             ovp->risphs += ovp->risinc;
         }
+
         if (ovp->timrem <= ovp->dectim) {
             result *= *(ftp2->tbl + (ovp->decphs >> ftp2->lobits) );
             if ((ovp->decphs -= ovp->decinc) < 0) ovp->decphs = 0;
