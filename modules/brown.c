@@ -31,11 +31,11 @@ int sp_brown_init(sp_data *sp, sp_brown *p)
 int sp_brown_compute(sp_data *sp, sp_brown *p, SPFLOAT *in, SPFLOAT *out)
 {
     SPFLOAT r;
-    while(1) {
+    while (1) {
         r = (sp_rand(sp) % SP_RANDMAX) / (SPFLOAT)(SP_RANDMAX);
         r = ((r * 2) - 1) * 0.5;
         p->brown += r;
-        if(p->brown < -8.0f || p->brown > 8.0f) {
+        if (p->brown < -8.0f || p->brown > 8.0f) {
             p->brown -= r;
         } else {
             break;
