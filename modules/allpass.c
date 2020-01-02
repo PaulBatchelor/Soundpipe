@@ -45,10 +45,12 @@ int sp_allpass_compute(sp_data *sp, sp_allpass *p, SPFLOAT *in, SPFLOAT *out)
     SPFLOAT y, z;
     SPFLOAT coef = p->coef;
     SPFLOAT *buf = (SPFLOAT *)p->aux.ptr;
-    if(p->prvt != p->revtime) {
+
+    if (p->prvt != p->revtime) {
         p->prvt = p->revtime;
         coef = p->coef = exp(-6.9078 * p->looptime / p->prvt);
     }
+
     y = buf[p->bufpos];
     z = coef * y + *in;
     buf[p->bufpos] = z;
