@@ -59,12 +59,12 @@ int sp_butlp_init(sp_data *sp, sp_butlp *p)
 
 int sp_butlp_compute(sp_data *sp, sp_butlp *p, SPFLOAT *in, SPFLOAT *out)
 {
-    if (p->freq <= 0.0){
+    if (p->freq <= 0.0) {
       *out = 0;
       return SP_OK;
     }
 
-    if (p->freq != p->lkf){
+    if (p->freq != p->lkf) {
         SPFLOAT *a, c;
         a = p->a;
         p->lkf = p->freq;
