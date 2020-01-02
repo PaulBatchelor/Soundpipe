@@ -22,8 +22,8 @@ int sp_clamp_init(sp_data *sp, sp_clamp *p)
 
 int sp_clamp_compute(sp_data *sp, sp_clamp *p, SPFLOAT *in, SPFLOAT *out)
 {
-    if(*in < p->min) *out = p->min;
-    else if(*in > p->max) *out = p->max;
+    if (*in < p->min) *out = p->min;
+    else if (*in > p->max) *out = p->max;
     else *out = *in;
     return SP_OK;
 }
