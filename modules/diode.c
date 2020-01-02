@@ -79,7 +79,7 @@ static void sp_diode_update(sp_data *sp, sp_diode *p)
 	p->SG[3] =  1.0;
 
 	/* set alphas */
-    for(i = 0; i < 4; i++) p->opva_alpha[i] = g/(1.0 + g);
+    for (i = 0; i < 4; i++) p->opva_alpha[i] = g/(1.0 + g);
 
     /* set betas */
     p->opva_beta[0] = 1.0/(1.0 + g - g*G2);
@@ -108,7 +108,7 @@ int sp_diode_init(sp_data *sp, sp_diode *p)
     int i;
     /* initialize the 4 one-pole VA filters */
 
-    for(i = 0; i < 4; i++) {
+    for (i = 0; i < 4; i++) {
         p->opva_alpha[i] = 1.0;
         p->opva_beta[i] = -1.0;
         p->opva_gamma[i] = 1.0;
@@ -169,7 +169,7 @@ int sp_diode_compute(sp_data *sp, sp_diode *p, SPFLOAT *in, SPFLOAT *out)
 
     un = (*in - p->K * sigma) / (1 + p->K * p->gamma);
     tmp = un;
-    for(i = 0; i < 4; i++) {
+    for (i = 0; i < 4; i++) {
         tmp = sp_diode_opva_compute(sp, p, tmp, i);
     }
     *out = tmp;
