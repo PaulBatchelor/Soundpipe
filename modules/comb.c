@@ -49,10 +49,10 @@ int sp_comb_compute(sp_data *sp, sp_comb *p, SPFLOAT *in, SPFLOAT *out)
     SPFLOAT outsamp = 0;
     SPFLOAT *buf = (SPFLOAT *)p->aux.ptr;
 
-    if(p->prvt != p->revtime) {
+    if (p->prvt != p->revtime) {
         p->prvt = p->revtime;
         SPFLOAT exp_arg = (SPFLOAT) (log001 * p->looptime / p->prvt);
-        if(exp_arg < -36.8413615) {
+        if (exp_arg < -36.8413615) {
             coef = p->coef = 0;
         } else {
             coef = p->coef = exp(exp_arg);
