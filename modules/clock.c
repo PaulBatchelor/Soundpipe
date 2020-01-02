@@ -32,7 +32,7 @@ int sp_clock_init(sp_data *sp, sp_clock *p)
 int sp_clock_compute(sp_data *sp, sp_clock *p, SPFLOAT *in, SPFLOAT *out)
 {
     *out = 0.0;
-    if(p->counter == 0 || *in != 0) {
+    if (p->counter == 0 || *in != 0) {
         *out = 1.0;
         p->counter = (int)(sp->sr * (60.0 / (p->bpm * p->subdiv))) + 1;
     }
