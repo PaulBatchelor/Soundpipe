@@ -56,10 +56,10 @@ int sp_biquad_init(sp_data *sp, sp_biquad *p)
     p->a2 = p->res*p->res;
 
 
-   if(p->reinit == 0.0){
-      p->xnm1 = p->xnm2 = p->ynm1 = p->ynm2 = 0.0;
-   }
-   return SP_OK;
+    if (p->reinit == 0.0) {
+        p->xnm1 = p->xnm2 = p->ynm1 = p->ynm2 = 0.0;
+    }
+    return SP_OK;
 }
 
 int sp_biquad_compute(sp_data *sp, sp_biquad *p, SPFLOAT *in, SPFLOAT *out)
@@ -70,8 +70,8 @@ int sp_biquad_compute(sp_data *sp, sp_biquad *p, SPFLOAT *in, SPFLOAT *out)
     SPFLOAT xnm1 = p->xnm1, xnm2 = p->xnm2, ynm1 = p->ynm1, ynm2 = p->ynm2;
 
     xn = *in;
-    yn = ( b0 * xn + b1 * xnm1 + b2 * xnm2 -
-             a1 * ynm1 - a2 * ynm2) / a0;
+    yn = (b0 * xn + b1 * xnm1 + b2 * xnm2 -
+          a1 * ynm1 - a2 * ynm2) / a0;
     xnm2 = xnm1;
     xnm1 = xn;
     ynm2 = ynm1;
