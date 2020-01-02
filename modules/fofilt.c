@@ -16,7 +16,7 @@
 #include "soundpipe.h"
 
 #ifndef M_PI
-#define M_PI		3.14159265358979323846
+#define M_PI 3.14159265358979323846
 #endif
 
 
@@ -43,16 +43,14 @@ int sp_fofilt_init(sp_data *sp, sp_fofilt *p)
    p->istor = 0.0;
 
    int i;
-   if (p->istor==0.0){
-        for (i=0; i<4; i++)
-         p->delay[i] = 0.0;
+   if (p->istor==0.0) {
+        for (i = 0; i < 4; i++) p->delay[i] = 0.0;
    }
    return SP_OK;
 }
 
 int sp_fofilt_compute(sp_data *sp, sp_fofilt *p, SPFLOAT *in, SPFLOAT *out)
 {
-
     SPFLOAT freq = p->freq;
     SPFLOAT ris = p->atk;
     SPFLOAT dec = p->dec;
@@ -63,6 +61,7 @@ int sp_fofilt_compute(sp_data *sp, sp_fofilt *p, SPFLOAT *in, SPFLOAT *out)
     SPFLOAT frq = freq;
     SPFLOAT rs = ris;
     SPFLOAT dc = dec;
+
     if (frq != lfrq || rs != lrs || dc != ldc) {
         lfrq = frq; lrs = rs; ldc = dc;
         ang = (SPFLOAT)p->tpidsr*frq;
@@ -72,13 +71,13 @@ int sp_fofilt_compute(sp_data *sp, sp_fofilt *p, SPFLOAT *in, SPFLOAT *out)
         rrad2 =  pow(10.0, fsc/(rs*sp->sr));
     }
 
-    w1  = *in + 2.0*rrad1*cos(ang)*delay[0] - rrad1*rrad1*delay[1];
-    y1 =  w1 - delay[1];
+    w1 = *in + 2.0*rrad1*cos(ang)*delay[0] - rrad1*rrad1*delay[1];
+    y1 = w1 - delay[1];
     delay[1] = delay[0];
     delay[0] = w1;
 
-    w2  = *in + 2.0*rrad2*cos(ang)*delay[2] - rrad2*rrad2*delay[3];
-    y2 =  w2 - delay[3];
+    w2 = *in + 2.0*rrad2*cos(ang)*delay[2] - rrad2*rrad2*delay[3];
+    y2 = w2 - delay[3];
     delay[3] = delay[2];
     delay[2] = w2;
 
