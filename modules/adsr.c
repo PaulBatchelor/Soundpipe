@@ -47,7 +47,7 @@ static SPFLOAT adsr_filter(sp_data *sp, sp_adsr *p)
 int sp_adsr_compute(sp_data *sp, sp_adsr *p, SPFLOAT *in, SPFLOAT *out)
 {
     SPFLOAT pole;
-    if(p->prev < *in && p->mode != DECAY) {
+    if (p->prev < *in && p->mode != DECAY) {
         p->mode = ATTACK;
         p->timer = 0;
         /* quick fix: uncomment if broken */
@@ -57,7 +57,7 @@ int sp_adsr_compute(sp_data *sp, sp_adsr *p, SPFLOAT *in, SPFLOAT *out)
         p->atk_time = p->atk * sp->sr;
         p->a = pole;
         p->b = 1 - pole;
-    } else if(p->prev > *in) {
+    } else if (p->prev > *in) {
         p->mode = RELEASE;
         pole = tau2pole(sp, p, p->rel);
         p->a = pole;
@@ -67,7 +67,7 @@ int sp_adsr_compute(sp_data *sp, sp_adsr *p, SPFLOAT *in, SPFLOAT *out)
     p->x = *in;
     p->prev = *in;
 
-    switch(p->mode) {
+    switch (p->mode) {
         case CLEAR:
             *out = 0;
             break;
@@ -76,7 +76,7 @@ int sp_adsr_compute(sp_data *sp, sp_adsr *p, SPFLOAT *in, SPFLOAT *out)
             *out = adsr_filter(sp, p);
             /* quick fix: uncomment if broken */
             /* if(p->timer > p->atk_time) { */
-            if(*out > 0.99) {
+            if (*out > 0.99) {
                 p->mode = DECAY;
                 pole = tau2pole(sp, p, p->dec);
                 p->a = pole;
