@@ -34,6 +34,7 @@ int sp_bal_init(sp_data *sp, sp_bal *p)
 {
 
     SPFLOAT b;
+
     p->ihp = 10;
     b = 2.0 - cos((SPFLOAT)(p->ihp * (2.0 * M_PI / sp->sr)));
     p->c2 = b - sqrt(b*b - 1.0);
@@ -65,7 +66,7 @@ int sp_bal_compute(sp_data *sp, sp_bal *p, SPFLOAT *sig, SPFLOAT *comp, SPFLOAT 
         a = sqrt(r);
     }
 
-    if((diff = a - p->prva) != 0.0) {
+    if ((diff = a - p->prva) != 0.0) {
         *out = *sig * p->prva;
         p->prva = a;
     } else {
