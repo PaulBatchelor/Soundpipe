@@ -91,7 +91,7 @@ int sp_bar_compute(sp_data *sp, sp_bar *p, SPFLOAT *in, SPFLOAT *out)
     SPFLOAT SIN1W = sin(xofreq);
     SPFLOAT COS1W = cos(xofreq);
 
-    if(*in) {
+    if (*in) {
         p->first = 0;
         SPFLOAT K = p->iK;
         SPFLOAT T30 = p->T30;
@@ -125,12 +125,10 @@ int sp_bar_compute(sp_data *sp, sp_bar *p, SPFLOAT *in, SPFLOAT *out)
     if (bcL == 3) {
         w1[1] = 2.0*w1[2]-w1[3];
         w1[0] = 3.0*w1[1]-3.0*w1[2]+w1[3];
-    }
-    else if (bcL == 1) {
+    } else if (bcL == 1) {
         w1[2] = 0.0;
         w1[3] = 0.0;
-    }
-    else if (bcL == 2) {
+    } else if (bcL == 2) {
         w1[2] = 0.0;
         w1[1] = -w1[3];
     }
