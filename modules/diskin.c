@@ -21,7 +21,7 @@ int sp_diskin_create(sp_diskin **p)
 int sp_diskin_destroy(sp_diskin **p)
 {
     sp_diskin *pp = *p;
-    if(pp->loaded) sf_close(pp->file);
+    if (pp->loaded) sf_close(pp->file);
     free(*p);
     return SP_OK;
 }
@@ -34,19 +34,19 @@ int sp_diskin_init(sp_data *sp, sp_diskin *p, const char *filename)
     p->loaded = 0;
     p->bufpos = 0;
 
-    if(p->file == NULL) {
+    if (p->file == NULL) {
         fprintf(stderr, "Error: could not open file \"%s\"\n", filename);
         exit(1);
     }
 
-    if(p->info.channels != 1) {
+    if (p->info.channels != 1) {
         fprintf(stderr, "Warning: file \"%s\" has %d channels,"
                 "when it is expecting only 1\n", filename, p->info.channels);
     }
 
     p->loaded = 1;
 
-    if(p->info.frames < 1024) {
+    if (p->info.frames < 1024) {
         p->count = p->info.frames;
     } else {
         p->count = 1024;
@@ -57,7 +57,7 @@ int sp_diskin_init(sp_data *sp, sp_diskin *p, const char *filename)
 
 int sp_diskin_compute(sp_data *sp, sp_diskin *p, SPFLOAT *in, SPFLOAT *out)
 {
-    if(p->bufpos == 0 && p->loaded && p->count > 0) {
+    if (p->bufpos == 0 && p->loaded && p->count > 0) {
 #ifdef USE_DOUBLE
         p->count = sf_read_double(p->file, p->buffer, p->count);
 #else
@@ -65,7 +65,7 @@ int sp_diskin_compute(sp_data *sp, sp_diskin *p, SPFLOAT *in, SPFLOAT *out)
 #endif
     }
 
-    if(p->count <= 0) {
+    if (p->count <= 0) {
         *out = 0;
         return SP_OK;
     }
