@@ -27,7 +27,7 @@
 #define MAX_SHAKE 2000
 
 #ifndef M_PI
-#define M_PI		3.14159265358979323846
+#define M_PI 3.14159265358979323846
 #endif
 
 static int my_random(sp_data *sp, int max)
@@ -114,7 +114,7 @@ int sp_drip_compute(sp_data *sp, sp_drip *p, SPFLOAT *trig, SPFLOAT *out)
 
     SPFLOAT tpidsr = 2.0 * M_PI / sp->sr;
 
-    if(*trig) {
+    if (*trig) {
         sp_drip_init(sp, p, p->dettack);
     }
     if (p->num_tubes != 0.0 && p->num_tubes != p->num_objects) {
@@ -170,7 +170,7 @@ int sp_drip_compute(sp_data *sp, sp_drip *p, SPFLOAT *trig, SPFLOAT *out)
             p->center_freqs1 = p->res_freq1 *
             (1.0 + (0.25 * noise_tick(sp)));
             p->gains1 = fabs(noise_tick(sp));
-        } else  {
+        } else {
             p->center_freqs2 = p->res_freq1 *
             (1.25 + (0.25 * noise_tick(sp)));
             p->gains2 = fabs(noise_tick(sp));
