@@ -14,8 +14,6 @@
 #include <math.h>
 #include "soundpipe.h"
 
-/* #define lrintf(x) lrintf(x) */
-
 int sp_pitchamdf_create(sp_pitchamdf **p)
 {
     *p = malloc(sizeof(sp_pitchamdf));
@@ -26,8 +24,10 @@ int sp_pitchamdf_destroy(sp_pitchamdf **p)
 {
     sp_pitchamdf *pp = *p;
     sp_auxdata_free(&pp->median);
-/* This mirrors the original code */
-    if(pp->rmsmedisize) {
+
+    /* This mirrors the original code */
+
+    if (pp->rmsmedisize) {
         sp_auxdata_free(&pp->rmsmedian);
     }
     sp_auxdata_free(&pp->buffer);
