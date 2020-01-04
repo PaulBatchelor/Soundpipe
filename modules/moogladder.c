@@ -15,7 +15,7 @@
 #include "soundpipe.h"
 
 #ifndef M_PI
-#define M_PI		3.14159265358979323846
+#define M_PI 3.14159265358979323846
 #endif
 
 #define SPFLOAT2LONG(x) lrintf(x)
@@ -58,12 +58,10 @@ int sp_moogladder_init(sp_data *sp, sp_moogladder *p){
     int i;
 
     if (p->istor == 0.0) {
-      for (i = 0; i < 6; i++)
-        p->delay[i] = 0.0;
-      for (i = 0; i < 3; i++)
-        p->tanhstg[i] = 0.0;
-      p->oldfreq = 0.0;
-      p->oldres = -1.0;     /* ensure calculation on first cycle */
+        for (i = 0; i < 6; i++) p->delay[i] = 0.0;
+        for (i = 0; i < 3; i++) p->tanhstg[i] = 0.0;
+        p->oldfreq = 0.0;
+        p->oldres = -1.0; /* ensure calculation on first cycle */
     }
     return SP_OK;
 }
@@ -77,7 +75,7 @@ int sp_moogladder_compute(sp_data *sp, sp_moogladder *p, SPFLOAT *in, SPFLOAT *o
     SPFLOAT stg[4], input;
     SPFLOAT acr, tune;
 #define THERMAL (0.000025) /* (1.0 / 40000.0) transistor thermal voltage  */
-    int     j, k;
+    int j, k;
 
     if (res < 0) res = 0;
 
