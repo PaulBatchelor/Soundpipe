@@ -73,10 +73,12 @@ int sp_prop_init(sp_data *sp, sp_prop *p, const char *str)
     p->count = 0;
 
     prop_create(&p->prp);
-    if(prop_parse(p->prp, str) == PSTATUS_NOTOK) {
+
+    if (prop_parse(p->prp, str) == PSTATUS_NOTOK) {
         fprintf(stderr,"There was an error parsing the string.\n");
         return SP_NOT_OK;
     }
+
     p->bpm = 60;
     p->lbpm = 60;
     return SP_OK;
@@ -84,19 +86,21 @@ int sp_prop_init(sp_data *sp, sp_prop *p, const char *str)
 
 int sp_prop_compute(sp_data *sp, sp_prop *p, SPFLOAT *in, SPFLOAT *out)
 {
-    if(p->count == 0) {
-        if(p->bpm != p->lbpm) {
+    if (p->count == 0) {
+        if (p->bpm != p->lbpm) {
             p->prp->scale = (SPFLOAT) 60.0 / p->bpm;
             p->lbpm = p->bpm;
         }
+
         p->evt = prop_next(sp, p->prp);
         p->count = prop_time(p->prp, p->evt) * sp->sr;
-        switch(p->evt.type) {
+
+        switch (p->evt.type) {
             case PTYPE_ON:
                 *out = 1.0;
                 break;
             case PTYPE_MAYBE:
-                if( ((SPFLOAT) sp_rand(sp) / SP_RANDMAX) > 0.5) *out = 1.0;
+                if (((SPFLOAT) sp_rand(sp) / SP_RANDMAX) > 0.5) *out = 1.0;
                 else *out = 0.0;
                 break;
             default:
@@ -105,6 +109,7 @@ int sp_prop_compute(sp_data *sp, sp_prop *p, SPFLOAT *in, SPFLOAT *out)
         }
         return SP_OK;
     }
+
     *out = 0;
     p->count--;
 
@@ -113,7 +118,7 @@ int sp_prop_compute(sp_data *sp, sp_prop *p, SPFLOAT *in, SPFLOAT *out)
 
 static int stack_push(prop_stack *ps, uint32_t val)
 {
-    if(ps->pos++ < 16) {
+    if (ps->pos++ < 16) {
         ps->stack[ps->pos] = val;
     }
     return SP_OK;
@@ -123,12 +128,12 @@ static void stack_init(prop_stack *ps)
 {
     ps->pos = -1;
     int n;
-    for(n = 0; n < 16; n++) ps->stack[n] = 1;
+    for (n = 0; n < 16; n++) ps->stack[n] = 1;
 }
 
 static uint32_t stack_pop(prop_stack *ps)
 {
-    if(ps->pos >= 0) {
+    if (ps->pos >= 0) {
         return ps->stack[ps->pos--];
     }
     return 1;
@@ -137,7 +142,7 @@ static uint32_t stack_pop(prop_stack *ps)
 static void mode_insert_event(prop_data *pd, char type)
 {
 #ifdef DEBUG_PROP
-    if(type == PTYPE_ON) {
+    if (type == PTYPE_ON) {
         printf("mode_insert: PTYPE_ON\n");
     } else {
         printf("mode_insert: PTYPE_OFF\n");
@@ -158,7 +163,7 @@ static void mode_insert_event(prop_data *pd, char type)
 
 static void mode_setdiv(prop_data *pd, char n)
 {
-    if(pd->tmp == 0 && n == 0) n = 1;
+    if (pd->tmp == 0 && n == 0) n = 1;
     pd->tmp *= 10;
     pd->tmp += n;
 }
@@ -223,7 +228,8 @@ static int prop_create(prop_data **pd)
 static int prop_parse(prop_data *pd, const char *str)
 {
     char c;
-    while(*str != 0) {
+
+    while (*str != 0) {
         c = str[0];
 
         switch(c) {
@@ -305,7 +311,7 @@ static int prop_parse(prop_data *pd, const char *str)
 
 prop_val prop_list_iterate(prop_list *lst)
 {
-    if(lst->pos >= lst->size) {
+    if (lst->pos >= lst->size) {
         prop_list_reset(lst);
     }
     prop_val val = lst->last->val;
@@ -325,7 +331,7 @@ static void back_to_top(prop_data *pd)
 static void reset(prop_data *pd)
 {
     prop_list *lst = pd->main;
-    if(lst->pos >= lst->size) {
+    if (lst->pos >= lst->size) {
         back_to_top(pd);
     }
 }
@@ -347,7 +353,7 @@ prop_event prop_next(sp_data *sp, prop_data *pd)
     lst->last = lst->last->next;
     lst->pos++;
 
-    switch(val.type) {
+    switch (val.type) {
         case PTYPE_SLICE: {
             prop_slice *slice = (prop_slice *)val.ud;
 
@@ -413,7 +419,7 @@ static int prop_list_append(prop_list *lst, prop_val val)
 static int prop_slice_free(prop_slice *slice)
 {
     uint32_t i;
-    for(i = 0; i < slice->size; i++) {
+    for (i = 0; i < slice->size; i++) {
         prop_list_destroy(slice->ar[i]);
         free(slice->ar[i]);
     }
@@ -423,7 +429,7 @@ static int prop_slice_free(prop_slice *slice)
 
 static int prop_val_free(prop_val val)
 {
-    switch(val.type) {
+    switch (val.type) {
         case PTYPE_SLICE:
             prop_slice_free((prop_slice *)val.ud);
             free(val.ud);
@@ -445,7 +451,7 @@ static int prop_list_destroy(prop_list *lst)
     prop_entry *next;
     uint32_t i;
 
-    for(i = 0; i < lst->size; i++) {
+    for (i = 0; i < lst->size; i++) {
         next = entry->next;
         prop_val_free(entry->val);
         free(entry);
@@ -463,7 +469,7 @@ static void prop_list_reset(prop_list *lst)
 static void mode_insert_slice(prop_data *pd)
 {
     prop_entry *entry = pd->main->top->last;
-    if(entry->val.type != PTYPE_SLICE) {
+    if (entry->val.type != PTYPE_SLICE) {
         prop_slice_encap(pd);
     } else {
         prop_slice_append(pd);
