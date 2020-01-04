@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "soundpipe.h"
+
 int sp_posc3_create(sp_posc3 **posc3)
 {
     *posc3 = malloc(sizeof(sp_posc3));
@@ -56,28 +57,33 @@ int sp_posc3_compute(sp_data *sp, sp_posc3 *posc3, SPFLOAT *in, SPFLOAT *out)
     fract = (SPFLOAT)(phs - (SPFLOAT)x0);
     x0--;
 
-    if (x0<0) {
+    if (x0 < 0) {
         ym1 = ftab[posc3->tablen-1]; x0 = 0;
-    }
-    else ym1 = ftab[x0++];
-    y0    = ftab[x0++];
-    y1    = ftab[x0++];
+    } else ym1 = ftab[x0++];
+
+    y0 = ftab[x0++];
+    y1 = ftab[x0++];
+
     if (x0>posc3->tablen) y2 = ftab[1];
     else y2 = ftab[x0];
+
     {
         SPFLOAT frsq = fract*fract;
         SPFLOAT frcu = frsq*ym1;
         SPFLOAT t1   = y2 + y0+y0+y0;
-        *out     = amp * (y0 + 0.5 *frcu +
+        *out = amp * (y0 + 0.5 *frcu +
         fract*(y1 - frcu/6.0 - t1/6.0
         - ym1/3.0) +
         frsq*fract*(t1/6.0 - 0.5*y1) +
         frsq*(0.5* y1 - y0));
     }
+
     phs += si;
+
     while (phs >= posc3->tablen) {
         phs -= posc3->tablen;
     }
+
     while (phs < 0.0) {
         phs += posc3->tablen;
         posc3->phs = phs;
