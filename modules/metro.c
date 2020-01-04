@@ -31,9 +31,11 @@ int sp_metro_init(sp_data *sp, sp_metro *p)
     p->freq= 2.0;
     SPFLOAT phs = p->iphs;
     int32_t  longphs = phs;
-    if (phs >= 0.0){
+
+    if (phs >= 0.0) {
       p->curphs = (SPFLOAT)phs - (SPFLOAT)longphs;
     }
+
     p->flag=1;
     p->onedsr = 1.0 / sp->sr;
     return SP_OK;
@@ -42,16 +44,19 @@ int sp_metro_init(sp_data *sp, sp_metro *p)
 int sp_metro_compute(sp_data *sp, sp_metro *p, SPFLOAT *in, SPFLOAT *out)
 {
     SPFLOAT phs= p->curphs;
-    if (phs == 0.0 && p->flag){
+
+    if (phs == 0.0 && p->flag) {
         *out = 1.0;
         p->flag = 0;
-    }else if ((phs += p->freq * p->onedsr) >= 1.0){
+    } else if ((phs += p->freq * p->onedsr) >= 1.0) {
         *out = 1.0;
         phs -= 1.0;
         p->flag = 0;
-    }else{
+    } else {
         *out = 0.0;
     }
+
     p->curphs = phs;
+
     return SP_OK;
 }
