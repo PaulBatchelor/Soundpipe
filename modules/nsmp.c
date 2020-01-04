@@ -24,7 +24,7 @@ int nano_ini_handler(void *user, const char *section, const char *name,
     nano_dict *dict = &ss->dict;
     const char *entry_name = dict->last->name;
 
-    if(dict->init) {
+    if (dict->init) {
         nano_dict_add(dict, section);
         dict->init = 0;
     } else if(strncmp(entry_name, section, 50) != 0) {
@@ -33,11 +33,11 @@ int nano_ini_handler(void *user, const char *section, const char *name,
 
     dict->last->speed = 1.0;
 
-    if(strcmp(name, "pos") == 0) {
+    if (strcmp(name, "pos") == 0) {
         dict->last->pos = (uint32_t)(atof(value) * ss->sr);
-    } else if(strcmp(name, "size") == 0) {
+    } else if (strcmp(name, "size") == 0) {
         dict->last->size = (uint32_t)(atof(value) * ss->sr);
-    } else if(strcmp(name, "speed") == 0) {
+    } else if (strcmp(name, "speed") == 0) {
         dict->last->speed = atof(value);
     }
 
@@ -55,7 +55,8 @@ int nano_create(nanosamp **smp, const char *ini, int sr)
     psmp->selected = 0;
     psmp->curpos = 0;
     psmp->sr = sr;
-    if(ini_parse(psmp->ini, nano_ini_handler, psmp) < 0) {
+
+    if (ini_parse(psmp->ini, nano_ini_handler, psmp) < 0) {
         printf("Can't load file %s\n", psmp->ini);
         return SP_NOT_OK;
     }
@@ -76,7 +77,7 @@ uint32_t nano_keyword_to_index(nanosamp *smp, const char *keyword)
 {
     uint32_t i;
     for (i = 0; i < smp->dict.nval; i++) {
-        if(strcmp(keyword, smp->index[i]->name)) {
+        if (strcmp(keyword, smp->index[i]->name)) {
             return i;
         }
     }
@@ -88,10 +89,12 @@ int nano_select(nanosamp *smp, const char *keyword)
     uint32_t i;
     nano_dict *dict = &smp->dict;
     nano_entry *entry = dict->root.next;
+
     smp->curpos = 0;
     smp->selected = 0;
-    for(i = 0; i < dict->nval; i++) {
-        if(strncmp(keyword, entry->name, 50) == 0) {
+
+    for (i = 0; i < dict->nval; i++) {
+        if (strncmp(keyword, entry->name, 50) == 0) {
             smp->selected = 1;
             smp->sample = entry;
             smp->curpos = 0;
@@ -101,27 +104,28 @@ int nano_select(nanosamp *smp, const char *keyword)
         }
     }
 
-    if(smp->selected == 1) return SP_OK;
+    if (smp->selected == 1) return SP_OK;
     else return SP_NOT_OK;
 }
 
 
 int nano_compute(sp_data *sp, nanosamp *smp, SPFLOAT *out)
 {
-    if(!smp->selected) {
+    if (!smp->selected) {
         *out = 0;
         return SP_NOT_OK;
     }
 
-    if(smp->curpos < (SPFLOAT)smp->sample->size) {
+    if (smp->curpos < (SPFLOAT)smp->sample->size) {
         SPFLOAT x1 = 0 , x2 = 0, frac = 0, tmp = 0;
         uint32_t index = 0;
         SPFLOAT *tbl = smp->ft->tbl;
+
         tmp = (smp->curpos + smp->sample->pos);
         index = floorf(tmp);
         frac = fabs(tmp - index);
 
-        if(index >= smp->ft->size) {
+        if (index >= smp->ft->size) {
             index = smp->ft->size - 1;
         }
 
@@ -143,11 +147,12 @@ int nano_dict_destroy(nano_dict *dict)
     nano_entry *entry, *next;
     entry = dict->root.next;
 
-    for(i = 0; i < dict->nval; i++) {
+    for (i = 0; i < dict->nval; i++) {
         next = entry->next;
         free(entry);
         entry = next;
     }
+
     return SP_OK;
 }
 
@@ -159,8 +164,6 @@ int nano_destroy(nanosamp **smp)
     return SP_OK;
 }
 
-
-
 int nano_create_index(nanosamp *smp)
 {
     nano_dict *dict = &smp->dict;
@@ -169,7 +172,7 @@ int nano_create_index(nanosamp *smp)
     nano_entry *entry, *next;
     entry = dict->root.next;
 
-    for(i = 0; i < dict->nval; i++) {
+    for (i = 0; i < dict->nval; i++) {
         next = entry->next;
         smp->index[i] = entry;
         entry = next;
@@ -219,7 +222,7 @@ int sp_nsmp_compute(sp_data *sp, sp_nsmp *p, SPFLOAT *trig, SPFLOAT *out)
        nano_select_from_index(p->smp, p->index);
     }
 
-    if(p->triggered == 1) {
+    if (p->triggered == 1) {
         nano_compute(sp, p->smp, out);
     } else {
         *out = 0;
@@ -231,7 +234,7 @@ int sp_nsmp_compute(sp_data *sp, sp_nsmp *p, SPFLOAT *trig, SPFLOAT *out)
 int sp_nsmp_print_index(sp_data *sp, sp_nsmp *p)
 {
     uint32_t i;
-    for(i = 0; i < p->smp->dict.nval; i++) {
+    for (i = 0; i < p->smp->dict.nval; i++) {
         printf("%d: key = %s\n", i, p->smp->index[i]->name);
     }
     return SP_OK;
