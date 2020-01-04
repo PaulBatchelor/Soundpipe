@@ -1,9 +1,12 @@
 /*
- * Foo
+ * Hilbert
  *
- * This is a dummy module. It doesn't do much.
- * Feel free to use this as a boilerplate template.
+ * This code has been extracted from the Csound opcode "hilbert".
+ * It has been modified to work as a Soundpipe module.
  *
+ * Original Author(s): Sean Costello
+ * Year: 1999
+ * Location: Opcodes/ugsc.c
  */
 
 #include <stdlib.h>
