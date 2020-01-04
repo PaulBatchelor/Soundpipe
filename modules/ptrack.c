@@ -35,7 +35,6 @@
 #define MINAMPS 40
 #define MAXAMPS 50
 
-
 #define THRSH 10.
 
 #define COEF1 ((SPFLOAT)(.5 * 1.227054))
@@ -430,11 +429,12 @@ int sp_ptrack_compute(sp_data *sp, sp_ptrack *p, SPFLOAT *in, SPFLOAT *freq, SPF
         ptrack(sp,p);
         pos = 0;
     }
+
     buf[pos] = *in * scale;
     pos++;
 
     *freq = p->cps;
-    *amp =  exp(p->dbs[p->histcnt] / 20.0 * log(10.0));
+    *amp = exp(p->dbs[p->histcnt] / 20.0 * log(10.0));
 
     p->cnt = pos;
 
