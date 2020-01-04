@@ -53,13 +53,13 @@ int sp_peaklim_compute(sp_data *sp, sp_peaklim *p, SPFLOAT *in, SPFLOAT *out)
 
     /* change coefficients, if needed */
 
-    if(p->patk != p->atk) {
+    if (p->patk != p->atk) {
         p->patk = p->atk;
 		p->a1_a = exp( -1.0 / ( p->rel * sp->sr ) );
 		p->b0_a = 1 - p->a1_a;
     }
 
-    if(p->prel != p->rel) {
+    if (p->prel != p->rel) {
         p->prel = p->rel;
 		p->a1_r = exp( -1.0 / ( p->rel * sp->sr ) );
 		p->b0_r = 1 - p->a1_r;
