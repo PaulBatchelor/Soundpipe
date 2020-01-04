@@ -15,11 +15,10 @@
 #include "soundpipe.h"
 
 #ifndef M_PI
-#define M_PI		3.14159265358979323846
+#define M_PI 3.14159265358979323846
 #endif
 
 #define SQRT2 1.41421356237309504880
-
 
 int sp_pan2_create(sp_pan2 **p)
 {
@@ -52,33 +51,32 @@ int sp_pan2_compute(sp_data *sp, sp_pan2 *p, SPFLOAT *in, SPFLOAT *out1, SPFLOAT
     switch (type) {
         /* Equal power */
         case 0:
-        pan = M_PI * 0.5 * pan;
-        *out1 = *in * cos(pan);
-        *out2 = *in * sin(pan);
-        break;
+            pan = M_PI * 0.5 * pan;
+            *out1 = *in * cos(pan);
+            *out2 = *in * sin(pan);
+            break;
 
         /* Square root */
         case 1:
-        *out1 = *in * sqrt(pan);
-        *out2 = *in * sqrt(1.0 - pan);
-        break;
+            *out1 = *in * sqrt(pan);
+            *out2 = *in * sqrt(1.0 - pan);
+            break;
 
         /* simple linear */
         case 2:
-        *out1 = *in * (1.0 - pan);
-        *out2 = *in * pan;
-        break;
+            *out1 = *in * (1.0 - pan);
+            *out2 = *in * pan;
+            break;
 
         /* Equal power (alternative) */
         case 3:
-
-        cc = cos(M_PI * pan * 0.5);
-        ss = sin(M_PI * pan * 0.5);
-        l = SQRT2 * (cc + ss) * 0.5;
-        r = SQRT2 * (cc - ss) * 0.5;
-        *out1 = *in * l;
-        *out2 = *in * r;
-        break;
+            cc = cos(M_PI * pan * 0.5);
+            ss = sin(M_PI * pan * 0.5);
+            l = SQRT2 * (cc + ss) * 0.5;
+            r = SQRT2 * (cc - ss) * 0.5;
+            *out1 = *in * l;
+            *out2 = *in * r;
+            break;
     }
 
     return SP_OK;
