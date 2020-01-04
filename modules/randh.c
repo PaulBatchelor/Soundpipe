@@ -26,10 +26,10 @@ int sp_randh_init(sp_data *sp, sp_randh *p)
 
 int sp_randh_compute(sp_data *sp, sp_randh *p, SPFLOAT *in, SPFLOAT *out)
 {
-    if(p->counter == 0) {
+    if (p->counter == 0) {
         p->val = p->min + ((SPFLOAT) sp_rand(sp) / SP_RANDMAX) * (p->max - p->min);
 
-        if(p->freq == 0) {
+        if (p->freq == 0) {
             p->dur = 1;
         } else {
             p->dur = (sp->sr / p->freq) + 1;
