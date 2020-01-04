@@ -40,13 +40,14 @@ int sp_pinknoise_destroy(sp_pinknoise **p)
 int sp_pinknoise_init(sp_data *sp, sp_pinknoise *p)
 {
     int i;
+
     p->amp = 1.0;
     p->seed = sp_rand(sp);
     p->total = 0;
     p->counter = 0;
-    for(i = 0; i < 7; i++) {
-        p->dice[i] = 0;
-    }
+
+    for (i = 0; i < 7; i++) p->dice[i] = 0;
+
     return SP_OK;
 }
 
