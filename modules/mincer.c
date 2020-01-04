@@ -40,7 +40,7 @@ int sp_mincer_destroy(sp_mincer **p)
 
 static int find_power(int n) {
     int pow = -1;
-    while(n > 0) {
+    while (n > 0) {
         n >>= 1;
         pow++;
     }
@@ -81,17 +81,20 @@ int sp_mincer_init(sp_data *sp, sp_mincer *p, sp_ftbl *ft, int winsize)
     sp_auxdata_alloc(&p->prev, size);
     size = decim*sizeof(int);
     sp_auxdata_alloc(&p->framecount, size);
+
     {
       int k=0;
         for (k=0; k < decim; k++) {
             ((int *)(p->framecount.ptr))[k] = k*N;
         }
     }
+
     size = decim*sizeof(SPFLOAT)*N;
     sp_auxdata_alloc(&p->outframe, size);
 
     size = N*sizeof(SPFLOAT);
     sp_auxdata_alloc(&p->win, size);
+
     {
         SPFLOAT x = 2.0 * M_PI/N;
         for (ui=0; ui < N; ui++)
@@ -131,9 +134,9 @@ int sp_mincer_compute(sp_data *sp, sp_mincer *p, SPFLOAT *in2, SPFLOAT *out)
         */
         spos  = hsize*(long)((time)*sp->sr/hsize);
         sizefrs = size;
-        while(spos > sizefrs) spos -= sizefrs;
-        while(spos <= 0)  spos += sizefrs;
 
+        while (spos > sizefrs) spos -= sizefrs;
+        while (spos <= 0)  spos += sizefrs;
 
         pos = spos;
         bwin = (SPFLOAT *) p->bwin.ptr;
@@ -161,8 +164,8 @@ int sp_mincer_compute(sp_data *sp, sp_mincer *p, SPFLOAT *in2, SPFLOAT *out)
             post = (int) (pos - hsize*pitch);
             post *= 1;
             post += 0;
-            while(post < 0) post += size;
-            while(post >= size) post -= size;
+            while (post < 0) post += size;
+            while (post >= size) post -= size;
             if(post + 1<  size)
             insig = tab[post] + frac*(tab[post + 1] - tab[post]);
             else insig = tab[post];
@@ -201,7 +204,7 @@ int sp_mincer_compute(sp_data *sp, sp_mincer *p, SPFLOAT *in2, SPFLOAT *out)
         for (i=0; i < N + 2; i+=2) {
             if (lock) {  /* phase-locking */
                 if (i > 0) {
-                    if (i < N){
+                    if (i < N) {
                         tmp_real = bwin[i] + bwin[i-2] + bwin[i+2];
                         tmp_im = bwin[i+1] + bwin[i-1] + bwin[i+3];
                     } else { /* Nyquist */
@@ -218,7 +221,7 @@ int sp_mincer_compute(sp_data *sp, sp_mincer *p, SPFLOAT *in2, SPFLOAT *out)
             }
 
             tmp_real += 1e-15;
-            divi =  1.0/(hypot(tmp_real, tmp_im));
+            divi = 1.0/(hypot(tmp_real, tmp_im));
 
             /* phases of tmp frame */
             ph_real = tmp_real*divi;
@@ -226,8 +229,8 @@ int sp_mincer_compute(sp_data *sp, sp_mincer *p, SPFLOAT *in2, SPFLOAT *out)
 
             /* front window mags, phase sum of
             tmp and front windows */
-            tmp_real =   fwin[i] * ph_real - fwin[i+1] * ph_im;
-            tmp_im =   fwin[i] * ph_im + fwin[i+1] * ph_real;
+            tmp_real = fwin[i] * ph_real - fwin[i+1] * ph_im;
+            tmp_im = fwin[i] * ph_im + fwin[i+1] * ph_real;
 
             /* phase vocoder output */
             prev[i] = fwin[i] = tmp_real;
