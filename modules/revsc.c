@@ -66,11 +66,14 @@ int sp_revsc_init(sp_data *sp, sp_revsc *p)
     p->prv_LPFreq = 0.0;
     p->initDone = 1;
     int i, nBytes = 0;
-    for(i = 0; i < 8; i++){
+
+    for (i = 0; i < 8; i++) {
         nBytes += delay_line_bytes_alloc(sp->sr, 1, i);
     }
+
     sp_auxdata_alloc(&p->aux, nBytes);
     nBytes = 0;
+
     for (i = 0; i < 8; i++) {
         p->delayLines[i].buf = (p->aux.ptr) + nBytes;
         init_delay_line(p, &p->delayLines[i], i);
