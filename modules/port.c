@@ -14,6 +14,7 @@
 #include <math.h>
 #include <stdint.h>
 #include <stdlib.h>
+
 #define ROOT2 (1.4142135623730950488)
 
 #ifndef M_PI
@@ -47,7 +48,7 @@ int sp_port_init(sp_data *sp, sp_port *p, SPFLOAT htime)
 
 int sp_port_compute(sp_data *sp, sp_port *p, SPFLOAT *in, SPFLOAT *out)
 {
-    if(p->prvhtim != p->htime){
+    if (p->prvhtim != p->htime) {
         p->c2 = pow(0.5, p->onedsr / p->htime);
         p->c1 = 1.0 - p->c2;
         p->prvhtim = p->htime;
