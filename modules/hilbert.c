@@ -10,7 +10,7 @@
 #include "soundpipe.h"
 
 #ifndef M_PI
-#define M_PI		3.14159265358979323846
+#define M_PI 3.14159265358979323846
 #endif
 
 int sp_hilbert_create(sp_hilbert **p)
@@ -34,7 +34,7 @@ int sp_hilbert_init(sp_data *sp, sp_hilbert *p)
                         1.2524, 5.5671, 22.3423, 89.6271, 364.7914, 2770.1114};
     SPFLOAT polefreq, rc, alpha, beta;
     /* calculate coefficients for allpass filters, based on sampling rate */
-    for (j=0; j<12; j++) {
+    for (j = 0; j < 12; j++) {
         polefreq = poles[j] * 15.0;
         rc = 1.0 / (2.0 * M_PI * polefreq);
         alpha = 1.0 / rc;
