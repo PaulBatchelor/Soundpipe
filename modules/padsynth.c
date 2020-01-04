@@ -32,9 +32,9 @@ int sp_gen_padsynth(sp_data *sp, sp_ftbl *ps, sp_ftbl *amps,
     SPFLOAT *freq_amp = malloc((N / 2) * sizeof(SPFLOAT));
     SPFLOAT *freq_phase = malloc((N / 2) * sizeof(SPFLOAT));
 
-    for (i=0;i<N/2;i++) freq_amp[i]=0.0;
+    for (i = 0; i < N/2; i++) freq_amp[i]=0.0;
 
-    for (nh=1;nh<number_harmonics;nh++) {
+    for (nh=1; nh < number_harmonics; nh++) {
         SPFLOAT bw_Hz;
         SPFLOAT bwi;
         SPFLOAT fi;
@@ -48,8 +48,8 @@ int sp_gen_padsynth(sp_data *sp, sp_ftbl *ps, sp_ftbl *amps,
         }
     }
 
-    for (i=0;i<N/2;i++) {
-        freq_phase[i]= (sp_rand(sp) / (SP_RANDMAX + 1.0)) * 2.0 * M_PI;
+    for (i = 0; i < N/2; i++) {
+        freq_phase[i] = (sp_rand(sp) / (SP_RANDMAX + 1.0)) * 2.0 * M_PI;
     };
 
     sp_padsynth_ifft(N,freq_amp,freq_phase,smp);
@@ -70,10 +70,11 @@ SPFLOAT sp_padsynth_profile(SPFLOAT fi, SPFLOAT bwi)
     SPFLOAT x =fi/bwi;
     x *= x;
 
-/*
- * this avoids computing the e^(-x^2) where
- * it's results are very close to zero
- */
+    /*
+     * this avoids computing the e^(-x^2) where
+     * it's results are very close to zero
+     */
+
     if (x>14.71280603) return 0.0;
 
     return exp(-x)/bwi;
@@ -88,10 +89,11 @@ int sp_padsynth_ifft(int N, SPFLOAT *freq_amp,
     FFTFREQS fftfreqs;
     newFFTFREQS(&fftfreqs,N/2);
 
-    for (i=0; i<N/2; i++){
-        fftfreqs.c[i]=freq_amp[i]*cos(freq_phase[i]);
-        fftfreqs.s[i]=freq_amp[i]*sin(freq_phase[i]);
+    for (i = 0; i < N/2; i++) {
+        fftfreqs.c[i] = freq_amp[i]*cos(freq_phase[i]);
+        fftfreqs.s[i] = freq_amp[i]*sin(freq_phase[i]);
     };
+
     freqs2smps(fft, &fftfreqs,smp);
     deleteFFTFREQS(&fftfreqs);
     FFTwrapper_destroy(&fft);
@@ -106,8 +108,10 @@ int sp_padsynth_normalize(int N, SPFLOAT *smp)
 {
     int i;
     SPFLOAT max=0.0;
-    for (i=0;i<N;i++) if (fabs(smp[i])>max) max=fabs(smp[i]);
-    if (max<1e-5) max=1e-5;
-    for (i=0;i<N;i++) smp[i]/=max*1.4142;
+    for (i = 0; i < N;i++) {
+        if (fabs(smp[i]) > max) max = fabs(smp[i]);
+    }
+    if (max < 1e-5) max = 1e-5;
+    for (i = 0; i < N; i++) smp[i] /= max*1.4142;
     return SP_OK;
 }
