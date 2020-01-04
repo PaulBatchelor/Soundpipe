@@ -29,31 +29,36 @@ static void compute_block(sp_data *sp, sp_paulstretch *p) {
     SPFLOAT *tbl = p->ft->tbl;
     SPFLOAT *window = p->window;
     SPFLOAT *output= p->output;
-    for(i = 0; i < windowsize; i++) {
+
+    for (i = 0; i < windowsize; i++) {
         /* Loop through buffer */
         pos = (istart_pos + i);
 
-        if(p->wrap) {
+        if (p->wrap) {
             pos %= p->ft->size;
         }
 
-        if(pos < p->ft->size) {
+        if (pos < p->ft->size) {
             buf[i] = tbl[pos] * window[i];
         } else {
             buf[i] = 0;
         }
     }
+
     kiss_fftr(p->fft, buf, p->tmp1);
-    for(i = 0; i < windowsize / 2; i++) {
+
+    for (i = 0; i < windowsize / 2; i++) {
         SPFLOAT mag = sqrt(p->tmp1[i].r*p->tmp1[i].r + p->tmp1[i].i*p->tmp1[i].i);
         SPFLOAT ph = ((SPFLOAT)sp_rand(sp) / SP_RANDMAX) * 2 * M_PI;
         p->tmp1[i].r = mag * cos(ph);
         p->tmp1[i].i = mag * sin(ph);
     }
+
     kiss_fftri(p->ifft, p->tmp1, buf);
-    for(i = 0; i < windowsize; i++) {
+
+    for (i = 0; i < windowsize; i++) {
         buf[i] *= window[i];
-        if(i < half_windowsize) {
+        if (i < half_windowsize) {
             output[i] = (SPFLOAT)(buf[i] + old_windowed_buf[half_windowsize + i]) / windowsize;
             output[i] *= hinv_buf[i];
         }
@@ -89,9 +94,9 @@ int sp_paulstretch_init(sp_data *sp, sp_paulstretch *p, sp_ftbl *ft, SPFLOAT win
     p->ft = ft;
     p->windowsize = (uint32_t)(sp->sr * windowsize);
     p->stretch = stretch;
-    if(p->windowsize < 16) {
-        p->windowsize = 16;
-    }
+
+    if (p->windowsize < 16) p->windowsize = 16;
+
     p->half_windowsize = p->windowsize / 2;
     p->displace_pos = (p->windowsize * 0.5) / p->stretch;
 
@@ -111,12 +116,12 @@ int sp_paulstretch_init(sp_data *sp, sp_paulstretch *p, sp_ftbl *ft, SPFLOAT win
     p->output = p->m_output.ptr;
 
     /* Create Hann window */
-    for(i = 0; i < p->windowsize; i++) {
+    for (i = 0; i < p->windowsize; i++) {
         p->window[i] = 0.5 - cos(i * 2.0 * M_PI / (p->windowsize - 1)) * 0.5;
     }
     /* creatve inverse hann window */
     SPFLOAT hinv_sqrt2 = (1 + sqrt(0.5)) * 0.5;
-    for(i = 0; i < p->half_windowsize; i++) {
+    for (i = 0; i < p->half_windowsize; i++) {
         p->hinv_buf[i] = hinv_sqrt2 - (1.0 - hinv_sqrt2) * cos(i * 2.0 * M_PI / p->half_windowsize);
     }
 
@@ -137,9 +142,8 @@ int sp_paulstretch_init(sp_data *sp, sp_paulstretch *p, sp_ftbl *ft, SPFLOAT win
 
 int sp_paulstretch_compute(sp_data *sp, sp_paulstretch *p, SPFLOAT *in, SPFLOAT *out)
 {
-    if(p->counter == 0) {
-        compute_block(sp, p);
-    }
+    if (p->counter == 0) compute_block(sp, p);
+
     *out = p->output[p->counter];
     p->counter = (p->counter + 1) % p->half_windowsize;
 
