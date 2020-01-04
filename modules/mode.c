@@ -13,10 +13,11 @@
 #include <math.h>
 #include <stdint.h>
 #include <stdlib.h>
+
 #define ROOT2 (1.4142135623730950488)
 
 #ifndef M_PI
-#define M_PI		3.14159265358979323846	/* pi */
+#define M_PI 3.14159265358979323846
 #endif
 
 #include "soundpipe.h"
@@ -61,8 +62,8 @@ int sp_mode_compute(sp_data *sp, sp_mode *p, SPFLOAT *in, SPFLOAT *out)
         SPFLOAT kfreq = kfq*(2.0 * M_PI);
         SPFLOAT kalpha = (p->sr/kfreq);
         SPFLOAT kbeta = kalpha*kalpha;
-        d = 0.5*kalpha;
 
+        d = 0.5*kalpha;
         lq = kq; lfq = kfq;
         a0 = 1.0/ (kbeta+d/kq);
         a1 = a0 * (1.0-2.0*kbeta);
