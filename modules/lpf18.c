@@ -47,7 +47,7 @@ int sp_lpf18_compute(sp_data *sp, sp_lpf18 *p, SPFLOAT *in, SPFLOAT *out)
     SPFLOAT aout = p->aout;
     SPFLOAT lastin = p->lastin;
     double value = 0.0;
-    int   flag = 1;
+    int flag = 1;
     SPFLOAT lfc=0, lrs=0, kres=0, kfcn=0, kp=0, kp1=0,  kp1h=0;
     double lds = 0.0;
 
@@ -55,6 +55,7 @@ int sp_lpf18_compute(sp_data *sp, sp_lpf18 *p, SPFLOAT *in, SPFLOAT *out)
     SPFLOAT ax1  = lastin;
     SPFLOAT ay11 = ay1;
     SPFLOAT ay31 = ay2;
+
     fco = p->cutoff;
     res = p->res;
     dist = p->dist;
