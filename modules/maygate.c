@@ -23,8 +23,8 @@ int sp_maygate_init(sp_data *sp, sp_maygate *p)
 
 int sp_maygate_compute(sp_data *sp, sp_maygate *p, SPFLOAT *in, SPFLOAT *out)
 {
-    if(*in == 0) {
-        if(p->mode) {
+    if (*in == 0) {
+        if (p->mode) {
             *out = 0;
         } else {
             *out = p->gate;
@@ -32,7 +32,7 @@ int sp_maygate_compute(sp_data *sp, sp_maygate *p, SPFLOAT *in, SPFLOAT *out)
         return SP_OK;
     }
 
-    if((1.0 * sp_rand(sp) / SP_RANDMAX) <= p->prob) {
+    if ((1.0 * sp_rand(sp) / SP_RANDMAX) <= p->prob) {
         *out = 1;
         p->gate = 1;
     } else {
