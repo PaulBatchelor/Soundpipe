@@ -33,7 +33,7 @@ int sp_incr_init(sp_data *sp, sp_incr *p, SPFLOAT val)
 
 int sp_incr_compute(sp_data *sp, sp_incr *p, SPFLOAT *in, SPFLOAT *out)
 {
-    if(*in > 0 ) {
+    if (*in > 0 ) {
         p->val += p->step;
         p->val = max(min(p->val, p->max), p->min);
     } else if (*in < 0) {
