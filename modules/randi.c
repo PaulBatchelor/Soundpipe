@@ -16,9 +16,9 @@
 #include <math.h>
 #include "soundpipe.h"
 
-#define sp_oneUp31Bit      (4.656612875245796924105750827168e-10)
+#define sp_oneUp31Bit (4.656612875245796924105750827168e-10)
 
-#define sp_randGab   ((SPFLOAT)     \
+#define sp_randGab ((SPFLOAT)     \
         (((p->holdrand = p->holdrand * 214013 + 2531011) >> 1)  \
          & 0x7fffffff) * sp_oneUp31Bit)
 
@@ -47,6 +47,7 @@ int sp_randi_init(sp_data *sp, sp_randi *p)
     p->fstval = 0;
 
     int mode = (int)(p->mode);
+
     switch (mode) {
     case 1: /* immediate interpolation between kmin and 1st random number */
         p->num1 = 0.0;
@@ -68,6 +69,7 @@ int sp_randi_init(sp_data *sp, sp_randi *p)
         p->num1 = p->num2 = 0.0;
         p->dfdmax = 0.0;
     }
+
     return SP_OK;
 }
 
