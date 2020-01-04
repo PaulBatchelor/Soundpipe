@@ -34,17 +34,17 @@ int sp_line_init(sp_data *sp, sp_line *p)
 
 int sp_line_compute(sp_data *sp, sp_line *p, SPFLOAT *in, SPFLOAT *out)
 {
-    if(*in != 0 ) {
+    if (*in != 0 ) {
         line_reinit(sp, p);
         p->init = 0;
     }
 
-    if(p->init) {
+    if (p->init) {
         *out = 0;
         return SP_OK;
     }
 
-    if(p->stime < p->sdur) {
+    if (p->stime < p->sdur) {
         SPFLOAT val = p->val;
         p->val += p->incr;
         p->stime++;
