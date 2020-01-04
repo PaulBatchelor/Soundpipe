@@ -24,24 +24,32 @@ int sp_progress_init(sp_data *sp, sp_progress *p)
 
 int sp_progress_compute(sp_data *sp, sp_progress *p, SPFLOAT *in, SPFLOAT *out)
 {
-    if(p->counter == 0 || sp->pos == p->len - 1) {
+    if (p->counter == 0 || sp->pos == p->len - 1) {
         int n;
         SPFLOAT slope = 1.0 / p->nbars;
+
         if(sp->pos == 0) fprintf(stderr, "\e[?25l");
+
         SPFLOAT percent = ((SPFLOAT)sp->pos / p->len);
+
         fprintf(stderr, "[");
-        for(n = 0; n < p->nbars; n++) {
-            if(n * slope <= percent) {
+
+        for (n = 0; n < p->nbars; n++) {
+            if (n * slope <= percent) {
                 fprintf(stderr, "#");
-            }else {
+            } else {
                 fprintf(stderr, " ");
             }
         }
+
         fprintf(stderr, "] %.2f%%\t\r", 100 * percent);
 
     }
-    if(sp->pos == p->len - 1) fprintf(stderr, "\n\e[?25h");
+
+    if (sp->pos == p->len - 1) fprintf(stderr, "\n\e[?25h");
+
     fflush(stderr);
+
     p->counter++;
     p->counter %= p->skip;
     return SP_OK;
