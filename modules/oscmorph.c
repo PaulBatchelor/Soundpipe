@@ -26,8 +26,8 @@ int sp_oscmorph_init(sp_data *sp, sp_oscmorph *osc, sp_ftbl **ft, int nft, SPFLO
     osc->wtpos = 0.0;
     osc->nft = nft;
     uint32_t prev = (uint32_t)ft[0]->size;
-    for(i = 0; i < nft; i++) {
-        if(prev != ft[i]->size) {
+    for (i = 0; i < nft; i++) {
+        if (prev != ft[i]->size) {
             fprintf(stderr, "sp_oscmorph: size mismatch\n");
             return SP_NOT_OK;
         }
@@ -59,7 +59,7 @@ int sp_oscmorph_compute(sp_data *sp, sp_oscmorph *osc, SPFLOAT *in, SPFLOAT *out
     ftp1 = osc->tbl[index];
     ft1 = osc->tbl[index]->tbl;
 
-    if(index >= osc->nft - 1) {
+    if (index >= osc->nft - 1) {
         ft2 = ft1;
     } else {
         ft2 = osc->tbl[index + 1]->tbl;
