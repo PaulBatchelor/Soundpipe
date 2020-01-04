@@ -72,13 +72,12 @@ int sp_pluck_compute(sp_data *sp, sp_pluck *p, SPFLOAT *trig, SPFLOAT *out)
     int32_t phs256, phsinc, ltwopi, offset;
     SPFLOAT frac, diff;
 
-
-    if(*trig != 0) {
+    if (*trig != 0) {
         p->init = 0;
         sp_pluck_reinit(sp, p);
     }
 
-    if(p->init) {
+    if (p->init) {
         *out = 0;
         return SP_OK;
     }
