@@ -30,24 +30,24 @@ end
 
 function PG.createf(self, sp)
     local tbl = sp[self.name]
-    print(string.format("%s(sp_%s **%s)", 
+    print(string.format("%s(sp_%s **%s)",
         tbl.func.create, self.name, self.name, tbl.func.init))
 end
 
 function PG.destroyf(self, sp)
     local tbl = sp[self.name]
-    print(string.format("%s(sp_%s **%s)", 
+    print(string.format("%s(sp_%s **%s)",
         tbl.func.destroy, self.name, self.name, tbl.func.init))
 end
 
 function PG.initf(self, sp)
     local tbl = sp[self.name]
-    
-    io.write(string.format("%s(sp_data *sp, sp_%s *%s", 
+
+    io.write(string.format("%s(sp_data *sp, sp_%s *%s",
     tbl.func.init, self.name, self.name))
-    
+
     if(tbl.params.mandatory ~= nil) then
-    
+
         for _, v in pairs(tbl.params.mandatory) do
             if(string.byte(v.type, string.len(v.type)) == 42) then
     	        arg = string.format(", %s%s", v.type, v.name)
@@ -63,9 +63,9 @@ end
 
 function PG.genf(self, sp)
     local tbl = sp[self.name]
-    
-    io.write(string.format("%s(sp_data *sp, sp_ftbl *ft ", tbl.func.name)) 
-    
+
+    io.write(string.format("%s(sp_data *sp, sp_ftbl *ft ", tbl.func.name))
+
     if(tbl.params ~= nil) then
         for _, v in pairs(tbl.params) do
             if(string.byte(v.type, string.len(v.type)) == 42) then
@@ -82,15 +82,19 @@ end
 
 function PG.computef(self, sp)
     local tbl = sp[self.name]
-    io.write(string.format("%s(sp_data *sp, sp_%s *%s", 
+    io.write(string.format("%s(sp_data *sp, sp_%s *%s",
         tbl.func.compute, self.name, self.name, tbl.func.init))
-        
-    for _, input in pairs(tbl.inputs) do
-        io.write(string.format(", SPFLOAT *%s", input.name))
+
+    if tbl.inputs ~= nil then
+        for _, input in pairs(tbl.inputs) do
+            io.write(string.format(", SPFLOAT *%s", input.name))
+        end
     end
-    
-    for _, output in pairs(tbl.outputs) do
-        io.write(string.format(", SPFLOAT *%s", output.name))
+
+    if tbl.outputs ~= nil then
+        for _, output in pairs(tbl.outputs) do
+            io.write(string.format(", SPFLOAT *%s", output.name))
+        end
     end
 
     io.write(")\n")
@@ -99,36 +103,36 @@ end
 
 function PG.funcs(self, sp)
     io.write("<div class=\"row\">\n")
-    self:printheader("Functions")    
+    self:printheader("Functions")
     io.write("</div>\n")
     io.write("<div class=\"row\">\n")
-    self:createf(sp) 
+    self:createf(sp)
     io.write("</div>\n")
     io.write("<div class=\"row\">\n")
-    self:initf(sp)   
+    self:initf(sp)
     io.write("</div>\n")
     io.write("<div class=\"row\">\n")
     self:computef(sp)
     io.write("</div>\n")
     io.write("<div class=\"row\">\n")
-    self:destroyf(sp)   
+    self:destroyf(sp)
     io.write("</div>\n")
     io.write("<div class=\"row\"><br></div>\n")
 end
 
 function PG.genfuncs(self, sp)
     io.write("<div class=\"row\">\n")
-    self:printheader("Functions")    
+    self:printheader("Functions")
     io.write("</div>\n")
     io.write("<div class=\"row\">\n")
-    self:genf(sp) 
+    self:genf(sp)
     io.write("</div>\n")
     io.write("<div class=\"row\"><br></div>\n")
 end
 
 function PG.man_params(self,sp)
     local tbl = sp[self.name].params.mandatory
-	if (tbl == nil) then return end 
+	if (tbl == nil) then return end
     self:printheader("Mandatory Parameters")
     for _, v in pairs(tbl) do
         io.write("<div class=\"row\">\n")
@@ -136,7 +140,7 @@ function PG.man_params(self,sp)
         io.write(v.description)
         io.write("</div>\n")
         io.write("<div class=\"row\">\n")
-        io.write(string.format("\n(Recommended value: %s)\n", 
+        io.write(string.format("\n(Recommended value: %s)\n",
             v.default))
         io.write("</div>\n")
     end
@@ -145,7 +149,7 @@ end
 
 function PG.genparams(self,sp)
     local tbl = sp[self.name].params
-	if (tbl == nil) then return end 
+	if (tbl == nil) then return end
     self:printheader("Parameters")
     for _, v in pairs(tbl) do
         io.write("<div class=\"row\">\n")
@@ -153,7 +157,7 @@ function PG.genparams(self,sp)
         io.write(v.description)
         io.write("</div>\n")
         io.write("<div class=\"row\">\n")
-        io.write(string.format("\n(Recommended value: %s)\n", 
+        io.write(string.format("\n(Recommended value: %s)\n",
             v.default))
         io.write("</div>\n")
     end
@@ -161,21 +165,21 @@ function PG.genparams(self,sp)
  end
 function PG.opt_params(self,sp)
     local tbl = sp[self.name].params.optional
-    
+
     if (tbl == nil) then return end
     self:printheader("Optional Parameters")
-   
+
     for _, v in pairs(tbl) do
-        io.write("<div class=\"row\">\n")    
+        io.write("<div class=\"row\">\n")
         self:printoption(v.name)
         io.write(v.description)
         io.write("</div>\n")
-        
-        io.write("<div class=\"row\">\n")    
-        io.write(string.format("\n(Default value: %s)\n", 
+
+        io.write("<div class=\"row\">\n")
+        io.write(string.format("\n(Default value: %s)\n",
             v.default))
         io.write("</div>\n")
-   
+
     end
     io.write("<div class=\"row\"><br></div>\n")
 end
@@ -185,19 +189,19 @@ function PG.inputs(self, sp)
     self:printheader("Inputs")
     local tbl = sp[self.name].inputs
     for _, v in pairs(tbl) do
-        io.write("<div class=\"row\">\n")    
+        io.write("<div class=\"row\">\n")
         self:printoption(v.name)
         io.write(v.description .. "\n")
         io.write("</div>\n")
     end
     io.write("<div class=\"row\"><br></div>\n")
 end
-    
+
 function PG.outputs(self, sp)
     self:printheader("Outputs")
     local tbl = sp[self.name].outputs
     for _, v in pairs(tbl) do
-    io.write("<div class=\"row\">\n")    
+    io.write("<div class=\"row\">\n")
         self:printoption(v.name)
         io.write(v.description .. "\n")
     io.write("</div>\n")
@@ -207,18 +211,18 @@ end
 
 function PG.other(self, sp)
     local tbl = sp[self.name].func.other
-    if(tbl == nil) then return end    
+    if(tbl == nil) then return end
     self:printheader("Other Functions:")
     for func,params in pairs(tbl) do
         io.write("<div class=\"row\">\n")
-        io.write(string.format("%s(sp_data *sp, sp_%s *%s", func, self.name, self.name)) 
+        io.write(string.format("%s(sp_data *sp, sp_%s *%s", func, self.name, self.name))
         for _,p in pairs(params.args) do
             io.write(string.format(", %s %s", p.type, p.name))
         end
-        
+
         io.write(")\n")
         io.write("</div>\n")
-        
+
         io.write("<div class=\"row\">\n")
         io.write(params.description)
         io.write("</div>\n")
@@ -229,7 +233,7 @@ function PG.other(self, sp)
             self:printoption(p.name)
             io.write(p.description.. "\n")
             io.write("</div></div>\n")
-            
+
             io.write("<div class=\"row\">\n")
             io.write("<div class=\"one column\"></div>\n")
             io.write("<div class=\"elevent columns\">\n")
@@ -239,7 +243,7 @@ function PG.other(self, sp)
     end
     io.write("<div class=\"row\"><br></div>\n")
 end
-    
+
 function PG.params(self, sp)
     PG:man_params(sp)
     PG:opt_params(sp)
