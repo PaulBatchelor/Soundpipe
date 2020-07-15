@@ -11,92 +11,158 @@ sptbl["granule"] = {
         destroy = "sp_granule_destroy",
         init = "sp_granule_init",
         compute = "sp_granule_compute",
-        other = {
-            sp_granule_set = {
-                description = "granule_set description goes here.",
-                args = {
-                    {
-                        name = "var1",
-                        type = "SPFLOAT",
-                        description = "This is the first parameter",
-                        default = 1.5
-                    },
-                    {
-                        name = "var2",
-                        type = "SPFLOAT",
-                        description = "This is the second parameter",
-                        default = 1.5
-                    }
-                }
-            }
-        }
     },
 
     params = {
         mandatory = {
             {
-                name = "bar",
+                name = "ivoice",
+                type = "SPLFLOAT",
+                description = "The number of voices.",
+                default = 64
+            },
+            {
+                name = "iratio",
+                type = "SPFLOAT",
+                description = "playback rate control. 0.5 is half speed",
+                default = 1
+            },
+            {
+                name = "imode",
+                type = "SPFLOAT",
+                description = "playback mode. 1=forward,0=random,-1:backward",
+                default = 1
+            },
+            {
+                name = "ithd",
+                type = "SPFLOAT",
+                description = "threshold. skip samples smaller than this.",
+                default = 0
+            },
+            {
+                name = "ft",
                 type = "sp_ftbl *",
-                description = "This is a mandatory table value. It does not have a default value, so we set it to 'N/A'. Any that does not or cannot have a default value should set this default value to 'N/A'.",
+                description = "ftable for sound source",
                 default = "N/A"
             },
             {
-                name = "bar2",
+                name = "ipshift",
                 type = "SPFLOAT",
-                description = "This is a mandatory parameter. In soundpipe, users will always need to specify this value, but a default value has been giving in case it is needed to write more complicated engines in the future.",
-                default = 123
-            }
+                description = "pitch shift control. 0=random. 1-4 sets up to 4 different random pitches.",
+                default = 4
+            },
+            {
+                name = "igskip",
+                type = "SPFLOAT",
+                description = "Initial skip from beginning of function table.",
+                default = 0
+            },
+            {
+                name = "igskip_os",
+                type = "SPFLOAT",
+                description = "Random pointer offset (s)",
+                default = 0.005
+            },
+            {
+                name = "ilength",
+                type = "SPFLOAT",
+                description = "length of table to be used, starting from igskip",
+                default = 5
+            },
+            {
+                name = "igap_os",
+                type = "SPFLOAT",
+                description = "Skip time offset randomness amount (0-100)",
+                default = 50
+            },
+            {
+                name = "igsize_os",
+                type = "SPFLOAT",
+                description = "Grain size random size amount (0-100)",
+                default = 50
+            },
+            {
+                name = "iatt",
+                type = "SPFLOAT",
+                description = "Grain attack (0-100).",
+                default = 30
+            },
+            {
+                name = "idec",
+                type = "SPFLOAT",
+                description = "Grain decay (0-100).",
+                default = 30
+            },
+            {
+                name = "iseed",
+                type = "SPFLOAT",
+                description = "Seed for RNG.",
+                default = 0.39
+            },
+            {
+                name = "ipitch1",
+                type = "SPFLOAT",
+                description = "Pitch shift parameter 1.",
+                default = 1
+            },
+            {
+                name = "ipitch2",
+                type = "SPFLOAT",
+                description = "Pitch shift parameter 2.",
+                default = 1.42
+            },
+            {
+                name = "ipitch3",
+                type = "SPFLOAT",
+                description = "Pitch shift parameter 3.",
+                default = 0.29
+            },
+            {
+                name = "ipitch4",
+                type = "SPFLOAT",
+                description = "Pitch shift parameter 4.",
+                default = 2
+            },
+            {
+                name = "ft_env",
+                type = "sp_ftbl *",
+                description = "Ftable envelope used for grain. Half-sine is a pretty good choice.",
+                default = "N/A"
+            },
         },
 
         optional = {
             {
-                name = "blah_1",
+                name = "xamp",
                 type = "SPFLOAT",
-                description = "This is an optional parameter. These values are always set to a value by default, and can be set after the init function has been called.",
-                default = 1.5
+                description = "Grain amplitude",
+                default = 1
             },
             {
-                name = "blah_2",
+                name = "kgap",
                 type = "SPFLOAT",
-                description ="This is yet another optional parameter...",
-                default = 456.7
+                description ="gap between grains in sec.",
+                default = 50
             },
         }
     },
 
     modtype = "module",
 
-    description = [[A short title describing the module
-
-    This is a description of the entire module.  This is not a real module. This description should be a comprehensive sumary of what this function does.
-
-Inside the Lua table, this is expressed as a multiline string, however it does not adhere to the tradtional 80 column rule found in programming.
-
-Write as much text as needed here...
+    description = [[
+A granular synthesizer, using an ftable as input.
 ]],
 
-    ninputs = 2,
-    noutputs = 2,
+    ninputs = 0,
+    noutputs = 1,
 
     inputs = {
-        {
-            name = "clock",
-            description = "this is the clock source for a made up plugin."
-        },
-        {
-            name = "input",
-            description = "this is the audio input for a made up plugin."
-        },
     },
 
     outputs = {
         {
-            name = "out_left",
-            description = "Stereo left output for granule."
-        },
-        {
-            name = "out_right",
-            description = "Stereo right output for granule."
+            name = "out",
+            description = "Signal output for granule."
         },
     }
 
