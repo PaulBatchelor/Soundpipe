@@ -28,16 +28,20 @@ sptbl["dmetro"] = {
 
     description = [[Delta Metro
 
-    Produce a set of triggers spaced apart by time.]],
+    Produce a set of triggers spaced apart by time.
+
+An implementation note: while dmetro does indeed use sample
+precision, it will intentionally add 1 sample to the
+duration time as a way to avoid divide-by-zero errors. A
+dmetro of one second will really be one second and 1 sample.
+For most musical purposes, this is negligible. For more
+scientific purposes, this could cause problems, and it is
+recommended to find or build another module.]],
 
     ninputs = 0,
     noutputs = 1,
 
     inputs = {
-        {
-            name = "dummy",
-            description = "this doesn't do anything."
-        },
     },
 
     outputs = {
