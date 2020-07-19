@@ -11,6 +11,7 @@
     - fixed gen_sinesum: amps no longer flipped
     - paulstretch fix: wrap mode can be disabled now
     - stretcher utility updated + cleaned up
+    - added sp_granule
 
 1.7.0
 -----

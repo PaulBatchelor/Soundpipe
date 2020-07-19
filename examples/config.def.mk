@@ -49,6 +49,7 @@ ex_gen_sinesum \
 ex_gen_triangle \
 ex_gen_vals \
 ex_gen_xline \
+ex_granule \
 ex_hilbert \
 ex_in \
 ex_incr \
