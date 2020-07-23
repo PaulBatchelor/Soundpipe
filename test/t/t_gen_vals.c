@@ -10,8 +10,8 @@ int t_gen_vals(sp_test *tst, sp_data *sp, const char *hash)
     SPFLOAT out = 0;
 
     sp_ftbl *ft;
-    sp_ftbl_create(sp, &ft, 4096);
-    sp_gen_sinesum(sp, ft, "1 1.5 -3 5 ");
+    sp_ftbl_create(sp, &ft, 1);
+    sp_gen_vals(sp, ft, "1 1.5 -3 5");
 
     for(n = 0; n < tst->size; n++) {
         if(n < ft->size) {
