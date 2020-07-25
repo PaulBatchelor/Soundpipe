@@ -5,6 +5,7 @@ typedef struct sp_tenv{
     SPFLOAT last;
     int sigmode;
     SPFLOAT input;
+    int started;
 } sp_tenv;
 
 int sp_tenv_create(sp_tenv **p);
