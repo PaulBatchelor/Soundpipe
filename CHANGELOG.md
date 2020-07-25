@@ -12,6 +12,7 @@
     - paulstretch fix: wrap mode can be disabled now
     - stretcher utility updated + cleaned up
     - added sp_granule
+    - tenv: fixed to not rely on tevent
 
 1.7.0
 -----
