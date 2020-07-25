@@ -4,15 +4,11 @@
 int sp_tenv_create(sp_tenv **p)
 {
     *p = malloc(sizeof(sp_tenv));
-    sp_tenv *pp = *p;
-    sp_tevent_create(&pp->te);
     return SP_OK;
 }
 
 int sp_tenv_destroy(sp_tenv **p)
 {
-    sp_tenv *pp = *p;
-    sp_tevent_destroy(&pp->te);
     free(*p);
     return SP_OK;
 }
@@ -34,6 +30,7 @@ static void sp_tenv_comp(void *ud, SPFLOAT *out)
     SPFLOAT sig = 0;
     uint32_t pos = env->pos;
     *out = 0.0;
+
     if(pos < env->atk_end){
         sig = env->last + env->atk_slp;
     }else if (pos < env->rel_start){
@@ -74,12 +71,16 @@ int sp_tenv_init(sp_data *sp, sp_tenv *p)
     p->atk_slp = 1.0 / p->atk_end;
     p->rel_slp = -1.0 / (p->sr * p->rel);
     p->totaldur = p->sr * (p->atk + p->hold + p->rel);
-    sp_tevent_init(sp, p->te, sp_tenv_reinit, sp_tenv_comp, p);
     return SP_OK;
 }
 
 int sp_tenv_compute(sp_data *sp, sp_tenv *p, SPFLOAT *in, SPFLOAT *out)
 {
-    sp_tevent_compute(sp, p->te, in, out);
+    if (*in) {
+        sp_tenv_reinit(p);
+    }
+
+    sp_tenv_comp(p, out);
+
     return SP_OK;
 }

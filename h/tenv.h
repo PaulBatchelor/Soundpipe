@@ -1,5 +1,4 @@
 typedef struct sp_tenv{
-    sp_tevent *te;
     uint32_t pos, atk_end, rel_start, sr, totaldur;
     SPFLOAT atk, rel, hold;
     SPFLOAT atk_slp, rel_slp;
