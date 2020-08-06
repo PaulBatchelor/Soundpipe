@@ -1,13 +1,13 @@
 /*
- * Butterworth Filters
+ * Buthp
  *
- * This code has been extracted from the Csound butterworth filter opcodes
- * It has been modified to work as a Soundpipe module.
+ * This is an implementation of a 2nd-order butterworth
+ * highpass filter, discretized using the bilinear transform.
  *
- * Original Author(s): Paris Smaragdis, John ffitch
- * Year: 1994
- * Location: Opcodes/butter.c
+ * For more information on using the BLT on 2nd-order
+ * butterworth filters, see:
  *
+ * https://ccrma.stanford.edu/~jos/filters/Example_Second_Order_Butterworth_Lowpass.html
  */
 
 #include <math.h>

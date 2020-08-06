@@ -1,13 +1,13 @@
 /*
- * Butterworth Filters
+ * Butbp
  *
- * This code has been extracted from the Csound butterworth filter opcodes
- * It has been modified to work as a Soundpipe module.
+ * This is an implementation of a 2nd-order butterworth
+ * bandpass filter, discretized using the bilinear transform.
  *
- * Original Author(s): Paris Smaragdis, John ffitch
- * Year: 1994
- * Location: Opcodes/butter.c
+ * For more information on using the BLT on 2nd-order
+ * butterworth filters, see:
  *
+ * https://ccrma.stanford.edu/~jos/filters/Example_Second_Order_Butterworth_Lowpass.html
  */
 
 #include <math.h>
@@ -35,49 +35,52 @@ int sp_butbp_destroy(sp_butbp **p)
 
 int sp_butbp_init(sp_data *sp, sp_butbp *p)
 {
-    p->istor = 0.0;
-    p->sr = sp->sr;
     p->freq = 1000;
     p->bw = 10;
     p->pidsr = M_PI / sp->sr * 1.0;
     p->tpidsr = 2 * M_PI / sp->sr * 1.0;
-    p->a[6] = p->a[7] = 0.0;
-    p->lkf = 0.0;
-    p->lkb = 0.0;
+    p->a[5] = p->a[6] = 0.0;
+    p->lfreq = 0.0;
+    p->lbw = 0.0;
     return SP_OK;
 }
 
 int sp_butbp_compute(sp_data *sp, sp_butbp *p, SPFLOAT *in, SPFLOAT *out)
 {
-    SPFLOAT *a = p->a;
+    SPFLOAT *a;
     SPFLOAT t, y;
+    SPFLOAT bw, fr;
 
+    a = p->a;
     if (p->bw <= 0.0) {
        *out = 0;
        return SP_OK;
     }
 
-    SPFLOAT bw, fr;
     bw = p->bw;
     fr = p->freq;
 
-    if (bw != p->lkb || fr != p->lkf) {
+    if (bw != p->lbw || fr != p->lfreq) {
         SPFLOAT c, d;
-        p->lkf = fr;
-        p->lkb = bw;
+        p->lfreq = fr;
+        p->lbw = bw;
+
+        /* Perform BLT and store components */
         c = 1.0 / tan((SPFLOAT)(p->pidsr * bw));
         d = 2.0 * cos((SPFLOAT)(p->tpidsr * fr));
-        a[1] = 1.0 / (1.0 + c);
-        a[2] = 0.0;
-        a[3] = -a[1];
-        a[4] = - c * d * a[1];
-        a[5] = (c - 1.0) * a[1];
+        a[0] = 1.0 / (1.0 + c);
+        a[1] = 0.0;
+        a[2] = -a[0];
+        a[3] = - c * d * a[0];
+        a[4] = (c - 1.0) * a[0];
     }
 
-    t = *in - a[4] * a[6] - a[5] * a[7];
-    y = t * a[1] + a[2] * a[6] + a[3] * a[7];
-    a[7] = a[6];
-    a[6] = t;
+    /* a5 = t(n - 1); a6 = t(n - 2) */
+    t = *in - a[3]*a[5] - a[4]*a[6];
+    y = t*a[0] + a[1]*a[5] + a[2]*a[6];
+    a[6] = a[5];
+    a[5] = t;
     *out = y;
+
     return SP_OK;
 }
