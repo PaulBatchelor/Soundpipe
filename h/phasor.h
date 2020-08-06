@@ -1,6 +1,6 @@
 typedef struct sp_phasor{
     SPFLOAT freq, phs;
-    SPFLOAT curphs, onedsr;
+    SPFLOAT onedsr;
 } sp_phasor;
 
 int sp_phasor_create(sp_phasor **p);

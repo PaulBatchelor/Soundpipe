@@ -1,13 +1,9 @@
 /*
  * Phasor
  *
- * This code has been extracted from the Csound opcode "phasor".
- * It has been modified to work as a Soundpipe module.
- *
- * Original Author(s): Barry Vercoe, John ffitch, Robin whittle
- * Year: 1991
- * Location: OOps/ugens2.c
- *
+ * A phasor produces a non-bandlimited sawtooth wave,
+ * normalized to be in range 0-1. Phasors are most
+ * frequently used to create table-lookup oscillators.
  */
 
 #include <stdlib.h>
@@ -29,25 +25,28 @@ int sp_phasor_init(sp_data *sp, sp_phasor *p, SPFLOAT iphs)
 {
     p->freq = 440;
     p->phs = iphs;
-    p->curphs = iphs;
     p->onedsr = 1.0 / sp->sr;
     return SP_OK;
 }
 
 int sp_phasor_compute(sp_data *sp, sp_phasor *p, SPFLOAT *in, SPFLOAT *out)
 {
-    SPFLOAT phase;
+    SPFLOAT phs;
     SPFLOAT incr;
 
-    phase = p->curphs;
+    phs = p->phs;
     incr = p->freq * p->onedsr;
-    *out = phase;
-    phase += incr;
-    if (phase >= 1.0) {
-        phase -= 1.0;
-    } else if (phase < 0.0) {
-        phase += 1.0;
+
+    *out = phs;
+
+    phs += incr;
+
+    if (phs >= 1.0) {
+        phs -= 1.0;
+    } else if (phs < 0.0) {
+        phs += 1.0;
     }
-    p->curphs = phase;
+
+    p->phs = phs;
     return SP_OK;
 }
