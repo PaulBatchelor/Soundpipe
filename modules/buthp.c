@@ -16,20 +16,20 @@
 #define ROOT2 (1.4142135623730950488)
 
 #ifndef M_PI
-#define M_PI		3.14159265358979323846	/* pi */
+#define M_PI 3.14159265358979323846
 #endif
 
 #include "soundpipe.h"
 
-/* Filter loop */
-
-static int sp_butter_filter(SPFLOAT *in, SPFLOAT *out, SPFLOAT *a)
+static int filter(SPFLOAT *in, SPFLOAT *out, SPFLOAT *a)
 {
     SPFLOAT t, y;
-    t = *in - a[4] * a[6] - a[5] * a[7];
-    y = t * a[1] + a[2] * a[6] + a[3] * a[7];
-    a[7] = a[6];
-    a[6] = t;
+
+    /* a5 = t(n - 1); a6 = t(n - 2) */
+    t = *in - a[3]*a[5] - a[4]*a[6];
+    y = t*a[0] + a[1]*a[5] + a[2]*a[6];
+    a[6] = a[5];
+    a[5] = t;
     *out = y;
     return SP_OK;
 }
@@ -49,36 +49,35 @@ int sp_buthp_destroy(sp_buthp **p)
 
 int sp_buthp_init(sp_data *sp, sp_buthp *p)
 {
-    p->istor = 0.0;
-    p->sr = sp->sr;
     p->freq = 1000;
     p->pidsr = M_PI / sp->sr * 1.0;
-    if (p->istor==0.0) {
-        p->a[6] = p->a[7] = 0.0;
-        p->lkf = 0.0;
-    }
+    p->a[5] = p->a[6] = 0.0;
+    p->lfreq = 0.0;
     return SP_OK;
 }
 
 int sp_buthp_compute(sp_data *sp, sp_buthp *p, SPFLOAT *in, SPFLOAT *out)
 {
     if (p->freq <= 0.0) {
-      *out = 0;
-      return SP_OK;
+        *out = 0;
+        return SP_OK;
     }
 
-    if (p->freq != p->lkf) {
-      SPFLOAT *a, c;
-      a = p->a;
-      p->lkf = p->freq;
-      c = tan((SPFLOAT)(p->pidsr * p->lkf));
+    if (p->freq != p->lfreq) {
+        SPFLOAT *a, c;
+        a = p->a;
+        p->lfreq = p->freq;
+        /* derive C constant used in BLT */
+        c = tan((SPFLOAT)(p->pidsr * p->freq));
 
-      a[1] = 1.0 / ( 1.0 + ROOT2 * c + c * c);
-      a[2] = -(a[1] + a[1]);
-      a[3] = a[1];
-      a[4] = 2.0 * ( c*c - 1.0) * a[1];
-      a[5] = ( 1.0 - ROOT2 * c + c * c) * a[1];
+        /* perform BLT, store components */
+        a[0] = 1.0 / (1.0 + c*ROOT2 + c*c);
+        a[1] = -2*a[0];
+        a[2] = a[0];
+        a[3] = 2.0 * (c*c - 1.0) * a[0];
+        a[4] = (1.0 - c*ROOT2 + c*c) * a[0];
     }
-    sp_butter_filter(in, out, p->a);
+
+    filter(in, out, p->a);
     return SP_OK;
 }

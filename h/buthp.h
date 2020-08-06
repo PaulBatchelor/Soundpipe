@@ -1,7 +1,7 @@
 typedef struct  {
-    SPFLOAT sr, freq, istor;
-    SPFLOAT lkf;
-    SPFLOAT a[8];
+    SPFLOAT freq;
+    SPFLOAT lfreq;
+    SPFLOAT a[7];
     SPFLOAT pidsr;
 } sp_buthp;
 
