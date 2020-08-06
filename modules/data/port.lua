@@ -28,19 +28,13 @@ sptbl["port"] = {
 
     params = {
         mandatory = {
-            {
-                name = "htime",
-                type = "SPFLOAT",
-                description = "",
-                default = 0.02
-            },
         },
         optional = {
             {
-                name = "htime",
+                name = "smooth",
                 type = "SPFLOAT",
-                description = "",
-                default = 0.02
+                description = "Smooth time amount.",
+                default = 0.01
             },
         },
     },

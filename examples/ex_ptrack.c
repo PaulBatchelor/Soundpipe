@@ -44,7 +44,8 @@ int main() {
     ud.randh->max = 500;
     ud.randh->min = 200;
     ud.randh->freq = 6;
-    sp_port_init(sp, ud.port, 0.005);
+    sp_port_init(sp, ud.port);
+    ud.port->smooth = 0.005;
 
     sp_gen_sine(sp, ud.ft);
     sp_osc_init(sp, ud.osc, ud.ft, 0);

@@ -29,7 +29,8 @@ int t_port(sp_test *tst, sp_data *sp, const char *hash)
     sp_tseq_create(&ud.seq);
     sp_tseq_init(sp, ud.seq, ud.nn);
 
-    sp_port_init(sp, ud.prt, 0.02);
+    sp_port_init(sp, ud.prt);
+    ud.prt->smooth = 0.02;
     sp_metro_init(sp, ud.mt);
     ud.mt->freq = 4.0;
     sp_gen_sine(sp, ud.sine);

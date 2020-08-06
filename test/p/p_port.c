@@ -16,7 +16,7 @@ int main() {
 
     for(u = 0; u < NUM; u++) {
         sp_port_create(&unit[u]);
-        sp_port_init(sp, unit[u], 0);
+        sp_port_init(sp, unit[u]);
     }
 
     for(t = 0; t < sp->len; t++) {
