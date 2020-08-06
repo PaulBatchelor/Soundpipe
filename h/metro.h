@@ -1,7 +1,7 @@
 typedef struct sp_metro{
-    SPFLOAT sr, freq, iphs;
-    SPFLOAT curphs;
-    int flag;
+    SPFLOAT freq;
+    SPFLOAT phs;
+    int init;
     SPFLOAT onedsr;
 } sp_metro;
 

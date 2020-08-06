@@ -1,13 +1,13 @@
 /*
  * Metro
  *
- * This code has been extracted from the Csound opcode "metro".
- * It has been modified to work as a Soundpipe module.
+ * Metro produces a signal steady sequence of impulses,
+ * which is typically used as a clock signal to for other
+ * modules.
  *
- * Original Author(s): Gabriel Maldonado
- * Year: 2000
- * Location: Opcodes/metro.c
- *
+ * Metro is very similar to the "metro" object in puredata,
+ * except that the rate parameter unit is supplied in Hz,
+ * not ms.
  */
 
 #include <stdlib.h>
@@ -27,36 +27,34 @@ int sp_metro_destroy(sp_metro **p)
 
 int sp_metro_init(sp_data *sp, sp_metro *p)
 {
-    p->iphs = 0;
-    p->freq= 2.0;
-    SPFLOAT phs = p->iphs;
-    int32_t  longphs = phs;
-
-    if (phs >= 0.0) {
-      p->curphs = (SPFLOAT)phs - (SPFLOAT)longphs;
-    }
-
-    p->flag=1;
+    p->freq = 2.0;
+    p->phs = 0;
+    p->init = 1;
     p->onedsr = 1.0 / sp->sr;
     return SP_OK;
 }
 
 int sp_metro_compute(sp_data *sp, sp_metro *p, SPFLOAT *in, SPFLOAT *out)
 {
-    SPFLOAT phs= p->curphs;
+    SPFLOAT phs;
 
-    if (phs == 0.0 && p->flag) {
+    phs = p->phs;
+
+    *out = 0;
+
+    if (p->init) {
         *out = 1.0;
-        p->flag = 0;
-    } else if ((phs += p->freq * p->onedsr) >= 1.0) {
-        *out = 1.0;
-        phs -= 1.0;
-        p->flag = 0;
+        p->init = 0;
     } else {
-        *out = 0.0;
+        phs += p->freq * p->onedsr;
+
+        if (phs >= 1) {
+            *out = 1.0;
+            phs -= 1.0;
+        }
     }
 
-    p->curphs = phs;
+    p->phs = phs;
 
     return SP_OK;
 }
